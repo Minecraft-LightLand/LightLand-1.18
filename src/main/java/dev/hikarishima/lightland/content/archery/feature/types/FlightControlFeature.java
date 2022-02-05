@@ -4,7 +4,9 @@ import dev.hikarishima.lightland.content.archery.entity.GenericArrowEntity;
 import dev.hikarishima.lightland.content.archery.feature.BowArrowFeature;
 import net.minecraft.world.phys.Vec3;
 
-public abstract class FlightControlFeature implements BowArrowFeature {
+public class FlightControlFeature implements BowArrowFeature {
+
+    public static final FlightControlFeature INSTANCE = new FlightControlFeature();
 
     public float gravity = 0.05f;
     public float inertia = 0.99f;

@@ -2,8 +2,8 @@ package dev.hikarishima.lightland.content.archery.feature.bow;
 
 import dev.hikarishima.lightland.content.archery.feature.types.OnPullFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
+import dev.hikarishima.lightland.events.ClientEntityEffectRenderEvents.EntityTarget;
 import dev.hikarishima.lightland.util.GenericItemStack;
-import dev.lcy0x1.base.Proxy;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,26 +14,9 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Predicate;
 
-public class GlowTargetAimFeature implements OnPullFeature {
+public record GlowTargetAimFeature(int range) implements OnPullFeature {
 
-    public static Entity TARGET = null;
-    public static int TIME = 0;
-
-    public static void updateGlow(Entity entity) {
-        TARGET = entity;
-        TIME = 0;
-    }
-
-    public static void tickRender(){
-        Player player = Proxy.getClientPlayer();
-        Vec3 vec = player.getViewVector(1);
-    }
-
-    public final int range;
-
-    public GlowTargetAimFeature(int range) {
-        this.range = range;
-    }
+    public static final EntityTarget TARGET = new EntityTarget(3, Math.PI / 180 * 5, 2);
 
     @Override
     public void onPull(Player player, GenericItemStack<GenericBowItem> bow) {
@@ -51,15 +34,14 @@ public class GlowTargetAimFeature implements OnPullFeature {
             Predicate<Entity> predicate = (e) -> e instanceof LivingEntity && !e.isSpectator();
             EntityHitResult result = ProjectileUtil.getEntityHitResult(player, vec3, vec32, aabb, predicate, sq);
             if (result != null && vec3.distanceToSqr(result.getLocation()) < sq) {
-                updateGlow(result.getEntity());
+                TARGET.updateTarget(result.getEntity());
             }
         }
     }
 
     @Override
     public void stopAim(Player player, GenericItemStack<GenericBowItem> bow) {
-        TARGET = null;
-        TIME = 0;
+        TARGET.updateTarget(null);
     }
 
 }

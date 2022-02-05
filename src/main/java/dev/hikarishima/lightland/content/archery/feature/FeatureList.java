@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.content.archery.feature;
 
-import dev.hikarishima.lightland.content.archery.feature.arrow.DefaultFlightFeature;
 import dev.hikarishima.lightland.content.archery.feature.types.FlightControlFeature;
 import dev.hikarishima.lightland.content.archery.feature.types.OnHitFeature;
 import dev.hikarishima.lightland.content.archery.feature.types.OnPullFeature;
@@ -36,6 +35,18 @@ public class FeatureList {
     public List<OnHitFeature> hit = new ArrayList<>();
 
     public FlightControlFeature getFlightControl() {
-        return flight == null ? DefaultFlightFeature.INSTANCE : flight;
+        return flight == null ? FlightControlFeature.INSTANCE : flight;
+    }
+
+    public FeatureList add(BowArrowFeature feature) {
+        if (feature instanceof OnPullFeature f) pull.add(f);
+        if (feature instanceof OnShootFeature f) shot.add(f);
+        if (feature instanceof FlightControlFeature f) flight = f;
+        if (feature instanceof OnHitFeature f) hit.add(f);
+        return this;
+    }
+
+    public void end() {
+
     }
 }

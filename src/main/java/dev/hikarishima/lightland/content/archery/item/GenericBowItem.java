@@ -3,6 +3,7 @@ package dev.hikarishima.lightland.content.archery.item;
 import dev.hikarishima.lightland.content.archery.controller.ArrowFeatureController;
 import dev.hikarishima.lightland.content.archery.controller.BowFeatureController;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
+import dev.hikarishima.lightland.init.ClientRegister;
 import dev.hikarishima.lightland.util.GenericItemStack;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +24,7 @@ import java.util.function.Predicate;
 
 public class GenericBowItem extends BowItem {
 
-    public record BowConfig(FeatureList feature) {
+    public record BowConfig(float damage, int punch, int pull_time, int fov_time, float fov, FeatureList feature) {
 
     }
 
@@ -32,6 +33,7 @@ public class GenericBowItem extends BowItem {
     public GenericBowItem(Properties properties, BowConfig config) {
         super(properties);
         this.config = config;
+        ClientRegister.BOW_LIKE.add(this);
     }
 
     /**
@@ -57,7 +59,8 @@ public class GenericBowItem extends BowItem {
             }
             boolean no_consume = player.getAbilities().instabuild || (arrow.getItem() instanceof ArrowItem && ((ArrowItem) arrow.getItem()).isInfinite(arrow, bow, player));
             if (!level.isClientSide) {
-                shootArrowOnServer(player, level, bow, arrow, power, no_consume);
+                if (!shootArrowOnServer(player, level, bow, arrow, power, no_consume))
+                    return;
             }
 
             float pitch = 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + power * 0.5F;
@@ -75,7 +78,7 @@ public class GenericBowItem extends BowItem {
     /**
      * create arrow entity and add to world
      */
-    private void shootArrowOnServer(Player player, Level level, ItemStack bow, ItemStack arrow, float power, boolean no_consume) {
+    private boolean shootArrowOnServer(Player player, Level level, ItemStack bow, ItemStack arrow, float power, boolean no_consume) {
         AbstractArrow abstractarrow;
         if (arrow.getItem() instanceof GenericArrowItem genericArrow) {
             abstractarrow = ArrowFeatureController.createArrowEntity(
@@ -109,9 +112,12 @@ public class GenericBowItem extends BowItem {
                 abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
             }
         }
-
+        if (abstractarrow == null) {
+            return false;
+        }
         bow.hurtAndBreak(1, player, (pl) -> pl.broadcastBreakEvent(player.getUsedItemHand()));
         level.addFreshEntity(abstractarrow);
+        return true;
     }
 
     /**

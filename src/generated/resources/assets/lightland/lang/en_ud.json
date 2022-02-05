@@ -1,0 +1,14 @@
+{
+  "entity.lightland.generic_arrow": "\u028Do\u0279\u0279\u2C6F \u0254\u0131\u0279\u01DDu\u01DD\u2141",
+  "item.lightland.copper_arrow": "\u028Do\u0279\u0279\u2C6F \u0279\u01DDddo\u0186",
+  "item.lightland.ender_aim_bow": "\u028Do\u15FA \u026F\u0131\u2C6F \u0279\u01DDpu\u018E",
+  "item.lightland.ender_arrow": "\u028Do\u0279\u0279\u2C6F \u0279\u01DDpu\u018E",
+  "item.lightland.glow_aim_bow": "\u028Do\u15FA \u026F\u0131\u2C6F \u028Do\u05DF\u2141",
+  "item.lightland.iron_arrow": "\u028Do\u0279\u0279\u2C6F uo\u0279I",
+  "item.lightland.iron_bow": "\u028Do\u15FA uo\u0279I",
+  "item.lightland.magnify_bow": "\u028Do\u15FA \u028E\u025F\u0131ub\u0250W",
+  "item.lightland.no_fall_arrow": "\u028Do\u0279\u0279\u2C6F \u05DF\u05DF\u0250\u2132 oN",
+  "item.lightland.obsidian_arrow": "\u028Do\u0279\u0279\u2C6F u\u0250\u0131p\u0131sqO",
+  "item.lightland.starter_arrow": "\u028Do\u0279\u0279\u2C6F \u0279\u01DD\u0287\u0279\u0250\u0287S",
+  "item.lightland.starter_bow": "\u028Do\u15FA \u0279\u01DD\u0287\u0279\u0250\u0287S"
+}

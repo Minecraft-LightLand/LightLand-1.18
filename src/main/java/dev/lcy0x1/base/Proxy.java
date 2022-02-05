@@ -3,13 +3,15 @@ package dev.lcy0x1.base;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.server.ServerLifecycleHooks;
+
+import java.util.Optional;
 
 public class Proxy {
 
@@ -23,7 +25,7 @@ public class Proxy {
     }
 
     public static Level getWorld() {
-        return DistExecutor.unsafeRunForDist(() -> Proxy::getClientWorld, () -> Proxy::getServerWorld);
+        return DistExecutor.unsafeRunForDist(() -> Proxy::getClientWorld, () -> () -> Proxy.getServer().map(MinecraftServer::overworld).orElse(null));
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -31,8 +33,8 @@ public class Proxy {
         return Minecraft.getInstance().level;
     }
 
-    public static ServerLevel getServerWorld() {
-        return ServerLifecycleHooks.getCurrentServer().overworld();
+    public static Optional<MinecraftServer> getServer() {
+        return Optional.ofNullable(ServerLifecycleHooks.getCurrentServer());
     }
 
 }

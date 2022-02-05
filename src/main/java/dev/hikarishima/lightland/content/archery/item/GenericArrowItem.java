@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class GenericArrowItem extends ArrowItem {
 
-    public record ArrowConfig(boolean is_inf, FeatureList feature) {
+    public record ArrowConfig(float damage, int punch, boolean is_inf, FeatureList feature) {
     }
 
     public final ArrowConfig config;

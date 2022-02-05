@@ -18,6 +18,8 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -25,6 +27,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
@@ -32,7 +36,7 @@ import java.util.Objects;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-public class GenericArrowEntity extends AbstractArrow {
+public class GenericArrowEntity extends AbstractArrow implements IEntityAdditionalSpawnData {
 
     public record ArrowEntityData(GenericItemStack<GenericBowItem> bow, GenericItemStack<GenericArrowItem> arrow,
                                   boolean no_consume, float power) {
@@ -65,11 +69,10 @@ public class GenericArrowEntity extends AbstractArrow {
         super(type, level);
     }
 
-    public GenericArrowEntity(Level level, LivingEntity user, ArrowEntityData data) {
+    public GenericArrowEntity(Level level, LivingEntity user, ArrowEntityData data, FeatureList features) {
         super(EntityRegistrate.ET_ARROW.get(), user, level);
         this.data = data;
-        features = Objects.requireNonNull(FeatureList.merge(data.bow().item().config.feature(), data.arrow().item().config.feature()));
-        features.shot.forEach(e -> e.onShoot(this));
+        this.features = features;
     }
 
     @Override
@@ -106,7 +109,7 @@ public class GenericArrowEntity extends AbstractArrow {
 
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        features.hit.forEach(e->e.onHitBlock(this, result));
+        features.hit.forEach(e -> e.onHitBlock(this, result));
     }
 
     @ServerOnly
@@ -130,5 +133,32 @@ public class GenericArrowEntity extends AbstractArrow {
             DataResult<Pair<ArrowEntityData, Tag>> result = ArrowEntityData.CODEC.decode(NbtOps.INSTANCE, data_tag);
             result.get().left().ifPresent(e -> this.data = e.getFirst());
         }
+        features = Objects.requireNonNull(FeatureList.merge(data.bow().item().config.feature(), data.arrow().item().config.feature()));
     }
+
+    @Override
+    public void writeSpawnData(FriendlyByteBuf buffer) {
+        DataResult<Tag> data_tag = ArrowEntityData.CODEC.encodeStart(NbtOps.INSTANCE, data);
+        if (data_tag.error().isPresent()) {
+            LightLand.LOGGER.error(data_tag.error().get());
+        } else if (data_tag.get().left().isPresent()) {
+            buffer.writeNbt((CompoundTag) data_tag.get().left().get());
+        }
+
+    }
+
+    @Override
+    public void readSpawnData(FriendlyByteBuf additionalData) {
+        CompoundTag data_tag = additionalData.readAnySizeNbt();
+        DataResult<Pair<ArrowEntityData, Tag>> result = ArrowEntityData.CODEC.decode(NbtOps.INSTANCE, data_tag);
+        result.get().left().ifPresent(e -> this.data = e.getFirst());
+        features = Objects.requireNonNull(FeatureList.merge(data.bow().item().config.feature(), data.arrow().item().config.feature()));
+        features.shot.forEach(e -> e.onClientShoot(this));
+    }
+
+    @Override
+    public Packet<?> getAddEntityPacket() {
+        return NetworkHooks.getEntitySpawningPacket(this);
+    }
+
 }
