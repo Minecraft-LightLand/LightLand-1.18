@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	" ce",
+	"cbe",
+	" ce"
+  ],
+  "key": {
+	"b": {
+	  "item": "lightland:starter_bow"
+	},
+	"c": {
+	  "item": "minecraft:iron_ingot"
+	},
+	"e": {
+	  "item": "minecraft:iron_nugget"
+	}
+  },
+  "result": {
+	"item": "lightland:iron_bow"
+  }
+}

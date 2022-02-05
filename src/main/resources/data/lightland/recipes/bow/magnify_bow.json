@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"ccc",
+	"ebc",
+	"ccc"
+  ],
+  "key": {
+	"b": {
+	  "item": "lightland:glow_aim_bow"
+	},
+	"c": {
+	  "item": "minecraft:copper_ingot"
+	},
+	"e": {
+	  "item": "minecraft:spyglass"
+	}
+  },
+  "result": {
+	"item": "lightland:magnify_bow"
+  }
+}

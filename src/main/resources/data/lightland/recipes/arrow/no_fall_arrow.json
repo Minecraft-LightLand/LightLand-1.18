@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	" a ",
+	"aba",
+	" a "
+  ],
+  "key": {
+	"a": {
+	  "item": "lightland:starter_arrow"
+	},
+	"b": {
+	  "item": "minecraft:phantom_membrane"
+	}
+  },
+  "result": {
+	"item": "lightland:no_fall_arrow",
+	"count": 4
+  }
+}
