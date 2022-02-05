@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.init;
 
+import com.tterrag.registrate.Registrate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -30,6 +31,7 @@ public class LightLand {
 
     public static final String MODID = "lightland";
     public static final Logger LOGGER = LogManager.getLogger();
+    public static final Registrate REGISTRATE = Registrate.create(MODID);
 
     public LightLand() {
         FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
