@@ -2,6 +2,7 @@ package dev.hikarishima.lightland.content.archery.item;
 
 import dev.hikarishima.lightland.content.archery.controller.ArrowFeatureController;
 import dev.hikarishima.lightland.content.archery.controller.BowFeatureController;
+import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import dev.hikarishima.lightland.util.GenericItemStack;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -22,7 +23,7 @@ import java.util.function.Predicate;
 
 public class GenericBowItem extends BowItem {
 
-    public record BowConfig(){
+    public record BowConfig(FeatureList feature) {
 
     }
 
@@ -38,7 +39,7 @@ public class GenericBowItem extends BowItem {
      */
     public void releaseUsing(ItemStack bow, Level level, LivingEntity user, int remaining_pull_time) {
         if (user instanceof Player player) {
-            BowFeatureController.stopUsing(new GenericItemStack<GenericBowItem>(this, bow));
+            BowFeatureController.stopUsing(player, new GenericItemStack<>(this, bow));
             boolean has_inf = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, bow) > 0;
             ItemStack arrow = player.getProjectile(bow);
             int pull_time = this.getUseDuration(bow) - remaining_pull_time;
@@ -75,35 +76,41 @@ public class GenericBowItem extends BowItem {
      * create arrow entity and add to world
      */
     private void shootArrowOnServer(Player player, Level level, ItemStack bow, ItemStack arrow, float power, boolean no_consume) {
-        ArrowItem arrowitem = (ArrowItem) (arrow.getItem() instanceof ArrowItem ? arrow.getItem() : Items.ARROW);
-        AbstractArrow abstractarrow = arrowitem.createArrow(level, arrow, player);
-        abstractarrow = customArrow(abstractarrow);
-        abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);
-        if (power == 1.0F) {
-            abstractarrow.setCritArrow(true);
+        AbstractArrow abstractarrow;
+        if (arrow.getItem() instanceof GenericArrowItem genericArrow) {
+            abstractarrow = ArrowFeatureController.createArrowEntity(
+                    new ArrowFeatureController.BowArrowUseContext(level, player, no_consume, power),
+                    new GenericItemStack<>(this, bow),
+                    new GenericItemStack<>(genericArrow, arrow));
+        } else {
+            ArrowItem arrowitem = (ArrowItem) (arrow.getItem() instanceof ArrowItem ? arrow.getItem() : Items.ARROW);
+            abstractarrow = arrowitem.createArrow(level, arrow, player);
+            abstractarrow = customArrow(abstractarrow);
+            abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);
+            if (power == 1.0F) {
+                abstractarrow.setCritArrow(true);
+            }
+
+            int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, bow);
+            if (j > 0) {
+                abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + (double) j * 0.5D + 0.5D);
+            }
+
+            int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, bow);
+            if (k > 0) {
+                abstractarrow.setKnockback(k);
+            }
+
+            if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, bow) > 0) {
+                abstractarrow.setSecondsOnFire(100);
+            }
+
+            if (no_consume || player.getAbilities().instabuild && (arrow.is(Items.SPECTRAL_ARROW) || arrow.is(Items.TIPPED_ARROW))) {
+                abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+            }
         }
 
-        int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, bow);
-        if (j > 0) {
-            abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + (double) j * 0.5D + 0.5D);
-        }
-
-        int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, bow);
-        if (k > 0) {
-            abstractarrow.setKnockback(k);
-        }
-
-        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, bow) > 0) {
-            abstractarrow.setSecondsOnFire(100);
-        }
-
-        bow.hurtAndBreak(1, player, (p_40665_) -> {
-            p_40665_.broadcastBreakEvent(player.getUsedItemHand());
-        });
-        if (no_consume || player.getAbilities().instabuild && (arrow.is(Items.SPECTRAL_ARROW) || arrow.is(Items.TIPPED_ARROW))) {
-            abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-        }
-
+        bow.hurtAndBreak(1, player, (pl) -> pl.broadcastBreakEvent(player.getUsedItemHand()));
         level.addFreshEntity(abstractarrow);
     }
 
@@ -129,6 +136,12 @@ public class GenericBowItem extends BowItem {
         return UseAnim.BOW;
     }
 
+    @Override
+    public void onUsingTick(ItemStack stack, LivingEntity user, int count) {
+        if (user instanceof Player player)
+            BowFeatureController.usingTick(player, new GenericItemStack<>(this, stack));
+    }
+
     /**
      * On start pulling
      */
@@ -143,7 +156,7 @@ public class GenericBowItem extends BowItem {
             return InteractionResultHolder.fail(itemstack);
         } else {
             player.startUsingItem(hand);
-            BowFeatureController.startUsing(new GenericItemStack<>(this, itemstack));
+            BowFeatureController.startUsing(player, new GenericItemStack<>(this, itemstack));
             return InteractionResultHolder.consume(itemstack);
         }
     }

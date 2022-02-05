@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.archery.item;
 
+import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class GenericArrowItem extends ArrowItem {
 
-    public record ArrowConfig(boolean is_inf) {
+    public record ArrowConfig(boolean is_inf, FeatureList feature) {
     }
 
     public final ArrowConfig config;

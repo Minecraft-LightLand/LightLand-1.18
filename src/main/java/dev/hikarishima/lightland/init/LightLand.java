@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.init;
 
 import com.tterrag.registrate.Registrate;
+import dev.hikarishima.lightland.init.registrate.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -39,6 +40,12 @@ public class LightLand {
         bus.addListener(this::setup);
         bus.addListener(EventPriority.LOWEST, LightLand::gatherData);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> LightLandClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
+        BlockRegistrate.register();
+        EntityRegistrate.register();
+        ItemRegistrate.register();
+        MenuRegistrate.register();
+        RecipeRegistrate.register();
+        VanillaMagicRegistrate.register();
     }
 
     private void setup(final FMLCommonSetupEvent event) {

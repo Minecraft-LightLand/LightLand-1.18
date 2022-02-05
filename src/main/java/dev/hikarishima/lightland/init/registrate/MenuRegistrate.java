@@ -1,6 +1,9 @@
 package dev.hikarishima.lightland.init.registrate;
 
-public class RecipeRegistrate {
+/**
+ * handles container menu
+ * */
+public class MenuRegistrate {
 
     public static void register(){
 

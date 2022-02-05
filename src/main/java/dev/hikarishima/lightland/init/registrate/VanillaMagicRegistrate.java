@@ -1,6 +1,9 @@
 package dev.hikarishima.lightland.init.registrate;
 
-public class RecipeRegistrate {
+/**
+ * handles enchantment, mob effects, and potions
+ */
+public class VanillaMagicRegistrate {
 
     public static void register(){
 
