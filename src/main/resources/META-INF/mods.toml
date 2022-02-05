@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[38,)"
+license="All rights reserved"
+[[mods]]
+modId="lightland"
+version="${file.jarVersion}" #mandatory
+displayName="LightLand RPG" #mandatory
+logoFile="examplemod.png" #optional
+credits="Thanks for this example mod goes to Java" #optional
+authors="Love, Cheese and small house plants" #optional
+description='''
+'''
+[[dependencies.lightland]]
+    modId="forge"
+    mandatory=true
+    versionRange="[38,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.lightland]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18,1.19)"
+    ordering="NONE"
+    side="BOTH"
