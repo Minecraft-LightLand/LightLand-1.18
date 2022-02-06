@@ -2,14 +2,19 @@ package dev.hikarishima.lightland.init;
 
 import com.tterrag.registrate.Registrate;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.command.ArcaneCommand;
+import dev.hikarishima.lightland.content.common.command.MainCommand;
 import dev.hikarishima.lightland.events.*;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.*;
 import dev.hikarishima.lightland.network.PacketHandler;
+import dev.hikarishima.lightland.content.common.command.BaseCommand;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -46,9 +51,11 @@ public class LightLand {
         ParticleRegistrate.register();
         MinecraftForge.EVENT_BUS.register(ClientEntityEffectRenderEvents.class);
         MinecraftForge.EVENT_BUS.register(EffectSyncEvents.class);
-        MinecraftForge.EVENT_BUS.register(ServerPlayerEvents.class);
         MinecraftForge.EVENT_BUS.register(ItemUseEventHandler.class);
         MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
+        MinecraftForge.EVENT_BUS.register(GenericEventHandler.class);
+        BaseCommand.LIST.add(MainCommand::new);
+        BaseCommand.LIST.add(ArcaneCommand::new);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -57,14 +64,14 @@ public class LightLand {
     }
 
     public static void gatherData(GatherDataEvent event) {
-        DataGenerator gen = event.getGenerator();
+        LangData.addTranslations(REGISTRATE::addRawLang);
     }
 
     public void onParticleRegistryEvent(ParticleFactoryRegisterEvent event) {
         ParticleRegistrate.registerClient();
     }
 
-    public void registerCaps(RegisterCapabilitiesEvent event){
+    public void registerCaps(RegisterCapabilitiesEvent event) {
         event.register(LLPlayerData.class);
     }
 }

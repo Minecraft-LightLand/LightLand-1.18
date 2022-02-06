@@ -12,5 +12,13 @@
   "item.lightland.no_fall_arrow": "No Fall Arrow",
   "item.lightland.obsidian_arrow": "Obsidian Arrow",
   "item.lightland.starter_arrow": "Starter Arrow",
-  "item.lightland.starter_bow": "Starter Bow"
+  "item.lightland.starter_bow": "Starter Bow",
+  "lightland:argument.invalid_id": "Invalid Id",
+  "lightland:chat.action_success": "Action Success",
+  "lightland:chat.list_arcane_type_locked": "List Arcane Type Locked",
+  "lightland:chat.list_arcane_type_unlocked": "List Arcane Type Unlocked",
+  "lightland:chat.player_not_found": "Player Not Found",
+  "lightland:chat.profession_already_exist": "Profession Already Exist",
+  "lightland:chat.show_arcane_mana": "Show Arcane Mana",
+  "lightland:chat.wrong_item": "Wrong Item"
 }

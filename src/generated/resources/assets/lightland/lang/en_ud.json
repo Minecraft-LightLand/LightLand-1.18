@@ -12,5 +12,13 @@
   "item.lightland.no_fall_arrow": "\u028Do\u0279\u0279\u2C6F \u05DF\u05DF\u0250\u2132 oN",
   "item.lightland.obsidian_arrow": "\u028Do\u0279\u0279\u2C6F u\u0250\u0131p\u0131sqO",
   "item.lightland.starter_arrow": "\u028Do\u0279\u0279\u2C6F \u0279\u01DD\u0287\u0279\u0250\u0287S",
-  "item.lightland.starter_bow": "\u028Do\u15FA \u0279\u01DD\u0287\u0279\u0250\u0287S"
+  "item.lightland.starter_bow": "\u028Do\u15FA \u0279\u01DD\u0287\u0279\u0250\u0287S",
+  "lightland:argument.invalid_id": "pI p\u0131\u05DF\u0250\u028CuI",
+  "lightland:chat.action_success": "ss\u01DD\u0254\u0254nS uo\u0131\u0287\u0254\u2C6F",
+  "lightland:chat.list_arcane_type_locked": "p\u01DD\u029E\u0254o\uA780 \u01DDd\u028E\u27D8 \u01DDu\u0250\u0254\u0279\u2C6F \u0287s\u0131\uA780",
+  "lightland:chat.list_arcane_type_unlocked": "p\u01DD\u029E\u0254o\u05DFu\u2229 \u01DDd\u028E\u27D8 \u01DDu\u0250\u0254\u0279\u2C6F \u0287s\u0131\uA780",
+  "lightland:chat.player_not_found": "puno\u2132 \u0287oN \u0279\u01DD\u028E\u0250\u05DF\u0500",
+  "lightland:chat.profession_already_exist": "\u0287s\u0131x\u018E \u028Ep\u0250\u01DD\u0279\u05DF\u2C6F uo\u0131ss\u01DD\u025Fo\u0279\u0500",
+  "lightland:chat.show_arcane_mana": "\u0250u\u0250W \u01DDu\u0250\u0254\u0279\u2C6F \u028Do\u0265S",
+  "lightland:chat.wrong_item": "\u026F\u01DD\u0287I buo\u0279M"
 }
