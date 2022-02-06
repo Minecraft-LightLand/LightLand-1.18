@@ -2,7 +2,9 @@ package dev.hikarishima.lightland.events;
 
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
+import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.lcy0x1.base.Proxy;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -89,6 +91,10 @@ public class ClientEntityEffectRenderEvents {
         if (player.getMainHandItem().getItem() instanceof GenericBowItem bow) {
             float f = event.getFov();
             float i = player.getTicksUsingItem();
+            MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.QUICK_PULL.get());
+            if (ins != null) {
+                i *= 1.5 + 0.5 * ins.getAmplifier();
+            }
             float p = bow.config.fov_time();
             event.setNewfov(f * (1 - Math.min(1, i / p) * bow.config.fov()));
         }

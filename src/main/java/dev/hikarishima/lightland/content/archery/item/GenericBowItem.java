@@ -4,6 +4,7 @@ import dev.hikarishima.lightland.content.archery.controller.ArrowFeatureControll
 import dev.hikarishima.lightland.content.archery.controller.BowFeatureController;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import dev.hikarishima.lightland.init.ClientRegister;
+import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.GenericItemStack;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -11,6 +12,7 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -24,7 +26,8 @@ import java.util.function.Predicate;
 
 public class GenericBowItem extends BowItem {
 
-    public record BowConfig(float damage, int punch, int pull_time, int fov_time, float fov, FeatureList feature) {
+    public record BowConfig(float damage, int punch, int pull_time, float speed, int fov_time, float fov,
+                            FeatureList feature) {
 
     }
 
@@ -53,7 +56,7 @@ public class GenericBowItem extends BowItem {
             if (arrow.isEmpty()) { // no arrow: use default arrow
                 arrow = new ItemStack(Items.ARROW);
             }
-            float power = getPowerForTime(pull_time);
+            float power = getPowerForTime(user, pull_time);
             if (((double) power < 0.1D)) { // not enough power: cancel
                 return;
             }
@@ -89,7 +92,7 @@ public class GenericBowItem extends BowItem {
             ArrowItem arrowitem = (ArrowItem) (arrow.getItem() instanceof ArrowItem ? arrow.getItem() : Items.ARROW);
             abstractarrow = arrowitem.createArrow(level, arrow, player);
             abstractarrow = customArrow(abstractarrow);
-            abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F);
+            abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3f, 1.0F);
             if (power == 1.0F) {
                 abstractarrow.setCritArrow(true);
             }
@@ -120,22 +123,31 @@ public class GenericBowItem extends BowItem {
         return true;
     }
 
+    public float getPullForTime(LivingEntity entity, float time) {
+        float f = (float) time / config.pull_time();
+        MobEffectInstance ins = entity.getEffect(VanillaMagicRegistrate.QUICK_PULL.get());
+        if (ins != null) {
+            f *= (1.5 + 0.5 * ins.getAmplifier());
+        }
+        return Math.min(1, f);
+    }
+
     /**
      * power of arrow, range 0~1
      * Formula: (t*(t+2))/3
      * Full in 1 second
      */
-    public static float getPowerForTime(int time) {
-        float f = (float) time / 20.0F;
+    public float getPowerForTime(LivingEntity entity, float time) {
+        float f = getPullForTime(entity, time);
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;
         }
-        return f;
+        return Math.min(1, f);
     }
 
     public int getUseDuration(ItemStack stack) {
-        return BowFeatureController.getMaxPullTime(new GenericItemStack<>(this, stack));
+        return 72000;
     }
 
     public UseAnim getUseAnimation(ItemStack stack) {

@@ -17,7 +17,8 @@ public class DefaultShootFeature implements OnShootFeature {
     @Override
     public boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> consumer) {
         consumer.accept(entity -> {
-            entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, entity.data.power() * 3.0F, 1.0F);
+            entity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F,
+                    entity.data.power() * entity.data.bow().item().config.speed(), 1.0F);
             if (entity.data.power() == 1.0F) {
                 entity.setCritArrow(true);
             }

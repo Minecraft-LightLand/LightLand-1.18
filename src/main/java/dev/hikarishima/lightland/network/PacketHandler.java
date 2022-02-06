@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.network;
 
 import dev.hikarishima.lightland.init.LightLand;
+import dev.hikarishima.lightland.network.packets.EffectToClient;
 import dev.hikarishima.lightland.network.packets.EnderAimSetPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -16,10 +17,12 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 
 public enum PacketHandler {
-    ENDER_BOW_AIM_SET(EnderAimSetPacket.class, EnderAimSetPacket::new, PLAY_TO_SERVER);
+    ENDER_BOW_AIM_SET(EnderAimSetPacket.class, EnderAimSetPacket::new, PLAY_TO_SERVER),
+    EFFECT_SYNC(EffectToClient.class, EffectToClient::new, PLAY_TO_CLIENT);
 
     public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(LightLand.MODID, "main");
     public static final int NETWORK_VERSION = 1;
@@ -29,7 +32,7 @@ public enum PacketHandler {
     private final LoadedPacket<?> packet;
 
     <T extends SimplePacketBase> PacketHandler(Class<T> type, Function<FriendlyByteBuf, T> factory,
-                                            NetworkDirection direction) {
+                                               NetworkDirection direction) {
         packet = new LoadedPacket<>(type, factory, direction);
     }
 

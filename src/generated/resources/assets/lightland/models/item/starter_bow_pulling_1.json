@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:item/bow_pulling_1",
   "textures": {
     "layer0": "lightland:item/starter_bow_pulling_1"
   }

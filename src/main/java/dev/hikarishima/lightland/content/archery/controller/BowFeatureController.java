@@ -6,10 +6,6 @@ import net.minecraft.world.entity.player.Player;
 
 public class BowFeatureController {
 
-    public static int getMaxPullTime(GenericItemStack<GenericBowItem> bow){
-        return 72000;
-    }
-
     public static void startUsing(Player player, GenericItemStack<GenericBowItem> bow) {
         bow.item().config.feature().pull.forEach(e->e.onPull(player, bow));
     }
