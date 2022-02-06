@@ -3,6 +3,8 @@ package dev.hikarishima.lightland.init.registrate;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
+import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import dev.hikarishima.lightland.content.archery.feature.arrow.EnderArrowFeature;
 import dev.hikarishima.lightland.content.archery.feature.arrow.NoFallArrowFeature;
@@ -17,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 
@@ -57,6 +60,14 @@ public class ItemRegistrate {
     public static final ItemEntry<GenericArrowItem> OBSIDIAN_ARROW;
     public static final ItemEntry<GenericArrowItem> NO_FALL_ARROW;
     public static final ItemEntry<GenericArrowItem> ENDER_ARROW;
+
+
+    public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
+                    new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
+            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+    public static final ItemEntry<ArcaneAxe> ARCANE_AXE_GILDED = REGISTRATE.item("gilded_arcane_axe", p ->
+                    new ArcaneAxe(Tiers.IRON, 8, -3.1f, p.stacksTo(1).setNoRepair(), 50))
+            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
 
     static {
         STARTER_BOW = genBow("starter_bow", 600, 0, 0, FeatureList::end);

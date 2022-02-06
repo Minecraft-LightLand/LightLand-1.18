@@ -1,5 +1,6 @@
 package dev.lcy0x1.base;
 
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -23,6 +24,10 @@ public class NamedEntry<T extends NamedEntry<T>> extends ForgeRegistryEntry<T> {
         ResourceLocation reg = registry.get().getRegistryName();
         desc = reg.toString() + "." + rl.toString();
         return desc;
+    }
+
+    public TranslatableComponent getDesc() {
+        return new TranslatableComponent(getDescriptionId());
     }
 
     public String getID() {

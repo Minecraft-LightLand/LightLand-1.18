@@ -24,7 +24,7 @@ public abstract class SimplePacketBase {
     }
 
     public void toClientPlayer(ServerPlayer e) {
-		PacketHandler.channel.sendTo(this, e.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
+        PacketHandler.channel.sendTo(this, e.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
 }

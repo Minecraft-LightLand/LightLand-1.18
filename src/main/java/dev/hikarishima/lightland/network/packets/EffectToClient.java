@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.network.packets;
 
-import dev.hikarishima.lightland.content.archery.feature.bow.EnderShootFeature;
 import dev.hikarishima.lightland.events.EffectSyncEvents;
 import dev.hikarishima.lightland.network.SimplePacketBase;
 import net.minecraft.network.FriendlyByteBuf;

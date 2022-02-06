@@ -1,9 +1,7 @@
 package dev.hikarishima.lightland.events;
 
-import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.network.packets.EffectToClient;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.LivingEntity;

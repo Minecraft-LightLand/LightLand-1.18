@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.init;
 
-import dev.hikarishima.lightland.init.registrate.ParticleRegistrate;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
