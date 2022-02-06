@@ -57,7 +57,7 @@ public class ArcaneSword extends SwordItem implements IArcaneItem {
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        return (int) Math.round(13 * (1 - 1.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack)));
+        return (int) Math.round(13.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack));
     }
 
     @Override

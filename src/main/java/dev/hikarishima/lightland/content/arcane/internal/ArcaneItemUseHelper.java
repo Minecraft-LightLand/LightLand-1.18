@@ -88,14 +88,14 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         Player player = event.getPlayer();
         LLPlayerData magic = LLPlayerData.get(player);
         if (stack.getItem() instanceof ArcaneAxe) {
-            ArcaneType type = isAxeCharged(stack) ? ArcaneType.DUBHE : ArcaneType.MEGREZ;
+            ArcaneType type = isAxeCharged(stack) ? ArcaneType.DUBHE.get() : ArcaneType.MEGREZ.get();
             if (executeArcane(player, magic, stack, type, target)) {
                 if (event.isCancelable())
                     event.setCanceled(true);
                 event.setCancellationResult(InteractionResult.SUCCESS);
             }
         } else if (stack.getItem() instanceof ArcaneSword) {
-            if (executeArcane(player, magic, stack, ArcaneType.ALIOTH, target)) {
+            if (executeArcane(player, magic, stack, ArcaneType.ALIOTH.get(), target)) {
                 if (event.isCancelable())
                     event.setCanceled(true);
                 event.setCancellationResult(InteractionResult.SUCCESS);
@@ -116,7 +116,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         } else if (stack.getItem() instanceof ArcaneSword) {
             if (executeArcane(event.getPlayer(),
                     LLPlayerData.get(event.getPlayer()),
-                    stack, ArcaneType.ALKAID, target)) {
+                    stack, ArcaneType.ALKAID.get(), target)) {
                 if (cancellable) event.setCanceled(true);
                 event.setCancellationResult(InteractionResult.SUCCESS);
             }
@@ -164,9 +164,9 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         boolean cr = event.isVanillaCritical();
         if (stack.getItem() instanceof ArcaneAxe) {
             boolean ch = isAxeCharged(stack);
-            type = cr ? ch ? ArcaneType.MERAK : ArcaneType.PHECDA : ch ? ArcaneType.DUBHE : ArcaneType.MEGREZ;
+            type = cr ? ch ? ArcaneType.MERAK.get() : ArcaneType.PHECDA.get() : ch ? ArcaneType.DUBHE.get() : ArcaneType.MEGREZ.get();
         } else if (stack.getItem() instanceof ArcaneSword) {
-            type = cr ? ArcaneType.MIZAR : ArcaneType.ALIOTH;
+            type = cr ? ArcaneType.MIZAR.get() : ArcaneType.ALIOTH.get();
         }
         if (type != null)
             executeArcane(player, magic, stack, type, le);

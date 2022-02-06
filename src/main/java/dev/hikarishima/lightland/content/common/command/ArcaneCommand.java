@@ -40,7 +40,7 @@ public class ArcaneCommand extends BaseCommand {
                     TextComponent comps = new TextComponent("[");
                     for (ArcaneType type : LightLandRegistry.ARCANE_TYPE.getValues()) {
                         boolean bool = magic.magicAbility.isArcaneTypeUnlocked(type);
-                        BaseComponent lock = (bool ? LangData.IDS.LIST_UNLOCKED : LangData.IDS.LIST_LOCKED).get();
+                        BaseComponent lock = (bool ? LangData.IDS.UNLOCKED : LangData.IDS.LOCKED).get();
                         comps.append(type.getDesc().append(": ").append(lock).append(",\n"));
                     }
                     Component comp = comps.append("]");
@@ -82,8 +82,8 @@ public class ArcaneCommand extends BaseCommand {
                             ItemStack stack = e.getMainHandItem();
                             Arcane arcane = context.getArgument("arcane", Arcane.class);
                             if (arcane == null || stack.isEmpty() ||
-                                    arcane.type.weapon == ArcaneType.Weapon.AXE && !(stack.getItem() instanceof ArcaneAxe) ||
-                                    arcane.type.weapon == ArcaneType.Weapon.SWORD && !(stack.getItem() instanceof ArcaneSword)) {
+                                    arcane.type.get().weapon == ArcaneType.Weapon.AXE && !(stack.getItem() instanceof ArcaneAxe) ||
+                                    arcane.type.get().weapon == ArcaneType.Weapon.SWORD && !(stack.getItem() instanceof ArcaneSword)) {
                                 send(context, LangData.IDS.WRONG_ITEM.get());
                                 return 0;
                             }
@@ -101,7 +101,7 @@ public class ArcaneCommand extends BaseCommand {
                     }
                     TextComponent list = new TextComponent("[");
                     for (Arcane a : ArcaneItemCraftHelper.getAllArcanesOnItem(stack)) {
-                        list.append(a.type.getDesc().append(": ").append(a.getDesc()).append(",\n"));
+                        list.append(a.type.get().getDesc().append(": ").append(a.getDesc()).append(",\n"));
                     }
                     send(context, list.append("]"));
                     return 1;

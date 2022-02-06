@@ -41,8 +41,8 @@ public class ArcaneAxe extends AxeItem implements IArcaneItem {
         Player pl = Proxy.getPlayer();
         LLPlayerData handler = pl == null ? null : LLPlayerData.get(pl);
         for (Arcane a : arcane) {
-            boolean red = handler != null && !handler.magicAbility.isArcaneTypeUnlocked(a.type);
-            TranslatableComponent text = a.type.getDesc();
+            boolean red = handler != null && !handler.magicAbility.isArcaneTypeUnlocked(a.type.get());
+            TranslatableComponent text = a.type.get().getDesc();
             if (red)
                 text.withStyle(ChatFormatting.RED);
             list.add(text.append(": ").append(a.getDesc()));
@@ -75,7 +75,7 @@ public class ArcaneAxe extends AxeItem implements IArcaneItem {
 
     @Override
     public int getBarWidth(ItemStack stack) {
-        return (int) Math.round(13 * (1 - 1.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack)));
+        return (int) Math.round(13.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack));
     }
 
     @Override

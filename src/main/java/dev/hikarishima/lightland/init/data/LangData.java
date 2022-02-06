@@ -11,8 +11,8 @@ public class LangData {
     public enum IDS {
         INVALID_ID("argument.invalid_id"),
         PROF_EXIST("chat.profession_already_exist"),
-        LIST_LOCKED("chat.list_arcane_type_locked"),
-        LIST_UNLOCKED("chat.list_arcane_type_unlocked"),
+        LOCKED("chat.locked"),
+        UNLOCKED("chat.unlocked"),
         GET_ARCANE_MANA("chat.show_arcane_mana"),
         ACTION_SUCCESS("chat.action_success"),
         PLAYER_NOT_FOUND("chat.player_not_found"),
@@ -25,7 +25,7 @@ public class LangData {
         }
 
         public TranslatableComponent get(Object... objs) {
-            return new TranslatableComponent(LightLand.MODID + ":" + id, objs);
+            return new TranslatableComponent(LightLand.MODID + "." + id, objs);
         }
 
     }
@@ -34,7 +34,7 @@ public class LangData {
         for (IDS id : IDS.values()) {
             String[] strs = id.id.split("\\.");
             String str = strs[strs.length - 1];
-            pvd.accept(LightLand.MODID + ":" + id.id, RegistrateLangProvider.toEnglishName(str));
+            pvd.accept(LightLand.MODID + "." + id.id, RegistrateLangProvider.toEnglishName(str));
         }
     }
 }

@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.arcane.internal;
 
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
-import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.lcy0x1.base.NamedEntry;
@@ -10,19 +10,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
+
 /**
  * 天枢，天璇，天玑，天权，玉衡，开阳，摇光
  * DUBHE, MERAK, PHECDA, MEGREZ, ALIOTH, MIZAR, ALKAID
  */
 public class ArcaneType extends NamedEntry<ArcaneType> {
 
-    public static final ArcaneType DUBHE = reg("dubhe", new ArcaneType(Weapon.AXE, Hit.LIGHT, Mana.ACTIVE));
-    public static final ArcaneType MERAK = reg("merak", new ArcaneType(Weapon.AXE, Hit.CRITICAL, Mana.ACTIVE));
-    public static final ArcaneType PHECDA = reg("phecda", new ArcaneType(Weapon.AXE, Hit.CRITICAL, Mana.PASSIVE));
-    public static final ArcaneType MEGREZ = reg("megrez", new ArcaneType(Weapon.AXE, Hit.LIGHT, Mana.PASSIVE));
-    public static final ArcaneType ALIOTH = reg("alioth", new ArcaneType(Weapon.SWORD, Hit.LIGHT, Mana.PASSIVE));
-    public static final ArcaneType MIZAR = reg("mizar", new ArcaneType(Weapon.SWORD, Hit.CRITICAL, Mana.PASSIVE));
-    public static final ArcaneType ALKAID = reg("alkaid", new ArcaneType(Weapon.SWORD, Hit.NONE, Mana.ACTIVE));
+    public static final RegistryEntry<ArcaneType> DUBHE = reg("dubhe", Weapon.AXE, Hit.LIGHT, Mana.ACTIVE);
+    public static final RegistryEntry<ArcaneType> MERAK = reg("merak", Weapon.AXE, Hit.CRITICAL, Mana.ACTIVE);
+    public static final RegistryEntry<ArcaneType> PHECDA = reg("phecda", Weapon.AXE, Hit.CRITICAL, Mana.PASSIVE);
+    public static final RegistryEntry<ArcaneType> MEGREZ = reg("megrez", Weapon.AXE, Hit.LIGHT, Mana.PASSIVE);
+    public static final RegistryEntry<ArcaneType> ALIOTH = reg("alioth", Weapon.SWORD, Hit.LIGHT, Mana.PASSIVE);
+    public static final RegistryEntry<ArcaneType> MIZAR = reg("mizar", Weapon.SWORD, Hit.CRITICAL, Mana.PASSIVE);
+    public static final RegistryEntry<ArcaneType> ALKAID = reg("alkaid", Weapon.SWORD, Hit.NONE, Mana.ACTIVE);
     public final Weapon weapon;
     public final Hit hit;
     public final Mana mana;
@@ -40,9 +42,8 @@ public class ArcaneType extends NamedEntry<ArcaneType> {
         }
     }
 
-    private static ArcaneType reg(String str, ArcaneType type) {
-        type.setRegistryName(LightLand.MODID, str);
-        return type;
+    private static RegistryEntry<ArcaneType> reg(String str, Weapon w, Hit h, Mana m) {
+        return REGISTRATE.generic(ArcaneType.class, str, () -> new ArcaneType(w, h, m)).defaultLang().register();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -71,4 +72,7 @@ public class ArcaneType extends NamedEntry<ArcaneType> {
     public enum Mana {
         PASSIVE, ACTIVE
     }
+
+    public static void register(){}
+
 }

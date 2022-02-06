@@ -42,7 +42,7 @@ public class ArcaneDamageEventHandler {
             ItemStack stack = e.getMainHandItem();
             if (stack.getItem() instanceof IArcaneItem) {
                 ArcaneItemUseHelper.addArcaneMana(stack, (int) event.getAmount());
-                LightLandFakeEntity.addEffect(e, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), e);
+                LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), e);
             }
         }
     }

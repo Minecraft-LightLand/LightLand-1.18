@@ -32,42 +32,6 @@ public class LLRegistryEvents {
         new Automator.RegistryClassHandler<>(r.getRegistrySuperType(), () -> r);
     }
 
-    /*
-    @SubscribeEvent
-    public static void onMagicElementRegistry(RegistryEvent.Register<MagicElement> event) {
-        process(LightLandRegistrate.class, MagicElement.class, event.getRegistry()::register);
-    }
-
-    @SubscribeEvent
-    public static void onMagicProductTypeRegistry(RegistryEvent.Register<MagicProductType<?, ?>> event) {
-        process(MagicRegistry.class, MagicProductType.class, event.getRegistry()::register);
-    }*/
-
-    @SubscribeEvent
-    public static void onArcaneTypeRegistry(RegistryEvent.Register<ArcaneType> event) {
-        process(ArcaneType.class, ArcaneType.class, event.getRegistry()::register);
-    }
-
-    @SubscribeEvent
-    public static void onArcaneRegistry(RegistryEvent.Register<Arcane> event) {
-        process(ArcaneRegistry.class, Arcane.class, event.getRegistry()::register);
-    }
-/*
-    @SubscribeEvent
-    public static void onSpellRegistry(RegistryEvent.Register<Spell<?, ?>> event) {
-        process(SpellRegistry.class, Spell.class, event.getRegistry()::register);
-    }*/
-
-    @SubscribeEvent
-    public static void onProfessionRegistry(RegistryEvent.Register<Profession> event) {
-        process(LightLandRegistry.class, Profession.class, event.getRegistry()::register);
-    }
-/*
-    @SubscribeEvent
-    public static void onSkillRegistry(RegistryEvent.Register<Skill> event) {
-        process(SkillRegistry.class, Skill.class, event.getRegistry()::register);
-    }*/
-
     @SuppressWarnings({"unchecked", "rawtypes"})
     public static <T> void process(Class<?> provider, Class<T> reg, Consumer<T> acceptor) {
         ExceptionHandler.run(() -> {

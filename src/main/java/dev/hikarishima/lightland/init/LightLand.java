@@ -6,13 +6,12 @@ import dev.hikarishima.lightland.content.common.command.*;
 import dev.hikarishima.lightland.events.*;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.*;
+import dev.hikarishima.lightland.init.special.LLRegistrate;
 import dev.hikarishima.lightland.network.PacketHandler;
-import net.minecraft.data.DataGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -23,17 +22,15 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.rmi.registry.Registry;
-
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("lightland")
 public class LightLand {
 
     public static final String MODID = "lightland";
     public static final Logger LOGGER = LogManager.getLogger();
-    public static final Registrate REGISTRATE = Registrate.create(MODID);
+    public static final LLRegistrate REGISTRATE = new LLRegistrate(MODID);
 
-    private static void registerRegistrates(){
+    private static void registerRegistrates() {
         BlockRegistrate.register();
         EntityRegistrate.register();
         ItemRegistrate.register();
@@ -43,7 +40,7 @@ public class LightLand {
         ParticleRegistrate.register();
     }
 
-    private static void registerForgeEvents(){
+    private static void registerForgeEvents() {
         MinecraftForge.EVENT_BUS.register(ClientEntityEffectRenderEvents.class);
         MinecraftForge.EVENT_BUS.register(EffectSyncEvents.class);
         MinecraftForge.EVENT_BUS.register(ItemUseEventHandler.class);
@@ -52,7 +49,7 @@ public class LightLand {
         MinecraftForge.EVENT_BUS.register(ArcaneDamageEventHandler.class);
     }
 
-    private static void registerCommands(){
+    private static void registerCommands() {
         EnumParser.register();
         RegistryParser.register();
         BaseCommand.LIST.add(MainCommand::new);

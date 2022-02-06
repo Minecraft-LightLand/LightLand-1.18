@@ -39,9 +39,9 @@ public abstract class Profession extends NamedEntry<Profession> {
             if (lv == 9)
                 return ERR_MAX;
             if (level < 10) {
-                if (this == LightLandRegistry.PROF_SPELL)
+                if (this == LightLandRegistry.PROF_SPELL.get())
                     return null;
-                if (this == LightLandRegistry.PROF_MAGIC || this == LightLandRegistry.PROF_ARCANE)
+                if (this == LightLandRegistry.PROF_MAGIC.get() || this == LightLandRegistry.PROF_ARCANE.get())
                     return lv >= 3 ? ERR_PROF_MAX : null;
                 if (lv >= 1)
                     return ERR_PROF_MAX;
@@ -51,9 +51,9 @@ public abstract class Profession extends NamedEntry<Profession> {
             if (lv >= 10)
                 return ERR_MAX;
             if (level < 10) {
-                if (this == LightLandRegistry.PROF_MAGIC)
+                if (this == LightLandRegistry.PROF_MAGIC.get())
                     return null;
-                if (this == LightLandRegistry.PROF_SPELL || this == LightLandRegistry.PROF_ARCANE)
+                if (this == LightLandRegistry.PROF_SPELL.get() || this == LightLandRegistry.PROF_ARCANE.get())
                     return lv >= 3 + level / 3 ? ERR_PROF_MAX : null;
                 if (lv >= 3)
                     return ERR_PROF_MAX;
@@ -63,9 +63,9 @@ public abstract class Profession extends NamedEntry<Profession> {
             if (lv >= 10)
                 return ERR_MAX;
             if (level < 10) {
-                if (this == LightLandRegistry.PROF_MAGIC || this == LightLandRegistry.PROF_SPELL)
+                if (this == LightLandRegistry.PROF_MAGIC.get() || this == LightLandRegistry.PROF_SPELL.get())
                     return lv >= 1 + level / 5 ? ERR_PROF_MAX : null;
-                if (this == LightLandRegistry.PROF_ARCANE)
+                if (this == LightLandRegistry.PROF_ARCANE.get())
                     return lv >= 3 + level / 3 ? ERR_PROF_MAX : null;
             }
         }

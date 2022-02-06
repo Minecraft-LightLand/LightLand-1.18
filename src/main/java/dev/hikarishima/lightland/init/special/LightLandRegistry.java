@@ -1,12 +1,13 @@
 package dev.hikarishima.lightland.init.special;
 
+import com.tterrag.registrate.util.entry.RegistryEntry;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.profession.*;
 import dev.hikarishima.lightland.content.spell.internal.Spell;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 
@@ -14,7 +15,7 @@ public class LightLandRegistry {
 
     public static IForgeRegistry<ArcaneType> ARCANE_TYPE;
     public static IForgeRegistry<Arcane> ARCANE;
-    public static IForgeRegistry<Spell<?,?>> SPELL;
+    public static IForgeRegistry<Spell<?, ?>> SPELL;
     public static IForgeRegistry<Profession> PROFESSION;
 
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -39,24 +40,25 @@ public class LightLandRegistry {
 
         //SKILL = new RegistryBuilder<Skill>().setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class).create();
 
+        ArcaneType.register();
+        ArcaneRegistry.register();
     }
 
-    public static final ArcaneProfession PROF_ARCANE = reg("arcane", new ArcaneProfession());
-    public static final MagicianProfession PROF_MAGIC = reg("magician", new MagicianProfession());
-    public static final SpellCasterProfession PROF_SPELL = reg("spell_caster", new SpellCasterProfession());
-    public static final KnightProfession PROF_KNIGHT = reg("knight", new KnightProfession());
-    public static final ShielderProfession PROF_SHIELDER = reg("shielder", new ShielderProfession());
-    public static final BurserkerProfession PROF_BURSERKER = reg("burserker", new BurserkerProfession());
-    public static final ArcherProfession PROF_ARCHER = reg("archer", new ArcherProfession());
-    public static final HunterProfession PROF_HUNTER = reg("hunter", new HunterProfession());
-    public static final AlchemistProfession PROF_ALCHEM = reg("alchemist", new AlchemistProfession());
-    public static final ChemistProfession PROF_CHEM = reg("chemist", new ChemistProfession());
-    public static final TidecallerProfession PROF_TIDE = reg("tidecaller", new TidecallerProfession());
-    public static final AssassinProfession PROF_ASSASSIN = reg("assassin", new AssassinProfession());
+    public static final RegistryEntry<ArcaneProfession> PROF_ARCANE = genProf("arcane", ArcaneProfession::new);
+    public static final RegistryEntry<MagicianProfession> PROF_MAGIC = genProf("magician", MagicianProfession::new);
+    public static final RegistryEntry<SpellCasterProfession> PROF_SPELL = genProf("spell_caster", SpellCasterProfession::new);
+    public static final RegistryEntry<KnightProfession> PROF_KNIGHT = genProf("knight", KnightProfession::new);
+    public static final RegistryEntry<ShielderProfession> PROF_SHIELDER = genProf("shielder", ShielderProfession::new);
+    public static final RegistryEntry<BurserkerProfession> PROF_BURSERKER = genProf("burserker", BurserkerProfession::new);
+    public static final RegistryEntry<ArcherProfession> PROF_ARCHER = genProf("archer", ArcherProfession::new);
+    public static final RegistryEntry<HunterProfession> PROF_HUNTER = genProf("hunter", HunterProfession::new);
+    public static final RegistryEntry<AlchemistProfession> PROF_ALCHEM = genProf("alchemist", AlchemistProfession::new);
+    public static final RegistryEntry<ChemistProfession> PROF_CHEM = genProf("chemist", ChemistProfession::new);
+    public static final RegistryEntry<TidecallerProfession> PROF_TIDE = genProf("tidecaller", TidecallerProfession::new);
+    public static final RegistryEntry<AssassinProfession> PROF_ASSASSIN = genProf("assassin", AssassinProfession::new);
 
-    private static <V extends T, T extends ForgeRegistryEntry<T>> V reg(String name, V v) {
-        v.setRegistryName(LightLand.MODID, name);
-        return v;
+    private static <V extends Profession> RegistryEntry<V> genProf(String name, NonNullSupplier<V> v) {
+        return LightLand.REGISTRATE.generic(Profession.class, name, v).defaultLang().register();
     }
 
 }

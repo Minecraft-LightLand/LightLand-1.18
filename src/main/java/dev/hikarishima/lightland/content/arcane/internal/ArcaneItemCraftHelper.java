@@ -32,7 +32,7 @@ public class ArcaneItemCraftHelper {
     }
 
     public static void setArcaneOnItem(ItemStack stack, Arcane arcane) {
-        String s = arcane.type.getID();
+        String s = arcane.type.get().getID();
         String str = arcane.getID();
         stack.getOrCreateTagElement("arcane").putString(s, str);
     }
