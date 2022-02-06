@@ -4,11 +4,12 @@ import dev.lcy0x1.util.SerialClass;
 
 @SerialClass
 public class SpellConfig {
-/*
+
     @SerialClass.SerialField
     public int duration, mana_cost, spell_load;
     @SerialClass.SerialField
     public float factor = 1f;
+    /*
     @SerialClass.SerialField public MagicScroll.ScrollType type;
 
     public static <C extends SpellConfig> C get(Spell<C, ?> spell, Level world, Player player) {
