@@ -27,10 +27,10 @@ public class EffectToClient extends SimplePacketBase {
 
     public EffectToClient(FriendlyByteBuf buf) {
         entity = buf.readUUID();
-        boolean exist = buf.readBoolean();
+        exist = buf.readBoolean();
         if (exist) {
             effect = ForgeRegistries.MOB_EFFECTS.getValue(buf.readResourceLocation());
-            int lv = buf.readInt();
+            level = buf.readInt();
         }
     }
 
