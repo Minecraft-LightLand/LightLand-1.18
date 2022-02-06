@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.arcane.magic;
 
-import dev.hikarishima.lightland.content.arcane.ArcaneRegistry;
+import dev.hikarishima.lightland.init.special.ArcaneRegistry;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;

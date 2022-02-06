@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.arcane;
+package dev.hikarishima.lightland.init.special;
 
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.magic.DamageAxe;

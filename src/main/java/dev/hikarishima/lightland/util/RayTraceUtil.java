@@ -12,8 +12,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -36,6 +38,15 @@ public class RayTraceUtil {
         Vec3 end = getRayTerm(pos, player.getXRot(), player.getYRot(), reach);
         AABB box = new AABB(pos, end).inflate(1);
         return ProjectileUtil.getEntityHitResult(world, player, pos, end, box, pred);
+    }
+
+    public static BlockHitResult rayTraceBlock(Level worldIn, Player player, double reach) {
+        float xRot = player.getXRot();
+        float yRot = player.getYRot();
+        Vec3 Vector3d = new Vec3(player.getX(), player.getEyeY(), player.getZ());
+        Vec3 Vector3d1 = getRayTerm(Vector3d, xRot, yRot, reach);
+        return worldIn.clip(new ClipContext(Vector3d, Vector3d1, ClipContext.Block.OUTLINE,
+                ClipContext.Fluid.NONE, player));
     }
 
     public static Vec3 getRayTerm(Vec3 pos, float xRot, float yRot, double reach) {

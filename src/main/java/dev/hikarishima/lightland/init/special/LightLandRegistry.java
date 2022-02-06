@@ -3,6 +3,7 @@ package dev.hikarishima.lightland.init.special;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.profession.*;
+import dev.hikarishima.lightland.content.spell.internal.Spell;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -13,6 +14,7 @@ public class LightLandRegistry {
 
     public static IForgeRegistry<ArcaneType> ARCANE_TYPE;
     public static IForgeRegistry<Arcane> ARCANE;
+    public static IForgeRegistry<Spell<?,?>> SPELL;
     public static IForgeRegistry<Profession> PROFESSION;
 
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -29,7 +31,7 @@ public class LightLandRegistry {
                 .setName(new ResourceLocation(LightLand.MODID, "arcane"))
                 .setType(Arcane.class).create();
 
-        //SPELL = new RegistryBuilder().setName(new ResourceLocation(LightLand.MODID, "spell")).setType(Spell.class).create();
+        SPELL = new RegistryBuilder().setName(new ResourceLocation(LightLand.MODID, "spell")).setType(Spell.class).create();
 
         PROFESSION = new RegistryBuilder<Profession>()
                 .setName(new ResourceLocation(LightLand.MODID, "profession"))

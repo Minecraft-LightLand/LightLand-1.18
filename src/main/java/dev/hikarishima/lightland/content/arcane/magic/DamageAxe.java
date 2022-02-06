@@ -29,7 +29,7 @@ public class DamageAxe extends Arcane {
         source.add(new MagicDamageEntry(DamageSource.playerAttack(player).bypassMagic(), damage));
         source.add(new MagicDamageEntry(DamageSource.playerAttack(player).bypassArmor().bypassMagic(), damage)
                 .setPost(ArcaneRegistry.postDamage(stack)));
-        target.hurt(source, damage);*/
+        target.hurt(source, damage);*/ //TODO
         return true;
     }
 

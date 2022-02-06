@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.init.special;
 
-import dev.hikarishima.lightland.content.arcane.ArcaneRegistry;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.profession.Profession;
