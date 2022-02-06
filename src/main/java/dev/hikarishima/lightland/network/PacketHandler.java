@@ -1,8 +1,7 @@
 package dev.hikarishima.lightland.network;
 
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.network.packets.EffectToClient;
-import dev.hikarishima.lightland.network.packets.EnderAimSetPacket;
+import dev.hikarishima.lightland.network.packets.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -21,8 +20,11 @@ import static net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT;
 import static net.minecraftforge.network.NetworkDirection.PLAY_TO_SERVER;
 
 public enum PacketHandler {
-    ENDER_BOW_AIM_SET(EnderAimSetPacket.class, EnderAimSetPacket::new, PLAY_TO_SERVER),
-    EFFECT_SYNC(EffectToClient.class, EffectToClient::new, PLAY_TO_CLIENT);
+    TARGET_SET(TargetSetPacket.class, TargetSetPacket::new, PLAY_TO_SERVER),
+    EFFECT_SYNC(EffectToClient.class, EffectToClient::new, PLAY_TO_CLIENT),
+    CAP_TO_CLIENT(CapToClient.class, PLAY_TO_CLIENT),
+    CAP_TO_SERVER(CapToServer.class, PLAY_TO_SERVER),
+    EMPTY_RIGHT_CLICK(EmptyRightClickToServer.class, PLAY_TO_SERVER);
 
     public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(LightLand.MODID, "main");
     public static final int NETWORK_VERSION = 1;
@@ -34,6 +36,10 @@ public enum PacketHandler {
     <T extends SimplePacketBase> PacketHandler(Class<T> type, Function<FriendlyByteBuf, T> factory,
                                                NetworkDirection direction) {
         packet = new LoadedPacket<>(type, factory, direction);
+    }
+
+    <T extends SerialPacketBase> PacketHandler(Class<T> type, NetworkDirection direction) {
+        this(type, (buf) -> SerialPacketBase.serial(type, buf), direction);
     }
 
     public static void registerPackets() {

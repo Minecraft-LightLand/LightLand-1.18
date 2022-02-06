@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.LightLandFakeEntity;
+import dev.hikarishima.lightland.util.LightLandFakeEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;

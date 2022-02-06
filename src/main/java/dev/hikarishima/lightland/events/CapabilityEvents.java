@@ -23,12 +23,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class CapabilityEvents {
 
     @SubscribeEvent
-    public void registerCaps(RegisterCapabilitiesEvent event){
-        event.register(LLPlayerData.class);
-    }
-
-    @SubscribeEvent
-    public void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
+    public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) {
             event.addCapability(new ResourceLocation(LightLand.MODID, "player_data"),
                     new LLPlayerCapability((Player) event.getObject(), event.getObject().level));
@@ -37,31 +32,31 @@ public class CapabilityEvents {
 
 
     @SubscribeEvent
-    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.player.isAlive())
             LLPlayerData.get(event.player).tick();
     }
 
     @SubscribeEvent
-    public void onServerPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
+    public static void onServerPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
         ServerPlayer e = (ServerPlayer) event.getPlayer();
         if (e != null) {
-            PacketHandler.toClient(e, new CapToClient(CapToClient.Action.ALL, LLPlayerData.get(e)));
+            new CapToClient(CapToClient.Action.ALL, LLPlayerData.get(e)).toClientPlayer(e);
         }
     }
 
     @SubscribeEvent
-    public void onPlayerClone(PlayerEvent.Clone event) {
+    public static void onPlayerClone(PlayerEvent.Clone event) {
         CompoundTag tag0 = Automator.toTag(new CompoundTag(), LLPlayerData.get(event.getOriginal()));
         ExceptionHandler.run(() -> Automator.fromTag(tag0, LLPlayerData.class, LLPlayerData.get(event.getPlayer()), f -> true));
         LLPlayerData.get(event.getPlayer());
         ServerPlayer e = (ServerPlayer) event.getPlayer();
-        PacketHandler.toClient(e, new CapToClient(CapToClient.Action.CLONE, LLPlayerData.get(e)));
+        new CapToClient(CapToClient.Action.CLONE, LLPlayerData.get(e)).toClientPlayer(e);
     }
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void onPlayerRespawn(ClientPlayerNetworkEvent.RespawnEvent event) {
+    public static void onPlayerRespawn(ClientPlayerNetworkEvent.RespawnEvent event) {
         CompoundTag tag0 = LLPlayerData.getCache(event.getOldPlayer());
         ExceptionHandler.run(() -> Automator.fromTag(tag0, LLPlayerData.class, LLPlayerData.get(event.getNewPlayer()), f -> true));
         LLPlayerData.get(event.getNewPlayer());

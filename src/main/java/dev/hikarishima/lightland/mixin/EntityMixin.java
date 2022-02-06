@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.mixin;
 
-import dev.hikarishima.lightland.content.archery.feature.bow.EnderShootFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
+import dev.hikarishima.lightland.util.RayTraceUtil;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,7 +16,7 @@ public class EntityMixin {
         if (GlowTargetAimFeature.TARGET.target == (Object) this) {
             cir.setReturnValue(true);
         }
-        if (EnderShootFeature.TARGET.target == (Object) this) {
+        if (RayTraceUtil.TARGET.target == (Object) this) {
             cir.setReturnValue(true);
         }
     }

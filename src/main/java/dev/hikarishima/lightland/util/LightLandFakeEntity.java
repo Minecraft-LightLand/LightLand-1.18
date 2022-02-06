@@ -1,27 +1,12 @@
-package net.minecraft.world.entity;
+package dev.hikarishima.lightland.util;
 
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.PotionEvent;
 
 public class LightLandFakeEntity {
-
-    public static void actuallyHurt(LivingEntity e, DamageSource source, float damage) {
-        e.actuallyHurt(source, damage);
-    }
-
-    public static float getDamageAfterArmorAbsorb(LivingEntity e, DamageSource source, float damage) {
-        return e.getDamageAfterArmorAbsorb(source, damage);
-    }
-
-    public static float getDamageAfterMagicAbsorb(LivingEntity e, DamageSource source, float damage) {
-        return e.getDamageAfterMagicAbsorb(source, damage);
-    }
-
-    public static void hurtArmor(LivingEntity e, DamageSource source, float damage) {
-        e.hurtArmor(source, damage);
-    }
 
     /**
      * force add effect, make boss not override
@@ -36,10 +21,6 @@ public class LightLandFakeEntity {
         } else if (effectinstance.update(ins)) {
             e.onEffectUpdated(effectinstance, true, source);
         }
-    }
-
-    public static float getEquipmentDropChance(Mob entity, EquipmentSlot slot) {
-        return entity.getEquipmentDropChance(slot);
     }
 
 }

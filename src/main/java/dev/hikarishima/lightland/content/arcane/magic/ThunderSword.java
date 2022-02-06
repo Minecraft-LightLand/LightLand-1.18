@@ -13,7 +13,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 public class ThunderSword extends Arcane {
@@ -28,15 +27,15 @@ public class ThunderSword extends Arcane {
     @Override
     public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
         if (target == null) {
-            EntityHitResult res = RayTraceUtil.rayTraceEntity(player, dist, e -> e instanceof LivingEntity && e != player);
-            if (res != null) {
-                target = (LivingEntity) res.getEntity();
-            } else return false;
+            target = RayTraceUtil.serverGetTarget(player);
+            if (target == null) {
+                return false;
+            }
         }
         BlockPos pos = target.blockPosition();
         Level w = player.level;
         if (!w.isClientSide()) {
-            LightningBolt e = new LightningBolt(EntityType.LIGHTNING_BOLT,w);
+            LightningBolt e = new LightningBolt(EntityType.LIGHTNING_BOLT, w);
             e.moveTo(Vec3.atBottomCenterOf(pos));
             e.setCause(player instanceof ServerPlayer ? (ServerPlayer) player : null);
             w.addFreshEntity(e);

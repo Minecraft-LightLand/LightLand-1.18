@@ -57,8 +57,7 @@ public class LLPlayerData {
     public AbilityPoints abilityPoints = new AbilityPoints(this);
     @SerialClass.SerialField
     public MagicAbility magicAbility = new MagicAbility(this);
-    @SerialClass.SerialField
-    public MagicHolder magicHolder = new MagicHolder(this);
+   // @SerialClass.SerialField public MagicHolder magicHolder = new MagicHolder(this);
     public Player player;
     public Level world;
 
@@ -75,7 +74,7 @@ public class LLPlayerData {
             reset(Reset.FOR_INJECT);
         }
         if (state != State.ACTIVE) {
-            magicHolder.checkUnlocks();
+            //magicHolder.checkUnlocks();
             abilityPoints.updateAttribute();
             state = State.ACTIVE;
         }
@@ -108,8 +107,8 @@ public class LLPlayerData {
             h.abilityPoints = new AbilityPoints(h);
             h.abilityPoints.updateAttribute();
         }), HOLDER((h) -> {
-            h.magicHolder = new MagicHolder(h);
-            h.magicHolder.checkUnlocks();
+            //h.magicHolder = new MagicHolder(h);
+            //h.magicHolder.checkUnlocks();
         }), ALL((h) -> {
             ABILITY.cons.accept(h);
             HOLDER.cons.accept(h);
@@ -117,7 +116,7 @@ public class LLPlayerData {
             h.state = State.PREINJECT;
             h.magicAbility = new MagicAbility(h);
             h.abilityPoints = new AbilityPoints(h);
-            h.magicHolder = new MagicHolder(h);
+            //h.magicHolder = new MagicHolder(h);
         });
 
         final Consumer<LLPlayerData> cons;

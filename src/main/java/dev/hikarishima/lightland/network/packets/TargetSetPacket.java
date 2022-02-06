@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.network.packets;
 
-import dev.hikarishima.lightland.content.archery.feature.bow.EnderShootFeature;
 import dev.hikarishima.lightland.network.SimplePacketBase;
+import dev.hikarishima.lightland.util.RayTraceUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -9,16 +9,16 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class EnderAimSetPacket extends SimplePacketBase {
+public class TargetSetPacket extends SimplePacketBase {
 
     public UUID player, target;
 
-    public EnderAimSetPacket(UUID player, @Nullable UUID target) {
+    public TargetSetPacket(UUID player, @Nullable UUID target) {
         this.player = player;
         this.target = target;
     }
 
-    public EnderAimSetPacket(FriendlyByteBuf buf) {
+    public TargetSetPacket(FriendlyByteBuf buf) {
         player = buf.readUUID();
         boolean exist = buf.readBoolean();
         if (exist) {
@@ -37,7 +37,7 @@ public class EnderAimSetPacket extends SimplePacketBase {
 
     @Override
     public void handle(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(()->EnderShootFeature.sync(this));
+        context.get().enqueueWork(()-> RayTraceUtil.sync(this));
         context.get().setPacketHandled(true);
     }
 }

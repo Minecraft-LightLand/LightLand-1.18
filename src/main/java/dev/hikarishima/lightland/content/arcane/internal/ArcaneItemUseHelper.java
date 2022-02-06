@@ -5,6 +5,8 @@ import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
+import dev.hikarishima.lightland.util.DoubleSidedCall;
+import dev.hikarishima.lightland.util.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
@@ -81,6 +83,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
     /**
      * executes on server only, play animation in client
      */
+    @ServerOnly
     private static void handleLeftClickEvent(ItemStack stack, PlayerInteractEvent event, LivingEntity target) {
         Player player = event.getPlayer();
         LLPlayerData magic = LLPlayerData.get(player);
@@ -103,6 +106,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
     /**
      * executes on server only, play animation in client
      */
+    @ServerOnly
     private static void handleRightClickEvent(ItemStack stack, PlayerInteractEvent event, LivingEntity target) {
         boolean cancellable = event.isCancelable();
         if (stack.getItem() instanceof ArcaneAxe) {
@@ -138,9 +142,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         handleLeftClickEvent(stack, event, null);
     }
 
-    /**
-     * executes on both server and client side
-     */
+    @DoubleSidedCall
     @Override
     public void onPlayerLeftClickEntity(ItemStack stack, AttackEntityEvent event) {
         float charge = event.getPlayer().getAttackStrengthScale(0.5f);
@@ -149,9 +151,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         }
     }
 
-    /**
-     * executes on server only
-     */
+    @ServerOnly
     @Override
     public void onCriticalHit(ItemStack stack, CriticalHitEvent event) {
         if (event.getPlayer().level.isClientSide())

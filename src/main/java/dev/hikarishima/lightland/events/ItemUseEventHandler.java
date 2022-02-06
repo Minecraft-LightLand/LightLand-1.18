@@ -17,11 +17,6 @@ import java.util.List;
 public class ItemUseEventHandler {
 
     public static final List<ItemClickHandler> LIST = new ArrayList<>();
-    public static ItemUseEventHandler INSTANCE;
-
-    public ItemUseEventHandler() {
-        INSTANCE = this;
-    }
 
     public static <T extends PlayerEvent> void execute(ItemStack stack, T event, TriCon<T> cons) {
         if (stack.getItem() instanceof ItemClickHandler && ((ItemClickHandler) stack.getItem()).predicate(stack, event.getClass(), event))
@@ -32,7 +27,7 @@ public class ItemUseEventHandler {
     }
 
     @SubscribeEvent
-    public void onPlayerLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
+    public static void onPlayerLeftClickEmpty(PlayerInteractEvent.LeftClickEmpty event) {
         if (event.getPlayer().level.isClientSide()) {
             new EmptyRightClickToServer(false, event.getHand() == InteractionHand.MAIN_HAND).toServer();
         }
@@ -40,17 +35,17 @@ public class ItemUseEventHandler {
     }
 
     @SubscribeEvent
-    public void onPlayerLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+    public static void onPlayerLeftClickBlock(PlayerInteractEvent.LeftClickBlock event) {
         execute(event.getItemStack(), event, ItemClickHandler::onPlayerLeftClickBlock);
     }
 
     @SubscribeEvent
-    public void onPlayerLeftClickEntity(AttackEntityEvent event) {
+    public static void onPlayerLeftClickEntity(AttackEntityEvent event) {
         execute(event.getPlayer().getMainHandItem(), event, ItemClickHandler::onPlayerLeftClickEntity);
     }
 
     @SubscribeEvent
-    public void onPlayerRightClickEmpty(PlayerInteractEvent.RightClickEmpty event) {
+    public static void onPlayerRightClickEmpty(PlayerInteractEvent.RightClickEmpty event) {
         if (event.getPlayer().level.isClientSide()) {
             new EmptyRightClickToServer(true, event.getHand() == InteractionHand.MAIN_HAND).toServer();
         }
@@ -58,17 +53,17 @@ public class ItemUseEventHandler {
     }
 
     @SubscribeEvent
-    public void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+    public static void onPlayerRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         execute(event.getItemStack(), event, ItemClickHandler::onPlayerRightClickBlock);
     }
 
     @SubscribeEvent(priority = EventPriority.NORMAL)
-    public void onPlayerRightClickEntity(PlayerInteractEvent.EntityInteract event) {
+    public static void onPlayerRightClickEntity(PlayerInteractEvent.EntityInteract event) {
         execute(event.getItemStack(), event, ItemClickHandler::onPlayerRightClickEntity);
     }
 
     @SubscribeEvent
-    public void onCriticalHit(CriticalHitEvent event) {
+    public static void onCriticalHit(CriticalHitEvent event) {
         execute(event.getPlayer().getMainHandItem(), event, ItemClickHandler::onCriticalHit);
     }
 

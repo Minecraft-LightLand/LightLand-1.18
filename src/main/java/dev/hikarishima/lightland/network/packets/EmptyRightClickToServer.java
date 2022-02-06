@@ -30,10 +30,10 @@ public class EmptyRightClickToServer extends SerialPacketBase {
             if (right) {
                 PlayerInteractEvent.RightClickEmpty event = new PlayerInteractEvent.RightClickEmpty(pl,
                         hand ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND);
-                ItemUseEventHandler.INSTANCE.onPlayerRightClickEmpty(event);
+                ItemUseEventHandler.onPlayerRightClickEmpty(event);
             } else {
                 PlayerInteractEvent.LeftClickEmpty event = new PlayerInteractEvent.LeftClickEmpty(pl);
-                ItemUseEventHandler.INSTANCE.onPlayerLeftClickEmpty(event);
+                ItemUseEventHandler.onPlayerLeftClickEmpty(event);
             }
         }
     }

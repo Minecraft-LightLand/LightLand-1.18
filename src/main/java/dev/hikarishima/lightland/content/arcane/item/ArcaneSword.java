@@ -2,10 +2,13 @@ package dev.hikarishima.lightland.content.arcane.item;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.IArcaneItem;
+import dev.hikarishima.lightland.util.RayTraceUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
@@ -65,6 +68,13 @@ public class ArcaneSword extends SwordItem implements IArcaneItem {
     @Override
     public int getMaxMana(ItemStack stack) {
         return mana;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity user, int slot, boolean selected) {
+        if (user instanceof Player player && selected) {
+            RayTraceUtil.clientUpdateTarget(player, getDistance(stack));
+        }
     }
 
 }

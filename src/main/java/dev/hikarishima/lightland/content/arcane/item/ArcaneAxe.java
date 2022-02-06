@@ -5,12 +5,14 @@ import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemCraftHelper;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.IArcaneItem;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.util.RayTraceUtil;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
@@ -47,8 +49,6 @@ public class ArcaneAxe extends AxeItem implements IArcaneItem {
         }
     }
 
-
-
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
         add(stack, list);
     }
@@ -68,21 +68,31 @@ public class ArcaneAxe extends AxeItem implements IArcaneItem {
         return true;
     }
 
-    public boolean showDurabilityBar(ItemStack stack) {
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
         return true;
     }
 
-    public double getDurabilityForDisplay(ItemStack stack) {
-        return 1 - 1.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack);
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        return (int) Math.round(13 * (1 - 1.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack)));
     }
 
-    public int getRGBDurabilityForDisplay(ItemStack stack) {
+    @Override
+    public int getBarColor(ItemStack stack) {
         return 0xFFFFFF;
     }
 
     @Override
     public int getMaxMana(ItemStack stack) {
         return mana;
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity user, int slot, boolean selected) {
+        if (user instanceof Player player && selected) {
+            RayTraceUtil.clientUpdateTarget(player, getDistance(stack));
+        }
     }
 
 }
