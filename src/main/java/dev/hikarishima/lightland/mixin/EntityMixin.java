@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.mixin;
 
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
-import dev.hikarishima.lightland.util.RayTraceUtil;
+import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

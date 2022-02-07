@@ -35,7 +35,7 @@ public class CapToClient extends SerialPacketBase {
         this.tag = action.server.apply(handler);
     }
 
-    public void handle( NetworkEvent.Context context) {
+    public void handle(NetworkEvent.Context context) {
         if (action != Action.ALL && action != Action.CLONE && !Proxy.getClientPlayer().isAlive())
             return;
         action.client.accept(tag);

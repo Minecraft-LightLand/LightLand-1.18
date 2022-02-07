@@ -10,7 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> extends NamedEntry<Spell<?, ?>> implements IForgeRegistryEntry<Spell<?,?>> {
+public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> extends NamedEntry<Spell<?, ?>> implements IForgeRegistryEntry<Spell<?, ?>> {
 
     public Spell() {
         super(() -> LightLandRegistry.SPELL);

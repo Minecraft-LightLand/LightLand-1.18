@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.util;
+package dev.hikarishima.lightland.util.math;
 
 import net.minecraft.world.phys.Vec3;
 

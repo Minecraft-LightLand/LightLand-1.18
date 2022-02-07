@@ -12,7 +12,7 @@ import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.hikarishima.lightland.util.GenericItemStack;
-import dev.hikarishima.lightland.util.ServerOnly;
+import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;

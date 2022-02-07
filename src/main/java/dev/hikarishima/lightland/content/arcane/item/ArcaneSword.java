@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.arcane.item;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.IArcaneItem;
-import dev.hikarishima.lightland.util.RayTraceUtil;
+import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

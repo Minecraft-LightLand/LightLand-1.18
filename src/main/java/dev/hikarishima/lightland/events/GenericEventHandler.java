@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.events;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.hikarishima.lightland.content.common.command.BaseCommand;
-import dev.hikarishima.lightland.util.RayTraceUtil;
+import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.util.SpriteManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

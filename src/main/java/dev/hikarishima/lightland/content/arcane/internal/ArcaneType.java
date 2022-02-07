@@ -73,6 +73,7 @@ public class ArcaneType extends NamedEntry<ArcaneType> {
         PASSIVE, ACTIVE
     }
 
-    public static void register(){}
+    public static void register() {
+    }
 
 }

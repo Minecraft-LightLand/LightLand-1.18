@@ -1,8 +1,5 @@
 package dev.hikarishima.lightland.init.special;
 
-import dev.hikarishima.lightland.content.arcane.internal.Arcane;
-import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
-import dev.hikarishima.lightland.content.profession.Profession;
 import dev.lcy0x1.util.Automator;
 import dev.lcy0x1.util.ExceptionHandler;
 import dev.lcy0x1.util.Serializer;

@@ -19,7 +19,8 @@ import java.util.function.Consumer;
 @SerialClass
 public class LLPlayerData {
 
-    public static Capability<LLPlayerData> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});
+    public static Capability<LLPlayerData> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+    });
 
     public static LLPlayerData get(Player e) {
         return e.getCapability(CAPABILITY).resolve().get().check();
@@ -57,7 +58,7 @@ public class LLPlayerData {
     public AbilityPoints abilityPoints = new AbilityPoints(this);
     @SerialClass.SerialField
     public MagicAbility magicAbility = new MagicAbility(this);
-   // @SerialClass.SerialField public MagicHolder magicHolder = new MagicHolder(this);
+    // @SerialClass.SerialField public MagicHolder magicHolder = new MagicHolder(this);
     public Player player;
     public Level world;
 

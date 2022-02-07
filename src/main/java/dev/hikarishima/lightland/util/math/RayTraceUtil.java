@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.util;
+package dev.hikarishima.lightland.util.math;
 
 import com.google.common.collect.Maps;
 import dev.hikarishima.lightland.events.ClientEntityEffectRenderEvents;
@@ -26,8 +26,8 @@ import java.util.function.Predicate;
 
 public class RayTraceUtil {
 
-    public static final int CLIENT_TIMEOUT = 200;
-    public static final int SERVER_TIMEOUT = 400;
+    public static final int CLIENT_TIMEOUT = 100;
+    public static final int SERVER_TIMEOUT = 200;
 
     public static final ClientEntityEffectRenderEvents.EntityTarget TARGET = new EnderEntityTarget();
     public static final ConcurrentMap<UUID, ServerTarget> TARGET_MAP = Maps.newConcurrentMap();

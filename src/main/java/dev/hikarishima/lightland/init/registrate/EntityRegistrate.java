@@ -17,19 +17,19 @@ public class EntityRegistrate {
             .defaultLang().register();
 
     public static final EntityEntry<WindBladeEntity> ET_WIND_BLADE = REGISTRATE
-            .<WindBladeEntity>entity("wind_blade",WindBladeEntity::new, MobCategory.MISC)
-            .properties(e->e.sized(0.5f,0.5f)
+            .<WindBladeEntity>entity("wind_blade", WindBladeEntity::new, MobCategory.MISC)
+            .properties(e -> e.sized(0.5f, 0.5f)
                     .updateInterval(20).fireImmune())
-            .renderer(()-> WindBladeEntityRenderer::new)
+            .renderer(() -> WindBladeEntityRenderer::new)
             .defaultLang().register();
 
 
     public static final EntityEntry<SpellEntity> ET_SPELL = REGISTRATE
-            .<SpellEntity>entity("spell",SpellEntity::new, MobCategory.MISC)
-            .properties(e->e.sized(3f,3f)
+            .<SpellEntity>entity("spell", SpellEntity::new, MobCategory.MISC)
+            .properties(e -> e.sized(3f, 3f)
                     .setShouldReceiveVelocityUpdates(true)
                     .fireImmune().updateInterval(20))
-            .renderer(()->SpellEntityRenderer::new)
+            .renderer(() -> SpellEntityRenderer::new)
             .defaultLang().register();
 
     public static void register() {

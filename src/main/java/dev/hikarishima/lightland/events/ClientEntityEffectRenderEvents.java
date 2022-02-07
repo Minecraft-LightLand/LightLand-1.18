@@ -10,9 +10,11 @@ import dev.hikarishima.lightland.content.common.render.LLRenderState;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.ParticleRegistrate;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
@@ -104,7 +106,22 @@ public class ClientEntityEffectRenderEvents {
 
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
+        if (Proxy.getClientPlayer() == null) {
+            EffectSyncEvents.EFFECT_MAP.clear();
+        } else {
+            AbstractClientPlayer player = Proxy.getClientPlayer();
+            MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.EMERALD.get());
+            if (ins != null) {
+                int lv = ins.getAmplifier();
+                int r = EmeraldPopeEffect.RADIUS * (1 + lv);
+                int count = (1 + lv) * (1 + lv) * 4;
+                for (int i = 0; i < count; i++) {
+                    addParticle(player.level, player.position(), r);
+                }
+            }
+        }
         GlowTargetAimFeature.TARGET.tickRender();
+        RayTraceUtil.TARGET.tickRender();
     }
 
     @SubscribeEvent

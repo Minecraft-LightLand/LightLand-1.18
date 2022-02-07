@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemCraftHelper;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.IArcaneItem;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.util.RayTraceUtil;
+import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;

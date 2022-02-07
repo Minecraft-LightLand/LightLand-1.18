@@ -124,7 +124,7 @@ public class GenericBowItem extends BowItem {
     }
 
     public float getPullForTime(LivingEntity entity, float time) {
-        float f = (float) time / config.pull_time();
+        float f = time / config.pull_time();
         MobEffectInstance ins = entity.getEffect(VanillaMagicRegistrate.QUICK_PULL.get());
         if (ins != null) {
             f *= (1.5 + 0.5 * ins.getAmplifier());

@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.arcane.internal;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
-import dev.hikarishima.lightland.util.DoubleSidedCall;
+import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
 import dev.lcy0x1.base.NamedEntry;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

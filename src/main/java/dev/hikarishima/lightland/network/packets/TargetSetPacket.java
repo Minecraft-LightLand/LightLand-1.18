@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.network.packets;
 
 import dev.hikarishima.lightland.network.SimplePacketBase;
-import dev.hikarishima.lightland.util.RayTraceUtil;
+import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -37,7 +37,7 @@ public class TargetSetPacket extends SimplePacketBase {
 
     @Override
     public void handle(Supplier<NetworkEvent.Context> context) {
-        context.get().enqueueWork(()-> RayTraceUtil.sync(this));
+        context.get().enqueueWork(() -> RayTraceUtil.sync(this));
         context.get().setPacketHandled(true);
     }
 }

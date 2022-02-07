@@ -11,7 +11,7 @@ public class LightLandClient {
     }
 
     @SubscribeEvent
-    public static void clientSetup(FMLClientSetupEvent event){
+    public static void clientSetup(FMLClientSetupEvent event) {
         ClientRegister.registerItemProperties();
     }
 

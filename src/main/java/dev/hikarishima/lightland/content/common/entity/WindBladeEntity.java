@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.common.entity;
 
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.util.LightLandFakeEntity;
-import dev.hikarishima.lightland.util.MathHelper;
+import dev.hikarishima.lightland.util.math.MathHelper;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.particles.ParticleTypes;

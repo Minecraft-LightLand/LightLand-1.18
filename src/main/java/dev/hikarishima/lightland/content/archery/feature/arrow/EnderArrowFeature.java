@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.archery.feature.arrow;
 
-import dev.hikarishima.lightland.content.common.entity.GenericArrowEntity;
 import dev.hikarishima.lightland.content.archery.feature.types.OnShootFeature;
+import dev.hikarishima.lightland.content.common.entity.GenericArrowEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

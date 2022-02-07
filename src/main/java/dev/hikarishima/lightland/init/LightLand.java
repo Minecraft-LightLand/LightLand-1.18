@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.init;
 
-import com.tterrag.registrate.Registrate;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.common.command.*;
 import dev.hikarishima.lightland.events.*;
