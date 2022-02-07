@@ -3,7 +3,6 @@ package dev.hikarishima.lightland.content.arcane.magic;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class ThunderAxe extends Arcane {
@@ -32,7 +30,7 @@ public class ThunderAxe extends Arcane {
         Level w = player.level;
         strike(w, player, target);
         if (!w.isClientSide()) {
-            search(w, player, radius, player.getPosition(1), target, this::strike);
+            search(w, player, radius, player.getPosition(1), target, true, this::strike);
         }
         return true;
     }

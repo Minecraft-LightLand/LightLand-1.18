@@ -31,7 +31,7 @@ public class EarthAxe extends Arcane {
         Level w = player.level;
         strike(w, player, target);
         if (!w.isClientSide()) {
-            search(w, player, radius, player.getPosition(1), target, this::strike);
+            search(w, player, radius, player.getPosition(1), target, false, this::strike);
             LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), time, 1), player);
             LightLandFakeEntity.addEffect(target, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, 4), player);
             double x = target.getX();

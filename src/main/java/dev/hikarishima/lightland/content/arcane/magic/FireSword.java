@@ -30,7 +30,7 @@ public class FireSword extends Arcane {
         Level w = player.level;
         strike(w, player, target);
         if (!w.isClientSide()) {
-            search(w, player, radius, player.getPosition(1), target, this::strike);
+            search(w, player, radius, player.getPosition(1), target, false, this::strike);
             LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.FLAME.get(), time, 1), player);
         }
         return true;

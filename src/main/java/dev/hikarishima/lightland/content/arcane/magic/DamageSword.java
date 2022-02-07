@@ -5,21 +5,22 @@ import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.LightLandFakeEntity;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class WaterSword extends Arcane {
+public class DamageSword extends Arcane {
 
     private final float radius;
-    private final int time;
+    private final float damage;
 
-    public WaterSword(float radius, int time) {
-        super(ArcaneType.MIZAR, 0);
+    public DamageSword(float radius, float damage) {
+        super(ArcaneType.ALIOTH, 0);
         this.radius = radius;
-        this.time = time;
+        this.damage = damage;
     }
 
     @Override
@@ -29,15 +30,17 @@ public class WaterSword extends Arcane {
         Level w = player.level;
         strike(w, player, target);
         if (!w.isClientSide()) {
-            search(w, player, radius, target.getPosition(1), target, false, this::strike);
-            LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 1), player);
+            search(w, player, radius, player.getPosition(1), target, false, this::strike);
         }
         return true;
     }
 
     private void strike(Level w, Player player, LivingEntity target) {
         if (!w.isClientSide()) {
-            LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 0), player);
+            DamageSource source = DamageSource.playerAttack(player);
+            source.setMagic();
+            source.bypassArmor();
+            target.hurt(source, damage);
         }
     }
 

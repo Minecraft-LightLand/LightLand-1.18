@@ -28,7 +28,7 @@ public abstract class Arcane extends NamedEntry<Arcane> {
     @DoubleSidedCall
     public abstract boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target);
 
-    public static void search(Level w, Player player, double radius, Vec3 center, LivingEntity target, Strike strike) {
+    public static void search(Level w, Player player, double radius, Vec3 center, LivingEntity target, boolean require_mark, Strike strike) {
         w.getEntities(player, new AABB(center, center).inflate(radius), e -> {
             if (!(e instanceof LivingEntity))
                 return false;
@@ -36,7 +36,7 @@ public abstract class Arcane extends NamedEntry<Arcane> {
                 return false;
             if (e.getPosition(1).distanceToSqr(center) > radius * radius)
                 return false;
-            return ((LivingEntity) e).hasEffect(VanillaMagicRegistrate.ARCANE.get());
+            return !require_mark || ((LivingEntity) e).hasEffect(VanillaMagicRegistrate.ARCANE.get());
         }).forEach(e -> strike.strike(w, player, (LivingEntity) e));
     }
 

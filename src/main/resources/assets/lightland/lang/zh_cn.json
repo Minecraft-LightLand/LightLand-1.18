@@ -1,8 +1,12 @@
 {
-  "arcane.lightland.damage_axe": "Damage Axe",
+  "arcane.lightland.damage_axe": "奥术聚能",
+  "arcane.lightland.damage_sword": "奥术爆发",
+  "arcane.lightland.earth_axe": "地牢斧",
   "arcane.lightland.marker": "指引剑",
+  "arcane.lightland.soul_fire_sword": "业火剑",
   "arcane.lightland.thunder_axe": "引雷之斧",
   "arcane.lightland.thunder_sword": "引雷之剑",
+  "arcane.lightland.water_trap_sword": "水牢剑",
   "arcane.lightland.wind_blade": "风刃剑",
   "arcane_type.lightland.alioth": "玉衡",
   "arcane_type.lightland.alkaid": "摇光",
