@@ -32,13 +32,7 @@ public class ThunderAxe extends Arcane {
         Level w = player.level;
         strike(w, player, target);
         if (!w.isClientSide()) {
-            w.getEntities(player, new AABB(player.blockPosition()).inflate(radius), e -> {
-                if (!(e instanceof LivingEntity))
-                    return false;
-                if (e == player || e == target || e.isAlliedTo(e))
-                    return false;
-                return ((LivingEntity) e).hasEffect(VanillaMagicRegistrate.ARCANE.get());
-            }).forEach(e -> strike(w, player, (LivingEntity) e));
+            search(w, player, radius, player.getPosition(1), target, this::strike);
         }
         return true;
     }

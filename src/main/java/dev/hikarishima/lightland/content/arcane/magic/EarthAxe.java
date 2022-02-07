@@ -6,6 +6,7 @@ import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.LightLandFakeEntity;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -30,14 +31,9 @@ public class EarthAxe extends Arcane {
         Level w = player.level;
         strike(w, player, target);
         if (!w.isClientSide()) {
-            w.getEntities(player, new AABB(player.blockPosition()).inflate(radius), e -> {
-                if (!(e instanceof LivingEntity))
-                    return false;
-                if (e == player || e == target || e.isAlliedTo(e))
-                    return false;
-                return ((LivingEntity) e).hasEffect(VanillaMagicRegistrate.ARCANE.get());
-            }).forEach(e -> strike(w, player, (LivingEntity) e));
+            search(w, player, radius, player.getPosition(1), target, this::strike);
             LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), time, 1), player);
+            LightLandFakeEntity.addEffect(target, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, 4), player);
             double x = target.getX();
             double y = target.getY();
             double z = target.getZ();
@@ -49,6 +45,7 @@ public class EarthAxe extends Arcane {
     private void strike(Level w, Player player, LivingEntity target) {
         if (!w.isClientSide()) {
             LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), time, 0), player);
+            LightLandFakeEntity.addEffect(target, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, 2), player);
         }
     }
 

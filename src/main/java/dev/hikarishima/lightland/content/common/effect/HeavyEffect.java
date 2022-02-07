@@ -18,6 +18,7 @@ public class HeavyEffect extends MobEffect {
         this.addAttributeModifier(Attributes.FLYING_SPEED, ID.toString(), -0.45f, AttributeModifier.Operation.MULTIPLY_TOTAL);
         this.addAttributeModifier(Attributes.JUMP_STRENGTH, ID.toString(), -0.45f, AttributeModifier.Operation.MULTIPLY_TOTAL);
         this.addAttributeModifier(Attributes.MOVEMENT_SPEED, ID.toString(), -0.45f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        this.addAttributeModifier(Attributes.ATTACK_DAMAGE, ID.toString(), -0.45f, AttributeModifier.Operation.MULTIPLY_TOTAL);
         this.addAttributeModifier(ForgeMod.SWIM_SPEED.get(), ID.toString(), -0.45f, AttributeModifier.Operation.MULTIPLY_TOTAL);
     }
 
