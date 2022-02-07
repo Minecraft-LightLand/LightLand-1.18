@@ -9,10 +9,11 @@ import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.NonNullLazy;
 
 public class GenericArrowItem extends ArrowItem {
 
-    public record ArrowConfig(float damage, int punch, boolean is_inf, FeatureList feature) {
+    public record ArrowConfig(float damage, int punch, boolean is_inf, NonNullLazy<FeatureList> feature) {
     }
 
     public final ArrowConfig config;

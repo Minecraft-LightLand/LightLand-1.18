@@ -6,9 +6,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
-import dev.hikarishima.lightland.content.archery.feature.arrow.EnderArrowFeature;
-import dev.hikarishima.lightland.content.archery.feature.arrow.ExplodeArrowFeature;
-import dev.hikarishima.lightland.content.archery.feature.arrow.NoFallArrowFeature;
+import dev.hikarishima.lightland.content.archery.feature.arrow.*;
 import dev.hikarishima.lightland.content.archery.feature.bow.DefaultShootFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.EnderShootFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
@@ -17,12 +15,14 @@ import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.util.NonNullLazy;
 
 import java.util.function.Consumer;
 
@@ -56,12 +56,12 @@ public class ItemRegistrate {
     public static final ItemEntry<GenericBowItem> ENDER_AIM_BOW;
 
     public static final ItemEntry<GenericArrowItem> STARTER_ARROW;
-    public static final ItemEntry<GenericArrowItem> COPPER_ARROW;
-    public static final ItemEntry<GenericArrowItem> IRON_ARROW;
-    public static final ItemEntry<GenericArrowItem> OBSIDIAN_ARROW;
+    public static final ItemEntry<GenericArrowItem> COPPER_ARROW, IRON_ARROW, OBSIDIAN_ARROW;
     public static final ItemEntry<GenericArrowItem> NO_FALL_ARROW;
     public static final ItemEntry<GenericArrowItem> ENDER_ARROW;
     public static final ItemEntry<GenericArrowItem> TNT_1_ARROW, TNT_2_ARROW, TNT_3_ARROW;
+    public static final ItemEntry<GenericArrowItem> FIRE_1_ARROW, FIRE_2_ARROW;
+    public static final ItemEntry<GenericArrowItem> ICE_ARROW;
 
 
     public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
@@ -87,6 +87,15 @@ public class ItemRegistrate {
         TNT_1_ARROW = genArrow("tnt_arrow_lv1", 0, 0, false, e -> e.add(new ExplodeArrowFeature(2)));
         TNT_2_ARROW = genArrow("tnt_arrow_lv2", 0, 0, false, e -> e.add(new ExplodeArrowFeature(4)));
         TNT_3_ARROW = genArrow("tnt_arrow_lv3", 0, 0, false, e -> e.add(new ExplodeArrowFeature(6)));
+        FIRE_1_ARROW = genArrow("fire_arrow_lv1", 0, 0, false, e -> e
+                .add(new FireArrowFeature(100)).add(new PotionArrowFeature(
+                        new MobEffectInstance(VanillaMagicRegistrate.FLAME.get(), 100, 0))));
+        FIRE_2_ARROW = genArrow("fire_arrow_lv2", 0, 0, false, e -> e
+                .add(new FireArrowFeature(200)).add(new PotionArrowFeature(
+                        new MobEffectInstance(VanillaMagicRegistrate.FLAME.get(), 100, 1))));
+        ICE_ARROW = genArrow("frozen_arrow", 0, 0, false, e -> e.add(new PotionArrowFeature(
+                new MobEffectInstance(VanillaMagicRegistrate.ICE.get(), 200),
+                new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), 200))));
     }
 
     public static void register() {
@@ -109,9 +118,12 @@ public class ItemRegistrate {
     }
 
     public static ItemEntry<GenericArrowItem> genArrow(String id, float damage, int punch, boolean is_inf, Consumer<FeatureList> consumer) {
-        FeatureList features = new FeatureList();
-        consumer.accept(features);
-        return REGISTRATE.item(id, p -> new GenericArrowItem(p, new GenericArrowItem.ArrowConfig(damage, punch, is_inf, features)))
+        NonNullLazy<FeatureList> f = NonNullLazy.of(() -> {
+            FeatureList features = new FeatureList();
+            consumer.accept(features);
+            return features;
+        });
+        return REGISTRATE.item(id, p -> new GenericArrowItem(p, new GenericArrowItem.ArrowConfig(damage, punch, is_inf, f)))
                 .defaultModel().defaultLang().register();
     }
 

@@ -22,13 +22,13 @@ public class ArrowFeatureController {
     }
 
     public static boolean canBowUseArrow(GenericBowItem bow, GenericItemStack<GenericArrowItem> arrow) {
-        return FeatureList.canMerge(bow.config.feature(), arrow.item().config.feature());
+        return FeatureList.canMerge(bow.config.feature(), arrow.item().config.feature().get());
     }
 
     public static AbstractArrow createArrowEntity(BowArrowUseContext ctx,
                                                   GenericItemStack<GenericBowItem> bow,
                                                   GenericItemStack<GenericArrowItem> arrow) {
-        FeatureList features = Objects.requireNonNull(FeatureList.merge(bow.item().config.feature(), arrow.item().config.feature()));
+        FeatureList features = Objects.requireNonNull(FeatureList.merge(bow.item().config.feature(), arrow.item().config.feature().get()));
         List<Consumer<GenericArrowEntity>> list = new ArrayList<>();
         for (OnShootFeature e : features.shot)
             if (!e.onShoot(ctx.user, list::add))
