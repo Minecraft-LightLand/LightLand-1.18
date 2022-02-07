@@ -7,6 +7,7 @@ import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import dev.hikarishima.lightland.content.archery.feature.arrow.EnderArrowFeature;
+import dev.hikarishima.lightland.content.archery.feature.arrow.ExplodeArrowFeature;
 import dev.hikarishima.lightland.content.archery.feature.arrow.NoFallArrowFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.DefaultShootFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.EnderShootFeature;
@@ -60,6 +61,7 @@ public class ItemRegistrate {
     public static final ItemEntry<GenericArrowItem> OBSIDIAN_ARROW;
     public static final ItemEntry<GenericArrowItem> NO_FALL_ARROW;
     public static final ItemEntry<GenericArrowItem> ENDER_ARROW;
+    public static final ItemEntry<GenericArrowItem> TNT_1_ARROW, TNT_2_ARROW, TNT_3_ARROW;
 
 
     public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
@@ -77,11 +79,14 @@ public class ItemRegistrate {
         ENDER_AIM_BOW = genBow("ender_aim_bow", 8, -1, 0, e -> e.add(new EnderShootFeature(128)));
 
         STARTER_ARROW = genArrow("starter_arrow", 0, 0, true, FeatureList::end);
-        COPPER_ARROW = genArrow("copper_arrow", 1, 0, true, FeatureList::end);
-        IRON_ARROW = genArrow("iron_arrow", 1, 1, true, FeatureList::end);
-        OBSIDIAN_ARROW = genArrow("obsidian_arrow", 1.5f, 0, true, FeatureList::end);
+        COPPER_ARROW = genArrow("copper_arrow", 1, 0, false, FeatureList::end);
+        IRON_ARROW = genArrow("iron_arrow", 1, 1, false, FeatureList::end);
+        OBSIDIAN_ARROW = genArrow("obsidian_arrow", 1.5f, 0, false, FeatureList::end);
         NO_FALL_ARROW = genArrow("no_fall_arrow", 0, 0, false, e -> e.add(new NoFallArrowFeature(40)));
         ENDER_ARROW = genArrow("ender_arrow", -1, 0, false, e -> e.add(new EnderArrowFeature(128)));
+        TNT_1_ARROW = genArrow("tnt_arrow_lv1", 0, 0, false, e -> e.add(new ExplodeArrowFeature(2)));
+        TNT_2_ARROW = genArrow("tnt_arrow_lv2", 0, 0, false, e -> e.add(new ExplodeArrowFeature(4)));
+        TNT_3_ARROW = genArrow("tnt_arrow_lv3", 0, 0, false, e -> e.add(new ExplodeArrowFeature(6)));
     }
 
     public static void register() {

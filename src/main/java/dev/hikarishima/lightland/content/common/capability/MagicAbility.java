@@ -123,12 +123,12 @@ public class MagicAbility {
     }
 
     public boolean isArcaneTypeUnlocked(ArcaneType type) {
-        return new NBTObj(arcane_type).getSub(type.getID()).tag.getInt("level") > 0;
+        return new NBTObj(arcane_type).getSub(type.getID()).tag.getInt("radius") > 0;
     }
 
     public void unlockArcaneType(ArcaneType type, boolean force) {
         if (!isArcaneTypeUnlocked(type) && (force || parent.abilityPoints.levelArcane())) {
-            new NBTObj(arcane_type).getSub(type.getID()).tag.putInt("level", 1);
+            new NBTObj(arcane_type).getSub(type.getID()).tag.putInt("radius", 1);
         }
     }
 
