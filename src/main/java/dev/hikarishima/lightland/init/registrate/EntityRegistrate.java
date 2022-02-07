@@ -19,6 +19,8 @@ public class EntityRegistrate {
     public static final EntityEntry<WindBladeEntity> ET_WIND_BLADE = REGISTRATE
             .<WindBladeEntity>entity("wind_blade", WindBladeEntity::new, MobCategory.MISC)
             .properties(e -> e.sized(0.5f, 0.5f)
+                    .clientTrackingRange(4)
+                    .setShouldReceiveVelocityUpdates(true)
                     .updateInterval(20).fireImmune())
             .renderer(() -> WindBladeEntityRenderer::new)
             .defaultLang().register();

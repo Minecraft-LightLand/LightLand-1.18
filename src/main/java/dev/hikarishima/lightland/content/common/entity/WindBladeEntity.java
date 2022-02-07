@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.common.entity;
 
+import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.util.LightLandFakeEntity;
 import dev.hikarishima.lightland.util.math.MathHelper;
@@ -14,7 +15,7 @@ import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
@@ -27,7 +28,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class WindBladeEntity extends Projectile implements IEntityAdditionalSpawnData {
+public class WindBladeEntity extends ThrowableProjectile implements IEntityAdditionalSpawnData {
 
     @SerialClass.SerialField
     public float damage = 3;
@@ -89,10 +90,6 @@ public class WindBladeEntity extends Projectile implements IEntityAdditionalSpaw
         }
     }
 
-    protected float getGravity() {
-        return 0;
-    }
-
     protected void onHit(HitResult result) {
         super.onHit(result);
         if (!level.isClientSide) {
@@ -109,12 +106,19 @@ public class WindBladeEntity extends Projectile implements IEntityAdditionalSpaw
             entity.hurt(source, damage);
             if (isArcane && entity instanceof LivingEntity le && owner instanceof LivingEntity ow) {
                 LightLandFakeEntity.addArcane(le, ow);
+                if (issuer != null)
+                    ArcaneItemUseHelper.addArcaneMana(issuer, (int) damage);
             }
             if (owner instanceof LivingEntity) {
                 doEnchantDamageEffects((LivingEntity) owner, entity);
             }
             discard();
         }
+    }
+
+    @Override
+    protected float getGravity() {
+        return 0;
     }
 
     @Override
