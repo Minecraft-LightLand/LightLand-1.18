@@ -3,7 +3,9 @@ package dev.hikarishima.lightland.events;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import dev.hikarishima.lightland.content.arcane.item.IGlowingTarget;
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
+import dev.hikarishima.lightland.content.archery.feature.bow.IGlowFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.common.effect.EmeraldPopeEffect;
 import dev.hikarishima.lightland.content.common.render.LLRenderState;
@@ -78,11 +80,11 @@ public class ClientEntityEffectRenderEvents {
             }
             ItemStack stack = player.getMainHandItem();
             if (stack.getItem() instanceof GenericBowItem bow) {
-                if (bow.config.feature().pull.stream().noneMatch(e -> e instanceof GlowTargetAimFeature)) {
+                if (bow.config.feature().pull.stream().noneMatch(e -> e instanceof IGlowFeature)) {
                     updateTarget(null);
                     return;
                 }
-            } else {
+            } else if(!(stack.getItem() instanceof IGlowingTarget)){
                 updateTarget(null);
                 return;
             }

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.function.Consumer;
 
-public record EnderShootFeature(int range) implements OnShootFeature, OnPullFeature {
+public record EnderShootFeature(int range) implements OnShootFeature, OnPullFeature, IGlowFeature {
 
     @Override
     public boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> consumer) {

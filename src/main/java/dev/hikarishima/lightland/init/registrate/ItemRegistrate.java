@@ -94,7 +94,7 @@ public class ItemRegistrate {
                 .add(new FireArrowFeature(200)).add(new PotionArrowFeature(
                         new MobEffectInstance(VanillaMagicRegistrate.FLAME.get(), 100, 1))));
         ICE_ARROW = genArrow("frozen_arrow", 0, 0, false, e -> e.add(new PotionArrowFeature(
-                new MobEffectInstance(VanillaMagicRegistrate.ICE.get(), 200),
+                new MobEffectInstance(VanillaMagicRegistrate.ICE.get(), 600),
                 new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), 200))));
     }
 

@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Predicate;
 
-public record GlowTargetAimFeature(int range) implements OnPullFeature {
+public record GlowTargetAimFeature(int range) implements OnPullFeature, IGlowFeature {
 
     public static final EntityTarget TARGET = new EntityTarget(3, Math.PI / 180 * 5, 2);
 
