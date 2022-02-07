@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.archery.entity;
+package dev.hikarishima.lightland.content.common.entity;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.entity.ArrowRenderer;

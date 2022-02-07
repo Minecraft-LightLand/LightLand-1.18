@@ -1,5 +1,7 @@
 package dev.hikarishima.lightland.util;
 
+import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.special.ArcaneRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +23,10 @@ public class LightLandFakeEntity {
         } else if (effectinstance.update(ins)) {
             e.onEffectUpdated(effectinstance, true, source);
         }
+    }
+
+    public static void addArcane(LivingEntity target, Entity source) {
+        addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), source);
     }
 
 }

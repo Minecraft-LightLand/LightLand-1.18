@@ -11,6 +11,8 @@
   "arcane_type.lightland.mizar": "Mizar",
   "arcane_type.lightland.phecda": "Phecda",
   "entity.lightland.generic_arrow": "Generic Arrow",
+  "entity.lightland.spell": "Spell",
+  "entity.lightland.wind_blade": "Wind Blade",
   "item.lightland.copper_arrow": "Copper Arrow",
   "item.lightland.ender_aim_bow": "Ender Aim Bow",
   "item.lightland.ender_arrow": "Ender Arrow",

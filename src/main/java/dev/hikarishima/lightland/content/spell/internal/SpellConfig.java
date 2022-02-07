@@ -30,7 +30,7 @@ public class SpellConfig {
 
     public static <C extends SpellConfig> C makeCopy(C config) {
         return Automator.fromTag(Automator.toTag(new CompoundTag(), config), config.getClass());
-    }
+    }TODO*/
 
     @SerialClass
     public static class SpellDisplay {
@@ -41,6 +41,6 @@ public class SpellConfig {
         @SerialClass.SerialField
         public int duration, setup, close;
 
-    }TODO*/
+    }
 
 }

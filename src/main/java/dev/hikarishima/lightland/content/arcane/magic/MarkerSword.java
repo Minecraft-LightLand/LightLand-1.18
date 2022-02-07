@@ -1,11 +1,8 @@
 package dev.hikarishima.lightland.content.arcane.magic;
 
-import dev.hikarishima.lightland.init.special.ArcaneRegistry;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
-import net.minecraft.world.effect.MobEffectInstance;
 import dev.hikarishima.lightland.util.LightLandFakeEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -31,7 +28,7 @@ public class MarkerSword extends Arcane {
                 if (!(e instanceof Mob))
                     return false;
                 return e != target && !e.isAlliedTo(e);
-            }).forEach(e -> LightLandFakeEntity.addEffect((LivingEntity) e, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), player));
+            }).forEach(e -> LightLandFakeEntity.addArcane((LivingEntity) e, player));
         }
         return true;
     }

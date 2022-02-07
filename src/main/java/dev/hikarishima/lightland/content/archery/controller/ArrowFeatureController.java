@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.archery.controller;
 
-import dev.hikarishima.lightland.content.archery.entity.GenericArrowEntity;
+import dev.hikarishima.lightland.content.common.entity.GenericArrowEntity;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import dev.hikarishima.lightland.content.archery.feature.types.OnShootFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;

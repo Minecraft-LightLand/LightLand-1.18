@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -34,9 +35,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         return item instanceof ArcaneSword || item instanceof ArcaneAxe;
     }
 
-    /**
-     * execute in both server and client, specific action side logic handled inside Arcane class
-     */
+    @DoubleSidedCall
     public static boolean executeArcane(
             Player player, LLPlayerData magic,
             ItemStack stack, ArcaneType type, LivingEntity target) {
@@ -58,10 +57,9 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         return false;
     }
 
-    /**
-     * execute on both server and client (for animation)
-     */
-    public static void rightClickAxe(ItemStack stack) {
+    @ServerOnly
+    public static void rightClickAxe(Level level, ItemStack stack) {
+        if (level.isClientSide()) return;
         CompoundTag tag = stack.getOrCreateTagElement("arcane");
         tag.putBoolean("charged", !tag.getBoolean("charged"));
     }
@@ -70,6 +68,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
         return stack.getOrCreateTagElement("arcane").getBoolean("charged");
     }
 
+    @ServerOnly
     public static void addArcaneMana(ItemStack stack, int mana) {
         IArcaneItem item = (IArcaneItem) stack.getItem();
         CompoundTag tag = stack.getOrCreateTagElement("arcane");
@@ -110,7 +109,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
     private static void handleRightClickEvent(ItemStack stack, PlayerInteractEvent event, LivingEntity target) {
         boolean cancellable = event.isCancelable();
         if (stack.getItem() instanceof ArcaneAxe) {
-            rightClickAxe(stack);
+            rightClickAxe(event.getWorld(), stack);
             if (cancellable) event.setCanceled(true);
             event.setCancellationResult(InteractionResult.SUCCESS);
         } else if (stack.getItem() instanceof ArcaneSword) {
@@ -146,7 +145,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
     @Override
     public void onPlayerLeftClickEntity(ItemStack stack, AttackEntityEvent event) {
         float charge = event.getPlayer().getAttackStrengthScale(0.5f);
-        if (event.getEntityLiving() != null && charge > 0.9f) {
+        if (!event.getPlayer().level.isClientSide() && event.getEntityLiving() != null && charge > 0.9f) {
             addArcaneMana(stack, 1);
         }
     }

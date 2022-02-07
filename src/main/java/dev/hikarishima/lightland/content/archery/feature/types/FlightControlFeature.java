@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.archery.feature.types;
 
-import dev.hikarishima.lightland.content.archery.entity.GenericArrowEntity;
+import dev.hikarishima.lightland.content.common.entity.GenericArrowEntity;
 import dev.hikarishima.lightland.content.archery.feature.BowArrowFeature;
 import net.minecraft.world.phys.Vec3;
 
