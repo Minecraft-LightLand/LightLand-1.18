@@ -148,8 +148,9 @@ public class ClientEntityEffectRenderEvents {
 
     }
 
-    public static final ResourceLocation RL_ENTITY_BODY_ICON = new ResourceLocation(LightLand.MODID, "textures/arcane_icon.png");
-    public static final ResourceLocation WATER_TRAP_ICON = new ResourceLocation(LightLand.MODID, "textures/water_trap_icon.png");
+    public static final ResourceLocation ARCANE_ICON = new ResourceLocation(LightLand.MODID, "textures/effect_overlay/arcane.png");
+    public static final ResourceLocation WATER_TRAP_ICON = new ResourceLocation(LightLand.MODID, "textures/effect_overlay/water_trap.png");
+    public static final ResourceLocation FLAME_ICON = new ResourceLocation(LightLand.MODID, "textures/effect_overlay/flame.png");
 
     private static final ArrayList<DelayedEntityRender> ICONS = new ArrayList<>();
 
@@ -175,10 +176,13 @@ public class ClientEntityEffectRenderEvents {
         if (EffectSyncEvents.EFFECT_MAP.containsKey(entity.getUUID())) {
             Map<MobEffect, Integer> map = EffectSyncEvents.EFFECT_MAP.get(entity.getUUID());
             if (map.containsKey(VanillaMagicRegistrate.ARCANE.get())) {
-                ICONS.add(new DelayedEntityRender(entity, RL_ENTITY_BODY_ICON));
+                ICONS.add(new DelayedEntityRender(entity, ARCANE_ICON));
             }
             if (map.containsKey(VanillaMagicRegistrate.WATER_TRAP.get())) {
                 ICONS.add(new DelayedEntityRender(entity, WATER_TRAP_ICON));
+            }
+            if (map.containsKey(VanillaMagicRegistrate.FLAME.get())) {
+                ICONS.add(new DelayedEntityRender(entity, FLAME_ICON));
             }
             if (map.containsKey(VanillaMagicRegistrate.EMERALD.get())) {
                 if (!Minecraft.getInstance().isPaused() && entity != Proxy.getClientPlayer()) {
