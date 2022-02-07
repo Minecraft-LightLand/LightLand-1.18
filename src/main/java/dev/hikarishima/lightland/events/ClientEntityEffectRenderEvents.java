@@ -66,6 +66,7 @@ public class ClientEntityEffectRenderEvents {
 
         }
 
+        @OnlyIn(Dist.CLIENT)
         public void tickRender() {
             if (target == null) {
                 return;
@@ -104,6 +105,7 @@ public class ClientEntityEffectRenderEvents {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void clientTick(TickEvent.ClientTickEvent event) {
         if (Proxy.getClientPlayer() == null) {
@@ -124,6 +126,7 @@ public class ClientEntityEffectRenderEvents {
         RayTraceUtil.TARGET.tickRender();
     }
 
+    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void fov(FOVModifierEvent event) {
         Player player = Proxy.getClientPlayer();
@@ -224,6 +227,7 @@ public class ClientEntityEffectRenderEvents {
                 .endVertex();
     }
 
+    @OnlyIn(Dist.CLIENT)
     private static void addParticle(Level w, Vec3 vec, int r) {
         float tpi = (float) (Math.PI * 2);
         Vec3 v0 = new Vec3(0, r, 0);
