@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"cac",
+		"aba",
+		"cac"
+	],
+	"key": {
+		"a": {
+			"item": "lightland:tnt_arrow_lv2"
+		},
+		"b": {
+			"item": "minecraft:creeper_head"
+		},
+		"c": {
+			"item": "minecraft:end_crystal"
+		}
+	},
+	"result": {
+		"item": "lightland:tnt_arrow_lv3",
+		"count": 4
+	}
+}

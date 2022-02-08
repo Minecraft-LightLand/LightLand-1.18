@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
 	"cec",
-	" b ",
+	"ibi",
 	"cdc"
   ],
   "key": {
@@ -17,6 +17,9 @@
 	},
 	"e": {
 	  "item": "minecraft:ender_eye"
+	},
+	"i":{
+		"item":"minecraft:end_rod"
 	}
   },
   "result": {

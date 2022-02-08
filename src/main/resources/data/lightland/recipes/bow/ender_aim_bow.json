@@ -1,24 +1,28 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": [
-	"ddc",
-	"ebc",
-	"ddc"
-  ],
-  "key": {
-	"b": {
-	  "item": "lightland:glow_aim_bow"
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"idc",
+		"ebc",
+		"idc"
+	],
+	"key": {
+		"b": {
+			"item": "lightland:glow_aim_bow"
+		},
+		"c": {
+			"item": "minecraft:ender_pearl"
+		},
+		"e": {
+			"item": "minecraft:ender_eye"
+		},
+		"d": {
+			"item": "minecraft:obsidian"
+		},
+		"i": {
+			"item": "minecraft:end_rod"
+		}
 	},
-	"c": {
-	  "item": "minecraft:ender_pearl"
-	},
-	"e": {
-	  "item": "minecraft:ender_eye"
-	},"d": {
-	  "item": "minecraft:obsidian"
+	"result": {
+		"item": "lightland:ender_aim_bow"
 	}
-  },
-  "result": {
-	"item": "lightland:ender_aim_bow"
-  }
 }
