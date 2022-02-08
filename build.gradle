@@ -83,6 +83,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 mixin {
     add sourceSets.main, 'lightland.refmap.json'
+    config 'lightland.mixins.json'
 }
 
 repositories {
@@ -99,7 +100,7 @@ repositories {
     maven {
         // Location of the maven for mixed mappings, Registrate, and Flywheel
         name 'tterrag maven'
-        url 'https://maven.tterrag.com'
+        url 'https://maven.tterrag.com/'
     }
 }
 
@@ -109,6 +110,7 @@ configurations {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.1-39.0.66'
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     def registrate = "com.tterrag.registrate:Registrate:${registrate_version}"
     implementation fg.deobf(registrate)
@@ -142,9 +144,17 @@ jar {
 }
 
 shadowJar {
+    classifier = ''
     configurations = [project.configurations.shade]
     relocate 'com.tterrag.registrate', 'dev.hikarishima.lightland.repack.registrate'
 }
+
+reobf {
+    shadowJar { }
+}
+
+build.dependsOn shadowJar
+build.dependsOn reobfShadowJar
 
 // Example configuration to allow publishing using the maven-publish plugin
 // This is the preferred method to reobfuscate your jar file
