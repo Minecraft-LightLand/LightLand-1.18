@@ -4,8 +4,9 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
+import dev.hikarishima.lightland.content.magic.internal.Spell;
 import dev.hikarishima.lightland.content.profession.*;
-import dev.hikarishima.lightland.content.spell.internal.Spell;
+import dev.hikarishima.lightland.content.skill.Skill;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -17,6 +18,7 @@ public class LightLandRegistry {
     public static IForgeRegistry<Arcane> ARCANE;
     public static IForgeRegistry<Spell<?, ?>> SPELL;
     public static IForgeRegistry<Profession> PROFESSION;
+    public static IForgeRegistry<Skill> SKILL;
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static void createRegistries() {
@@ -38,7 +40,7 @@ public class LightLandRegistry {
                 .setName(new ResourceLocation(LightLand.MODID, "profession"))
                 .setType(Profession.class).create();
 
-        //SKILL = new RegistryBuilder<Skill>().setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class).create();
+        SKILL = new RegistryBuilder<Skill>().setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class).create();
 
         ArcaneType.register();
         ArcaneRegistry.register();

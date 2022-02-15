@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.common.entity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.hikarishima.lightland.content.common.render.LLRenderState;
-import dev.hikarishima.lightland.content.spell.render.SpellComponent;
+import dev.hikarishima.lightland.content.magic.render.SpellComponent;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;

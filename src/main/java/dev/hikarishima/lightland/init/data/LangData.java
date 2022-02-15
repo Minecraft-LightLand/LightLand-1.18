@@ -16,7 +16,11 @@ public class LangData {
         GET_ARCANE_MANA("chat.show_arcane_mana"),
         ACTION_SUCCESS("chat.action_success"),
         PLAYER_NOT_FOUND("chat.player_not_found"),
-        WRONG_ITEM("chat.wrong_item");
+        WRONG_ITEM("chat.wrong_item"),
+        TARGET_ALLY("tooltip.target.ally"),
+        TARGET_ENEMY("tooltip.target.enemy"),
+        TARGET_ALL("tooltip.target.all"),
+        POTION_RADIUS("tooltip.potion.radius");
 
         final String id;
 

@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.spell.internal;
+package dev.hikarishima.lightland.content.magic.internal;
 
 import dev.lcy0x1.util.SerialClass;
 

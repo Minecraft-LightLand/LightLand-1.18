@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.common.entity;
 
-import dev.hikarishima.lightland.content.spell.internal.ActivationConfig;
-import dev.hikarishima.lightland.content.spell.internal.SpellConfig;
-import dev.hikarishima.lightland.content.spell.render.SpellComponent;
+import dev.hikarishima.lightland.content.magic.internal.ActivationConfig;
+import dev.hikarishima.lightland.content.magic.internal.SpellConfig;
+import dev.hikarishima.lightland.content.magic.render.SpellComponent;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.base.BaseEntity;

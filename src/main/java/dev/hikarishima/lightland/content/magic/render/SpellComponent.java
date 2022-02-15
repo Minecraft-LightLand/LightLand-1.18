@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.spell.render;
+package dev.hikarishima.lightland.content.magic.render;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

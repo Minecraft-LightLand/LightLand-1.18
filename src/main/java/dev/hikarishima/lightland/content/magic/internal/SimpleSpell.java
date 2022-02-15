@@ -1,12 +1,12 @@
-package dev.hikarishima.lightland.content.spell.internal;
+package dev.hikarishima.lightland.content.magic.internal;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
 
 public abstract class SimpleSpell<C extends SpellConfig> extends Spell<C, ActivationConfig> {
 
     @Override
-    protected final ActivationConfig canActivate(Type type, Level world, Player player) {
+    protected final ActivationConfig canActivate(Type type, Level world, ServerPlayer player) {
         return new ActivationConfig(world, player, getDistance(player));
     }
 
