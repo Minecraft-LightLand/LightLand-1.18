@@ -1,5 +1,5 @@
-0038315648ee83b27c7f14f6ab937a4f33596632 assets/lightland/lang/en_ud.json
-ce92105d627d0e88cc1b179b82a500a07dc6e6fd assets/lightland/lang/en_us.json
+73d9e366b8cbd0336995431bb09e763724f68ce5 assets/lightland/lang/en_ud.json
+f94789ed829b78733cfce756b98a17a8ab081d7d assets/lightland/lang/en_us.json
 14146db8c8830b8bc0c4aff25a30d3ef9b7f9d6e assets/lightland/models/item/copper_arrow.json
 5d994167969aee87eb543b4d913249dd1a224a74 assets/lightland/models/item/dispell_arrow.json
 14d5dfa9c5ab3e3cd128a716c05c43929a92c7c6 assets/lightland/models/item/eagle_bow.json
@@ -31,6 +31,9 @@ a43d1de4979d5bc251a89dfbbe6960bbb7ce3e0c assets/lightland/models/item/iron_bow_p
 60a11c5b5121ed336078afef7dcfd90cd0f1d19d assets/lightland/models/item/magnify_bow_pulling_2.json
 540806128a8e6a6a57fc0f35023d6206930097a8 assets/lightland/models/item/no_fall_arrow.json
 43454a4e5ecc60f803000ea240afca4a50d2a8ef assets/lightland/models/item/obsidian_arrow.json
+51997d833bd84442c806918550244f15b2fe1c73 assets/lightland/models/item/spell_card.json
+d077902999087cb59896de033d88ebcafd23fe03 assets/lightland/models/item/spell_parchment.json
+cdf4a500656ef0dd03118599330d0626e404f7a7 assets/lightland/models/item/spell_scroll.json
 6d3bb773ea105ae504b2f498fc531d14c6c103a8 assets/lightland/models/item/starter_arrow.json
 edc5c3957ebafc04dba2a330b93071a7f2748f54 assets/lightland/models/item/starter_bow.json
 3c270c18a8f4c294c135061cb4560ad828c81520 assets/lightland/models/item/starter_bow_pulling_0.json
