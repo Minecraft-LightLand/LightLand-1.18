@@ -3,6 +3,8 @@ package dev.hikarishima.lightland.content.archery.item;
 import dev.hikarishima.lightland.content.archery.controller.ArrowFeatureController;
 import dev.hikarishima.lightland.content.archery.controller.BowFeatureController;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
+import dev.hikarishima.lightland.content.archery.feature.bow.WindBowFeature;
+import dev.hikarishima.lightland.content.common.item.FastItem;
 import dev.hikarishima.lightland.init.ClientRegister;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.GenericItemStack;
@@ -24,7 +26,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 import java.util.function.Predicate;
 
-public class GenericBowItem extends BowItem {
+public class GenericBowItem extends BowItem implements FastItem {
 
     public record BowConfig(float damage, int punch, int pull_time, float speed, int fov_time, float fov,
                             FeatureList feature) {
@@ -203,6 +205,11 @@ public class GenericBowItem extends BowItem {
      */
     public int getDefaultProjectileRange() {
         return 15;
+    }
+
+    @Override
+    public boolean isFast(ItemStack stack) {
+        return config.feature().pull.stream().anyMatch(e -> e instanceof WindBowFeature);
     }
 
 }

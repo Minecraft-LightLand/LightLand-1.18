@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.arcane.item;
+package dev.hikarishima.lightland.content.common.item;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;

@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.events;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.hikarishima.lightland.content.arcane.item.IGlowingTarget;
+import dev.hikarishima.lightland.content.common.item.IGlowingTarget;
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.IGlowFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;

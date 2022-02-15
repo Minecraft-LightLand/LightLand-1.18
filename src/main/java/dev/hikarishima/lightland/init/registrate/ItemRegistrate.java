@@ -10,11 +10,13 @@ import dev.hikarishima.lightland.content.archery.feature.arrow.*;
 import dev.hikarishima.lightland.content.archery.feature.bow.DefaultShootFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.EnderShootFeature;
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
+import dev.hikarishima.lightland.content.archery.feature.bow.WindBowFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -54,6 +56,8 @@ public class ItemRegistrate {
     public static final ItemEntry<GenericBowItem> MAGNIFY_BOW;
     public static final ItemEntry<GenericBowItem> GLOW_AIM_BOW;
     public static final ItemEntry<GenericBowItem> ENDER_AIM_BOW;
+    public static final ItemEntry<GenericBowItem> EAGLE_BOW;
+    public static final ItemEntry<GenericBowItem> WIND_BOW;
 
     public static final ItemEntry<GenericArrowItem> STARTER_ARROW;
     public static final ItemEntry<GenericArrowItem> COPPER_ARROW, IRON_ARROW, OBSIDIAN_ARROW;
@@ -62,6 +66,7 @@ public class ItemRegistrate {
     public static final ItemEntry<GenericArrowItem> TNT_1_ARROW, TNT_2_ARROW, TNT_3_ARROW;
     public static final ItemEntry<GenericArrowItem> FIRE_1_ARROW, FIRE_2_ARROW;
     public static final ItemEntry<GenericArrowItem> ICE_ARROW;
+    public static final ItemEntry<GenericArrowItem> DISPELL_ARROW;
 
 
     public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
@@ -77,13 +82,20 @@ public class ItemRegistrate {
         MAGNIFY_BOW = genBow("magnify_bow", 600, 0, 0, 20, 3.0f, 60, 0.9f, e -> e.add(new GlowTargetAimFeature(128)));
         GLOW_AIM_BOW = genBow("glow_aim_bow", 600, 0, 0, e -> e.add(new GlowTargetAimFeature(128)));
         ENDER_AIM_BOW = genBow("ender_aim_bow", 8, -1, 0, e -> e.add(new EnderShootFeature(128)));
+        EAGLE_BOW = genBow("eagle_bow", 600, 6, 2, 40, 3f, e -> e.add(new DamageArrowFeature(
+                a -> DamageSource.arrow(a, a.getOwner()).bypassArmor(),
+                a -> (float) (a.getBaseDamage() * a.getDeltaMovement().length())
+        )));
+        WIND_BOW = genBow("wind_bow", 600, 0, 1, 10, 3.9f, e -> e
+                .add(new NoFallArrowFeature(40))
+                .add(new WindBowFeature()));
 
         STARTER_ARROW = genArrow("starter_arrow", 0, 0, true, FeatureList::end);
         COPPER_ARROW = genArrow("copper_arrow", 1, 0, false, FeatureList::end);
         IRON_ARROW = genArrow("iron_arrow", 1, 1, false, FeatureList::end);
         OBSIDIAN_ARROW = genArrow("obsidian_arrow", 1.5f, 0, false, FeatureList::end);
         NO_FALL_ARROW = genArrow("no_fall_arrow", 0, 0, false, e -> e.add(new NoFallArrowFeature(40)));
-        ENDER_ARROW = genArrow("ender_arrow", -1, 0, false, e -> e.add(new EnderArrowFeature(128)));
+        ENDER_ARROW = genArrow("ender_arrow", -1, 0, false, e -> e.add(new EnderArrowFeature()));
         TNT_1_ARROW = genArrow("tnt_arrow_lv1", 0, 0, false, e -> e.add(new ExplodeArrowFeature(2)));
         TNT_2_ARROW = genArrow("tnt_arrow_lv2", 0, 0, false, e -> e.add(new ExplodeArrowFeature(4)));
         TNT_3_ARROW = genArrow("tnt_arrow_lv3", 0, 0, false, e -> e.add(new ExplodeArrowFeature(6)));
@@ -96,6 +108,10 @@ public class ItemRegistrate {
         ICE_ARROW = genArrow("frozen_arrow", 0, 0, false, e -> e.add(new PotionArrowFeature(
                 new MobEffectInstance(VanillaMagicRegistrate.ICE.get(), 600),
                 new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), 200))));
+        DISPELL_ARROW = genArrow("dispell_arrow", 0, 0, false, e -> e.add(new DamageArrowFeature(
+                a -> DamageSource.arrow(a, a.getOwner()).bypassMagic(),
+                a -> (float) (a.getBaseDamage() * a.getDeltaMovement().length())
+        )));
     }
 
     public static void register() {
