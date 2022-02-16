@@ -19,15 +19,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class BlockEntityBlockMethodImpl<T extends BlockEntity> implements BlockEntityBlockMethod<T>, OnClickBlockMethod {
-
-    private final BlockEntityEntry<T> type;
-    private final Class<T> cls;
-
-    public BlockEntityBlockMethodImpl(BlockEntityEntry<T> type, Class<T> cls) {
-        this.type = type;
-        this.cls = cls;
-    }
+public record BlockEntityBlockMethodImpl<T extends BlockEntity>(
+        BlockEntityEntry<T> type,
+        Class<T> cls) implements BlockEntityBlockMethod<T>, OnClickBlockMethod {
 
     @Override
     public BlockEntity createTileEntity(BlockPos pos, BlockState state) {
