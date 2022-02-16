@@ -7,19 +7,11 @@ import com.hikarishima.lightland.magic.capabilities.MagicHandler;
 import com.hikarishima.lightland.magic.capabilities.ToClientMsg;
 import com.hikarishima.lightland.magic.products.MagicProduct;
 import com.hikarishima.lightland.magic.recipe.MagicRecipeRegistry;
-import com.hikarishima.lightland.magic.recipe.ritual.AbstractMagicCraftRecipe;
-import com.hikarishima.lightland.magic.registry.MagicContainerRegistry;
 import com.hikarishima.lightland.magic.registry.MagicItemRegistry;
 import com.hikarishima.lightland.magic.registry.item.magic.MagicWand;
 import com.hikarishima.lightland.proxy.PacketHandler;
-import com.lcy0x1.base.BaseRecipe;
-import com.lcy0x1.base.block.mult.AnimateTickBlockMethod;
-import com.lcy0x1.base.block.mult.OnClickBlockMethod;
-import com.lcy0x1.base.block.mult.ScheduleTickBlockMethod;
-import com.lcy0x1.base.block.type.BlockMethod;
-import com.lcy0x1.base.block.type.TileEntitySupplier;
-import com.lcy0x1.core.util.SerialClass;
 import dev.hikarishima.lightland.content.magic.ritual.AbstractMagicRitualRecipe;
+import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.lcy0x1.base.BaseRecipe;
 import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
@@ -28,39 +20,24 @@ import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.mult.ScheduleTickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.type.BlockMethod;
-import dev.lcy0x1.block.type.TileEntitySupplier;
 import dev.lcy0x1.util.SerialClass;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.block.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ChatType;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.World;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -69,7 +46,7 @@ import java.util.*;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class RitualCore {
-    public static final BlockEntityBlockMethod<TE> TILE_ENTITY_SUPPLIER_BUILDER = new BlockEntityBlockMethodImpl<>(null,TE.class,TE::new);
+    public static final BlockEntityBlockMethod<TE> TILE_ENTITY_SUPPLIER_BUILDER = new BlockEntityBlockMethodImpl<>(BlockRegistrate.TE_RITUAL_CORE, TE.class);
 
     public static class Activate implements ScheduleTickBlockMethod, OnClickBlockMethod, AnimateTickBlockMethod {
 
@@ -134,8 +111,8 @@ public class RitualCore {
         @SerialClass.SerialField
         public int lv = 0;
 
-        public TE() {
-            super(MagicContainerRegistry.TE_RITUAL_CORE.get());
+        public TE(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+            super(type, pos, state);
         }
 
         public void activate(@Nullable Player player, @Nullable MagicProduct<?, ?> magic) {

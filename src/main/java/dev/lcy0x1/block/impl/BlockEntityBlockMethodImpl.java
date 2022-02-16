@@ -1,5 +1,6 @@
 package dev.lcy0x1.block.impl;
 
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -10,27 +11,25 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class BlockEntityBlockMethodImpl<T extends BlockEntity> extends BlockEntityBlockMethod<T> implements OnClickBlockMethod {
 
-    private final Supplier<T> f;
+    private final BlockEntityEntry<T> f;
 
-    public BlockEntityBlockMethodImpl(Supplier<BlockEntityType<T>> type, Class<T> cls, Supplier<T> f) {
+    public BlockEntityBlockMethodImpl(BlockEntityEntry<T> type, Class<T> cls) {
         super(type, cls);
-        this.f = f;
+        f = type;
     }
 
     @Override
     public BlockEntity createTileEntity(BlockPos pos, BlockState state) {
-        return f.get();
+        return f.create(pos, state);
     }
 
     @Override

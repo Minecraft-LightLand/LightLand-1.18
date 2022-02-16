@@ -1,5 +1,6 @@
 package dev.lcy0x1.block.one;
 
+import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import dev.lcy0x1.block.type.SingletonBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -10,10 +11,10 @@ import java.util.function.Supplier;
 
 public abstract class BlockEntityBlockMethod<T extends BlockEntity> implements SingletonBlockMethod {
 
-    public final Supplier<BlockEntityType<T>> type;
+    public final BlockEntityEntry<T> type;
     public final Class<T> cls;
 
-    public BlockEntityBlockMethod(Supplier<BlockEntityType<T>> type, Class<T> cls){
+    public BlockEntityBlockMethod(BlockEntityEntry<T> type, Class<T> cls){
         this.type = type;
         this.cls = cls;
     }
