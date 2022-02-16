@@ -20,6 +20,7 @@ import com.lcy0x1.base.block.type.BlockMethod;
 import com.lcy0x1.base.block.type.TileEntitySupplier;
 import com.lcy0x1.core.util.SerialClass;
 import dev.lcy0x1.base.BaseRecipe;
+import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.block.mult.AnimateTickBlockMethod;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.mult.ScheduleTickBlockMethod;
@@ -120,7 +121,7 @@ public class RitualCore {
     public static final int[][] POS = {{-2, -2}, {-3, 0}, {-2, 2}, {0, -3}, {0, 3}, {2, -2}, {3, 0}, {2, 2}};
 
     @SerialClass
-    public static class TE extends RitualTE implements ITickableTileEntity {
+    public static class TE extends RitualTE implements TickableBlockEntity {
 
         public AbstractMagicCraftRecipe<?> recipe = null;
 

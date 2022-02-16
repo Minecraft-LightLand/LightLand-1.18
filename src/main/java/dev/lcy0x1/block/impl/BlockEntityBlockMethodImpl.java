@@ -1,7 +1,7 @@
 package dev.lcy0x1.block.impl;
 
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
-import dev.lcy0x1.block.one.TitleEntityBlockMethod;
+import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -9,16 +9,18 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.function.Supplier;
 
-public class TitleEntityBlockMethodImpl implements TitleEntityBlockMethod, OnClickBlockMethod {
+public class BlockEntityBlockMethodImpl<T extends BlockEntity> extends BlockEntityBlockMethod<T> implements OnClickBlockMethod {
 
-    private final Supplier<? extends BlockEntity> f;
+    private final Supplier<T> f;
 
-    public TitleEntityBlockMethodImpl(Supplier<? extends BlockEntity> f) {
+    public BlockEntityBlockMethodImpl(Supplier<BlockEntityType<T>> type, Class<T> cls, Supplier<T> f) {
+        super(type, cls);
         this.f = f;
     }
 

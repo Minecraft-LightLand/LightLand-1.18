@@ -1,11 +1,11 @@
 package dev.lcy0x1.block;
 
-import dev.lcy0x1.block.impl.TitleEntityBlockMethodImpl;
+import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.*;
 import dev.lcy0x1.block.one.BlockPowerBlockMethod;
 import dev.lcy0x1.block.one.LightBlockMethod;
 import dev.lcy0x1.block.one.MirrorRotateBlockMethod;
-import dev.lcy0x1.block.one.TitleEntityBlockMethod;
+import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.type.BlockMethod;
 import dev.lcy0x1.block.type.MultipleBlockMethod;
 import dev.lcy0x1.block.type.SingletonBlockMethod;
@@ -19,7 +19,6 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -101,7 +100,7 @@ public class DelegateBlockImpl extends DelegateBlock {
 
     @Override
     public final void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (impl.one(TitleEntityBlockMethod.class).isPresent() && state.getBlock() != newState.getBlock()) {
+        if (impl.one(BlockEntityBlockMethod.class).isPresent() && state.getBlock() != newState.getBlock()) {
             BlockEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity != null) {
                 if (tileentity instanceof Container) {
@@ -160,17 +159,14 @@ public class DelegateBlockImpl extends DelegateBlock {
 
         public BlockImplementor addImpls(BlockMethod... impls) {
             for (BlockMethod impl : impls) {
-                BlockMethod i = impl;
-                if (i instanceof TileEntitySupplier)
-                    i = new TitleEntityBlockMethodImpl((TileEntitySupplier) impl);
-                if (i instanceof MultipleBlockMethod)
-                    list.add((MultipleBlockMethod) i);
-                if (i instanceof SingletonBlockMethod one) {
+                if (impl instanceof MultipleBlockMethod)
+                    list.add((MultipleBlockMethod) impl);
+                if (impl instanceof SingletonBlockMethod one) {
                     List<Class<?>> list = new ArrayList<>();
                     addOneImpl(one.getClass(), list);
                     for (Class<?> cls : list) {
                         if (map.containsKey(cls)) {
-                            throw new RuntimeException("class " + cls + " is implemented twice with " + map.get(cls) + " and " + i);
+                            throw new RuntimeException("class " + cls + " is implemented twice with " + map.get(cls) + " and " + impl);
                         } else {
                             map.put(cls, one);
                         }

@@ -3,7 +3,9 @@ package dev.hikarishima.lightland.content.magic.block;
 import com.hikarishima.lightland.magic.registry.MagicContainerRegistry;
 import com.lcy0x1.base.block.type.TileEntitySupplier;
 import com.lcy0x1.core.util.SerialClass;
+import dev.lcy0x1.util.SerialClass;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
