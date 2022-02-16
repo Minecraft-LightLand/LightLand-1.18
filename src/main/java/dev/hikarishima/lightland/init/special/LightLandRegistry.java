@@ -4,7 +4,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
-import dev.hikarishima.lightland.content.magic.internal.Spell;
+import dev.hikarishima.lightland.content.magic.spell.Spell;
 import dev.hikarishima.lightland.content.profession.*;
 import dev.hikarishima.lightland.content.skill.Skill;
 import dev.hikarishima.lightland.init.LightLand;

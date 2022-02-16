@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.magic.internal;
+package dev.hikarishima.lightland.content.magic.spell;
 
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;

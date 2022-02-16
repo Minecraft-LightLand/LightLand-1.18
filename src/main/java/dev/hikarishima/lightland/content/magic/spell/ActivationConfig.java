@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.magic.internal;
+package dev.hikarishima.lightland.content.magic.spell;
 
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import net.minecraft.world.entity.Entity;
