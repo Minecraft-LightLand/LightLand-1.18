@@ -14,19 +14,19 @@ public class RecipeRegistrate {
     public static final RecipeType<AbstractMagicRitualRecipe<?>> RT_RITUAL = RecipeType.register("lightland:ritual");
 
     public static final RegistryEntry<BaseRecipe.RecType<BasicMagicRitualRecipe, AbstractMagicRitualRecipe<?>, RitualCore.Inv>> RS_DEF =
-            REGISTRATE.simple(RecipeSerializer.class, () -> new BaseRecipe.RecType<>(BasicMagicRitualRecipe.class, RT_RITUAL));
+            REGISTRATE.simple("ritual_default", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(BasicMagicRitualRecipe.class, RT_RITUAL));
 
     public static final RegistryEntry<BaseRecipe.RecType<EnchantMagicRitualRecipe, AbstractMagicRitualRecipe<?>, RitualCore.Inv>> RS_ENCH =
-            REGISTRATE.simple(RecipeSerializer.class, () -> new BaseRecipe.RecType<>(EnchantMagicRitualRecipe.class, RT_RITUAL));
+            REGISTRATE.simple("ritual_enchantment", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(EnchantMagicRitualRecipe.class, RT_RITUAL));
 
     public static final RegistryEntry<BaseRecipe.RecType<PotionBoostRecipe, AbstractMagicRitualRecipe<?>, RitualCore.Inv>> RSP_BOOST =
-            REGISTRATE.simple(RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionBoostRecipe.class, RT_RITUAL));
+            REGISTRATE.simple("ritual_potion_boost", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionBoostRecipe.class, RT_RITUAL));
     public static final RegistryEntry<BaseRecipe.RecType<PotionCoreRecipe, AbstractMagicRitualRecipe<?>, RitualCore.Inv>> RSP_CORE =
-            REGISTRATE.simple(RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionCoreRecipe.class, RT_RITUAL));
+            REGISTRATE.simple("ritual_potion_core", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionCoreRecipe.class, RT_RITUAL));
     public static final RegistryEntry<BaseRecipe.RecType<PotionSpellRecipe, AbstractMagicRitualRecipe<?>, RitualCore.Inv>> RSP_SPELL =
-            REGISTRATE.simple(RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionSpellRecipe.class, RT_RITUAL));
+            REGISTRATE.simple("ritual_potion_spell", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionSpellRecipe.class, RT_RITUAL));
     public static final RegistryEntry<BaseRecipe.RecType<PotionModifyRecipe, AbstractMagicRitualRecipe<?>, RitualCore.Inv>> RSP_MODIFY =
-            REGISTRATE.simple(RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionModifyRecipe.class, RT_RITUAL));
+            REGISTRATE.simple("ritual_potion_modify", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionModifyRecipe.class, RT_RITUAL));
 
     public static void register() {
 

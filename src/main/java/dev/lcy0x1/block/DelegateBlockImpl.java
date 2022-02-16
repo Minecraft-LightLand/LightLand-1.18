@@ -1,15 +1,13 @@
 package dev.lcy0x1.block;
 
-import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.*;
+import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.one.BlockPowerBlockMethod;
 import dev.lcy0x1.block.one.LightBlockMethod;
 import dev.lcy0x1.block.one.MirrorRotateBlockMethod;
-import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.type.BlockMethod;
 import dev.lcy0x1.block.type.MultipleBlockMethod;
 import dev.lcy0x1.block.type.SingletonBlockMethod;
-import dev.lcy0x1.block.type.TileEntitySupplier;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

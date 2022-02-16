@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.magic.block;
 
+import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.ritual.AbstractMagicRitualRecipe;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;

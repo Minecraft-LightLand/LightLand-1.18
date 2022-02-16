@@ -12,11 +12,16 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
+import static dev.hikarishima.lightland.init.registrate.ItemRegistrate.TAB;
 
 /**
  * handles blocks and block entities
  */
 public class BlockRegistrate {
+
+    static {
+        REGISTRATE.creativeModeTab(() -> TAB);
+    }
 
     private static final DelegateBlockProperties PEDESTAL = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
             .noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
@@ -25,11 +30,13 @@ public class BlockRegistrate {
     public static final BlockEntry<DelegateBlock> B_RITUAL_CORE = REGISTRATE.block("ritual_core",
                     (p) -> DelegateBlock.newBaseBlock(PEDESTAL, RitualCore.ACTIVATE, RitualCore.CLICK,
                             BlockProxy.TRIGGER, RitualCore.TILE_ENTITY_SUPPLIER_BUILDER))
-            .defaultLoot().defaultLang().simpleItem().register();
+            .blockstate((a, b) -> {
+            }).defaultLoot().defaultLang().simpleItem().register();
 
     public static final BlockEntry<DelegateBlock> B_RITUAL_SIDE = REGISTRATE.block("ritual_side",
                     (p) -> DelegateBlock.newBaseBlock(PEDESTAL, RitualCore.CLICK, RitualSide.TILE_ENTITY_SUPPLIER_BUILDER))
-            .defaultLoot().defaultLang().simpleItem().register();
+            .blockstate((a, b) -> {
+            }).defaultLoot().defaultLang().simpleItem().register();
 
     public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE = REGISTRATE.blockEntity("ritual_core", RitualCore.TE::new)
             .validBlock(B_RITUAL_CORE).renderer(() -> RitualRenderer::new).register();

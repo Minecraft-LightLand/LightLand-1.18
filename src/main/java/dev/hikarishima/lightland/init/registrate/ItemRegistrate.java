@@ -14,6 +14,7 @@ import dev.hikarishima.lightland.content.archery.feature.bow.WindBowFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
+import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -69,24 +70,7 @@ public class ItemRegistrate {
     public static final ItemEntry<GenericArrowItem> ICE_ARROW;
     public static final ItemEntry<GenericArrowItem> DISPELL_ARROW;
 
-
-    public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
-                    new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
-            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
-    public static final ItemEntry<ArcaneAxe> ARCANE_AXE_GILDED = REGISTRATE.item("gilded_arcane_axe", p ->
-                    new ArcaneAxe(Tiers.IRON, 8, -3.1f, p.stacksTo(1).setNoRepair(), 50))
-            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
-
-    public static final ItemEntry<MagicScroll> SPELL_CARD = REGISTRATE.item("spell_card", p ->
-                    new MagicScroll(MagicScroll.ScrollType.CARD, p))
-            .defaultModel().defaultLang().register();
-    public static final ItemEntry<MagicScroll> SPELL_PARCHMENT = REGISTRATE.item("spell_parchment", p ->
-                    new MagicScroll(MagicScroll.ScrollType.PARCHMENT, p))
-            .defaultModel().defaultLang().register();
-    public static final ItemEntry<MagicScroll> SPELL_SCROLL = REGISTRATE.item("spell_scroll", p ->
-                    new MagicScroll(MagicScroll.ScrollType.SCROLL, p))
-            .defaultModel().defaultLang().register();
-
+    // archery
     static {
         STARTER_BOW = genBow("starter_bow", 600, 0, 0, FeatureList::end);
         IRON_BOW = genBow("iron_bow", 1200, 1, 0, 40, 3.9f, FeatureList::end);
@@ -124,6 +108,26 @@ public class ItemRegistrate {
                 a -> (float) (a.getBaseDamage() * a.getDeltaMovement().length())
         )));
     }
+
+    public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
+                    new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
+            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+    public static final ItemEntry<ArcaneAxe> ARCANE_AXE_GILDED = REGISTRATE.item("gilded_arcane_axe", p ->
+                    new ArcaneAxe(Tiers.IRON, 8, -3.1f, p.stacksTo(1).setNoRepair(), 50))
+            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+
+    public static final ItemEntry<MagicWand> MAGIC_WAND = REGISTRATE.item("magic_wand", MagicWand::new)
+            .defaultModel().defaultLang().register();
+
+    public static final ItemEntry<MagicScroll> SPELL_CARD = REGISTRATE.item("spell_card", p ->
+                    new MagicScroll(MagicScroll.ScrollType.CARD, p))
+            .defaultModel().defaultLang().register();
+    public static final ItemEntry<MagicScroll> SPELL_PARCHMENT = REGISTRATE.item("spell_parchment", p ->
+                    new MagicScroll(MagicScroll.ScrollType.PARCHMENT, p))
+            .defaultModel().defaultLang().register();
+    public static final ItemEntry<MagicScroll> SPELL_SCROLL = REGISTRATE.item("spell_scroll", p ->
+                    new MagicScroll(MagicScroll.ScrollType.SCROLL, p))
+            .defaultModel().defaultLang().register();
 
     public static void register() {
     }
