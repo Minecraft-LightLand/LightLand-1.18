@@ -1,38 +1,27 @@
 package dev.hikarishima.lightland.content.magic.block;
 
-import com.lcy0x1.base.block.mult.CreateBlockStateBlockMethod;
-import com.lcy0x1.base.block.mult.DefaultStateBlockMethod;
-import com.lcy0x1.base.block.mult.OnClickBlockMethod;
-import com.lcy0x1.core.util.SerialClass;
+import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
+import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
+import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.util.SerialClass;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static sun.java2d.metal.MTLRenderQueue.sync;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -78,28 +67,27 @@ public class RitualTE extends SyncedSingleItemTE {
     public static class RitualPlace implements OnClickBlockMethod, CreateBlockStateBlockMethod, DefaultStateBlockMethod {
 
         @Override
-        public ActionResultType onClick(BlockState bs, World w, BlockPos pos, PlayerEntity pl, Hand h, BlockRayTraceResult r) {
+        public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
             if (w.isClientSide()) {
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
-            TileEntity te = w.getBlockEntity(pos);
-            if (te instanceof RitualTE) {
-                RitualTE rte = (RitualTE) te;
+            BlockEntity te = w.getBlockEntity(pos);
+            if (te instanceof RitualTE rte) {
                 if (!rte.isLocked()) {
                     if (rte.isEmpty()) {
                         if (!pl.getMainHandItem().isEmpty()) {
                             rte.setItem(0, pl.getMainHandItem().split(1));
                         }
                     } else {
-                        pl.inventory.placeItemBackInInventory(w, rte.removeItem(0, 1));
+                        pl.getInventory().placeItemBackInInventory(rte.removeItem(0, 1));
                     }
                 }
             }
-            return ActionResultType.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         @Override
-        public void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+        public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
             builder.add(BlockStateProperties.LIT);
         }
 
