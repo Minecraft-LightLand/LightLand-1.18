@@ -10,6 +10,7 @@ import dev.lcy0x1.block.type.BlockMethod;
 import dev.lcy0x1.block.type.MultipleBlockMethod;
 import dev.lcy0x1.block.type.SingletonBlockMethod;
 import dev.lcy0x1.block.type.TileEntitySupplier;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -36,6 +37,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.stream.Stream;
 
+@MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class DelegateBlockImpl extends DelegateBlock {
 
@@ -63,12 +65,6 @@ public class DelegateBlockImpl extends DelegateBlock {
     @Override
     public final boolean isSignalSource(BlockState bs) {
         return impl.one(BlockPowerBlockMethod.class).isPresent();
-    }
-
-    @Override
-    public final int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-        return impl.one(TitleEntityBlockMethod.class).map(e -> Optional.ofNullable(worldIn.getBlockEntity(pos))
-                .map(AbstractContainerMenu::getRedstoneSignalFromBlockEntity).orElse(0)).orElse(0);
     }
 
     @Override

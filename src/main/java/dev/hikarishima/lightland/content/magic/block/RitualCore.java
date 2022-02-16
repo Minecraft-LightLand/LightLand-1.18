@@ -19,13 +19,26 @@ import com.lcy0x1.base.block.mult.ScheduleTickBlockMethod;
 import com.lcy0x1.base.block.type.BlockMethod;
 import com.lcy0x1.base.block.type.TileEntitySupplier;
 import com.lcy0x1.core.util.SerialClass;
+import dev.lcy0x1.base.BaseRecipe;
+import dev.lcy0x1.block.mult.AnimateTickBlockMethod;
+import dev.lcy0x1.block.mult.OnClickBlockMethod;
+import dev.lcy0x1.block.mult.ScheduleTickBlockMethod;
+import dev.lcy0x1.block.type.BlockMethod;
+import dev.lcy0x1.block.type.TileEntitySupplier;
+import dev.lcy0x1.util.SerialClass;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.block.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.chat.ChatType;
+import net.minecraft.network.chat.Component;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
@@ -34,7 +47,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.ChatType;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
@@ -49,32 +70,32 @@ public class RitualCore {
     public static class Activate implements ScheduleTickBlockMethod, OnClickBlockMethod, AnimateTickBlockMethod {
 
         @Override
-        public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-            TileEntity te = world.getBlockEntity(pos);
+        public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+            BlockEntity te = world.getBlockEntity(pos);
             if (te instanceof TE) {
                 ((TE) te).activate(null, null);
             }
         }
 
         @Override
-        public ActionResultType onClick(BlockState bs, World w, BlockPos pos, PlayerEntity pl, Hand h, BlockRayTraceResult r) {
+        public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
             if (w.isClientSide()) {
-                return pl.getMainHandItem().getItem() instanceof MagicWand ? ActionResultType.SUCCESS : ActionResultType.PASS;
+                return pl.getMainHandItem().getItem() instanceof MagicWand ? InteractionResult.SUCCESS : InteractionResult.PASS;
             }
             if (pl.getMainHandItem().getItem() instanceof MagicWand) {
-                TileEntity te = w.getBlockEntity(pos);
+                BlockEntity te = w.getBlockEntity(pos);
                 if (te instanceof TE) {
                     MagicProduct<?, ?> magic = MagicItemRegistry.GILDED_WAND.get().getData(pl, pl.getMainHandItem());
                     ((TE) te).activate(pl, magic);
                 }
-                return ActionResultType.SUCCESS;
+                return InteractionResult.SUCCESS;
             }
-            return ActionResultType.PASS;
+            return InteractionResult.PASS;
         }
 
         @Override
-        public void animateTick(BlockState state, World world, BlockPos pos, Random r) {
-            TileEntity tile = world.getBlockEntity(pos);
+        public void animateTick(BlockState state, Level world, BlockPos pos, Random r) {
+            BlockEntity tile = world.getBlockEntity(pos);
             if (!(tile instanceof TE)) return;
             TE te = (TE) tile;
             if (!te.isLocked()) return;
@@ -113,7 +134,7 @@ public class RitualCore {
             super(MagicContainerRegistry.TE_RITUAL_CORE.get());
         }
 
-        public void activate(@Nullable PlayerEntity player, @Nullable MagicProduct<?, ?> magic) {
+        public void activate(@Nullable Player player, @Nullable MagicProduct<?, ?> magic) {
             if (level == null || level.isClientSide()) {
                 return;
             }
@@ -164,9 +185,9 @@ public class RitualCore {
 
         }
 
-        private void send(@Nullable PlayerEntity player, ITextComponent text) {
+        private void send(@Nullable Player player, Component text) {
             if (player == null) return;
-            World world = player.level;
+            Level world = player.level;
             if (world == null) return;
             MinecraftServer server = world.getServer();
             if (server == null)
@@ -178,7 +199,7 @@ public class RitualCore {
             assert level != null;
             List<RitualSide.TE> list = new ArrayList<>();
             for (int[] dire : POS) {
-                TileEntity te = level.getBlockEntity(getBlockPos().offset(dire[0], 0, dire[1]));
+                BlockEntity te = level.getBlockEntity(getBlockPos().offset(dire[0], 0, dire[1]));
                 if (te instanceof RitualSide.TE) {
                     list.add((RitualSide.TE) te);
                 }
@@ -293,7 +314,7 @@ public class RitualCore {
         }
 
         @Override
-        public boolean stillValid(PlayerEntity player) {
+        public boolean stillValid(Player player) {
             return true;
         }
 

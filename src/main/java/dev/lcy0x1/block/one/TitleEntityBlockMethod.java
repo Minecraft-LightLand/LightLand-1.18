@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 public interface TitleEntityBlockMethod extends SingletonBlockMethod {
+
     default boolean hasTileEntity(BlockState state) {
         return true;
     }
