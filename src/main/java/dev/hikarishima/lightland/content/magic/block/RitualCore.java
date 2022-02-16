@@ -19,11 +19,14 @@ import com.lcy0x1.base.block.mult.ScheduleTickBlockMethod;
 import com.lcy0x1.base.block.type.BlockMethod;
 import com.lcy0x1.base.block.type.TileEntitySupplier;
 import com.lcy0x1.core.util.SerialClass;
+import dev.hikarishima.lightland.content.magic.ritual.AbstractMagicRitualRecipe;
 import dev.lcy0x1.base.BaseRecipe;
 import dev.lcy0x1.base.TickableBlockEntity;
+import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.AnimateTickBlockMethod;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.mult.ScheduleTickBlockMethod;
+import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.type.BlockMethod;
 import dev.lcy0x1.block.type.TileEntitySupplier;
 import dev.lcy0x1.util.SerialClass;
@@ -66,7 +69,7 @@ import java.util.*;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class RitualCore {
-    public static final TileEntitySupplier TILE_ENTITY_SUPPLIER_BUILDER = TE::new;
+    public static final BlockEntityBlockMethod<TE> TILE_ENTITY_SUPPLIER_BUILDER = new BlockEntityBlockMethodImpl<>(null,TE.class,TE::new);
 
     public static class Activate implements ScheduleTickBlockMethod, OnClickBlockMethod, AnimateTickBlockMethod {
 
@@ -123,7 +126,7 @@ public class RitualCore {
     @SerialClass
     public static class TE extends RitualTE implements TickableBlockEntity {
 
-        public AbstractMagicCraftRecipe<?> recipe = null;
+        public AbstractMagicRitualRecipe<?> recipe = null;
 
         @SerialClass.SerialField
         public int remainingTime = 0;
@@ -145,7 +148,7 @@ public class RitualCore {
             }
             //TODO sideness
             Inv inv = new Inv(this, list);
-            Optional<AbstractMagicCraftRecipe<?>> r = level.getRecipeManager().getRecipeFor(MagicRecipeRegistry.RT_CRAFT, inv, level);
+            Optional<AbstractMagicRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(MagicRecipeRegistry.RT_CRAFT, inv, level);
             r.ifPresent(e -> {
                 Map<MagicElement, Integer> map = new LinkedHashMap<>();
                 if (e.getMagic() != null) {
@@ -219,7 +222,7 @@ public class RitualCore {
             List<RitualSide.TE> list = getSide();
             if (list.size() == 8 && recipe == null) {
                 Inv inv = new Inv(this, list);
-                Optional<AbstractMagicCraftRecipe<?>> r = level.getRecipeManager().getRecipeFor(MagicRecipeRegistry.RT_CRAFT, inv, level);
+                Optional<AbstractMagicRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(MagicRecipeRegistry.RT_CRAFT, inv, level);
                 if (r.isPresent()) {
                     recipe = r.get();
                 } else {
@@ -265,7 +268,7 @@ public class RitualCore {
 
     }
 
-    public static class Inv implements BaseRecipe.RecInv<AbstractMagicCraftRecipe<?>> {
+    public static class Inv implements BaseRecipe.RecInv<AbstractMagicRitualRecipe<?>> {
 
         public final TE core;
         public final List<RitualSide.TE> sides;
