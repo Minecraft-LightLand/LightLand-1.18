@@ -1,6 +1,12 @@
 package dev.hikarishima.lightland.content.magic.spell;
 
+import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.magic.item.MagicScroll;
+import dev.lcy0x1.util.Automator;
 import dev.lcy0x1.util.SerialClass;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 @SerialClass
 public class SpellConfig {
@@ -9,7 +15,7 @@ public class SpellConfig {
     public int duration, mana_cost, spell_load;
     @SerialClass.SerialField
     public float factor = 1f;
-    /*
+
     @SerialClass.SerialField public MagicScroll.ScrollType type;
 
     public static <C extends SpellConfig> C get(Spell<C, ?> spell, Level world, Player player) {
@@ -30,7 +36,7 @@ public class SpellConfig {
 
     public static <C extends SpellConfig> C makeCopy(C config) {
         return Automator.fromTag(Automator.toTag(new CompoundTag(), config), config.getClass());
-    }TODO*/
+    }
 
     @SerialClass
     public static class SpellDisplay {
