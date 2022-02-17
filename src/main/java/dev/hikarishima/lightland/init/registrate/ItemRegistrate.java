@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.init.registrate;
 
+import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -13,22 +14,25 @@ import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeatur
 import dev.hikarishima.lightland.content.archery.feature.bow.WindBowFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
+import dev.hikarishima.lightland.content.burserker.item.MedicineArmor;
+import dev.hikarishima.lightland.content.burserker.item.MedicineLeather;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.init.LightLand;
+import dev.hikarishima.lightland.init.special.LLRegistrate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.util.NonNullLazy;
 
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
@@ -53,6 +57,7 @@ public class ItemRegistrate {
         REGISTRATE.creativeModeTab(() -> TAB);
     }
 
+    // -------- archery --------
     public static final ItemEntry<GenericBowItem> STARTER_BOW;
     public static final ItemEntry<GenericBowItem> IRON_BOW;
     public static final ItemEntry<GenericBowItem> MAGNIFY_BOW;
@@ -70,7 +75,6 @@ public class ItemRegistrate {
     public static final ItemEntry<GenericArrowItem> ICE_ARROW;
     public static final ItemEntry<GenericArrowItem> DISPELL_ARROW;
 
-    // archery
     static {
         STARTER_BOW = genBow("starter_bow", 600, 0, 0, FeatureList::end);
         IRON_BOW = genBow("iron_bow", 1200, 1, 0, 40, 3.9f, FeatureList::end);
@@ -109,6 +113,7 @@ public class ItemRegistrate {
         )));
     }
 
+    // -------- magic --------
     public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
                     new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
             .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
@@ -128,6 +133,12 @@ public class ItemRegistrate {
     public static final ItemEntry<MagicScroll> SPELL_SCROLL = REGISTRATE.item("spell_scroll", p ->
                     new MagicScroll(MagicScroll.ScrollType.SCROLL, p))
             .defaultModel().defaultLang().register();
+
+    // -------- berserker --------
+    public static final ItemEntry<MedicineLeather> MEDICINE_LEATHER = REGISTRATE.item("medicine_leather", MedicineLeather::new)
+            .defaultModel().defaultLang().register();
+    public static final ItemEntry<MedicineArmor>[] MEDICINE_ARMOR = genArmor("medicine_leather", MedicineArmor::new, e -> e.model(ItemRegistrate::createDoubleLayerModel));
+
 
     public static void register() {
     }
@@ -158,6 +169,16 @@ public class ItemRegistrate {
                 .defaultModel().defaultLang().register();
     }
 
+    @SuppressWarnings({"rawtypes", "unsafe", "unchecked"})
+    public static <T extends ArmorItem> ItemEntry<T>[] genArmor(String id, BiFunction<EquipmentSlot, Item.Properties, T> sup, Function<ItemBuilder<T, LLRegistrate>, ItemBuilder<T, LLRegistrate>> func) {
+        ItemEntry[] ans = new ItemEntry[4];
+        ans[0] = func.apply(REGISTRATE.item(id + "_helmet", p -> sup.apply(EquipmentSlot.HEAD, p))).defaultLang().register();
+        ans[1] = func.apply(REGISTRATE.item(id + "_chestplate", p -> sup.apply(EquipmentSlot.CHEST, p))).defaultLang().register();
+        ans[2] = func.apply(REGISTRATE.item(id + "_leggings", p -> sup.apply(EquipmentSlot.LEGS, p))).defaultLang().register();
+        ans[3] = func.apply(REGISTRATE.item(id + "_boots", p -> sup.apply(EquipmentSlot.FEET, p))).defaultLang().register();
+        return ans;
+    }
+
     private static final float[] BOW_PULL_VALS = {0, 0.65f, 0.9f};
 
     public static <T extends GenericBowItem> void createBowModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider pvd) {
@@ -173,6 +194,12 @@ public class ItemRegistrate {
                 override.predicate(new ResourceLocation("pull"), BOW_PULL_VALS[i]);
             override.model(new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/" + name));
         }
+    }
+
+    public static <T extends Item> void createDoubleLayerModel(DataGenContext<Item, T> ctx, RegistrateItemModelProvider pvd) {
+        ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "minecraft:generated");
+        builder.texture("layer0", "item/" + ctx.getName());
+        builder.texture("layer1", "item/" + ctx.getName() + "_overlay");
     }
 
 }

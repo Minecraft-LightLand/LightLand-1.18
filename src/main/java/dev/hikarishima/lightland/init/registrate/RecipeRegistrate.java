@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.init.registrate;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.hikarishima.lightland.content.burserker.recipe.MedArmorRecipe;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.ritual.*;
 import dev.lcy0x1.base.BaseRecipe;
@@ -27,6 +28,9 @@ public class RecipeRegistrate {
             REGISTRATE.simple("ritual_potion_spell", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionSpellRecipe.class, RT_RITUAL));
     public static final RegistryEntry<BaseRecipe.RecType<PotionModifyRecipe, AbstractRitualRecipe<?>, RitualCore.Inv>> RSP_MODIFY =
             REGISTRATE.simple("ritual_potion_modify", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionModifyRecipe.class, RT_RITUAL));
+
+    public static final RegistryEntry<MedArmorRecipe.Ser> RSC_MED_ARMOR =
+            REGISTRATE.simple("medicine_armor", RecipeSerializer.class, MedArmorRecipe.Ser::new);
 
     public static void register() {
 
