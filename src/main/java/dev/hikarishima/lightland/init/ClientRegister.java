@@ -6,8 +6,6 @@ import dev.hikarishima.lightland.content.burserker.item.MedicineArmor;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -32,9 +30,7 @@ public class ClientRegister {
         MedicineArmor[] items = Arrays.stream(ItemRegistrate.MEDICINE_ARMOR).map(RegistryEntry::get).toArray(MedicineArmor[]::new);
         event.getItemColors().register((stack, val) -> {
             if (val > 0) return -1;
-            List<MobEffectInstance> list = PotionUtils.getCustomEffects(stack);
-            if (list.size() != 1) return -1;
-            return list.get(0).getEffect().getColor();
+            return ((MedicineArmor) stack.getItem()).getColor(stack);
         }, items);
     }
 

@@ -2,7 +2,6 @@ package dev.hikarishima.lightland.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.hikarishima.lightland.init.LightLand;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.function.BiConsumer;

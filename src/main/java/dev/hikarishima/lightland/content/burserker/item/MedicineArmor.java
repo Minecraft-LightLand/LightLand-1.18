@@ -3,25 +3,24 @@ package dev.hikarishima.lightland.content.burserker.item;
 import dev.hikarishima.lightland.content.common.item.Mat;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.LazyLoadedValue;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class MedicineArmor extends ArmorItem implements MedicineItem{
+public class MedicineArmor extends ArmorItem implements MedicineItem, DyeableLeatherItem {
 
     public MedicineArmor(EquipmentSlot slot, Properties prop) {
         super(Mat.MEDICINE_LEATHER, slot, prop);
@@ -41,6 +40,12 @@ public class MedicineArmor extends ArmorItem implements MedicineItem{
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
         PotionUtils.addPotionTooltip(stack, list, 1);
+    }
+
+    public int getColor(ItemStack stack) {
+        List<MobEffectInstance> list = PotionUtils.getCustomEffects(stack);
+        if (list.size() == 1) return list.get(0).getEffect().getColor();
+        return 10511680;
     }
 
 }

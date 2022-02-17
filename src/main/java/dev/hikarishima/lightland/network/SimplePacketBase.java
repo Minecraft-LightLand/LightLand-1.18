@@ -1,7 +1,6 @@
 package dev.hikarishima.lightland.network;
 
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.network.NetworkDirection;
@@ -28,7 +27,7 @@ public abstract class SimplePacketBase {
         PacketHandler.channel.sendTo(this, e.connection.getConnection(), NetworkDirection.PLAY_TO_CLIENT);
     }
 
-    public void toAllClient(){
+    public void toAllClient() {
         PacketHandler.channel.send(PacketDistributor.ALL.noArg(), this);
     }
 

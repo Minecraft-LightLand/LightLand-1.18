@@ -21,8 +21,6 @@ public class SpellConfig {
 
     public static <C extends SpellConfig> C get(Spell<C, ?> spell, Level world, Player player) {
         C ans = SpellDataConfig.getConfig(spell.getRegistryName());
-        if (ans == null)
-            return null;
         /*
         IMagicRecipe<?> r = IMagicRecipe.getMap(world, MagicRegistry.MPT_SPELL).get(spell);
         if (r == null)
