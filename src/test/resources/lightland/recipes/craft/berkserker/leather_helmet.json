@@ -1,0 +1,15 @@
+{
+  "type": "lightland:medicine_armor",
+  "pattern": [
+    "XXX",
+    "X X"
+  ],
+  "key": {
+    "X": {
+      "item": "lightland:medicine_leather"
+    }
+  },
+  "result": {
+    "item": "lightland:medicine_leather_helmet"
+  }
+}
