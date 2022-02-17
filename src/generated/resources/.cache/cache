@@ -1,5 +1,5 @@
-29a841274a1d92723c027db693f562a801aae38d assets/lightland/lang/en_ud.json
-0b9edc0d7cb4b4ebb9c044b22cf6f56628413f12 assets/lightland/lang/en_us.json
+7a326d31977ce7c3afb979ae72f57c931f2ab716 assets/lightland/lang/en_ud.json
+95376ae69a29b3726031a9f3e259e273ca0a9c33 assets/lightland/lang/en_us.json
 14146db8c8830b8bc0c4aff25a30d3ef9b7f9d6e assets/lightland/models/item/copper_arrow.json
 5d994167969aee87eb543b4d913249dd1a224a74 assets/lightland/models/item/dispell_arrow.json
 14d5dfa9c5ab3e3cd128a716c05c43929a92c7c6 assets/lightland/models/item/eagle_bow.json
@@ -37,6 +37,7 @@ a601220ad07ec2f3caeb5bf9bd4aa0a6fdca441a assets/lightland/models/item/medicine_l
 7b05279170daf07916a7c7cbdacc42b9ebffab28 assets/lightland/models/item/medicine_leather_leggings.json
 540806128a8e6a6a57fc0f35023d6206930097a8 assets/lightland/models/item/no_fall_arrow.json
 43454a4e5ecc60f803000ea240afca4a50d2a8ef assets/lightland/models/item/obsidian_arrow.json
+7d7b1ed60bff2e02d4845495bd9038db9c530c3c assets/lightland/models/item/potion_core.json
 2c1b9e28968495713bd589c4ba4eee737584302c assets/lightland/models/item/ritual_core.json
 059bc813cba9a58f68bf6343bbf350c958dcab0a assets/lightland/models/item/ritual_side.json
 51997d833bd84442c806918550244f15b2fe1c73 assets/lightland/models/item/spell_card.json

@@ -7,13 +7,13 @@
   ],
   "key": {
 	"L": {
-	  "tag": "minecraft:leather"
+	  "item": "minecraft:leather"
 	},
 	"V": {
 	  "item": "minecraft:vine"
 	},
 	"F": {
-	  "tag": "minecraft:oxeye_daisy"
+	  "item": "minecraft:oxeye_daisy"
 	}
   },
   "result": {

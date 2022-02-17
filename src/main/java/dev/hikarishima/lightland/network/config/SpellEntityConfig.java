@@ -11,7 +11,7 @@ import java.util.Objects;
 @SerialClass
 public class SpellEntityConfig extends ConfigSyncManager.BaseConfig {
 
-    @SerialClass.SerialField
+    @SerialClass.SerialField(generic = {String.class, SpellComponent.class})
     public HashMap<String, SpellComponent> map = new HashMap<>();
 
     @Nullable

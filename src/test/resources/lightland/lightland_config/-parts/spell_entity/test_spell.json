@@ -3,7 +3,7 @@
   "file": "config_spell_entity",
   "path": "map",
   "common": {
-    "_class": "dev.hikarishima.lightland.magic.render.SpellComponent"
+    "_class": "dev.hikarishima.lightland.content.magic.render.SpellComponent"
   },
   "map": {
     "lightland:test_spell": {

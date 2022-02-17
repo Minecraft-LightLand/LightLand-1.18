@@ -7,13 +7,13 @@
   ],
   "key": {
 	"L": {
-	  "tag": "minecraft:leather"
+	  "item": "minecraft:leather"
 	},
 	"V": {
 	  "item": "minecraft:vine"
 	},
 	"F": {
-	  "tag": "minecraft:lily_of_the_valley"
+	  "item": "minecraft:lily_of_the_valley"
 	}
   },
   "result": {
@@ -21,7 +21,7 @@
 	"nbt": {
 	  "CustomPotionEffects": [
 		{
-		  "Id": 1,
+		  "Id": 6,
 		  "Amplifier": 0,
 		  "Duration": 0
 		}

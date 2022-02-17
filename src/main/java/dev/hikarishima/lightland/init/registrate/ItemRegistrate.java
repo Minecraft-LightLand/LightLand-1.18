@@ -18,6 +18,7 @@ import dev.hikarishima.lightland.content.burserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.burserker.item.MedicineLeather;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
+import dev.hikarishima.lightland.content.magic.item.PotionCore;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -122,6 +123,8 @@ public class ItemRegistrate {
             .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
 
     public static final ItemEntry<MagicWand> MAGIC_WAND = REGISTRATE.item("magic_wand", MagicWand::new)
+            .defaultModel().defaultLang().register();
+    public static final ItemEntry<PotionCore> POTION_CORE = REGISTRATE.item("potion_core", PotionCore::new)
             .defaultModel().defaultLang().register();
 
     public static final ItemEntry<MagicScroll> SPELL_CARD = REGISTRATE.item("spell_card", p ->
