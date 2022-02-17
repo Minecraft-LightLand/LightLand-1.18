@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"cac",
+		"aba",
+		"cac"
+	],
+	"key": {
+		"a": {
+			"item": "lightland:fire_arrow_lv1"
+		},
+		"b": {
+			"item": "minecraft:blaze_rod"
+		},
+		"c": {
+			"item": "minecraft:blaze_powder"
+		}
+	},
+	"result": {
+		"item": "lightland:fire_arrow_lv2",
+		"count": 4
+	}
+}

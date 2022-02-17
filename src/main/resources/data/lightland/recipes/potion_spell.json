@@ -1,0 +1,77 @@
+{
+    "type": "lightland:ritual_potion_spell",
+    "core": {
+        "input": {
+            "item": "lightland:potion_core"
+        },
+        "output": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "side": [
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:spell_card"
+            },
+            "output": {
+                "item": "lightland:spell_card"
+            }
+        }
+    ]
+}

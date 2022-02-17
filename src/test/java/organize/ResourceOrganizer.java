@@ -27,18 +27,18 @@ public abstract class ResourceOrganizer {
 
     public static void main(String[] args) throws Exception {
         //new LangFileOrganizer();
-        //new ItemFileOrganizer();
+        new ItemFileOrganizer();
         //new BlockFileOrganizer();
         //new ArmorFileOrganizer();
-        //new RecipeFileOrganizer();
+        new RecipeFileOrganizer();
         //new AssetMisc();
         //new DataMisc();
         new ConfigFileOrganizer();
         File f = new File("./src/test/resources");
         for (File fi : f.listFiles()) {
             MODID = fi.getName();
-            //delete(new File("./src/main/resources/assets/"));
-            //delete(new File(".//src/main/resources/data/"));
+            delete(new File("./src/main/resources/assets/lightland/textures/item"));
+            delete(new File("./src/main/resources/data/lightland/recipes"));
             if (!fi.isDirectory())
                 continue;
             for (ResourceOrganizer obj : MAP.values()) {

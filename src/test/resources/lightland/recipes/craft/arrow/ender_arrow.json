@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"cec",
+	"ibi",
+	"cdc"
+  ],
+  "key": {
+	"c": {
+	  "item": "lightland:no_fall_arrow"
+	},
+	"b": {
+	  "item": "minecraft:obsidian"
+	},
+	"d": {
+	  "item": "minecraft:ender_pearl"
+	},
+	"e": {
+	  "item": "minecraft:ender_eye"
+	},
+	"i":{
+		"item":"minecraft:end_rod"
+	}
+  },
+  "result": {
+	"item": "lightland:ender_arrow",
+	"count": 4
+  }
+}

@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.common.entity;
 
+import dev.hikarishima.lightland.content.magic.render.SpellComponent;
 import dev.hikarishima.lightland.content.magic.spell.internal.ActivationConfig;
 import dev.hikarishima.lightland.content.magic.spell.internal.SpellConfig;
-import dev.hikarishima.lightland.content.magic.render.SpellComponent;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.base.BaseEntity;
@@ -20,6 +20,9 @@ public class SpellEntity extends BaseEntity {
     @SerialClass.SerialField
     public int time, setup, close;
 
+    @SerialClass.SerialField
+    public String spell_id = "lightland:test_spell";
+
     private Consumer<SpellEntity> action;
 
     public SpellEntity(EntityType<?> type, Level world) {
@@ -30,13 +33,14 @@ public class SpellEntity extends BaseEntity {
         this(EntityRegistrate.ET_SPELL.get(), w);
     }
 
-    public void setData(double x, double y, double z, int time, int setup, int close, float xr, float yr) {
+    public void setData(double x, double y, double z, int time, int setup, int close, float xr, float yr, String id) {
         this.setPos(x, y - 1.5f, z);
         this.time = time;
         this.setup = setup;
         this.close = close;
         this.setXRot(xr);
         this.setYRot(yr);
+        this.spell_id = id;
     }
 
     public void setData(Player player, SpellConfig.SpellDisplay spell, SpellPlane plane) {
@@ -54,14 +58,14 @@ public class SpellEntity extends BaseEntity {
             pos = pos.add(0, player.getEyeHeight(), 0);
             pos = RayTraceUtil.getRayTerm(pos, xr, yr, 0.5);
         }
-        setData(pos.x, pos.y, pos.z, spell.duration, spell.setup, spell.close, xr, yr);
+        setData(pos.x, pos.y, pos.z, spell.duration, spell.setup, spell.close, xr, yr, spell.id);
     }
 
     public void setData(ActivationConfig act, SpellConfig.SpellDisplay spell) {
         Vec3 pos = act.target == null ? act.pos : act.target.position().add(0, act.target.getBbHeight() / 2, 0);
         pos = pos.add(0, 1e-3, 0);
         float xr = -90;
-        setData(pos.x, pos.y, pos.z, spell.duration, spell.setup, spell.close, xr, 0);
+        setData(pos.x, pos.y, pos.z, spell.duration, spell.setup, spell.close, xr, 0, spell.id);
     }
 
     public void setAction(Consumer<SpellEntity> cons) {
@@ -91,7 +95,7 @@ public class SpellEntity extends BaseEntity {
     }
 
     public SpellComponent getComponent() {
-        return null;//SpellComponent.getFromConfig("test_spell"); TODO
+        return SpellComponent.getFromConfig(spell_id);
     }
 
     @Override

@@ -3,15 +3,22 @@ package dev.hikarishima.lightland.content.magic.render;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
+import dev.hikarishima.lightland.network.config.SpellEntityConfig;
 import dev.lcy0x1.util.SerialClass;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SerialClass
 public class SpellComponent {
+
+    public static SpellComponent getFromConfig(String s) {
+        return SpellEntityConfig.getConfig(new ResourceLocation(s));
+    }
 
     @SerialClass.SerialField(generic = Stroke.class)
     public ArrayList<Stroke> strokes = new ArrayList<>();
@@ -115,8 +122,8 @@ public class SpellComponent {
         @OnlyIn(Dist.CLIENT)
         public void render(RenderHandle handle) {
             if (_children == null) {
-                //_children = children.stream().map(SpellComponent::getFromConfig).collect(Collectors.toList());
-                return;//TODO
+                _children = children.stream().map(SpellComponent::getFromConfig).collect(Collectors.toList());
+                return;
             }
             int n = _children.size();
             float z = get(z_offset, handle, 0);
@@ -149,6 +156,7 @@ public class SpellComponent {
 
 
     }
+
 
     @OnlyIn(Dist.CLIENT)
     public static class RenderHandle {

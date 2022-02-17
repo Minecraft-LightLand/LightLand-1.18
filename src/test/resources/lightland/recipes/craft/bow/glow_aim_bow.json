@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"ccc",
+	"ebc",
+	"ccc"
+  ],
+  "key": {
+	"b": {
+	  "item": "lightland:starter_bow"
+	},
+	"c": {
+	  "item": "minecraft:glowstone_dust"
+	},
+	"e": {
+	  "item": "minecraft:ender_eye"
+	}
+  },
+  "result": {
+	"item": "lightland:glow_aim_bow"
+  }
+}

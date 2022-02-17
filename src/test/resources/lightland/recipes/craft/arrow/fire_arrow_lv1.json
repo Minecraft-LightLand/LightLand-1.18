@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"cac",
+		"aba",
+		"cac"
+	],
+	"key": {
+		"a": {
+			"item": "lightland:starter_arrow"
+		},
+		"b": {
+			"item": "minecraft:fire_charge"
+		},
+		"c": [
+			{
+				"item": "minecraft:charcoal"
+			},
+			{
+				"item": "minecraft:coal"
+			}
+		]
+	},
+	"result": {
+		"item": "lightland:fire_arrow_lv1",
+		"count": 4
+	}
+}

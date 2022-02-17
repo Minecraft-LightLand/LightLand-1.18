@@ -1,0 +1,59 @@
+{
+    "type": "lightland:ritual_potion_modify",
+    "radius": 40,
+    "core": {
+        "input": {
+            "item": "lightland:potion_core"
+        },
+        "output": {
+            "item": "lightland:potion_core",
+            "nbt": {
+                "spell": {
+                    "radius": 40
+                }
+            }
+        }
+    },
+    "side": [
+        {
+            "input": {
+                "item": "minecraft:dragon_breath"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:enchant_carrot"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:dragon_breath"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:tnt"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:tnt"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:dragon_breath"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:diamond"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:dragon_breath"
+            }
+        }
+    ]
+}

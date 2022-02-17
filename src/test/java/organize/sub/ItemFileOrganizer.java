@@ -7,7 +7,7 @@ import java.io.File;
 
 public class ItemFileOrganizer extends ResourceOrganizer {
 
-    public String texture, model, IM, IM_B, IM_H;
+    public String texture;
 
     public ItemFileOrganizer() {
         super(Type.ASSETS, "items", "");
@@ -17,10 +17,6 @@ public class ItemFileOrganizer extends ResourceOrganizer {
     @Override
     public void organize(File f) throws Exception {
         texture = getTargetFolder() + "textures/item/";
-        model = getTargetFolder() + "models/item/";
-        IM = readFile(f.getPath() + "/-models/-template/-.json");
-        IM_B = readFile(f.getPath() + "/-models/-template/-block.json");
-        IM_H = readFile(f.getPath() + "/-models/-template/-handheld.json");
         process("", f);
     }
 
@@ -42,18 +38,6 @@ public class ItemFileOrganizer extends ResourceOrganizer {
         File ti = new File(texture + name + ".png");
         check(ti);
         Files.copy(f, ti);
-        String template = getTemplate(name);
-        write(model + name + ".json", template.replaceAll("\\^s", name));
-    }
-
-    private String getTemplate(String name) {
-        if (name.endsWith("axe") || name.endsWith("sword") || name.endsWith("wand"))
-            return IM_H;
-        return IM;
-    }
-
-    void createBlock(String name) throws Exception {
-        write(model + name + ".json", IM_B.replaceAll("\\^s", name));
     }
 
 }

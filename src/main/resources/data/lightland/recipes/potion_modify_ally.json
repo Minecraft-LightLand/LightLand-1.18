@@ -1,0 +1,59 @@
+{
+    "type": "lightland:ritual_potion_modify",
+    "target": "ALLY",
+    "core": {
+        "input": {
+            "item": "lightland:potion_core"
+        },
+        "output": {
+            "item": "lightland:potion_core",
+            "nbt": {
+                "spell": {
+                    "target": "ALLY"
+                }
+            }
+        }
+    },
+    "side": [
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:golden_carrot"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:redstone"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:redstone"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:golden_carrot"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        }
+    ]
+}

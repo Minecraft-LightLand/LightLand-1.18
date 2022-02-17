@@ -1,0 +1,59 @@
+{
+    "type": "lightland:ritual_potion_modify",
+    "target": "ENEMY",
+    "core": {
+        "input": {
+            "item": "lightland:potion_core"
+        },
+        "output": {
+            "item": "lightland:potion_core",
+            "nbt": {
+                "spell": {
+                    "target": "ENEMY"
+                }
+            }
+        }
+    },
+    "side": [
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:fermented_spider_eye"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:glowstone_dust"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:glowstone_dust"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:fermented_spider_eye"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:lapis_lazuli"
+            }
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+{
+    "type": "lightland:ritual_potion_modify",
+    "radius": 20,
+    "core": {
+        "input": {
+            "item": "lightland:potion_core"
+        },
+        "output": {
+            "item": "lightland:potion_core",
+            "nbt": {
+                "spell": {
+                    "radius": 20
+                }
+            }
+        }
+    },
+    "side": [
+        {
+            "input": {
+                "item": "lightland:enchant_cookie"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:gunpowder"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:enchant_cookie"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:gunpowder"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:gunpowder"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:enchant_cookie"
+            }
+        },
+        {
+            "input": {
+                "item": "minecraft:gunpowder"
+            }
+        },
+        {
+            "input": {
+                "item": "lightland:enchant_cookie"
+            }
+        }
+    ]
+}

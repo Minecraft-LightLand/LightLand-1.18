@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	" ac",
+	"abc",
+	" ac"
+  ],
+  "key": {
+	"a": {
+	  "item": "minecraft:bamboo"
+	},
+	"b": {
+	  "item": "minecraft:bow"
+	},
+	"c": {
+	  "item": "minecraft:iron_nugget"
+	}
+  },
+  "result": {
+	"item": "lightland:starter_bow"
+  }
+}
