@@ -1,10 +1,10 @@
-package dev.hikarishima.lightland.content.magic.magic;
+package dev.hikarishima.lightland.content.magic.spell;
 
 import dev.hikarishima.lightland.content.common.entity.SpellEntity;
 import dev.hikarishima.lightland.content.common.entity.WindBladeEntity;
-import dev.hikarishima.lightland.content.magic.spell.ActivationConfig;
-import dev.hikarishima.lightland.content.magic.spell.SimpleSpell;
-import dev.hikarishima.lightland.content.magic.spell.SpellConfig;
+import dev.hikarishima.lightland.content.magic.spell.internal.ActivationConfig;
+import dev.hikarishima.lightland.content.magic.spell.internal.SimpleSpell;
+import dev.hikarishima.lightland.content.magic.spell.internal.SpellConfig;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.server.level.ServerPlayer;

@@ -70,5 +70,7 @@
   "profession.lightland.magician": "Magician",
   "profession.lightland.shielder": "Shielder",
   "profession.lightland.spell_caster": "Spell Caster",
-  "profession.lightland.tidecaller": "Tidecaller"
+  "profession.lightland.tidecaller": "Tidecaller",
+  "spell.lightland.blade_front": "Blade Front",
+  "spell.lightland.blade_side": "Blade Side"
 }

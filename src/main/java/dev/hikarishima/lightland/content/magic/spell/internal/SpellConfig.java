@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.magic.spell;
+package dev.hikarishima.lightland.content.magic.spell.internal;
 
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.network.config.SpellDataConfig;

@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.magic.spell;
+package dev.hikarishima.lightland.content.magic.spell.internal;
 
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
