@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import javax.annotation.Nullable;
 
 @SerialClass
-public class AbstractLevelRitualRecipe<R extends AbstractLevelRitualRecipe<R>> extends AbstractMagicRitualRecipe<R> {
+public class AbstractLevelRitualRecipe<R extends AbstractLevelRitualRecipe<R>> extends AbstractRitualRecipe<R> {
 
     @SerialClass.SerialField
     public ResourceLocation magic_recipe;
@@ -16,7 +16,7 @@ public class AbstractLevelRitualRecipe<R extends AbstractLevelRitualRecipe<R>> e
     @SerialClass.SerialField
     public int[] levels;
 
-    public AbstractLevelRitualRecipe(ResourceLocation id, BaseRecipe.RecType<R, AbstractMagicRitualRecipe<?>, RitualCore.Inv> fac) {
+    public AbstractLevelRitualRecipe(ResourceLocation id, BaseRecipe.RecType<R, AbstractRitualRecipe<?>, RitualCore.Inv> fac) {
         super(id, fac);
     }
 

@@ -18,7 +18,7 @@ import java.util.Map;
 
 @SerialClass
 @ParametersAreNonnullByDefault
-public class PotionCoreRecipe extends AbstractMagicRitualRecipe<PotionCoreRecipe> {
+public class PotionCoreRecipe extends AbstractRitualRecipe<PotionCoreRecipe> {
 
     public PotionCoreRecipe(ResourceLocation id) {
         super(id, RecipeRegistrate.RSP_CORE.get());

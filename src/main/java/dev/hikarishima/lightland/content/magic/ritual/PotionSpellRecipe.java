@@ -16,7 +16,7 @@ import java.util.List;
 
 @SerialClass
 @ParametersAreNonnullByDefault
-public class PotionSpellRecipe extends AbstractMagicRitualRecipe<PotionSpellRecipe> {
+public class PotionSpellRecipe extends AbstractRitualRecipe<PotionSpellRecipe> {
 
     public PotionSpellRecipe(ResourceLocation id) {
         super(id, RecipeRegistrate.RSP_SPELL.get());

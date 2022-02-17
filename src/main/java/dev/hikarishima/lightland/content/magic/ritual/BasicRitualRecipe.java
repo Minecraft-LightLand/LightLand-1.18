@@ -5,9 +5,9 @@ import dev.lcy0x1.util.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 
 @SerialClass
-public class BasicMagicRitualRecipe extends AbstractMagicRitualRecipe<BasicMagicRitualRecipe> {
+public class BasicRitualRecipe extends AbstractRitualRecipe<BasicRitualRecipe> {
 
-    public BasicMagicRitualRecipe(ResourceLocation id) {
+    public BasicRitualRecipe(ResourceLocation id) {
         super(id, RecipeRegistrate.RS_DEF.get());
     }
 }

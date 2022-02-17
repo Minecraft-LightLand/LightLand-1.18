@@ -2,11 +2,13 @@ package dev.hikarishima.lightland.events;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.hikarishima.lightland.content.common.command.BaseCommand;
+import dev.hikarishima.lightland.network.config.ConfigSyncManager;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.util.SpriteManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraftforge.event.AddReloadListenerEvent;
+import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -34,8 +36,19 @@ public class GenericEventHandler {
     }
 
     @SubscribeEvent
-    public void serverTick(TickEvent.ServerTickEvent event) {
+    public static void serverTick(TickEvent.ServerTickEvent event) {
         RayTraceUtil.serverTick();
+    }
+
+
+    @SubscribeEvent
+    public static void addReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(ConfigSyncManager.CONFIG);
+    }
+
+    @SubscribeEvent
+    public static void onDatapackSync(OnDatapackSyncEvent event) {
+        ConfigSyncManager.onDatapackSync(event);
     }
 
 }

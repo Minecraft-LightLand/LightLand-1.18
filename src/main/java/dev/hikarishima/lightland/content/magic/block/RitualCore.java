@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.block;
 
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
-import dev.hikarishima.lightland.content.magic.ritual.AbstractMagicRitualRecipe;
+import dev.hikarishima.lightland.content.magic.ritual.AbstractRitualRecipe;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.lcy0x1.base.BaseRecipe;
@@ -97,7 +97,7 @@ public class RitualCore {
     @SerialClass
     public static class TE extends RitualTE implements TickableBlockEntity {
 
-        public AbstractMagicRitualRecipe<?> recipe = null;
+        public AbstractRitualRecipe<?> recipe = null;
 
         @SerialClass.SerialField
         public int remainingTime = 0;
@@ -119,7 +119,7 @@ public class RitualCore {
             }
             //TODO sideness
             Inv inv = new Inv(this, list);
-            Optional<AbstractMagicRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_RITUAL, inv, level);
+            Optional<AbstractRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_RITUAL, inv, level);
             r.ifPresent(e -> {
                 /*
                 Map<MagicElement, Integer> map = new LinkedHashMap<>();
@@ -196,7 +196,7 @@ public class RitualCore {
             List<RitualSide.TE> list = getSide();
             if (list.size() == 8 && recipe == null) {
                 Inv inv = new Inv(this, list);
-                Optional<AbstractMagicRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_RITUAL, inv, level);
+                Optional<AbstractRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_RITUAL, inv, level);
                 if (r.isPresent()) {
                     recipe = r.get();
                 } else {
@@ -242,7 +242,7 @@ public class RitualCore {
 
     }
 
-    public static class Inv implements BaseRecipe.RecInv<AbstractMagicRitualRecipe<?>> {
+    public static class Inv implements BaseRecipe.RecInv<AbstractRitualRecipe<?>> {
 
         public final TE core;
         public final List<RitualSide.TE> sides;

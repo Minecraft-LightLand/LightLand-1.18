@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 @SerialClass
-public class AbstractMagicRitualRecipe<R extends AbstractMagicRitualRecipe<R>> extends BaseRecipe<R, AbstractMagicRitualRecipe<?>, RitualCore.Inv> {
+public class AbstractRitualRecipe<R extends AbstractRitualRecipe<R>> extends BaseRecipe<R, AbstractRitualRecipe<?>, RitualCore.Inv> {
 
     @SerialClass.SerialField
     public Entry core;
@@ -36,7 +36,7 @@ public class AbstractMagicRitualRecipe<R extends AbstractMagicRitualRecipe<R>> e
     @SerialClass.SerialField(generic = Entry.class)
     public ArrayList<Entry> side;
 
-    public AbstractMagicRitualRecipe(ResourceLocation id, RecType<R, AbstractMagicRitualRecipe<?>, RitualCore.Inv> fac) {
+    public AbstractRitualRecipe(ResourceLocation id, RecType<R, AbstractRitualRecipe<?>, RitualCore.Inv> fac) {
         super(id, fac);
     }
 

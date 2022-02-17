@@ -11,7 +11,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @SerialClass
 @ParametersAreNonnullByDefault
-public class PotionModifyRecipe extends AbstractMagicRitualRecipe<PotionModifyRecipe> {
+public class PotionModifyRecipe extends AbstractRitualRecipe<PotionModifyRecipe> {
 
     public PotionModifyRecipe(ResourceLocation id) {
         super(id, RecipeRegistrate.RSP_MODIFY.get());

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.compat.jei.recipes;
 
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
-import dev.hikarishima.lightland.content.magic.ritual.AbstractMagicRitualRecipe;
+import dev.hikarishima.lightland.content.magic.ritual.AbstractRitualRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.PotionBoostRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.PotionSpellRecipe;
 import dev.hikarishima.lightland.init.LightLand;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractMagicRitualRecipe<?>> {
+public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualRecipe<?>> {
 
     private static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
 
@@ -60,7 +60,7 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractMagicRi
     @SuppressWarnings({"unchecked", "rawtypes"})
     @Override
     public Class getRecipeClass() {
-        return AbstractMagicRitualRecipe.class;
+        return AbstractRitualRecipe.class;
     }
 
     @Override
@@ -79,10 +79,10 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractMagicRi
     }
 
     @Override
-    public void setIngredients(AbstractMagicRitualRecipe<?> sl, IIngredients list) {
+    public void setIngredients(AbstractRitualRecipe<?> sl, IIngredients list) {
         List<Ingredient> input = new ArrayList<>();
         input.add(Ingredient.of(sl.core.input));
-        for (AbstractMagicRitualRecipe.Entry ent : sl.side) {
+        for (AbstractRitualRecipe.Entry ent : sl.side) {
             if (!ent.input.isEmpty()) {
                 input.add(Ingredient.of(ent.input));
             }
@@ -91,7 +91,7 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractMagicRi
         list.setInputIngredients(input);
         List<ItemStack> output = new ArrayList<>();
         output.add(sl.core.output);
-        for (AbstractMagicRitualRecipe.Entry ent : sl.side) {
+        for (AbstractRitualRecipe.Entry ent : sl.side) {
             if (!ent.output.isEmpty()) {
                 output.add(ent.output);
             }
@@ -100,10 +100,10 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractMagicRi
     }
 
     @Override
-    public void setRecipe(IRecipeLayout layout, AbstractMagicRitualRecipe<?> sl, IIngredients list) {
-        List<AbstractMagicRitualRecipe.Entry> entry = new ArrayList<>(sl.side);
+    public void setRecipe(IRecipeLayout layout, AbstractRitualRecipe<?> sl, IIngredients list) {
+        List<AbstractRitualRecipe.Entry> entry = new ArrayList<>(sl.side);
         while (entry.size() < 8) {
-            entry.add(new AbstractMagicRitualRecipe.Entry());
+            entry.add(new AbstractRitualRecipe.Entry());
         }
         entry.add(4, sl.core);
 
@@ -137,7 +137,7 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractMagicRi
         set(layout.getItemStacks(), Collections.singletonList(wand_stack), in, true, 63, 0);
     }
 
-    private static ItemStack specialProcess(AbstractMagicRitualRecipe<?> sl, ItemStack stack, boolean isCore) {
+    private static ItemStack specialProcess(AbstractRitualRecipe<?> sl, ItemStack stack, boolean isCore) {
         if (sl instanceof PotionBoostRecipe) {
             if (isCore) {
                 stack = stack.copy();

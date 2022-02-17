@@ -13,9 +13,9 @@ import java.util.Map;
 
 @SerialClass
 @ParametersAreNonnullByDefault
-public class EnchantMagicRitualRecipe extends AbstractLevelRitualRecipe<EnchantMagicRitualRecipe> {
+public class EnchantRitualRecipe extends AbstractLevelRitualRecipe<EnchantRitualRecipe> {
 
-    public EnchantMagicRitualRecipe(ResourceLocation id) {
+    public EnchantRitualRecipe(ResourceLocation id) {
         super(id, RecipeRegistrate.RS_ENCH.get());
     }
 
