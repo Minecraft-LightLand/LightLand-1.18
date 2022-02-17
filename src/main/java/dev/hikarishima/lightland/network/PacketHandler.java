@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.network;
 
 import dev.hikarishima.lightland.init.LightLand;
+import dev.hikarishima.lightland.network.config.ConfigSyncManager;
 import dev.hikarishima.lightland.network.packets.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -24,7 +25,8 @@ public enum PacketHandler {
     EFFECT_SYNC(EffectToClient.class, EffectToClient::new, PLAY_TO_CLIENT),
     CAP_TO_CLIENT(CapToClient.class, PLAY_TO_CLIENT),
     CAP_TO_SERVER(CapToServer.class, PLAY_TO_SERVER),
-    EMPTY_RIGHT_CLICK(EmptyRightClickToServer.class, PLAY_TO_SERVER);
+    EMPTY_RIGHT_CLICK(EmptyRightClickToServer.class, PLAY_TO_SERVER),
+    CONFIG_SYNC(ConfigSyncManager.SyncPacket.class, PLAY_TO_CLIENT);
 
     public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(LightLand.MODID, "main");
     public static final int NETWORK_VERSION = 1;
