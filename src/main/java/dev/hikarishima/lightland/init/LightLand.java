@@ -2,7 +2,13 @@ package dev.hikarishima.lightland.init;
 
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.common.command.*;
-import dev.hikarishima.lightland.events.*;
+import dev.hikarishima.lightland.events.ArcaneDamageEventHandler;
+import dev.hikarishima.lightland.events.ItemUseEventHandler;
+import dev.hikarishima.lightland.events.ProfessionEventHandler;
+import dev.hikarishima.lightland.events.generic.CapabilityEvents;
+import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;
+import dev.hikarishima.lightland.events.generic.EffectSyncEvents;
+import dev.hikarishima.lightland.events.generic.GenericEventHandler;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.*;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
@@ -46,6 +52,7 @@ public class LightLand {
         MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
         MinecraftForge.EVENT_BUS.register(GenericEventHandler.class);
         MinecraftForge.EVENT_BUS.register(ArcaneDamageEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(ProfessionEventHandler.class);
     }
 
     private static void registerCommands() {

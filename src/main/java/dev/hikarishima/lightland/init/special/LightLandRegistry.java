@@ -52,7 +52,7 @@ public class LightLandRegistry {
     public static final RegistryEntry<SpellCasterProfession> PROF_SPELL = genProf("spell_caster", SpellCasterProfession::new);
     public static final RegistryEntry<KnightProfession> PROF_KNIGHT = genProf("knight", KnightProfession::new);
     public static final RegistryEntry<ShielderProfession> PROF_SHIELDER = genProf("shielder", ShielderProfession::new);
-    public static final RegistryEntry<BurserkerProfession> PROF_BURSERKER = genProf("burserker", BurserkerProfession::new);
+    public static final RegistryEntry<BerserkerProfession> PROF_BURSERKER = genProf("berserker", BerserkerProfession::new);
     public static final RegistryEntry<ArcherProfession> PROF_ARCHER = genProf("archer", ArcherProfession::new);
     public static final RegistryEntry<HunterProfession> PROF_HUNTER = genProf("hunter", HunterProfession::new);
     public static final RegistryEntry<AlchemistProfession> PROF_ALCHEM = genProf("alchemist", AlchemistProfession::new);

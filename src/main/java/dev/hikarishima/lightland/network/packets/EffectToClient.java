@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.network.packets;
 
-import dev.hikarishima.lightland.events.EffectSyncEvents;
+import dev.hikarishima.lightland.events.generic.EffectSyncEvents;
 import dev.hikarishima.lightland.network.SimplePacketBase;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.effect.MobEffect;

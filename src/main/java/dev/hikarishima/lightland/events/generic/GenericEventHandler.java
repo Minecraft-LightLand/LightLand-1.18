@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.events;
+package dev.hikarishima.lightland.events.generic;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.hikarishima.lightland.content.common.command.BaseCommand;

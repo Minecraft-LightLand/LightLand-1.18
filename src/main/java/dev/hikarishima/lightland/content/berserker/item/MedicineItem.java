@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.burserker.item;
+package dev.hikarishima.lightland.content.berserker.item;
 
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;

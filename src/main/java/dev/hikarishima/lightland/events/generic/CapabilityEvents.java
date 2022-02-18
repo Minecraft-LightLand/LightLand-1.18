@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.events;
+package dev.hikarishima.lightland.events.generic;
 
 import dev.hikarishima.lightland.content.common.capability.LLPlayerCapability;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;

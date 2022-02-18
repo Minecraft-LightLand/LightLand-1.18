@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.events;
+package dev.hikarishima.lightland.events.generic;
 
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.network.packets.EffectToClient;

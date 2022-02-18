@@ -13,7 +13,7 @@
 	  "item": "minecraft:vine"
 	},
 	"F": {
-	  "item": "minecraft:poppy"
+	  "item": "minecraft:blue_orchid"
 	}
   },
   "result": {
@@ -21,9 +21,9 @@
 	"nbt": {
 	  "CustomPotionEffects": [
 		{
-		  "Id": 5,
-		  "Amplifier": 1,
-		  "Duration": 100
+		  "Id": 22,
+		  "Amplifier": 0,
+		  "Duration": 200
 		}
 	  ]
 	}

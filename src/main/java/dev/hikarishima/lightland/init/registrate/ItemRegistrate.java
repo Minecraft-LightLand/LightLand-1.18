@@ -14,10 +14,11 @@ import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeatur
 import dev.hikarishima.lightland.content.archery.feature.bow.WindBowFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
-import dev.hikarishima.lightland.content.burserker.item.MedicineArmor;
-import dev.hikarishima.lightland.content.burserker.item.MedicineLeather;
+import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
+import dev.hikarishima.lightland.content.berserker.item.MedicineLeather;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
+import dev.hikarishima.lightland.content.magic.item.ManaStorage;
 import dev.hikarishima.lightland.content.magic.item.PotionCore;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
@@ -26,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -115,27 +117,44 @@ public class ItemRegistrate {
     }
 
     // -------- magic --------
-    public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
-                    new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
-            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
-    public static final ItemEntry<ArcaneAxe> ARCANE_AXE_GILDED = REGISTRATE.item("gilded_arcane_axe", p ->
-                    new ArcaneAxe(Tiers.IRON, 8, -3.1f, p.stacksTo(1).setNoRepair(), 50))
-            .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+    public static final int MANA = 256;
 
-    public static final ItemEntry<MagicWand> MAGIC_WAND = REGISTRATE.item("magic_wand", MagicWand::new)
-            .defaultModel().defaultLang().register();
-    public static final ItemEntry<PotionCore> POTION_CORE = REGISTRATE.item("potion_core", PotionCore::new)
-            .defaultModel().defaultLang().register();
+    public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED;
+    public static final ItemEntry<ArcaneAxe> ARCANE_AXE_GILDED;
+    public static final ItemEntry<MagicWand> MAGIC_WAND;
+    public static final ItemEntry<PotionCore> POTION_CORE;
+    public static final ItemEntry<MagicScroll> SPELL_CARD, SPELL_PARCHMENT, SPELL_SCROLL;
+    public static final ItemEntry<ManaStorage> COOKIE, MELON, CARROT, APPLE;
 
-    public static final ItemEntry<MagicScroll> SPELL_CARD = REGISTRATE.item("spell_card", p ->
-                    new MagicScroll(MagicScroll.ScrollType.CARD, p))
-            .defaultModel().defaultLang().register();
-    public static final ItemEntry<MagicScroll> SPELL_PARCHMENT = REGISTRATE.item("spell_parchment", p ->
-                    new MagicScroll(MagicScroll.ScrollType.PARCHMENT, p))
-            .defaultModel().defaultLang().register();
-    public static final ItemEntry<MagicScroll> SPELL_SCROLL = REGISTRATE.item("spell_scroll", p ->
-                    new MagicScroll(MagicScroll.ScrollType.SCROLL, p))
-            .defaultModel().defaultLang().register();
+    static {
+        ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
+                        new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
+                .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+        ARCANE_AXE_GILDED = REGISTRATE.item("gilded_arcane_axe", p ->
+                        new ArcaneAxe(Tiers.IRON, 8, -3.1f, p.stacksTo(1).setNoRepair(), 50))
+                .model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+        MAGIC_WAND = REGISTRATE.item("magic_wand", MagicWand::new)
+                .defaultModel().defaultLang().register();
+        POTION_CORE = REGISTRATE.item("potion_core", PotionCore::new)
+                .defaultModel().defaultLang().register();
+        SPELL_CARD = REGISTRATE.item("spell_card", p ->
+                        new MagicScroll(MagicScroll.ScrollType.CARD, p))
+                .defaultModel().defaultLang().register();
+        SPELL_PARCHMENT = REGISTRATE.item("spell_parchment", p ->
+                        new MagicScroll(MagicScroll.ScrollType.PARCHMENT, p))
+                .defaultModel().defaultLang().register();
+        SPELL_SCROLL = REGISTRATE.item("spell_scroll", p ->
+                        new MagicScroll(MagicScroll.ScrollType.SCROLL, p))
+                .defaultModel().defaultLang().register();
+        COOKIE = REGISTRATE.item("enchant_cookie", p -> new ManaStorage(p.food(Foods.COOKIE), Items.COOKIE, MANA / 8))
+                .defaultModel().defaultLang().register();
+        MELON = REGISTRATE.item("enchant_melon", p -> new ManaStorage(p.food(Foods.MELON_SLICE), Items.MELON_SLICE, MANA))
+                .defaultModel().defaultLang().register();
+        CARROT = REGISTRATE.item("enchant_carrot", p -> new ManaStorage(p.food(Foods.GOLDEN_CARROT), Items.GOLDEN_CARROT, MANA * 8))
+                .defaultModel().defaultLang().register();
+        APPLE = REGISTRATE.item("enchant_apple", p -> new ManaStorage(p.food(Foods.GOLDEN_APPLE), Items.GOLDEN_APPLE, MANA * 72))
+                .defaultModel().defaultLang().register();
+    }
 
     // -------- berserker --------
     public static final ItemEntry<MedicineLeather> MEDICINE_LEATHER = REGISTRATE.item("medicine_leather", MedicineLeather::new)

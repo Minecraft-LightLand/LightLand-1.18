@@ -23,7 +23,13 @@ public class LLPlayerData {
     });
 
     public static LLPlayerData get(Player e) {
-        return e.getCapability(CAPABILITY).resolve().get().check();
+        LLPlayerData data;
+        if (!e.getCapability(CAPABILITY).isPresent()) {
+            e.reviveCaps();
+            data = e.getCapability(CAPABILITY).resolve().get().check();
+            e.invalidateCaps();
+        } else data = e.getCapability(CAPABILITY).resolve().get().check();
+        return data;
     }
 
     public static boolean isProper(Player player) {

@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.init;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
-import dev.hikarishima.lightland.content.burserker.item.MedicineArmor;
+import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;

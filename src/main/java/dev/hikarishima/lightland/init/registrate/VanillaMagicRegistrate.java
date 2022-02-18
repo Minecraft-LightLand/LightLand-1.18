@@ -3,6 +3,8 @@ package dev.hikarishima.lightland.init.registrate;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.hikarishima.lightland.content.berserker.effect.BloodThurstEffect;
+import dev.hikarishima.lightland.content.berserker.effect.NoKnockBackEffect;
 import dev.hikarishima.lightland.content.common.effect.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -21,6 +23,8 @@ public class VanillaMagicRegistrate {
     public static final RegistryEntry<QuickPullEffect> QUICK_PULL = genEffect("quick_pull", () -> new QuickPullEffect(MobEffectCategory.BENEFICIAL, 0xFFFFFF));
     public static final RegistryEntry<EmeraldPopeEffect> EMERALD = genEffect("emerald", () -> new EmeraldPopeEffect(MobEffectCategory.NEUTRAL, 0x00FF00));
     public static final RegistryEntry<IceEffect> ICE = genEffect("frozen", () -> new IceEffect(MobEffectCategory.HARMFUL, 0x7f7fff));
+    public static final RegistryEntry<NoKnockBackEffect> NO_KB = genEffect("no_knockback", () -> new NoKnockBackEffect(MobEffectCategory.BENEFICIAL, 0xafafaf));
+    public static final RegistryEntry<BloodThurstEffect> BLOOD_THURST = genEffect("blood_thurst", () -> new BloodThurstEffect(MobEffectCategory.BENEFICIAL, 0xffafaf));
 
     public static <T extends MobEffect> RegistryEntry<T> genEffect(String name, NonNullSupplier<T> sup) {
         return REGISTRATE.simple(name, MobEffect.class, sup);

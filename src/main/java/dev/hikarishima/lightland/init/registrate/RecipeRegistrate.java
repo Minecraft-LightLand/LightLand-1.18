@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init.registrate;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import dev.hikarishima.lightland.content.burserker.recipe.MedArmorRecipe;
+import dev.hikarishima.lightland.content.berserker.recipe.MedArmorRecipe;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.ritual.*;
 import dev.lcy0x1.base.BaseRecipe;

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.util.math;
 
 import com.google.common.collect.Maps;
-import dev.hikarishima.lightland.events.ClientEntityEffectRenderEvents;
+import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;
 import dev.hikarishima.lightland.network.packets.TargetSetPacket;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.server.MinecraftServer;

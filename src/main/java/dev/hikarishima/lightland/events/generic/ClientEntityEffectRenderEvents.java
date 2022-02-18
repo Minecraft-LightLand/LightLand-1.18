@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.events;
+package dev.hikarishima.lightland.events.generic;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;

@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.burserker.item;
+package dev.hikarishima.lightland.content.berserker.item;
 
 import dev.hikarishima.lightland.content.common.item.Mat;
 import net.minecraft.MethodsReturnNonnullByDefault;

@@ -1,7 +1,7 @@
-package dev.hikarishima.lightland.content.burserker.recipe;
+package dev.hikarishima.lightland.content.berserker.recipe;
 
 import com.google.gson.JsonObject;
-import dev.hikarishima.lightland.content.burserker.item.MedicineItem;
+import dev.hikarishima.lightland.content.berserker.item.MedicineItem;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
