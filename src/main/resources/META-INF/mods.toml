@@ -22,3 +22,7 @@ description='''
     versionRange="[1.18,1.19)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.lightland]]
+    modId="geckolib3"
+    mandatory=true
+    versionRange="[3.0.0,)"

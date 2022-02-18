@@ -26,6 +26,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import software.bernie.geckolib3.GeckoLib;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("lightland")
@@ -70,6 +71,7 @@ public class LightLand {
         bus.addListener(EventPriority.LOWEST, LightLand::gatherData);
         bus.addListener(this::onParticleRegistryEvent);
         bus.addListener(this::registerCaps);
+        GeckoLib.initialize();
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> LightLandClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
         registerRegistrates();
         registerForgeEvents();

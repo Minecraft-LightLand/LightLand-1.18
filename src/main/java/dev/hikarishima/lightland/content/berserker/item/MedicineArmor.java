@@ -7,7 +7,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -32,7 +31,9 @@ public class MedicineArmor extends ArmorItem implements MedicineItem {
         for (MobEffectInstance ins : list) {
             MobEffectInstance a = new MobEffectInstance(ins.getEffect(), ins.getDuration() * amount, ins.getAmplifier(),
                     ins.isAmbient(), ins.isVisible(), ins.showIcon());
-            entity.addEffect(a);
+            if (ins.getEffect().isInstantenous())
+                ins.getEffect().applyInstantenousEffect(null, null, entity, ins.getAmplifier(), 1);
+            else entity.addEffect(a);
         }
         return super.damageItem(stack, amount, entity, onBroken);
     }
