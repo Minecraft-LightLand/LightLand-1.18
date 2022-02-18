@@ -1,17 +1,18 @@
 package dev.hikarishima.lightland.init;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ClientRegister {
@@ -27,11 +28,10 @@ public class ClientRegister {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerItemColors(ColorHandlerEvent.Item event) {
-        MedicineArmor[] items = Arrays.stream(ItemRegistrate.MEDICINE_ARMOR).map(RegistryEntry::get).toArray(MedicineArmor[]::new);
-        event.getItemColors().register((stack, val) -> {
-            if (val > 0) return -1;
-            return ((MedicineArmor) stack.getItem()).getColor(stack);
-        }, items);
+        ItemColor color = (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack);
+        for (ItemEntry<MedicineArmor> entry : ItemRegistrate.MEDICINE_ARMOR)
+            event.getItemColors().register(color, entry.get());
+        event.getItemColors().register(color, ItemRegistrate.MEDICINE_LEATHER.get());
     }
 
 }

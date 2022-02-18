@@ -20,7 +20,7 @@ import java.util.function.Consumer;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class MedicineArmor extends ArmorItem implements MedicineItem, DyeableLeatherItem {
+public class MedicineArmor extends ArmorItem implements MedicineItem {
 
     public MedicineArmor(EquipmentSlot slot, Properties prop) {
         super(Mat.MEDICINE_LEATHER, slot, prop);
@@ -40,12 +40,6 @@ public class MedicineArmor extends ArmorItem implements MedicineItem, DyeableLea
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
         PotionUtils.addPotionTooltip(stack, list, 1);
-    }
-
-    public int getColor(ItemStack stack) {
-        List<MobEffectInstance> list = PotionUtils.getCustomEffects(stack);
-        if (list.size() == 1) return list.get(0).getEffect().getColor();
-        return 10511680;
     }
 
 }

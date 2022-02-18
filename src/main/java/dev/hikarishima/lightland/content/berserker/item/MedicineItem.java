@@ -1,12 +1,15 @@
 package dev.hikarishima.lightland.content.berserker.item;
 
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 
-public interface MedicineItem {
+@ParametersAreNonnullByDefault
+public interface MedicineItem extends DyeableLeatherItem {
 
     static boolean eq(ItemStack a, ItemStack b) {
         List<MobEffectInstance> la = PotionUtils.getCustomEffects(a);
@@ -20,6 +23,12 @@ public interface MedicineItem {
             if (ma.getDuration() != mb.getDuration()) return false;
         }
         return true;
+    }
+
+    default int getColor(ItemStack stack) {
+        List<MobEffectInstance> list = PotionUtils.getCustomEffects(stack);
+        if (list.size() == 1) return list.get(0).getEffect().getColor();
+        return 10511680;
     }
 
 }

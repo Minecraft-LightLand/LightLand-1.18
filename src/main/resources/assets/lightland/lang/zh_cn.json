@@ -56,6 +56,7 @@
   "item.lightland.tnt_arrow_lv2": "TNT箭",
   "item.lightland.tnt_arrow_lv3": "末影水晶箭",
   "item.lightland.wind_bow": "八坂的神弓",
+  "itemGroup.lightland": "Light Land RPG",
   "lightland.argument.invalid_id": "Invalid Id",
   "lightland.chat.action_success": "操作成功",
   "lightland.chat.locked": "未解锁",
