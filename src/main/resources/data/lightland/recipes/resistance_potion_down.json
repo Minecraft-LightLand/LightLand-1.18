@@ -1,74 +1,66 @@
 {
     "type": "lightland:ritual_potion_boost",
-    "effect": "^e",
+    "effect": "minecraft:resistance",
     "modify_level": 1,
-    "magic_recipe": "^r",
-    "levels": ^l,
+    "magic_recipe": "lightland:effect_resistance",
+    "levels": [100,50,35,21],
     "core": {
         "input": {
             "item": "lightland:potion_core",
             "nbt": {
                 "CustomPotionEffects": [
                     {
-                        "Id": ^i,
+                        "Id": 11,
                         "Duration": 200
                     }
                 ]
             }
         },
         "output": {
-            "item": "lightland:potion_core",
-            "nbt": {
-                "CustomPotionEffects": [
-                    {
-                        "Id": ^i,
-                        "Duration": 200,
-                        "Amplifier": 1
-                    }
-                ]
-            }
+            "item": "lightland:potion_core"
         }
     },
     "side": [
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         },
         {
             "input": {
-                "item": "^a"
+                "item": "minecraft:shulker_shell"
             }
         },
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         },
         {
             "input": {
-                "item": "^b"
+                "item": "minecraft:nether_wart"
             }
         },
         {
             "input": {
-                "item": "^b"
+                "item": "minecraft:nether_wart"
             }
         },
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         },
         {
             "input": {
-                "item": "^a"
+                "item": "minecraft:shulker_shell"
             }
         },
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         }
     ]
 }
+

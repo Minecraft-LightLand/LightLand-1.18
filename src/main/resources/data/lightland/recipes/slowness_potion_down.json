@@ -1,74 +1,66 @@
 {
     "type": "lightland:ritual_potion_boost",
-    "effect": "^e",
+    "effect": "minecraft:slowness",
     "modify_level": 1,
-    "magic_recipe": "^r",
-    "levels": ^l,
+    "magic_recipe": "lightland:effect_slowness",
+    "levels": [100,36,31,26,21,16],
     "core": {
         "input": {
             "item": "lightland:potion_core",
             "nbt": {
                 "CustomPotionEffects": [
                     {
-                        "Id": ^i,
+                        "Id": 2,
                         "Duration": 200
                     }
                 ]
             }
         },
         "output": {
-            "item": "lightland:potion_core",
-            "nbt": {
-                "CustomPotionEffects": [
-                    {
-                        "Id": ^i,
-                        "Duration": 200,
-                        "Amplifier": 1
-                    }
-                ]
-            }
+            "item": "lightland:potion_core"
         }
     },
     "side": [
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         },
         {
             "input": {
-                "item": "^a"
+                "item": "minecraft:sugar"
             }
         },
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         },
         {
             "input": {
-                "item": "^b"
+                "item": "minecraft:fermented_spider_eye"
             }
         },
         {
             "input": {
-                "item": "^b"
+                "item": "minecraft:fermented_spider_eye"
             }
         },
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         },
         {
             "input": {
-                "item": "^a"
+                "item": "minecraft:sugar"
             }
         },
         {
             "input": {
-                "item": "minecraft:glowstone_dust"
+                "item": "minecraft:redstone"
             }
         }
     ]
 }
+

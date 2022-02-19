@@ -70,14 +70,6 @@
             "a": "minecraft:shulker_shell",
             "b": "minecraft:nether_wart"
         },
-        "sundering": {
-            "e": "apotheosis:^n",
-            "r": "lightland:effect_^n",
-            "l": "[100,50,35,25]",
-            "i": "1",
-            "a": "minecraft:shulker_shell",
-            "b": "minecraft:fermented_spider_eye"
-        },
         "instant_health": {
             "e": "minecraft:^n",
             "r": "lightland:effect_^n",

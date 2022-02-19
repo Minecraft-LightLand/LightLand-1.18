@@ -1,16 +1,16 @@
 {
     "type": "lightland:ritual_potion_boost",
-    "effect": "^e",
+    "effect": "minecraft:instant_damage",
     "modify_level": 1,
-    "magic_recipe": "^r",
-    "levels": ^l,
+    "magic_recipe": "lightland:effect_instant_damage",
+    "levels": [100,50,35,24],
     "core": {
         "input": {
             "item": "lightland:potion_core",
             "nbt": {
                 "CustomPotionEffects": [
                     {
-                        "Id": ^i,
+                        "Id": 7,
                         "Duration": 200
                     }
                 ]
@@ -21,7 +21,7 @@
             "nbt": {
                 "CustomPotionEffects": [
                     {
-                        "Id": ^i,
+                        "Id": 7,
                         "Duration": 200,
                         "Amplifier": 1
                     }
@@ -37,7 +37,7 @@
         },
         {
             "input": {
-                "item": "^a"
+                "item": "minecraft:glistering_melon_slice"
             }
         },
         {
@@ -47,12 +47,12 @@
         },
         {
             "input": {
-                "item": "^b"
+                "item": "minecraft:fermented_spider_eye"
             }
         },
         {
             "input": {
-                "item": "^b"
+                "item": "minecraft:fermented_spider_eye"
             }
         },
         {
@@ -62,7 +62,7 @@
         },
         {
             "input": {
-                "item": "^a"
+                "item": "minecraft:glistering_melon_slice"
             }
         },
         {
@@ -72,3 +72,4 @@
         }
     ]
 }
+

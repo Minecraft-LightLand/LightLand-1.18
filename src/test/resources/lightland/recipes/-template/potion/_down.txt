@@ -1,5 +1,5 @@
 {
-    "type": "lightland:craft_potion_boost",
+    "type": "lightland:ritual_potion_boost",
     "effect": "^e",
     "modify_level": 1,
     "magic_recipe": "^r",

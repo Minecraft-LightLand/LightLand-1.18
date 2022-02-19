@@ -177,7 +177,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
     public enum ScrollType {
         CARD(64, ItemRegistrate.SPELL_CARD),
         PARCHMENT(16, ItemRegistrate.SPELL_PARCHMENT),
-        SCROLL(2, ItemRegistrate.SPELL_SCROLL);
+        SCROLL(4, ItemRegistrate.SPELL_SCROLL);
 
         public final int stack;
         private final Supplier<MagicScroll> item;

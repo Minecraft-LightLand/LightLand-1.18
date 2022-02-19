@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"bbb",
+	"ded",
+	"ccc"
+  ],
+  "key": {
+	"b": {
+	  "item": "lightland:enchant_gold_nugget"
+	},
+	"d": {
+	  "item": "minecraft:iron_nugget"
+	},
+	"c": {
+	  "item": "minecraft:iron_ingot"
+	},
+	"e": {
+	  "tag": "minecraft:planks"
+	}
+  },
+  "result": {
+	"item": "lightland:ritual_side"
+  }
+}
