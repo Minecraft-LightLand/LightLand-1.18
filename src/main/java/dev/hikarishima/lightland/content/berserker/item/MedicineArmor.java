@@ -1,12 +1,12 @@
 package dev.hikarishima.lightland.content.berserker.item;
 
-import dev.hikarishima.lightland.content.common.item.Mat;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -21,8 +21,8 @@ import java.util.function.Consumer;
 @MethodsReturnNonnullByDefault
 public class MedicineArmor extends ArmorItem implements MedicineItem {
 
-    public MedicineArmor(EquipmentSlot slot, Properties prop) {
-        super(Mat.MEDICINE_LEATHER, slot, prop);
+    public MedicineArmor(ArmorMaterial mat, EquipmentSlot slot, Properties prop) {
+        super(mat, slot, prop);
     }
 
     @Override

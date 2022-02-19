@@ -16,6 +16,7 @@ import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.berserker.item.MedicineLeather;
+import dev.hikarishima.lightland.content.common.item.Mat;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
@@ -124,7 +125,7 @@ public class ItemRegistrate {
     public static final ItemEntry<MagicWand> MAGIC_WAND;
     public static final ItemEntry<PotionCore> POTION_CORE;
     public static final ItemEntry<MagicScroll> SPELL_CARD, SPELL_PARCHMENT, SPELL_SCROLL;
-    public static final ItemEntry<ManaStorage> COOKIE, MELON, CARROT, APPLE;
+    public static final ItemEntry<ManaStorage> ENC_GOLD_NUGGET, ENC_GOLD_INGOT, COOKIE, MELON, CARROT, APPLE;
 
     static {
         ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
@@ -154,12 +155,23 @@ public class ItemRegistrate {
                 .defaultModel().defaultLang().register();
         APPLE = REGISTRATE.item("enchant_apple", p -> new ManaStorage(p.food(Foods.GOLDEN_APPLE), Items.GOLDEN_APPLE, MANA * 72))
                 .defaultModel().defaultLang().register();
+        ENC_GOLD_NUGGET = REGISTRATE.item("enchant_gold_nugget", p -> new ManaStorage(p, Items.GOLD_NUGGET, MANA))
+                .defaultModel().defaultLang().register();
+        ENC_GOLD_INGOT = REGISTRATE.item("enchant_gold_ingot", p -> new ManaStorage(p, Items.GOLD_INGOT, MANA * 9))
+                .defaultModel().defaultLang().register();
     }
 
     // -------- berserker --------
-    public static final ItemEntry<MedicineLeather> MEDICINE_LEATHER = REGISTRATE.item("medicine_leather", MedicineLeather::new)
+    public static final ItemEntry<MedicineLeather> MEDICINE_LEATHER = REGISTRATE.item("medicine_leather", p -> new MedicineLeather(14, p))
             .defaultModel().defaultLang().register();
-    public static final ItemEntry<MedicineArmor>[] MEDICINE_ARMOR = genArmor("medicine_leather", MedicineArmor::new, e -> e.model(ItemRegistrate::createDoubleLayerModel));
+    public static final ItemEntry<Item> KING_LEATHER = REGISTRATE.item("king_leather", Item::new)
+            .defaultModel().defaultLang().register();
+    public static final ItemEntry<MedicineLeather> KING_MED_LEATHER = REGISTRATE.item("king_med_leather", p -> new MedicineLeather(100, p))
+            .defaultModel().defaultLang().register();
+    public static final ItemEntry<MedicineArmor>[] MEDICINE_ARMOR = genArmor("medicine_leather",
+            (slot, p) -> new MedicineArmor(Mat.MEDICINE_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
+    public static final ItemEntry<MedicineArmor>[] KING_MED_ARMOR = genArmor("king_leather",
+            (slot, p) -> new MedicineArmor(Mat.KING_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
 
 
     public static void register() {

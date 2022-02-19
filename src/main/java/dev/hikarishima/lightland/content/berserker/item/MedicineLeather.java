@@ -21,8 +21,11 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class MedicineLeather extends Item implements MedicineItem {
 
-    public MedicineLeather(Properties props) {
+    private final int rep;
+
+    public MedicineLeather(int rep, Properties props) {
         super(props);
+        this.rep = rep;
     }
 
     @Override
@@ -30,8 +33,8 @@ public class MedicineLeather extends Item implements MedicineItem {
         ItemStack itemstack = player.getItemInHand(hand);
         for (ItemStack stack : player.getInventory().armor) {
             if (stack.getItem() instanceof MedicineArmor) {
-                if (MedicineItem.eq(itemstack, stack) && stack.getDamageValue() >= 25) {
-                    stack.setDamageValue(Math.max(0, stack.getDamageValue() - 50));
+                if (MedicineItem.eq(itemstack, stack) && stack.getDamageValue() >= rep / 2) {
+                    stack.setDamageValue(Math.max(0, stack.getDamageValue() - rep));
                     level.playSound(null, player.getX(), player.getY(), player.getZ(),
                             SoundEvents.ARMOR_EQUIP_LEATHER, SoundSource.NEUTRAL, 1, 1);
                     if (!player.getAbilities().instabuild) {

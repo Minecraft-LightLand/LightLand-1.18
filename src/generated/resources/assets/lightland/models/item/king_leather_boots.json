@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lightland:item/king_leather_boots",
+    "layer1": "lightland:item/king_leather_boots_overlay"
+  }
+}

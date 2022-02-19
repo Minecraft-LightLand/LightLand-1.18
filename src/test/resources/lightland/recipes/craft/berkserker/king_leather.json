@@ -1,0 +1,20 @@
+{
+  "type": "lightland:medicine_armor",
+  "pattern": [
+    "XXX",
+    "XOX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lightland:medicine_leather"
+    },
+    "O": {
+      "item": "lightland:king_leather"
+    }
+  },
+  "result": {
+    "item": "lightland:king_med_leather",
+    "count": 8
+  }
+}

@@ -31,7 +31,10 @@ public class ClientRegister {
         ItemColor color = (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack);
         for (ItemEntry<MedicineArmor> entry : ItemRegistrate.MEDICINE_ARMOR)
             event.getItemColors().register(color, entry.get());
+        for (ItemEntry<MedicineArmor> entry : ItemRegistrate.KING_MED_ARMOR)
+            event.getItemColors().register(color, entry.get());
         event.getItemColors().register(color, ItemRegistrate.MEDICINE_LEATHER.get());
+        event.getItemColors().register(color, ItemRegistrate.KING_MED_LEATHER.get());
     }
 
 }

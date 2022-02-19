@@ -1,0 +1,98 @@
+{
+    "-split": {
+        "-list": [
+            "split",
+            "merge"
+        ],
+        "enchant_gold_nugget": {
+            "a": "^m:^n",
+            "b": "^m:enchant_gold_ingot"
+        }
+    },
+    "-potion": {
+        "-list": [
+            "potion_up",
+            "potion_down"
+        ],
+        "speed": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,40,30,27,26]",
+            "i": "1",
+            "a": "minecraft:sugar",
+            "b": "minecraft:nether_wart"
+        },
+        "slowness": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,36,31,26,21,16]",
+            "i": "2",
+            "a": "minecraft:sugar",
+            "b": "minecraft:fermented_spider_eye"
+        },
+        "strength": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,40,30,27,26]",
+            "i": "5",
+            "a": "minecraft:blaze_powder",
+            "b": "minecraft:nether_wart"
+        },
+        "weakness": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,50,24,19]",
+            "i": "18",
+            "a": "minecraft:fermented_spider_eye",
+            "b": "minecraft:nether_wart"
+        },
+        "regeneration": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,60,57]",
+            "i": "10",
+            "a": "minecraft:ghast_tear",
+            "b": "minecraft:nether_wart"
+        },
+        "poison": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,50,35,24]",
+            "i": "19",
+            "a": "minecraft:spider_eye",
+            "b": "minecraft:nether_wart"
+        },
+        "resistance": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,50,35,21]",
+            "i": "11",
+            "a": "minecraft:shulker_shell",
+            "b": "minecraft:nether_wart"
+        },
+        "sundering": {
+            "e": "apotheosis:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,50,35,25]",
+            "i": "1",
+            "a": "minecraft:shulker_shell",
+            "b": "minecraft:fermented_spider_eye"
+        },
+        "instant_health": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,50,35,25]",
+            "i": "6",
+            "a": "minecraft:glistering_melon_slice",
+            "b": "minecraft:nether_wart"
+        },
+        "instant_damage": {
+            "e": "minecraft:^n",
+            "r": "lightland:effect_^n",
+            "l": "[100,50,35,24]",
+            "i": "7",
+            "a": "minecraft:glistering_melon_slice",
+            "b": "minecraft:fermented_spider_eye"
+        }
+    }
+}
