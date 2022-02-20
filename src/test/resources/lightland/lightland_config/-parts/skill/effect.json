@@ -1,0 +1,48 @@
+{
+  "_class": "organize.json.JsonPartMap",
+  "file": "config_skill",
+  "path": "map",
+  "common": {
+	"_class": "dev.hikarishima.lightland.content.skill.EffectSkill$Config"
+  },
+  "map": {
+	"lightland:no_knockback": {
+	  "max_level": 3,
+	  "cooldown": [
+		3600,
+		3600,
+		3600
+	  ],
+	  "id": "lightland:no_knockback",
+	  "durations": [
+		600,
+		900,
+		1200
+	  ],
+	  "amplifiers": [
+		0,
+		0,
+		0
+	  ]
+	},
+	"lightland:blood_thirst": {
+	  "max_level": 3,
+	  "cooldown": [
+		1800,
+		1800,
+		1800
+	  ],
+	  "id": "lightland:blood_thirst",
+	  "durations": [
+		600,
+		600,
+		600
+	  ],
+	  "amplifiers": [
+		0,
+		1,
+		2
+	  ]
+	}
+  }
+}

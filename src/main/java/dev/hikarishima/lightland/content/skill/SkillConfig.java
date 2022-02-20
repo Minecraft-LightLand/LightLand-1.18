@@ -6,17 +6,24 @@ import dev.lcy0x1.util.SerialClass;
 public class SkillConfig<T extends SkillData> {
 
     @SerialClass.SerialField
-    public int cooldown;
+    public int[] cooldown;
 
     @SerialClass.SerialField
     public int max_level;
 
     public int getCooldown(T data) {
-        return cooldown;
+        int lv = Math.min(data.level, cooldown.length - 1);
+        return cooldown[lv];
     }
 
     public boolean isValid() {
-        return cooldown > 0 && max_level > 0;
+        if (max_level <= 0 || cooldown.length != max_level)
+            return false;
+        for (int val : cooldown) {
+            if (val <= 0)
+                return false;
+        }
+        return true;
     }
 
 }

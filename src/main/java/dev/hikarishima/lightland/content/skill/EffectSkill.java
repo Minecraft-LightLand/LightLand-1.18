@@ -29,8 +29,21 @@ public class EffectSkill extends Skill<EffectSkill.Config, SkillData> {
 
         @Override
         public boolean isValid() {
-            return super.isValid() && id != null && ForgeRegistries.MOB_EFFECTS.containsKey(id) &&
-                    durations.length == max_level && amplifiers.length == max_level;
+            if (super.isValid() && id != null && ForgeRegistries.MOB_EFFECTS.containsKey(id) &&
+                    durations.length == max_level && amplifiers.length == max_level) {
+                for (int val : durations) {
+                    if (val <= 0) {
+                        return false;
+                    }
+                }
+                for (int val : amplifiers) {
+                    if (val <= 0) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
     }
 

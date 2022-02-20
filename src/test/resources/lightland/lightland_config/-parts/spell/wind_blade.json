@@ -6,7 +6,7 @@
     "_class": "dev.hikarishima.lightland.content.magic.spell.WindBladeSpell$Config"
   },
   "map": {
-    "lightland-magic:blade_side": {
+    "lightland:blade_side": {
       "duration": 30,
       "mana_cost": 50,
       "spell_load": 70,
@@ -28,7 +28,7 @@
       "velocity": 3,
       "plane": "HORIZONTAL"
     },
-    "lightland-magic:blade_front": {
+    "lightland:blade_front": {
       "duration": 30,
       "mana_cost": 50,
       "spell_load": 70,

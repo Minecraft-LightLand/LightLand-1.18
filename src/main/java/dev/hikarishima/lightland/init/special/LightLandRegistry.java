@@ -45,6 +45,7 @@ public class LightLandRegistry {
         ArcaneType.register();
         ArcaneRegistry.register();
         SpellRegistry.register();
+        SkillRegistry.register();
     }
 
     public static final RegistryEntry<ArcaneProfession> PROF_ARCANE = genProf("arcane", ArcaneProfession::new);
