@@ -64,6 +64,8 @@ public class LLPlayerData {
     public AbilityPoints abilityPoints = new AbilityPoints(this);
     @SerialClass.SerialField
     public MagicAbility magicAbility = new MagicAbility(this);
+    @SerialClass.SerialField
+    public SkillCap skillCap = new SkillCap(this);
     // @SerialClass.SerialField public MagicHolder magicHolder = new MagicHolder(this);
     public Player player;
     public Level world;
@@ -116,13 +118,18 @@ public class LLPlayerData {
         }), HOLDER((h) -> {
             //h.magicHolder = new MagicHolder(h);
             //h.magicHolder.checkUnlocks();
-        }), ALL((h) -> {
+        }), SKILL(h -> {
+            h.skillCap = new SkillCap(h);
+        }),
+        ALL((h) -> {
             ABILITY.cons.accept(h);
             HOLDER.cons.accept(h);
+            SKILL.cons.accept(h);
         }), FOR_INJECT((h) -> {
             h.state = State.PREINJECT;
             h.magicAbility = new MagicAbility(h);
             h.abilityPoints = new AbilityPoints(h);
+            h.skillCap = new SkillCap(h);
             //h.magicHolder = new MagicHolder(h);
         });
 

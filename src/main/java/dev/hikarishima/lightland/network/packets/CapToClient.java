@@ -1,9 +1,6 @@
 package dev.hikarishima.lightland.network.packets;
 
-import dev.hikarishima.lightland.content.common.capability.AbilityPoints;
-import dev.hikarishima.lightland.content.common.capability.CapProxy;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.content.common.capability.MagicAbility;
+import dev.hikarishima.lightland.content.common.capability.*;
 import dev.hikarishima.lightland.network.SerialPacketBase;
 import dev.lcy0x1.base.Proxy;
 import dev.lcy0x1.util.Automator;
@@ -71,6 +68,10 @@ public class CapToClient extends SerialPacketBase {
         }), RESET(m -> new CompoundTag(), tag -> {
             LLPlayerData h = CapProxy.getHandler();
             h.reset(LLPlayerData.Reset.values()[tag.getInt("ordinal")]);
+        }), SKILL(m -> Automator.toTag(new CompoundTag(), m.skillCap), tag -> {
+            LLPlayerData h = CapProxy.getHandler();
+            h.skillCap = new SkillCap(h);
+            ExceptionHandler.run(() -> Automator.fromTag(tag, SkillCap.class, h.skillCap, f -> true));
         });
 
         public final Function<LLPlayerData, CompoundTag> server;

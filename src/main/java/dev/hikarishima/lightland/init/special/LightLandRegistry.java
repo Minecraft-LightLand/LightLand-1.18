@@ -18,7 +18,7 @@ public class LightLandRegistry {
     public static IForgeRegistry<Arcane> ARCANE;
     public static IForgeRegistry<Spell<?, ?>> SPELL;
     public static IForgeRegistry<Profession> PROFESSION;
-    public static IForgeRegistry<Skill> SKILL;
+    public static IForgeRegistry<Skill<?,?>> SKILL;
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static void createRegistries() {
@@ -40,7 +40,7 @@ public class LightLandRegistry {
                 .setName(new ResourceLocation(LightLand.MODID, "profession"))
                 .setType(Profession.class).create();
 
-        SKILL = new RegistryBuilder<Skill>().setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class).create();
+        SKILL = new RegistryBuilder().setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class).create();
 
         ArcaneType.register();
         ArcaneRegistry.register();
