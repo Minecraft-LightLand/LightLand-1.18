@@ -23,6 +23,16 @@ public class SkillCap {
         @SerialClass.SerialField
         public D data;
 
+        @Deprecated
+        public Cont() {
+
+        }
+
+        public Cont(S skill) {
+            this.skill = skill;
+            this.data = skill.genData();
+        }
+
         @DoubleSidedCall
         public boolean canActivate(Level level, Player player) {
             return skill.canActivate(level, player, data);

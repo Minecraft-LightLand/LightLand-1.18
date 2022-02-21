@@ -14,6 +14,7 @@ public class LangData {
         LOCKED("chat.locked", 0),
         UNLOCKED("chat.unlocked", 0),
         GET_ARCANE_MANA("chat.show_arcane_mana", 2),
+        SPELL_SLOT("chat.spell_slot", 1),
         ACTION_SUCCESS("chat.action_success", 0),
         PLAYER_NOT_FOUND("chat.player_not_found", 0),
         WRONG_ITEM("chat.wrong_item", 0),

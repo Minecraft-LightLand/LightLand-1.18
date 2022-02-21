@@ -3,7 +3,9 @@ package dev.hikarishima.lightland.content.common.command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.SkillCap;
 import dev.hikarishima.lightland.content.profession.Profession;
+import dev.hikarishima.lightland.content.skill.Skill;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.network.packets.CapToClient;
 import net.minecraft.commands.CommandSourceStack;
@@ -65,6 +67,20 @@ public class MainCommand extends BaseCommand {
                             handler.abilityPoints.addExp(val);
                             new CapToClient(CapToClient.Action.ABILITY_POINT, handler).toClientPlayer(e);
                             send(context, LangData.IDS.ACTION_SUCCESS.get());
+                            return 1;
+                        }))));
+
+        registerCommand("set_skill", getPlayer()
+                .then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))
+                        .then(Commands.argument("skill", RegistryParser.SKILL))
+                        .executes(withPlayer((context, e) -> {
+                            LLPlayerData handler = LLPlayerData.get(e);
+                            int slot = context.getArgument("slot", Integer.class);
+                            Skill<?, ?> skill = context.getArgument("skill", Skill.class);
+                            if (handler.skillCap.list.size() <= slot) {
+                                handler.skillCap.list.add(new SkillCap.Cont<>(skill));
+                            } else handler.skillCap.list.set(slot, new SkillCap.Cont<>(skill));
+                            new CapToClient(CapToClient.Action.SKILL, handler).toClientPlayer(e);
                             return 1;
                         }))));
 

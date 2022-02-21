@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
-public class Skill<C extends SkillConfig<D>, D extends SkillData> extends NamedEntry<Skill<?, ?>> {
+public abstract class Skill<C extends SkillConfig<D>, D extends SkillData> extends NamedEntry<Skill<?, ?>> {
 
     public Skill() {
         super(() -> LightLandRegistry.SKILL);
@@ -35,5 +35,7 @@ public class Skill<C extends SkillConfig<D>, D extends SkillData> extends NamedE
     public C getConfig() {
         return SkillDataConfig.getConfig(getRegistryName());
     }
+
+    public abstract D genData();
 
 }

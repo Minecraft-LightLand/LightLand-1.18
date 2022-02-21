@@ -53,5 +53,9 @@ public class EffectSkill extends Skill<EffectSkill.Config, SkillData> {
         super.activate(level, player, data);
     }
 
+    public SkillData genData() {
+        return new SkillData();
+    }
+
 
 }

@@ -10,7 +10,9 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
+import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.content.profession.Profession;
+import dev.hikarishima.lightland.content.skill.Skill;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -38,6 +40,8 @@ public class RegistryParser<T extends IForgeRegistryEntry<T>> implements Argumen
     public static final RegistryParser<ArcaneType> ARCANE_TYPE = new RegistryParser<>(ArcaneType.class, () -> LightLandRegistry.ARCANE_TYPE);
     public static final RegistryParser<Arcane> ARCANE = new RegistryParser<>(Arcane.class, () -> LightLandRegistry.ARCANE);
     public static final RegistryParser<Profession> PROFESSION = new RegistryParser<>(Profession.class, () -> LightLandRegistry.PROFESSION);
+    public static final RegistryParser<Spell<?, ?>> SPELL = new RegistryParser(Spell.class, () -> LightLandRegistry.SPELL);
+    public static final RegistryParser<Skill<?, ?>> SKILL = new RegistryParser(Skill.class, () -> LightLandRegistry.SKILL);
 
     public static void register() {
         ArgumentTypes.register("lightland:registry", (Class<RegistryParser<?>>) (Class) RegistryParser.class, new ArgumentSerializer<>() {

@@ -61,6 +61,7 @@ public class LightLand {
         RegistryParser.register();
         BaseCommand.LIST.add(MainCommand::new);
         BaseCommand.LIST.add(ArcaneCommand::new);
+        BaseCommand.LIST.add(MagicCommand::new);
     }
 
     public LightLand() {
