@@ -81,6 +81,20 @@ public class MainCommand extends BaseCommand {
                                 handler.skillCap.list.add(new SkillCap.Cont<>(skill));
                             } else handler.skillCap.list.set(slot, new SkillCap.Cont<>(skill));
                             new CapToClient(CapToClient.Action.SKILL, handler).toClientPlayer(e);
+                            send(context, LangData.IDS.ACTION_SUCCESS.get());
+                            return 1;
+                        }))));
+
+        registerCommand("remove_skill", getPlayer()
+                .then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))
+                        .executes(withPlayer((context, e) -> {
+                            LLPlayerData handler = LLPlayerData.get(e);
+                            int slot = context.getArgument("slot", Integer.class);
+                            if (slot < handler.skillCap.list.size()) {
+                                handler.skillCap.list.remove(slot);
+                                new CapToClient(CapToClient.Action.SKILL, handler).toClientPlayer(e);
+                            }
+                            send(context, LangData.IDS.ACTION_SUCCESS.get());
                             return 1;
                         }))));
 
