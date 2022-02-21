@@ -1,6 +1,8 @@
 package dev.hikarishima.lightland.content.common.capability;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
+import dev.hikarishima.lightland.content.magic.item.MagicScroll;
+import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.lcy0x1.util.NBTObj;
 import dev.lcy0x1.util.SerialClass;
@@ -79,7 +81,6 @@ public class MagicAbility {
     }
 
     private void tickSpell(ItemStack stack, CompoundTag tag) {
-        /*
         if (stack.getItem() instanceof MagicScroll) {
             String tag_spell = tag.getString("spell");
             Spell<?, ?> spell = MagicScroll.getSpell(stack);
@@ -93,7 +94,7 @@ public class MagicAbility {
                 }
                 return;
             }
-        }*/
+        }
         tag.putString("spell", "");
         tag.putInt("time", 0);
     }

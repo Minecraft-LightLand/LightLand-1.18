@@ -90,6 +90,8 @@
   "profession.lightland.shielder": "Shielder",
   "profession.lightland.spell_caster": "Spell Caster",
   "profession.lightland.tidecaller": "Tidecaller",
+  "skill.lightland.blood_thirst": "Blood Thirst",
+  "skill.lightland.no_knockback": "No Knockback",
   "spell.lightland.blade_front": "Blade Front",
   "spell.lightland.blade_side": "Blade Side"
 }

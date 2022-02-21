@@ -90,6 +90,8 @@
   "profession.lightland.shielder": "\u0279\u01DDp\u05DF\u01DD\u0131\u0265S",
   "profession.lightland.spell_caster": "\u0279\u01DD\u0287s\u0250\u0186 \u05DF\u05DF\u01DDdS",
   "profession.lightland.tidecaller": "\u0279\u01DD\u05DF\u05DF\u0250\u0254\u01DDp\u0131\u27D8",
+  "skill.lightland.blood_thirst": "\u0287s\u0279\u0131\u0265\u27D8 poo\u05DF\u15FA",
+  "skill.lightland.no_knockback": "\u029E\u0254\u0250q\u029E\u0254ou\u029E oN",
   "spell.lightland.blade_front": "\u0287uo\u0279\u2132 \u01DDp\u0250\u05DF\u15FA",
   "spell.lightland.blade_side": "\u01DDp\u0131S \u01DDp\u0250\u05DF\u15FA"
 }

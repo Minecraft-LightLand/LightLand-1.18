@@ -58,6 +58,7 @@ public class Automator {
         );
         new ClassHandler<CompoundTag, CompoundTag>(CompoundTag.class, e -> e, e -> e);
         new ClassHandler<ListTag, ListTag>(ListTag.class, e -> e, e -> e);
+        new ClassHandler<StringTag, ResourceLocation>(ResourceLocation.class, tag -> new ResourceLocation(tag.getAsString()), rl -> StringTag.valueOf(rl.toString()));
         new RegistryClassHandler<>(Block.class, () -> ForgeRegistries.BLOCKS);
     }
 
