@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.init;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.common.render.BarOverlay;
@@ -52,8 +53,7 @@ public class ClientRegister {
         OverlayRegistry.registerOverlayTop("SpellHotbar", new SpellOverlay());
         OverlayRegistry.registerOverlayTop("LLExperience", new BarOverlay());
         OverlayRegistry.registerOverlayTop("ItemShifted", new ItemNameOverlay());
-
-
+        GeneralCompatHandler.handle(GeneralCompatHandler.Stage.OVERLAY);
     }
 
 }

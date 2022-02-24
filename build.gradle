@@ -103,6 +103,9 @@ repositories {
         url 'https://maven.tterrag.com/'
     }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    flatDir {
+        dir("libs")
+    }
 }
 
 configurations {
@@ -117,10 +120,14 @@ dependencies {
     implementation fg.deobf(registrate)
     shade registrate
 
-    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api") // Adds JEI API as a compile dependency
-    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
+    compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
+    // Adds JEI API as a compile dependency
+    runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
+    // Adds the full JEI mod as a runtime dependency
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.11')
+
+    implementation fg.deobf('local.lib.appleskin:appleskin-forge-mc1.18:2.3.0')
 
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
@@ -153,7 +160,7 @@ shadowJar {
 }
 
 reobf {
-    shadowJar { }
+    shadowJar {}
 }
 
 build.dependsOn shadowJar

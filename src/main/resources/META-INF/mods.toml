@@ -26,3 +26,8 @@ description='''
     modId="geckolib3"
     mandatory=true
     versionRange="[3.0.0,)"
+[[dependencies.lightland]]
+    modId="appleskin"
+    mandatory=false
+    versionRange="[2.3.0,)"
+    ordering="AFTER"
