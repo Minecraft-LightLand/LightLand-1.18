@@ -5,6 +5,7 @@ import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.common.render.BarOverlay;
+import dev.hikarishima.lightland.content.common.render.HealthOverlay;
 import dev.hikarishima.lightland.content.common.render.ItemNameOverlay;
 import dev.hikarishima.lightland.content.common.render.SpellOverlay;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
@@ -50,9 +51,12 @@ public class ClientRegister {
         OverlayRegistry.enableOverlay(ForgeIngameGui.EXPERIENCE_BAR_ELEMENT, false);
         OverlayRegistry.enableOverlay(ForgeIngameGui.JUMP_BAR_ELEMENT, false);
         OverlayRegistry.enableOverlay(ForgeIngameGui.ITEM_NAME_ELEMENT, false);
+        OverlayRegistry.enableOverlay(ForgeIngameGui.PLAYER_HEALTH_ELEMENT, false);
+        OverlayRegistry.enableOverlay(ForgeIngameGui.ARMOR_LEVEL_ELEMENT, false);
         OverlayRegistry.registerOverlayTop("SpellHotbar", new SpellOverlay());
         OverlayRegistry.registerOverlayTop("LLExperience", new BarOverlay());
         OverlayRegistry.registerOverlayTop("ItemShifted", new ItemNameOverlay());
+        OverlayRegistry.registerOverlayTop("PlayerHealth", new HealthOverlay());
         GeneralCompatHandler.handle(GeneralCompatHandler.Stage.OVERLAY);
     }
 

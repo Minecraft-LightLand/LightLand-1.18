@@ -19,6 +19,7 @@ public class BarOverlay implements IIngameOverlay {
     public static final ResourceLocation BARS = new ResourceLocation(LightLand.MODID, "textures/gui/bars.png");
 
     private boolean shouldRenderSpecial(ForgeIngameGui gui) {
+        if (gui.minecraft.player.isRidingJumpable()) return false;
         Player player = Proxy.getClientPlayer();
         if (player == null) return false;
         if (player != gui.minecraft.cameraEntity) return false;
@@ -37,6 +38,9 @@ public class BarOverlay implements IIngameOverlay {
             else ForgeIngameGui.EXPERIENCE_BAR_ELEMENT.render(gui, mStack, partialTicks, width, height);
             return;
         }
+        if (gui.minecraft.player.isRidingJumpable()) {
+            ForgeIngameGui.JUMP_BAR_ELEMENT.render(gui, mStack, partialTicks, width, height);
+        }
         RenderSystem.setShaderTexture(0, GUI_ICONS_LOCATION);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.disableBlend();
@@ -44,51 +48,36 @@ public class BarOverlay implements IIngameOverlay {
         RenderSystem.setShaderTexture(0, GuiComponent.GUI_ICONS_LOCATION);
 
         int h = gui.screenHeight - 32 + 3;
-        // exp / jump bar
-        {
-            int len = 81;
-            int left = -91;
-            if (gui.minecraft.player.isRidingJumpable()) {
-                renderBar(gui, mStack, left, len, h, gui.minecraft.player.getJumpRidingScale(), 84);
-            } else {
-                renderBar(gui, mStack, left, len, h, gui.minecraft.player.experienceProgress, 64);
-                renderText(gui, mStack, "" + gui.minecraft.player.experienceLevel, len, left, h, 8453920);
-            }
-        }
-
         LLPlayerData data = CapProxy.getHandler();
-        {
-            int len = 81;
-            int left = 10;
-            double prog = data.abilityPoints.exp * 1.0 / AbilityPoints.expRequirement(data.abilityPoints.level);
-            String str = "Lv." + data.abilityPoints.level;
-            RenderSystem.setShaderTexture(0, BARS);
-            renderBar(gui, mStack, left, len, h, prog, 60);
-            renderText(gui, mStack, str, len, left, h, 0xFFFFFF);
-        }
 
-        h -= 10;
-        {
-            int len = 81;
-            int left = -91;
+        int len = 81;
+        int left = -91;
+        if (data.magicAbility.getSpellLoad() > 0) {
             double prog = Math.min(1, data.magicAbility.getMaxSpellEndurance() == 0 ? 0 :
                     data.magicAbility.getSpellLoad() * 1.0 / data.magicAbility.getMaxSpellEndurance());
             String str = "Load: " + data.magicAbility.getSpellLoad() + "/" + data.magicAbility.getMaxSpellEndurance();
             RenderSystem.setShaderTexture(0, BARS);
             renderBar(gui, mStack, left, len, h, prog, 20);
             renderText(gui, mStack, str, len, left, h, 0xFF5F32);
+        } else {
+            renderBar(gui, mStack, left, len, h, gui.minecraft.player.experienceProgress, 64);
+            renderText(gui, mStack, "" + gui.minecraft.player.experienceLevel, len, left, h, 8453920);
         }
-        {
-            int len = 81;
-            int left = 10;
+        left = 10;
+        if (data.magicAbility.getMana() < data.magicAbility.getMaxMana()) {
             double prog = data.magicAbility.getMaxMana() == 0 ? 0 :
                     data.magicAbility.getMana() * 1.0 / data.magicAbility.getMaxMana();
             String str = "Mana: " + data.magicAbility.getMana() + "/" + data.magicAbility.getMaxMana();
             RenderSystem.setShaderTexture(0, BARS);
             renderBar(gui, mStack, left, len, h, prog, 10);
             renderText(gui, mStack, str, len, left, h, 0x34D1FF);
+        } else {
+            double prog = data.abilityPoints.exp * 1.0 / AbilityPoints.expRequirement(data.abilityPoints.level);
+            String str = "Lv." + data.abilityPoints.level;
+            RenderSystem.setShaderTexture(0, BARS);
+            renderBar(gui, mStack, left, len, h, prog, 60);
+            renderText(gui, mStack, str, len, left, h, 0xFFFFFF);
         }
-
         RenderSystem.enableBlend();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     }
