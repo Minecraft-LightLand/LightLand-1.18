@@ -4,10 +4,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
-import dev.hikarishima.lightland.content.common.render.BarOverlay;
-import dev.hikarishima.lightland.content.common.render.HealthOverlay;
-import dev.hikarishima.lightland.content.common.render.ItemNameOverlay;
-import dev.hikarishima.lightland.content.common.render.SpellOverlay;
+import dev.hikarishima.lightland.content.common.render.*;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -57,6 +54,7 @@ public class ClientRegister {
         OverlayRegistry.registerOverlayTop("LLExperience", new BarOverlay());
         OverlayRegistry.registerOverlayTop("ItemShifted", new ItemNameOverlay());
         OverlayRegistry.registerOverlayTop("PlayerHealth", new HealthOverlay());
+        OverlayRegistry.registerOverlayTop("SkillBar",new SkillOverlay());
         GeneralCompatHandler.handle(GeneralCompatHandler.Stage.OVERLAY);
     }
 

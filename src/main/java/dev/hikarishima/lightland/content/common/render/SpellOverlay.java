@@ -7,7 +7,6 @@ import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.AttackIndicatorStatus;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;

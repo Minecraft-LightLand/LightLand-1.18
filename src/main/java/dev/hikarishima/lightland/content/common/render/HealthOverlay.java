@@ -32,7 +32,7 @@ public class HealthOverlay implements IIngameOverlay {
         int healthMax = (int) Math.ceil(Math.max((float) attrMaxHealth.getValue(), player.getHealth()));
         int absorb = Mth.ceil(player.getAbsorptionAmount());
         int healthRows = Mth.ceil((healthMax + absorb) / 20.0F);
-        if (healthRows <= 0) {
+        if (healthRows <= 2) {
             renderIcons(gui, mStack, player, width, height);
         } else {
             renderBars(gui, mStack, player, width, height);
