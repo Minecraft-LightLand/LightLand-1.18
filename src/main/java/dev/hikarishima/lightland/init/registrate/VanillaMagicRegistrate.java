@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.init.registrate;
 
 
+import com.tterrag.registrate.builders.NoConfigBuilder;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.berserker.effect.BloodThurstEffect;
@@ -27,7 +28,8 @@ public class VanillaMagicRegistrate {
     public static final RegistryEntry<BloodThurstEffect> BLOOD_THURST = genEffect("blood_thurst", () -> new BloodThurstEffect(MobEffectCategory.BENEFICIAL, 0xffafaf));
 
     public static <T extends MobEffect> RegistryEntry<T> genEffect(String name, NonNullSupplier<T> sup) {
-        return REGISTRATE.simple(name, MobEffect.class, sup);
+        return REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(REGISTRATE, REGISTRATE, name, cb, MobEffect.class, sup))
+                .lang(MobEffect::getDescriptionId).register();
     }
 
     public static void register() {
