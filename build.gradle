@@ -102,6 +102,22 @@ repositories {
         name 'tterrag maven'
         url 'https://maven.tterrag.com/'
     }
+    maven {
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        url "https://maven.architectury.dev/"
+    }
+    maven {
+        url "https://maven.saps.dev/minecraft"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.ftb.mods"
+        }
+    }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
     flatDir {
         dir("libs")
@@ -121,20 +137,20 @@ dependencies {
     shade registrate
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
-    // Adds JEI API as a compile dependency
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
-    // Adds the full JEI mod as a runtime dependency
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.11')
-
     implementation fg.deobf('local.lib.appleskin:appleskin-forge-mc1.18:2.3.0')
 
-    // Examples using mod jars from ./libs
-    // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
+    implementation fg.deobf("curse.maven:create-328085:3600402")
+    implementation fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:1.18-0.5.1.44")
+    implementation fg.deobf("dev.architectury:architectury-forge:3.4.9")
+    implementation fg.deobf("dev.ftb.mods:ftb-library-forge:1801.3.5-build.109")
+    implementation fg.deobf("dev.ftb.mods:ftb-teams-forge:1801.2.4-build.46")
+    implementation fg.deobf("dev.ftb.mods:ftb-chunks-forge:1801.3.4-build.127")
+    implementation fg.deobf("dev.latvian.mods:rhino-forge:1800.1.7-build.92")
+    implementation fg.deobf("dev.latvian.mods:kubejs-forge:1801.4.2-build.278")
 
-    // For more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
