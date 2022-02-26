@@ -72,6 +72,7 @@ public class LLPlayerData {
 
     public void tick() {
         magicAbility.tick();
+        skillCap.tick();
     }
 
     public void reset(Reset reset) {

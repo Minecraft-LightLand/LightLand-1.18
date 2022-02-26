@@ -2,7 +2,9 @@ package dev.hikarishima.lightland.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.hikarishima.lightland.init.LightLand;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.TranslatableComponent;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.function.BiConsumer;
 
@@ -40,6 +42,24 @@ public class LangData {
 
     }
 
+    public enum Keys {
+        SKILL_1("key.lightland.skill_1", GLFW.GLFW_KEY_Z),
+        SKILL_2("key.lightland.skill_2", GLFW.GLFW_KEY_X),
+        SKILL_3("key.lightland.skill_3", GLFW.GLFW_KEY_C),
+        SKILL_4("key.lightland.skill_4", GLFW.GLFW_KEY_V);
+
+        public final String id;
+        public final int key;
+        public final KeyMapping map;
+
+        Keys(String id, int key) {
+            this.id = id;
+            this.key = key;
+            map = new KeyMapping(id, key, "key.categories.lightland");
+        }
+
+    }
+
     public static void addTranslations(BiConsumer<String, String> pvd) {
         for (IDS id : IDS.values()) {
             String[] strs = id.id.split("\\.");
@@ -51,6 +71,12 @@ public class LangData {
             }
             pvd.accept(LightLand.MODID + "." + id.id, RegistrateLangProvider.toEnglishName(str) + pad);
         }
+        for (Keys key : Keys.values()) {
+            String[] strs = key.id.split("\\.");
+            String str = strs[strs.length - 1];
+            pvd.accept(key.id, RegistrateLangProvider.toEnglishName(str));
+        }
         pvd.accept("itemGroup.lightland", "Light Land RPG");
+        pvd.accept("key.categories.lightland", "Light Land Keys");
     }
 }

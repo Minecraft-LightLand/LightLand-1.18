@@ -35,7 +35,7 @@ public class SpellEntityRenderer extends EntityRenderer<SpellEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SpellEntity p_110775_1_) {
+    public ResourceLocation getTextureLocation(SpellEntity entity) {
         return new ResourceLocation("");
     }
 }

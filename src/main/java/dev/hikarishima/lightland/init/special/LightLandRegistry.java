@@ -18,7 +18,7 @@ public class LightLandRegistry {
     public static IForgeRegistry<Arcane> ARCANE;
     public static IForgeRegistry<Spell<?, ?>> SPELL;
     public static IForgeRegistry<Profession> PROFESSION;
-    public static IForgeRegistry<Skill<?,?>> SKILL;
+    public static IForgeRegistry<Skill<?, ?>> SKILL;
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static void createRegistries() {

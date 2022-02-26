@@ -5,12 +5,10 @@ import dev.hikarishima.lightland.network.config.SkillDataConfig;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import dev.lcy0x1.base.NamedEntry;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
 
 public abstract class Skill<C extends SkillConfig<D>, D extends SkillData> extends NamedEntry<Skill<?, ?>> {
 
@@ -38,4 +36,8 @@ public abstract class Skill<C extends SkillConfig<D>, D extends SkillData> exten
 
     public abstract D genData();
 
+    public ResourceLocation getIcon() {
+        ResourceLocation rl = getRegistryName();
+        return new ResourceLocation(rl.getNamespace(), "textures/skill/" + rl.getPath() + ".png");
+    }
 }

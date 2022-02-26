@@ -100,7 +100,19 @@ public class MagicScroll extends Item implements IGlowingTarget {
 
     @Override
     public boolean isBarVisible(ItemStack stack) {
-        return true;
+        Player pl = Proxy.getPlayer();
+        if (pl == null) return false;
+        MagicAbility ability = LLPlayerData.get(pl).magicAbility;
+        int id = -1;
+        for (int i = 0; i < 9; i++) {
+            if (pl.getInventory().getItem(i) == stack) {
+                id = i;
+                break;
+            }
+        }
+        if (id == -1) return false;
+        if (id >= ability.getMaxSpellSlot()) return true;
+        return ability.getSpellActivation(id) > 0;
     }
 
     @Override

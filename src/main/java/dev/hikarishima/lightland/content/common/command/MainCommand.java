@@ -72,18 +72,18 @@ public class MainCommand extends BaseCommand {
 
         registerCommand("set_skill", getPlayer()
                 .then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))
-                        .then(Commands.argument("skill", RegistryParser.SKILL))
-                        .executes(withPlayer((context, e) -> {
-                            LLPlayerData handler = LLPlayerData.get(e);
-                            int slot = context.getArgument("slot", Integer.class);
-                            Skill<?, ?> skill = context.getArgument("skill", Skill.class);
-                            if (handler.skillCap.list.size() <= slot) {
-                                handler.skillCap.list.add(new SkillCap.Cont<>(skill));
-                            } else handler.skillCap.list.set(slot, new SkillCap.Cont<>(skill));
-                            new CapToClient(CapToClient.Action.SKILL, handler).toClientPlayer(e);
-                            send(context, LangData.IDS.ACTION_SUCCESS.get());
-                            return 1;
-                        }))));
+                        .then(Commands.argument("skill", RegistryParser.SKILL)
+                                .executes(withPlayer((context, e) -> {
+                                    LLPlayerData handler = LLPlayerData.get(e);
+                                    int slot = context.getArgument("slot", Integer.class) - 1;
+                                    Skill<?, ?> skill = context.getArgument("skill", Skill.class);
+                                    if (handler.skillCap.list.size() <= slot) {
+                                        handler.skillCap.list.add(new SkillCap.Cont<>(skill));
+                                    } else handler.skillCap.list.set(slot, new SkillCap.Cont<>(skill));
+                                    new CapToClient(CapToClient.Action.SKILL, handler).toClientPlayer(e);
+                                    send(context, LangData.IDS.ACTION_SUCCESS.get());
+                                    return 1;
+                                })))));
 
         registerCommand("remove_skill", getPlayer()
                 .then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))

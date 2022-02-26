@@ -3,11 +3,16 @@ package dev.hikarishima.lightland.content.common.capability;
 import dev.hikarishima.lightland.content.skill.Skill;
 import dev.hikarishima.lightland.content.skill.SkillConfig;
 import dev.hikarishima.lightland.content.skill.SkillData;
+import dev.hikarishima.lightland.init.data.LangData;
+import dev.hikarishima.lightland.network.packets.SkillToServer;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
+import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 
 import java.util.ArrayList;
 
@@ -38,9 +43,18 @@ public class SkillCap {
             return skill.canActivate(level, player, data);
         }
 
+        @ServerOnly
         public void activate(Level level, ServerPlayer player) {
             skill.activate(level, player, data);
+            refreshCooldown();
         }
+
+        @ServerOnly
+        public void refreshCooldown() {
+            if (skill.getConfig() == null) return;
+            data.cooldown = skill.getConfig().getCooldown(data);
+        }
+
     }
 
     private final LLPlayerData parent;
@@ -50,6 +64,22 @@ public class SkillCap {
 
     public SkillCap(LLPlayerData parent) {
         this.parent = parent;
+    }
+
+    @DoubleSidedCall
+    public void tick() {
+        for (int i = 0; i < list.size(); i++) {
+            Cont<?, ?, ?> cont = list.get(i);
+            if (cont.data.cooldown > 0) {
+                cont.data.cooldown--;
+            }
+            int I = i;
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+                if (cont.data.cooldown == 0 && LangData.Keys.values()[I].map.isDown()) {
+                    SkillToServer.clientActivate(I);
+                }
+            });
+        }
     }
 
 }

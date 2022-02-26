@@ -31,7 +31,7 @@ public class LLRenderState extends RenderStateShard {
                 DefaultVertexFormat.POSITION_COLOR,
                 VertexFormat.Mode.QUADS, 256, true, true,
                 RenderType.CompositeState.builder()
-                        .setShaderState(RenderStateShard.NEW_ENTITY_SHADER)
+                        .setShaderState(RenderStateShard.POSITION_COLOR_SHADER)
                         .setTextureState(RenderStateShard.NO_TEXTURE)
                         .setCullState(NO_CULL)
                         .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
