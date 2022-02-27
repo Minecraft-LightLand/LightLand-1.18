@@ -32,6 +32,9 @@ public class ClientRegister {
             ItemProperties.register(bow, new ResourceLocation("pull"), (stack, level, entity, i) -> entity == null || entity.getUseItem() != stack ? 0.0F : bow.getPullForTime(entity, stack.getUseDuration() - entity.getUseItemRemainingTicks()));
             ItemProperties.register(bow, new ResourceLocation("pulling"), (stack, level, entity, i) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
         }
+        for (ItemEntry<BackpackItem> entry : ItemRegistrate.BACKPACKS){
+            ItemProperties.register(entry.get(), new ResourceLocation("open"), BackpackItem::isOpened);
+        }
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -46,7 +49,7 @@ public class ClientRegister {
             event.getItemColors().register(color, ItemRegistrate.KING_MED_LEATHER.get());
         }
         {
-            ItemColor color = (stack, val) -> val > 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col;
+            ItemColor color = (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col;
             for (ItemEntry<BackpackItem> entry : ItemRegistrate.BACKPACKS)
                 event.getItemColors().register(color, entry.get());
         }

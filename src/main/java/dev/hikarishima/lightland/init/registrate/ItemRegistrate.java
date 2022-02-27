@@ -71,8 +71,14 @@ public class ItemRegistrate {
         for (int i = 0; i < 16; i++) {
             DyeColor color = DyeColor.values()[i];
             BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-                    .model((ctx, pvd) -> pvd.withExistingParent(ctx.getName(), "lightland:backpack")).defaultLang().register();
+                    .model(ItemRegistrate::createBackpackModel).defaultLang().register();
         }
+    }
+
+    private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {
+        ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:backpack");
+        builder.override().predicate(new ResourceLocation("open"), 1).model(
+                new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/backpack_open"));
     }
 
     // -------- archery --------

@@ -1,5 +1,9 @@
 package dev.hikarishima.lightland.content.common.item.backpack;
 
+import dev.lcy0x1.base.Proxy;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -10,6 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -17,6 +22,8 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
 
 import java.util.UUID;
@@ -33,6 +40,16 @@ public class BackpackItem extends Item {
 
     public static void setListTag(ItemStack stack, ListTag list) {
         stack.getOrCreateTag().put("Items", list);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
+        if (entity != Proxy.getClientPlayer()) return 0;
+        Screen screen = Minecraft.getInstance().screen;
+        if (screen instanceof BackpackScreen gui) {
+            return gui.getMenu().getStack() == stack ? 1 : 0;
+        }
+        return 0;
     }
 
     public static final class MenuPvd implements MenuProvider {
