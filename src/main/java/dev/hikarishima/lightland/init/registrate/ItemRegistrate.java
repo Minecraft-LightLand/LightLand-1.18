@@ -24,6 +24,7 @@ import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
 import dev.hikarishima.lightland.content.magic.item.PotionCore;
 import dev.hikarishima.lightland.init.LightLand;
+import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -73,7 +74,7 @@ public class ItemRegistrate {
         for (int i = 0; i < 16; i++) {
             DyeColor color = DyeColor.values()[i];
             BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-                    .model(ItemRegistrate::createBackpackModel).defaultLang().register();
+                    .tag(AllTags.AllItemTags.BACKPACKS.tag).model(ItemRegistrate::createBackpackModel).defaultLang().register();
         }
         ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
                 .model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();

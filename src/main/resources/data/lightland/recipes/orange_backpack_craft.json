@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "lightland_backpack_craft",
+  "pattern": [
+	"cac",
+	"aba",
+	"cac"
+  ],
+  "key": {
+	"a": {
+	  "item": "minecraft:orange_wool"
+	},
+	"b": {
+	  "item": "minecraft:chest"
+	},
+	"c": {
+	  "item": "minecraft:leather"
+	}
+  },
+  "result": {
+	"item": "lightland:backpack_orange"
+  }
+}
+

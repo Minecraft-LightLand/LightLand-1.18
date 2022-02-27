@@ -2,8 +2,11 @@ package dev.hikarishima.lightland.init.registrate;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.berserker.recipe.MedArmorRecipe;
+import dev.hikarishima.lightland.content.common.recipe.BackpackDyeRecipe;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.ritual.*;
+import dev.lcy0x1.base.AbstractShapedRecipe;
+import dev.lcy0x1.base.AbstractShapelessRecipe;
 import dev.lcy0x1.base.BaseRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -29,8 +32,10 @@ public class RecipeRegistrate {
     public static final RegistryEntry<BaseRecipe.RecType<PotionModifyRecipe, AbstractRitualRecipe<?>, RitualCore.Inv>> RSP_MODIFY =
             REGISTRATE.simple("ritual_potion_modify", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PotionModifyRecipe.class, RT_RITUAL));
 
-    public static final RegistryEntry<MedArmorRecipe.Ser> RSC_MED_ARMOR =
-            REGISTRATE.simple("medicine_armor", RecipeSerializer.class, MedArmorRecipe.Ser::new);
+    public static final RegistryEntry<AbstractShapedRecipe.Serializer<MedArmorRecipe>> RSC_MED_ARMOR =
+            REGISTRATE.simple("medicine_armor", RecipeSerializer.class, () -> new AbstractShapedRecipe.Serializer<>(MedArmorRecipe::new));
+    public static final RegistryEntry<AbstractShapelessRecipe.Serializer<BackpackDyeRecipe>> RSC_BAG_DYE =
+            REGISTRATE.simple("backpack_dye", RecipeSerializer.class, () -> new AbstractShapelessRecipe.Serializer<>(BackpackDyeRecipe::new));
 
     public static void register() {
 

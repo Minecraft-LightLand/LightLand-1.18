@@ -87,3 +87,5 @@ bb160963941e097a9dd5bcc805642bc4009ae62e assets/lightland/models/item/wind_bow.j
 7573cb939c8eecccacd7b4073f67b81be53d3bb9 assets/lightland/models/item/wind_bow_pulling_2.json
 634abc6c6b98d992e83078c98138f57f5044dd7f data/lightland/loot_tables/blocks/ritual_core.json
 968e85a976212ae0d0fa2799cf4a2147f1c6e46e data/lightland/loot_tables/blocks/ritual_side.json
+4883e3459dd6a18cece1f766800846b3692e3eeb data/lightland/tags/items/backpacks.json
+74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/lightland/tags/items/dyes.json

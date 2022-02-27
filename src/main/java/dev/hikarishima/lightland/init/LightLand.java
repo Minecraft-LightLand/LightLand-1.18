@@ -10,6 +10,7 @@ import dev.hikarishima.lightland.events.generic.CapabilityEvents;
 import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;
 import dev.hikarishima.lightland.events.generic.EffectSyncEvents;
 import dev.hikarishima.lightland.events.generic.GenericEventHandler;
+import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.*;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
@@ -45,6 +46,7 @@ public class LightLand {
         RecipeRegistrate.register();
         VanillaMagicRegistrate.register();
         ParticleRegistrate.register();
+        AllTags.register();
     }
 
     private static void registerForgeEvents() {

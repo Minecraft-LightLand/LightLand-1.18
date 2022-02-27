@@ -86,5 +86,59 @@
             "a": "minecraft:glistering_melon_slice",
             "b": "minecraft:fermented_spider_eye"
         }
+    },
+    "-backpack": {
+        "-list": [
+            "backpack_craft",
+            "backpack_dye"
+        ],
+        "white": {
+            "c": "^n"
+        },
+        "orange": {
+            "c": "^n"
+        },
+        "magenta": {
+            "c": "^n"
+        },
+        "light_blue": {
+            "c": "^n"
+        },
+        "yellow": {
+            "c": "^n"
+        },
+        "lime": {
+            "c": "^n"
+        },
+        "pink": {
+            "c": "^n"
+        },
+        "gray": {
+            "c": "^n"
+        },
+        "light_gray": {
+            "c": "^n"
+        },
+        "cyan": {
+            "c": "^n"
+        },
+        "purple": {
+            "c": "^n"
+        },
+        "blue": {
+            "c": "^n"
+        },
+        "brown": {
+            "c": "^n"
+        },
+        "green": {
+            "c": "^n"
+        },
+        "red": {
+            "c": "^n"
+        },
+        "black": {
+            "c": "^n"
+        }
     }
 }

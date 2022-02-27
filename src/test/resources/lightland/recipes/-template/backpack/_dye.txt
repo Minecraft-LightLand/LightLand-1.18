@@ -1,0 +1,15 @@
+{
+  "type": "lightland:backpack_dye",
+  "group": "lightland_backpack_dye",
+  "ingredients": [
+    {
+      "tag": "lightland:backpacks"
+    },
+    {
+      "tag": "forge:dyes/^c"
+    }
+  ],
+  "result": {
+    "item": "lightland:backpack_^c"
+  }
+}
