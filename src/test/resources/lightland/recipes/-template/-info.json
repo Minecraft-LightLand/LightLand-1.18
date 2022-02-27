@@ -87,10 +87,11 @@
             "b": "minecraft:fermented_spider_eye"
         }
     },
-    "-backpack": {
+    "-color": {
         "-list": [
             "backpack_craft",
-            "backpack_dye"
+            "backpack_dye",
+            "backpack_upgrade"
         ],
         "white": {
             "c": "^n"

@@ -1,5 +1,5 @@
-555ff9c4c0f05577a92f20c63bb7f75683416676 assets/lightland/lang/en_ud.json
-1f9ed2d5eebc7f579c1951a1edee83d0745f163d assets/lightland/lang/en_us.json
+aaea861cf7fc2bd7c52e1e749d2c828a8be12f8e assets/lightland/lang/en_ud.json
+3448eee3cd27ead960303fd98e757097c5652642 assets/lightland/lang/en_us.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_black.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_blue.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_brown.json
@@ -35,6 +35,7 @@ c42471351c218da8755f946d34f3c2471bf8e1c7 assets/lightland/models/item/ender_aim_
 e8c2eedc34c28f32443ee9ed096c0f989c07927a assets/lightland/models/item/ender_arrow.json
 f9bd318c8c1b536a1e13bcc8fa771ee60370ca86 assets/lightland/models/item/ender_backpack.json
 bca7cfc7ae515d954c26dc995092cb299d4ebc9f assets/lightland/models/item/ender_backpack_open.json
+66251075afe5e200651853dd8314b79fad5a45b4 assets/lightland/models/item/ender_pocket.json
 78a7ca62c01e82bd40415641a0de8b0e16291982 assets/lightland/models/item/fire_arrow_lv1.json
 4c07589e04b2ccc1f9ba8c797f81be1088deb76b assets/lightland/models/item/fire_arrow_lv2.json
 25233390a5209ab966a75f638221649835dacc9f assets/lightland/models/item/frozen_arrow.json
@@ -78,6 +79,7 @@ edc5c3957ebafc04dba2a330b93071a7f2748f54 assets/lightland/models/item/starter_bo
 3c270c18a8f4c294c135061cb4560ad828c81520 assets/lightland/models/item/starter_bow_pulling_0.json
 fe1d5f402a6891b75866ca1fd2f1224a62e7417e assets/lightland/models/item/starter_bow_pulling_1.json
 10feb91079eea92e36e0f6562b7042307f64eec3 assets/lightland/models/item/starter_bow_pulling_2.json
+554cbb8fcb3d8de381f4fd07d165f2b9453cfee8 assets/lightland/models/item/strong_leather.json
 0c126cf62f498bb2b4e7cb69900978cf133bd558 assets/lightland/models/item/tnt_arrow_lv1.json
 86adfcc8a98ca225a6dbdd77cb8f05a6f786131f assets/lightland/models/item/tnt_arrow_lv2.json
 b3e56b80e988cb4edaebc858bf8600a4e6b6c69a assets/lightland/models/item/tnt_arrow_lv3.json

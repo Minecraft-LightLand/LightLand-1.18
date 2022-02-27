@@ -17,11 +17,11 @@ import java.util.UUID;
 
 public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
 
-    public static final SpriteManager[] MANAGERS = new SpriteManager[4];
+    public static final SpriteManager[] MANAGERS = new SpriteManager[6];
 
     static {
-        for (int i = 0; i < 4; i++) {
-            MANAGERS[i] = new SpriteManager(LightLand.MODID, "backpack_" + (i + 3));
+        for (int i = 0; i < 6; i++) {
+            MANAGERS[i] = new SpriteManager(LightLand.MODID, "backpack_" + (i + 1));
         }
     }
 
@@ -37,7 +37,7 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
     protected final UUID uuid;
 
     public BackpackContainer(int windowId, Inventory inventory, int hand, UUID uuid, int row) {
-        super(MenuRegistrate.MT_BACKPACK.get(), windowId, inventory, MANAGERS[row - 3], menu -> new BaseContainer<>(row * 9, menu), false);
+        super(MenuRegistrate.MT_BACKPACK.get(), windowId, inventory, MANAGERS[row - 1], menu -> new BaseContainer<>(row * 9, menu), false);
         this.player = inventory.player;
         this.item_slot = hand;
         this.uuid = uuid;

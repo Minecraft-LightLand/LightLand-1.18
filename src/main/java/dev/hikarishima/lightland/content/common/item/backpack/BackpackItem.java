@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.common.item.backpack;
 
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -21,11 +22,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkHooks;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.UUID;
 
 public class BackpackItem extends Item {
@@ -95,7 +99,7 @@ public class BackpackItem extends Item {
             if (!tag.getBoolean("init")) {
                 tag.putBoolean("init", true);
                 tag.putUUID("container_id", UUID.randomUUID());
-                tag.putInt("rows", 3);
+                tag.putInt("rows", 1);
             }
             NetworkHooks.openGui(player, this, this::writeBuffer);
         }
@@ -120,4 +124,8 @@ public class BackpackItem extends Item {
         return InteractionResultHolder.success(stack);
     }
 
+    @Override
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+        list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows"))));
+    }
 }

@@ -1,0 +1,13 @@
+{
+  "type": "lightland:backpack_upgrade",
+  "base": {
+	"item": "lightland:backpack_orange"
+  },
+  "addition": {
+	"item": "lightland:ender_pocket"
+  },
+  "result": {
+	"item": "lightland:backpack_orange"
+  }
+}
+

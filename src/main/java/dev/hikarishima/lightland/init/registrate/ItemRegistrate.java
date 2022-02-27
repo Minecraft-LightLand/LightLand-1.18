@@ -68,6 +68,7 @@ public class ItemRegistrate {
     // -------- common --------
     public static final ItemEntry<BackpackItem>[] BACKPACKS;
     public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
+    public static final ItemEntry<Item> STRONG_LEATHER, ENDER_POCKET;
 
     static {
         BACKPACKS = new ItemEntry[16];
@@ -78,6 +79,8 @@ public class ItemRegistrate {
         }
         ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
                 .model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
+        STRONG_LEATHER = REGISTRATE.item("strong_leather",Item::new).defaultModel().defaultLang().register();
+        ENDER_POCKET = REGISTRATE.item("ender_pocket",Item::new).defaultModel().defaultLang().register();
     }
 
     private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {

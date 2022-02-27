@@ -24,7 +24,8 @@ public class LangData {
         TARGET_ENEMY("tooltip.target.enemy", 0),
         TARGET_ALL("tooltip.target.all", 0),
         POTION_RADIUS("tooltip.potion.radius", 1),
-        CONT_RITUAL("container.ritual", 0);
+        CONT_RITUAL("container.ritual", 0),
+        BACKPACK_SLOT("tooltip.backpack_slot", 1);
 
         final String id;
         final int count;
