@@ -98,6 +98,23 @@ public class MainCommand extends BaseCommand {
                             return 1;
                         }))));
 
+
+        registerCommand("set_skill_level", getPlayer()
+                .then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))
+                        .then(Commands.argument("level", IntegerArgumentType.integer(1))
+                                .executes(withPlayer((context, e) -> {
+                                    LLPlayerData handler = LLPlayerData.get(e);
+                                    int slot = context.getArgument("slot", Integer.class) - 1;
+                                    int lv = context.getArgument("level", Integer.class) - 1;
+                                    if (slot < handler.skillCap.list.size()) {
+                                        SkillCap.Cont<?, ?, ?> cont = handler.skillCap.list.get(slot);
+                                        cont.data.level = Math.min(lv, cont.skill.getConfig().max_level - 1);
+                                        new CapToClient(CapToClient.Action.SKILL, handler).toClientPlayer(e);
+                                    }
+                                    send(context, LangData.IDS.ACTION_SUCCESS.get());
+                                    return 1;
+                                })))));
+
     }
 
 }

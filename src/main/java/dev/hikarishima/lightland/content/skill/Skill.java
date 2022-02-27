@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.skill;
 
+import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.network.config.SkillDataConfig;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
@@ -31,7 +32,9 @@ public abstract class Skill<C extends SkillConfig<D>, D extends SkillData> exten
 
     @DoubleSidedCall
     public C getConfig() {
-        return SkillDataConfig.getConfig(getRegistryName());
+        C c = SkillDataConfig.getConfig(getRegistryName());
+        if (c != null && !c.isValid()) LightLand.LOGGER.error("skill " + getRegistryName() + " has invalid config");
+        return c;
     }
 
     @ServerOnly

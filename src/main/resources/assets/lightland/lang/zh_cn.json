@@ -25,6 +25,7 @@
   "effect.lightland.heavy": "负重",
   "effect.lightland.no_knockback": "霸体",
   "effect.lightland.quick_pull": "快速拉弓",
+  "effect.lightland.run_bow": "Run Bow",
   "effect.lightland.water_trap": "水牢",
   "entity.lightland.generic_arrow": "箭",
   "entity.lightland.spell": "法阵",
@@ -128,6 +129,7 @@
   "skill.lightland.blood_thirst": "嗜血",
   "skill.lightland.no_knockback": "霸体",
   "skill.lightland.quick_move": "位移",
+  "skill.lightland.quick_pull": "游击",
   "spell.lightland.blade_front": "Blade Front",
   "spell.lightland.blade_side": "Blade Side"
 }

@@ -25,6 +25,7 @@
   "effect.lightland.heavy": "Heavy",
   "effect.lightland.no_knockback": "No Knockback",
   "effect.lightland.quick_pull": "Quick Pull",
+  "effect.lightland.run_bow": "Run Bow",
   "effect.lightland.water_trap": "Water Trap",
   "entity.lightland.generic_arrow": "Generic Arrow",
   "entity.lightland.spell": "Spell",
@@ -128,6 +129,7 @@
   "skill.lightland.blood_thirst": "Blood Thirst",
   "skill.lightland.no_knockback": "No Knockback",
   "skill.lightland.quick_move": "Quick Move",
+  "skill.lightland.quick_pull": "Quick Pull",
   "spell.lightland.blade_front": "Blade Front",
   "spell.lightland.blade_side": "Blade Side"
 }

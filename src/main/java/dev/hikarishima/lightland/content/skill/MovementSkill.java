@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.skill;
 
+import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,15 +44,25 @@ public class MovementSkill extends Skill<MovementSkill.Config, MovementSkill.Dat
         @Override
         public boolean isValid() {
             if (!super.isValid()) return false;
-            if (time.length != max_level) return false;
-            if (velocity.length != max_level) return false;
+            if (time.length != max_level) {
+                LightLand.LOGGER.error("time length must be the same as max_level");
+                return false;
+            }
+            if (velocity.length != max_level) {
+                LightLand.LOGGER.error("velocity length must be the same as max_level");
+                return false;
+            }
             for (int i = 0; i < max_level; i++) {
                 int t = time[i];
                 double v = velocity[i];
-                if (t <= 0 || t >= cooldown[i])
+                if (t <= 0 || t >= cooldown[i]) {
+                    LightLand.LOGGER.error("time cannot exceed cooldown");
                     return false;
-                if (v <= 0.25 || v >= 3)
+                }
+                if (v < 0.25 || v > 3) {
+                    LightLand.LOGGER.error("velocity must be between 0.25 and 3");
                     return false;
+                }
             }
             return true;
         }

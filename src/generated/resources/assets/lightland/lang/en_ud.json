@@ -25,6 +25,7 @@
   "effect.lightland.heavy": "\u028E\u028C\u0250\u01DDH",
   "effect.lightland.no_knockback": "\u029E\u0254\u0250q\u029E\u0254ou\u029E oN",
   "effect.lightland.quick_pull": "\u05DF\u05DFn\u0500 \u029E\u0254\u0131n\u1F49",
+  "effect.lightland.run_bow": "\u028Do\u15FA un\u1D1A",
   "effect.lightland.water_trap": "d\u0250\u0279\u27D8 \u0279\u01DD\u0287\u0250M",
   "entity.lightland.generic_arrow": "\u028Do\u0279\u0279\u2C6F \u0254\u0131\u0279\u01DDu\u01DD\u2141",
   "entity.lightland.spell": "\u05DF\u05DF\u01DDdS",
@@ -128,6 +129,7 @@
   "skill.lightland.blood_thirst": "\u0287s\u0279\u0131\u0265\u27D8 poo\u05DF\u15FA",
   "skill.lightland.no_knockback": "\u029E\u0254\u0250q\u029E\u0254ou\u029E oN",
   "skill.lightland.quick_move": "\u01DD\u028CoW \u029E\u0254\u0131n\u1F49",
+  "skill.lightland.quick_pull": "\u05DF\u05DFn\u0500 \u029E\u0254\u0131n\u1F49",
   "spell.lightland.blade_front": "\u0287uo\u0279\u2132 \u01DDp\u0250\u05DF\u15FA",
   "spell.lightland.blade_side": "\u01DDp\u0131S \u01DDp\u0250\u05DF\u15FA"
 }

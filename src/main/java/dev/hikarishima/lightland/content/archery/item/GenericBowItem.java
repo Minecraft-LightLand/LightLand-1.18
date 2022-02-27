@@ -8,6 +8,7 @@ import dev.hikarishima.lightland.content.common.item.FastItem;
 import dev.hikarishima.lightland.init.ClientRegister;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.GenericItemStack;
+import dev.lcy0x1.base.Proxy;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -209,6 +210,8 @@ public class GenericBowItem extends BowItem implements FastItem {
 
     @Override
     public boolean isFast(ItemStack stack) {
+        if (Proxy.getPlayer().hasEffect(VanillaMagicRegistrate.RUN_BOW.get()))
+            return true;
         return config.feature().pull.stream().anyMatch(e -> e instanceof WindBowFeature);
     }
 
