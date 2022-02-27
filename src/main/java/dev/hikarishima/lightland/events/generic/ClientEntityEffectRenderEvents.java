@@ -7,7 +7,7 @@ import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeatur
 import dev.hikarishima.lightland.content.archery.feature.bow.IGlowFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.common.effect.EmeraldPopeEffect;
-import dev.hikarishima.lightland.content.common.item.IGlowingTarget;
+import dev.hikarishima.lightland.content.common.item.api.IGlowingTarget;
 import dev.hikarishima.lightland.content.common.render.LLRenderState;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.ParticleRegistrate;

@@ -16,9 +16,10 @@ import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.berserker.item.MedicineLeather;
-import dev.hikarishima.lightland.content.common.item.Mat;
+import dev.hikarishima.lightland.content.common.item.api.Mat;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
 import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
+import dev.hikarishima.lightland.content.common.item.misc.RecordPearl;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
@@ -69,6 +70,7 @@ public class ItemRegistrate {
     public static final ItemEntry<BackpackItem>[] BACKPACKS;
     public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
     public static final ItemEntry<Item> STRONG_LEATHER, ENDER_POCKET;
+    public static final ItemEntry<RecordPearl> RECORD_PEARL;
 
     static {
         BACKPACKS = new ItemEntry[16];
@@ -79,8 +81,9 @@ public class ItemRegistrate {
         }
         ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
                 .model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
-        STRONG_LEATHER = REGISTRATE.item("strong_leather",Item::new).defaultModel().defaultLang().register();
-        ENDER_POCKET = REGISTRATE.item("ender_pocket",Item::new).defaultModel().defaultLang().register();
+        STRONG_LEATHER = REGISTRATE.item("strong_leather", Item::new).defaultModel().defaultLang().register();
+        ENDER_POCKET = REGISTRATE.item("ender_pocket", Item::new).defaultModel().defaultLang().register();
+        RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1))).defaultModel().defaultLang().register();
     }
 
     private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {

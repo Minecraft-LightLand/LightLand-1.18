@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.arcane.internal;
 
-import dev.hikarishima.lightland.content.common.item.IGlowingTarget;
+import dev.hikarishima.lightland.content.common.item.api.IGlowingTarget;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

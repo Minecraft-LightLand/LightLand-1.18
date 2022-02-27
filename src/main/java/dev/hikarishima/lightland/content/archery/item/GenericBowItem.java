@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.archery.controller.ArrowFeatureControll
 import dev.hikarishima.lightland.content.archery.controller.BowFeatureController;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import dev.hikarishima.lightland.content.archery.feature.bow.WindBowFeature;
-import dev.hikarishima.lightland.content.common.item.FastItem;
+import dev.hikarishima.lightland.content.common.item.api.FastItem;
 import dev.hikarishima.lightland.init.ClientRegister;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.GenericItemStack;

@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.magic.item;
 
-import dev.hikarishima.lightland.content.common.item.IGlowingTarget;
+import dev.hikarishima.lightland.content.common.item.api.IGlowingTarget;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.item;
+package dev.hikarishima.lightland.content.common.item.api;
 
 import net.minecraft.world.item.ItemStack;
 

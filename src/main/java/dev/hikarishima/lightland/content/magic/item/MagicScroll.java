@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.magic.item;
 
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.common.capability.MagicAbility;
-import dev.hikarishima.lightland.content.common.item.IGlowingTarget;
+import dev.hikarishima.lightland.content.common.item.api.IGlowingTarget;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;

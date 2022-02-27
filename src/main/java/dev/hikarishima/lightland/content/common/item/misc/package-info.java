@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.hikarishima.lightland.content.common.item;
+package dev.hikarishima.lightland.content.common.item.misc;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 
