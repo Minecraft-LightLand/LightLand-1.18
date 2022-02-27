@@ -108,6 +108,7 @@
   "lightland.chat.unlocked": "已解锁",
   "lightland.chat.wrong_item": "物品不合适",
   "lightland.container.ritual": "仪式注魔",
+  "lightland.tooltip.backpack_slot": "背包升级: %s / %s",
   "lightland.tooltip.potion.radius": "范围: %s",
   "lightland.tooltip.target.all": "全部",
   "lightland.tooltip.target.ally": "队友",

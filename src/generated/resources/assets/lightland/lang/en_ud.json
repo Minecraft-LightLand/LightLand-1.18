@@ -108,6 +108,7 @@
   "lightland.chat.unlocked": "p\u01DD\u029E\u0254o\u05DFu\u2229",
   "lightland.chat.wrong_item": "\u026F\u01DD\u0287I buo\u0279M",
   "lightland.container.ritual": "\u05DF\u0250n\u0287\u0131\u1D1A",
+  "lightland.tooltip.backpack_slot": "%s/%s :\u0287o\u05DFS \u029E\u0254\u0250d\u029E\u0254\u0250\u15FA",
   "lightland.tooltip.potion.radius": "%s :sn\u0131p\u0250\u1D1A",
   "lightland.tooltip.target.all": "\u05DF\u05DF\u2C6F",
   "lightland.tooltip.target.ally": "\u028E\u05DF\u05DF\u2C6F",

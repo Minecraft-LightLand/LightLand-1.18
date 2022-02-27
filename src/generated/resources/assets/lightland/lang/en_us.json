@@ -108,6 +108,7 @@
   "lightland.chat.unlocked": "Unlocked",
   "lightland.chat.wrong_item": "Wrong Item",
   "lightland.container.ritual": "Ritual",
+  "lightland.tooltip.backpack_slot": "Backpack Slot: %s/%s",
   "lightland.tooltip.potion.radius": "Radius: %s",
   "lightland.tooltip.target.all": "All",
   "lightland.tooltip.target.ally": "Ally",
