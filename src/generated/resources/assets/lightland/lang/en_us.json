@@ -27,6 +27,8 @@
   "effect.lightland.quick_pull": "Quick Pull",
   "effect.lightland.run_bow": "Run Bow",
   "effect.lightland.water_trap": "Water Trap",
+  "entity.lightland.fire_arrow": "Fire Arrow",
+  "entity.lightland.fire_ball": "Fire Ball",
   "entity.lightland.generic_arrow": "Generic Arrow",
   "entity.lightland.spell": "Spell",
   "entity.lightland.wind_blade": "Wind Blade",

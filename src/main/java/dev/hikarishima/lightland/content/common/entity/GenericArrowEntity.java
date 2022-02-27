@@ -33,8 +33,6 @@ import net.minecraftforge.network.NetworkHooks;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
 public class GenericArrowEntity extends AbstractArrow implements IEntityAdditionalSpawnData {
 

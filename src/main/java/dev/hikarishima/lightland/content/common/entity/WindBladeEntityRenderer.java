@@ -20,8 +20,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @OnlyIn(Dist.CLIENT)
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class WindBladeEntityRenderer extends EntityRenderer<WindBladeEntity> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(LightLand.MODID, "textures/entity/wind_blade.png");

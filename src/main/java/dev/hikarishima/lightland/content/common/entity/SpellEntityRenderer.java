@@ -12,8 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class SpellEntityRenderer extends EntityRenderer<SpellEntity> {
 
     public SpellEntityRenderer(EntityRendererProvider.Context manager) {

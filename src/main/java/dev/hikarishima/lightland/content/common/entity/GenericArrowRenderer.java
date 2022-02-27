@@ -8,8 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class GenericArrowRenderer extends ArrowRenderer<GenericArrowEntity> {
 
     public GenericArrowRenderer(EntityRendererProvider.Context ctx) {

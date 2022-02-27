@@ -27,6 +27,8 @@
   "effect.lightland.quick_pull": "快速拉弓",
   "effect.lightland.run_bow": "Run Bow",
   "effect.lightland.water_trap": "水牢",
+  "entity.lightland.fire_arrow": "魔法火箭",
+  "entity.lightland.fire_ball": "魔法火球",
   "entity.lightland.generic_arrow": "箭",
   "entity.lightland.spell": "法阵",
   "entity.lightland.wind_blade": "风刃",

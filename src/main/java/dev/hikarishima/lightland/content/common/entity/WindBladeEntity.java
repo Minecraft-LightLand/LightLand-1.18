@@ -26,8 +26,6 @@ import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public class WindBladeEntity extends ThrowableProjectile implements IEntityAdditionalSpawnData {
 
     @SerialClass.SerialField

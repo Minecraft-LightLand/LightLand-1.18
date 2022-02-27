@@ -27,6 +27,8 @@
   "effect.lightland.quick_pull": "\u05DF\u05DFn\u0500 \u029E\u0254\u0131n\u1F49",
   "effect.lightland.run_bow": "\u028Do\u15FA un\u1D1A",
   "effect.lightland.water_trap": "d\u0250\u0279\u27D8 \u0279\u01DD\u0287\u0250M",
+  "entity.lightland.fire_arrow": "\u028Do\u0279\u0279\u2C6F \u01DD\u0279\u0131\u2132",
+  "entity.lightland.fire_ball": "\u05DF\u05DF\u0250\u15FA \u01DD\u0279\u0131\u2132",
   "entity.lightland.generic_arrow": "\u028Do\u0279\u0279\u2C6F \u0254\u0131\u0279\u01DDu\u01DD\u2141",
   "entity.lightland.spell": "\u05DF\u05DF\u01DDdS",
   "entity.lightland.wind_blade": "\u01DDp\u0250\u05DF\u15FA pu\u0131M",
