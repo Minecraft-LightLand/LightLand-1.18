@@ -134,5 +134,11 @@
   "skill.lightland.quick_move": "Quick Move",
   "skill.lightland.quick_pull": "Quick Pull",
   "spell.lightland.blade_front": "Blade Front",
-  "spell.lightland.blade_side": "Blade Side"
+  "spell.lightland.blade_side": "Blade Side",
+  "spell.lightland.explosion_rain": "Explosion Rain",
+  "spell.lightland.fang_round": "Fang Round",
+  "spell.lightland.fire_explosion": "Fire Explosion",
+  "spell.lightland.fire_rain": "Fire Rain",
+  "spell.lightland.water_trap_0": "Water Trap 0",
+  "spell.lightland.water_trap_1": "Water Trap 1"
 }

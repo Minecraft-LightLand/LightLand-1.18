@@ -25,7 +25,8 @@ public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> e
     @ServerOnly
     public boolean attempt(Type type, Level world, ServerPlayer player) {
         boolean ans = inner_attempt(type, world, player);
-        new CapToClient(CapToClient.Action.MAGIC_ABILITY, LLPlayerData.get(player)).toClientPlayer(player);
+        if (ans)
+            new CapToClient(CapToClient.Action.MAGIC_ABILITY, LLPlayerData.get(player)).toClientPlayer(player);
         return ans;
     }
 

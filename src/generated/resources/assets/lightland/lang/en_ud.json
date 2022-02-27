@@ -134,5 +134,11 @@
   "skill.lightland.quick_move": "\u01DD\u028CoW \u029E\u0254\u0131n\u1F49",
   "skill.lightland.quick_pull": "\u05DF\u05DFn\u0500 \u029E\u0254\u0131n\u1F49",
   "spell.lightland.blade_front": "\u0287uo\u0279\u2132 \u01DDp\u0250\u05DF\u15FA",
-  "spell.lightland.blade_side": "\u01DDp\u0131S \u01DDp\u0250\u05DF\u15FA"
+  "spell.lightland.blade_side": "\u01DDp\u0131S \u01DDp\u0250\u05DF\u15FA",
+  "spell.lightland.explosion_rain": "u\u0131\u0250\u1D1A uo\u0131so\u05DFdx\u018E",
+  "spell.lightland.fang_round": "puno\u1D1A bu\u0250\u2132",
+  "spell.lightland.fire_explosion": "uo\u0131so\u05DFdx\u018E \u01DD\u0279\u0131\u2132",
+  "spell.lightland.fire_rain": "u\u0131\u0250\u1D1A \u01DD\u0279\u0131\u2132",
+  "spell.lightland.water_trap_0": "0 d\u0250\u0279\u27D8 \u0279\u01DD\u0287\u0250M",
+  "spell.lightland.water_trap_1": "\u0196 d\u0250\u0279\u27D8 \u0279\u01DD\u0287\u0250M"
 }
