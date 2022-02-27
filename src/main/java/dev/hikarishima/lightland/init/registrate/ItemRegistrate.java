@@ -17,6 +17,7 @@ import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.berserker.item.MedicineLeather;
 import dev.hikarishima.lightland.content.common.item.Mat;
+import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
@@ -40,6 +41,7 @@ import java.util.function.Function;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
+@SuppressWarnings({"rawtypes", "unchecked", "unsafe"})
 @MethodsReturnNonnullByDefault
 public class ItemRegistrate {
 
@@ -59,6 +61,18 @@ public class ItemRegistrate {
 
     static {
         REGISTRATE.creativeModeTab(() -> TAB);
+    }
+
+    // -------- common --------
+    public static final ItemEntry<BackpackItem>[] BACKPACKS;
+
+    static {
+        BACKPACKS = new ItemEntry[16];
+        for (int i = 0; i < 16; i++) {
+            DyeColor color = DyeColor.values()[i];
+            BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
+                    .model((ctx, pvd) -> pvd.withExistingParent(ctx.getName(), "lightland:backpack")).defaultLang().register();
+        }
     }
 
     // -------- archery --------

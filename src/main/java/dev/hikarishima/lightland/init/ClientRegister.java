@@ -4,6 +4,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
+import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
 import dev.hikarishima.lightland.content.common.render.*;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
@@ -35,13 +36,20 @@ public class ClientRegister {
 
     @OnlyIn(Dist.CLIENT)
     public static void registerItemColors(ColorHandlerEvent.Item event) {
-        ItemColor color = (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack);
-        for (ItemEntry<MedicineArmor> entry : ItemRegistrate.MEDICINE_ARMOR)
-            event.getItemColors().register(color, entry.get());
-        for (ItemEntry<MedicineArmor> entry : ItemRegistrate.KING_MED_ARMOR)
-            event.getItemColors().register(color, entry.get());
-        event.getItemColors().register(color, ItemRegistrate.MEDICINE_LEATHER.get());
-        event.getItemColors().register(color, ItemRegistrate.KING_MED_LEATHER.get());
+        {
+            ItemColor color = (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack);
+            for (ItemEntry<MedicineArmor> entry : ItemRegistrate.MEDICINE_ARMOR)
+                event.getItemColors().register(color, entry.get());
+            for (ItemEntry<MedicineArmor> entry : ItemRegistrate.KING_MED_ARMOR)
+                event.getItemColors().register(color, entry.get());
+            event.getItemColors().register(color, ItemRegistrate.MEDICINE_LEATHER.get());
+            event.getItemColors().register(color, ItemRegistrate.KING_MED_LEATHER.get());
+        }
+        {
+            ItemColor color = (stack, val) -> val > 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col;
+            for (ItemEntry<BackpackItem> entry : ItemRegistrate.BACKPACKS)
+                event.getItemColors().register(color, entry.get());
+        }
     }
 
     @OnlyIn(Dist.CLIENT)

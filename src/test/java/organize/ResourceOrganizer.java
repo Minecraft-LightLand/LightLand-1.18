@@ -31,8 +31,8 @@ public abstract class ResourceOrganizer {
         //new BlockFileOrganizer();
         //new ArmorFileOrganizer();
         new RecipeFileOrganizer();
-        //new AssetMisc();
-        //new DataMisc();
+        new AssetMisc();
+        new DataMisc();
         new ConfigFileOrganizer();
         File f = new File("./src/test/resources");
         for (File fi : f.listFiles()) {
