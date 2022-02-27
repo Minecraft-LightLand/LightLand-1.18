@@ -8,7 +8,6 @@ import dev.lcy0x1.util.SpriteManager;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
@@ -27,20 +26,20 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
     }
 
     public static BackpackContainer fromNetwork(MenuType<BackpackContainer> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
-        InteractionHand hand = buf.readBoolean() ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        int slot = buf.readInt();
         UUID id = buf.readUUID();
         int row = buf.readInt();
-        return new BackpackContainer(windowId, inv, hand, id, row);
+        return new BackpackContainer(windowId, inv, slot, id, row);
     }
 
     protected final Player player;
-    protected final InteractionHand hand;
+    protected final int item_slot;
     protected final UUID uuid;
 
-    public BackpackContainer(int windowId, Inventory inventory, InteractionHand hand, UUID uuid, int row) {
+    public BackpackContainer(int windowId, Inventory inventory, int hand, UUID uuid, int row) {
         super(MenuRegistrate.MT_BACKPACK.get(), windowId, inventory, MANAGERS[row - 3], menu -> new BaseContainer<>(row * 9, menu), false);
         this.player = inventory.player;
-        this.hand = hand;
+        this.item_slot = hand;
         this.uuid = uuid;
         this.addSlot("grid", stack -> !(stack.getItem() instanceof BackpackItem));
         if (!this.player.level.isClientSide()) {
@@ -62,7 +61,7 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
 
     @ServerOnly
     public ItemStack getStack() {
-        ItemStack stack = player.getItemInHand(hand);
+        ItemStack stack = player.getInventory().getItem(item_slot);
         CompoundTag tag = stack.getTag();
         if (tag == null) return ItemStack.EMPTY;
         if (!tag.contains("container_id")) return ItemStack.EMPTY;

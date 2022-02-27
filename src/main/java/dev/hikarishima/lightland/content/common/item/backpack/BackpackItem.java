@@ -18,7 +18,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
@@ -36,26 +35,40 @@ public class BackpackItem extends Item {
         stack.getOrCreateTag().put("Items", list);
     }
 
-    record MenuPvd(ServerPlayer player, InteractionHand hand, BackpackItem item,
-                   ItemStack stack) implements MenuProvider {
+    public static final class MenuPvd implements MenuProvider {
+
+        private final ServerPlayer player;
+        private final int slot;
+        private final ItemStack stack;
+
+        public MenuPvd(ServerPlayer player, InteractionHand hand, ItemStack stack) {
+            this.player = player;
+            slot = hand == InteractionHand.MAIN_HAND ? player.getInventory().selected : 40;
+            this.stack = stack;
+        }
+
+        public MenuPvd(ServerPlayer player, int slot, ItemStack stack) {
+            this.player = player;
+            this.slot = slot;
+            this.stack = stack;
+        }
 
         @Override
         public Component getDisplayName() {
             return stack.getDisplayName();
         }
 
-        @Nullable
         @Override
         public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
             CompoundTag tag = stack.getOrCreateTag();
             UUID uuid = tag.getUUID("container_id");
-            return new BackpackContainer(id, inventory, hand, uuid, tag.getInt("rows"));
+            return new BackpackContainer(id, inventory, slot, uuid, tag.getInt("rows"));
         }
 
         public void writeBuffer(FriendlyByteBuf buf) {
             CompoundTag tag = stack.getOrCreateTag();
             UUID id = tag.getUUID("container_id");
-            buf.writeBoolean(hand == InteractionHand.MAIN_HAND);
+            buf.writeInt(slot);
             buf.writeUUID(id);
             buf.writeInt(tag.getInt("rows"));
         }
@@ -83,7 +96,7 @@ public class BackpackItem extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (!level.isClientSide()) {
-            new MenuPvd((ServerPlayer) player, hand, this, stack).open();
+            new MenuPvd((ServerPlayer) player, hand, stack).open();
         } else {
             player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
         }
