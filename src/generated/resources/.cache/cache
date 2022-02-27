@@ -1,5 +1,5 @@
-3112eac61997d93b380de8ed95bf6dac52e51392 assets/lightland/lang/en_ud.json
-7833034de729e0b193f7b196a9a47c03ac1354e8 assets/lightland/lang/en_us.json
+555ff9c4c0f05577a92f20c63bb7f75683416676 assets/lightland/lang/en_ud.json
+1f9ed2d5eebc7f579c1951a1edee83d0745f163d assets/lightland/lang/en_us.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_black.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_blue.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_brown.json
@@ -33,6 +33,8 @@ c42471351c218da8755f946d34f3c2471bf8e1c7 assets/lightland/models/item/ender_aim_
 6ecaa913a7a54dd44824d08a49c94798bcaa51c5 assets/lightland/models/item/ender_aim_bow_pulling_1.json
 666e94b211d2d04ed2731a589c9ca4d06142914a assets/lightland/models/item/ender_aim_bow_pulling_2.json
 e8c2eedc34c28f32443ee9ed096c0f989c07927a assets/lightland/models/item/ender_arrow.json
+f9bd318c8c1b536a1e13bcc8fa771ee60370ca86 assets/lightland/models/item/ender_backpack.json
+bca7cfc7ae515d954c26dc995092cb299d4ebc9f assets/lightland/models/item/ender_backpack_open.json
 78a7ca62c01e82bd40415641a0de8b0e16291982 assets/lightland/models/item/fire_arrow_lv1.json
 4c07589e04b2ccc1f9ba8c797f81be1088deb76b assets/lightland/models/item/fire_arrow_lv2.json
 25233390a5209ab966a75f638221649835dacc9f assets/lightland/models/item/frozen_arrow.json

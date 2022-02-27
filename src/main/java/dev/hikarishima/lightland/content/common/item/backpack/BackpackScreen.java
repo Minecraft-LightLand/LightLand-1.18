@@ -13,13 +13,6 @@ public class BackpackScreen extends BaseContainerScreen<BackpackContainer> {
     }
 
     @Override
-    public void render(PoseStack stack, int mx, int my, float pt) {
-        this.renderBackground(stack);
-        super.render(stack, mx, my, pt);
-        this.renderTooltip(stack, mx, my);
-    }
-
-    @Override
     protected void renderBg(PoseStack stack, float pt, int mx, int my) {
         SpriteManager sm = menu.sprite;
         SpriteManager.ScreenRenderer sr = sm.getRenderer(this);

@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.events;
 
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
+import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
 import dev.hikarishima.lightland.network.packets.SlotClickToServer;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.gui.screens.Screen;
@@ -21,11 +22,12 @@ public class MiscEventHadler {
                 screen instanceof AbstractContainerScreen cont) {
             Slot slot = cont.findSlot(event.getMouseX(), event.getMouseY());
             if (slot != null &&
-                    slot.container == Proxy.getClientPlayer().getInventory() &&
-                    slot.getItem().getItem() instanceof BackpackItem) {
-                int ind = slot.getSlotIndex();
-                new SlotClickToServer(ind).toServer();
-                event.setCanceled(true);
+                    slot.container == Proxy.getClientPlayer().getInventory()) {
+                if (slot.getItem().getItem() instanceof BackpackItem || slot.getItem().getItem() instanceof EnderBackpackItem) {
+                    int ind = slot.getSlotIndex();
+                    new SlotClickToServer(ind).toServer();
+                    event.setCanceled(true);
+                }
             }
         }
     }

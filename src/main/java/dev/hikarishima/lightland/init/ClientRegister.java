@@ -5,6 +5,7 @@ import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
+import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
 import dev.hikarishima.lightland.content.common.render.*;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
@@ -32,9 +33,10 @@ public class ClientRegister {
             ItemProperties.register(bow, new ResourceLocation("pull"), (stack, level, entity, i) -> entity == null || entity.getUseItem() != stack ? 0.0F : bow.getPullForTime(entity, stack.getUseDuration() - entity.getUseItemRemainingTicks()));
             ItemProperties.register(bow, new ResourceLocation("pulling"), (stack, level, entity, i) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
         }
-        for (ItemEntry<BackpackItem> entry : ItemRegistrate.BACKPACKS){
+        for (ItemEntry<BackpackItem> entry : ItemRegistrate.BACKPACKS) {
             ItemProperties.register(entry.get(), new ResourceLocation("open"), BackpackItem::isOpened);
         }
+        ItemProperties.register(ItemRegistrate.ENDER_BACKPACK.get(), new ResourceLocation("open"), EnderBackpackItem::isOpened);
     }
 
     @OnlyIn(Dist.CLIENT)

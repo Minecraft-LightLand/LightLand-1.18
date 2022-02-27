@@ -18,6 +18,7 @@ import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.berserker.item.MedicineLeather;
 import dev.hikarishima.lightland.content.common.item.Mat;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
+import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
@@ -65,6 +66,7 @@ public class ItemRegistrate {
 
     // -------- common --------
     public static final ItemEntry<BackpackItem>[] BACKPACKS;
+    public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
 
     static {
         BACKPACKS = new ItemEntry[16];
@@ -73,12 +75,23 @@ public class ItemRegistrate {
             BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
                     .model(ItemRegistrate::createBackpackModel).defaultLang().register();
         }
+        ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
+                .model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
     }
 
     private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {
         ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:backpack");
         builder.override().predicate(new ResourceLocation("open"), 1).model(
                 new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/backpack_open"));
+    }
+
+    private static void createEnderBackpackModel(DataGenContext<Item, EnderBackpackItem> ctx, RegistrateItemModelProvider pvd) {
+        pvd.withExistingParent("ender_backpack_open", "generated")
+                .texture("layer0", "item/ender_backpack_open");
+        ItemModelBuilder builder = pvd.withExistingParent("ender_backpack", "generated");
+        builder.texture("layer0", "item/ender_backpack");
+        builder.override().predicate(new ResourceLocation("open"), 1).model(
+                new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/ender_backpack_open"));
     }
 
     // -------- archery --------
