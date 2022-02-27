@@ -13,7 +13,7 @@
       "factor": 4,
       "type": "PARCHMENT",
       "spell_time": {
-        "id": "test.spell",
+        "id": "lightland:test_spell",
         "duration": 50,
         "setup": 20,
         "close": 20
@@ -29,7 +29,7 @@
       "factor": 4,
       "type": "PARCHMENT",
       "spell_time": {
-        "id": "test.spell",
+        "id": "lightland:test_spell",
         "duration": 50,
         "setup": 20,
         "close": 20

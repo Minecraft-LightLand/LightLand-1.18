@@ -4,13 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import dev.hikarishima.lightland.content.common.render.LLRenderState;
 import dev.hikarishima.lightland.content.magic.render.SpellComponent;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 public class SpellEntityRenderer extends EntityRenderer<SpellEntity> {
 
@@ -27,7 +24,8 @@ public class SpellEntityRenderer extends EntityRenderer<SpellEntity> {
         matrix.mulPose(Vector3f.XP.rotationDegrees(entity.getXRot()));
         float scale = entity.getSize(partial);
         matrix.scale(scale / 16f, scale / 16f, scale / 16f);
-        entity.getComponent().render(handle);
+        SpellComponent component = entity.getComponent();
+        if (component != null) component.render(handle);
         matrix.popPose();
         super.render(entity, yRot, partial, matrix, buffer, light);
     }
