@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
  * Tells if such method / field is and should only be used in logical server
  */
 @Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.FIELD, ElementType.METHOD})
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.CONSTRUCTOR})
 public @interface ServerOnly {
 }

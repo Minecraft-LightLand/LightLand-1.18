@@ -34,10 +34,19 @@ public abstract class Skill<C extends SkillConfig<D>, D extends SkillData> exten
         return SkillDataConfig.getConfig(getRegistryName());
     }
 
-    public abstract D genData();
+    @ServerOnly
+    public abstract D genData(Player player);
 
     public ResourceLocation getIcon() {
         ResourceLocation rl = getRegistryName();
         return new ResourceLocation(rl.getNamespace(), "textures/skill/" + rl.getPath() + ".png");
     }
+
+    @DoubleSidedCall
+    public void tick(Player player, D data) {
+        if (data.cooldown > 0) {
+            data.cooldown--;
+        }
+    }
+
 }

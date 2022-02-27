@@ -1,0 +1,28 @@
+{
+  "_class": "organize.json.JsonPartMap",
+  "file": "config_skill",
+  "path": "map",
+  "common": {
+	"_class": "dev.hikarishima.lightland.content.skill.MovementSkill$Config"
+  },
+  "map": {
+	"lightland:quick_move": {
+	  "max_level": 3,
+	  "cooldown": [
+		200,
+		200,
+		200
+	  ],
+	  "time": [
+		16,
+		8,
+		4
+	  ],
+	  "velocity": [
+		0.5,
+		1,
+		2
+	  ]
+	}
+  }
+}

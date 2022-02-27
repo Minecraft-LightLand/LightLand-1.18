@@ -33,9 +33,10 @@ public class SkillCap {
 
         }
 
-        public Cont(S skill) {
+        @ServerOnly
+        public Cont(ServerPlayer player, S skill) {
             this.skill = skill;
-            this.data = skill.genData();
+            this.data = skill.genData(player);
         }
 
         @DoubleSidedCall
@@ -55,6 +56,10 @@ public class SkillCap {
             data.cooldown = skill.getConfig().getCooldown(data);
         }
 
+        @DoubleSidedCall
+        public void tick(Player player) {
+            skill.tick(player, data);
+        }
     }
 
     private final LLPlayerData parent;
@@ -70,9 +75,7 @@ public class SkillCap {
     public void tick() {
         for (int i = 0; i < list.size(); i++) {
             Cont<?, ?, ?> cont = list.get(i);
-            if (cont.data.cooldown > 0) {
-                cont.data.cooldown--;
-            }
+            cont.tick(parent.player);
             int I = i;
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
                 if (cont.data.cooldown == 0 && LangData.Keys.values()[I].map.isDown()) {

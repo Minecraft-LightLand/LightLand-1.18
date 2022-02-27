@@ -140,18 +140,18 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.11')
-    implementation fg.deobf('local.lib.appleskin:appleskin-forge-mc1.18:2.3.0')
-
-    implementation fg.deobf("curse.maven:create-328085:3600402")
-    implementation fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:1.18-0.5.1.44")
+    implementation fg.deobf("com.simibubi.create:Create:mc1.18.1_v0.4d+87")
+    implementation fg.deobf("curse.maven:appleskin-248787:3626712")
+    implementation fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:1.18-0.6.1.62")
     implementation fg.deobf("dev.architectury:architectury-forge:3.7.22")
     implementation fg.deobf("dev.ftb.mods:ftb-library-forge:1801.3.5-build.109")
     implementation fg.deobf("dev.ftb.mods:ftb-teams-forge:1801.2.4-build.46")
     implementation fg.deobf("dev.ftb.mods:ftb-chunks-forge:1801.3.4-build.127")
     //runtimeOnly fg.deobf("dev.ftb.mods:ftb-quests-forge:1801.3.7-build.94")
     runtimeOnly fg.deobf("dev.latvian.mods:item-filters-forge:1801.2.6-build.16")
-    runtimeOnly fg.deobf("dev.latvian.mods:rhino-forge:1801.1.8-build.102")
-    runtimeOnly fg.deobf("dev.latvian.mods:kubejs-forge:1801.4.2-build.300")
+    //runtimeOnly fg.deobf("dev.latvian.mods:rhino-forge:1801.1.8-build.102")
+    //runtimeOnly fg.deobf("dev.latvian.mods:kubejs-forge:1801.4.2-build.300")
+
 
 }
 

@@ -78,8 +78,8 @@ public class MainCommand extends BaseCommand {
                                     int slot = context.getArgument("slot", Integer.class) - 1;
                                     Skill<?, ?> skill = context.getArgument("skill", Skill.class);
                                     if (handler.skillCap.list.size() <= slot) {
-                                        handler.skillCap.list.add(new SkillCap.Cont<>(skill));
-                                    } else handler.skillCap.list.set(slot, new SkillCap.Cont<>(skill));
+                                        handler.skillCap.list.add(new SkillCap.Cont<>(e, skill));
+                                    } else handler.skillCap.list.set(slot, new SkillCap.Cont<>(e, skill));
                                     new CapToClient(CapToClient.Action.SKILL, handler).toClientPlayer(e);
                                     send(context, LangData.IDS.ACTION_SUCCESS.get());
                                     return 1;

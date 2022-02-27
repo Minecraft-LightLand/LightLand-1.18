@@ -6,6 +6,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -50,6 +51,15 @@ public class Automator {
                     tag.putInt("x", obj.getX());
                     tag.putInt("y", obj.getY());
                     tag.putInt("z", obj.getZ());
+                    return tag;
+                });
+        new ClassHandler<CompoundTag, Vec3>(Vec3.class,
+                tag -> new Vec3(tag.getDouble("x"), tag.getDouble("y"), tag.getDouble("z")),
+                obj -> {
+                    CompoundTag tag = new CompoundTag();
+                    tag.putDouble("x", obj.x());
+                    tag.putDouble("y", obj.y());
+                    tag.putDouble("z", obj.z());
                     return tag;
                 });
         new ClassHandler<IntArrayTag, UUID>(UUID.class,

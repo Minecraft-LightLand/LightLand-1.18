@@ -4,6 +4,7 @@ import dev.lcy0x1.util.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -53,7 +54,7 @@ public class EffectSkill extends Skill<EffectSkill.Config, SkillData> {
         super.activate(level, player, data);
     }
 
-    public SkillData genData() {
+    public SkillData genData(Player player) {
         return new SkillData();
     }
 
