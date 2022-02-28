@@ -18,7 +18,7 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class MiscEventHadler {
+public class MiscEventHandler {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
