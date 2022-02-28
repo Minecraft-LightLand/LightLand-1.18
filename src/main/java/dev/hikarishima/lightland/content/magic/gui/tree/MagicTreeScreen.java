@@ -8,10 +8,9 @@ import dev.hikarishima.lightland.content.magic.products.MagicProductType;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.lcy0x1.base.Proxy;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -91,20 +90,19 @@ public class MagicTreeScreen extends Screen {
     }
 
     private void renderWindow(PoseStack matrix, int x, int y) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        TextureManager tm = Minecraft.getInstance().getTextureManager();
-        tm.bind(WINDOW_LOCATION);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, WINDOW_LOCATION);
         this.blit(matrix, x, y, 0, 0, 252, 140);
         if (this.tabs.size() > 1) {
-            tm.bind(TABS_LOCATION);
+            RenderSystem.setShaderTexture(0, TABS_LOCATION);
             Iterator<MagicTreeGui<?, ?>> iterator;
             iterator = this.tabs.values().iterator();
             while (iterator.hasNext()) {
                 MagicTreeGui<?, ?> gui = iterator.next();
                 gui.drawTab(matrix, x, y, gui == selected);
             }
-            RenderSystem.enableRescaleNormal();
             RenderSystem.defaultBlendFunc();
             iterator = this.tabs.values().iterator();
             while (iterator.hasNext()) {
@@ -117,14 +115,14 @@ public class MagicTreeScreen extends Screen {
     }
 
     private void renderTooltips(PoseStack matrix, int mx, int my, int x0, int y0) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         if (selected != null) {
-            RenderSystem.pushMatrix();
+            matrix.pushPose();
             RenderSystem.enableDepthTest();
-            RenderSystem.translatef((float) (x0 + 9), (float) (y0 + 18), 400.0F);
+            matrix.translate((float) (x0 + 9), (float) (y0 + 18), 400.0F);
             selected.drawTooltips(matrix, mx - x0 - 9, my - y0 - 18, x0, y0);
             RenderSystem.disableDepthTest();
-            RenderSystem.popMatrix();
+            matrix.popPose();
         }
 
         if (this.tabs.size() > 1) {

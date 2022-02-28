@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.content.common.gui.ability;
 
-import com.hikarishima.lightland.magic.registry.MagicItemRegistry;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hikarishima.lightland.content.common.gui.GuiTabType;
@@ -46,15 +45,14 @@ public abstract class AbstractAbilityScreen extends Screen {
         RenderSystem.disableDepthTest();
         TextureManager tm = Minecraft.getInstance().getTextureManager();
         ItemRenderer ir = Minecraft.getInstance().getItemRenderer();
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
-        tm.bind(WINDOW_LOCATION);
+        RenderSystem.setShaderTexture(0, WINDOW_LOCATION);
         this.blit(matrix, x0, y0, 0, 0, 252, 140);
-        tm.bind(TABS_LOCATION);
+        RenderSystem.setShaderTexture(0, TABS_LOCATION);
         for (AbilityTab tab : AbilityTab.values()) {
             tab.type.draw(matrix, this, x0, y0, this.tab == tab, tab.index);
         }
-        RenderSystem.enableRescaleNormal();
         RenderSystem.defaultBlendFunc();
         for (AbilityTab tab : AbilityTab.values()) {
             tab.type.drawIcon(x0, y0, tab.index, ir, tab.icon.get());
@@ -98,7 +96,7 @@ public abstract class AbstractAbilityScreen extends Screen {
     public enum AbilityTab {
         PROFESSION(0, Items.IRON_SWORD::getDefaultInstance, ProfessionScreen::canAccess, ProfessionScreen::new, ProfessionScreen.TITLE),
         ABILITY(1, Items.GOLDEN_APPLE::getDefaultInstance, () -> true, AbilityScreen::new, AbilityScreen.TITLE),
-        ELEMENT(2, () -> MagicItemRegistry.MAGIC_BOOK.get().getDefaultInstance(), ElementalScreen::canAccess, ElementalScreen::new, ElementalScreen.TITLE),
+        ELEMENT(2, () -> ItemRegistrate.MAGIC_WAND.get().getDefaultInstance(), ElementalScreen::canAccess, ElementalScreen::new, ElementalScreen.TITLE),
         ARCANE(3, () -> ItemRegistrate.ARCANE_AXE_GILDED.get().getDefaultInstance(), ArcaneScreen::canAccess, ArcaneScreen::new, ArcaneScreen.TITLE);
 
         public final GuiTabType type = GuiTabType.ABOVE;

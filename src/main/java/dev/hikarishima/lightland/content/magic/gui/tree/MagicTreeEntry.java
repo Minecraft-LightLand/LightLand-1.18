@@ -11,6 +11,7 @@ import dev.hikarishima.lightland.content.magic.products.info.ProductState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.locale.Language;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -37,11 +38,11 @@ public class MagicTreeEntry<I extends IForgeRegistryEntry<I>, P extends MagicPro
         this.tab = tab;
         this.product = product;
         this.display = display;
-        this.title = LanguageMap.getInstance().getVisualOrder(minecraft.font.substrByWidth(Translator.get(product), 163));
+        this.title = Language.getInstance().getVisualOrder(minecraft.font.substrByWidth(product.getDesc(), 163));
         this.x = Math.round(display.getX() * X_SLOT);
         this.y = Math.round(display.getY() * Y_SLOT);
         int title_width = Math.max(80, 29 + minecraft.font.width(this.title));
-        this.description = LanguageMap.getInstance().getVisualOrder(Translator.getDesc(product));
+        this.description = Language.getInstance().getVisualOrder(product.getFullDesc());
         for (FormattedCharSequence text : this.description) {
             title_width = Math.max(title_width, minecraft.font.width(text));
         }
@@ -116,7 +117,7 @@ public class MagicTreeEntry<I extends IForgeRegistryEntry<I>, P extends MagicPro
 
         int lvt_16_1_ = this.width - this.width / 2;
         RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
         int lvt_17_1_ = sy + this.y;
         int lvt_18_2_;

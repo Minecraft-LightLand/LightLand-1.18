@@ -1,29 +1,19 @@
 package dev.hikarishima.lightland.content.common.gui.ability;
 
-import com.hikarishima.lightland.magic.MagicElement;
-import com.hikarishima.lightland.magic.MagicProxy;
-import com.hikarishima.lightland.magic.MagicRegistry;
-import com.hikarishima.lightland.magic.Translator;
-import com.hikarishima.lightland.magic.capabilities.MagicHandler;
-import com.hikarishima.lightland.magic.capabilities.ToServerMsg;
-import com.hikarishima.lightland.magic.gui.AbstractHexGui;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.common.capability.CapProxy;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.hikarishima.lightland.network.packets.CapToServer;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.ITextProperties;
-import net.minecraft.util.text.LanguageMap;
+import net.minecraft.network.chat.FormattedText;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -33,7 +23,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class ElementalScreen extends AbstractAbilityScreen {
 
-    public static final Component TITLE = Translator.get("screen.ability.elemental.title");
+    public static final Component TITLE = LangData.IDS.GUI_ELEMENT.get();
     private static final int RADIUS = 30;
 
     public static boolean canAccess() {
@@ -85,12 +75,12 @@ public class ElementalScreen extends AbstractAbilityScreen {
                 int lv = handler.magicHolder.getElementalMastery(e.elem.get());
                 int count = handler.magicHolder.getElement(e.elem.get());
                 int rem = handler.abilityPoints.element;
-                List<Component> list = new ArrayList<>();
+                List<FormattedText> list = new ArrayList<>();
                 list.add(e.elem.get().getDesc());
-                list.add(Translator.get("screen.ability.elemental.desc.lv", lv));
-                list.add(Translator.get("screen.ability.elemental.desc.count", count));
-                list.add(Translator.get("screen.ability.elemental.desc.cost", 1, rem));
-                renderTooltip(matrix, LanguageMap.getInstance().getVisualOrder(list), mx, my);
+                list.add(LangData.IDS.GUI_ELEMENT_LV.get(lv));
+                list.add(LangData.IDS.GUI_ELEMENT_COUNT.get(count));
+                list.add(LangData.IDS.GUI_ELEMENT_COST.get(1, rem));
+                renderTooltip(matrix, Language.getInstance().getVisualOrder(list), mx, my);
             }
         }
     }

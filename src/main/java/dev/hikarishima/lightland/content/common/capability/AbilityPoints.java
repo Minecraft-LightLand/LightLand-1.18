@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.content.common.capability;
 
 import dev.hikarishima.lightland.content.profession.Profession;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.util.BodyAttribute;
 import dev.lcy0x1.util.SerialClass;
 
@@ -158,13 +159,13 @@ public class AbilityPoints {
             this.level = level;
         }
 
-        public String checkLevelUp(LLPlayerData handler) {
+        public LangData.IDS checkLevelUp(LLPlayerData handler) {
             if (!check.test(handler)) {
-                return "screen.ability.ability.error.no_point";
+                return LangData.IDS.LVUP_NO_POINT;
             }
             Profession prof = handler.abilityPoints.getProfession();
             if (prof == null) {
-                return "screen.ability.ability.error.no_prof";
+                return LangData.IDS.LVUP_NO_PROF;
             } else {
                 return prof.allowLevel(this, handler);
             }

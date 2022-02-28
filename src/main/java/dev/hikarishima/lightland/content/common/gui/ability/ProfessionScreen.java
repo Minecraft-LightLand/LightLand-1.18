@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.content.common.gui.ability;
 
-import com.hikarishima.lightland.magic.Translator;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tterrag.registrate.util.entry.RegistryEntry;
@@ -8,11 +7,13 @@ import dev.hikarishima.lightland.content.common.capability.CapProxy;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.content.profession.Profession;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.network.packets.CapToServer;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.LanguageMap;
+import net.minecraft.network.chat.FormattedText;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class ProfessionScreen extends AbstractAbilityScreen {
 
-    public static final Component TITLE = Translator.get("screen.ability.profession.title");
+    public static final Component TITLE = LangData.IDS.GUI_PROF_EXIST.get();
     private static final int H_DIS = 15, Y_DIS = 30;
 
     public static boolean canAccess() {
@@ -68,11 +69,11 @@ public class ProfessionScreen extends AbstractAbilityScreen {
         LLPlayerData handler = CapProxy.getHandler();
         for (ProfType e : ProfType.values()) {
             if (e.within(mx - w / 2f, my - h / 2f)) {
-                List<Component> list = new ArrayList<>();
+                List<FormattedText> list = new ArrayList<>();
                 list.add(e.prof.get().getDesc());
                 if (handler.abilityPoints.profession != null)
-                    list.add(Translator.get("screen.ability.profession.desc.exist"));
-                renderTooltip(matrix, LanguageMap.getInstance().getVisualOrder(list), mx, my);
+                    list.add(LangData.IDS.GUI_PROF_EXIST.get());
+                renderTooltip(matrix, Language.getInstance().getVisualOrder(list), mx, my);
             }
         }
     }

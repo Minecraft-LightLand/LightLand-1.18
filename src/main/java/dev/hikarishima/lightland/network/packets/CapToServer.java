@@ -6,6 +6,7 @@ import dev.hikarishima.lightland.content.common.capability.CapProxy;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.common.capability.MagicHolder;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
+import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.MagicProduct;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.content.profession.Profession;
@@ -58,6 +59,13 @@ public class CapToServer extends SerialPacketBase {
             if (prof == null)
                 return;
             handler.abilityPoints.setProfession(prof);
+        }),
+        ELEMENTAL((handler, tag) -> {
+            MagicElement elem = LightLandRegistry.ELEMENT.getValue(new ResourceLocation(tag.getString("id")));
+            if (elem == null)
+                return;
+            if (handler.abilityPoints.canLevelElement() && handler.magicHolder.addElementalMastery(elem))
+                handler.abilityPoints.levelElement();
         }),
         ARCANE((handler, tag) -> {
             ArcaneType type = LightLandRegistry.ARCANE_TYPE.getValue(new ResourceLocation(tag.getString("id")));
@@ -125,6 +133,13 @@ public class CapToServer extends SerialPacketBase {
         CompoundTag tag = new CompoundTag();
         tag.putString("id", type.getID());
         new CapToServer(Action.ARCANE, tag).toServer();
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void addElemMastery(MagicElement elem) {
+        CompoundTag tag = new CompoundTag();
+        tag.putString("id", elem.getID());
+        new CapToServer(Action.ELEMENTAL, tag).toServer();
     }
 
     @OnlyIn(Dist.CLIENT)

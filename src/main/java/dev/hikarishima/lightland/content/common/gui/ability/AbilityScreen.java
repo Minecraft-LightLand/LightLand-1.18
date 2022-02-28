@@ -1,6 +1,5 @@
 package dev.hikarishima.lightland.content.common.gui.ability;
 
-import com.hikarishima.lightland.magic.Translator;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hikarishima.lightland.content.common.capability.AbilityPoints;
@@ -8,12 +7,14 @@ import dev.hikarishima.lightland.content.common.capability.CapProxy;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.init.LightLand;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.network.packets.CapToServer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.LanguageMap;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import java.util.function.Function;
 @MethodsReturnNonnullByDefault
 public class AbilityScreen extends AbstractAbilityScreen {
 
-    public static final Component TITLE = Translator.get("screen.ability.ability.title");
+    public static final Component TITLE = LangData.IDS.GUI_ABILITY.get();
     private static final int H_DIS = 50, Y_DIS = 30;
 
     public AbilityScreen() {
@@ -67,14 +68,14 @@ public class AbilityScreen extends AbstractAbilityScreen {
             if (e.within(mx - w / 2f, my - h / 2f)) {
                 int lv = e.type.level.apply(handler);
                 int cost = e.cost.apply(handler.abilityPoints);
-                List<Component> list = new ArrayList<>();
+                List<FormattedText> list = new ArrayList<>();
                 list.add(e.getDesc());
-                list.add(Translator.get("screen.ability.ability.desc.lv", lv));
-                list.add(Translator.get("screen.ability.ability.desc.cost", 1, cost));
-                String lvup = e.type.checkLevelUp(handler);
+                list.add(LangData.IDS.GUI_ABILITY_LV.get(lv));
+                list.add(LangData.IDS.GUI_ABILITY_COST.get(1, cost));
+                LangData.IDS lvup = e.type.checkLevelUp(handler);
                 if (lvup != null)
-                    list.add(Translator.get(lvup).withStyle(ChatFormatting.RED));
-                renderTooltip(matrix, LanguageMap.getInstance().getVisualOrder(list), mx, my);
+                    list.add(lvup.get().withStyle(ChatFormatting.RED));
+                renderTooltip(matrix, Language.getInstance().getVisualOrder(list), mx, my);
             }
         }
     }
@@ -111,7 +112,7 @@ public class AbilityScreen extends AbstractAbilityScreen {
         }
 
         public Component getDesc() {
-            return Translator.get("screen.ability.ability." + icon);
+            return LangData.get(this);
         }
 
     }

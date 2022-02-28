@@ -1,7 +1,10 @@
 package dev.hikarishima.lightland.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
+import dev.hikarishima.lightland.content.common.gui.ability.AbilityScreen;
 import dev.hikarishima.lightland.content.magic.gui.hex.HexStatus;
+import dev.hikarishima.lightland.content.magic.products.info.ProductState;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.magic.HexDirection;
 import net.minecraft.client.KeyMapping;
@@ -33,7 +36,28 @@ public class LangData {
         BACKPACK_SLOT("tooltip.backpack_slot", 2),
         MANA_COST("tooltip.mana_cost", 1),
 
-        HEX_COST("screen.hex.cost", 1);
+        LVUP_NO_POINT("screen.ability.ability.error.no_point", 0),
+        LVUP_NO_PROF("screen.ability.ability.error.prof", 0),
+        LVUP_MAX_REACHED("screen.ability.ability.error.max_reached", 0),
+        LVUP_PROF_MAX("screen.ability.ability.error.prof_max", 0),
+
+        HEX_COST("screen.hex.cost", 1),
+        GUI_TREE_ELEM_PRE("screen.magic_tree.elem.require", 0),
+        GUI_TREE_ELEM_POST("screen.magic_tree.elem.lv", 1),
+        GUI_TREE_COST("screen.magic_tree.cost", 1),
+        GUI_TREE_SHORT("screen.magic_tree.short", 0),
+        GUI_TREE_REPEAT("screen.magic_tree.repeat", 0),
+        GUI_ABILITY("screen.ability.ability.title", 0),
+        GUI_ABILITY_LV("screen.ability.ability.desc.lv", 1),
+        GUI_ABILITY_COST("screen.ability.ability.desc.cost", 2),
+        GUI_ARCANE("screen.ability.arcane.title", 0),
+        GUI_ARCANE_COST("screen.ability.arcane.cost", 2),
+        GUI_ELEMENT("screen.ability.elemental.title", 0),
+        GUI_ELEMENT_LV("screen.ability.elemental.desc.lv", 1),
+        GUI_ELEMENT_COUNT("screen.ability.elemental.desc.count", 1),
+        GUI_ELEMENT_COST("screen.ability.elemental.desc.cost", 2),
+        GUI_PROF("screen.ability.profession.title", 0),
+        GUI_PROF_EXIST("screen.ability.profession.desc.prof_already_exist", 0);
 
         final String id;
         final int count;
@@ -75,6 +99,9 @@ public class LangData {
         MAP.put(HexDirection.class, "screen.hex.direction.");
         MAP.put(HexStatus.Compile.class, "screen.hex.compile.");
         MAP.put(HexStatus.Save.class, "screen.hex.save.");
+        MAP.put(AbilityScreen.AbilityType.class, "screen.ability.ability.");
+        MAP.put(ArcaneType.Hit.class, "screen.ability.arcane.activate.");
+        MAP.put(ProductState.class, "screen.magic_tree.status.");
     }
 
     public static TranslatableComponent get(Enum<?> obj) {

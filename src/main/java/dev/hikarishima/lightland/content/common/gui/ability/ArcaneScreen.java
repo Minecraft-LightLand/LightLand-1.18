@@ -1,20 +1,20 @@
 package dev.hikarishima.lightland.content.common.gui.ability;
 
-import com.hikarishima.lightland.magic.Translator;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.CapProxy;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.network.packets.CapToServer;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.LanguageMap;
+import net.minecraft.network.chat.FormattedText;
 import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -25,7 +25,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class ArcaneScreen extends AbstractAbilityScreen {
 
-    public static final Component TITLE = Translator.get("screen.ability.arcane.title");
+    public static final Component TITLE = LangData.IDS.GUI_ARCANE.get();
 
     public static boolean canAccess() {
         LLPlayerData handler = CapProxy.getHandler();
@@ -75,13 +75,13 @@ public class ArcaneScreen extends AbstractAbilityScreen {
         for (ArcaneEntry e : ArcaneEntry.values()) {
             if (e.within(mx - w / 2f, my - h / 2f)) {
                 int cost = handler.abilityPoints.arcane + handler.abilityPoints.magic + handler.abilityPoints.general;
-                List<Component> list = new ArrayList<>();
+                List<FormattedText> list = new ArrayList<>();
                 list.add(e.type.get().getDesc());
                 if (!handler.magicAbility.isArcaneTypeUnlocked(e.type.get())) {
-                    list.add(Translator.get("screen.ability.arcane.cost", 1, cost));
+                    list.add(LangData.IDS.GUI_ARCANE_COST.get(1, cost));
                 }
-                list.add(Translator.get("screen.ability.arcane.activate." + e.type.get().hit.name().toLowerCase()));
-                renderTooltip(matrix, LanguageMap.getInstance().getVisualOrder(list), mx, my);
+                list.add(LangData.get(e.type.get().hit));
+                renderTooltip(matrix, Language.getInstance().getVisualOrder(list), mx, my);
             }
         }
     }
