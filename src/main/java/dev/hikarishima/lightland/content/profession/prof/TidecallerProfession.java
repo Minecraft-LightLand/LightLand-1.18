@@ -1,6 +1,7 @@
-package dev.hikarishima.lightland.content.profession;
+package dev.hikarishima.lightland.content.profession.prof;
 
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.profession.Profession;
 
 public class TidecallerProfession extends Profession {
 

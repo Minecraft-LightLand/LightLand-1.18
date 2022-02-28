@@ -4,6 +4,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
+import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.network.packets.CapToClient;
@@ -45,6 +46,17 @@ public class MagicCommand extends BaseCommand {
                             handler.magicAbility.spell_level += slot;
                             new CapToClient(CapToClient.Action.MAGIC_ABILITY, handler).toClientPlayer(e);
                             send(context, LangData.IDS.SPELL_SLOT.get(handler.magicAbility.getMaxSpellSlot()));
+                            return 1;
+                        }))));
+
+        registerCommand("master_element", getPlayer()
+                .then(Commands.argument("elem", RegistryParser.ELEMENT)
+                        .executes(withPlayer((context, e) -> {
+                            LLPlayerData handler = LLPlayerData.get(e);
+                            MagicElement elem = context.getArgument("elem", MagicElement.class);
+                            handler.magicHolder.addElementalMastery(elem);
+                            new CapToClient(CapToClient.Action.ALL, handler).toClientPlayer(e);
+                            send(context, LangData.IDS.ACTION_SUCCESS.get());
                             return 1;
                         }))));
 

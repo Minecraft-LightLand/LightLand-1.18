@@ -10,6 +10,7 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
+import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
@@ -37,6 +38,7 @@ import java.util.function.Supplier;
 public class RegistryParser<T extends IForgeRegistryEntry<T>> implements ArgumentType<T> {
 
     public static final Set<RegistryParser<?>> SET = new HashSet<>();
+    public static final RegistryParser<MagicElement> ELEMENT = new RegistryParser<>(MagicElement.class, () -> LightLandRegistry.ELEMENT);
     public static final RegistryParser<ArcaneType> ARCANE_TYPE = new RegistryParser<>(ArcaneType.class, () -> LightLandRegistry.ARCANE_TYPE);
     public static final RegistryParser<Arcane> ARCANE = new RegistryParser<>(Arcane.class, () -> LightLandRegistry.ARCANE);
     public static final RegistryParser<Profession> PROFESSION = new RegistryParser<>(Profession.class, () -> LightLandRegistry.PROFESSION);
