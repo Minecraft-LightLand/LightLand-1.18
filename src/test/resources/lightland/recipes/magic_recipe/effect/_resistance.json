@@ -1,0 +1,33 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:effect",
+    "product_id": "minecraft:resistance",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:earth",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 2,
+        "y": 0
+    },
+    "elements": {
+        "A": "lightland:water",
+        "B": "lightland:earth",
+        "C": "lightland:earth",
+        "D": "lightland:water",
+        "E": "lightland:quint",
+        "F": "lightland:quint"
+    },
+    "flows": [
+        "A->B",
+        "B->C",
+        "C->D",
+        "D<->A",
+        "F->A",
+        "E->F",
+        "D->E"
+    ]
+}

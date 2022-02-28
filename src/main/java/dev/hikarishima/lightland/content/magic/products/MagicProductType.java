@@ -1,13 +1,11 @@
 package dev.hikarishima.lightland.content.magic.products;
 
-import com.hikarishima.lightland.magic.recipe.MagicRecipeRegistry;
-import com.hikarishima.lightland.recipe.ConfigRecipe;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.products.info.TypeConfig;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
+import dev.hikarishima.lightland.network.config.ProductTypeConfig;
 import dev.lcy0x1.base.NamedEntry;
-import dev.lcy0x1.base.Proxy;
 import dev.lcy0x1.util.NBTObj;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -37,7 +35,7 @@ public class MagicProductType<I extends IForgeRegistryEntry<I>, P extends MagicP
     }
 
     public TypeConfig getDisplay() {
-        return ConfigRecipe.getObject(Proxy.getPlayer().level, MagicRecipeRegistry.PRODUCT_TYPE_DISPLAY, getID());
+        return ProductTypeConfig.getConfig(getRegistryName());
     }
 
     @FunctionalInterface

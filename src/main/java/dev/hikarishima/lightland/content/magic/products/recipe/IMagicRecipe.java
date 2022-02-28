@@ -1,24 +1,15 @@
 package dev.hikarishima.lightland.content.magic.products.recipe;
 
 import com.google.common.collect.Maps;
-import com.hikarishima.lightland.magic.MagicElement;
-import com.hikarishima.lightland.magic.products.IMagicProduct;
-import com.hikarishima.lightland.magic.products.MagicProductType;
-import com.hikarishima.lightland.magic.products.info.DisplayInfo;
-import com.lcy0x1.base.BaseRecipe;
-import com.lcy0x1.core.util.SerialClass;
 import dev.hikarishima.lightland.content.magic.products.IMagicProduct;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.MagicProductType;
 import dev.hikarishima.lightland.content.magic.products.info.DisplayInfo;
+import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.lcy0x1.base.BaseRecipe;
 import dev.lcy0x1.util.SerialClass;
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -51,7 +42,7 @@ public class IMagicRecipe<R extends IMagicRecipe<R>> extends BaseRecipe<R, IMagi
     }
 
     public static List<IMagicRecipe<?>> getAll(Level w) {
-        return w.getRecipeManager().getAllRecipesFor(MagicRecipeRegistry.RT_MAGIC);
+        return w.getRecipeManager().getAllRecipesFor(RecipeRegistrate.RT_MAGIC);
     }
 
     public static <T extends IForgeRegistryEntry<T>> Map<T, IMagicRecipe<?>> getMap(Level w, MagicProductType<T, ?> type) {

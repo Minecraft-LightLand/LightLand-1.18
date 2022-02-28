@@ -1,0 +1,27 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:enchantment",
+    "product_id": "minecraft:power",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:fire",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 0,
+        "y": -3
+    },
+    "elements": {
+        "A": "lightland:air",
+        "B": "lightland:air",
+        "C": "lightland:fire",
+        "D": "lightland:air",
+        "E": "lightland:air",
+        "F": "lightland:fire"
+    },
+    "flows": [
+        "ABDE<->CF"
+    ]
+}

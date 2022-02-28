@@ -1,0 +1,26 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:spell",
+    "product_id": "lightland:fang_round",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:water",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 0,
+        "y": 1
+
+    },
+    "elements": {
+        "A": "lightland:earth",
+        "B": "lightland:water",
+        "C": "lightland:water",
+        "D": "lightland:water"
+    },
+    "flows": [
+        "A<->BCD"
+    ]
+}

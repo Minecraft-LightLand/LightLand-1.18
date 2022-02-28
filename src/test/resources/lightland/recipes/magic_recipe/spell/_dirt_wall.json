@@ -1,0 +1,25 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:spell",
+    "product_id": "lightland:dirt_wall",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:earth",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 0,
+        "y": 0
+
+    },
+    "elements": {
+        "A": "lightland:water",
+        "B": "lightland:earth",
+        "C": "lightland:earth"
+    },
+    "flows": [
+        "A<->BC"
+    ]
+}

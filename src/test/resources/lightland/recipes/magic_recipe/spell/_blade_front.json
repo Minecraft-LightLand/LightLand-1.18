@@ -1,0 +1,30 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:spell",
+    "product_id": "lightland:blade_front",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:air",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 0,
+        "y": 2
+
+    },
+    "elements": {
+        "A": "lightland:fire",
+        "B": "lightland:earth",
+        "C": "lightland:air",
+        "D": "lightland:air",
+        "E": "lightland:air",
+        "F": "lightland:air"
+    },
+    "flows": [
+        "A->B",
+        "B->CDEF",
+        "CDEF->A"
+    ]
+}

@@ -50,6 +50,7 @@ public class LightLandRegistry {
 
         SKILL = new RegistryBuilder().setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class).create();
 
+        MagicRegistry.register();
         ArcaneType.register();
         ArcaneRegistry.register();
         SpellRegistry.register();

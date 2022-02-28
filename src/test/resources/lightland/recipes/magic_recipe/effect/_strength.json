@@ -1,0 +1,29 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:effect",
+    "product_id": "minecraft:strength",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:fire",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 1,
+        "y": 0
+    },
+    "elements": {
+        "A": "lightland:fire",
+        "B": "lightland:fire",
+        "C": "lightland:water",
+        "D": "lightland:water",
+        "E": "lightland:earth"
+    },
+    "flows": [
+        "A->C",
+        "B->D",
+        "CD->E",
+        "E->AB"
+    ]
+}

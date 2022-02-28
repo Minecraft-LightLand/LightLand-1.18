@@ -66,7 +66,8 @@ public class LLPlayerData {
     public MagicAbility magicAbility = new MagicAbility(this);
     @SerialClass.SerialField
     public SkillCap skillCap = new SkillCap(this);
-    // @SerialClass.SerialField public MagicHolder magicHolder = new MagicHolder(this);
+    @SerialClass.SerialField
+    public MagicHolder magicHolder = new MagicHolder(this);
     public Player player;
     public Level world;
 
@@ -117,8 +118,8 @@ public class LLPlayerData {
             h.abilityPoints = new AbilityPoints(h);
             h.abilityPoints.updateAttribute();
         }), HOLDER((h) -> {
-            //h.magicHolder = new MagicHolder(h);
-            //h.magicHolder.checkUnlocks();
+            h.magicHolder = new MagicHolder(h);
+            h.magicHolder.checkUnlocks();
         }), SKILL(h -> {
             h.skillCap = new SkillCap(h);
         }),
@@ -131,7 +132,7 @@ public class LLPlayerData {
             h.magicAbility = new MagicAbility(h);
             h.abilityPoints = new AbilityPoints(h);
             h.skillCap = new SkillCap(h);
-            //h.magicHolder = new MagicHolder(h);
+            h.magicHolder = new MagicHolder(h);
         });
 
         final Consumer<LLPlayerData> cons;
