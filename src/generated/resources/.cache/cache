@@ -1,5 +1,6 @@
-8b3a3c6e811c538edd77c49a656d34e9024f9afe assets/lightland/lang/en_ud.json
-284fbfa71f49bdf088fd80cd08a89c897cccec56 assets/lightland/lang/en_us.json
+3ffd18337e50ddf285de9fd897433d41077c3e0e assets/lightland/lang/en_ud.json
+4b1a66cb1dfcfcb84e096776babc1055d9048912 assets/lightland/lang/en_us.json
+8381768134a920cfd3a7219316be110aa217e239 assets/lightland/models/item/ability_book.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_black.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_blue.json
 6b395340480864564af10f3b7ef0683a361df697 assets/lightland/models/item/backpack_brown.json
@@ -56,6 +57,7 @@ e39af56bf55455294fd67c37887294e6a72909b6 assets/lightland/models/item/king_leath
 920c021a50cef0b7456d760d837f5ed13a0755a7 assets/lightland/models/item/king_leather_helmet.json
 b5cad1363554feda797c07b66509b650b8c9a748 assets/lightland/models/item/king_leather_leggings.json
 f7e464a906bd06b574dc0cba9dd55309253d5531 assets/lightland/models/item/king_med_leather.json
+6b05e89cdfb9cb276819e5eee346dd93840cbb9d assets/lightland/models/item/magic_book.json
 2a4461583e17a5a3d2cb0a9dd0b9ffa41764d794 assets/lightland/models/item/magic_wand.json
 912ace90498156478a9bb4be3ba10bac51cbda08 assets/lightland/models/item/magnify_bow.json
 488d6b22a19b91e4e72a3960b176700f225aca31 assets/lightland/models/item/magnify_bow_pulling_0.json

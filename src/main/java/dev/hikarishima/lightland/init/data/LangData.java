@@ -113,7 +113,7 @@ public class LangData {
     public static TranslatableComponent get(Enum<?> obj) {
         if (!MAP.containsKey(obj.getClass()))
             return new TranslatableComponent("unknown.enum." + obj.name().toLowerCase(Locale.ROOT));
-        return new TranslatableComponent(MAP.get(obj.getClass()) + obj.name().toLowerCase(Locale.ROOT));
+        return new TranslatableComponent(LightLand.MODID + "." + MAP.get(obj.getClass()) + obj.name().toLowerCase(Locale.ROOT));
     }
 
     public static void addTranslations(BiConsumer<String, String> pvd) {
