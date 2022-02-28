@@ -37,7 +37,7 @@ public class LangData {
         MANA_COST("tooltip.mana_cost", 1),
 
         LVUP_NO_POINT("screen.ability.ability.error.no_point", 0),
-        LVUP_NO_PROF("screen.ability.ability.error.prof", 0),
+        LVUP_NO_PROF("screen.ability.ability.error.no_prof", 0),
         LVUP_MAX_REACHED("screen.ability.ability.error.max_reached", 0),
         LVUP_PROF_MAX("screen.ability.ability.error.prof_max", 0),
 
@@ -131,7 +131,7 @@ public class LangData {
         MAP.forEach((v, k) -> {
             for (Enum<?> e : v.getEnumConstants()) {
                 String en = e.name().toLowerCase(Locale.ROOT);
-                pvd.accept(k + en, RegistrateLangProvider.toEnglishName(en));
+                pvd.accept(LightLand.MODID + "." + k + en, RegistrateLangProvider.toEnglishName(en));
             }
         });
     }
