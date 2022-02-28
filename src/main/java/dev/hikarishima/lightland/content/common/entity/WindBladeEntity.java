@@ -5,7 +5,6 @@ import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.util.LightLandFakeEntity;
 import dev.hikarishima.lightland.util.math.MathHelper;
 import dev.lcy0x1.util.SerialClass;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
@@ -23,8 +22,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 public class WindBladeEntity extends ThrowableProjectile implements IEntityAdditionalSpawnData {
 

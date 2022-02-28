@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.content.profession.*;
-import dev.hikarishima.lightland.content.skill.Skill;
+import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;

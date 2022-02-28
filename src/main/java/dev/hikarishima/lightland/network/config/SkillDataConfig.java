@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.network.config;
 
-import dev.hikarishima.lightland.content.skill.SkillConfig;
+import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 

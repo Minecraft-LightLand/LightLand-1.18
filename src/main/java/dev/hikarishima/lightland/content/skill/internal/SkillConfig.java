@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.skill;
+package dev.hikarishima.lightland.content.skill.internal;
 
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.util.SerialClass;

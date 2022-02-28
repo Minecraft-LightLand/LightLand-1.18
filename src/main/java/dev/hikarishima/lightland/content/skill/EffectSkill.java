@@ -1,5 +1,8 @@
 package dev.hikarishima.lightland.content.skill;
 
+import dev.hikarishima.lightland.content.skill.internal.Skill;
+import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
+import dev.hikarishima.lightland.content.skill.internal.SkillData;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.resources.ResourceLocation;
@@ -71,7 +74,13 @@ public class EffectSkill extends Skill<EffectSkill.Config, SkillData> {
 
     @Override
     public void activate(Level level, ServerPlayer player, SkillData data) {
-        getConfig().getIns(data).forEach(player::addEffect);
+        for (MobEffectInstance ins : getConfig().getIns(data)) {
+            if (ins.getEffect().isInstantenous()) {
+                ins.getEffect().applyInstantenousEffect(null, null, player, ins.getAmplifier(), 1);
+            } else {
+                player.addEffect(ins);
+            }
+        }
         super.activate(level, player, data);
     }
 

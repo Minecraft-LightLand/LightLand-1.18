@@ -12,7 +12,7 @@ import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.content.profession.Profession;
-import dev.hikarishima.lightland.content.skill.Skill;
+import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import net.minecraft.MethodsReturnNonnullByDefault;

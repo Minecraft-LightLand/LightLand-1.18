@@ -4,7 +4,7 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.skill.EffectSkill;
 import dev.hikarishima.lightland.content.skill.MovementSkill;
-import dev.hikarishima.lightland.content.skill.Skill;
+import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.LightLand;
 
 public class SkillRegistry {

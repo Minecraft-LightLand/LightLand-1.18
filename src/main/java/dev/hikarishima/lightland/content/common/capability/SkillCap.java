@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.common.capability;
 
-import dev.hikarishima.lightland.content.skill.Skill;
-import dev.hikarishima.lightland.content.skill.SkillConfig;
-import dev.hikarishima.lightland.content.skill.SkillData;
+import dev.hikarishima.lightland.content.skill.internal.Skill;
+import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
+import dev.hikarishima.lightland.content.skill.internal.SkillData;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.network.packets.SkillToServer;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;

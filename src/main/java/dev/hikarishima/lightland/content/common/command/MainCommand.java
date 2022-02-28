@@ -5,7 +5,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.common.capability.SkillCap;
 import dev.hikarishima.lightland.content.profession.Profession;
-import dev.hikarishima.lightland.content.skill.Skill;
+import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.network.packets.CapToClient;
 import net.minecraft.commands.CommandSourceStack;

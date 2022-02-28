@@ -14,7 +14,6 @@ import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.hikarishima.lightland.util.GenericItemStack;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import net.minecraft.FieldsAreNonnullByDefault;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
@@ -30,7 +29,6 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 
-import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Objects;
 
 @FieldsAreNonnullByDefault

@@ -1,5 +1,8 @@
 package dev.hikarishima.lightland.content.skill;
 
+import dev.hikarishima.lightland.content.skill.internal.Skill;
+import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
+import dev.hikarishima.lightland.content.skill.internal.SkillData;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.util.SerialClass;
