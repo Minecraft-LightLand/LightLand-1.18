@@ -1,11 +1,16 @@
 package dev.hikarishima.lightland.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import dev.hikarishima.lightland.content.magic.render.hex.HexStatus;
 import dev.hikarishima.lightland.init.LightLand;
+import dev.lcy0x1.magic.HexDirection;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.TranslatableComponent;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class LangData {
@@ -26,7 +31,9 @@ public class LangData {
         POTION_RADIUS("tooltip.potion.radius", 1),
         CONT_RITUAL("container.ritual", 0),
         BACKPACK_SLOT("tooltip.backpack_slot", 2),
-        MANA_COST("tooltip.mana_cost", 1);
+        MANA_COST("tooltip.mana_cost", 1),
+
+        HEX_COST("screen.hex.cost", 1);
 
         final String id;
         final int count;
@@ -62,6 +69,20 @@ public class LangData {
 
     }
 
+    public static final Map<Class<? extends Enum<?>>, String> MAP = new HashMap<>();
+
+    static {
+        MAP.put(HexDirection.class, "screen.hex.direction.");
+        MAP.put(HexStatus.Compile.class, "screen.hex.compile.");
+        MAP.put(HexStatus.Save.class, "screen.hex.save.");
+    }
+
+    public static TranslatableComponent get(Enum<?> obj) {
+        if (!MAP.containsKey(obj.getClass()))
+            return new TranslatableComponent("unknown.enum." + obj.name().toLowerCase(Locale.ROOT));
+        return new TranslatableComponent(MAP.get(obj.getClass()) + obj.name().toLowerCase(Locale.ROOT));
+    }
+
     public static void addTranslations(BiConsumer<String, String> pvd) {
         for (IDS id : IDS.values()) {
             String[] strs = id.id.split("\\.");
@@ -80,5 +101,11 @@ public class LangData {
         }
         pvd.accept("itemGroup.lightland", "Light Land RPG");
         pvd.accept("key.categories.lightland", "Light Land Keys");
+        MAP.forEach((v, k) -> {
+            for (Enum<?> e : v.getEnumConstants()) {
+                String en = e.name().toLowerCase(Locale.ROOT);
+                pvd.accept(k + en, RegistrateLangProvider.toEnglishName(en));
+            }
+        });
     }
 }
