@@ -4,6 +4,8 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
+import dev.hikarishima.lightland.content.magic.products.MagicElement;
+import dev.hikarishima.lightland.content.magic.products.MagicProductType;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.content.profession.*;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
@@ -14,6 +16,8 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 public class LightLandRegistry {
 
+    public static IForgeRegistry<MagicElement> ELEMENT;
+    public static IForgeRegistry<MagicProductType<?, ?>> PRODUCT_TYPE;
     public static IForgeRegistry<ArcaneType> ARCANE_TYPE;
     public static IForgeRegistry<Arcane> ARCANE;
     public static IForgeRegistry<Spell<?, ?>> SPELL;
@@ -22,9 +26,13 @@ public class LightLandRegistry {
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static void createRegistries() {
-        //ELEMENT = new RegistryBuilder<MagicElement>().setName(new ResourceLocation(LightLandMagic.MODID, "magic_element")).setType(MagicElement.class).create();
+        ELEMENT = new RegistryBuilder<MagicElement>()
+                .setName(new ResourceLocation(LightLand.MODID, "magic_element"))
+                .setType(MagicElement.class).create();
 
-        //PRODUCT_TYPE = new RegistryBuilder().setName(new ResourceLocation(LightLandMagic.MODID, "magic_product_type")).setType(MagicProductType.class).create();
+        PRODUCT_TYPE = new RegistryBuilder()
+                .setName(new ResourceLocation(LightLand.MODID, "magic_product_type"))
+                .setType(MagicProductType.class).create();
 
         ARCANE_TYPE = new RegistryBuilder<ArcaneType>()
                 .setName(new ResourceLocation(LightLand.MODID, "arcane_type"))
