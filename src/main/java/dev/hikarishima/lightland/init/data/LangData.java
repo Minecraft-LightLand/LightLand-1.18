@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import dev.hikarishima.lightland.content.magic.render.hex.HexStatus;
+import dev.hikarishima.lightland.content.magic.gui.hex.HexStatus;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.magic.HexDirection;
 import net.minecraft.client.KeyMapping;

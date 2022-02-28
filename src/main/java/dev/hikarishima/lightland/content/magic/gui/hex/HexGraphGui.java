@@ -1,9 +1,9 @@
-package dev.hikarishima.lightland.content.magic.render.hex;
+package dev.hikarishima.lightland.content.magic.gui.hex;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
-import dev.hikarishima.lightland.content.magic.render.AbstractHexGui;
+import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.lcy0x1.magic.*;

@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.magic.render.hex;
+package dev.hikarishima.lightland.content.magic.gui.hex;
 
 import dev.hikarishima.lightland.init.data.LangData;
 import net.minecraft.ChatFormatting;
