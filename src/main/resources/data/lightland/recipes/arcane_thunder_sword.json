@@ -1,0 +1,26 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:arcane",
+    "product_id": "lightland:thunder_sword",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:quint",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 2,
+        "y": 0
+    },
+    "elements": {
+        "A": "lightland:fire",
+        "B": "lightland:water",
+        "C": "lightland:air",
+        "E": "lightland:quint",
+        "D": "lightland:quint"
+    },
+    "flows": [
+        "ABCDE|"
+    ]
+}

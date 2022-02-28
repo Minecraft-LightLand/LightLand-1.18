@@ -35,7 +35,7 @@ public class MagicAbility {
     }
 
     public void giveMana(int mana) {
-        magic_mana = Mth.clamp(magic_mana + mana, -CapProxy.getMargin(parent.player), getMaxMana());
+        magic_mana = Mth.clamp(magic_mana + mana, 0, getMaxMana());
     }
 
     public void addSpellLoad(int load) {

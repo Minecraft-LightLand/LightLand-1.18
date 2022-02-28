@@ -1,0 +1,32 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:effect",
+    "product_id": "minecraft:speed",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:air",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 0,
+        "y": 0
+    },
+    "elements": {
+        "A": "lightland:air",
+        "B": "lightland:air",
+        "C": "lightland:water",
+        "D": "lightland:water",
+        "E": "lightland:fire",
+        "F": "lightland:fire"
+    },
+    "flows": [
+        "A->C",
+        "B->D",
+        "C->E",
+        "D->F",
+        "E->A",
+        "F->B"
+    ]
+}

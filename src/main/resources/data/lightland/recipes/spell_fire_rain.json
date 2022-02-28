@@ -1,0 +1,29 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:spell",
+    "product_id": "lightland:fire_rain",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:fire",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 0,
+        "y": 3
+
+    },
+    "elements": {
+        "A": "lightland:water",
+        "B": "lightland:air",
+        "C": "lightland:air",
+        "D": "lightland:fire",
+        "E": "lightland:fire"
+    },
+    "flows": [
+        "A->BC",
+        "BC->DE",
+        "DE->A"
+    ]
+}

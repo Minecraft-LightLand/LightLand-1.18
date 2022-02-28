@@ -1,0 +1,23 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:craft",
+    "product_id": "minecraft:diorite",
+    "predecessor": [
+        "lightland:craft_tutorial_2"
+    ],
+    "elemental_mastery": [],
+    "screen": {
+        "x": 3,
+        "y": 0
+    },
+    "elements": {
+        "A": "lightland:earth",
+        "B": "lightland:earth",
+        "C": "lightland:water"
+    },
+    "flows": [
+        "A->B",
+        "B->C",
+        "C->A"
+    ]
+}

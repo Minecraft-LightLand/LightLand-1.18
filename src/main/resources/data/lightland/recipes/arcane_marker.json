@@ -1,0 +1,27 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:arcane",
+    "product_id": "lightland:marker",
+    "predecessor": [],
+    "elemental_mastery": [
+        {
+            "element": "lightland:quint",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 3,
+        "y": 0
+    },
+    "elements": {
+        "A": "lightland:fire",
+        "B": "lightland:water",
+        "C": "lightland:air",
+        "E": "lightland:earth",
+        "D": "lightland:quint",
+        "F": "lightland:quint"
+    },
+    "flows": [
+        "ABCDEF|"
+    ]
+}

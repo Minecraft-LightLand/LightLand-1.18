@@ -1,0 +1,29 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:spell",
+    "product_id": "lightland:petrification_0",
+    "predecessor": [
+        "lightland:spell_stone_slab"
+    ],
+    "elemental_mastery": [
+        {
+            "element": "lightland:earth",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 3,
+        "y": 0
+    },
+    "elements": {
+        "A": "lightland:water",
+        "B": "lightland:water",
+        "C": "lightland:earth",
+        "D": "lightland:earth",
+        "E": "lightland:earth",
+        "F": "lightland:earth"
+    },
+    "flows": [
+        "AB<->CEDF"
+    ]
+}

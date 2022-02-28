@@ -12,10 +12,4 @@ public class CapProxy {
         return LLPlayerData.get(Proxy.getClientPlayer());
     }
 
-    public static int getMargin(Player player) {
-        if (player.level.isClientSide())
-            return 0;
-        return LLPlayerData.get(player).magicAbility.getManaRestoration() * 5;
-    }
-
 }

@@ -1,0 +1,33 @@
+{
+    "type": "lightland:magic_default",
+    "product_type": "lightland:spell",
+    "product_id": "lightland:water_trap_1",
+    "predecessor": [
+        "lightland:spell_water_trap_0"
+    ],
+    "elemental_mastery": [
+        {
+            "element": "lightland:water",
+            "level": 1
+        }
+    ],
+    "screen": {
+        "x": 2,
+        "y": 1
+
+    },
+    "elements": {
+        "A": "lightland:earth",
+        "B": "lightland:fire",
+        "C": "lightland:water",
+        "D": "lightland:water",
+        "E": "lightland:water",
+        "F": "lightland:water"
+    },
+    "flows": [
+        "A->CD",
+        "CD->B",
+        "B->EF",
+        "EF->A"
+    ]
+}
