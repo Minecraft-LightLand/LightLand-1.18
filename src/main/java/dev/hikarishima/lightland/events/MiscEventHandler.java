@@ -15,6 +15,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -50,6 +51,12 @@ public class MiscEventHandler {
     public static void onVisibilityGet(LivingEvent.LivingVisibilityEvent event) {
         if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.T_HIDE.get()))
             event.modifyVisibility(0);
+    }
+
+    @SubscribeEvent
+    public static void onEntityKnockBack(LivingKnockBackEvent event) {
+        if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.NO_KB.get()))
+            event.setCanceled(true);
     }
 
     @OnlyIn(Dist.CLIENT)

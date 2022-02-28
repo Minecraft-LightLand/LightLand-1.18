@@ -5,7 +5,6 @@ import dev.hikarishima.lightland.content.common.command.*;
 import dev.hikarishima.lightland.events.ArcaneDamageEventHandler;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
 import dev.hikarishima.lightland.events.MiscEventHandler;
-import dev.hikarishima.lightland.events.ProfessionEventHandler;
 import dev.hikarishima.lightland.events.generic.CapabilityEvents;
 import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;
 import dev.hikarishima.lightland.events.generic.EffectSyncEvents;
@@ -56,7 +55,6 @@ public class LightLand {
         MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
         MinecraftForge.EVENT_BUS.register(GenericEventHandler.class);
         MinecraftForge.EVENT_BUS.register(ArcaneDamageEventHandler.class);
-        MinecraftForge.EVENT_BUS.register(ProfessionEventHandler.class);
         MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
     }
 
