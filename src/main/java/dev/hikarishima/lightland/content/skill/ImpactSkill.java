@@ -13,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 public class ImpactSkill extends Skill<ImpactSkill.Config, SkillData> {
 
@@ -71,16 +72,20 @@ public class ImpactSkill extends Skill<ImpactSkill.Config, SkillData> {
         if (config != null) {
             int lv = Math.min(config.max_level, data.level);
             double radius = config.radius[lv];
-            double impact = config.radius[lv];
-            double damage = config.radius[lv];
+            double impact = config.impact[lv];
+            double damage = config.damage[lv];
             DamageSource source = DamageSource.playerAttack(player);
             for (Entity e : level.getEntities(player, new AABB(player.position(), player.position()).inflate(radius))) {
                 if (e.distanceToSqr(player) > radius * radius) continue;
-                if (e instanceof LivingEntity le && TeamAccessor.arePlayerAndEntityInSameTeam(player, le)) continue;
+                if (Math.abs(e.getPosition(1).y() - player.getPosition(1).y()) > 3) continue;
+                if (e instanceof LivingEntity le) {
+                    if (TeamAccessor.arePlayerAndEntityInSameTeam(player, le))
+                        continue;
+                    le.hurt(source, (float) damage);
+                }
                 e.hasImpulse = true;
-                e.setDeltaMovement(e.getPosition(1).subtract(player.position()).normalize().scale(impact));
-                if (!(e instanceof LivingEntity le)) continue;
-                le.hurt(source, (float) damage);
+                Vec3 diff = e.getPosition(1).subtract(player.position()).multiply(1, 0, 1).normalize();
+                e.setDeltaMovement(diff.scale(impact).add(0, 0.4f, 0));
             }
         }
         super.activate(level, player, data);

@@ -221,23 +221,52 @@
 	  "effects": [
 		[
 		  {
-			"id": "lightland:target_attract",
+			"id": "lightland:target_attractor",
 			"duration": 600,
 			"amplifier": 0
 		  }
 		],
 		[
 		  {
-			"id": "lightland:target_attract",
+			"id": "lightland:target_attractor",
 			"duration": 750,
 			"amplifier": 1
 		  }
 		],
 		[
 		  {
-			"id": "lightland:target_attract",
+			"id": "lightland:target_attractor",
 			"duration": 900,
 			"amplifier": 2
+		  }
+		]
+	  ],
+	  "range_effects": [
+		[
+		  {
+			"id": "lightland:target_attracted",
+			"duration": 600,
+			"amplifier": 0,
+			"range": 10,
+			"for_enemy": true
+		  }
+		],
+		[
+		  {
+			"id": "lightland:target_attracted",
+			"duration": 750,
+			"amplifier": 1,
+			"range": 14,
+			"for_enemy": true
+		  }
+		],
+		[
+		  {
+			"id": "lightland:target_attracted",
+			"duration": 900,
+			"amplifier": 2,
+			"range": 18,
+			"for_enemy": true
 		  }
 		]
 	  ]
