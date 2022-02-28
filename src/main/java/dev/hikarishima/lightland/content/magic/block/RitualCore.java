@@ -1,9 +1,16 @@
 package dev.hikarishima.lightland.content.magic.block;
 
+import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
+import dev.hikarishima.lightland.content.magic.products.MagicElement;
+import dev.hikarishima.lightland.content.magic.products.MagicProduct;
 import dev.hikarishima.lightland.content.magic.ritual.AbstractRitualRecipe;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
+import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.special.MagicRegistry;
+import dev.hikarishima.lightland.network.packets.CapToClient;
 import dev.lcy0x1.base.BaseRecipe;
 import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
@@ -20,6 +27,7 @@ import net.minecraft.network.chat.ChatType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -32,10 +40,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
@@ -48,7 +53,7 @@ public class RitualCore {
         public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
             BlockEntity te = world.getBlockEntity(pos);
             if (te instanceof TE) {
-                ((TE) te).activate(null);//, null);
+                ((TE) te).activate(null, null);
             }
         }
 
@@ -60,8 +65,8 @@ public class RitualCore {
             if (pl.getMainHandItem().getItem() instanceof MagicWand) {
                 BlockEntity te = w.getBlockEntity(pos);
                 if (te instanceof TE) {
-                    //MagicProduct<?, ?> magic = MagicItemRegistry.GILDED_WAND.get().getData(pl, pl.getMainHandItem());
-                    ((TE) te).activate(pl);//, magic);
+                    MagicProduct<?, ?> magic = ItemRegistrate.MAGIC_WAND.get().getData(pl, pl.getMainHandItem());
+                    ((TE) te).activate(pl, magic);
                 }
                 return InteractionResult.SUCCESS;
             }
@@ -109,7 +114,7 @@ public class RitualCore {
             super(type, pos, state);
         }
 
-        public void activate(@Nullable Player player) {//, @Nullable MagicProduct<?, ?> magic) {
+        public void activate(@Nullable Player player, @Nullable MagicProduct<?, ?> magic) {
             if (level == null || level.isClientSide()) {
                 return;
             }
@@ -121,45 +126,42 @@ public class RitualCore {
             Inv inv = new Inv(this, list);
             Optional<AbstractRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_RITUAL, inv, level);
             r.ifPresent(e -> {
-                /*
                 Map<MagicElement, Integer> map = new LinkedHashMap<>();
                 if (e.getMagic() != null) {
                     if (magic == null || magic.getCost() <= 0 || !e.getMagic().equals(magic.recipe.id) || player == null) {
-                        send(player, Translator.get(true, "chat.ritual.fail.wrong"));
+                        send(player, LangData.IDS.RITUAL_WRONG.get());
                         return;
                     }
                     lv = e.getLevel(magic.getCost());
                     if (lv == 0) {
-                        send(player, Translator.get(true, "chat.ritual.fail.zero"));
+                        send(player, LangData.IDS.RITUAL_ZERO.get());
                         return;
                     }
-                    if (magic.type == MagicRegistry.MPT_ENCH || magic.type == MagicRegistry.MPT_EFF) {
+                    if (magic.type == MagicRegistry.MPT_ENCH.get() || magic.type == MagicRegistry.MPT_EFF.get()) {
                         MagicElement[] elems = magic.recipe.getElements();
                         for (MagicElement elem : elems) {
                             map.put(elem, map.getOrDefault(elem, 0) + lv);
                         }
                         for (MagicElement elem : map.keySet()) {
-                            int has = MagicHandler.get(player).magicHolder.getElement(elem);
+                            int has = LLPlayerData.get(player).magicHolder.getElement(elem);
                             int take = map.get(elem);
                             if (has < take) {
-                                send(player, Translator.get(true, "chat.ritual.fail.element"));
+                                send(player, LangData.IDS.RITUAL_ELEM.get());
                                 return;
                             }
                         }
                     }
                 }
-                *///TODO
                 recipe = e;
                 remainingTime = 200;
                 setLocked(true, list);
-                /*
+
                 if (player != null) {
                     for (MagicElement elem : map.keySet()) {
-                        MagicHandler.get(player).magicHolder.addElement(elem, -map.get(elem));
+                        LLPlayerData.get(player).magicHolder.addElement(elem, -map.get(elem));
                     }
-                    PacketHandler.toClient((ServerPlayerEntity) player, new ToClientMsg(ToClientMsg.Action.ALL, MagicHandler.get(player)));
+                    new CapToClient(CapToClient.Action.ALL, LLPlayerData.get(player)).toClientPlayer((ServerPlayer) player);
                 }
-                *///TODO
             });
 
         }

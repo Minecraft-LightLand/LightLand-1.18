@@ -35,6 +35,12 @@ public class LangData {
         CONT_RITUAL("container.ritual", 0),
         BACKPACK_SLOT("tooltip.backpack_slot", 2),
         MANA_COST("tooltip.mana_cost", 1),
+        ENCH_LV("tooltip.enchantment_result.level", 1),
+        ENCH_NEXT("tooltip.enchantment_result.next", 1),
+        ENCH_ELEM("tooltip.enchantment_result.elements", 0),
+        RITUAL_WRONG("chat.ritual.fail.wrong", 0),
+        RITUAL_ZERO("chat.ritual.fail.zero", 0),
+        RITUAL_ELEM("chat.ritual.fail.element", 0),
 
         LVUP_NO_POINT("screen.ability.ability.error.no_point", 0),
         LVUP_NO_PROF("screen.ability.ability.error.no_prof", 0),
