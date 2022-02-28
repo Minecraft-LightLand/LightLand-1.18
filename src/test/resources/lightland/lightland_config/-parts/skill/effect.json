@@ -68,6 +68,52 @@
 		]
 	  ]
 	},
+	"lightland:armor_breaker": {
+	  "max_level": 3,
+	  "cooldown": [
+		1200,
+		1200,
+		1200
+	  ],
+	  "effects": [
+		[
+		  {
+			"id": "lightland:armor_breaker",
+			"duration": 600,
+			"amplifier": 0
+		  },
+		  {
+			"id": "lightland:armor_reduce",
+			"duration": 600,
+			"amplifier": 0
+		  }
+		],
+		[
+		  {
+			"id": "lightland:armor_breaker",
+			"duration": 600,
+			"amplifier": 1
+		  },
+		  {
+			"id": "lightland:armor_reduce",
+			"duration": 600,
+			"amplifier": 0
+		  }
+		],
+		[
+		  {
+			"id": "lightland:armor_breaker",
+			"duration": 600,
+			"amplifier": 2
+		  },
+		  {
+			"id": "lightland:armor_reduce",
+			"duration": 600,
+			"amplifier": 0
+		  }
+		]
+	  ]
+	},
 	"lightland:quick_pull": {
 	  "max_level": 3,
 	  "cooldown": [
@@ -129,6 +175,68 @@
 		  {
 			"id": "lightland:quick_pull",
 			"duration": 300,
+			"amplifier": 2
+		  }
+		]
+	  ]
+	},
+	"lightland:target_hide": {
+	  "max_level": 3,
+	  "cooldown": [
+		2400,
+		2400,
+		2400
+	  ],
+	  "effects": [
+		[
+		  {
+			"id": "lightland:target_hide",
+			"duration": 600,
+			"amplifier": 0
+		  }
+		],
+		[
+		  {
+			"id": "lightland:target_hide",
+			"duration": 900,
+			"amplifier": 0
+		  }
+		],
+		[
+		  {
+			"id": "lightland:target_hide",
+			"duration": 900,
+			"amplifier": 1
+		  }
+		]
+	  ]
+	},
+	"lightland:target_attract": {
+	  "max_level": 3,
+	  "cooldown": [
+		1200,
+		1200,
+		1200
+	  ],
+	  "effects": [
+		[
+		  {
+			"id": "lightland:target_attract",
+			"duration": 600,
+			"amplifier": 0
+		  }
+		],
+		[
+		  {
+			"id": "lightland:target_attract",
+			"duration": 750,
+			"amplifier": 1
+		  }
+		],
+		[
+		  {
+			"id": "lightland:target_attract",
+			"duration": 900,
 			"amplifier": 2
 		  }
 		]
