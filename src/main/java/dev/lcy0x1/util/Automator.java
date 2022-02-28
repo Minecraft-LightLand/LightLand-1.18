@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.SerializableUUID;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
@@ -70,6 +71,7 @@ public class Automator {
         new ClassHandler<ListTag, ListTag>(ListTag.class, e -> e, e -> e);
         new ClassHandler<StringTag, ResourceLocation>(ResourceLocation.class, tag -> new ResourceLocation(tag.getAsString()), rl -> StringTag.valueOf(rl.toString()));
         new RegistryClassHandler<>(Block.class, () -> ForgeRegistries.BLOCKS);
+        new RegistryClassHandler<>(Item.class, () -> ForgeRegistries.ITEMS);
     }
 
     public static Object fromTag(CompoundTag tag, Class<?> cls, Object obj, Predicate<SerialClass.SerialField> pred)
