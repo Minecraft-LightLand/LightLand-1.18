@@ -1,0 +1,21 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "minecraft:quartz"
+    },
+    {
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "minecraft:slow_falling"
+      },
+      "amount": 25
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:amethyst_shard"
+    }
+  ]
+}

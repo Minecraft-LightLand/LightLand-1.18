@@ -75,6 +75,7 @@ public class ItemRegistrate {
     public static final ItemEntry<Item> STRONG_LEATHER, ENDER_POCKET;
     public static final ItemEntry<RecordPearl> RECORD_PEARL;
     public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
+    public static final ItemEntry<Item> STEEL_INGOT, STEEL_NUGGET, LEAD_INGOT, LEAD_NUGGET;
 
     static {
         BACKPACKS = new ItemEntry[16];
@@ -94,6 +95,16 @@ public class ItemRegistrate {
         MAGIC_BOOK = REGISTRATE.item("magic_book", p -> new ScreenBook(p, () -> MagicTreeScreen::new))
                 .defaultModel().defaultLang().register();
         ABILITY_BOOK = REGISTRATE.item("ability_book", p -> new ScreenBook(p, () -> ProfessionScreen::new))
+                .defaultModel().defaultLang().register();
+
+
+        STEEL_INGOT = LightLand.REGISTRATE.item("steel_ingot", Item::new)
+                .defaultModel().defaultLang().register();
+        STEEL_NUGGET = LightLand.REGISTRATE.item("steel_nugget", Item::new)
+                .defaultModel().defaultLang().register();
+        LEAD_INGOT = LightLand.REGISTRATE.item("lead_ingot", Item::new)
+                .defaultModel().defaultLang().register();
+        LEAD_NUGGET = LightLand.REGISTRATE.item("lead_nugget", Item::new)
                 .defaultModel().defaultLang().register();
     }
 

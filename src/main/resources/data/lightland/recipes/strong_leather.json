@@ -1,0 +1,71 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+	"item": "minecraft:leather"
+  },
+  "transitionalItem": {
+	"item": "lightland:processing_leather"
+  },
+  "sequence": [
+	{
+	  "type": "create:deploying",
+	  "ingredients": [
+		{
+		  "item": "lightland:processing_leather"
+		},
+		{
+		  "item": "minecraft:iron_nugget"
+		}
+	  ],
+	  "results": [
+		{
+		  "item": "lightland:processing_leather"
+		}
+	  ]
+	},
+	{
+	  "type": "create:deploying",
+	  "ingredients": [
+		{
+		  "item": "lightland:processing_leather"
+		},
+		{
+		  "item": "minecraft:string"
+		}
+	  ],
+	  "results": [
+		{
+		  "item": "lightland:processing_leather"
+		}
+	  ]
+	},
+	{
+	  "type": "create:pressing",
+	  "ingredients": [
+		{
+		  "item": "lightland:processing_leather"
+		}
+	  ],
+	  "results": [
+		{
+		  "item": "lightland:processing_leather"
+		}
+	  ]
+	}
+  ],
+  "results": [
+	{
+	  "item": "lightland:strong_leather",
+	  "chance": 90.0
+	},
+	{
+	  "item": "minecraft:leather",
+	  "chance": 5.0
+	},
+	{
+	  "item": "minecraft:iron_nugget",
+	  "chance": 5.0
+	}
+  ],
+  "loops": 5
+}

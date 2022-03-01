@@ -176,9 +176,9 @@
   "lightland.screen.magic_tree.status.locked": "未解锁",
   "lightland.screen.magic_tree.status.unlocked": "已解锁",
   "lightland.tooltip.backpack_slot": "背包升级: %s / %s",
-  "lightland.tooltip.enchantment_result.elements": "Elements",
-  "lightland.tooltip.enchantment_result.level": "Level: %s",
-  "lightland.tooltip.enchantment_result.next": "Next: %s",
+  "lightland.tooltip.enchantment_result.elements": "元素消耗:",
+  "lightland.tooltip.enchantment_result.level": "附魔等级: %s",
+  "lightland.tooltip.enchantment_result.next": "下一级所需复杂度: %s",
   "lightland.tooltip.mana_cost": "魔力消耗: %s",
   "lightland.tooltip.potion.radius": "范围: %s",
   "lightland.tooltip.target.all": "全部",
@@ -222,5 +222,10 @@
   "spell.lightland.fire_explosion": "大火球术",
   "spell.lightland.fire_rain": "火雨",
   "spell.lightland.water_trap_0": "Water Trap 0",
-  "spell.lightland.water_trap_1": "Water Trap 1"
+  "spell.lightland.water_trap_1": "Water Trap 1",
+  "block.lightland.enchant_gold_block": "蓄魔金块",
+  "block.lightland.lead_block": "铅块",
+  "block.lightland.steel_block": "钢块",
+  "item.lightland.incomplete_ender_pocket": "未完成空间组件",
+  "item.lightland.processing_leather": "加工中的皮革"
 }
