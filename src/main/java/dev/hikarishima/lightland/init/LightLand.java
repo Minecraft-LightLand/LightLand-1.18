@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.init;
 
+import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.common.command.*;
 import dev.hikarishima.lightland.events.ArcaneDamageEventHandler;
@@ -46,6 +47,7 @@ public class LightLand {
         VanillaMagicRegistrate.register();
         ParticleRegistrate.register();
         AllTags.register();
+        GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
     }
 
     private static void registerForgeEvents() {

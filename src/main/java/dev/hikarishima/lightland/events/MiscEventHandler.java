@@ -43,7 +43,7 @@ public class MiscEventHandler {
     public static void onTargetSet(LivingSetAttackTargetEvent event) {
         if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.T_CLEAR.get()))
             event.setCanceled(true);
-        if (event.getTarget().hasEffect(VanillaMagicRegistrate.T_HIDE.get()))
+        if (event.getTarget() != null && event.getTarget().hasEffect(VanillaMagicRegistrate.T_HIDE.get()))
             event.setCanceled(true);
     }
 

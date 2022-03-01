@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "lightland:coal_iron_mix"
+  },
+  "result": "lightland:hot_coal_iron_mix",
+  "experience": 0.1,
+  "cookingtime": 12000
+}

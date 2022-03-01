@@ -1,0 +1,35 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "lightland:hot_coal_iron_mix"
+  },
+  "transitionalItem": {
+    "item": "lightland:processing_steel"
+  },
+  "sequence": [
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "lightland:processing_steel"
+        }
+      ],
+      "results": [
+        {
+          "item": "lightland:processing_steel"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "lightland:steel_ingot",
+      "chance": 1.0
+    },
+    {
+      "item": "lightland:coal_iron_mix",
+      "chance": 99.0
+    }
+  ],
+  "loops": 64
+}

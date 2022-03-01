@@ -7,6 +7,26 @@
         "enchant_gold_nugget": {
             "a": "^m:^n",
             "b": "^m:enchant_gold_ingot"
+        },
+        "lead_nugget": {
+            "a": "^m:^n",
+            "b": "^m:lead_ingot"
+        },
+        "steel_nugget": {
+            "a": "^m:^n",
+            "b": "^m:steel_ingot"
+        },
+        "enchant_gold_ingot": {
+            "a": "^m:^n",
+            "b": "^m:enchant_gold_block"
+        },
+        "lead_ingot": {
+            "a": "^m:^n",
+            "b": "^m:lead_block"
+        },
+        "steel_ingot": {
+            "a": "^m:^n",
+            "b": "^m:steel_block"
         }
     },
     "-potion": {

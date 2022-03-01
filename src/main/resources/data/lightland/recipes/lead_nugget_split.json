@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:lead_ingot"
+    }
+  ],
+  "result": {
+    "item": "lightland:lead_nugget",
+    "count": 9
+  }
+}
+

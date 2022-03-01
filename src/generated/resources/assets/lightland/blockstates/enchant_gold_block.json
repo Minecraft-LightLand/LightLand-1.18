@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "lightland:block/enchant_gold_block"
+    }
+  }
+}

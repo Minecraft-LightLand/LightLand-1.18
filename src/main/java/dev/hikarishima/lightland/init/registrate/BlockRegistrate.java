@@ -8,7 +8,9 @@ import dev.hikarishima.lightland.content.magic.block.RitualSide;
 import dev.lcy0x1.block.BlockProxy;
 import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
@@ -37,6 +39,10 @@ public class BlockRegistrate {
                     (p) -> DelegateBlock.newBaseBlock(PEDESTAL, RitualCore.CLICK, RitualSide.TILE_ENTITY_SUPPLIER_BUILDER))
             .blockstate((a, b) -> {
             }).defaultLoot().defaultLang().simpleItem().register();
+
+    public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK = REGISTRATE.block("enchant_gold_block", p ->
+                    new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)))
+            .defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
 
     public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE = REGISTRATE.blockEntity("ritual_core", RitualCore.TE::new)
             .validBlock(B_RITUAL_CORE).renderer(() -> RitualRenderer::new).register();

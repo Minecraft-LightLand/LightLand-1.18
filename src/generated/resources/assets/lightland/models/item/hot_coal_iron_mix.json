@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lightland:item/hot_coal_iron_mix"
+  }
+}

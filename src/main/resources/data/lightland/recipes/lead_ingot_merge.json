@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "lightland:lead_ingot"
+    }
+  },
+  "result": {
+    "item": "lightland:lead_block"
+  }
+}
+

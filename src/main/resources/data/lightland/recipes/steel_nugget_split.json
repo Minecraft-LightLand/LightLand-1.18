@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:steel_ingot"
+    }
+  ],
+  "result": {
+    "item": "lightland:steel_nugget",
+    "count": 9
+  }
+}
+
