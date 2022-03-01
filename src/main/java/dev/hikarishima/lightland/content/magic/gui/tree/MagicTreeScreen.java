@@ -79,10 +79,13 @@ public class MagicTreeScreen extends Screen {
             drawCenteredString(matrix, this.font, NO_ADVANCEMENTS_LABEL, i, y0 + 18 + 56 - 4, -1);
             drawCenteredString(matrix, this.font, VERY_SAD_LABEL, i, y0 + 18 + 113 - 9, -1);
         } else {
-            matrix.pushPose();
-            matrix.translate((float) (x0 + 9), (float) (y0 + 18), 0.0F);
+            PoseStack mat = RenderSystem.getModelViewStack();
+            mat.pushPose();
+            mat.translate((float) (x0 + 9), (float) (y0 + 18), 0.0F);
+            RenderSystem.applyModelViewMatrix();
             selected.drawContents(matrix);
-            matrix.popPose();
+            mat.popPose();
+            RenderSystem.applyModelViewMatrix();
             RenderSystem.depthFunc(515);
             RenderSystem.disableDepthTest();
         }
@@ -117,12 +120,16 @@ public class MagicTreeScreen extends Screen {
     private void renderTooltips(PoseStack matrix, int mx, int my, int x0, int y0) {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         if (selected != null) {
-            matrix.pushPose();
+            PoseStack mat = RenderSystem.getModelViewStack();
+            mat.pushPose();
             RenderSystem.enableDepthTest();
-            matrix.translate((float) (x0 + 9), (float) (y0 + 18), 400.0F);
+            mat.translate((float) (x0 + 9), (float) (y0 + 18), 400.0F);
+            RenderSystem.applyModelViewMatrix();
+            RenderSystem.enableDepthTest();
             selected.drawTooltips(matrix, mx - x0 - 9, my - y0 - 18, x0, y0);
             RenderSystem.disableDepthTest();
-            matrix.popPose();
+            mat.popPose();
+            RenderSystem.applyModelViewMatrix();
         }
 
         if (this.tabs.size() > 1) {

@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.magic.products;
 
+import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -13,6 +14,9 @@ public class IMagicProduct<I extends IForgeRegistryEntry<I>, P extends MagicProd
         this.type = type;
         this.rl = rl;
         this.item = type.getter.apply(rl);
+        if (item == null) {
+            LightLand.LOGGER.error("magic product " + type.getRegistryName() + " does not have " + rl);
+        }
     }
 
     public String getDescriptionID() {

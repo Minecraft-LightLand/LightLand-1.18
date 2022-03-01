@@ -2,6 +2,7 @@ package dev.hikarishima.lightland.content.profession.prof;
 
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.profession.Profession;
+import dev.hikarishima.lightland.init.special.MagicRegistry;
 
 public class ArcaneProfession extends Profession {
 
@@ -9,7 +10,7 @@ public class ArcaneProfession extends Profession {
     public void init(LLPlayerData handler) {
         handler.abilityPoints.arcane += 2;
         handler.abilityPoints.general += 2;
-        //handler.magicHolder.addElementalMastery(MagicRegistry.ELEM_QUINT);
+        handler.magicHolder.addElementalMastery(MagicRegistry.ELEM_QUINT.get());
         handler.abilityPoints.element++;
     }
 

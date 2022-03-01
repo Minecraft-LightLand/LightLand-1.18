@@ -76,14 +76,11 @@ public class MagicProduct<I extends IForgeRegistryEntry<I>, P extends MagicProdu
     }
 
     public ProductState getState() {
-        switch (getBase().tag.getInt("cost")) {
-            case LOCKED:
-                return ProductState.LOCKED;
-            case UNLOCKED:
-                return ProductState.UNLOCKED;
-            default:
-                return ProductState.CRAFTED;
-        }
+        return switch (getBase().tag.getInt("cost")) {
+            case LOCKED -> ProductState.LOCKED;
+            case UNLOCKED -> ProductState.UNLOCKED;
+            default -> ProductState.CRAFTED;
+        };
     }
 
     public boolean visible() {

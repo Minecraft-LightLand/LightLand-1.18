@@ -23,7 +23,7 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class ProfessionScreen extends AbstractAbilityScreen {
 
-    public static final Component TITLE = LangData.IDS.GUI_PROF_EXIST.get();
+    public static final Component TITLE = LangData.IDS.GUI_PROF.get();
     private static final int H_DIS = 15, Y_DIS = 30;
 
     public static boolean canAccess() {

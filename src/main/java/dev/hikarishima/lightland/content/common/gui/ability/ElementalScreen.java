@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.common.gui.ability;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.common.capability.CapProxy;

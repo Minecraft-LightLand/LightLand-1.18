@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.common.gui.ability;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
@@ -111,7 +112,13 @@ public class ArcaneScreen extends AbstractAbilityScreen {
             boolean hover = within(mx, my) && !unlocked;
             AbstractHexGui.drawFrame(matrix, unlocked ? FrameType.CHALLENGE : FrameType.TASK, hover, x, y);
             ItemStack stack = type.get().getStack();
+            PoseStack mat = RenderSystem.getModelViewStack();
+            mat.pushPose();
+            mat.mulPoseMatrix(matrix.last().pose());
+            RenderSystem.applyModelViewMatrix();
             Minecraft.getInstance().getItemRenderer().renderAndDecorateFakeItem(stack, x - 8, y - 8);
+            mat.popPose();
+            RenderSystem.applyModelViewMatrix();
         }
 
         public boolean within(double mx, double my) {

@@ -11,6 +11,7 @@ import dev.hikarishima.lightland.content.magic.products.info.ProductState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.locale.Language;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -88,6 +89,7 @@ public class MagicTreeEntry<I extends IForgeRegistryEntry<I>, P extends MagicPro
         ProductState state = product.getState();
         int icon_index = state == ProductState.LOCKED ? 1 : 0;
         if (product.visible()) {
+            RenderSystem.setShader(GameRenderer::getPositionTexShader);
             RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
             this.blit(matrix, x0 + this.x + 3, y0 + this.y, this.display.getFrame().getTexture(), 128 + icon_index * 26, 26, 26);
             this.minecraft.getItemRenderer().renderAndDecorateFakeItem(this.display.getIcon(), x0 + this.x + 8, y0 + this.y + 5);
@@ -116,6 +118,7 @@ public class MagicTreeEntry<I extends IForgeRegistryEntry<I>, P extends MagicPro
         int icon_index = state == ProductState.LOCKED ? 1 : 0;
 
         int lvt_16_1_ = this.width - this.width / 2;
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, WIDGETS_LOCATION);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();

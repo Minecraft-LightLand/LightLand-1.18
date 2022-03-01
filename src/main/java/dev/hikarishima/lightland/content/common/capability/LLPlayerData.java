@@ -85,7 +85,7 @@ public class LLPlayerData {
             reset(Reset.FOR_INJECT);
         }
         if (state != State.ACTIVE) {
-            //magicHolder.checkUnlocks();
+            magicHolder.checkUnlocks();
             abilityPoints.updateAttribute();
             state = State.ACTIVE;
         }

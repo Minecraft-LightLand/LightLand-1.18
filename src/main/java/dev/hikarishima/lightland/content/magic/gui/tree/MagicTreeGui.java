@@ -64,8 +64,8 @@ public class MagicTreeGui<I extends IForgeRegistryEntry<I>, P extends MagicProdu
         }
 
         matrix.pushPose();
-        RenderSystem.enableDepthTest();
         matrix.translate(0.0F, 0.0F, 950.0F);
+        RenderSystem.enableDepthTest();
         RenderSystem.colorMask(false, false, false, false);
         fill(matrix, 4680, 2260, -4680, -2260, -16777216);
         RenderSystem.colorMask(true, true, true, true);
@@ -98,9 +98,7 @@ public class MagicTreeGui<I extends IForgeRegistryEntry<I>, P extends MagicProdu
         RenderSystem.colorMask(false, false, false, false);
         fill(matrix, 4680, 2260, -4680, -2260, -16777216);
         RenderSystem.colorMask(true, true, true, true);
-        matrix.translate(0.0F, 0.0F, 950.0F);
         RenderSystem.depthFunc(515);
-        RenderSystem.disableDepthTest();
         matrix.popPose();
     }
 

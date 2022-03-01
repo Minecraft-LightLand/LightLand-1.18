@@ -61,7 +61,7 @@ public class MiscEventHandler {
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public void keyEvent(InputEvent.KeyInputEvent event) {
+    public static void keyEvent(InputEvent.KeyInputEvent event) {
         if (Minecraft.getInstance().screen == null && Proxy.getClientPlayer() != null && MagicWandOverlay.has_magic_wand) {
             MagicWandOverlay.input(event.getKey(), event.getAction());
         }

@@ -7,6 +7,7 @@ import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.network.chat.Component;
@@ -37,16 +38,20 @@ public abstract class AbstractAbilityScreen extends Screen {
         int x0 = (this.width - 252) / 2;
         int y0 = (this.height - 140) / 2;
         renderBackground(matrix);
-        matrix.pushPose();
-        matrix.translate((float) (x0 + 9), (float) (y0 + 18), 0.0F);
+        PoseStack mat = RenderSystem.getModelViewStack();
+        mat.pushPose();
+        mat.translate((float) (x0 + 9), (float) (y0 + 18), 0.0F);
+        RenderSystem.applyModelViewMatrix();
         renderInside(matrix, 234, 113, mx - x0 - 9, my - y0 - 18, partial);
-        matrix.popPose();
+        mat.popPose();
+        RenderSystem.applyModelViewMatrix();
         RenderSystem.depthFunc(515);
         RenderSystem.disableDepthTest();
-        TextureManager tm = Minecraft.getInstance().getTextureManager();
+
         ItemRenderer ir = Minecraft.getInstance().getItemRenderer();
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, WINDOW_LOCATION);
         this.blit(matrix, x0, y0, 0, 0, 252, 140);
         RenderSystem.setShaderTexture(0, TABS_LOCATION);
@@ -64,10 +69,15 @@ public abstract class AbstractAbilityScreen extends Screen {
                 renderTooltip(matrix, tab.title, mx, my);
             }
         }
-        matrix.pushPose();
-        matrix.translate((float) (x0 + 9), (float) (y0 + 18), 0.0F);
+        mat.pushPose();
+        mat.translate((float) (x0 + 9), (float) (y0 + 18), 400.0F);
+        RenderSystem.applyModelViewMatrix();
+        RenderSystem.enableDepthTest();
         renderInnerTooltip(matrix, 234, 113, mx - x0 - 9, my - y0 - 18);
-        matrix.popPose();
+        RenderSystem.disableDepthTest();
+        mat.popPose();
+        RenderSystem.applyModelViewMatrix();
+        //TODO render outer tool tip
     }
 
     protected abstract void renderInside(PoseStack matrix, int w, int h, int mx, int my, float partial);

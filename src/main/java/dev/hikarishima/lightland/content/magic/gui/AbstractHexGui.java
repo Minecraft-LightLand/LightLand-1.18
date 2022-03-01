@@ -26,6 +26,7 @@ public class AbstractHexGui extends GuiComponent {
     private static final ResourceLocation WIDGETS_LOCATION = new ResourceLocation("textures/gui/advancements/widgets.png");
 
     public static void drawIcon(PoseStack matrix, double x, double y, double scale) {
+        PoseStack mat = RenderSystem.getModelViewStack();
         matrix.pushPose();
         matrix.translate(x, y, 0);
         matrix.scale((float) (1f / 16 * scale), (float) (1f / 16 * scale), 0);
@@ -34,6 +35,7 @@ public class AbstractHexGui extends GuiComponent {
     }
 
     public static void drawScaled(PoseStack matrix, double x, double y, int scale) {
+        PoseStack mat = RenderSystem.getModelViewStack();
         matrix.pushPose();
         matrix.translate(x, y, 0);
         matrix.scale(1f / scale, 1f / scale, 0);
