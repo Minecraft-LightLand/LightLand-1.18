@@ -41,6 +41,8 @@ public class LangData {
         RITUAL_WRONG("chat.ritual.fail.wrong", 0),
         RITUAL_ZERO("chat.ritual.fail.zero", 0),
         RITUAL_ELEM("chat.ritual.fail.element", 0),
+        ARMOR_WEIGHT("tooltip.weight",1),
+        ARMOR_ENCHANT("tooltip.enchant",1),
 
         LVUP_NO_POINT("screen.ability.ability.error.no_point", 0),
         LVUP_NO_PROF("screen.ability.ability.error.no_prof", 0),

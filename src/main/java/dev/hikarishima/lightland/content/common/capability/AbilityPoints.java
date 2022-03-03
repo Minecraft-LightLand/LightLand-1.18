@@ -1,9 +1,12 @@
 package dev.hikarishima.lightland.content.common.capability;
 
+import dev.hikarishima.lightland.content.common.capability.restriction.ArmorWeight;
 import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.init.data.LangData;
+import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.BodyAttribute;
 import dev.lcy0x1.util.SerialClass;
+import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -113,13 +116,13 @@ public class AbilityPoints {
     void tickSeconds() {
         if (profession == null)
             return;
-        /*
-        int weight = WeightCalculator.getTotalWeight(parent.player);
+
+        int weight = ArmorWeight.getArmorWeight(parent.player);
         int base = getWeightAble();
         int slow = weight <= base ? 0 : weight <= base * 1.2 ? 1 : 2;
         if (slow > 0) {
-            parent.player.addEffect(new MobEffectInstance(VanillaMagicRegistrate.EFF_HEAVY.get(), 40, slow - 1));
-        }*/
+            parent.player.addEffect(new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), 40, slow - 1));
+        }
 
         if (parent.player.experienceLevel >= 40) {
             parent.player.giveExperienceLevels(-1);

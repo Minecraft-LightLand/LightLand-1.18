@@ -50,12 +50,21 @@ public class CapToClient extends SerialPacketBase {
             CompoundTag comp = ExceptionHandler.get(() -> Automator.toTag(new CompoundTag(), LLPlayerData.class, m, f -> true));
             CapToServer.sendDebugInfo(tag, comp);
         }),
-        ALL((m) -> Automator.toTag(new CompoundTag(), m), tag -> LLPlayerData.cacheSet(tag, false)),
-        CLONE((m) -> Automator.toTag(new CompoundTag(), m), tag -> LLPlayerData.cacheSet(tag, true)),
+        ALL((m) -> {
+            m.magicAbility.time_after_sync = 0;
+            return Automator.toTag(new CompoundTag(), m);
+        }, tag -> LLPlayerData.cacheSet(tag, false)),
+        CLONE((m) -> {
+            m.magicAbility.time_after_sync = 0;
+            return Automator.toTag(new CompoundTag(), m);
+        }, tag -> LLPlayerData.cacheSet(tag, true)),
         ARCANE_TYPE((m) -> m.magicAbility.arcane_type, (tag) -> {
             MagicAbility abi = CapProxy.getHandler().magicAbility;
             abi.arcane_type = tag;
-        }), MAGIC_ABILITY((m) -> Automator.toTag(new CompoundTag(), m.magicAbility), (tag) -> {
+        }), MAGIC_ABILITY((m) -> {
+            m.magicAbility.time_after_sync = 0;
+            return Automator.toTag(new CompoundTag(), m.magicAbility);
+        }, (tag) -> {
             LLPlayerData h = CapProxy.getHandler();
             h.magicAbility = new MagicAbility(h);
             ExceptionHandler.run(() -> Automator.fromTag(tag, MagicAbility.class, h.magicAbility, f -> true));
