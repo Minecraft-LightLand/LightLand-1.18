@@ -60,6 +60,15 @@ public class LightLand {
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
 	}
 
+	private static void registerModBusEvents(IEventBus bus) {
+		bus.addListener(LightLand::setup);
+		bus.addListener(LightLandClient::clientSetup);
+		bus.addListener(EventPriority.LOWEST, LightLand::gatherData);
+		bus.addListener(LightLand::onParticleRegistryEvent);
+		bus.addListener(LightLand::registerCaps);
+		bus.addListener(EntityRegistrate::registerEntityAttributes);
+	}
+
 	private static void registerCommands() {
 		EnumParser.register();
 		RegistryParser.register();
@@ -71,11 +80,7 @@ public class LightLand {
 	public LightLand() {
 		FMLJavaModLoadingContext ctx = FMLJavaModLoadingContext.get();
 		IEventBus bus = ctx.getModEventBus();
-		bus.addListener(this::setup);
-		bus.addListener(LightLandClient::clientSetup);
-		bus.addListener(EventPriority.LOWEST, LightLand::gatherData);
-		bus.addListener(this::onParticleRegistryEvent);
-		bus.addListener(this::registerCaps);
+		registerModBusEvents(bus);
 		GeckoLib.initialize();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> LightLandClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
 		registerRegistrates();
@@ -83,7 +88,7 @@ public class LightLand {
 		registerCommands();
 	}
 
-	private void setup(final FMLCommonSetupEvent event) {
+	private static void setup(final FMLCommonSetupEvent event) {
 		PacketHandler.registerPackets();
 		EffectSyncEvents.init();
 	}
@@ -92,11 +97,11 @@ public class LightLand {
 		LangData.addTranslations(REGISTRATE::addRawLang);
 	}
 
-	public void onParticleRegistryEvent(ParticleFactoryRegisterEvent event) {
+	public static void onParticleRegistryEvent(ParticleFactoryRegisterEvent event) {
 		ParticleRegistrate.registerClient();
 	}
 
-	public void registerCaps(RegisterCapabilitiesEvent event) {
+	public static void registerCaps(RegisterCapabilitiesEvent event) {
 		event.register(LLPlayerData.class);
 	}
 

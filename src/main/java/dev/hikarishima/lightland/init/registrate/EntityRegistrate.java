@@ -4,6 +4,7 @@ import com.tterrag.registrate.util.entry.EntityEntry;
 import dev.hikarishima.lightland.content.common.entity.*;
 import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
@@ -48,6 +49,10 @@ public class EntityRegistrate {
 			.defaultLang().register();
 
 	public static void register() {
+	}
+
+	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
+
 	}
 
 }
