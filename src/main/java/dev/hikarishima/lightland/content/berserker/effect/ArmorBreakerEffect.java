@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class ArmorBreakerEffect extends MobEffect {
 
-    public ArmorBreakerEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public ArmorBreakerEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 }

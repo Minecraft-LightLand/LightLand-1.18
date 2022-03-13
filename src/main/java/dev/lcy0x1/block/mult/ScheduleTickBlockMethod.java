@@ -9,6 +9,6 @@ import java.util.Random;
 
 public interface ScheduleTickBlockMethod extends MultipleBlockMethod {
 
-    void tick(BlockState state, ServerLevel world, BlockPos pos, Random random);
+	void tick(BlockState state, ServerLevel world, BlockPos pos, Random random);
 
 }

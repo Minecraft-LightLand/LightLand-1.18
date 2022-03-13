@@ -24,166 +24,166 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler {
 
-    public static final ArcaneItemUseHelper INSTANCE = new ArcaneItemUseHelper();
+	public static final ArcaneItemUseHelper INSTANCE = new ArcaneItemUseHelper();
 
-    private ArcaneItemUseHelper() {
-        ItemUseEventHandler.LIST.add(this);
-    }
+	private ArcaneItemUseHelper() {
+		ItemUseEventHandler.LIST.add(this);
+	}
 
-    public static boolean isArcaneItem(ItemStack stack) {
-        Item item = stack.getItem();
-        return item instanceof ArcaneSword || item instanceof ArcaneAxe;
-    }
+	public static boolean isArcaneItem(ItemStack stack) {
+		Item item = stack.getItem();
+		return item instanceof ArcaneSword || item instanceof ArcaneAxe;
+	}
 
-    @DoubleSidedCall
-    public static boolean executeArcane(
-            Player player, LLPlayerData magic,
-            ItemStack stack, ArcaneType type, LivingEntity target) {
-        if (!magic.magicAbility.isArcaneTypeUnlocked(type))
-            return false;
-        CompoundTag tag = stack.getTagElement("arcane");
-        if (tag == null || !tag.contains(type.getID()))
-            return false;
-        String str = tag.getString(type.getID());
-        ResourceLocation rl = new ResourceLocation(str);
-        Arcane arcane = LightLandRegistry.ARCANE.getValue(rl);
-        if (arcane == null || arcane.cost > tag.getInt("mana"))
-            return false;
-        if (arcane.activate(player, magic, stack, target)) {
-            if (!player.level.isClientSide())
-                tag.putInt("mana", tag.getInt("mana") - arcane.cost);
-            return true;
-        }
-        return false;
-    }
+	@DoubleSidedCall
+	public static boolean executeArcane(
+			Player player, LLPlayerData magic,
+			ItemStack stack, ArcaneType type, LivingEntity target) {
+		if (!magic.magicAbility.isArcaneTypeUnlocked(type))
+			return false;
+		CompoundTag tag = stack.getTagElement("arcane");
+		if (tag == null || !tag.contains(type.getID()))
+			return false;
+		String str = tag.getString(type.getID());
+		ResourceLocation rl = new ResourceLocation(str);
+		Arcane arcane = LightLandRegistry.ARCANE.getValue(rl);
+		if (arcane == null || arcane.cost > tag.getInt("mana"))
+			return false;
+		if (arcane.activate(player, magic, stack, target)) {
+			if (!player.level.isClientSide())
+				tag.putInt("mana", tag.getInt("mana") - arcane.cost);
+			return true;
+		}
+		return false;
+	}
 
-    @ServerOnly
-    public static void rightClickAxe(Level level, ItemStack stack) {
-        if (level.isClientSide()) return;
-        CompoundTag tag = stack.getOrCreateTagElement("arcane");
-        tag.putBoolean("charged", !tag.getBoolean("charged"));
-    }
+	@ServerOnly
+	public static void rightClickAxe(Level level, ItemStack stack) {
+		if (level.isClientSide()) return;
+		CompoundTag tag = stack.getOrCreateTagElement("arcane");
+		tag.putBoolean("charged", !tag.getBoolean("charged"));
+	}
 
-    public static boolean isAxeCharged(ItemStack stack) {
-        return stack.getOrCreateTagElement("arcane").getBoolean("charged");
-    }
+	public static boolean isAxeCharged(ItemStack stack) {
+		return stack.getOrCreateTagElement("arcane").getBoolean("charged");
+	}
 
-    @ServerOnly
-    public static void addArcaneMana(ItemStack stack, int mana) {
-        IArcaneItem item = (IArcaneItem) stack.getItem();
-        CompoundTag tag = stack.getOrCreateTagElement("arcane");
-        tag.putInt("mana", Mth.clamp(tag.getInt("mana") + mana, 0, item.getMaxMana(stack)));
-    }
+	@ServerOnly
+	public static void addArcaneMana(ItemStack stack, int mana) {
+		IArcaneItem item = (IArcaneItem) stack.getItem();
+		CompoundTag tag = stack.getOrCreateTagElement("arcane");
+		tag.putInt("mana", Mth.clamp(tag.getInt("mana") + mana, 0, item.getMaxMana(stack)));
+	}
 
-    public static int getArcaneMana(ItemStack stack) {
-        return stack.getOrCreateTagElement("arcane").getInt("mana");
-    }
+	public static int getArcaneMana(ItemStack stack) {
+		return stack.getOrCreateTagElement("arcane").getInt("mana");
+	}
 
-    /**
-     * executes on server only, play animation in client
-     */
-    @ServerOnly
-    private static void handleLeftClickEvent(ItemStack stack, PlayerInteractEvent event, LivingEntity target) {
-        Player player = event.getPlayer();
-        LLPlayerData magic = LLPlayerData.get(player);
-        if (stack.getItem() instanceof ArcaneAxe) {
-            ArcaneType type = isAxeCharged(stack) ? ArcaneType.DUBHE.get() : ArcaneType.MEGREZ.get();
-            if (executeArcane(player, magic, stack, type, target)) {
-                if (event.isCancelable())
-                    event.setCanceled(true);
-                event.setCancellationResult(InteractionResult.SUCCESS);
-            }
-        } else if (stack.getItem() instanceof ArcaneSword) {
-            if (executeArcane(player, magic, stack, ArcaneType.ALIOTH.get(), target)) {
-                if (event.isCancelable())
-                    event.setCanceled(true);
-                event.setCancellationResult(InteractionResult.SUCCESS);
-            }
-        }
-    }
+	/**
+	 * executes on server only, play animation in client
+	 */
+	@ServerOnly
+	private static void handleLeftClickEvent(ItemStack stack, PlayerInteractEvent event, LivingEntity target) {
+		Player player = event.getPlayer();
+		LLPlayerData magic = LLPlayerData.get(player);
+		if (stack.getItem() instanceof ArcaneAxe) {
+			ArcaneType type = isAxeCharged(stack) ? ArcaneType.DUBHE.get() : ArcaneType.MEGREZ.get();
+			if (executeArcane(player, magic, stack, type, target)) {
+				if (event.isCancelable())
+					event.setCanceled(true);
+				event.setCancellationResult(InteractionResult.SUCCESS);
+			}
+		} else if (stack.getItem() instanceof ArcaneSword) {
+			if (executeArcane(player, magic, stack, ArcaneType.ALIOTH.get(), target)) {
+				if (event.isCancelable())
+					event.setCanceled(true);
+				event.setCancellationResult(InteractionResult.SUCCESS);
+			}
+		}
+	}
 
-    /**
-     * executes on server only, play animation in client
-     */
-    @ServerOnly
-    private static void handleRightClickEvent(ItemStack stack, PlayerInteractEvent event, LivingEntity target) {
-        boolean cancellable = event.isCancelable();
-        if (stack.getItem() instanceof ArcaneAxe) {
-            rightClickAxe(event.getWorld(), stack);
-            if (cancellable) event.setCanceled(true);
-            event.setCancellationResult(InteractionResult.SUCCESS);
-        } else if (stack.getItem() instanceof ArcaneSword) {
-            if (executeArcane(event.getPlayer(),
-                    LLPlayerData.get(event.getPlayer()),
-                    stack, ArcaneType.ALKAID.get(), target)) {
-                if (cancellable) event.setCanceled(true);
-                event.setCancellationResult(InteractionResult.SUCCESS);
-            }
-        }
-    }
+	/**
+	 * executes on server only, play animation in client
+	 */
+	@ServerOnly
+	private static void handleRightClickEvent(ItemStack stack, PlayerInteractEvent event, LivingEntity target) {
+		boolean cancellable = event.isCancelable();
+		if (stack.getItem() instanceof ArcaneAxe) {
+			rightClickAxe(event.getWorld(), stack);
+			if (cancellable) event.setCanceled(true);
+			event.setCancellationResult(InteractionResult.SUCCESS);
+		} else if (stack.getItem() instanceof ArcaneSword) {
+			if (executeArcane(event.getPlayer(),
+					LLPlayerData.get(event.getPlayer()),
+					stack, ArcaneType.ALKAID.get(), target)) {
+				if (cancellable) event.setCanceled(true);
+				event.setCancellationResult(InteractionResult.SUCCESS);
+			}
+		}
+	}
 
-    public static LivingEntity toLiving(Entity e) {
-        return e instanceof LivingEntity ? (LivingEntity) e : null;
-    }
+	public static LivingEntity toLiving(Entity e) {
+		return e instanceof LivingEntity ? (LivingEntity) e : null;
+	}
 
-    @Override
-    public boolean predicate(ItemStack stack, Class<? extends PlayerEvent> cls, PlayerEvent event) {
-        return isArcaneItem(stack);
-    }
+	@Override
+	public boolean predicate(ItemStack stack, Class<? extends PlayerEvent> cls, PlayerEvent event) {
+		return isArcaneItem(stack);
+	}
 
-    @Override
-    public void onPlayerLeftClickEmpty(ItemStack stack, PlayerInteractEvent.LeftClickEmpty event) {
-        handleLeftClickEvent(stack, event, null);
-    }
+	@Override
+	public void onPlayerLeftClickEmpty(ItemStack stack, PlayerInteractEvent.LeftClickEmpty event) {
+		handleLeftClickEvent(stack, event, null);
+	}
 
-    @Override
-    public void onPlayerLeftClickBlock(ItemStack stack, PlayerInteractEvent.LeftClickBlock event) {
-        handleLeftClickEvent(stack, event, null);
-    }
+	@Override
+	public void onPlayerLeftClickBlock(ItemStack stack, PlayerInteractEvent.LeftClickBlock event) {
+		handleLeftClickEvent(stack, event, null);
+	}
 
-    @DoubleSidedCall
-    @Override
-    public void onPlayerLeftClickEntity(ItemStack stack, AttackEntityEvent event) {
-        float charge = event.getPlayer().getAttackStrengthScale(0.5f);
-        if (!event.getPlayer().level.isClientSide() && event.getEntityLiving() != null && charge > 0.9f) {
-            addArcaneMana(stack, 1);
-        }
-    }
+	@DoubleSidedCall
+	@Override
+	public void onPlayerLeftClickEntity(ItemStack stack, AttackEntityEvent event) {
+		float charge = event.getPlayer().getAttackStrengthScale(0.5f);
+		if (!event.getPlayer().level.isClientSide() && event.getEntityLiving() != null && charge > 0.9f) {
+			addArcaneMana(stack, 1);
+		}
+	}
 
-    @ServerOnly
-    @Override
-    public void onCriticalHit(ItemStack stack, CriticalHitEvent event) {
-        if (event.getPlayer().level.isClientSide())
-            return;
-        Player player = event.getPlayer();
-        LLPlayerData magic = LLPlayerData.get(player);
-        Entity e = event.getTarget();
-        LivingEntity le = toLiving(event.getTarget());
-        ArcaneType type = null;
-        boolean cr = event.isVanillaCritical();
-        if (stack.getItem() instanceof ArcaneAxe) {
-            boolean ch = isAxeCharged(stack);
-            type = cr ? ch ? ArcaneType.MERAK.get() : ArcaneType.PHECDA.get() : ch ? ArcaneType.DUBHE.get() : ArcaneType.MEGREZ.get();
-        } else if (stack.getItem() instanceof ArcaneSword) {
-            type = cr ? ArcaneType.MIZAR.get() : ArcaneType.ALIOTH.get();
-        }
-        if (type != null)
-            executeArcane(player, magic, stack, type, le);
-    }
+	@ServerOnly
+	@Override
+	public void onCriticalHit(ItemStack stack, CriticalHitEvent event) {
+		if (event.getPlayer().level.isClientSide())
+			return;
+		Player player = event.getPlayer();
+		LLPlayerData magic = LLPlayerData.get(player);
+		Entity e = event.getTarget();
+		LivingEntity le = toLiving(event.getTarget());
+		ArcaneType type = null;
+		boolean cr = event.isVanillaCritical();
+		if (stack.getItem() instanceof ArcaneAxe) {
+			boolean ch = isAxeCharged(stack);
+			type = cr ? ch ? ArcaneType.MERAK.get() : ArcaneType.PHECDA.get() : ch ? ArcaneType.DUBHE.get() : ArcaneType.MEGREZ.get();
+		} else if (stack.getItem() instanceof ArcaneSword) {
+			type = cr ? ArcaneType.MIZAR.get() : ArcaneType.ALIOTH.get();
+		}
+		if (type != null)
+			executeArcane(player, magic, stack, type, le);
+	}
 
-    @Override
-    public void onPlayerRightClickEmpty(ItemStack stack, PlayerInteractEvent.RightClickEmpty event) {
-        handleRightClickEvent(stack, event, null);
-    }
+	@Override
+	public void onPlayerRightClickEmpty(ItemStack stack, PlayerInteractEvent.RightClickEmpty event) {
+		handleRightClickEvent(stack, event, null);
+	}
 
-    @Override
-    public void onPlayerRightClickBlock(ItemStack stack, PlayerInteractEvent.RightClickBlock event) {
-        handleRightClickEvent(stack, event, null);
-    }
+	@Override
+	public void onPlayerRightClickBlock(ItemStack stack, PlayerInteractEvent.RightClickBlock event) {
+		handleRightClickEvent(stack, event, null);
+	}
 
-    @Override
-    public void onPlayerRightClickEntity(ItemStack stack, PlayerInteractEvent.EntityInteract event) {
-        handleRightClickEvent(stack, event, toLiving(event.getTarget()));
-    }
+	@Override
+	public void onPlayerRightClickEntity(ItemStack stack, PlayerInteractEvent.EntityInteract event) {
+		handleRightClickEvent(stack, event, toLiving(event.getTarget()));
+	}
 
 }

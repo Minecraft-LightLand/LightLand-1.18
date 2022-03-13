@@ -11,17 +11,17 @@ import java.util.Objects;
 @SerialClass
 public class SpellDataConfig extends ConfigSyncManager.BaseConfig {
 
-    @SerialClass.SerialField(generic = {String.class, SpellConfig.class})
-    public HashMap<String, SpellConfig> map = new HashMap<>();
+	@SerialClass.SerialField(generic = {String.class, SpellConfig.class})
+	public HashMap<String, SpellConfig> map = new HashMap<>();
 
-    @Nullable
-    @SuppressWarnings({"unchecked", "unsafe"})
-    public static <C extends SpellConfig> C getConfig(ResourceLocation rl) {
-        return (C) ConfigSyncManager.CONFIGS.entrySet().stream()
-                .filter(e -> new ResourceLocation(e.getKey()).getPath().equals("config_spell"))
-                .map(e -> ((SpellDataConfig) e.getValue()).map.get(rl.toString()))
-                .filter(Objects::nonNull).findFirst().orElse(null);
+	@Nullable
+	@SuppressWarnings({"unchecked", "unsafe"})
+	public static <C extends SpellConfig> C getConfig(ResourceLocation rl) {
+		return (C) ConfigSyncManager.CONFIGS.entrySet().stream()
+				.filter(e -> new ResourceLocation(e.getKey()).getPath().equals("config_spell"))
+				.map(e -> ((SpellDataConfig) e.getValue()).map.get(rl.toString()))
+				.filter(Objects::nonNull).findFirst().orElse(null);
 
-    }
+	}
 
 }

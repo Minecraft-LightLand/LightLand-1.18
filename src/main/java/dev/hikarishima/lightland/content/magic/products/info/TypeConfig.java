@@ -8,18 +8,18 @@ import net.minecraft.world.item.ItemStack;
 @SerialClass
 public class TypeConfig {
 
-    @SerialClass.SerialField
-    public Item icon;
+	@SerialClass.SerialField
+	public Item icon;
 
-    @SerialClass.SerialField
-    public ResourceLocation background;
+	@SerialClass.SerialField
+	public ResourceLocation background;
 
-    public ItemStack getIcon() {
-        return icon.getDefaultInstance();
-    }
+	public ItemStack getIcon() {
+		return icon.getDefaultInstance();
+	}
 
-    public ResourceLocation getBackground() {
-        return background;
-    }
+	public ResourceLocation getBackground() {
+		return background;
+	}
 
 }

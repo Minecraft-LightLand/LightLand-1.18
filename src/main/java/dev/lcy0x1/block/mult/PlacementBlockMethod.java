@@ -6,6 +6,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public interface PlacementBlockMethod extends MultipleBlockMethod {
 
-    BlockState getStateForPlacement(BlockState def, BlockPlaceContext context);
+	BlockState getStateForPlacement(BlockState def, BlockPlaceContext context);
 
 }

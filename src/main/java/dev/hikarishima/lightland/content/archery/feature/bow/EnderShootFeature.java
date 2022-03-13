@@ -13,29 +13,29 @@ import java.util.function.Consumer;
 
 public record EnderShootFeature(int range) implements OnShootFeature, OnPullFeature, IGlowFeature {
 
-    @Override
-    public boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> consumer) {
-        if (player == null)
-            return false;
-        Entity target = RayTraceUtil.serverGetTarget(player);
-        if (target == null)
-            return false;
-        consumer.accept(entity -> entity.setPos(target.position().lerp(target.getEyePosition(), 0.5).add(entity.getDeltaMovement().scale(-1))));
-        return true;
-    }
+	@Override
+	public boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> consumer) {
+		if (player == null)
+			return false;
+		Entity target = RayTraceUtil.serverGetTarget(player);
+		if (target == null)
+			return false;
+		consumer.accept(entity -> entity.setPos(target.position().lerp(target.getEyePosition(), 0.5).add(entity.getDeltaMovement().scale(-1))));
+		return true;
+	}
 
-    @Override
-    public void onPull(Player player, GenericItemStack<GenericBowItem> bow) {
+	@Override
+	public void onPull(Player player, GenericItemStack<GenericBowItem> bow) {
 
-    }
+	}
 
-    @Override
-    public void tickAim(Player player, GenericItemStack<GenericBowItem> bow) {
-        RayTraceUtil.clientUpdateTarget(player, range);
-    }
+	@Override
+	public void tickAim(Player player, GenericItemStack<GenericBowItem> bow) {
+		RayTraceUtil.clientUpdateTarget(player, range);
+	}
 
-    @Override
-    public void stopAim(Player player, GenericItemStack<GenericBowItem> bow) {
-        RayTraceUtil.TARGET.updateTarget(null);
-    }
+	@Override
+	public void stopAim(Player player, GenericItemStack<GenericBowItem> bow) {
+		RayTraceUtil.TARGET.updateTarget(null);
+	}
 }

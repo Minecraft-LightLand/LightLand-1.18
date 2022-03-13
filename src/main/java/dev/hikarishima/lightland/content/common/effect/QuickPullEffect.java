@@ -5,8 +5,8 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class QuickPullEffect extends MobEffect {
 
-    public QuickPullEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public QuickPullEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 
 }

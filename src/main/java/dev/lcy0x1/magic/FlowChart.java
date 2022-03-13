@@ -16,34 +16,34 @@ import java.util.List;
  */
 public class FlowChart {
 
-    public final List<Flow> flows = new ArrayList<>();
-    public final Frac[][] matrix;
+	public final List<Flow> flows = new ArrayList<>();
+	public final Frac[][] matrix;
 
-    public FlowChart(Frac[][] matrix) {
-        this.matrix = matrix;
-    }
+	public FlowChart(Frac[][] matrix) {
+		this.matrix = matrix;
+	}
 
-    public class Flow {
-        public final ArrowResult arrow;
-        public Frac[] forward, backward;
+	public class Flow {
+		public final ArrowResult arrow;
+		public Frac[] forward, backward;
 
-        Flow(ArrowResult arrow) {
-            flows.add(this);
-            this.arrow = arrow;
-        }
+		Flow(ArrowResult arrow) {
+			flows.add(this);
+			this.arrow = arrow;
+		}
 
-        public boolean flawed() {
-            for (Frac fr : forward) {
-                if (fr != null && fr.isFrac && fr.den == 0)
-                    return true;
-            }
-            for (Frac fr : backward) {
-                if (fr != null && fr.isFrac && fr.den == 0)
-                    return true;
-            }
-            return false;
-        }
+		public boolean flawed() {
+			for (Frac fr : forward) {
+				if (fr != null && fr.isFrac && fr.den == 0)
+					return true;
+			}
+			for (Frac fr : backward) {
+				if (fr != null && fr.isFrac && fr.den == 0)
+					return true;
+			}
+			return false;
+		}
 
-    }
+	}
 
 }

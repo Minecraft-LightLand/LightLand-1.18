@@ -17,49 +17,49 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class MagicFireBallEntity extends LargeFireball implements IEntityAdditionalSpawnData, ISizedItemEntity {
 
-    public MagicFireBallEntity(EntityType<MagicFireBallEntity> type, Level world) {
-        super(type, world);
-    }
+	public MagicFireBallEntity(EntityType<MagicFireBallEntity> type, Level world) {
+		super(type, world);
+	}
 
-    private float size;
+	private float size;
 
-    public MagicFireBallEntity(Level world, LivingEntity owner, Vec3 vec, float size) {
-        this(EntityRegistrate.ET_FIRE_BALL.get(), world);
-        this.setOwner(owner);
-        this.setPos(vec.x, vec.y, vec.z);
-        this.size = size;
-    }
+	public MagicFireBallEntity(Level world, LivingEntity owner, Vec3 vec, float size) {
+		this(EntityRegistrate.ET_FIRE_BALL.get(), world);
+		this.setOwner(owner);
+		this.setPos(vec.x, vec.y, vec.z);
+		this.size = size;
+	}
 
-    @Override
-    protected void onHit(HitResult result) {
-        if (!this.level.isClientSide) {
-            this.level.explode(this, getX(), getY(), getZ(), explosionPower, false, Explosion.BlockInteraction.NONE);
-            this.discard();
-        }
-    }
+	@Override
+	protected void onHit(HitResult result) {
+		if (!this.level.isClientSide) {
+			this.level.explode(this, getX(), getY(), getZ(), explosionPower, false, Explosion.BlockInteraction.NONE);
+			this.discard();
+		}
+	}
 
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
+	@Override
+	public Packet<?> getAddEntityPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
 
-    @Override
-    public void writeSpawnData(FriendlyByteBuf buffer) {
-        buffer.writeFloat(size);
-    }
+	@Override
+	public void writeSpawnData(FriendlyByteBuf buffer) {
+		buffer.writeFloat(size);
+	}
 
-    @Override
-    public void readSpawnData(FriendlyByteBuf additionalData) {
-        size = additionalData.readFloat();
-    }
+	@Override
+	public void readSpawnData(FriendlyByteBuf additionalData) {
+		size = additionalData.readFloat();
+	}
 
-    @Override
-    public float getSize() {
-        return 3 * (1 + size * 2);
-    }
+	@Override
+	public float getSize() {
+		return 3 * (1 + size * 2);
+	}
 
-    public EntityDimensions getDimensions(Pose pose) {
-        return EntityDimensions.scalable(1 + size * 2, 1 + size * 2);
-    }
+	public EntityDimensions getDimensions(Pose pose) {
+		return EntityDimensions.scalable(1 + size * 2, 1 + size * 2);
+	}
 
 }

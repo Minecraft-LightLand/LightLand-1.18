@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 @SerialClass
 public class BasicRitualRecipe extends AbstractRitualRecipe<BasicRitualRecipe> {
 
-    public BasicRitualRecipe(ResourceLocation id) {
-        super(id, RecipeRegistrate.RS_DEF.get());
-    }
+	public BasicRitualRecipe(ResourceLocation id) {
+		super(id, RecipeRegistrate.RS_DEF.get());
+	}
 }

@@ -11,32 +11,32 @@ import net.minecraft.world.level.Level;
 
 public class WindBladeSword extends Arcane {
 
-    public final float dmg, velocity, dist;
+	public final float dmg, velocity, dist;
 
-    public WindBladeSword(float dmg, float velocity, float dist) {
-        super(ArcaneType.ALIOTH, 2);
-        this.dmg = dmg;
-        this.velocity = velocity;
-        this.dist = dist;
-    }
+	public WindBladeSword(float dmg, float velocity, float dist) {
+		super(ArcaneType.ALIOTH, 2);
+		this.dmg = dmg;
+		this.velocity = velocity;
+		this.dist = dist;
+	}
 
-    @Override
-    public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
-        if (target != null)
-            return false;
-        float strength = player.getAttackStrengthScale(0.5f);
-        if (strength < 0.9f)
-            return false;
-        player.resetAttackStrengthTicker();
-        Level w = player.level;
-        if (!w.isClientSide()) {
-            WindBladeEntity e = new WindBladeEntity(w);
-            e.setOwner(player);
-            e.setPos(player.getX(), player.getEyeY() - 0.5f, player.getZ());
-            e.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, velocity, 1);
-            e.setProperties(dmg, Math.round(dist / velocity), (float) (Math.random() * 360f), stack);
-            w.addFreshEntity(e);
-        }
-        return true;
-    }
+	@Override
+	public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
+		if (target != null)
+			return false;
+		float strength = player.getAttackStrengthScale(0.5f);
+		if (strength < 0.9f)
+			return false;
+		player.resetAttackStrengthTicker();
+		Level w = player.level;
+		if (!w.isClientSide()) {
+			WindBladeEntity e = new WindBladeEntity(w);
+			e.setOwner(player);
+			e.setPos(player.getX(), player.getEyeY() - 0.5f, player.getZ());
+			e.shootFromRotation(player, player.getXRot(), player.getYRot(), 0, velocity, 1);
+			e.setProperties(dmg, Math.round(dist / velocity), (float) (Math.random() * 360f), stack);
+			w.addFreshEntity(e);
+		}
+		return true;
+	}
 }

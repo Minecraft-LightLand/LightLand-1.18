@@ -18,37 +18,37 @@ import net.minecraft.world.phys.Vec3;
 
 public abstract class Arcane extends NamedEntry<Arcane> {
 
-    public final RegistryEntry<ArcaneType> type;
+	public final RegistryEntry<ArcaneType> type;
 
-    public final int cost;
+	public final int cost;
 
-    public Arcane(RegistryEntry<ArcaneType> type, int cost) {
-        super(() -> LightLandRegistry.ARCANE);
-        this.type = type;
-        this.cost = cost;
-    }
+	public Arcane(RegistryEntry<ArcaneType> type, int cost) {
+		super(() -> LightLandRegistry.ARCANE);
+		this.type = type;
+		this.cost = cost;
+	}
 
-    @DoubleSidedCall
-    public abstract boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target);
+	@DoubleSidedCall
+	public abstract boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target);
 
-    @ServerOnly
-    public static void search(Level w, Player player, double radius, Vec3 center, LivingEntity target, boolean require_mark, Strike strike) {
-        w.getEntities(player, new AABB(center, center).inflate(radius), e -> {
-            if (!(e instanceof LivingEntity le))
-                return false;
-            if (e == player || e == target || TeamAccessor.arePlayerAndEntityInSameTeam((ServerPlayer) player, le))
-                return false;
-            if (e.getPosition(1).distanceToSqr(center) > radius * radius)
-                return false;
-            return !require_mark || ((LivingEntity) e).hasEffect(VanillaMagicRegistrate.ARCANE.get());
-        }).forEach(e -> strike.strike(w, player, (LivingEntity) e));
-    }
+	@ServerOnly
+	public static void search(Level w, Player player, double radius, Vec3 center, LivingEntity target, boolean require_mark, Strike strike) {
+		w.getEntities(player, new AABB(center, center).inflate(radius), e -> {
+			if (!(e instanceof LivingEntity le))
+				return false;
+			if (e == player || e == target || TeamAccessor.arePlayerAndEntityInSameTeam((ServerPlayer) player, le))
+				return false;
+			if (e.getPosition(1).distanceToSqr(center) > radius * radius)
+				return false;
+			return !require_mark || ((LivingEntity) e).hasEffect(VanillaMagicRegistrate.ARCANE.get());
+		}).forEach(e -> strike.strike(w, player, (LivingEntity) e));
+	}
 
-    @FunctionalInterface
-    public interface Strike {
+	@FunctionalInterface
+	public interface Strike {
 
-        void strike(Level level, Player player, LivingEntity target);
+		void strike(Level level, Player player, LivingEntity target);
 
-    }
+	}
 
 }

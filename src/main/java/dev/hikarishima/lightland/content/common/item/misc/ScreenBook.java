@@ -14,20 +14,20 @@ import java.util.function.Supplier;
 
 public class ScreenBook extends Item {
 
-    public Supplier<Supplier<?>> sup;
+	public Supplier<Supplier<?>> sup;
 
-    public ScreenBook(Properties props, Supplier<Supplier<?>> sup) {
-        super(props.stacksTo(1));
-        this.sup = sup;
-    }
+	public ScreenBook(Properties props, Supplier<Supplier<?>> sup) {
+		super(props.stacksTo(1));
+		this.sup = sup;
+	}
 
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (world.isClientSide()) {
-            player.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0f, 1.0f);
-            Minecraft.getInstance().setScreen((Screen) sup.get().get());
-        }
-        return InteractionResultHolder.success(stack);
-    }
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (world.isClientSide()) {
+			player.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0f, 1.0f);
+			Minecraft.getInstance().setScreen((Screen) sup.get().get());
+		}
+		return InteractionResultHolder.success(stack);
+	}
 
 }

@@ -15,26 +15,26 @@ import java.util.Optional;
 
 public class Proxy {
 
-    @OnlyIn(Dist.CLIENT)
-    public static AbstractClientPlayer getClientPlayer() {
-        return Minecraft.getInstance().player;
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static AbstractClientPlayer getClientPlayer() {
+		return Minecraft.getInstance().player;
+	}
 
-    public static Player getPlayer() {
-        return DistExecutor.unsafeRunForDist(() -> Proxy::getClientPlayer, () -> () -> null);
-    }
+	public static Player getPlayer() {
+		return DistExecutor.unsafeRunForDist(() -> Proxy::getClientPlayer, () -> () -> null);
+	}
 
-    public static Level getWorld() {
-        return DistExecutor.unsafeRunForDist(() -> Proxy::getClientWorld, () -> () -> Proxy.getServer().map(MinecraftServer::overworld).orElse(null));
-    }
+	public static Level getWorld() {
+		return DistExecutor.unsafeRunForDist(() -> Proxy::getClientWorld, () -> () -> Proxy.getServer().map(MinecraftServer::overworld).orElse(null));
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public static ClientLevel getClientWorld() {
-        return Minecraft.getInstance().level;
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static ClientLevel getClientWorld() {
+		return Minecraft.getInstance().level;
+	}
 
-    public static Optional<MinecraftServer> getServer() {
-        return Optional.ofNullable(ServerLifecycleHooks.getCurrentServer());
-    }
+	public static Optional<MinecraftServer> getServer() {
+		return Optional.ofNullable(ServerLifecycleHooks.getCurrentServer());
+	}
 
 }

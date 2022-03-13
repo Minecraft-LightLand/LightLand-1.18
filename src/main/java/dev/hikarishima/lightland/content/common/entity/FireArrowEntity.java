@@ -10,25 +10,25 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class FireArrowEntity extends Arrow {
 
-    public FireArrowEntity(EntityType<FireArrowEntity> type, Level world) {
-        super(type, world);
-    }
+	public FireArrowEntity(EntityType<FireArrowEntity> type, Level world) {
+		super(type, world);
+	}
 
-    public FireArrowEntity(Level world, LivingEntity owner) {
-        this(EntityRegistrate.ET_FIRE_ARROW.get(), world);
-        this.setOwner(owner);
-    }
+	public FireArrowEntity(Level world, LivingEntity owner) {
+		this(EntityRegistrate.ET_FIRE_ARROW.get(), world);
+		this.setOwner(owner);
+	}
 
-    @Override
-    protected void tickDespawn() {
-        ++this.life;
-        if (this.life > 200)
-            discard();
-    }
+	@Override
+	protected void tickDespawn() {
+		++this.life;
+		if (this.life > 200)
+			discard();
+	}
 
-    @Override
-    public Packet<?> getAddEntityPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
+	@Override
+	public Packet<?> getAddEntityPacket() {
+		return NetworkHooks.getEntitySpawningPacket(this);
+	}
 
 }

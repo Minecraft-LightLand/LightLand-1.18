@@ -18,44 +18,44 @@ import java.util.List;
 
 public class RecordPearl extends Item {
 
-    public RecordPearl(Properties props) {
-        super(props.stacksTo(1));
-    }
+	public RecordPearl(Properties props) {
+		super(props.stacksTo(1));
+	}
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        LLPlayerData handler = LLPlayerData.get(player);
-        if (isFoil(stack)) {
-            if (handler.abilityPoints.getProfession() != null)
-                return InteractionResultHolder.fail(stack);
-            CompoundTag tag = stack.getTagElement("player_cap");
-            handler.reset(LLPlayerData.Reset.FOR_INJECT);
-            ExceptionHandler.run(() -> Automator.fromTag(tag, LLPlayerData.class, handler, f -> true));
-            handler.reInit();
-            stack.removeTagKey("player_cap");
-            return InteractionResultHolder.success(stack);
-        } else {
-            if (handler.abilityPoints.getProfession() == null)
-                return InteractionResultHolder.fail(stack);
-            CompoundTag tag = stack.getOrCreateTagElement("player_cap");
-            Automator.toTag(tag, handler);
-            handler.reset(LLPlayerData.Reset.ALL);
-            return InteractionResultHolder.success(stack);
-        }
-    }
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		LLPlayerData handler = LLPlayerData.get(player);
+		if (isFoil(stack)) {
+			if (handler.abilityPoints.getProfession() != null)
+				return InteractionResultHolder.fail(stack);
+			CompoundTag tag = stack.getTagElement("player_cap");
+			handler.reset(LLPlayerData.Reset.FOR_INJECT);
+			ExceptionHandler.run(() -> Automator.fromTag(tag, LLPlayerData.class, handler, f -> true));
+			handler.reInit();
+			stack.removeTagKey("player_cap");
+			return InteractionResultHolder.success(stack);
+		} else {
+			if (handler.abilityPoints.getProfession() == null)
+				return InteractionResultHolder.fail(stack);
+			CompoundTag tag = stack.getOrCreateTagElement("player_cap");
+			Automator.toTag(tag, handler);
+			handler.reset(LLPlayerData.Reset.ALL);
+			return InteractionResultHolder.success(stack);
+		}
+	}
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return stack.getTagElement("player_cap") != null;
-    }
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return stack.getTagElement("player_cap") != null;
+	}
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
-        if (isFoil(stack)) {
-            LLPlayerData handler = Automator.fromTag(stack.getTagElement("player_cap"), LLPlayerData.class);
-            list.add(handler.abilityPoints.profession.getDesc());
-        }
-        super.appendHoverText(stack, world, list, flag);
-    }
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
+		if (isFoil(stack)) {
+			LLPlayerData handler = Automator.fromTag(stack.getTagElement("player_cap"), LLPlayerData.class);
+			list.add(handler.abilityPoints.profession.getDesc());
+		}
+		super.appendHoverText(stack, world, list, flag);
+	}
 }

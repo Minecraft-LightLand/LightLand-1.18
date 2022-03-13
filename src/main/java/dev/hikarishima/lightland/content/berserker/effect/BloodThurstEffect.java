@@ -5,8 +5,8 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class BloodThurstEffect extends MobEffect {
 
-    public BloodThurstEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public BloodThurstEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 
 }

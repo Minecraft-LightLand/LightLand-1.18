@@ -31,10 +31,10 @@ public class MiscEventHandler {
 	public static void onScreenClick(ScreenEvent.MouseClickedEvent event) {
 		Screen screen = event.getScreen();
 		if (event.getButton() == 1 &&
-			screen instanceof AbstractContainerScreen cont) {
+				screen instanceof AbstractContainerScreen cont) {
 			Slot slot = cont.findSlot(event.getMouseX(), event.getMouseY());
 			if (slot != null &&
-				slot.container == Proxy.getClientPlayer().getInventory()) {
+					slot.container == Proxy.getClientPlayer().getInventory()) {
 				if (slot.getItem().getItem() instanceof BackpackItem || slot.getItem().getItem() instanceof EnderBackpackItem) {
 					int ind = slot.getSlotIndex();
 					new SlotClickToServer(ind).toServer();

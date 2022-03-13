@@ -34,98 +34,98 @@ import java.util.UUID;
 
 public class BackpackItem extends Item {
 
-    public static ListTag getListTag(ItemStack stack) {
-        if (stack.getOrCreateTag().contains("Items")) {
-            return stack.getOrCreateTag().getList("Items", Tag.TAG_COMPOUND);
-        } else {
-            return new ListTag();
-        }
-    }
+	public static ListTag getListTag(ItemStack stack) {
+		if (stack.getOrCreateTag().contains("Items")) {
+			return stack.getOrCreateTag().getList("Items", Tag.TAG_COMPOUND);
+		} else {
+			return new ListTag();
+		}
+	}
 
-    public static void setListTag(ItemStack stack, ListTag list) {
-        stack.getOrCreateTag().put("Items", list);
-    }
+	public static void setListTag(ItemStack stack, ListTag list) {
+		stack.getOrCreateTag().put("Items", list);
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
-        if (entity != Proxy.getClientPlayer()) return 0;
-        Screen screen = Minecraft.getInstance().screen;
-        if (screen instanceof BackpackScreen gui) {
-            return gui.getMenu().getStack() == stack ? 1 : 0;
-        }
-        return 0;
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
+		if (entity != Proxy.getClientPlayer()) return 0;
+		Screen screen = Minecraft.getInstance().screen;
+		if (screen instanceof BackpackScreen gui) {
+			return gui.getMenu().getStack() == stack ? 1 : 0;
+		}
+		return 0;
+	}
 
-    public static final class MenuPvd implements MenuProvider {
+	public static final class MenuPvd implements MenuProvider {
 
-        private final ServerPlayer player;
-        private final int slot;
-        private final ItemStack stack;
+		private final ServerPlayer player;
+		private final int slot;
+		private final ItemStack stack;
 
-        public MenuPvd(ServerPlayer player, InteractionHand hand, ItemStack stack) {
-            this.player = player;
-            slot = hand == InteractionHand.MAIN_HAND ? player.getInventory().selected : 40;
-            this.stack = stack;
-        }
+		public MenuPvd(ServerPlayer player, InteractionHand hand, ItemStack stack) {
+			this.player = player;
+			slot = hand == InteractionHand.MAIN_HAND ? player.getInventory().selected : 40;
+			this.stack = stack;
+		}
 
-        public MenuPvd(ServerPlayer player, int slot, ItemStack stack) {
-            this.player = player;
-            this.slot = slot;
-            this.stack = stack;
-        }
+		public MenuPvd(ServerPlayer player, int slot, ItemStack stack) {
+			this.player = player;
+			this.slot = slot;
+			this.stack = stack;
+		}
 
-        @Override
-        public Component getDisplayName() {
-            return stack.getDisplayName();
-        }
+		@Override
+		public Component getDisplayName() {
+			return stack.getDisplayName();
+		}
 
-        @Override
-        public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
-            CompoundTag tag = stack.getOrCreateTag();
-            UUID uuid = tag.getUUID("container_id");
-            return new BackpackContainer(id, inventory, slot, uuid, tag.getInt("rows"));
-        }
+		@Override
+		public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+			CompoundTag tag = stack.getOrCreateTag();
+			UUID uuid = tag.getUUID("container_id");
+			return new BackpackContainer(id, inventory, slot, uuid, tag.getInt("rows"));
+		}
 
-        public void writeBuffer(FriendlyByteBuf buf) {
-            CompoundTag tag = stack.getOrCreateTag();
-            UUID id = tag.getUUID("container_id");
-            buf.writeInt(slot);
-            buf.writeUUID(id);
-            buf.writeInt(tag.getInt("rows"));
-        }
+		public void writeBuffer(FriendlyByteBuf buf) {
+			CompoundTag tag = stack.getOrCreateTag();
+			UUID id = tag.getUUID("container_id");
+			buf.writeInt(slot);
+			buf.writeUUID(id);
+			buf.writeInt(tag.getInt("rows"));
+		}
 
-        public void open() {
-            CompoundTag tag = stack.getOrCreateTag();
-            if (!tag.getBoolean("init")) {
-                tag.putBoolean("init", true);
-                tag.putUUID("container_id", UUID.randomUUID());
-                tag.putInt("rows", 1);
-            }
-            NetworkHooks.openGui(player, this, this::writeBuffer);
-        }
+		public void open() {
+			CompoundTag tag = stack.getOrCreateTag();
+			if (!tag.getBoolean("init")) {
+				tag.putBoolean("init", true);
+				tag.putUUID("container_id", UUID.randomUUID());
+				tag.putInt("rows", 1);
+			}
+			NetworkHooks.openGui(player, this, this::writeBuffer);
+		}
 
-    }
+	}
 
-    public final DyeColor color;
+	public final DyeColor color;
 
-    public BackpackItem(DyeColor color, Properties props) {
-        super(props);
-        this.color = color;
-    }
+	public BackpackItem(DyeColor color, Properties props) {
+		super(props);
+		this.color = color;
+	}
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (!level.isClientSide()) {
-            new MenuPvd((ServerPlayer) player, hand, stack).open();
-        } else {
-            player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
-        }
-        return InteractionResultHolder.success(stack);
-    }
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (!level.isClientSide()) {
+			new MenuPvd((ServerPlayer) player, hand, stack).open();
+		} else {
+			player.playSound(SoundEvents.ARMOR_EQUIP_LEATHER, 1, 1);
+		}
+		return InteractionResultHolder.success(stack);
+	}
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
-        list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows")), 6));
-    }
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
+		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows")), 6));
+	}
 }

@@ -7,15 +7,15 @@ import net.minecraftforge.fml.DistExecutor;
 
 public class AppleSkinCompatHandler {
 
-    public static void handleCompat(GeneralCompatHandler.Stage stage) {
-        if (stage == GeneralCompatHandler.Stage.OVERLAY) {
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AppleSkinCompatHandler::modifyOverlay);
-        }
-    }
+	public static void handleCompat(GeneralCompatHandler.Stage stage) {
+		if (stage == GeneralCompatHandler.Stage.OVERLAY) {
+			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> AppleSkinCompatHandler::modifyOverlay);
+		}
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public static void modifyOverlay() {
-        OverlayRegistry.enableOverlay(GeneralCompatHandler.getOverlay("AppleSkin Health Overlay").getOverlay(), false);
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static void modifyOverlay() {
+		OverlayRegistry.enableOverlay(GeneralCompatHandler.getOverlay("AppleSkin Health Overlay").getOverlay(), false);
+	}
 
 }

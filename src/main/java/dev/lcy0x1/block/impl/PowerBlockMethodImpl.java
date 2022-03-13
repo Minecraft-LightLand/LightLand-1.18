@@ -13,22 +13,22 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class PowerBlockMethodImpl implements CreateBlockStateBlockMethod, BlockPowerBlockMethod, DefaultStateBlockMethod {
 
-    public PowerBlockMethodImpl() {
-    }
+	public PowerBlockMethodImpl() {
+	}
 
-    @Override
-    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockStateProperties.POWER);
-    }
+	@Override
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(BlockStateProperties.POWER);
+	}
 
-    @Override
-    public int getSignal(BlockState bs, BlockGetter r, BlockPos pos, Direction d) {
-        return bs.getValue(BlockStateProperties.POWER);
-    }
+	@Override
+	public int getSignal(BlockState bs, BlockGetter r, BlockPos pos, Direction d) {
+		return bs.getValue(BlockStateProperties.POWER);
+	}
 
-    @Override
-    public BlockState getDefaultState(BlockState state) {
-        return state.setValue(BlockStateProperties.POWER, 0);
-    }
+	@Override
+	public BlockState getDefaultState(BlockState state) {
+		return state.setValue(BlockStateProperties.POWER, 0);
+	}
 
 }

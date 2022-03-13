@@ -10,8 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SpellMagic extends MagicProduct<Spell<?, ?>, SpellMagic> {
 
-    public SpellMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
-        super(MagicRegistry.MPT_SPELL.get(), player, tag, rl, r);
-    }
+	public SpellMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
+		super(MagicRegistry.MPT_SPELL.get(), player, tag, rl, r);
+	}
 
 }

@@ -24,7 +24,7 @@ public class ArmorWeight extends ConfigSyncManager.BaseConfig {
 			return 0;
 		int ans = 0;
 		for (ItemStack stack : player.getArmorSlots()) {
-			ans += weight.getWeight(stack);
+			ans += getWeight(stack);
 		}
 		return ans;
 	}

@@ -23,58 +23,58 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class ArcaneSword extends SwordItem implements IArcaneItem {
 
-    private final int mana;
+	private final int mana;
 
-    public ArcaneSword(Tier tier, int attack, float speed, Properties props, int mana) {
-        super(tier, attack, speed, props);
-        this.mana = mana;
-    }
+	public ArcaneSword(Tier tier, int attack, float speed, Properties props, int mana) {
+		super(tier, attack, speed, props);
+		this.mana = mana;
+	}
 
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
-        ArcaneAxe.add(stack, list);
-    }
+	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
+		ArcaneAxe.add(stack, list);
+	}
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        CompoundTag tag = stack.getTag();
-        if (tag != null && tag.getBoolean("foil"))
-            return true;
-        return super.isFoil(stack);
-    }
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		CompoundTag tag = stack.getTag();
+		if (tag != null && tag.getBoolean("foil"))
+			return true;
+		return super.isFoil(stack);
+	}
 
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
-        return true;
-    }
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
+		return true;
+	}
 
-    public boolean mineBlock(ItemStack stack, Level w, BlockState state, BlockPos pos, LivingEntity user) {
-        return true;
-    }
+	public boolean mineBlock(ItemStack stack, Level w, BlockState state, BlockPos pos, LivingEntity user) {
+		return true;
+	}
 
-    @Override
-    public boolean isBarVisible(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean isBarVisible(ItemStack stack) {
+		return true;
+	}
 
-    @Override
-    public int getBarWidth(ItemStack stack) {
-        return (int) Math.round(13.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack));
-    }
+	@Override
+	public int getBarWidth(ItemStack stack) {
+		return (int) Math.round(13.0 * ArcaneItemUseHelper.getArcaneMana(stack) / getMaxMana(stack));
+	}
 
-    @Override
-    public int getBarColor(ItemStack stack) {
-        return 0xFFFFFF;
-    }
+	@Override
+	public int getBarColor(ItemStack stack) {
+		return 0xFFFFFF;
+	}
 
-    @Override
-    public int getMaxMana(ItemStack stack) {
-        return mana;
-    }
+	@Override
+	public int getMaxMana(ItemStack stack) {
+		return mana;
+	}
 
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity user, int slot, boolean selected) {
-        if (user instanceof Player player && selected) {
-            RayTraceUtil.clientUpdateTarget(player, getDistance(stack));
-        }
-    }
+	@Override
+	public void inventoryTick(ItemStack stack, Level level, Entity user, int slot, boolean selected) {
+		if (user instanceof Player player && selected) {
+			RayTraceUtil.clientUpdateTarget(player, getDistance(stack));
+		}
+	}
 
 }

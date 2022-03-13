@@ -15,31 +15,31 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class ManaStorage extends Item {
 
-    public static final int ARCANE_COST = 16;
+	public static final int ARCANE_COST = 16;
 
-    public final Item container;
-    public final int mana;
+	public final Item container;
+	public final int mana;
 
-    public ManaStorage(Properties props, Item container, int mana) {
-        super(props);
-        this.container = container;
-        this.mana = mana;
-    }
+	public ManaStorage(Properties props, Item container, int mana) {
+		super(props);
+		this.container = container;
+		this.mana = mana;
+	}
 
-    public ItemStack finishUsingItem(ItemStack stack, Level w, LivingEntity e) {
-        if (e instanceof ServerPlayer sp) {
-            if (stack.isEdible()) {
-                LLPlayerData data = LLPlayerData.get(sp);
-                data.magicAbility.giveMana(mana);
-                data.magicAbility.addSpellLoad(-mana);
-                new CapToClient(CapToClient.Action.MAGIC_ABILITY, data).toClientPlayer(sp);
-            }
-        }
-        return super.finishUsingItem(stack, w, e);
-    }
+	public ItemStack finishUsingItem(ItemStack stack, Level w, LivingEntity e) {
+		if (e instanceof ServerPlayer sp) {
+			if (stack.isEdible()) {
+				LLPlayerData data = LLPlayerData.get(sp);
+				data.magicAbility.giveMana(mana);
+				data.magicAbility.addSpellLoad(-mana);
+				new CapToClient(CapToClient.Action.MAGIC_ABILITY, data).toClientPlayer(sp);
+			}
+		}
+		return super.finishUsingItem(stack, w, e);
+	}
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return true;
-    }
+	@Override
+	public boolean isFoil(ItemStack stack) {
+		return true;
+	}
 }

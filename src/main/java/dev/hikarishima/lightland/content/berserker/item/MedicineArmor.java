@@ -21,26 +21,26 @@ import java.util.function.Consumer;
 @MethodsReturnNonnullByDefault
 public class MedicineArmor extends ArmorItem implements MedicineItem {
 
-    public MedicineArmor(ArmorMaterial mat, EquipmentSlot slot, Properties prop) {
-        super(mat, slot, prop);
-    }
+	public MedicineArmor(ArmorMaterial mat, EquipmentSlot slot, Properties prop) {
+		super(mat, slot, prop);
+	}
 
-    @Override
-    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
-        List<MobEffectInstance> list = PotionUtils.getCustomEffects(stack);
-        for (MobEffectInstance ins : list) {
-            MobEffectInstance a = new MobEffectInstance(ins.getEffect(), ins.getDuration() * amount, ins.getAmplifier(),
-                    ins.isAmbient(), ins.isVisible(), ins.showIcon());
-            if (ins.getEffect().isInstantenous())
-                ins.getEffect().applyInstantenousEffect(null, null, entity, ins.getAmplifier(), 1);
-            else entity.addEffect(a);
-        }
-        return super.damageItem(stack, amount, entity, onBroken);
-    }
+	@Override
+	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
+		List<MobEffectInstance> list = PotionUtils.getCustomEffects(stack);
+		for (MobEffectInstance ins : list) {
+			MobEffectInstance a = new MobEffectInstance(ins.getEffect(), ins.getDuration() * amount, ins.getAmplifier(),
+					ins.isAmbient(), ins.isVisible(), ins.showIcon());
+			if (ins.getEffect().isInstantenous())
+				ins.getEffect().applyInstantenousEffect(null, null, entity, ins.getAmplifier(), 1);
+			else entity.addEffect(a);
+		}
+		return super.damageItem(stack, amount, entity, onBroken);
+	}
 
-    @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
-        PotionUtils.addPotionTooltip(stack, list, 1);
-    }
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
+		PotionUtils.addPotionTooltip(stack, list, 1);
+	}
 
 }

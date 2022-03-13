@@ -15,17 +15,17 @@ import java.util.function.Consumer;
 @ParametersAreNonnullByDefault
 public class BaseJsonReloadListener extends SimpleJsonResourceReloadListener {
 
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
+	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
-    private final Consumer<Map<ResourceLocation, JsonElement>> consumer;
+	private final Consumer<Map<ResourceLocation, JsonElement>> consumer;
 
-    public BaseJsonReloadListener(Consumer<Map<ResourceLocation, JsonElement>> consumer) {
-        super(GSON, "gui/coords");
-        this.consumer = consumer;
-    }
+	public BaseJsonReloadListener(Consumer<Map<ResourceLocation, JsonElement>> consumer) {
+		super(GSON, "gui/coords");
+		this.consumer = consumer;
+	}
 
-    @Override
-    protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller profiler) {
-        consumer.accept(map);
-    }
+	@Override
+	protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller profiler) {
+		consumer.accept(map);
+	}
 }

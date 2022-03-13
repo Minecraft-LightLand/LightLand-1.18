@@ -20,24 +20,24 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class PotionCoreRecipe extends AbstractRitualRecipe<PotionCoreRecipe> {
 
-    public PotionCoreRecipe(ResourceLocation id) {
-        super(id, RecipeRegistrate.RSP_CORE.get());
-    }
+	public PotionCoreRecipe(ResourceLocation id) {
+		super(id, RecipeRegistrate.RSP_CORE.get());
+	}
 
-    @Override
-    public void assemble(RitualCore.Inv inv, int level) {
-        Map<MobEffect, MobEffectInstance> map = new HashMap<>();
-        for (RitualSide.TE te : inv.sides) {
-            ItemStack stack = te.getItem(0);
-            if (stack.getItem() == Items.POTION) {
-                for (MobEffectInstance ins : PotionUtils.getMobEffects(te.getItem(0))) {
-                    map.put(ins.getEffect(), ins);
-                }
-            }
-        }
-        ItemStack stack = assemble(inv);
-        PotionUtils.setCustomEffects(stack, new ArrayList<>(map.values()));
-        inv.setItem(5, stack);
-    }
+	@Override
+	public void assemble(RitualCore.Inv inv, int level) {
+		Map<MobEffect, MobEffectInstance> map = new HashMap<>();
+		for (RitualSide.TE te : inv.sides) {
+			ItemStack stack = te.getItem(0);
+			if (stack.getItem() == Items.POTION) {
+				for (MobEffectInstance ins : PotionUtils.getMobEffects(te.getItem(0))) {
+					map.put(ins.getEffect(), ins);
+				}
+			}
+		}
+		ItemStack stack = assemble(inv);
+		PotionUtils.setCustomEffects(stack, new ArrayList<>(map.values()));
+		inv.setItem(5, stack);
+	}
 
 }

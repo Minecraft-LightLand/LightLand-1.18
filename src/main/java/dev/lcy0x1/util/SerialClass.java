@@ -12,22 +12,22 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target(TYPE)
 public @interface SerialClass {
 
-    @Documented
-    @Retention(RUNTIME)
-    @Target(FIELD)
-    @interface SerialField {
+	@Documented
+	@Retention(RUNTIME)
+	@Target(FIELD)
+	@interface SerialField {
 
-        boolean toClient() default false;
+		boolean toClient() default false;
 
-        Class<?>[] generic() default {};
+		Class<?>[] generic() default {};
 
-    }
+	}
 
-    @Documented
-    @Retention(RUNTIME)
-    @Target(METHOD)
-    @interface OnInject {
+	@Documented
+	@Retention(RUNTIME)
+	@Target(METHOD)
+	@interface OnInject {
 
-    }
+	}
 
 }

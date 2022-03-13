@@ -13,43 +13,43 @@ import net.minecraft.world.level.Level;
 
 public abstract class Skill<C extends SkillConfig<D>, D extends SkillData> extends NamedEntry<Skill<?, ?>> {
 
-    public Skill() {
-        super(() -> LightLandRegistry.SKILL);
-    }
+	public Skill() {
+		super(() -> LightLandRegistry.SKILL);
+	}
 
-    /**
-     * checked by client first. When client pass the check, check on server and then activate
-     */
-    @DoubleSidedCall
-    public boolean canActivate(Level level, Player player, D data) {
-        return data.cooldown == 0 && getConfig() != null;
-    }
+	/**
+	 * checked by client first. When client pass the check, check on server and then activate
+	 */
+	@DoubleSidedCall
+	public boolean canActivate(Level level, Player player, D data) {
+		return data.cooldown == 0 && getConfig() != null;
+	}
 
-    @ServerOnly
-    public void activate(Level level, ServerPlayer player, D data) {
-        data.cooldown = getConfig().getCooldown(data);
-    }
+	@ServerOnly
+	public void activate(Level level, ServerPlayer player, D data) {
+		data.cooldown = getConfig().getCooldown(data);
+	}
 
-    @DoubleSidedCall
-    public C getConfig() {
-        C c = SkillDataConfig.getConfig(getRegistryName());
-        if (c != null && !c.isValid()) LightLand.LOGGER.error("skill " + getRegistryName() + " has invalid config");
-        return c;
-    }
+	@DoubleSidedCall
+	public C getConfig() {
+		C c = SkillDataConfig.getConfig(getRegistryName());
+		if (c != null && !c.isValid()) LightLand.LOGGER.error("skill " + getRegistryName() + " has invalid config");
+		return c;
+	}
 
-    @ServerOnly
-    public abstract D genData(Player player);
+	@ServerOnly
+	public abstract D genData(Player player);
 
-    public ResourceLocation getIcon() {
-        ResourceLocation rl = getRegistryName();
-        return new ResourceLocation(rl.getNamespace(), "textures/skill/" + rl.getPath() + ".png");
-    }
+	public ResourceLocation getIcon() {
+		ResourceLocation rl = getRegistryName();
+		return new ResourceLocation(rl.getNamespace(), "textures/skill/" + rl.getPath() + ".png");
+	}
 
-    @DoubleSidedCall
-    public void tick(Player player, D data) {
-        if (data.cooldown > 0) {
-            data.cooldown--;
-        }
-    }
+	@DoubleSidedCall
+	public void tick(Player player, D data) {
+		if (data.cooldown > 0) {
+			data.cooldown--;
+		}
+	}
 
 }

@@ -9,23 +9,23 @@ import net.minecraftforge.fml.ModList;
 
 public class GeneralCompatHandler {
 
-    public enum Stage {
-        INIT,
-        OVERLAY
-    }
+	public enum Stage {
+		INIT,
+		OVERLAY
+	}
 
-    public static void handle(Stage stage) {
-        if (ModList.get().isLoaded("create")) {
-            ExceptionHandler.ignore(() -> CreateCompatHandler.handleCompat(stage));
-        }
-        if (ModList.get().isLoaded("appleskin")) {
-            ExceptionHandler.ignore(() -> AppleSkinCompatHandler.handleCompat(stage));
-        }
-    }
+	public static void handle(Stage stage) {
+		if (ModList.get().isLoaded("create")) {
+			ExceptionHandler.ignore(() -> CreateCompatHandler.handleCompat(stage));
+		}
+		if (ModList.get().isLoaded("appleskin")) {
+			ExceptionHandler.ignore(() -> AppleSkinCompatHandler.handleCompat(stage));
+		}
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public static OverlayRegistry.OverlayEntry getOverlay(String str) {
-        return OverlayRegistry.orderedEntries().stream().filter(e -> e.getDisplayName().equals(str)).findFirst().orElse(null);
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static OverlayRegistry.OverlayEntry getOverlay(String str) {
+		return OverlayRegistry.orderedEntries().stream().filter(e -> e.getDisplayName().equals(str)).findFirst().orElse(null);
+	}
 
 }

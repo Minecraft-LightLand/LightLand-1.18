@@ -11,6 +11,6 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public interface OnClickBlockMethod extends MultipleBlockMethod {
 
-    InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r);
+	InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r);
 
 }

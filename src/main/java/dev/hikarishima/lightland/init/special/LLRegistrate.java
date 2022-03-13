@@ -10,38 +10,38 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 
 public class LLRegistrate extends AbstractRegistrate<LLRegistrate> {
-    /**
-     * Construct a new Registrate for the given mod ID.
-     *
-     * @param modid The mod ID for which objects will be registered
-     */
-    public LLRegistrate(String modid) {
-        super(modid);
-        registerEventListeners(FMLJavaModLoadingContext.get().getModEventBus());
-    }
+	/**
+	 * Construct a new Registrate for the given mod ID.
+	 *
+	 * @param modid The mod ID for which objects will be registered
+	 */
+	public LLRegistrate(String modid) {
+		super(modid);
+		registerEventListeners(FMLJavaModLoadingContext.get().getModEventBus());
+	}
 
-    public <T extends NamedEntry<T>, P extends T> GenericBuilder<T, P> generic(Class<T> cls, String id, NonNullSupplier<P> sup) {
-        return entry(id, cb -> new GenericBuilder<>(this, id, cb, cls, sup));
-    }
+	public <T extends NamedEntry<T>, P extends T> GenericBuilder<T, P> generic(Class<T> cls, String id, NonNullSupplier<P> sup) {
+		return entry(id, cb -> new GenericBuilder<>(this, id, cb, cls, sup));
+	}
 
-    public static class GenericBuilder<T extends NamedEntry<T>, P extends T> extends AbstractBuilder<T, P, LLRegistrate, GenericBuilder<T, P>> {
+	public static class GenericBuilder<T extends NamedEntry<T>, P extends T> extends AbstractBuilder<T, P, LLRegistrate, GenericBuilder<T, P>> {
 
-        private final NonNullSupplier<P> sup;
+		private final NonNullSupplier<P> sup;
 
-        GenericBuilder(LLRegistrate parent, String name, BuilderCallback callback, Class<T> registryType, NonNullSupplier<P> sup) {
-            super(parent, parent, name, callback, registryType);
-            this.sup = sup;
-        }
+		GenericBuilder(LLRegistrate parent, String name, BuilderCallback callback, Class<T> registryType, NonNullSupplier<P> sup) {
+			super(parent, parent, name, callback, registryType);
+			this.sup = sup;
+		}
 
-        @Override
-        protected @NonnullType @NotNull P createEntry() {
-            return sup.get();
-        }
+		@Override
+		protected @NonnullType @NotNull P createEntry() {
+			return sup.get();
+		}
 
-        public GenericBuilder<T, P> defaultLang() {
-            return lang(NamedEntry::getDescriptionId);
-        }
+		public GenericBuilder<T, P> defaultLang() {
+			return lang(NamedEntry::getDescriptionId);
+		}
 
-    }
+	}
 
 }

@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class NoKnockBackEffect extends MobEffect {
 
-    public NoKnockBackEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public NoKnockBackEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 }

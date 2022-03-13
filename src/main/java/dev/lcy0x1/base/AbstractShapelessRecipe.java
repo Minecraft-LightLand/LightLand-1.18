@@ -16,42 +16,42 @@ import java.util.List;
 @MethodsReturnNonnullByDefault
 public class AbstractShapelessRecipe<T extends AbstractShapelessRecipe<T>> extends ShapelessRecipe {
 
-    public AbstractShapelessRecipe(ResourceLocation rl, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-        super(rl, group, result, ingredients);
-    }
+	public AbstractShapelessRecipe(ResourceLocation rl, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
+		super(rl, group, result, ingredients);
+	}
 
-    public List<ItemStack> getJEIResult() {
-        return List.of(getResultItem());
-    }
+	public List<ItemStack> getJEIResult() {
+		return List.of(getResultItem());
+	}
 
-    @FunctionalInterface
-    public interface RecipeFactory<T extends AbstractShapelessRecipe<T>> {
+	@FunctionalInterface
+	public interface RecipeFactory<T extends AbstractShapelessRecipe<T>> {
 
-        T create(ResourceLocation rl, String group, ItemStack result, NonNullList<Ingredient> ingredients);
+		T create(ResourceLocation rl, String group, ItemStack result, NonNullList<Ingredient> ingredients);
 
-    }
+	}
 
-    public static class Serializer<T extends AbstractShapelessRecipe<T>> extends ShapelessRecipe.Serializer {
+	public static class Serializer<T extends AbstractShapelessRecipe<T>> extends ShapelessRecipe.Serializer {
 
-        private final RecipeFactory<T> factory;
+		private final RecipeFactory<T> factory;
 
-        public Serializer(RecipeFactory<T> factory) {
-            this.factory = factory;
-        }
+		public Serializer(RecipeFactory<T> factory) {
+			this.factory = factory;
+		}
 
-        public T fromJson(ResourceLocation id, JsonObject obj) {
-            ShapelessRecipe r = super.fromJson(id, obj);
-            return factory.create(r.getId(), r.getGroup(), r.getResultItem(), r.getIngredients());
-        }
+		public T fromJson(ResourceLocation id, JsonObject obj) {
+			ShapelessRecipe r = super.fromJson(id, obj);
+			return factory.create(r.getId(), r.getGroup(), r.getResultItem(), r.getIngredients());
+		}
 
-        public T fromNetwork(ResourceLocation id, FriendlyByteBuf obj) {
-            ShapelessRecipe r = super.fromNetwork(id, obj);
-            if (r == null) {
-                return null;
-            }
-            return factory.create(r.getId(), r.getGroup(), r.getResultItem(), r.getIngredients());
-        }
+		public T fromNetwork(ResourceLocation id, FriendlyByteBuf obj) {
+			ShapelessRecipe r = super.fromNetwork(id, obj);
+			if (r == null) {
+				return null;
+			}
+			return factory.create(r.getId(), r.getGroup(), r.getResultItem(), r.getIngredients());
+		}
 
-    }
+	}
 
 }

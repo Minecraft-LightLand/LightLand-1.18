@@ -19,70 +19,70 @@ import java.util.ArrayList;
 @SerialClass
 public class SkillCap {
 
-    @SerialClass
-    public static class Cont<S extends Skill<C, D>, C extends SkillConfig<D>, D extends SkillData> {
+	@SerialClass
+	public static class Cont<S extends Skill<C, D>, C extends SkillConfig<D>, D extends SkillData> {
 
-        @SerialClass.SerialField
-        public S skill;
+		@SerialClass.SerialField
+		public S skill;
 
-        @SerialClass.SerialField
-        public D data;
+		@SerialClass.SerialField
+		public D data;
 
-        @Deprecated
-        public Cont() {
+		@Deprecated
+		public Cont() {
 
-        }
+		}
 
-        @ServerOnly
-        public Cont(ServerPlayer player, S skill) {
-            this.skill = skill;
-            this.data = skill.genData(player);
-        }
+		@ServerOnly
+		public Cont(ServerPlayer player, S skill) {
+			this.skill = skill;
+			this.data = skill.genData(player);
+		}
 
-        @DoubleSidedCall
-        public boolean canActivate(Level level, Player player) {
-            return skill.canActivate(level, player, data);
-        }
+		@DoubleSidedCall
+		public boolean canActivate(Level level, Player player) {
+			return skill.canActivate(level, player, data);
+		}
 
-        @ServerOnly
-        public void activate(Level level, ServerPlayer player) {
-            skill.activate(level, player, data);
-            refreshCooldown();
-        }
+		@ServerOnly
+		public void activate(Level level, ServerPlayer player) {
+			skill.activate(level, player, data);
+			refreshCooldown();
+		}
 
-        @ServerOnly
-        public void refreshCooldown() {
-            if (skill.getConfig() == null) return;
-            data.cooldown = skill.getConfig().getCooldown(data);
-        }
+		@ServerOnly
+		public void refreshCooldown() {
+			if (skill.getConfig() == null) return;
+			data.cooldown = skill.getConfig().getCooldown(data);
+		}
 
-        @DoubleSidedCall
-        public void tick(Player player) {
-            skill.tick(player, data);
-        }
-    }
+		@DoubleSidedCall
+		public void tick(Player player) {
+			skill.tick(player, data);
+		}
+	}
 
-    private final LLPlayerData parent;
+	private final LLPlayerData parent;
 
-    @SerialClass.SerialField(generic = Cont.class)
-    public ArrayList<Cont<?, ?, ?>> list = new ArrayList<>();
+	@SerialClass.SerialField(generic = Cont.class)
+	public ArrayList<Cont<?, ?, ?>> list = new ArrayList<>();
 
-    public SkillCap(LLPlayerData parent) {
-        this.parent = parent;
-    }
+	public SkillCap(LLPlayerData parent) {
+		this.parent = parent;
+	}
 
-    @DoubleSidedCall
-    public void tick() {
-        for (int i = 0; i < list.size(); i++) {
-            Cont<?, ?, ?> cont = list.get(i);
-            cont.tick(parent.player);
-            int I = i;
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                if (cont.data.cooldown == 0 && LangData.Keys.values()[I].map.isDown()) {
-                    SkillToServer.clientActivate(I);
-                }
-            });
-        }
-    }
+	@DoubleSidedCall
+	public void tick() {
+		for (int i = 0; i < list.size(); i++) {
+			Cont<?, ?, ?> cont = list.get(i);
+			cont.tick(parent.player);
+			int I = i;
+			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+				if (cont.data.cooldown == 0 && LangData.Keys.values()[I].map.isDown()) {
+					SkillToServer.clientActivate(I);
+				}
+			});
+		}
+	}
 
 }

@@ -13,32 +13,32 @@ import net.minecraft.world.level.Level;
 
 public class WaterSword extends Arcane {
 
-    private final float radius;
-    private final int time;
+	private final float radius;
+	private final int time;
 
-    public WaterSword(float radius, int time) {
-        super(ArcaneType.MIZAR, 0);
-        this.radius = radius;
-        this.time = time;
-    }
+	public WaterSword(float radius, int time) {
+		super(ArcaneType.MIZAR, 0);
+		this.radius = radius;
+		this.time = time;
+	}
 
-    @Override
-    public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
-        if (target == null)
-            return false;
-        Level w = player.level;
-        strike(w, player, target);
-        if (!w.isClientSide()) {
-            search(w, player, radius, target.getPosition(1), target, false, this::strike);
-            LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 1), player);
-        }
-        return true;
-    }
+	@Override
+	public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
+		if (target == null)
+			return false;
+		Level w = player.level;
+		strike(w, player, target);
+		if (!w.isClientSide()) {
+			search(w, player, radius, target.getPosition(1), target, false, this::strike);
+			LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 1), player);
+		}
+		return true;
+	}
 
-    private void strike(Level w, Player player, LivingEntity target) {
-        if (!w.isClientSide()) {
-            LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 0), player);
-        }
-    }
+	private void strike(Level w, Player player, LivingEntity target) {
+		if (!w.isClientSide()) {
+			LightLandFakeEntity.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 0), player);
+		}
+	}
 
 }

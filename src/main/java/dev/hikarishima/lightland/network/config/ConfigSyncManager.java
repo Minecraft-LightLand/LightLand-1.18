@@ -22,51 +22,51 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class ConfigSyncManager {
 
-    public static HashMap<String, BaseConfig> CONFIGS = new HashMap<>();
+	public static HashMap<String, BaseConfig> CONFIGS = new HashMap<>();
 
-    public static final PreparableReloadListener CONFIG = new SimpleJsonResourceReloadListener(new Gson(), "lightland_config") {
-        @Override
-        protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller filler) {
-            map.forEach((k, v) -> {
-                BaseConfig config = Serializer.from(v, BaseConfig.class, null);
-                if (config != null)
-                    CONFIGS.put(k.toString(), config);
-            });
-        }
-    };
+	public static final PreparableReloadListener CONFIG = new SimpleJsonResourceReloadListener(new Gson(), "lightland_config") {
+		@Override
+		protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller filler) {
+			map.forEach((k, v) -> {
+				BaseConfig config = Serializer.from(v, BaseConfig.class, null);
+				if (config != null)
+					CONFIGS.put(k.toString(), config);
+			});
+		}
+	};
 
-    @SerialClass
-    public static class SyncPacket extends SerialPacketBase {
+	@SerialClass
+	public static class SyncPacket extends SerialPacketBase {
 
-        @SerialClass.SerialField(generic = {String.class, BaseConfig.class})
-        public HashMap<String, BaseConfig> map = null;
+		@SerialClass.SerialField(generic = {String.class, BaseConfig.class})
+		public HashMap<String, BaseConfig> map = null;
 
-        @Deprecated
-        public SyncPacket() {
+		@Deprecated
+		public SyncPacket() {
 
-        }
+		}
 
-        public SyncPacket(HashMap<String, BaseConfig> map) {
-            this.map = map;
-        }
+		public SyncPacket(HashMap<String, BaseConfig> map) {
+			this.map = map;
+		}
 
-        @Override
-        public void handle(NetworkEvent.Context ctx) {
-            if (map != null)
-                CONFIGS = map;
-        }
+		@Override
+		public void handle(NetworkEvent.Context ctx) {
+			if (map != null)
+				CONFIGS = map;
+		}
 
-    }
+	}
 
-    @SerialClass
-    public static class BaseConfig {
+	@SerialClass
+	public static class BaseConfig {
 
-    }
+	}
 
-    public static void onDatapackSync(OnDatapackSyncEvent event) {
-        SyncPacket packet = new SyncPacket(CONFIGS);
-        if (event.getPlayer() == null) packet.toAllClient();
-        else packet.toClientPlayer(event.getPlayer());
-    }
+	public static void onDatapackSync(OnDatapackSyncEvent event) {
+		SyncPacket packet = new SyncPacket(CONFIGS);
+		if (event.getPlayer() == null) packet.toAllClient();
+		else packet.toClientPlayer(event.getPlayer());
+	}
 
 }

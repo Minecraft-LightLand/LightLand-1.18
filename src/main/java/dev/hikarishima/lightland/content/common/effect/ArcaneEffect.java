@@ -5,7 +5,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class ArcaneEffect extends MobEffect {
 
-    public ArcaneEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public ArcaneEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 }

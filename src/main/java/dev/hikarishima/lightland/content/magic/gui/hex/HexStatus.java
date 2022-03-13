@@ -9,45 +9,45 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class HexStatus {
 
-    public enum Save {
-        YES(ChatFormatting.GREEN), NO(ChatFormatting.RED);
+	public enum Save {
+		YES(ChatFormatting.GREEN), NO(ChatFormatting.RED);
 
-        public final ChatFormatting col;
+		public final ChatFormatting col;
 
-        Save(ChatFormatting col) {
-            this.col = col;
-        }
+		Save(ChatFormatting col) {
+			this.col = col;
+		}
 
-        public Component getDesc() {
-            return LangData.get(this);
-        }
+		public Component getDesc() {
+			return LangData.get(this);
+		}
 
-        public int getColor() {
-            return col.getColor();
-        }
+		public int getColor() {
+			return col.getColor();
+		}
 
-    }
+	}
 
-    public enum Compile {
-        COMPLETE(ChatFormatting.GREEN),
-        FAILED(ChatFormatting.DARK_PURPLE),
-        EDITING(ChatFormatting.BLUE),
-        ERROR(ChatFormatting.RED);
+	public enum Compile {
+		COMPLETE(ChatFormatting.GREEN),
+		FAILED(ChatFormatting.DARK_PURPLE),
+		EDITING(ChatFormatting.BLUE),
+		ERROR(ChatFormatting.RED);
 
-        public final ChatFormatting col;
+		public final ChatFormatting col;
 
-        Compile(ChatFormatting col) {
-            this.col = col;
-        }
+		Compile(ChatFormatting col) {
+			this.col = col;
+		}
 
-        public Component getDesc() {
-            return LangData.get(this);
-        }
+		public Component getDesc() {
+			return LangData.get(this);
+		}
 
-        public int getColor() {
-            return col.getColor();
-        }
+		public int getColor() {
+			return col.getColor();
+		}
 
-    }
+	}
 
 }

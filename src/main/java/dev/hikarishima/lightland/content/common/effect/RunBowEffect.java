@@ -5,8 +5,8 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 public class RunBowEffect extends MobEffect {
 
-    public RunBowEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public RunBowEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 
 }

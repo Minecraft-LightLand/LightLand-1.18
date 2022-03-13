@@ -14,31 +14,31 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LocalPlayer.class)
 public abstract class ClientLocalPlayerMixin {
 
-    @Shadow
-    private boolean startedUsingItem;
+	@Shadow
+	private boolean startedUsingItem;
 
-    private static boolean in_ai_step = false;
+	private static boolean in_ai_step = false;
 
-    @Inject(at = @At("HEAD"), method = "aiStep")
-    public void aiStep(CallbackInfo ci) {
-        in_ai_step = true;
-    }
+	@Inject(at = @At("HEAD"), method = "aiStep")
+	public void aiStep(CallbackInfo ci) {
+		in_ai_step = true;
+	}
 
-    @Inject(at = @At("HEAD"), method = "isUsingItem", cancellable = true)
-    public void isUsingItem(CallbackInfoReturnable<Boolean> cir) {
-        if (in_ai_step) {
-            in_ai_step = false;
-            Player player = (Player) (Object) this;
-            if (this.startedUsingItem) {
-                ItemStack stack = player.getUseItem();
-                if (stack.getItem() instanceof FastItem fast) {
-                    if (fast.isFast(stack)) {
-                        cir.setReturnValue(false);
-                    }
-                }
-            }
-        }
-    }
+	@Inject(at = @At("HEAD"), method = "isUsingItem", cancellable = true)
+	public void isUsingItem(CallbackInfoReturnable<Boolean> cir) {
+		if (in_ai_step) {
+			in_ai_step = false;
+			Player player = (Player) (Object) this;
+			if (this.startedUsingItem) {
+				ItemStack stack = player.getUseItem();
+				if (stack.getItem() instanceof FastItem fast) {
+					if (fast.isFast(stack)) {
+						cir.setReturnValue(false);
+					}
+				}
+			}
+		}
+	}
 
 
 }

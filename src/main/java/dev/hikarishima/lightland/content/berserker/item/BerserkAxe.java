@@ -16,26 +16,26 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public class BerserkAxe extends AxeItem {
 
-    public BerserkAxe(Tier tier, float damage, float cooldown, Properties properties) {
-        super(tier, damage, cooldown, properties);
-    }
+	public BerserkAxe(Tier tier, float damage, float cooldown, Properties properties) {
+		super(tier, damage, cooldown, properties);
+	}
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
-        if (user instanceof ServerPlayer player) {
-            {
-                MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.BLOOD_THURST.get());
-                if (ins != null) {
-                    player.addEffect(new MobEffectInstance(MobEffects.SATURATION, (ins.getAmplifier() + 1) * 4));
-                }
-            }
-            {
-                MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.ARMOR_BREAKER.get());
-                if (ins != null) {
-                    target.addEffect(new MobEffectInstance(VanillaMagicRegistrate.ARMOR_REDUCE.get(), 200, ins.getAmplifier()));
-                }
-            }
-        }
-        return super.hurtEnemy(stack, target, user);
-    }
+	@Override
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
+		if (user instanceof ServerPlayer player) {
+			{
+				MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.BLOOD_THURST.get());
+				if (ins != null) {
+					player.addEffect(new MobEffectInstance(MobEffects.SATURATION, (ins.getAmplifier() + 1) * 4));
+				}
+			}
+			{
+				MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.ARMOR_BREAKER.get());
+				if (ins != null) {
+					target.addEffect(new MobEffectInstance(VanillaMagicRegistrate.ARMOR_REDUCE.get(), 200, ins.getAmplifier()));
+				}
+			}
+		}
+		return super.hurtEnemy(stack, target, user);
+	}
 }

@@ -9,15 +9,15 @@ import net.minecraft.world.item.Tier;
 
 public class AssassinSwordItem extends SwordItem {
 
-    public AssassinSwordItem(Tier tier, int damage, float speed, Properties props) {
-        super(tier, damage, speed, props);
-    }
+	public AssassinSwordItem(Tier tier, int damage, float speed, Properties props) {
+		super(tier, damage, speed, props);
+	}
 
-    @Override
-    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
-        if (!user.level.isClientSide()) {
-            target.addEffect(new MobEffectInstance(VanillaMagicRegistrate.T_CLEAR.get(), 100));
-        }
-        return super.hurtEnemy(stack, user, target);
-    }
+	@Override
+	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
+		if (!user.level.isClientSide()) {
+			target.addEffect(new MobEffectInstance(VanillaMagicRegistrate.T_CLEAR.get(), 100));
+		}
+		return super.hurtEnemy(stack, user, target);
+	}
 }

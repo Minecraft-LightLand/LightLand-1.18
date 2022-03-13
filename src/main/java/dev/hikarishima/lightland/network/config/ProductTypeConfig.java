@@ -11,17 +11,17 @@ import java.util.Objects;
 @SerialClass
 public class ProductTypeConfig extends ConfigSyncManager.BaseConfig {
 
-    @SerialClass.SerialField(generic = {String.class, TypeConfig.class})
-    public HashMap<String, TypeConfig> map = new HashMap<>();
+	@SerialClass.SerialField(generic = {String.class, TypeConfig.class})
+	public HashMap<String, TypeConfig> map = new HashMap<>();
 
-    @Nullable
-    @SuppressWarnings({"unchecked", "unsafe"})
-    public static TypeConfig getConfig(ResourceLocation rl) {
-        return ConfigSyncManager.CONFIGS.entrySet().stream()
-                .filter(e -> new ResourceLocation(e.getKey()).getPath().equals("config_product_type"))
-                .map(e -> ((ProductTypeConfig) e.getValue()).map.get(rl.toString()))
-                .filter(Objects::nonNull).findFirst().orElse(null);
+	@Nullable
+	@SuppressWarnings({"unchecked", "unsafe"})
+	public static TypeConfig getConfig(ResourceLocation rl) {
+		return ConfigSyncManager.CONFIGS.entrySet().stream()
+				.filter(e -> new ResourceLocation(e.getKey()).getPath().equals("config_product_type"))
+				.map(e -> ((ProductTypeConfig) e.getValue()).map.get(rl.toString()))
+				.filter(Objects::nonNull).findFirst().orElse(null);
 
-    }
+	}
 
 }

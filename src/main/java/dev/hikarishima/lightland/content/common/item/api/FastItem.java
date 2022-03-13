@@ -4,6 +4,6 @@ import net.minecraft.world.item.ItemStack;
 
 public interface FastItem {
 
-    boolean isFast(ItemStack stack);
+	boolean isFast(ItemStack stack);
 
 }

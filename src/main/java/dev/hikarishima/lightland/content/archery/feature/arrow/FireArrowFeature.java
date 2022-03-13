@@ -11,19 +11,19 @@ import java.util.function.Consumer;
 
 public record FireArrowFeature(int time) implements OnShootFeature, OnHitFeature {
 
-    @Override
-    public boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> consumer) {
-        consumer.accept((e) -> e.setRemainingFireTicks(time));
-        return true;
-    }
+	@Override
+	public boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> consumer) {
+		consumer.accept((e) -> e.setRemainingFireTicks(time));
+		return true;
+	}
 
-    @Override
-    public void onHitEntity(GenericArrowEntity genericArrow, LivingEntity target) {
-        target.setRemainingFireTicks(time);
-    }
+	@Override
+	public void onHitEntity(GenericArrowEntity genericArrow, LivingEntity target) {
+		target.setRemainingFireTicks(time);
+	}
 
-    @Override
-    public void onHitBlock(GenericArrowEntity genericArrow, BlockHitResult result) {
+	@Override
+	public void onHitBlock(GenericArrowEntity genericArrow, BlockHitResult result) {
 
-    }
+	}
 }

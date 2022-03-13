@@ -20,31 +20,31 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class EnderBackpackItem extends Item {
 
-    @OnlyIn(Dist.CLIENT)
-    public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
-        if (entity != Proxy.getClientPlayer()) return 0;
-        Screen screen = Minecraft.getInstance().screen;
-        if (screen instanceof ContainerScreen gui) {
-            if (gui.getMenu().getContainer() == Proxy.getClientPlayer().getEnderChestInventory()) {
-                return 1;
-            }
-        }
-        return 0;
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static float isOpened(ItemStack stack, ClientLevel level, LivingEntity entity, int i) {
+		if (entity != Proxy.getClientPlayer()) return 0;
+		Screen screen = Minecraft.getInstance().screen;
+		if (screen instanceof ContainerScreen gui) {
+			if (gui.getMenu().getContainer() == Proxy.getClientPlayer().getEnderChestInventory()) {
+				return 1;
+			}
+		}
+		return 0;
+	}
 
-    public EnderBackpackItem(Properties props) {
-        super(props);
-    }
+	public EnderBackpackItem(Properties props) {
+		super(props);
+	}
 
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (!level.isClientSide()) {
-            player.openMenu(new SimpleMenuProvider((id, inv, pl) -> ChestMenu.threeRows(id, inv, player.getEnderChestInventory()), stack.getDisplayName()));
-        } else {
-            player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
-        }
-        return InteractionResultHolder.success(stack);
-    }
+	@Override
+	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (!level.isClientSide()) {
+			player.openMenu(new SimpleMenuProvider((id, inv, pl) -> ChestMenu.threeRows(id, inv, player.getEnderChestInventory()), stack.getDisplayName()));
+		} else {
+			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
+		}
+		return InteractionResultHolder.success(stack);
+	}
 
 }

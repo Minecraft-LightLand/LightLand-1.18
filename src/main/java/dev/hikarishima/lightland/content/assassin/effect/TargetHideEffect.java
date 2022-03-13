@@ -9,27 +9,27 @@ import net.minecraft.world.phys.AABB;
 
 public class TargetHideEffect extends MobEffect {
 
-    public TargetHideEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public TargetHideEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 
-    @Override
-    public boolean isDurationEffectTick(int tick, int level) {
-        return tick % 10 == 0;
-    }
+	@Override
+	public boolean isDurationEffectTick(int tick, int level) {
+		return tick % 10 == 0;
+	}
 
-    @Override
-    public void applyEffectTick(LivingEntity self, int level) {
-        if (self.level.isClientSide()) return;
-        int radius = 20 << level;
-        for (Entity e : self.level.getEntities(self, new AABB(self.position(), self.position()).inflate(radius))) {
-            if (!(e instanceof Mob mob)) continue;
-            if (e.distanceToSqr(self) > radius * radius) continue;
-            LivingEntity le = mob.getTarget();
-            if (le != self) continue;
-            mob.setTarget(null);
-        }
+	@Override
+	public void applyEffectTick(LivingEntity self, int level) {
+		if (self.level.isClientSide()) return;
+		int radius = 20 << level;
+		for (Entity e : self.level.getEntities(self, new AABB(self.position(), self.position()).inflate(radius))) {
+			if (!(e instanceof Mob mob)) continue;
+			if (e.distanceToSqr(self) > radius * radius) continue;
+			LivingEntity le = mob.getTarget();
+			if (le != self) continue;
+			mob.setTarget(null);
+		}
 
-    }
+	}
 
 }

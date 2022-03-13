@@ -20,34 +20,34 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public record BlockEntityBlockMethodImpl<T extends BlockEntity>(
-        BlockEntityEntry<T> type,
-        Class<T> cls) implements BlockEntityBlockMethod<T>, OnClickBlockMethod {
+		BlockEntityEntry<T> type,
+		Class<T> cls) implements BlockEntityBlockMethod<T>, OnClickBlockMethod {
 
-    @Override
-    public BlockEntity createTileEntity(BlockPos pos, BlockState state) {
-        return type.create(pos, state);
-    }
+	@Override
+	public BlockEntity createTileEntity(BlockPos pos, BlockState state) {
+		return type.create(pos, state);
+	}
 
-    @Override
-    public BlockEntityType<T> getType() {
-        return type.get();
-    }
+	@Override
+	public BlockEntityType<T> getType() {
+		return type.get();
+	}
 
-    @Override
-    public Class<T> getEntityClass() {
-        return cls;
-    }
+	@Override
+	public Class<T> getEntityClass() {
+		return cls;
+	}
 
-    @Override
-    public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
-        BlockEntity te = w.getBlockEntity(pos);
-        if (w.isClientSide())
-            return te instanceof MenuProvider ? InteractionResult.SUCCESS : InteractionResult.PASS;
-        if (te instanceof MenuProvider) {
-            pl.openMenu((MenuProvider) te);
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.PASS;
-    }
+	@Override
+	public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
+		BlockEntity te = w.getBlockEntity(pos);
+		if (w.isClientSide())
+			return te instanceof MenuProvider ? InteractionResult.SUCCESS : InteractionResult.PASS;
+		if (te instanceof MenuProvider) {
+			pl.openMenu((MenuProvider) te);
+			return InteractionResult.SUCCESS;
+		}
+		return InteractionResult.PASS;
+	}
 
 }

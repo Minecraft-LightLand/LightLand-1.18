@@ -9,9 +9,9 @@ import java.util.function.Consumer;
 
 public interface OnShootFeature extends BowArrowFeature {
 
-    @ServerOnly
-    boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> entity);
+	@ServerOnly
+	boolean onShoot(Player player, Consumer<Consumer<GenericArrowEntity>> entity);
 
-    default void onClientShoot(GenericArrowEntity entity) {
-    }
+	default void onClientShoot(GenericArrowEntity entity) {
+	}
 }

@@ -18,25 +18,25 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 public class PotionSpellRecipe extends AbstractRitualRecipe<PotionSpellRecipe> {
 
-    public PotionSpellRecipe(ResourceLocation id) {
-        super(id, RecipeRegistrate.RSP_SPELL.get());
-    }
+	public PotionSpellRecipe(ResourceLocation id) {
+		super(id, RecipeRegistrate.RSP_SPELL.get());
+	}
 
-    @Override
-    public void assemble(RitualCore.Inv inv, int level) {
-        ItemStack core = inv.core.getItem(0).copy();
-        List<MobEffectInstance> list = PotionUtils.getCustomEffects(core);
-        MagicScroll.TargetType target = MagicScroll.getTarget(core);
-        double radius = MagicScroll.getRadius(core);
-        inv.setItem(5, assemble(inv));
-        for (RitualSide.TE te : inv.sides) {
-            ItemStack stack = te.getItem(0);
-            if (stack.getItem() == ItemRegistrate.SPELL_CARD.get()) {
-                MagicScroll.initEffect(list, stack);
-                MagicScroll.setTarget(target, stack);
-                MagicScroll.setRadius(radius, stack);
-            }
-        }
-    }
+	@Override
+	public void assemble(RitualCore.Inv inv, int level) {
+		ItemStack core = inv.core.getItem(0).copy();
+		List<MobEffectInstance> list = PotionUtils.getCustomEffects(core);
+		MagicScroll.TargetType target = MagicScroll.getTarget(core);
+		double radius = MagicScroll.getRadius(core);
+		inv.setItem(5, assemble(inv));
+		for (RitualSide.TE te : inv.sides) {
+			ItemStack stack = te.getItem(0);
+			if (stack.getItem() == ItemRegistrate.SPELL_CARD.get()) {
+				MagicScroll.initEffect(list, stack);
+				MagicScroll.setTarget(target, stack);
+				MagicScroll.setRadius(radius, stack);
+			}
+		}
+	}
 
 }

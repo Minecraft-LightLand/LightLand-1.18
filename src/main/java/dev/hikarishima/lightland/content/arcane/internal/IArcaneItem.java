@@ -7,11 +7,11 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface IArcaneItem extends IGlowingTarget {
 
-    int getMaxMana(ItemStack stack);
+	int getMaxMana(ItemStack stack);
 
-    @OnlyIn(Dist.CLIENT)
-    default int getDistance(ItemStack stack) {
-        return 64;
-    }
+	@OnlyIn(Dist.CLIENT)
+	default int getDistance(ItemStack stack) {
+		return 64;
+	}
 
 }

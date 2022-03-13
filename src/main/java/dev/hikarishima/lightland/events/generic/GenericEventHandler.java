@@ -18,37 +18,37 @@ import java.util.function.Consumer;
 @SuppressWarnings("unused")
 public class GenericEventHandler {
 
-    @SubscribeEvent
-    public static void onCommandRegister(RegisterCommandsEvent event) {
-        LiteralArgumentBuilder<CommandSourceStack> lightland = Commands.literal("lightland");
-        for (Consumer<LiteralArgumentBuilder<CommandSourceStack>> command : BaseCommand.LIST) {
-            command.accept(lightland);
-        }
-        event.getDispatcher().register(lightland);
-    }
+	@SubscribeEvent
+	public static void onCommandRegister(RegisterCommandsEvent event) {
+		LiteralArgumentBuilder<CommandSourceStack> lightland = Commands.literal("lightland");
+		for (Consumer<LiteralArgumentBuilder<CommandSourceStack>> command : BaseCommand.LIST) {
+			command.accept(lightland);
+		}
+		event.getDispatcher().register(lightland);
+	}
 
-    @SubscribeEvent
-    public static void onAddReloadListenerEvent(AddReloadListenerEvent event) {
-        event.addListener(new BaseJsonReloadListener(map -> {
-            SpriteManager.CACHE.clear();
-            SpriteManager.CACHE.putAll(map);
-        }));
-    }
+	@SubscribeEvent
+	public static void onAddReloadListenerEvent(AddReloadListenerEvent event) {
+		event.addListener(new BaseJsonReloadListener(map -> {
+			SpriteManager.CACHE.clear();
+			SpriteManager.CACHE.putAll(map);
+		}));
+	}
 
-    @SubscribeEvent
-    public static void serverTick(TickEvent.ServerTickEvent event) {
-        RayTraceUtil.serverTick();
-    }
+	@SubscribeEvent
+	public static void serverTick(TickEvent.ServerTickEvent event) {
+		RayTraceUtil.serverTick();
+	}
 
 
-    @SubscribeEvent
-    public static void addReloadListeners(AddReloadListenerEvent event) {
-        event.addListener(ConfigSyncManager.CONFIG);
-    }
+	@SubscribeEvent
+	public static void addReloadListeners(AddReloadListenerEvent event) {
+		event.addListener(ConfigSyncManager.CONFIG);
+	}
 
-    @SubscribeEvent
-    public static void onDatapackSync(OnDatapackSyncEvent event) {
-        ConfigSyncManager.onDatapackSync(event);
-    }
+	@SubscribeEvent
+	public static void onDatapackSync(OnDatapackSyncEvent event) {
+		ConfigSyncManager.onDatapackSync(event);
+	}
 
 }

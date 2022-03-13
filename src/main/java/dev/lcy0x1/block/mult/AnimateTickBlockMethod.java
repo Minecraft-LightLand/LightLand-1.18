@@ -10,6 +10,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.Random;
 
 public interface AnimateTickBlockMethod extends MultipleBlockMethod {
-    @OnlyIn(Dist.CLIENT)
-    void animateTick(BlockState state, Level world, BlockPos pos, Random r);
+	@OnlyIn(Dist.CLIENT)
+	void animateTick(BlockState state, Level world, BlockPos pos, Random r);
 }

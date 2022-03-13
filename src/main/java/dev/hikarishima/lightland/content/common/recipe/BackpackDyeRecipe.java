@@ -12,25 +12,25 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 
 public class BackpackDyeRecipe extends AbstractShapelessRecipe<BackpackDyeRecipe> {
 
-    public BackpackDyeRecipe(ResourceLocation rl, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-        super(rl, group, result, ingredients);
-    }
+	public BackpackDyeRecipe(ResourceLocation rl, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
+		super(rl, group, result, ingredients);
+	}
 
-    @Override
-    public ItemStack assemble(CraftingContainer container) {
-        ItemStack bag = ItemStack.EMPTY;
-        for (int i = 0; i < container.getContainerSize(); i++) {
-            if (AllTags.AllItemTags.BACKPACKS.matches(container.getItem(i))) {
-                bag = container.getItem(i);
-            }
-        }
-        ItemStack stack = super.assemble(container);
-        stack.setTag(bag.getTag());
-        return stack;
-    }
+	@Override
+	public ItemStack assemble(CraftingContainer container) {
+		ItemStack bag = ItemStack.EMPTY;
+		for (int i = 0; i < container.getContainerSize(); i++) {
+			if (AllTags.AllItemTags.BACKPACKS.matches(container.getItem(i))) {
+				bag = container.getItem(i);
+			}
+		}
+		ItemStack stack = super.assemble(container);
+		stack.setTag(bag.getTag());
+		return stack;
+	}
 
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return RecipeRegistrate.RSC_BAG_DYE.get();
-    }
+	@Override
+	public RecipeSerializer<?> getSerializer() {
+		return RecipeRegistrate.RSC_BAG_DYE.get();
+	}
 }

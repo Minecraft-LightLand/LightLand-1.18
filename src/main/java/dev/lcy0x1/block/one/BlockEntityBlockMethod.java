@@ -8,9 +8,9 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public interface BlockEntityBlockMethod<T extends BlockEntity> extends SingletonBlockMethod {
 
-    BlockEntity createTileEntity(BlockPos pos, BlockState state);
+	BlockEntity createTileEntity(BlockPos pos, BlockState state);
 
-    BlockEntityType<T> getType();
+	BlockEntityType<T> getType();
 
-    Class<T> getEntityClass();
+	Class<T> getEntityClass();
 }

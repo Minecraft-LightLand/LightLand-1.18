@@ -8,5 +8,5 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public interface BlockPowerBlockMethod extends SingletonBlockMethod {
 
-    int getSignal(BlockState bs, BlockGetter r, BlockPos pos, Direction d);
+	int getSignal(BlockState bs, BlockGetter r, BlockPos pos, Direction d);
 }

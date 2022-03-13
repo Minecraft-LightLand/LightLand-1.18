@@ -14,14 +14,14 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public class RitualSide {
-    public static final BlockEntityBlockMethod<TE> TILE_ENTITY_SUPPLIER_BUILDER = new BlockEntityBlockMethodImpl<TE>(BlockRegistrate.TE_RITUAL_SIDE, TE.class);
+	public static final BlockEntityBlockMethod<TE> TILE_ENTITY_SUPPLIER_BUILDER = new BlockEntityBlockMethodImpl<TE>(BlockRegistrate.TE_RITUAL_SIDE, TE.class);
 
-    @SerialClass
-    public static class TE extends RitualTE {
+	@SerialClass
+	public static class TE extends RitualTE {
 
-        public TE(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-            super(type, pos, state);
-        }
-    }
+		public TE(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+			super(type, pos, state);
+		}
+	}
 
 }

@@ -3,13 +3,29 @@ package dev.hikarishima.lightland.compat.jei.ingredients;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ParametersAreNonnullByDefault
 public class ElementIngredient {
 
+	public static List<ElementIngredient> collect(Stream<ElementIngredient> stream) {
+		List<ElementIngredient> list = stream.collect(Collectors.toList());
+		LinkedHashMap<ElementIngredient, ElementIngredient> set = new LinkedHashMap<>();
+		for (ElementIngredient t : list) {
+			if (set.containsKey(t))
+				set.get(t).count += t.count;
+			else set.put(t, t);
+		}
+		return new ArrayList<>(set.values());
+	}
+
 	public final MagicElement elem;
-	public final int count;
+	public int count;
 
 	public ElementIngredient(MagicElement elem, int count) {
 		this.elem = elem;

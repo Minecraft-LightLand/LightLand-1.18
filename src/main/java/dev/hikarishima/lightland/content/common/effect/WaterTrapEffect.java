@@ -11,14 +11,14 @@ import java.util.UUID;
 
 public class WaterTrapEffect extends MobEffect {
 
-    public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:water_trap");
+	public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:water_trap");
 
-    public WaterTrapEffect(MobEffectCategory type, int color) {
-        super(type, color);
-        this.addAttributeModifier(Attributes.FLYING_SPEED, ID.toString(), -0.5f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        this.addAttributeModifier(Attributes.JUMP_STRENGTH, ID.toString(), -0.4f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        this.addAttributeModifier(Attributes.MOVEMENT_SPEED, ID.toString(), -0.4f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        this.addAttributeModifier(ForgeMod.SWIM_SPEED.get(), ID.toString(), -0.3f, AttributeModifier.Operation.MULTIPLY_TOTAL);
-    }
+	public WaterTrapEffect(MobEffectCategory type, int color) {
+		super(type, color);
+		this.addAttributeModifier(Attributes.FLYING_SPEED, ID.toString(), -0.5f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+		this.addAttributeModifier(Attributes.JUMP_STRENGTH, ID.toString(), -0.4f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+		this.addAttributeModifier(Attributes.MOVEMENT_SPEED, ID.toString(), -0.4f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+		this.addAttributeModifier(ForgeMod.SWIM_SPEED.get(), ID.toString(), -0.3f, AttributeModifier.Operation.MULTIPLY_TOTAL);
+	}
 
 }

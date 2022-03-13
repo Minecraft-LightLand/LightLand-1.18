@@ -14,27 +14,27 @@ import net.minecraftforge.network.NetworkHooks;
 @SerialClass
 public class SlotClickToServer extends SerialPacketBase {
 
-    @SerialClass.SerialField
-    public int slot;
+	@SerialClass.SerialField
+	public int slot;
 
-    @Deprecated
-    public SlotClickToServer() {
+	@Deprecated
+	public SlotClickToServer() {
 
-    }
+	}
 
-    public SlotClickToServer(int slot) {
-        this.slot = slot;
-    }
+	public SlotClickToServer(int slot) {
+		this.slot = slot;
+	}
 
-    @Override
-    public void handle(NetworkEvent.Context ctx) {
-        ServerPlayer player = ctx.getSender();
-        if (player == null) return;
-        ItemStack stack = ctx.getSender().getInventory().getItem(slot);
-        if (stack.getItem() instanceof BackpackItem)
-            new BackpackItem.MenuPvd(player, slot, stack).open();
-        if (stack.getItem() instanceof EnderBackpackItem)
-            NetworkHooks.openGui(player, new SimpleMenuProvider((id, inv, pl) ->
-                    ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
-    }
+	@Override
+	public void handle(NetworkEvent.Context ctx) {
+		ServerPlayer player = ctx.getSender();
+		if (player == null) return;
+		ItemStack stack = ctx.getSender().getInventory().getItem(slot);
+		if (stack.getItem() instanceof BackpackItem)
+			new BackpackItem.MenuPvd(player, slot, stack).open();
+		if (stack.getItem() instanceof EnderBackpackItem)
+			NetworkHooks.openGui(player, new SimpleMenuProvider((id, inv, pl) ->
+					ChestMenu.threeRows(id, inv, pl.getEnderChestInventory()), stack.getDisplayName()));
+	}
 }

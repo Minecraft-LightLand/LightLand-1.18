@@ -10,8 +10,8 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ArcaneMagic extends MagicProduct<Arcane, ArcaneMagic> {
 
-    public ArcaneMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
-        super(MagicRegistry.MPT_ARCANE.get(), player, tag, rl, r);
-    }
+	public ArcaneMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
+		super(MagicRegistry.MPT_ARCANE.get(), player, tag, rl, r);
+	}
 
 }

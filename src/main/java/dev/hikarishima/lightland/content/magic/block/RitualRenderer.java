@@ -20,23 +20,23 @@ import java.util.Objects;
 @ParametersAreNonnullByDefault
 public class RitualRenderer implements BlockEntityRenderer<RitualTE> {
 
-    public RitualRenderer(BlockEntityRendererProvider.Context dispatcher) {
+	public RitualRenderer(BlockEntityRendererProvider.Context dispatcher) {
 
-    }
+	}
 
-    @Override
-    public void render(RitualTE te, float partial, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
-        float time = Math.floorMod(Objects.requireNonNull(te.getLevel()).getGameTime(), 80L) + partial;
-        ItemStack is = te.getItem(0);
-        if (!is.isEmpty()) {
-            matrix.pushPose();
-            double offset = (Math.sin(time * 2 * Math.PI / 40.0) - 3) / 16;
-            matrix.translate(0.5, 1.5 + offset, 0.5);
-            matrix.mulPose(Vector3f.YP.rotationDegrees(time * 4.5f));
-            Minecraft.getInstance().getItemRenderer().renderStatic(is, ItemTransforms.TransformType.GROUND, light,
-                    overlay, matrix, buffer, 0);
-            matrix.popPose();
-        }
-    }
+	@Override
+	public void render(RitualTE te, float partial, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
+		float time = Math.floorMod(Objects.requireNonNull(te.getLevel()).getGameTime(), 80L) + partial;
+		ItemStack is = te.getItem(0);
+		if (!is.isEmpty()) {
+			matrix.pushPose();
+			double offset = (Math.sin(time * 2 * Math.PI / 40.0) - 3) / 16;
+			matrix.translate(0.5, 1.5 + offset, 0.5);
+			matrix.mulPose(Vector3f.YP.rotationDegrees(time * 4.5f));
+			Minecraft.getInstance().getItemRenderer().renderStatic(is, ItemTransforms.TransformType.GROUND, light,
+					overlay, matrix, buffer, 0);
+			matrix.popPose();
+		}
+	}
 
 }

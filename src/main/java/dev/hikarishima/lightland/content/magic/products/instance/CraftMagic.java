@@ -10,8 +10,8 @@ import net.minecraft.world.item.Item;
 
 public class CraftMagic extends MagicProduct<Item, CraftMagic> {
 
-    public CraftMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
-        super(MagicRegistry.MPT_CRAFT.get(), player, tag, rl, r);
-    }
+	public CraftMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
+		super(MagicRegistry.MPT_CRAFT.get(), player, tag, rl, r);
+	}
 
 }

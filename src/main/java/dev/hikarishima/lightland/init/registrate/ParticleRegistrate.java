@@ -12,15 +12,15 @@ import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
 public class ParticleRegistrate {
 
-    public static final RegistryEntry<SimpleParticleType> EMERALD = REGISTRATE.simple("emerald", ParticleType.class, () -> new SimpleParticleType(false));
+	public static final RegistryEntry<SimpleParticleType> EMERALD = REGISTRATE.simple("emerald", ParticleType.class, () -> new SimpleParticleType(false));
 
-    public static void register() {
+	public static void register() {
 
-    }
+	}
 
-    @OnlyIn(Dist.CLIENT)
-    public static void registerClient() {
-        Minecraft.getInstance().particleEngine.register(EMERALD.get(), new EmeraldParticle.Factory());
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static void registerClient() {
+		Minecraft.getInstance().particleEngine.register(EMERALD.get(), new EmeraldParticle.Factory());
+	}
 
 }

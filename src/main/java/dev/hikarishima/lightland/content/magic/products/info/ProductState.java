@@ -1,13 +1,13 @@
 package dev.hikarishima.lightland.content.magic.products.info;
 
 public enum ProductState {
-    LOCKED, UNLOCKED, CRAFTED;
+	LOCKED, UNLOCKED, CRAFTED;
 
-    public int getIndex() {
-        return ordinal();
-    }
+	public int getIndex() {
+		return ordinal();
+	}
 
-    public String toString() {
-        return name().toLowerCase();
-    }
+	public String toString() {
+		return name().toLowerCase();
+	}
 }

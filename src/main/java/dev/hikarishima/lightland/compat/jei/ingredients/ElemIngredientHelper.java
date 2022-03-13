@@ -22,17 +22,17 @@ public class ElemIngredientHelper implements IIngredientHelper<ElementIngredient
 		return null;
 	}
 
-    @Override
-    public IIngredientType<ElementIngredient> getIngredientType() {
-        return LightLandJeiPlugin.INSTANCE.ELEM_TYPE;
-    }
+	@Override
+	public IIngredientType<ElementIngredient> getIngredientType() {
+		return LightLandJeiPlugin.INSTANCE.ELEM_TYPE;
+	}
 
-    @Override
+	@Override
 	public String getDisplayName(ElementIngredient magicElement) {
 		return magicElement.elem.getDesc().getContents();
 	}
 
-    @Override
+	@Override
 	public String getUniqueId(ElementIngredient magicElement, UidContext context) {
 		return magicElement.elem.getID();
 	}

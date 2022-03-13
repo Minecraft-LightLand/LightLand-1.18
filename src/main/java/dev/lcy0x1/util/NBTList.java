@@ -8,27 +8,27 @@ import net.minecraft.nbt.ListTag;
  */
 public class NBTList<T> {
 
-    private final ListTag tag;
+	private final ListTag tag;
 
-    NBTList(NBTObj parent, String key) {
-        boolean old = parent.tag.contains(key);
-        tag = parent.tag.getList(key, 10);
-        if (!old)
-            parent.tag.put(key, tag);
-    }
+	NBTList(NBTObj parent, String key) {
+		boolean old = parent.tag.contains(key);
+		tag = parent.tag.getList(key, 10);
+		if (!old)
+			parent.tag.put(key, tag);
+	}
 
-    public NBTObj add() {
-        NBTObj ans = new NBTObj();
-        tag.add(ans.tag);
-        return ans;
-    }
+	public NBTObj add() {
+		NBTObj ans = new NBTObj();
+		tag.add(ans.tag);
+		return ans;
+	}
 
-    public NBTObj get(int i) {
-        return new NBTObj(tag.getCompound(i));
-    }
+	public NBTObj get(int i) {
+		return new NBTObj(tag.getCompound(i));
+	}
 
-    public int size() {
-        return tag.size();
-    }
+	public int size() {
+		return tag.size();
+	}
 
 }

@@ -11,7 +11,6 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -21,38 +20,38 @@ import java.util.function.Supplier;
 
 public class ContainerBook extends Item implements MenuProvider {
 
-    private final Supplier<MenuEntry<?>> cont;
+	private final Supplier<MenuEntry<?>> cont;
 
-    public ContainerBook(Properties props, Supplier<MenuEntry<?>> cont) {
-        super(props);
-        this.cont = cont;
-    }
+	public ContainerBook(Properties props, Supplier<MenuEntry<?>> cont) {
+		super(props);
+		this.cont = cont;
+	}
 
-    public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        if (!world.isClientSide()) {
-            player.openMenu(this);
-        } else {
-            player.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0f, 1.0f);
-        }
-        return InteractionResultHolder.success(stack);
-    }
+	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (!world.isClientSide()) {
+			player.openMenu(this);
+		} else {
+			player.playSound(SoundEvents.BOOK_PAGE_TURN, 1.0f, 1.0f);
+		}
+		return InteractionResultHolder.success(stack);
+	}
 
-    @Override
-    public Component getDisplayName() {
-        return new TranslatableComponent(MenuRegistrate.getLangKey(cont.get().get()));
-    }
+	@Override
+	public Component getDisplayName() {
+		return new TranslatableComponent(MenuRegistrate.getLangKey(cont.get().get()));
+	}
 
-    @Nullable
-    @Override
-    public AbstractContainerMenu createMenu(int wid, Inventory plInv, Player pl) {
-        return cont.get().create(wid, plInv);
-    }
+	@Nullable
+	@Override
+	public AbstractContainerMenu createMenu(int wid, Inventory plInv, Player pl) {
+		return cont.get().create(wid, plInv);
+	}
 
-    public interface IFac {
+	public interface IFac {
 
-        AbstractContainerMenu create(int wid, Inventory plInv, Player pl);
+		AbstractContainerMenu create(int wid, Inventory plInv, Player pl);
 
-    }
+	}
 
 }

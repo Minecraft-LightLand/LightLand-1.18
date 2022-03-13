@@ -13,25 +13,25 @@ import net.minecraft.world.level.block.state.StateDefinition;
 
 public class AllDireBlockMethodImpl implements PlacementBlockMethod, CreateBlockStateBlockMethod, MirrorRotateBlockMethod {
 
-    public AllDireBlockMethodImpl() {
-    }
+	public AllDireBlockMethodImpl() {
+	}
 
-    @Override
-    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(BlockProxy.FACING);
-    }
+	@Override
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(BlockProxy.FACING);
+	}
 
-    @Override
-    public BlockState getStateForPlacement(BlockState def, BlockPlaceContext context) {
-        return def.setValue(BlockProxy.FACING, context.getClickedFace().getOpposite());
-    }
+	@Override
+	public BlockState getStateForPlacement(BlockState def, BlockPlaceContext context) {
+		return def.setValue(BlockProxy.FACING, context.getClickedFace().getOpposite());
+	}
 
 
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state.setValue(BlockProxy.FACING, rot.rotate(state.getValue(BlockProxy.FACING)));
-    }
+	public BlockState rotate(BlockState state, Rotation rot) {
+		return state.setValue(BlockProxy.FACING, rot.rotate(state.getValue(BlockProxy.FACING)));
+	}
 
-    public BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(BlockProxy.FACING)));
-    }
+	public BlockState mirror(BlockState state, Mirror mirror) {
+		return state.rotate(mirror.getRotation(state.getValue(BlockProxy.FACING)));
+	}
 }

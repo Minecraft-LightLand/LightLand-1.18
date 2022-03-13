@@ -28,74 +28,74 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @SerialClass
 public class RitualTE extends SyncedSingleItemTE {
 
-    public RitualTE(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
-    }
+	public RitualTE(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+		super(type, pos, state);
+	}
 
-    @Override
-    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dire) {
-        return dire == Direction.UP && super.canPlaceItemThroughFace(slot, stack, dire);
-    }
+	@Override
+	public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dire) {
+		return dire == Direction.UP && super.canPlaceItemThroughFace(slot, stack, dire);
+	}
 
-    @Override
-    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dire) {
-        return dire == Direction.DOWN && super.canTakeItemThroughFace(slot, stack, dire);
-    }
+	@Override
+	public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dire) {
+		return dire == Direction.DOWN && super.canTakeItemThroughFace(slot, stack, dire);
+	}
 
-    @Override
-    public int getMaxStackSize() {
-        return 1;
-    }
+	@Override
+	public int getMaxStackSize() {
+		return 1;
+	}
 
-    @Override
-    public void setChanged() {
-        super.setChanged();
-        sync();
-    }
+	@Override
+	public void setChanged() {
+		super.setChanged();
+		sync();
+	}
 
-    @Override
-    public boolean isLocked() {
-        return getBlockState().getValue(BlockStateProperties.LIT);
-    }
+	@Override
+	public boolean isLocked() {
+		return getBlockState().getValue(BlockStateProperties.LIT);
+	}
 
-    protected void setLocked(boolean bool) {
-        if (level != null) {
-            level.setBlock(getBlockPos(), getBlockState().setValue(BlockStateProperties.LIT, bool), 3);
-        }
-    }
+	protected void setLocked(boolean bool) {
+		if (level != null) {
+			level.setBlock(getBlockPos(), getBlockState().setValue(BlockStateProperties.LIT, bool), 3);
+		}
+	}
 
-    public static class RitualPlace implements OnClickBlockMethod, CreateBlockStateBlockMethod, DefaultStateBlockMethod {
+	public static class RitualPlace implements OnClickBlockMethod, CreateBlockStateBlockMethod, DefaultStateBlockMethod {
 
-        @Override
-        public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
-            if (w.isClientSide()) {
-                return InteractionResult.SUCCESS;
-            }
-            BlockEntity te = w.getBlockEntity(pos);
-            if (te instanceof RitualTE rte) {
-                if (!rte.isLocked()) {
-                    if (rte.isEmpty()) {
-                        if (!pl.getMainHandItem().isEmpty()) {
-                            rte.setItem(0, pl.getMainHandItem().split(1));
-                        }
-                    } else {
-                        pl.getInventory().placeItemBackInInventory(rte.removeItem(0, 1));
-                    }
-                }
-            }
-            return InteractionResult.SUCCESS;
-        }
+		@Override
+		public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
+			if (w.isClientSide()) {
+				return InteractionResult.SUCCESS;
+			}
+			BlockEntity te = w.getBlockEntity(pos);
+			if (te instanceof RitualTE rte) {
+				if (!rte.isLocked()) {
+					if (rte.isEmpty()) {
+						if (!pl.getMainHandItem().isEmpty()) {
+							rte.setItem(0, pl.getMainHandItem().split(1));
+						}
+					} else {
+						pl.getInventory().placeItemBackInInventory(rte.removeItem(0, 1));
+					}
+				}
+			}
+			return InteractionResult.SUCCESS;
+		}
 
-        @Override
-        public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-            builder.add(BlockStateProperties.LIT);
-        }
+		@Override
+		public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+			builder.add(BlockStateProperties.LIT);
+		}
 
-        @Override
-        public BlockState getDefaultState(BlockState state) {
-            return state.setValue(BlockStateProperties.LIT, false);
-        }
+		@Override
+		public BlockState getDefaultState(BlockState state) {
+			return state.setValue(BlockStateProperties.LIT, false);
+		}
 
-    }
+	}
 
 }

@@ -6,9 +6,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CapProxy {
 
-    @OnlyIn(Dist.CLIENT)
-    public static LLPlayerData getHandler() {
-        return LLPlayerData.get(Proxy.getClientPlayer());
-    }
+	@OnlyIn(Dist.CLIENT)
+	public static LLPlayerData getHandler() {
+		return LLPlayerData.get(Proxy.getClientPlayer());
+	}
 
 }

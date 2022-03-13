@@ -17,30 +17,30 @@ import net.minecraft.world.phys.Vec3;
 
 public class ThunderSword extends Arcane {
 
-    public final float dist;
+	public final float dist;
 
-    public ThunderSword(int cost, float dist) {
-        super(ArcaneType.ALKAID, cost);
-        this.dist = dist;
-    }
+	public ThunderSword(int cost, float dist) {
+		super(ArcaneType.ALKAID, cost);
+		this.dist = dist;
+	}
 
-    @Override
-    public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
-        if (target == null) {
-            target = RayTraceUtil.serverGetTarget(player);
-            if (target == null) {
-                return false;
-            }
-        }
-        BlockPos pos = target.blockPosition();
-        Level w = player.level;
-        if (!w.isClientSide()) {
-            LightningBolt e = new LightningBolt(EntityType.LIGHTNING_BOLT, w);
-            e.moveTo(Vec3.atBottomCenterOf(pos));
-            e.setCause(player instanceof ServerPlayer ? (ServerPlayer) player : null);
-            w.addFreshEntity(e);
-            e.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER, 5f, 1.0F);
-        }
-        return true;
-    }
+	@Override
+	public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
+		if (target == null) {
+			target = RayTraceUtil.serverGetTarget(player);
+			if (target == null) {
+				return false;
+			}
+		}
+		BlockPos pos = target.blockPosition();
+		Level w = player.level;
+		if (!w.isClientSide()) {
+			LightningBolt e = new LightningBolt(EntityType.LIGHTNING_BOLT, w);
+			e.moveTo(Vec3.atBottomCenterOf(pos));
+			e.setCause(player instanceof ServerPlayer ? (ServerPlayer) player : null);
+			w.addFreshEntity(e);
+			e.playSound(SoundEvents.LIGHTNING_BOLT_THUNDER, 5f, 1.0F);
+		}
+		return true;
+	}
 }

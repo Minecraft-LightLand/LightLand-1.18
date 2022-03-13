@@ -8,17 +8,17 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class FlameEffect extends MobEffect {
 
-    public FlameEffect(MobEffectCategory type, int color) {
-        super(type, color);
-    }
+	public FlameEffect(MobEffectCategory type, int color) {
+		super(type, color);
+	}
 
-    @Override
-    public void applyEffectTick(LivingEntity target, int level) {
-        DamageUtil.dealDamage(target, DamageSource.IN_FIRE, 2 << level);
-    }
+	@Override
+	public void applyEffectTick(LivingEntity target, int level) {
+		DamageUtil.dealDamage(target, DamageSource.IN_FIRE, 2 << level);
+	}
 
-    @Override
-    public boolean isDurationEffectTick(int tick, int level) {
-        return tick % 20 == 0;
-    }
+	@Override
+	public boolean isDurationEffectTick(int tick, int level) {
+		return tick % 20 == 0;
+	}
 }

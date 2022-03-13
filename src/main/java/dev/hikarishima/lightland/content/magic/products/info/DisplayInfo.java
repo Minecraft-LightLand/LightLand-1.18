@@ -9,30 +9,30 @@ import net.minecraft.world.item.Items;
 @SerialClass
 public class DisplayInfo {
 
-    public static final float SCALE = 1;
+	public static final float SCALE = 1;
 
-    @SerialClass.SerialField
-    public int x, y;
+	@SerialClass.SerialField
+	public int x, y;
 
-    @SerialClass.SerialField
-    public FrameType type = FrameType.TASK;
+	@SerialClass.SerialField
+	public FrameType type = FrameType.TASK;
 
-    @SerialClass.SerialField
-    public Item icon = Items.PAPER;
+	@SerialClass.SerialField
+	public Item icon = Items.PAPER;
 
-    public float getX() {
-        return x * SCALE;
-    }
+	public float getX() {
+		return x * SCALE;
+	}
 
-    public float getY() {
-        return y * SCALE;
-    }
+	public float getY() {
+		return y * SCALE;
+	}
 
-    public FrameType getFrame() {
-        return type;
-    }
+	public FrameType getFrame() {
+		return type;
+	}
 
-    public ItemStack getIcon() {
-        return icon.getDefaultInstance();
-    }
+	public ItemStack getIcon() {
+		return icon.getDefaultInstance();
+	}
 }

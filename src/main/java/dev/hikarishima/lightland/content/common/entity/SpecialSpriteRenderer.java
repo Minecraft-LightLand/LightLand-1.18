@@ -16,34 +16,34 @@ import net.minecraft.world.inventory.InventoryMenu;
 
 public class SpecialSpriteRenderer<T extends Entity & ItemSupplier & ISizedItemEntity> extends EntityRenderer<T> {
 
-    private final ItemRenderer itemRenderer;
-    private final boolean fullBright;
+	private final ItemRenderer itemRenderer;
+	private final boolean fullBright;
 
-    public SpecialSpriteRenderer(EntityRendererProvider.Context manager, ItemRenderer itemRenderer, boolean bright) {
-        super(manager);
-        this.itemRenderer = itemRenderer;
-        this.fullBright = bright;
-    }
+	public SpecialSpriteRenderer(EntityRendererProvider.Context manager, ItemRenderer itemRenderer, boolean bright) {
+		super(manager);
+		this.itemRenderer = itemRenderer;
+		this.fullBright = bright;
+	}
 
-    protected int getBlockLightLevel(T entity, BlockPos pos) {
-        return this.fullBright ? 15 : super.getBlockLightLevel(entity, pos);
-    }
+	protected int getBlockLightLevel(T entity, BlockPos pos) {
+		return this.fullBright ? 15 : super.getBlockLightLevel(entity, pos);
+	}
 
-    public void render(T entity, float yRot, float partial, PoseStack matrix, MultiBufferSource buffer, int light) {
-        if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25D)) {
-            matrix.pushPose();
-            float size = entity.getSize();
-            matrix.scale(size, size, size);
-            matrix.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            matrix.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-            this.itemRenderer.renderStatic(entity.getItem(), ItemTransforms.TransformType.GROUND, light, OverlayTexture.NO_OVERLAY, matrix, buffer, 0);
-            matrix.popPose();
-            super.render(entity, yRot, partial, matrix, buffer, light);
-        }
-    }
+	public void render(T entity, float yRot, float partial, PoseStack matrix, MultiBufferSource buffer, int light) {
+		if (entity.tickCount >= 2 || !(this.entityRenderDispatcher.camera.getEntity().distanceToSqr(entity) < 12.25D)) {
+			matrix.pushPose();
+			float size = entity.getSize();
+			matrix.scale(size, size, size);
+			matrix.mulPose(this.entityRenderDispatcher.cameraOrientation());
+			matrix.mulPose(Vector3f.YP.rotationDegrees(180.0F));
+			this.itemRenderer.renderStatic(entity.getItem(), ItemTransforms.TransformType.GROUND, light, OverlayTexture.NO_OVERLAY, matrix, buffer, 0);
+			matrix.popPose();
+			super.render(entity, yRot, partial, matrix, buffer, light);
+		}
+	}
 
-    public ResourceLocation getTextureLocation(Entity p_110775_1_) {
-        return InventoryMenu.BLOCK_ATLAS;
-    }
+	public ResourceLocation getTextureLocation(Entity p_110775_1_) {
+		return InventoryMenu.BLOCK_ATLAS;
+	}
 
 }

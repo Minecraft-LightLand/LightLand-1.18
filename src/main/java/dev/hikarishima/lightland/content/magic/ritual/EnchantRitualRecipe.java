@@ -15,16 +15,16 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class EnchantRitualRecipe extends AbstractLevelRitualRecipe<EnchantRitualRecipe> {
 
-    public EnchantRitualRecipe(ResourceLocation id) {
-        super(id, RecipeRegistrate.RS_ENCH.get());
-    }
+	public EnchantRitualRecipe(ResourceLocation id) {
+		super(id, RecipeRegistrate.RS_ENCH.get());
+	}
 
-    public void assemble(RitualCore.Inv inv, int level) {
-        ItemStack stack = assemble(inv);
-        Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
-        map.replaceAll((e, v) -> v + level - 1);
-        EnchantmentHelper.setEnchantments(map, stack);
-        inv.setItem(5, stack);
-    }
+	public void assemble(RitualCore.Inv inv, int level) {
+		ItemStack stack = assemble(inv);
+		Map<Enchantment, Integer> map = EnchantmentHelper.getEnchantments(stack);
+		map.replaceAll((e, v) -> v + level - 1);
+		EnchantmentHelper.setEnchantments(map, stack);
+		inv.setItem(5, stack);
+	}
 
 }

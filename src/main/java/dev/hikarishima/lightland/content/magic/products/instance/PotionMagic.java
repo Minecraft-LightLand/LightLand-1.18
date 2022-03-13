@@ -10,7 +10,7 @@ import net.minecraft.world.effect.MobEffect;
 
 public class PotionMagic extends MagicProduct<MobEffect, PotionMagic> {
 
-    public PotionMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
-        super(MagicRegistry.MPT_EFF.get(), player, tag, rl, r);
-    }
+	public PotionMagic(LLPlayerData player, NBTObj tag, ResourceLocation rl, IMagicRecipe<?> r) {
+		super(MagicRegistry.MPT_EFF.get(), player, tag, rl, r);
+	}
 }

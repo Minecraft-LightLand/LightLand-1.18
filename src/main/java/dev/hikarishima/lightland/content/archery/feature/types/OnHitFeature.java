@@ -8,10 +8,10 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public interface OnHitFeature extends BowArrowFeature {
 
-    @ServerOnly
-    void onHitEntity(GenericArrowEntity genericArrow, LivingEntity target);
+	@ServerOnly
+	void onHitEntity(GenericArrowEntity genericArrow, LivingEntity target);
 
-    @ServerOnly
-    void onHitBlock(GenericArrowEntity genericArrow, BlockHitResult result);
+	@ServerOnly
+	void onHitBlock(GenericArrowEntity genericArrow, BlockHitResult result);
 
 }

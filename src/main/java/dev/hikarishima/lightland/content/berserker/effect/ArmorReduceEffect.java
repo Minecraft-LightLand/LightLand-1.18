@@ -10,11 +10,11 @@ import java.util.UUID;
 
 public class ArmorReduceEffect extends MobEffect {
 
-    public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:armor_reduce");
+	public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:armor_reduce");
 
-    public ArmorReduceEffect(MobEffectCategory category, int color) {
-        super(category, color);
-        this.addAttributeModifier(Attributes.ARMOR, ID.toString(), -8f, AttributeModifier.Operation.ADDITION);
-    }
+	public ArmorReduceEffect(MobEffectCategory category, int color) {
+		super(category, color);
+		this.addAttributeModifier(Attributes.ARMOR, ID.toString(), -8f, AttributeModifier.Operation.ADDITION);
+	}
 
 }
