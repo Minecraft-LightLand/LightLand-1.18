@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.common.item.misc;
 
+import com.tterrag.registrate.util.entry.MenuEntry;
 import dev.hikarishima.lightland.init.registrate.MenuRegistrate;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -20,13 +21,11 @@ import java.util.function.Supplier;
 
 public class ContainerBook extends Item implements MenuProvider {
 
-    private final Supplier<MenuType<?>> cont;
-    private final IFac fac;
+    private final Supplier<MenuEntry<?>> cont;
 
-    public ContainerBook(Properties props, Supplier<MenuType<?>> cont, IFac fac) {
+    public ContainerBook(Properties props, Supplier<MenuEntry<?>> cont) {
         super(props);
         this.cont = cont;
-        this.fac = fac;
     }
 
     public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
@@ -41,13 +40,13 @@ public class ContainerBook extends Item implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent(MenuRegistrate.getLangKey(cont.get()));
+        return new TranslatableComponent(MenuRegistrate.getLangKey(cont.get().get()));
     }
 
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int wid, Inventory plInv, Player pl) {
-        return fac.create(wid, plInv, pl);
+        return cont.get().create(wid, plInv);
     }
 
     public interface IFac {

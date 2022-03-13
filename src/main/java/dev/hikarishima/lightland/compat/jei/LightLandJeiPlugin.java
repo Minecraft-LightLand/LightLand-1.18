@@ -1,19 +1,26 @@
 package dev.hikarishima.lightland.compat.jei;
 
+import dev.hikarishima.lightland.compat.jei.ingredients.ElemIngredientHelper;
+import dev.hikarishima.lightland.compat.jei.ingredients.ElemIngredientRenderer;
+import dev.hikarishima.lightland.compat.jei.ingredients.ElementIngredient;
 import dev.hikarishima.lightland.compat.jei.recipes.MagicCraftRecipeCategory;
+import dev.hikarishima.lightland.compat.jei.screen.ExtraInfoScreen;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.lcy0x1.base.Proxy;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.stream.Collectors;
 
 @JeiPlugin
 @MethodsReturnNonnullByDefault
@@ -25,6 +32,10 @@ public class LightLandJeiPlugin implements IModPlugin {
     public final ResourceLocation UID = new ResourceLocation(LightLand.MODID, "jei_plugin");
 
     public final MagicCraftRecipeCategory MAGIC_CRAFT = new MagicCraftRecipeCategory();
+
+    public final ElemIngredientHelper ELEM_HELPER = new ElemIngredientHelper();
+    public final ElemIngredientRenderer ELEM_RENDERER = new ElemIngredientRenderer();
+    public final IIngredientType<ElementIngredient> ELEM_TYPE = () -> ElementIngredient.class;
 
     public LightLandJeiPlugin() {
         INSTANCE = this;
@@ -42,6 +53,9 @@ public class LightLandJeiPlugin implements IModPlugin {
 
     @Override
     public void registerIngredients(IModIngredientRegistration registration) {
+        registration.register(ELEM_TYPE, LightLandRegistry.ELEMENT.getValues().stream()
+                .map(ElementIngredient::new).collect(Collectors.toList()),
+            ELEM_HELPER, ELEM_RENDERER);
     }
 
     @Override
@@ -70,6 +84,7 @@ public class LightLandJeiPlugin implements IModPlugin {
 
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration) {
+        ExtraInfoScreen.init();
     }
 
     @Override
