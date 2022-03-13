@@ -39,7 +39,7 @@ public class DisEnchanterContainer extends BaseContainerMenu<DisEnchanterContain
 	protected final Map<Enchantment, MagicElement[]> temp = Maps.newLinkedHashMap();
 
 	public DisEnchanterContainer(MenuType<DisEnchanterContainer> type, int wid, Inventory plInv) {
-		super(type, wid, plInv, MANAGER, (menu) -> new BaseContainer<>(3, menu), false);
+		super(type, wid, plInv, MANAGER, (menu) -> new BaseContainer<>(3, menu), true);
 		addSlot("main_slot", stack -> stack.isEnchanted() || stack.getItem() == Items.ENCHANTED_BOOK);
 		addSlot("gold_slot", stack -> stack.getItem() == Items.GOLD_NUGGET);
 		addSlot("ench_slot", stack -> false);

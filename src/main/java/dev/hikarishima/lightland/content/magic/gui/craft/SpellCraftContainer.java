@@ -40,7 +40,7 @@ public class SpellCraftContainer extends BaseContainerMenu<SpellCraftContainer> 
 	private boolean changing = false;
 
 	public SpellCraftContainer(MenuType<SpellCraftContainer> type, int wid, Inventory plInv) {
-		super(type, wid, plInv, MANAGER, (menu) -> new BaseContainer<>(5, menu), false);
+		super(type, wid, plInv, MANAGER, (menu) -> new BaseContainer<>(5, menu), true);
 		addSlot("wand_slot", stack -> stack.getItem() instanceof MagicWand);
 		addSlot("input_slot", stack -> stack.getItem() instanceof MagicScroll);
 		addSlot("ench_slot", stack -> stack.getItem() instanceof ManaStorage);

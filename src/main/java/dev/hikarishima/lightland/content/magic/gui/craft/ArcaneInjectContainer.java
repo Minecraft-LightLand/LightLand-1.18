@@ -39,7 +39,7 @@ public class ArcaneInjectContainer extends BaseContainerMenu<ArcaneInjectContain
 	private boolean changing = false;
 
 	public ArcaneInjectContainer(MenuType<ArcaneInjectContainer> type, int wid, Inventory plInv) {
-		super(type, wid, plInv, MANAGER, (menu) -> new BaseContainer<>(5, menu), false);
+		super(type, wid, plInv, MANAGER, (menu) -> new BaseContainer<>(5, menu), true);
 		addSlot("wand_slot", stack -> stack.getItem() instanceof MagicWand);
 		addSlot("input_slot", ArcaneItemUseHelper::isArcaneItem);
 		addSlot("ench_slot", stack -> stack.getItem() instanceof ManaStorage);
