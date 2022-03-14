@@ -58,8 +58,8 @@ public class ItemRegistrate {
 
 		private final Supplier<ItemEntry> icon;
 
-		public Tab(Supplier<ItemEntry> icon) {
-			super(LightLand.MODID);
+		public Tab(String id, Supplier<ItemEntry> icon) {
+			super(LightLand.MODID + "." + id);
 			this.icon = icon;
 		}
 
@@ -69,9 +69,9 @@ public class ItemRegistrate {
 		}
 	}
 
-	public static final Tab TAB_MAIN = new Tab(() -> ItemRegistrate.MAGIC_WAND);
-	public static final Tab TAB_PROF = new Tab(() -> ItemRegistrate.STARTER_BOW);
-	public static final Tab TAB_QUEST = new Tab(() -> ItemRegistrate.GEN_ITEM[0][0]);
+	public static final Tab TAB_MAIN = new Tab("material",() -> ItemRegistrate.MAGIC_WAND);
+	public static final Tab TAB_PROF = new Tab("profession",() -> ItemRegistrate.STARTER_BOW);
+	public static final Tab TAB_QUEST = new Tab("generated",() -> ItemRegistrate.GEN_ITEM[0][0]);
 
 	static {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
@@ -139,6 +139,50 @@ public class ItemRegistrate {
 				new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/ender_backpack_open"));
 	}
 
+	// -------- magic --------
+	public static final int MANA = 256;
+
+	public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED;
+	public static final ItemEntry<ArcaneAxe> ARCANE_AXE_GILDED;
+	public static final ItemEntry<MagicWand> MAGIC_WAND;
+	public static final ItemEntry<PotionCore> POTION_CORE;
+	public static final ItemEntry<MagicScroll> SPELL_CARD, SPELL_PARCHMENT, SPELL_SCROLL;
+	public static final ItemEntry<ManaStorage> ENC_GOLD_NUGGET, ENC_GOLD_INGOT, COOKIE, MELON, CARROT, APPLE;
+
+	static {
+		ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
+						new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
+				.model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+		ARCANE_AXE_GILDED = REGISTRATE.item("gilded_arcane_axe", p ->
+						new ArcaneAxe(Tiers.IRON, 8, -3.1f, p.stacksTo(1).setNoRepair(), 50))
+				.model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
+		MAGIC_WAND = REGISTRATE.item("magic_wand", MagicWand::new)
+				.defaultModel().defaultLang().register();
+		POTION_CORE = REGISTRATE.item("potion_core", PotionCore::new)
+				.defaultModel().defaultLang().register();
+		SPELL_CARD = REGISTRATE.item("spell_card", p ->
+						new MagicScroll(MagicScroll.ScrollType.CARD, p))
+				.defaultModel().defaultLang().register();
+		SPELL_PARCHMENT = REGISTRATE.item("spell_parchment", p ->
+						new MagicScroll(MagicScroll.ScrollType.PARCHMENT, p))
+				.defaultModel().defaultLang().register();
+		SPELL_SCROLL = REGISTRATE.item("spell_scroll", p ->
+						new MagicScroll(MagicScroll.ScrollType.SCROLL, p))
+				.defaultModel().defaultLang().register();
+		COOKIE = REGISTRATE.item("enchant_cookie", p -> new ManaStorage(p.food(Foods.COOKIE), Items.COOKIE, MANA / 8))
+				.defaultModel().defaultLang().register();
+		MELON = REGISTRATE.item("enchant_melon", p -> new ManaStorage(p.food(Foods.MELON_SLICE), Items.MELON_SLICE, MANA))
+				.defaultModel().defaultLang().register();
+		CARROT = REGISTRATE.item("enchant_carrot", p -> new ManaStorage(p.food(Foods.GOLDEN_CARROT), Items.GOLDEN_CARROT, MANA * 8))
+				.defaultModel().defaultLang().register();
+		APPLE = REGISTRATE.item("enchant_apple", p -> new ManaStorage(p.food(Foods.GOLDEN_APPLE), Items.GOLDEN_APPLE, MANA * 72))
+				.defaultModel().defaultLang().register();
+		ENC_GOLD_NUGGET = REGISTRATE.item("enchant_gold_nugget", p -> new ManaStorage(p, Items.GOLD_NUGGET, MANA))
+				.defaultModel().defaultLang().register();
+		ENC_GOLD_INGOT = REGISTRATE.item("enchant_gold_ingot", p -> new ManaStorage(p, Items.GOLD_INGOT, MANA * 9))
+				.defaultModel().defaultLang().register();
+	}
+
 	// -------- questline--------
 
 	public static final ItemEntry<Item> KING_LEATHER;
@@ -196,50 +240,6 @@ public class ItemRegistrate {
 				a -> DamageSource.arrow(a, a.getOwner()).bypassMagic(),
 				a -> (float) (a.getBaseDamage() * a.getDeltaMovement().length())
 		)));
-	}
-
-	// -------- magic --------
-	public static final int MANA = 256;
-
-	public static final ItemEntry<ArcaneSword> ARCANE_SWORD_GILDED;
-	public static final ItemEntry<ArcaneAxe> ARCANE_AXE_GILDED;
-	public static final ItemEntry<MagicWand> MAGIC_WAND;
-	public static final ItemEntry<PotionCore> POTION_CORE;
-	public static final ItemEntry<MagicScroll> SPELL_CARD, SPELL_PARCHMENT, SPELL_SCROLL;
-	public static final ItemEntry<ManaStorage> ENC_GOLD_NUGGET, ENC_GOLD_INGOT, COOKIE, MELON, CARROT, APPLE;
-
-	static {
-		ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
-						new ArcaneSword(Tiers.IRON, 5, -2.4f, p.stacksTo(1).setNoRepair(), 50))
-				.model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
-		ARCANE_AXE_GILDED = REGISTRATE.item("gilded_arcane_axe", p ->
-						new ArcaneAxe(Tiers.IRON, 8, -3.1f, p.stacksTo(1).setNoRepair(), 50))
-				.model((ctx, pvd) -> pvd.handheld(ctx::getEntry)).defaultLang().register();
-		MAGIC_WAND = REGISTRATE.item("magic_wand", MagicWand::new)
-				.defaultModel().defaultLang().register();
-		POTION_CORE = REGISTRATE.item("potion_core", PotionCore::new)
-				.defaultModel().defaultLang().register();
-		SPELL_CARD = REGISTRATE.item("spell_card", p ->
-						new MagicScroll(MagicScroll.ScrollType.CARD, p))
-				.defaultModel().defaultLang().register();
-		SPELL_PARCHMENT = REGISTRATE.item("spell_parchment", p ->
-						new MagicScroll(MagicScroll.ScrollType.PARCHMENT, p))
-				.defaultModel().defaultLang().register();
-		SPELL_SCROLL = REGISTRATE.item("spell_scroll", p ->
-						new MagicScroll(MagicScroll.ScrollType.SCROLL, p))
-				.defaultModel().defaultLang().register();
-		COOKIE = REGISTRATE.item("enchant_cookie", p -> new ManaStorage(p.food(Foods.COOKIE), Items.COOKIE, MANA / 8))
-				.defaultModel().defaultLang().register();
-		MELON = REGISTRATE.item("enchant_melon", p -> new ManaStorage(p.food(Foods.MELON_SLICE), Items.MELON_SLICE, MANA))
-				.defaultModel().defaultLang().register();
-		CARROT = REGISTRATE.item("enchant_carrot", p -> new ManaStorage(p.food(Foods.GOLDEN_CARROT), Items.GOLDEN_CARROT, MANA * 8))
-				.defaultModel().defaultLang().register();
-		APPLE = REGISTRATE.item("enchant_apple", p -> new ManaStorage(p.food(Foods.GOLDEN_APPLE), Items.GOLDEN_APPLE, MANA * 72))
-				.defaultModel().defaultLang().register();
-		ENC_GOLD_NUGGET = REGISTRATE.item("enchant_gold_nugget", p -> new ManaStorage(p, Items.GOLD_NUGGET, MANA))
-				.defaultModel().defaultLang().register();
-		ENC_GOLD_INGOT = REGISTRATE.item("enchant_gold_ingot", p -> new ManaStorage(p, Items.GOLD_INGOT, MANA * 9))
-				.defaultModel().defaultLang().register();
 	}
 
 	// -------- berserker --------

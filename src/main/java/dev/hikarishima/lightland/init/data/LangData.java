@@ -164,7 +164,9 @@ public class LangData {
 			String str = strs[strs.length - 1];
 			pvd.accept(key.id, RegistrateLangProvider.toEnglishName(str));
 		}
-		pvd.accept("itemGroup.lightland", "Light Land RPG");
+		pvd.accept("itemGroup.lightland.material", "Tools and Materials");
+		pvd.accept("itemGroup.lightland.profession", "Professional Equipments");
+		pvd.accept("itemGroup.lightland.generated", "Common Equipments");
 		pvd.accept("key.categories.lightland", "Light Land Keys");
 		MAP.forEach((v, k) -> {
 			for (Enum<?> e : v.getEnumConstants()) {

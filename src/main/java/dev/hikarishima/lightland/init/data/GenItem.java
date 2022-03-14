@@ -94,6 +94,15 @@ public class GenItem {
 			this.armor_config = armor_config;
 			this.tool_stats = tool;
 		}
+
+		public Item getArmor(EquipmentSlot slot) {
+			return ItemRegistrate.GEN_ITEM[ordinal()][slot.getIndex()].get();
+		}
+
+		public Item getTool(Tools tool) {
+			return ItemRegistrate.GEN_ITEM[ordinal()][4 + tool.ordinal()].get();
+		}
+
 	}
 
 	public enum Tools {
@@ -148,7 +157,7 @@ public class GenItem {
 	private static ToolFactory fromToolGen(Function<Tools, RawToolFactory> gen) {
 		return (mat, tool, prop) -> gen.apply(tool).get(mat.tier,
 				mat.tool_stats.add_dmg[tool.ordinal()] - 1,
-				4 - mat.tool_stats.add_speed[tool.ordinal()], prop);
+				mat.tool_stats.add_speed[tool.ordinal()] - 4, prop);
 	}
 
 	public static ItemEntry<Item>[][] genItem() {

@@ -1,0 +1,28 @@
+{
+    "_class": "organize.json.JsonPartMap",
+    "file": "config_weight",
+    "path": "entries",
+    "map": {
+        "lightland:steel": {
+            "ingredient_weight": 70
+        },
+        "lightland:layroot": {
+            "ingredient_weight": 50
+        },
+        "lightland:layline": {
+            "ingredient_weight": 50
+        },
+        "lightland:oldroot": {
+            "ingredient_weight": 50
+        },
+        "lightland:knightsteel": {
+            "ingredient_weight": 70
+        },
+        "lightland:dispellium": {
+            "ingredient_weight": 70
+        },
+        "lightland:heavysteel": {
+            "ingredient_weight": 100
+        }
+    }
+}
