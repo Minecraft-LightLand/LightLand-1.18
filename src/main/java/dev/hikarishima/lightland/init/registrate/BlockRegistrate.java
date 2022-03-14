@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
-import static dev.hikarishima.lightland.init.registrate.ItemRegistrate.TAB;
+import static dev.hikarishima.lightland.init.registrate.ItemRegistrate.TAB_MAIN;
 
 /**
  * handles blocks and block entities
@@ -23,7 +23,7 @@ import static dev.hikarishima.lightland.init.registrate.ItemRegistrate.TAB;
 public class BlockRegistrate {
 
 	static {
-		REGISTRATE.creativeModeTab(() -> TAB);
+		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
 	}
 
 	private static final DelegateBlockProperties PEDESTAL = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e

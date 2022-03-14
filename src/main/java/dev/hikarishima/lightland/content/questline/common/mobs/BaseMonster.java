@@ -4,13 +4,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,43 +41,6 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 			data_map.put(data, data.getEmptyData());
 		}
 	}
-
-	@Override
-	protected void registerGoals() {
-	}
-
-
-	@Override
-	protected int getExperienceReward(Player player) {
-		return super.getExperienceReward(player);
-	}
-
-	@Override
-	public void tick() {
-		super.tick();
-	}
-
-	@Override
-	public void aiStep() {
-		super.aiStep();
-	}
-
-	@Override
-	public boolean hurt(DamageSource source, float damage) {
-		return super.hurt(source, damage);
-	}
-
-	@Override
-	public boolean doHurtTarget(Entity target) {
-		return super.doHurtTarget(target);
-	}
-
-	@Override
-	public void killed(ServerLevel p_19929_, LivingEntity p_19930_) {
-		super.killed(p_19929_, p_19930_);
-	}
-
-	// Delegated methods
 
 	@Override
 	protected final SoundEvent getAmbientSound() {
@@ -127,7 +91,7 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 	public final SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
 											  @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
 		for (SpawnedEquipment e : config.equipment())
-			e.finalizeSpawn(this, level, difficulty, spawnType, groupData, tag);
+			groupData = e.finalizeSpawn(this, level, difficulty, spawnType, groupData, tag);
 		return super.finalizeSpawn(level, difficulty, spawnType, groupData, tag);
 	}
 

@@ -30,6 +30,7 @@ import dev.hikarishima.lightland.content.magic.item.ManaStorage;
 import dev.hikarishima.lightland.content.magic.item.PotionCore;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.AllTags;
+import dev.hikarishima.lightland.init.data.GenItem;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
@@ -45,6 +46,7 @@ import net.minecraftforge.common.util.NonNullLazy;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
@@ -54,20 +56,25 @@ public class ItemRegistrate {
 
 	public static class Tab extends CreativeModeTab {
 
-		public Tab() {
+		private final Supplier<ItemEntry> icon;
+
+		public Tab(Supplier<ItemEntry> icon) {
 			super(LightLand.MODID);
+			this.icon = icon;
 		}
 
 		@Override
 		public ItemStack makeIcon() {
-			return STARTER_BOW.asStack();
+			return icon.get().asStack();
 		}
 	}
 
-	public static final Tab TAB = new Tab();
+	public static final Tab TAB_MAIN = new Tab(() -> ItemRegistrate.MAGIC_WAND);
+	public static final Tab TAB_PROF = new Tab(() -> ItemRegistrate.STARTER_BOW);
+	public static final Tab TAB_QUEST = new Tab(() -> ItemRegistrate.GEN_ITEM[0][0]);
 
 	static {
-		REGISTRATE.creativeModeTab(() -> TAB);
+		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
 	}
 
 	// -------- common --------
@@ -77,7 +84,8 @@ public class ItemRegistrate {
 	public static final ItemEntry<RecordPearl> RECORD_PEARL;
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
-	public static final ItemEntry<Item> STEEL_INGOT, STEEL_NUGGET, LEAD_INGOT, LEAD_NUGGET;
+	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET;
+	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	static {
 		BACKPACKS = new ItemEntry[16];
@@ -106,14 +114,14 @@ public class ItemRegistrate {
 		SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_SPCRAFT))
 				.defaultModel().defaultLang().register();
 
-		STEEL_INGOT = LightLand.REGISTRATE.item("steel_ingot", Item::new)
-				.defaultModel().defaultLang().register();
-		STEEL_NUGGET = LightLand.REGISTRATE.item("steel_nugget", Item::new)
-				.defaultModel().defaultLang().register();
 		LEAD_INGOT = LightLand.REGISTRATE.item("lead_ingot", Item::new)
 				.defaultModel().defaultLang().register();
 		LEAD_NUGGET = LightLand.REGISTRATE.item("lead_nugget", Item::new)
 				.defaultModel().defaultLang().register();
+
+		MAT_INGOTS = GenItem.genMats("_ingot");
+		MAT_NUGGETS = GenItem.genMats("_nugget");
+
 	}
 
 	private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {
@@ -131,23 +139,26 @@ public class ItemRegistrate {
 				new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/ender_backpack_open"));
 	}
 
-	// -------- archery --------
-	public static final ItemEntry<GenericBowItem> STARTER_BOW;
-	public static final ItemEntry<GenericBowItem> IRON_BOW;
-	public static final ItemEntry<GenericBowItem> MAGNIFY_BOW;
-	public static final ItemEntry<GenericBowItem> GLOW_AIM_BOW;
-	public static final ItemEntry<GenericBowItem> ENDER_AIM_BOW;
-	public static final ItemEntry<GenericBowItem> EAGLE_BOW;
-	public static final ItemEntry<GenericBowItem> WIND_BOW;
+	// -------- questline--------
 
-	public static final ItemEntry<GenericArrowItem> STARTER_ARROW;
-	public static final ItemEntry<GenericArrowItem> COPPER_ARROW, IRON_ARROW, OBSIDIAN_ARROW;
-	public static final ItemEntry<GenericArrowItem> NO_FALL_ARROW;
-	public static final ItemEntry<GenericArrowItem> ENDER_ARROW;
-	public static final ItemEntry<GenericArrowItem> TNT_1_ARROW, TNT_2_ARROW, TNT_3_ARROW;
-	public static final ItemEntry<GenericArrowItem> FIRE_1_ARROW, FIRE_2_ARROW;
-	public static final ItemEntry<GenericArrowItem> ICE_ARROW;
-	public static final ItemEntry<GenericArrowItem> DISPELL_ARROW;
+	public static final ItemEntry<Item> KING_LEATHER;
+
+	static {
+		KING_LEATHER = REGISTRATE.item("king_leather", Item::new)
+				.defaultModel().defaultLang().register();
+	}
+
+	static {
+		REGISTRATE.creativeModeTab(() -> TAB_PROF);
+	}
+
+	// -------- archery --------
+	public static final ItemEntry<GenericBowItem> STARTER_BOW, IRON_BOW, MAGNIFY_BOW, GLOW_AIM_BOW, ENDER_AIM_BOW,
+			EAGLE_BOW, WIND_BOW;
+
+	public static final ItemEntry<GenericArrowItem> STARTER_ARROW, COPPER_ARROW, IRON_ARROW, OBSIDIAN_ARROW,
+			NO_FALL_ARROW, ENDER_ARROW, TNT_1_ARROW, TNT_2_ARROW, TNT_3_ARROW, FIRE_1_ARROW, FIRE_2_ARROW,
+			ICE_ARROW, DISPELL_ARROW;
 
 	static {
 		STARTER_BOW = genBow("starter_bow", 600, 0, 0, FeatureList::end);
@@ -232,17 +243,28 @@ public class ItemRegistrate {
 	}
 
 	// -------- berserker --------
-	public static final ItemEntry<MedicineLeather> MEDICINE_LEATHER = REGISTRATE.item("medicine_leather", p -> new MedicineLeather(14, p))
-			.defaultModel().defaultLang().register();
-	public static final ItemEntry<Item> KING_LEATHER = REGISTRATE.item("king_leather", Item::new)
-			.defaultModel().defaultLang().register();
-	public static final ItemEntry<MedicineLeather> KING_MED_LEATHER = REGISTRATE.item("king_med_leather", p -> new MedicineLeather(100, p))
-			.defaultModel().defaultLang().register();
-	public static final ItemEntry<MedicineArmor>[] MEDICINE_ARMOR = genArmor("medicine_leather",
-			(slot, p) -> new MedicineArmor(Mat.MEDICINE_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
-	public static final ItemEntry<MedicineArmor>[] KING_MED_ARMOR = genArmor("king_leather",
-			(slot, p) -> new MedicineArmor(Mat.KING_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
+	public static final ItemEntry<MedicineLeather> MEDICINE_LEATHER, KING_MED_LEATHER;
+	public static final ItemEntry<MedicineArmor>[] MEDICINE_ARMOR, KING_MED_ARMOR;
 
+	static {
+		MEDICINE_LEATHER = REGISTRATE.item("medicine_leather", p -> new MedicineLeather(14, p))
+				.defaultModel().defaultLang().register();
+		KING_MED_LEATHER = REGISTRATE.item("king_med_leather", p -> new MedicineLeather(100, p))
+				.defaultModel().defaultLang().register();
+		MEDICINE_ARMOR = genArmor("medicine_leather",
+				(slot, p) -> new MedicineArmor(Mat.MEDICINE_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
+		KING_MED_ARMOR = genArmor("king_leather",
+				(slot, p) -> new MedicineArmor(Mat.KING_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
+	}
+
+
+	// -------- gen --------
+
+	public static final ItemEntry<Item>[][] GEN_ITEM;
+
+	static {
+		GEN_ITEM = GenItem.genItem();
+	}
 
 	public static void register() {
 	}
