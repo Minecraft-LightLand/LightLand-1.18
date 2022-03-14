@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:layline_ingot"
+    }
+  ],
+  "result": {
+    "item": "lightland:layline_nugget",
+    "count": 9
+  }
+}
+

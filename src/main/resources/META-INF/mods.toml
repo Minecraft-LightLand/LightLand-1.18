@@ -3,7 +3,7 @@ loaderVersion="[38,)"
 license="All rights reserved"
 [[mods]]
 modId="lightland"
-version="6.1.2" #mandatory
+version="6.1.3" #mandatory
 displayName="LightLand RPG" #mandatory
 logoFile="examplemod.png" #optional
 credits="Thanks for this example mod goes to Java" #optional

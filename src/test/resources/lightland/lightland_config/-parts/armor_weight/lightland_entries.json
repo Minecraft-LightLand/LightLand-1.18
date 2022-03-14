@@ -3,6 +3,12 @@
     "file": "config_weight",
     "path": "entries",
     "map": {
+        "lightland:medicine_leather": {
+            "ingredient_weight": 30
+        },
+        "lightland:king_leather": {
+            "ingredient_weight": 30
+        },
         "lightland:steel": {
             "ingredient_weight": 70
         },

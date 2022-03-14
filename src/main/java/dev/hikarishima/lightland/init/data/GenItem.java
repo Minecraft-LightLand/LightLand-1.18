@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.init.data;
 
 import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.common.item.api.Mat;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ForgeTier;
 import net.minecraftforge.common.Tags;
 
@@ -69,8 +71,8 @@ public class GenItem {
 				new ArmorStats(15, new int[]{2, 5, 6, 2}, 0, 0, 0),
 				TOOL_DEF, ARMOR_DEF),
 		HEAVYSTEEL("heavysteel", 3, SoundEvents.ARMOR_EQUIP_IRON,
-				new ToolStats(700, 5, new int[]{8, 14, 4, 4, 1},
-						new float[]{1.2f, 0.7f, 0.8f, 1f, 2f}, 14),
+				new ToolStats(700, 5, new int[]{10, 14, 4, 4, 1},
+						new float[]{1f, 0.7f, 0.8f, 1f, 2f}, 14),
 				new ArmorStats(30, new int[]{3, 5, 6, 3}, 3, 0.2f, 9),
 				TOOL_DEF, ARMOR_DEF);
 
@@ -189,6 +191,16 @@ public class GenItem {
 		ItemEntry[] ans = new ItemEntry[n];
 		for (int i = 0; i < n; i++) {
 			ans[i] = REGISTRATE.item(Mats.values()[i].id + suffix, Item::new).defaultModel().defaultLang().register();
+		}
+		return ans;
+	}
+
+	public static BlockEntry<Block>[] genBlockMats() {
+		int n = Mats.values().length;
+		BlockEntry[] ans = new BlockEntry[n];
+		for (int i = 0; i < n; i++) {
+			ans[i] = REGISTRATE.block(Mats.values()[i].id + "_block", p -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)))
+					.defaultLoot().defaultBlockstate().simpleItem().defaultLang().register();
 		}
 		return ans;
 	}

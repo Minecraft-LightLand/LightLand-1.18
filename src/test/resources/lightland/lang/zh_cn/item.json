@@ -134,13 +134,32 @@
 		  "layroot": "铁木",
 		  "layline": "地脉",
 		  "oldroot": "古木",
-		  "knightsteel": "骑士",
-		  "heavysteel": "重装",
-		  "dispellium": "破魔"
+		  "knightsteel": "骑士钢",
+		  "heavysteel": "重装钢",
+		  "dispellium": "破魔钢"
 		},
 		{
 		  "ingot": "锭",
 		  "nugget": "粒"
+		}
+	  ]
+	},
+	"gen_block_mat": {
+	  "path": "block.lightland",
+	  "list": [
+		{
+		  "lead": "铅",
+		  "enchant_gold": "蓄魔金",
+		  "steel": "钢",
+		  "layroot": "铁木",
+		  "layline": "地脉",
+		  "oldroot": "古木",
+		  "knightsteel": "骑士",
+		  "heavysteel": "重装",
+		  "dispellium": "破魔钢"
+		},
+		{
+		  "block": "块"
 		}
 	  ]
 	}

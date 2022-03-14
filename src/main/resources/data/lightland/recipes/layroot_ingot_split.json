@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:layroot_block"
+    }
+  ],
+  "result": {
+    "item": "lightland:layroot_ingot",
+    "count": 9
+  }
+}
+

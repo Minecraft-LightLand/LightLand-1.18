@@ -8,25 +8,73 @@
             "a": "^m:^n",
             "b": "^m:enchant_gold_ingot"
         },
-        "lead_nugget": {
-            "a": "^m:^n",
-            "b": "^m:lead_ingot"
-        },
-        "steel_nugget": {
-            "a": "^m:^n",
-            "b": "^m:steel_ingot"
-        },
         "enchant_gold_ingot": {
             "a": "^m:^n",
             "b": "^m:enchant_gold_block"
+        },
+        "lead_nugget": {
+            "a": "^m:^n",
+            "b": "^m:lead_ingot"
         },
         "lead_ingot": {
             "a": "^m:^n",
             "b": "^m:lead_block"
         },
+        "steel_nugget": {
+            "a": "^m:^n",
+            "b": "^m:steel_ingot"
+        },
         "steel_ingot": {
             "a": "^m:^n",
             "b": "^m:steel_block"
+        },
+        "knightsteel_nugget": {
+            "a": "^m:^n",
+            "b": "^m:knightsteel_ingot"
+        },
+        "knightsteel_ingot": {
+            "a": "^m:^n",
+            "b": "^m:knightsteel_block"
+        },
+        "heavysteel_nugget": {
+            "a": "^m:^n",
+            "b": "^m:heavysteel_ingot"
+        },
+        "heavysteel_ingot": {
+            "a": "^m:^n",
+            "b": "^m:heavysteel_block"
+        },
+        "layroot_nugget": {
+            "a": "^m:^n",
+            "b": "^m:layroot_ingot"
+        },
+        "layroot_ingot": {
+            "a": "^m:^n",
+            "b": "^m:layroot_block"
+        },
+        "layline_nugget": {
+            "a": "^m:^n",
+            "b": "^m:layline_ingot"
+        },
+        "layline_ingot": {
+            "a": "^m:^n",
+            "b": "^m:layline_block"
+        },
+        "oldroot_nugget": {
+            "a": "^m:^n",
+            "b": "^m:oldroot_ingot"
+        },
+        "oldroot_ingot": {
+            "a": "^m:^n",
+            "b": "^m:oldroot_block"
+        },
+        "dispellium_nugget": {
+            "a": "^m:^n",
+            "b": "^m:dispellium_ingot"
+        },
+        "dispellium_ingot": {
+            "a": "^m:^n",
+            "b": "^m:dispellium_block"
         }
     },
     "-potion": {
