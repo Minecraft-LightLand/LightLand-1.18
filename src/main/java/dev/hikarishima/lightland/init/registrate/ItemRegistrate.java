@@ -260,6 +260,10 @@ public class ItemRegistrate {
 
 	// -------- gen --------
 
+	static {
+		REGISTRATE.creativeModeTab(() -> TAB_QUEST);
+	}
+
 	public static final ItemEntry<Item>[][] GEN_ITEM;
 
 	static {
