@@ -1,39 +1,39 @@
 {
-	"container.lightland": {
-		"arcane_inject": "奥术注魔台",
-		"backpack": "背包",
-		"disenchanter": "附魔分解台",
-		"spell_craft": "符文合成台"
-	},
-	"effect.lightland": {
-		"arcane": "奥术标记",
-		"armor_breaker": "护甲破坏",
-		"armor_reduce": "护甲薄弱",
-		"blood_thirst": "嗜血",
-		"emerald": "绿宝石水花",
-		"flame": "业火",
-		"frozen": "冰冻",
-		"heavy": "负重",
-		"no_knockback": "霸体",
-		"quick_pull": "快速拉弓",
-		"run_bow": "疾行射手",
-		"target_attracted": "被嘲讽",
-		"target_attractor": "嘲讽",
-		"target_hide": "完全隐身",
-		"target_remove": "混乱",
-		"water_trap": "水牢"
-	},
-	"entity.lightland":{
-		"fire_arrow": "魔法火箭",
-		"fire_ball": "魔法火球",
-		"generic_arrow": "箭",
-		"spell": "法阵",
-		"wind_blade": "风刃"
-	},
-	"itemGroup.lightland": "Light Land RPG",
-	"key.categories.lightland": "Light Land 按键",
-	"key.lightland.skill_1": "技能 1",
-	"key.lightland.skill_2": "技能 2",
-	"key.lightland.skill_3": "技能 3",
-	"key.lightland.skill_4": "技能 4"
+  "container.lightland": {
+	"arcane_inject": "奥术注魔台",
+	"backpack": "背包",
+	"disenchanter": "附魔分解台",
+	"spell_craft": "符文合成台"
+  },
+  "effect.lightland": {
+	"arcane": "奥术标记",
+	"armor_breaker": "护甲破坏",
+	"armor_reduce": "护甲薄弱",
+	"blood_thirst": "嗜血",
+	"emerald": "绿宝石水花",
+	"flame": "业火",
+	"frozen": "冰冻",
+	"heavy": "负重",
+	"no_knockback": "霸体",
+	"quick_pull": "快速拉弓",
+	"run_bow": "疾行射手",
+	"target_attracted": "被嘲讽",
+	"target_attractor": "嘲讽",
+	"target_hide": "完全隐身",
+	"target_remove": "混乱",
+	"water_trap": "水牢"
+  },
+  "entity.lightland": {
+	"fire_arrow": "魔法火箭",
+	"fire_ball": "魔法火球",
+	"generic_arrow": "箭",
+	"spell": "法阵",
+	"wind_blade": "风刃"
+  },
+  "itemGroup.lightland": "Light Land RPG",
+  "key.categories.lightland": "Light Land 按键",
+  "key.lightland.skill_1": "技能 1",
+  "key.lightland.skill_2": "技能 2",
+  "key.lightland.skill_3": "技能 3",
+  "key.lightland.skill_4": "技能 4"
 }

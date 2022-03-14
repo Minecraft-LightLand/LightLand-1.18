@@ -26,7 +26,7 @@ public abstract class ResourceOrganizer {
     }
 
     public static void main(String[] args) throws Exception {
-        //new LangFileOrganizer();
+        new LangFileOrganizer();
         new ItemFileOrganizer();
         //new BlockFileOrganizer();
         //new ArmorFileOrganizer();
