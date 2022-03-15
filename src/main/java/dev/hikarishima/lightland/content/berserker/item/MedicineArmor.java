@@ -32,7 +32,7 @@ public class MedicineArmor extends ArmorItem implements MedicineItem {
 		for (MobEffectInstance ins : list) {
 			MobEffectInstance a = new MobEffectInstance(ins.getEffect(), ins.getDuration() * amount, ins.getAmplifier(),
 					ins.isAmbient(), ins.isVisible(), ins.showIcon());
-			EffectAddUtil.addEffect(entity, a);
+			EffectAddUtil.addEffect(entity, a, EffectAddUtil.AddReason.SELF, entity);
 		}
 		return super.damageItem(stack, amount, entity, onBroken);
 	}

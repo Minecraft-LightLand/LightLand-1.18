@@ -67,7 +67,7 @@ public class EffectSkill extends Skill<EffectSkill.Config, SkillData> {
 			if (effects != null)
 				for (Effect e : effects[lv]) {
 					MobEffectInstance ins = new MobEffectInstance(ForgeRegistries.MOB_EFFECTS.getValue(e.id), e.duration, e.amplifier);
-					EffectAddUtil.addEffect(player, ins);
+					EffectAddUtil.addEffect(player, ins, EffectAddUtil.AddReason.SKILL, player);
 				}
 			if (range_effects != null)
 				for (RangeEffect eff : range_effects[lv]) {
@@ -76,7 +76,7 @@ public class EffectSkill extends Skill<EffectSkill.Config, SkillData> {
 						if (e.distanceToSqr(player) > eff.range * eff.range) continue;
 						if (!(e instanceof LivingEntity le)) continue;
 						if (eff.for_enemy == TeamAccessor.arePlayerAndEntityInSameTeam(player, le)) continue;
-						EffectAddUtil.addEffect(le, ins);
+						EffectAddUtil.addEffect(le, ins, EffectAddUtil.AddReason.SKILL, player);
 					}
 				}
 		}

@@ -39,9 +39,9 @@ public class WaterTrapSpell extends SimpleSpell<WaterTrapSpell.Config> {
 					ent -> ent instanceof LivingEntity le &&
 							!TeamAccessor.arePlayerAndEntityInSameTeam(player, le) &&
 							le.position().distanceTo(spell.position()) < config.radius
-			).forEach(le -> EffectAddUtil.forceAddEffect((LivingEntity) le,
+			).forEach(le -> EffectAddUtil.addEffect((LivingEntity) le,
 					new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), config.effect_time, config.effect_level),
-					VanillaMagicRegistrate.WATER_TRAP.get(), player));
+					EffectAddUtil.AddReason.SKILL, player));
 		});
 		world.addFreshEntity(e);
 	}

@@ -30,16 +30,16 @@ public class WaterSword extends Arcane {
 		strike(w, player, target);
 		if (!w.isClientSide()) {
 			search(w, player, radius, target.getPosition(1), target, false, this::strike);
-			EffectAddUtil.forceAddEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 1),
-					VanillaMagicRegistrate.WATER_TRAP.get(), player);
+			EffectAddUtil.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 1),
+					EffectAddUtil.AddReason.SKILL, player);
 		}
 		return true;
 	}
 
 	private void strike(Level w, Player player, LivingEntity target) {
 		if (!w.isClientSide()) {
-			EffectAddUtil.forceAddEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 0),
-					VanillaMagicRegistrate.WATER_TRAP.get(), player);
+			EffectAddUtil.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), time, 0),
+					EffectAddUtil.AddReason.SKILL, player);
 		}
 	}
 

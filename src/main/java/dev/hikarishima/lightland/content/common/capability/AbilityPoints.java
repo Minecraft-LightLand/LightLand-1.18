@@ -5,6 +5,7 @@ import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.BodyAttribute;
+import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.world.effect.MobEffectInstance;
 
@@ -121,7 +122,8 @@ public class AbilityPoints {
 		int base = getWeightAble();
 		int slow = weight <= base ? 0 : weight <= base * 1.2 ? 1 : 2;
 		if (slow > 0) {
-			parent.player.addEffect(new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), 40, slow - 1));
+			MobEffectInstance ins = new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), 40, slow - 1);
+			EffectAddUtil.addEffect(parent.player, ins, EffectAddUtil.AddReason.SELF, parent.player);
 		}
 
 		if (parent.player.experienceLevel >= 40) {

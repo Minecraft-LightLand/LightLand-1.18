@@ -31,9 +31,10 @@ public class EarthAxe extends Arcane {
 		strike(w, player, target);
 		if (!w.isClientSide()) {
 			search(w, player, radius, player.getPosition(1), target, false, this::strike);
-			EffectAddUtil.forceAddEffect(target, new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), time, 1),
-					VanillaMagicRegistrate.HEAVY.get(), player);
-			EffectAddUtil.addEffect(target, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, 4));
+			EffectAddUtil.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), time, 1),
+					EffectAddUtil.AddReason.SKILL, player);
+			EffectAddUtil.addEffect(target, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, 4),
+					EffectAddUtil.AddReason.SKILL, player);
 			double x = target.getX();
 			double y = target.getY();
 			double z = target.getZ();
@@ -44,9 +45,10 @@ public class EarthAxe extends Arcane {
 
 	private void strike(Level w, Player player, LivingEntity target) {
 		if (!w.isClientSide()) {
-			EffectAddUtil.forceAddEffect(target, new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), time, 0),
-					VanillaMagicRegistrate.HEAVY.get(), player);
-			EffectAddUtil.addEffect(target, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, 2));
+			EffectAddUtil.addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), time, 0),
+					EffectAddUtil.AddReason.SKILL, player);
+			EffectAddUtil.addEffect(target, new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, time, 2),
+					EffectAddUtil.AddReason.SKILL, player);
 		}
 	}
 

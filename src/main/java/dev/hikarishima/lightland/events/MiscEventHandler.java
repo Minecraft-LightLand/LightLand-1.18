@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.events;
 
+import com.simibubi.create.foundation.utility.animation.Force;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorWeight;
 import dev.hikarishima.lightland.content.common.effect.ForceEffect;
@@ -10,6 +11,7 @@ import dev.hikarishima.lightland.content.common.render.MagicWandOverlay;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.network.packets.SlotClickToServer;
+import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -97,7 +99,11 @@ public class MiscEventHandler {
 		if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.CLEANSE.get())) {
 			if (event.getPotionEffect().getEffect() instanceof ForceEffect)
 				return;
-			if (event.getPotionEffect().getEffect() instanceof SkillEffect)
+			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.FORCE)
+				return;
+			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.SELF)
+				return;
+			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.SKILL)
 				return;
 			event.setCanceled(true);
 		}
@@ -108,6 +114,10 @@ public class MiscEventHandler {
 		if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get()) {
 			List<MobEffectInstance> list = new ArrayList<>(event.getEntityLiving().getActiveEffects());
 			for (MobEffectInstance ins : list) {
+				if (ins.getEffect() instanceof ForceEffect)
+					continue;
+				if (ins.getEffect() == VanillaMagicRegistrate.CLEANSE.get())
+					continue;
 				event.getEntityLiving().removeEffect(ins.getEffect());
 			}
 		}

@@ -161,7 +161,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
 						continue;
 					}
 					for (MobEffectInstance ins : list) {
-						EffectAddUtil.addEffect((LivingEntity) e, ins);
+						EffectAddUtil.addEffect((LivingEntity) e, ins, EffectAddUtil.AddReason.PROF, player);
 					}
 				}
 			}

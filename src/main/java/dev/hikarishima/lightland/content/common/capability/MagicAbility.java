@@ -6,6 +6,7 @@ import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.network.packets.CapToClient;
+import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.lcy0x1.util.NBTObj;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.nbt.CompoundTag;
@@ -13,6 +14,7 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.ItemStack;
@@ -66,23 +68,23 @@ public class MagicAbility {
 			parent.abilityPoints.tickSeconds();
 			int load = spell_load / Math.max(100, getMaxSpellEndurance());
 			if (load == 1) {
-				parent.player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2));
-				parent.player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 40));
+				add(MobEffects.MOVEMENT_SLOWDOWN, 2);
+				add(MobEffects.CONFUSION, 0);
 				parent.player.hurt(LOAD, 1);
 			}
 			if (load == 2) {
-				parent.player.addEffect(new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), 40, 4));
-				parent.player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40));
+				add(VanillaMagicRegistrate.HEAVY.get(), 4);
+				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 4);
 			}
 			if (load == 3) {
-				parent.player.addEffect(new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), 40, 4));
-				parent.player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40));
+				add(VanillaMagicRegistrate.HEAVY.get(), 4);
+				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 16);
 			}
 			if (load >= 4) {
-				parent.player.addEffect(new MobEffectInstance(VanillaMagicRegistrate.HEAVY.get(), 40, 4));
-				parent.player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40));
+				add(VanillaMagicRegistrate.HEAVY.get(), 4);
+				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 64);
 			}
 			if (!parent.world.isClientSide() && time_after_sync >= SYNC_PERIOD) {
@@ -96,6 +98,11 @@ public class MagicAbility {
 			CompoundTag tag = spell_activation.getCompound(i);
 			tickSpell(stack, tag);
 		}
+	}
+
+	private void add(MobEffect eff, int lv) {
+		MobEffectInstance ins = new MobEffectInstance(eff, 40, lv);
+		EffectAddUtil.addEffect(parent.player, ins, EffectAddUtil.AddReason.SELF, parent.player);
 	}
 
 	private void tickSpell(ItemStack stack, CompoundTag tag) {
