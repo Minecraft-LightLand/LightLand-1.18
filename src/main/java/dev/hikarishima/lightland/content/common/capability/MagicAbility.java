@@ -22,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 @SerialClass
 public class MagicAbility {
 
-	public static final int ACTIVATION = 600, SYNC_PERIOD = 100;
+	public static final int ACTIVATION = 600, SYNC_PERIOD = 100, ENCHANT_FACTOR = 4;
 	public static final DamageSource LOAD = new DamageSource("spell_load").bypassArmor().bypassMagic();
 
 	private final LLPlayerData parent;
@@ -53,7 +53,7 @@ public class MagicAbility {
 		tick++;
 		time_after_sync++;
 		if (tick % 20 == 0) {
-			int armor_cost = (int) Math.ceil(ArmorEnchant.getArmorEnchantLevel(parent.player));
+			int armor_cost = (int) Math.ceil(1.0 / ENCHANT_FACTOR * ArmorEnchant.getArmorEnchantLevel(parent.player));
 			int mana_restore = getManaRestoration();
 			int spell_restore = getSpellReduction();
 			int t0 = Math.min(armor_cost, mana_restore);

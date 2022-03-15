@@ -6,6 +6,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -72,6 +73,7 @@ public class Automator {
 		new ClassHandler<StringTag, ResourceLocation>(ResourceLocation.class, tag -> new ResourceLocation(tag.getAsString()), rl -> StringTag.valueOf(rl.toString()));
 		new RegistryClassHandler<>(Block.class, () -> ForgeRegistries.BLOCKS);
 		new RegistryClassHandler<>(Item.class, () -> ForgeRegistries.ITEMS);
+		new RegistryClassHandler<>(Enchantment.class, () -> ForgeRegistries.ENCHANTMENTS);
 	}
 
 	public static Object fromTag(CompoundTag tag, Class<?> cls, Object obj, Predicate<SerialClass.SerialField> pred)
@@ -151,13 +153,12 @@ public class Automator {
 				throw new Exception("generic field not correct for map");
 			Class<?> key = sfield.generic()[0];
 			Class<?> val = sfield.generic()[1];
-			if (key != String.class)
-				throw new Exception("non-string key not supported");
 			CompoundTag ctag = (CompoundTag) tag;
 			Map map = (Map) def;
 			map.clear();
 			for (String str : ctag.getAllKeys()) {
-				map.put(str, fromTagRaw(ctag.get(str), val, null, null, pred));
+				Object mkey = key == String.class ? str : MAP.get(key).fromTag.apply(StringTag.valueOf(str));
+				map.put(mkey, fromTagRaw(ctag.get(str), val, null, null, pred));
 			}
 			return map;
 		}
@@ -229,12 +230,12 @@ public class Automator {
 				throw new Exception("generic field not correct for map");
 			Class<?> key = sfield.generic()[0];
 			Class<?> val = sfield.generic()[1];
-			if (key != String.class)
-				throw new Exception("non-string key not supported");
 			CompoundTag ctag = new CompoundTag();
-			Map<String, ?> map = (Map<String, ?>) obj;
-			for (String str : map.keySet()) {
-				ctag.put(str, toTagRaw(val, map.get(str), null, pred));
+			Map<?, ?> map = (Map<?, ?>) obj;
+			for (Object str : map.keySet()) {
+				String mkey = key == String.class ? (String) str : toTagRaw(key, str, null, pred).getAsString();
+				ctag.put(mkey,
+						toTagRaw(val, map.get(str), null, pred));
 			}
 			return ctag;
 		}

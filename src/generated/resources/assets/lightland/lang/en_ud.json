@@ -320,6 +320,7 @@
   "lightland.tooltip.target.ally": "\u028E\u05DF\u05DF\u2C6F",
   "lightland.tooltip.target.enemy": "\u028E\u026F\u01DDu\u018E",
   "lightland.tooltip.weight": "%s :\u0287\u0265b\u0131\u01DDM",
+  "lore.lightland.enchant_load": "p\u01DDs\u0279n\u0254 \u01DDq \u05DF\u05DF\u0131\u028D s\u0279\u01DD\u0279\u0250\u01DDM \u02D9p\u01DD\u0287u\u0250\u0265\u0254u\u01DD-\u0279\u01DD\u028Co s\u0131 \u0279o\u026F\u0279\u0250 \u025Fo \u01DD\u0254\u01DD\u0131d s\u0131\u0265\u27D8",
   "magic_element.lightland.air": "\u0279\u0131\u2C6F",
   "magic_element.lightland.earth": "\u0265\u0287\u0279\u0250\u018E",
   "magic_element.lightland.fire": "\u01DD\u0279\u0131\u2132",

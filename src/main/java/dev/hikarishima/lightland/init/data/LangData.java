@@ -204,7 +204,9 @@ public class LangData {
 				pvd.accept(str, RegistrateLangProvider.toEnglishName(str));
 			}
 		}
-
+		for (Lore lore : Lore.values()) {
+			pvd.accept("lore." + LightLand.MODID + "." + lore.id, lore.lore);
+		}
 	}
 
 	private static String getParams(int count) {

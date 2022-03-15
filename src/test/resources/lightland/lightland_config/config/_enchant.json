@@ -1,0 +1,18 @@
+{
+  "_class": "dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant",
+  "map": {
+	"minecraft:protection": 4,
+	"minecraft:fire_protection": 3,
+	"minecraft:blast_protection": 3,
+	"minecraft:projectile_protection": 3,
+	"minecraft:feather_falling": 2,
+	"minecraft:unbreaking": 2,
+	"minecraft:thorns": 2,
+	"minecraft:respiration": 1,
+	"minecraft:aqua_affinity": 1,
+	"minecraft:depth_strider": 1,
+	"minecraft:frost_walker": 1,
+	"minecraft:soul_speed": 1,
+	"minecraft:mending": 5
+  }
+}

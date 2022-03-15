@@ -320,6 +320,7 @@
   "lightland.tooltip.target.ally": "Ally",
   "lightland.tooltip.target.enemy": "Enemy",
   "lightland.tooltip.weight": "Weight: %s",
+  "lore.lightland.enchant_load": "This piece of armor is over-enchanted. Wearers will be cursed",
   "magic_element.lightland.air": "Air",
   "magic_element.lightland.earth": "Earth",
   "magic_element.lightland.fire": "Fire",

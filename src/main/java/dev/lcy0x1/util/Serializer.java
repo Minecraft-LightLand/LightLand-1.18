@@ -1,9 +1,6 @@
 package dev.lcy0x1.util;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -12,6 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -59,6 +57,7 @@ public class Serializer {
 		new RLClassHandler<>(Item.class, () -> ForgeRegistries.ITEMS);
 		new RLClassHandler<>(Block.class, () -> ForgeRegistries.BLOCKS);
 		new RLClassHandler<>(Potion.class, () -> ForgeRegistries.POTIONS);
+		new RLClassHandler<>(Enchantment.class, () -> ForgeRegistries.ENCHANTMENTS);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -179,9 +178,10 @@ public class Serializer {
 				}
 				return ans;
 			}
-			if (e.isJsonObject() && ckey == String.class) {
+			if (e.isJsonObject()) {
 				for (Map.Entry<String, JsonElement> ent : e.getAsJsonObject().entrySet()) {
-					((Map) ans).put(ent.getKey(), fromRaw(ent.getValue(), cval, null, null));
+					Object key = ckey == String.class ? ent.getKey() : MAP.get(ckey).fromJson.apply(new JsonPrimitive(ent.getKey()));
+					((Map) ans).put(key, fromRaw(ent.getValue(), cval, null, null));
 				}
 				return ans;
 			}

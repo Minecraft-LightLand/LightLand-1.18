@@ -1,21 +1,22 @@
 package dev.hikarishima.lightland.events;
 
-import com.simibubi.create.foundation.utility.animation.Force;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorWeight;
 import dev.hikarishima.lightland.content.common.effect.ForceEffect;
-import dev.hikarishima.lightland.content.common.effect.SkillEffect;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
 import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
 import dev.hikarishima.lightland.content.common.render.MagicWandOverlay;
 import dev.hikarishima.lightland.init.data.LangData;
+import dev.hikarishima.lightland.init.data.Lore;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.network.packets.SlotClickToServer;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.lcy0x1.base.Proxy;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ArmorItem;
@@ -86,11 +87,24 @@ public class MiscEventHandler {
 	public static void onTooltipEvent(ItemTooltipEvent event) {
 		if (event.getItemStack().getItem() instanceof ArmorItem) {
 			int weight = ArmorWeight.getWeight(event.getItemStack());
-			if (weight > 0)
-				event.getToolTip().add(LangData.IDS.ARMOR_WEIGHT.get(weight));
 			double load = ArmorEnchant.getItemArmorEnchantLevel(event.getItemStack());
-			if (load > 0)
-				event.getToolTip().add(LangData.IDS.ARMOR_ENCHANT.get(load));
+			boolean tooHeavy = !ArmorWeight.canPutOn(Proxy.getClientPlayer(), event.getItemStack());
+			boolean tooMagic = !ArmorEnchant.canPutOn(Proxy.getClientPlayer(), event.getItemStack());
+			if (weight > 0) {
+				TranslatableComponent comp = LangData.IDS.ARMOR_WEIGHT.get(weight);
+				if (tooHeavy)
+					comp.withStyle(ChatFormatting.RED);
+				event.getToolTip().add(comp);
+			}
+			if (load > 0) {
+				TranslatableComponent comp = LangData.IDS.ARMOR_ENCHANT.get(load);
+				if (tooMagic)
+					comp.withStyle(ChatFormatting.RED);
+				event.getToolTip().add(comp);
+			}
+			if (ArmorEnchant.isCursed(event.getItemStack())) {
+				event.getToolTip().add(Lore.ENCHANT_LOAD.get().withStyle(ChatFormatting.RED));
+			}
 		}
 	}
 

@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.common.capability.restriction;
 
+import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.network.config.ConfigSyncManager;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +17,21 @@ public class ArmorWeight extends ConfigSyncManager.BaseConfig {
 	@Nullable
 	public static ArmorWeight getInstance() {
 		return (ArmorWeight) ConfigSyncManager.CONFIGS.get("lightland:config_weight");
+	}
+
+	public static boolean canPutOn(Player player, ItemStack stack) {
+		if (player == null || !LLPlayerData.isProper(player))
+			return true;
+		ArmorWeight weight = getInstance();
+		if (weight == null)
+			return true;
+		int ans = 0;
+		for (ItemStack armor : player.getArmorSlots()) {
+			if (((ArmorItem) armor.getItem()).getSlot() != ((ArmorItem) stack.getItem()).getSlot())
+				ans += getWeight(armor);
+		}
+		ans += getWeight(stack);
+		return ans <= LLPlayerData.get(player).abilityPoints.getWeightAble();
 	}
 
 	public static int getArmorWeight(Player player) {
