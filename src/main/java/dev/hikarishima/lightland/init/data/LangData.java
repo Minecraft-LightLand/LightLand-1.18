@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.init.data;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.gui.ability.AbilityScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.ArcaneInjectContainer;
@@ -8,13 +9,18 @@ import dev.hikarishima.lightland.content.magic.gui.craft.SpellCraftContainer;
 import dev.hikarishima.lightland.content.magic.gui.hex.HexStatus;
 import dev.hikarishima.lightland.content.magic.products.info.ProductState;
 import dev.hikarishima.lightland.init.LightLand;
+import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.lcy0x1.magic.HexDirection;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.Potion;
 import org.lwjgl.glfw.GLFW;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -190,6 +196,15 @@ public class LangData {
 							RegistrateLangProvider.toEnglishName(en) + getParams(e.getCount()));
 			}
 		});
+
+		List<Item> list = List.of(Items.POTION, Items.SPLASH_POTION, Items.LINGERING_POTION);
+		for (RegistryEntry<? extends Potion> ent : VanillaMagicRegistrate.POTION_LIST) {
+			for (Item item : list) {
+				String str = ent.get().getName(item.getDescriptionId() + ".effect.");
+				pvd.accept(str, RegistrateLangProvider.toEnglishName(str));
+			}
+		}
+
 	}
 
 	private static String getParams(int count) {

@@ -6,7 +6,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class FlameEffect extends MobEffect {
+public class FlameEffect extends MobEffect implements ForceEffect {
 
 	public FlameEffect(MobEffectCategory type, int color) {
 		super(type, color);

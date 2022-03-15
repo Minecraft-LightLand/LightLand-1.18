@@ -9,7 +9,7 @@ import net.minecraftforge.common.ForgeMod;
 
 import java.util.UUID;
 
-public class WaterTrapEffect extends MobEffect {
+public class WaterTrapEffect extends MobEffect implements ForceEffect {
 
 	public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:water_trap");
 

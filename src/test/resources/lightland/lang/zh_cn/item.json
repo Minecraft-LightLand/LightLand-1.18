@@ -50,7 +50,9 @@
 	"wind_bow": "八坂的神风",
 	"layline_orb": "游离的地脉能量",
 	"cursed_droplet": "诅咒泪滴",
-	"knight_scrap": "骑士甲碎片"
+	"knight_scrap": "骑士甲碎片",
+	"dispell_dust": "驱魔粉",
+	"holy_water_bottle": "瓶装圣水"
   },
   "block.lightland": {
 	"enchant_gold_block": "蓄魔金块",
@@ -178,6 +180,23 @@
 		},
 		{
 		  "spawn_egg": "生成蛋"
+		}
+	  ]
+	},
+	"potion": {
+	  "path": "item.minecraft",
+	  "use_dot": true,
+	  "list": [
+		{
+		  "lingering_potion": "滞留型",
+		  "potion": "",
+		  "splash_potion": "喷溅型"
+		},
+		{
+		  "effect": ""
+		},
+		{
+		  "holy_water": "净化药水"
 		}
 	  ]
 	}

@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.arcane.magic;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.util.LightLandFakeEntity;
+import dev.hikarishima.lightland.util.EffectAddUtil;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +22,7 @@ public class MarkerSword extends Arcane {
 	public boolean activate(Player player, LLPlayerData magic, ItemStack stack, LivingEntity target) {
 		Level w = player.level;
 		if (!w.isClientSide()) {
-			search(w, player, radius, player.getPosition(1), target, false, (l, p, e) -> LightLandFakeEntity.addArcane(e, player));
+			search(w, player, radius, player.getPosition(1), target, false, (l, p, e) -> EffectAddUtil.addArcane(e, player));
 		}
 		return true;
 	}

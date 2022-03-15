@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "lightland:holy_water"
+      },
+      "amount": 250
+    },
+    {
+      "item": "lightland:cursed_droplet"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ],
+  "results": [
+    {
+      "item": "lightland:dispell_dust"
+    }
+  ],
+  "heatRequirement": "superheated"
+}

@@ -3,9 +3,12 @@ package dev.hikarishima.lightland.init.special;
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.AbstractBuilder;
 import com.tterrag.registrate.builders.BuilderCallback;
+import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import com.tterrag.registrate.util.nullness.NonnullType;
+import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.base.NamedEntry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,6 +26,13 @@ public class LLRegistrate extends AbstractRegistrate<LLRegistrate> {
 	public <T extends NamedEntry<T>, P extends T> GenericBuilder<T, P> generic(Class<T> cls, String id, NonNullSupplier<P> sup) {
 		return entry(id, cb -> new GenericBuilder<>(this, id, cb, cls, sup));
 	}
+
+	public FluidBuilder<VirtualFluid, LLRegistrate> virtualFluid(String name) {
+		return entry(name,
+				c -> new VirtualFluidBuilder<>(self(), self(), name, c, new ResourceLocation(LightLand.MODID, "fluid/" + name + "_still"),
+						new ResourceLocation(LightLand.MODID, "fluid/" + name + "_flow"), null, VirtualFluid::new));
+	}
+
 
 	public static class GenericBuilder<T extends NamedEntry<T>, P extends T> extends AbstractBuilder<T, P, LLRegistrate, GenericBuilder<T, P>> {
 

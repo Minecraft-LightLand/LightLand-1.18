@@ -38,7 +38,9 @@ public class LangFileOrganizer extends ResourceOrganizer {
 					block_list.entrySet().forEach(ent0 -> {
 						JsonObject block = ent0.getValue().getAsJsonObject();
 						String path = block.get("path").getAsString();
-						boolean reverse = block.has("reverse");
+						boolean reverse = block.has("reverse") && block.get("reverse").getAsBoolean();
+						boolean dot = block.has("use_dot") && block.get("use_dot").getAsBoolean();
+						String con = dot ? "." : "_";
 						List<Pair<String, String>> map = new ArrayList<>();
 						for (JsonElement vector : block.get("list").getAsJsonArray()) {
 							if (map.isEmpty()) {
@@ -47,7 +49,7 @@ public class LangFileOrganizer extends ResourceOrganizer {
 										finalMap.add(Pair.of(ent1.getKey(), ent1.getValue().getAsString())));
 							} else {
 								map = map.stream().flatMap(ent1 -> vector.getAsJsonObject().entrySet().stream()
-												.map(ent2 -> Pair.of(ent1.getFirst() + "_" + ent2.getKey(),
+												.map(ent2 -> Pair.of(ent1.getFirst() + con + ent2.getKey(),
 														reverse ? ent2.getValue().getAsString() + ent1.getSecond() :
 																ent1.getSecond() + ent2.getValue().getAsString())))
 										.collect(Collectors.toList());

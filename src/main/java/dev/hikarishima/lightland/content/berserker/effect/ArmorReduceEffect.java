@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.berserker.effect;
 
+import dev.hikarishima.lightland.content.common.effect.SkillEffect;
 import dev.hikarishima.lightland.util.BodyAttribute;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -8,7 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.UUID;
 
-public class ArmorReduceEffect extends MobEffect {
+public class ArmorReduceEffect extends MobEffect implements SkillEffect {
 
 	public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:armor_reduce");
 

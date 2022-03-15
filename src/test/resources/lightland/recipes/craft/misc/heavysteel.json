@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"dac",
+	"aba",
+	"cad"
+  ],
+  "key": {
+	"a": {
+	  "item": "lightland:knight_scrap"
+	},
+	"b": {
+	  "item": "lightland:steel_nugget"
+	},
+	"c": {
+	  "item": "minecraft:gold_nugget"
+	},
+	"d": {
+	  "item": "lightland:lead_nugget"
+	}
+  },
+  "result": {
+	"item": "lightland:heavysteel_ingot"
+  }
+}

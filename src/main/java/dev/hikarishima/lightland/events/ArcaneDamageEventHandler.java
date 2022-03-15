@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.events;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.IArcaneItem;
-import dev.hikarishima.lightland.util.LightLandFakeEntity;
+import dev.hikarishima.lightland.util.EffectAddUtil;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +24,7 @@ public class ArcaneDamageEventHandler {
 					event.setCanceled(true);
 					return;
 				}
-				LightLandFakeEntity.addArcane(event.getEntityLiving(), event.getSource().getEntity());
+				EffectAddUtil.addArcane(event.getEntityLiving(), event.getSource().getEntity());
 			}
 		}
 	}
@@ -37,7 +37,7 @@ public class ArcaneDamageEventHandler {
 			ItemStack stack = e.getMainHandItem();
 			if (stack.getItem() instanceof IArcaneItem) {
 				ArcaneItemUseHelper.addArcaneMana(stack, (int) event.getAmount());
-				LightLandFakeEntity.addArcane(target, e);
+				EffectAddUtil.addArcane(target, e);
 			}
 		}
 	}

@@ -15,6 +15,11 @@ import dev.hikarishima.lightland.content.berserker.effect.NoKnockBackEffect;
 import dev.hikarishima.lightland.content.common.effect.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.alchemy.Potion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
@@ -43,9 +48,21 @@ public class VanillaMagicRegistrate {
 	public static final RegistryEntry<TargetRemoveEffect> T_CLEAR = genEffect("target_remove", () -> new TargetRemoveEffect(MobEffectCategory.NEUTRAL, 0xffffff));
 	public static final RegistryEntry<TargetHideEffect> T_HIDE = genEffect("target_hide", () -> new TargetHideEffect(MobEffectCategory.NEUTRAL, 0xffffff));
 
+	public static final RegistryEntry<CleanseEffect> CLEANSE = genEffect("cleanse", () -> new CleanseEffect(MobEffectCategory.NEUTRAL, 0xffffff));
+
+	public static final List<RegistryEntry<? extends Potion>> POTION_LIST = new ArrayList<>();
+
+	public static final RegistryEntry<Potion> P_HOLY_WATER = genPotion("holy_water", () -> new Potion(new MobEffectInstance(CLEANSE.get(), 600)));
+
 	public static <T extends MobEffect> RegistryEntry<T> genEffect(String name, NonNullSupplier<T> sup) {
 		return REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(REGISTRATE, REGISTRATE, name, cb, MobEffect.class, sup))
 				.lang(MobEffect::getDescriptionId).register();
+	}
+
+	public static <T extends Potion> RegistryEntry<T> genPotion(String name, NonNullSupplier<T> sup) {
+		RegistryEntry<T> ans = REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(REGISTRATE, REGISTRATE, name, cb, Potion.class, sup)).register();
+		POTION_LIST.add(ans);
+		return ans;
 	}
 
 	public static void register() {

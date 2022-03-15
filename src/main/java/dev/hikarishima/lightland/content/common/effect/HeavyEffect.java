@@ -9,7 +9,7 @@ import net.minecraftforge.common.ForgeMod;
 
 import java.util.UUID;
 
-public class HeavyEffect extends MobEffect {
+public class HeavyEffect extends MobEffect implements ForceEffect {
 
 	public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:heavy");
 

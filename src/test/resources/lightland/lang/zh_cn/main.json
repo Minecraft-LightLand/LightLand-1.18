@@ -21,7 +21,8 @@
 	"target_attractor": "嘲讽",
 	"target_hide": "完全隐身",
 	"target_remove": "混乱",
-	"water_trap": "水牢"
+	"water_trap": "水牢",
+	"cleanse": "净化"
   },
   "entity.lightland": {
 	"fire_arrow": "魔法火箭",
@@ -44,5 +45,6 @@
   "key.lightland.skill_1": "技能 1",
   "key.lightland.skill_2": "技能 2",
   "key.lightland.skill_3": "技能 3",
-  "key.lightland.skill_4": "技能 4"
+  "key.lightland.skill_4": "技能 4",
+  "fluid.lightland.holy_water": "圣水"
 }

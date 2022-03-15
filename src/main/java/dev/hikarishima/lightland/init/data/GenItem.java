@@ -109,7 +109,7 @@ public class GenItem {
 	}
 
 	public enum Tools {
-		SWORD, AXE, SHOVEL, PICKAXE, HOE;
+		SWORD, AXE, SHOVEL, PICKAXE, HOE
 	}
 
 	public record ToolStats(int durability, int speed, int[] add_dmg, float[] add_speed, int enchant) {

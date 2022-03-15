@@ -4,6 +4,7 @@ import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.entry.EntityEntry;
+import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
@@ -29,16 +30,19 @@ import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
 import dev.hikarishima.lightland.content.magic.item.PotionCore;
+import dev.hikarishima.lightland.content.questline.item.HolyWaterBottle;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.GenItem;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
+import dev.hikarishima.lightland.init.special.VirtualFluid;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -87,37 +91,54 @@ public class ItemRegistrate {
 	public static final ItemEntry<RecordPearl> RECORD_PEARL;
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
-	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET, KNIGHT_SCRAP;
+	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET, KNIGHT_SCRAP,
+			DISPELL_DUST;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
+	public static final ItemEntry<HolyWaterBottle> HOLY_WATER_BOTTLE;
+
+	public static final FluidEntry<VirtualFluid> HOLY_WATER;
+
 	static {
-		BACKPACKS = new ItemEntry[16];
-		for (int i = 0; i < 16; i++) {
-			DyeColor color = DyeColor.values()[i];
-			BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-					.tag(AllTags.AllItemTags.BACKPACKS.tag).model(ItemRegistrate::createBackpackModel).defaultLang().register();
+		// Backpacks
+		{
+			BACKPACKS = new ItemEntry[16];
+			for (int i = 0; i < 16; i++) {
+				DyeColor color = DyeColor.values()[i];
+				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
+						.tag(AllTags.AllItemTags.BACKPACKS.tag).model(ItemRegistrate::createBackpackModel).defaultLang().register();
+			}
+			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
+			RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1))).defaultModel().defaultLang().register();
 		}
-		ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
-		RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1))).defaultModel().defaultLang().register();
+		// Books
+		{
+			MAGIC_BOOK = REGISTRATE.item("magic_book", p -> new ScreenBook(p, () -> MagicTreeScreen::new)).defaultModel().defaultLang().register();
+			ABILITY_BOOK = REGISTRATE.item("ability_book", p -> new ScreenBook(p, () -> ProfessionScreen::new)).defaultModel().defaultLang().register();
+			ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_ARCANE)).defaultModel().defaultLang().register();
+			DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_DISENC)).defaultModel().defaultLang().register();
+			SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_SPCRAFT)).defaultModel().defaultLang().register();
+		}
+		// materials
+		{
+			MAT_INGOTS = GenItem.genMats("_ingot");
+			MAT_NUGGETS = GenItem.genMats("_nugget");
 
-		MAGIC_BOOK = REGISTRATE.item("magic_book", p -> new ScreenBook(p, () -> MagicTreeScreen::new)).defaultModel().defaultLang().register();
-		ABILITY_BOOK = REGISTRATE.item("ability_book", p -> new ScreenBook(p, () -> ProfessionScreen::new)).defaultModel().defaultLang().register();
-		ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_ARCANE)).defaultModel().defaultLang().register();
-		DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_DISENC)).defaultModel().defaultLang().register();
-		SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_SPCRAFT)).defaultModel().defaultLang().register();
+			LEAD_INGOT = simpleItem("lead_ingot");
+			LEAD_NUGGET = simpleItem("lead_nugget");
+			STRONG_LEATHER = simpleItem("strong_leather");
+			ENDER_POCKET = simpleItem("ender_pocket");
+			LAYLINE_ORB = simpleItem("layline_orb");
+			CURSED_DROPLET = simpleItem("cursed_droplet");
+			KNIGHT_SCRAP = simpleItem("knight_scrap");
+			DISPELL_DUST = simpleItem("dispell_dust");
 
+			HOLY_WATER_BOTTLE = REGISTRATE.item("holy_water_bottle", p -> new HolyWaterBottle(
+							p.craftRemainder(Items.GLASS_BOTTLE).food(new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().build()).stacksTo(16)))
+					.defaultModel().defaultLang().register();
 
-		MAT_INGOTS = GenItem.genMats("_ingot");
-		MAT_NUGGETS = GenItem.genMats("_nugget");
-
-		LEAD_INGOT = simpleItem("lead_ingot");
-		LEAD_NUGGET = simpleItem("lead_nugget");
-		STRONG_LEATHER = simpleItem("strong_leather");
-		ENDER_POCKET = simpleItem("ender_pocket");
-		LAYLINE_ORB = simpleItem("layline_orb");
-		CURSED_DROPLET = simpleItem("cursed_droplet");
-		KNIGHT_SCRAP = simpleItem("knight_scrap");
-
+			HOLY_WATER = REGISTRATE.virtualFluid("holy_water").defaultLang().register();
+		}
 	}
 
 	private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {

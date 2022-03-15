@@ -109,7 +109,7 @@ public class EntityRegistrate {
 
 		event.put(ET_CURSED_ARCHER.get(), Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 20.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.35F)
+				.add(Attributes.MOVEMENT_SPEED, 0.35F)
 				.add(Attributes.ATTACK_DAMAGE, 4.0D)
 				.add(Attributes.FOLLOW_RANGE, 35.0D).build());
 

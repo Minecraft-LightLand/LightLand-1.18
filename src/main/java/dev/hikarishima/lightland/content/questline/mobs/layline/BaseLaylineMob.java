@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.questline.mobs.layline;
 
-import dev.hikarishima.lightland.content.questline.common.mobs.BipedMonster;
 import dev.hikarishima.lightland.content.questline.common.mobs.AlertClassGoal;
+import dev.hikarishima.lightland.content.questline.common.mobs.BipedMonster;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

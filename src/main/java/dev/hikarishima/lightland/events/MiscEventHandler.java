@@ -2,6 +2,8 @@ package dev.hikarishima.lightland.events;
 
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorWeight;
+import dev.hikarishima.lightland.content.common.effect.ForceEffect;
+import dev.hikarishima.lightland.content.common.effect.SkillEffect;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
 import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
 import dev.hikarishima.lightland.content.common.render.MagicWandOverlay;
@@ -12,6 +14,7 @@ import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.api.distmarker.Dist;
@@ -21,8 +24,12 @@ import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiscEventHandler {
 
@@ -82,6 +89,27 @@ public class MiscEventHandler {
 			double load = ArmorEnchant.getItemArmorEnchantLevel(event.getItemStack());
 			if (load > 0)
 				event.getToolTip().add(LangData.IDS.ARMOR_ENCHANT.get(load));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPotionTest(PotionEvent.PotionApplicableEvent event) {
+		if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.CLEANSE.get())) {
+			if (event.getPotionEffect().getEffect() instanceof ForceEffect)
+				return;
+			if (event.getPotionEffect().getEffect() instanceof SkillEffect)
+				return;
+			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public static void onPotionAdded(PotionEvent.PotionAddedEvent event) {
+		if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get()) {
+			List<MobEffectInstance> list = new ArrayList<>(event.getEntityLiving().getActiveEffects());
+			for (MobEffectInstance ins : list) {
+				event.getEntityLiving().removeEffect(ins.getEffect());
+			}
 		}
 	}
 

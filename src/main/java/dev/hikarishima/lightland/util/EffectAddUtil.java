@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.util;
 
+import dev.hikarishima.lightland.content.common.effect.ForceEffect;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.init.special.ArcaneRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -8,13 +9,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.PotionEvent;
 
-public class LightLandFakeEntity {
+public class EffectAddUtil {
 
 	/**
 	 * force add effect, make boss not override
 	 * for icon use only, such as Arcane Mark on Wither and Ender Dragon
 	 */
-	public static void addEffect(LivingEntity e, MobEffectInstance ins, Entity source) {
+	public static void forceAddEffect(LivingEntity e, MobEffectInstance ins, ForceEffect eff, Entity source) {
 		MobEffectInstance effectinstance = e.getActiveEffectsMap().get(ins.getEffect());
 		MinecraftForge.EVENT_BUS.post(new PotionEvent.PotionAddedEvent(e, effectinstance, ins, source));
 		if (effectinstance == null) {
@@ -25,8 +26,14 @@ public class LightLandFakeEntity {
 		}
 	}
 
+	public static void addEffect(LivingEntity entity, MobEffectInstance ins) {
+		if (ins.getEffect().isInstantenous())
+			ins.getEffect().applyInstantenousEffect(null, null, entity, ins.getAmplifier(), 1);
+		else entity.addEffect(ins);
+	}
+
 	public static void addArcane(LivingEntity target, Entity source) {
-		addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), source);
+		forceAddEffect(target, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), VanillaMagicRegistrate.ARCANE.get(), source);
 	}
 
 }

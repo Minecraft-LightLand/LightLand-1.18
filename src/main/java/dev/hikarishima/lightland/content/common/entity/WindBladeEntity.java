@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.common.entity;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
-import dev.hikarishima.lightland.util.LightLandFakeEntity;
+import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.hikarishima.lightland.util.math.MathHelper;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.core.particles.ParticleTypes;
@@ -100,7 +100,7 @@ public class WindBladeEntity extends ThrowableProjectile implements IEntityAddit
 			DamageSource source = new IndirectEntityDamageSource("wind_blade", entity, owner);
 			entity.hurt(source, damage);
 			if (isArcane && entity instanceof LivingEntity le && owner instanceof LivingEntity ow) {
-				LightLandFakeEntity.addArcane(le, ow);
+				EffectAddUtil.addArcane(le, ow);
 				if (issuer != null)
 					ArcaneItemUseHelper.addArcaneMana(issuer, (int) damage);
 			}

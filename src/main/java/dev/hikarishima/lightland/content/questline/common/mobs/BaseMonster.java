@@ -106,7 +106,7 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
-											  @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+										@Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
 		this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
 		for (SpawnedEquipment e : getConfig().equipment())
 			groupData = e.finalizeSpawn(this, level, difficulty, spawnType, groupData, tag);

@@ -1,17 +1,9 @@
 package dev.hikarishima.lightland.content.questline.mobs.layline;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
-import dev.hikarishima.lightland.content.questline.common.mobs.BipedMonster;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootTable;

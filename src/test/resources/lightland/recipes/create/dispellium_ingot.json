@@ -1,0 +1,25 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "lightland:strong_harming"
+      },
+      "amount": 250
+    },
+    {
+      "item": "lightland:dispell_dust"
+    },
+    {
+      "item": "lightland:steel_ingot"
+    }
+  ],
+  "results": [
+    {
+      "item": "lightland:dispellium_ingot"
+    }
+  ],
+  "heatRequirement": "superheated"
+}

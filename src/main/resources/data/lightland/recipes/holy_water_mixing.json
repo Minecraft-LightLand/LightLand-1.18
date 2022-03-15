@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "create:potion",
+      "nbt": {
+        "Bottle": "REGULAR",
+        "Potion": "minecraft:mundane"
+      },
+      "amount": 250
+    },
+    {
+      "fluidTag": "forge:milk",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "fluid": "lightland:holy_water",
+      "amount": 25
+    }
+  ],
+  "heatRequirement": "heated"
+}

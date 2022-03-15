@@ -1,0 +1,17 @@
+{
+  "type": "create:emptying",
+  "ingredients": [
+	{
+	  "item": "lightland:holy_water_bottle"
+	}
+  ],
+  "results": [
+	{
+	  "item": "minecraft:glass_bottle"
+	},
+	{
+	  "fluid": "lightland:holy_water",
+	  "amount": 250
+	}
+  ]
+}
