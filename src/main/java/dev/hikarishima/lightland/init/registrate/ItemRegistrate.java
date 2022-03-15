@@ -41,6 +41,7 @@ import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.common.util.NonNullLazy;
 
 import java.util.function.BiFunction;
@@ -69,9 +70,9 @@ public class ItemRegistrate {
 		}
 	}
 
-	public static final Tab TAB_MAIN = new Tab("material",() -> ItemRegistrate.MAGIC_WAND);
-	public static final Tab TAB_PROF = new Tab("profession",() -> ItemRegistrate.STARTER_BOW);
-	public static final Tab TAB_QUEST = new Tab("generated",() -> ItemRegistrate.GEN_ITEM[0][0]);
+	public static final Tab TAB_MAIN = new Tab("material", () -> ItemRegistrate.MAGIC_WAND);
+	public static final Tab TAB_PROF = new Tab("profession", () -> ItemRegistrate.STARTER_BOW);
+	public static final Tab TAB_QUEST = new Tab("generated", () -> ItemRegistrate.GEN_ITEM[0][0]);
 
 	static {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
@@ -190,6 +191,19 @@ public class ItemRegistrate {
 	static {
 		KING_LEATHER = REGISTRATE.item("king_leather", Item::new)
 				.defaultModel().defaultLang().register();
+	}
+
+	public static final ItemEntry<ForgeSpawnEggItem> LAYLINE_ZOMBIE, LAYLINE_SKELETON;
+
+	static {
+		LAYLINE_ZOMBIE = REGISTRATE.item("layline_zombie_spawn_egg",
+						p -> new ForgeSpawnEggItem(() -> EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), 0, 0, p))
+				.model((ctx, prov) -> prov.withExistingParent(ctx.getName(), new ResourceLocation("item/template_spawn_egg")))
+				.defaultLang().register();
+		LAYLINE_SKELETON = REGISTRATE.item("layline_skeleton_spawn_egg",
+						p -> new ForgeSpawnEggItem(() -> EntityRegistrate.ET_LAYLINE_SKELETON.get(), 0, 0, p))
+				.model((ctx, prov) -> prov.withExistingParent(ctx.getName(), new ResourceLocation("item/template_spawn_egg")))
+				.defaultLang().register();
 	}
 
 	static {

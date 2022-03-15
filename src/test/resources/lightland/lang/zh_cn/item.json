@@ -162,6 +162,18 @@
 		  "block": "块"
 		}
 	  ]
+	},
+	"spawn_egg": {
+	  "path": "item.lightland",
+	  "list": [
+		{
+		  "layline_skeleton": "地脉骸骨",
+		  "layline_zombie": "地脉躯壳"
+		},
+		{
+		  "spawn_egg": "生成蛋"
+		}
+	  ]
 	}
   }
 }

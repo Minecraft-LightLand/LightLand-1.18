@@ -28,7 +28,9 @@
 	"fire_ball": "魔法火球",
 	"generic_arrow": "箭",
 	"spell": "法阵",
-	"wind_blade": "风刃"
+	"wind_blade": "风刃",
+	"layline_skeleton": "地脉侵蚀的骸骨",
+	"layline_zombie": "地脉侵蚀的躯壳"
   },
   "itemGroup.lightland": {
 	"material": "道具材料",

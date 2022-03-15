@@ -1,13 +1,24 @@
 package dev.hikarishima.lightland.content.questline.mobs.layline;
 
+import dev.hikarishima.lightland.content.questline.common.mobs.BaseMonster;
 import dev.hikarishima.lightland.content.questline.common.mobs.SimpleEquipment;
 import dev.hikarishima.lightland.content.questline.common.mobs.SoundPackage;
+import dev.hikarishima.lightland.init.data.GenItem;
+import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.util.random.WeightedRandomList;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+
+import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
 
 @SuppressWarnings({"rawtype", "unchecked", "unsafe"})
 public class LaylineProperties {
@@ -15,16 +26,47 @@ public class LaylineProperties {
 	public static final SoundPackage SOUND_ZOMBIE = new SoundPackage(SoundEvents.ZOMBIE_AMBIENT, SoundEvents.ZOMBIE_HURT, SoundEvents.ZOMBIE_DEATH, SoundEvents.ZOMBIE_STEP);
 	public static final SoundPackage SOUND_SKELETON = new SoundPackage(SoundEvents.SKELETON_AMBIENT, SoundEvents.SKELETON_HURT, SoundEvents.SKELETON_DEATH, SoundEvents.SKELETON_STEP);
 
-	public static final SimpleEquipment LAYLINE_HEAD = genEquip(EquipmentSlot.HEAD, 0.8, 10, 30, wrap(Items.IRON_HELMET, 70), wrap(Items.DIAMOND_HELMET, 10));
-	public static final SimpleEquipment LAYLINE_CHEST = genEquip(EquipmentSlot.CHEST, 0.8, 10, 30, wrap(Items.IRON_CHESTPLATE, 70), wrap(Items.DIAMOND_CHESTPLATE, 10));
-	public static final SimpleEquipment LAYLINE_LEGS = genEquip(EquipmentSlot.LEGS, 0.8, 10, 30, wrap(Items.IRON_LEGGINGS, 70), wrap(Items.DIAMOND_LEGGINGS, 10));
-	public static final SimpleEquipment LAYLINE_FEET = genEquip(EquipmentSlot.FEET, 0.8, 10, 30, wrap(Items.IRON_BOOTS, 70), wrap(Items.DIAMOND_BOOTS, 10));
+	private static final Function<EquipmentSlot, SimpleEquipment> ARMOR_GEN = (slot) -> genEquip(slot, 0.8, 10, 30,
+			wrap(GenItem.Mats.LAYROOT.getArmor(slot), 70), wrap(GenItem.Mats.LAYLINE.getArmor(slot), 10));
+
+	public static final SimpleEquipment LAYLINE_HEAD = ARMOR_GEN.apply(EquipmentSlot.HEAD);
+	public static final SimpleEquipment LAYLINE_CHEST = ARMOR_GEN.apply(EquipmentSlot.CHEST);
+	public static final SimpleEquipment LAYLINE_LEGS = ARMOR_GEN.apply(EquipmentSlot.LEGS);
+	public static final SimpleEquipment LAYLINE_FEET = ARMOR_GEN.apply(EquipmentSlot.FEET);
 	public static final SimpleEquipment LAYLINE_MEELEE = genEquip(EquipmentSlot.MAINHAND, 1, 10, 30,
-			wrap(Items.IRON_SWORD, 100), wrap(Items.DIAMOND_SWORD, 10),
-			wrap(Items.IRON_AXE, 50), wrap(Items.DIAMOND_AXE, 5),
-			wrap(Items.IRON_PICKAXE, 100), wrap(Items.DIAMOND_PICKAXE, 10),
-			wrap(Items.IRON_SHOVEL, 50), wrap(Items.DIAMOND_SHOVEL, 5),
-			wrap(Items.IRON_HOE, 50), wrap(Items.DIAMOND_HOE, 5));
+			wrap(GenItem.Mats.LAYROOT.getTool(GenItem.Tools.SWORD), 100), wrap(GenItem.Mats.LAYLINE.getTool(GenItem.Tools.SWORD), 10),
+			wrap(GenItem.Mats.LAYROOT.getTool(GenItem.Tools.AXE), 50), wrap(GenItem.Mats.LAYLINE.getTool(GenItem.Tools.AXE), 5),
+			wrap(GenItem.Mats.LAYROOT.getTool(GenItem.Tools.PICKAXE), 100), wrap(GenItem.Mats.LAYLINE.getTool(GenItem.Tools.PICKAXE), 10),
+			wrap(GenItem.Mats.LAYROOT.getTool(GenItem.Tools.SHOVEL), 50), wrap(GenItem.Mats.LAYLINE.getTool(GenItem.Tools.SHOVEL), 5),
+			wrap(GenItem.Mats.LAYROOT.getTool(GenItem.Tools.HOE), 50), wrap(GenItem.Mats.LAYLINE.getTool(GenItem.Tools.HOE), 5));
+
+	public static final SimpleEquipment LAYLINE_BOW = genEquip(EquipmentSlot.MAINHAND, 1, 10, 30,
+			wrap(Items.BOW, 100));
+
+	public static final BaseMonster.EntityConfig CONFIG_ZOMBIE = new BaseMonster.EntityConfig(MobType.UNDEAD, SOUND_ZOMBIE,
+			List.of(LAYLINE_HEAD, LAYLINE_CHEST, LAYLINE_LEGS, LAYLINE_FEET, LAYLINE_MEELEE), List.of());
+
+	public static final BaseMonster.EntityConfig CONFIG_SKELETON = new BaseMonster.EntityConfig(MobType.UNDEAD, SOUND_ZOMBIE,
+			List.of(LAYLINE_HEAD, LAYLINE_CHEST, LAYLINE_LEGS, LAYLINE_FEET, LAYLINE_BOW), List.of());
+
+	public static final Set<EntityType<?>> CONVERT_TYPE_ZOMBIE = Set.of(
+			EntityType.PLAYER, EntityType.VILLAGER, EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK,
+			EntityType.ZOMBIFIED_PIGLIN, EntityType.PIGLIN, EntityType.PIGLIN_BRUTE, EntityType.ZOMBIE_VILLAGER,
+			EntityType.PILLAGER, EntityType.ILLUSIONER, EntityType.EVOKER, EntityType.VINDICATOR,
+			EntityType.WITCH, EntityType.WANDERING_TRADER
+	);
+
+	public static final Set<EntityType<?>> CONVERT_TYPE_SKELETON = Set.of(
+			EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON
+	);
+
+	public static final Set<EntityType<?>> CONVERT_TYPE = Set.of();
+
+	static {
+		CONVERT_TYPE.addAll(CONVERT_TYPE_ZOMBIE);
+		CONVERT_TYPE.addAll(CONVERT_TYPE_SKELETON);
+	}
+
 
 	public static WeightedEntry.Wrapper<Item> wrap(Item item, int weight) {
 		return WeightedEntry.wrap(item, weight);
@@ -32,6 +74,30 @@ public class LaylineProperties {
 
 	public static SimpleEquipment genEquip(EquipmentSlot slot, double chance, int lv1, int lv2, WeightedEntry.Wrapper<Item>... items) {
 		return new SimpleEquipment(slot, WeightedRandomList.create(items), chance, lv1, lv2);
+	}
+
+	public static void convert(ServerLevel level, LivingEntity target) {
+		Monster monster = null;
+		if (LaylineProperties.CONVERT_TYPE_ZOMBIE.contains(target.getType()))
+			monster = new LaylineZombie(EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), level);
+		if (LaylineProperties.CONVERT_TYPE_SKELETON.contains(target.getType()))
+			monster = new LaylineSkeleton(EntityRegistrate.ET_LAYLINE_SKELETON.get(), level);
+		if (monster != null) {
+			monster.copyPosition(target);
+			if (target.hasCustomName())
+				monster.setCustomName(target.getCustomName());
+			else if (target instanceof Player player)
+				target.setCustomName(player.getDisplayName());
+			for (EquipmentSlot slot : EquipmentSlot.values()) {
+				ItemStack stack = target.getItemBySlot(slot);
+				if (stack.isEmpty()) continue;
+				monster.setItemSlot(slot, stack);
+				monster.setDropChance(slot, 0);
+			}
+			monster.finalizeSpawn(level, level.getCurrentDifficultyAt(monster.blockPosition()),
+					MobSpawnType.CONVERSION, null, null);
+			level.addFreshEntity(monster);
+		}
 	}
 
 }

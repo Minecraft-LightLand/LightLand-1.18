@@ -31,40 +31,55 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 
 	}
 
-	public final EntityConfig config;
+	private static final ThreadLocal<EntityConfig> TEMP = new ThreadLocal<>();
+
+	private static <T extends BaseMonster<T>> EntityType<T> save(EntityType<T> type, EntityConfig config) {
+		TEMP.set(config);
+		return type;
+	}
+
+	private EntityConfig config;
 	private final Map<DataHolder<?>, DataHolder.EntityData> data_map = new HashMap<>();
 
 	protected BaseMonster(EntityType<T> type, Level level, EntityConfig config) {
-		super(type, level);
-		this.config = config;
-		for (DataHolder<?> data : config.data) {
-			data_map.put(data, data.getEmptyData());
+		super(save(type, config), level);
+		getConfig();
+	}
+
+	public final EntityConfig getConfig() {
+		if (config == null) {
+			config = TEMP.get();
+			for (DataHolder<?> data : config.data) {
+				data_map.put(data, data.getEmptyData());
+			}
+			TEMP.set(null);
 		}
+		return config;
 	}
 
 	@Override
 	protected final SoundEvent getAmbientSound() {
-		return config.sound.ambient();
+		return getConfig().sound.ambient();
 	}
 
 	@Override
 	protected final SoundEvent getHurtSound(DamageSource source) {
-		return config.sound.hurt();
+		return getConfig().sound.hurt();
 	}
 
 	@Override
 	protected final SoundEvent getDeathSound() {
-		return config.sound.death();
+		return getConfig().sound.death();
 	}
 
 	@Override
 	protected final void playStepSound(BlockPos pos, BlockState state) {
-		this.playSound(config.sound.step(), 0.15F, 1.0F);
+		this.playSound(getConfig().sound.step(), 0.15F, 1.0F);
 	}
 
 	@Override
 	public final MobType getMobType() {
-		return config.type;
+		return getConfig().type;
 	}
 
 	@Override
@@ -75,14 +90,14 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 	@Override
 	protected final void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
 		super.populateDefaultEquipmentSlots(difficulty);
-		for (SpawnedEquipment e : config.equipment())
+		for (SpawnedEquipment e : getConfig().equipment())
 			e.populateDefaultEquipmentSlots(this, difficulty);
 	}
 
 	@Override
 	protected final void populateDefaultEquipmentEnchantments(DifficultyInstance difficulty) {
 		super.populateDefaultEquipmentEnchantments(difficulty);
-		for (SpawnedEquipment e : config.equipment())
+		for (SpawnedEquipment e : getConfig().equipment())
 			e.populateDefaultEquipmentEnchantments(this, difficulty);
 	}
 
@@ -90,7 +105,8 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 	@Override
 	public final SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
 											  @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-		for (SpawnedEquipment e : config.equipment())
+		this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
+		for (SpawnedEquipment e : getConfig().equipment())
 			groupData = e.finalizeSpawn(this, level, difficulty, spawnType, groupData, tag);
 		return super.finalizeSpawn(level, difficulty, spawnType, groupData, tag);
 	}
@@ -98,15 +114,15 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 	@Override
 	public final void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
-		for (DataHolder<?> holder : config.data) {
+		for (DataHolder<?> holder : getConfig().data) {
 			caller(holder, (h, data) -> h.addAdditionalSaveData(data, tag));
 		}
 	}
 
 	@Override
-	public final void readAdditionalSaveData(CompoundTag tag) {
+	public void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
-		for (DataHolder<?> holder : config.data) {
+		for (DataHolder<?> holder : getConfig().data) {
 			caller(holder, (h, data) -> h.readAdditionalSaveData(data, tag));
 		}
 	}
@@ -114,14 +130,14 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 	@Override
 	protected final void defineSynchedData() {
 		super.defineSynchedData();
-		for (DataHolder<?> holder : config.data) {
+		for (DataHolder<?> holder : getConfig().data) {
 			caller(holder, DataHolder::defineSynchedData);
 		}
 	}
 
 	@Override
 	public final void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
-		for (DataHolder<?> holder : config.data) {
+		for (DataHolder<?> holder : getConfig().data) {
 			caller(holder, (h, data) -> h.onSyncedDataUpdated(data, accessor));
 		}
 		super.onSyncedDataUpdated(accessor);

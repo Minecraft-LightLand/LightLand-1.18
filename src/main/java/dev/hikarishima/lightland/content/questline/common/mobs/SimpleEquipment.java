@@ -53,6 +53,10 @@ public class SimpleEquipment implements SpawnedEquipment {
 
 	@Override
 	public @Nullable SpawnGroupData finalizeSpawn(BaseMonster<?> entity, ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+		if (spawnType != MobSpawnType.CONVERSION) {
+			populateDefaultEquipmentSlots(entity, difficulty);
+			populateDefaultEquipmentEnchantments(entity, difficulty);
+		}
 		return groupData;
 	}
 }

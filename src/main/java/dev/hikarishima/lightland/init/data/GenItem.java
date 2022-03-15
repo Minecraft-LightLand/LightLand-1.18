@@ -36,7 +36,8 @@ public class GenItem {
 		case HOE -> HoeItem::new;
 	};
 
-	public static final ToolConfig TOOL_DEF = new ToolConfig(a -> a.defaultLang().defaultModel(), fromToolGen(TOOL_GEN));
+	public static final ToolConfig TOOL_DEF = new ToolConfig(a -> a.defaultLang()
+			.model((ctx, pvd) -> pvd.handheld(ctx::getEntry)), fromToolGen(TOOL_GEN));
 	public static final ArmorConfig ARMOR_DEF = new ArmorConfig(a -> a.defaultLang().defaultModel(), ArmorItem::new);
 
 	public enum Mats {
@@ -171,10 +172,10 @@ public class GenItem {
 			BiFunction<String, EquipmentSlot, ItemEntry> armor_gen = (str, slot) ->
 					mat.armor_config.func.apply(REGISTRATE.item(id + str,
 							p -> mat.armor_config.sup.get(mat.mat, slot, p))).register();
-			ans[i][0] = armor_gen.apply("_helmet", EquipmentSlot.HEAD);
-			ans[i][1] = armor_gen.apply("_chestplate", EquipmentSlot.CHEST);
-			ans[i][2] = armor_gen.apply("_leggings", EquipmentSlot.LEGS);
-			ans[i][3] = armor_gen.apply("_boots", EquipmentSlot.FEET);
+			ans[i][3] = armor_gen.apply("_helmet", EquipmentSlot.HEAD);
+			ans[i][2] = armor_gen.apply("_chestplate", EquipmentSlot.CHEST);
+			ans[i][1] = armor_gen.apply("_leggings", EquipmentSlot.LEGS);
+			ans[i][0] = armor_gen.apply("_boots", EquipmentSlot.FEET);
 			BiFunction<String, Tools, ItemEntry> tool_gen = (str, tool) ->
 					mat.tool_config.func.apply(REGISTRATE.item(id + str,
 							p -> mat.tool_config.sup.get(mat, tool, p))).register();
