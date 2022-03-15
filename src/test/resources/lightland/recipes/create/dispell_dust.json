@@ -2,11 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "fluid": "create:potion",
-      "nbt": {
-        "Bottle": "REGULAR",
-        "Potion": "lightland:holy_water"
-      },
+      "fluid": "lightland:holy_water",
       "amount": 250
     },
     {

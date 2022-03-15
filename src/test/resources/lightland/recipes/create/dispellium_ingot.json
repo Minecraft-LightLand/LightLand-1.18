@@ -5,7 +5,7 @@
       "fluid": "create:potion",
       "nbt": {
         "Bottle": "REGULAR",
-        "Potion": "lightland:strong_harming"
+        "Potion": "lightland:holy_water"
       },
       "amount": 250
     },

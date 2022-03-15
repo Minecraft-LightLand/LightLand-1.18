@@ -17,6 +17,8 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +69,10 @@ public class VanillaMagicRegistrate {
 
 	public static void register() {
 
+	}
+
+	public static void registerBrewingRecipe() {
+		PotionBrewing.addMix(Potions.AWKWARD, ItemRegistrate.DISPELL_DUST.get(), P_HOLY_WATER.get());
 	}
 
 }

@@ -10,13 +10,13 @@
 	  "item": "lightland:knight_scrap"
 	},
 	"b": {
-	  "item": "lightland:steel_nugget"
+	  "item": "lightland:steel_ingot"
 	},
 	"c": {
-	  "item": "minecraft:copper_nugget"
+	  "item": "create:copper_nugget"
 	},
 	"d": {
-	  "item": "minecraft:iron_nugget"
+	  "item": "create:zinc_nugget"
 	}
   },
   "result": {

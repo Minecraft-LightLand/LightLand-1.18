@@ -89,8 +89,11 @@ public class LightLand {
 	}
 
 	private static void setup(final FMLCommonSetupEvent event) {
-		PacketHandler.registerPackets();
-		EffectSyncEvents.init();
+		event.enqueueWork(() -> {
+			PacketHandler.registerPackets();
+			EffectSyncEvents.init();
+			VanillaMagicRegistrate.registerBrewingRecipe();
+		});
 	}
 
 	public static void gatherData(GatherDataEvent event) {
