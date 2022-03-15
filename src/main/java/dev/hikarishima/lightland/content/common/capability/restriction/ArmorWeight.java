@@ -26,9 +26,12 @@ public class ArmorWeight extends ConfigSyncManager.BaseConfig {
 		if (weight == null)
 			return true;
 		int ans = 0;
-		for (ItemStack armor : player.getArmorSlots()) {
-			if (((ArmorItem) armor.getItem()).getSlot() != ((ArmorItem) stack.getItem()).getSlot())
-				ans += getWeight(armor);
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+			ItemStack armor = player.getItemBySlot(slot);
+			if (armor.isEmpty()) continue;
+			if (slot == ((ArmorItem) stack.getItem()).getSlot()) continue;
+			ans += getWeight(armor);
 		}
 		ans += getWeight(stack);
 		return ans <= LLPlayerData.get(player).abilityPoints.getWeightAble();

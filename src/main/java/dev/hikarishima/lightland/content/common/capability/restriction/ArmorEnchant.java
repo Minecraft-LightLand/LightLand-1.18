@@ -5,6 +5,7 @@ import dev.hikarishima.lightland.content.common.capability.MagicAbility;
 import dev.hikarishima.lightland.network.config.ConfigSyncManager;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
@@ -36,9 +37,12 @@ public class ArmorEnchant extends ConfigSyncManager.BaseConfig {
 		if (enchant == null)
 			return true;
 		int ans = 0;
-		for (ItemStack armor : player.getArmorSlots()) {
-			if (((ArmorItem) armor.getItem()).getSlot() != ((ArmorItem) stack.getItem()).getSlot())
-				ans += getItemArmorEnchantLevel(armor);
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			if (slot.getType() != EquipmentSlot.Type.ARMOR) continue;
+			ItemStack armor = player.getItemBySlot(slot);
+			if (armor.isEmpty()) continue;
+			if (slot == ((ArmorItem) stack.getItem()).getSlot()) continue;
+			ans += getItemArmorEnchantLevel(armor);
 		}
 		ans += getItemArmorEnchantLevel(stack);
 		MagicAbility ab = LLPlayerData.get(player).magicAbility;

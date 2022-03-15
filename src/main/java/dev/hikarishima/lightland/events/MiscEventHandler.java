@@ -29,6 +29,7 @@ import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.ArrayList;
@@ -119,7 +120,9 @@ public class MiscEventHandler {
 				return;
 			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.SKILL)
 				return;
-			event.setCanceled(true);
+			if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get())
+				return;
+			event.setResult(Event.Result.DENY);
 		}
 	}
 
