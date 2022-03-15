@@ -16,7 +16,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootTable;
 
-public class LaylineZombie extends BipedMonster<LaylineZombie> {
+public class LaylineZombie extends BaseLaylineMob<LaylineZombie> {
 
 	public static void loot(RegistrateEntityLootTables table, EntityType<?> type) {
 		table.add(type, new LootTable.Builder()
@@ -31,20 +31,6 @@ public class LaylineZombie extends BipedMonster<LaylineZombie> {
 
 	public LaylineZombie(EntityType<LaylineZombie> type, Level level) {
 		super(type, level, LaylineProperties.CONFIG_ZOMBIE);
-	}
-
-	@Override
-	protected void registerGoals() {
-		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
-		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-		this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-		this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Mob.class, true,
-				e -> LaylineProperties.CONVERT_TYPE.contains(e.getType())));
-	}
-
-	@Override
-	public void killed(ServerLevel level, LivingEntity target) {
-		LaylineProperties.convert(level, target);
 	}
 
 	@Override

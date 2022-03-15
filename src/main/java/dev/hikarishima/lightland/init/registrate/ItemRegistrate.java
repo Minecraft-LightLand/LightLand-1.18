@@ -3,6 +3,7 @@ package dev.hikarishima.lightland.init.registrate;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateItemModelProvider;
+import com.tterrag.registrate.util.entry.EntityEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
@@ -37,6 +38,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -85,7 +87,7 @@ public class ItemRegistrate {
 	public static final ItemEntry<RecordPearl> RECORD_PEARL;
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
-	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET;
+	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET, KNIGHT_SCRAP;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	static {
@@ -114,6 +116,7 @@ public class ItemRegistrate {
 		ENDER_POCKET = simpleItem("ender_pocket");
 		LAYLINE_ORB = simpleItem("layline_orb");
 		CURSED_DROPLET = simpleItem("cursed_droplet");
+		KNIGHT_SCRAP = simpleItem("knight_scrap");
 
 	}
 
@@ -185,15 +188,17 @@ public class ItemRegistrate {
 				.defaultModel().defaultLang().register();
 	}
 
-	public static final ItemEntry<ForgeSpawnEggItem> LAYLINE_ZOMBIE, LAYLINE_SKELETON;
-
 	static {
-		LAYLINE_ZOMBIE = REGISTRATE.item("layline_zombie_spawn_egg",
-						p -> new ForgeSpawnEggItem(() -> EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), 0, 0, p))
-				.model((ctx, prov) -> prov.withExistingParent(ctx.getName(), new ResourceLocation("item/template_spawn_egg")))
-				.defaultLang().register();
-		LAYLINE_SKELETON = REGISTRATE.item("layline_skeleton_spawn_egg",
-						p -> new ForgeSpawnEggItem(() -> EntityRegistrate.ET_LAYLINE_SKELETON.get(), 0, 0, p))
+		registerEgg("layline_zombie_spawn_egg", 0, 0, () -> EntityRegistrate.ET_LAYLINE_ZOMBIE);
+		registerEgg("layline_skeleton_spawn_egg", 0, 0, () -> EntityRegistrate.ET_LAYLINE_SKELETON);
+		registerEgg("cursed_knight_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_KNIGHT);
+		registerEgg("cursed_archer_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_ARCHER);
+		registerEgg("cursed_shield_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_SHIELD);
+	}
+
+	private static void registerEgg(String id, int col_0, int col_1, Supplier<EntityEntry<? extends Mob>> sup) {
+		REGISTRATE.item(id,
+						p -> new ForgeSpawnEggItem(() -> sup.get().get(), col_0, col_1, p))
 				.model((ctx, prov) -> prov.withExistingParent(ctx.getName(), new ResourceLocation("item/template_spawn_egg")))
 				.defaultLang().register();
 	}

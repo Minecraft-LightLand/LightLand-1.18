@@ -2,6 +2,7 @@ package dev.hikarishima.lightland.init.registrate;
 
 import com.tterrag.registrate.util.entry.EntityEntry;
 import dev.hikarishima.lightland.content.common.entity.*;
+import dev.hikarishima.lightland.content.questline.mobs.cursedknight.*;
 import dev.hikarishima.lightland.content.questline.mobs.layline.LaylineSkeleton;
 import dev.hikarishima.lightland.content.questline.mobs.layline.LaylineSkeletonRenderer;
 import dev.hikarishima.lightland.content.questline.mobs.layline.LaylineZombie;
@@ -65,19 +66,57 @@ public class EntityRegistrate {
 			.renderer(() -> LaylineSkeletonRenderer::new).loot(LaylineSkeleton::loot).defaultLang().register();
 
 
+	public static final EntityEntry<CursedKnight> ET_CURSED_KNIGHT = REGISTRATE
+			.entity("cursed_knight", CursedKnight::new, MobCategory.MONSTER)
+			.properties(e -> e.sized(0.6f, 1.95f).clientTrackingRange(8))
+			.renderer(() -> CursedKnightRenderer::new).loot(BaseCursedKnight::loot).defaultLang().register();
+
+
+	public static final EntityEntry<CursedArcher> ET_CURSED_ARCHER = REGISTRATE
+			.entity("cursed_archer", CursedArcher::new, MobCategory.MONSTER)
+			.properties(e -> e.sized(0.6f, 1.95f).clientTrackingRange(8))
+			.renderer(() -> CursedKnightRenderer::new).loot(BaseCursedKnight::loot).defaultLang().register();
+
+
+	public static final EntityEntry<CursedShield> ET_CURSED_SHIELD = REGISTRATE
+			.entity("cursed_shield", CursedShield::new, MobCategory.MONSTER)
+			.properties(e -> e.sized(0.6f, 1.95f).clientTrackingRange(8))
+			.renderer(() -> CursedKnightRenderer::new).loot(BaseCursedKnight::loot).defaultLang().register();
+
 	public static void register() {
 	}
 
 	public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
 		event.put(ET_LAYLINE_ZOMBIE.get(), Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 30.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.3F)
+				.add(Attributes.MOVEMENT_SPEED, 0.25F)
 				.add(Attributes.ATTACK_DAMAGE, 4.0D)
 				.add(Attributes.FOLLOW_RANGE, 35.0D).build());
 
 		event.put(ET_LAYLINE_SKELETON.get(), Monster.createMonsterAttributes()
 				.add(Attributes.MAX_HEALTH, 20.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.3F)
+				.add(Attributes.MOVEMENT_SPEED, 0.25F)
+				.add(Attributes.ATTACK_DAMAGE, 4.0D)
+				.add(Attributes.FOLLOW_RANGE, 35.0D).build());
+
+
+		event.put(ET_CURSED_KNIGHT.get(), Monster.createMonsterAttributes()
+				.add(Attributes.MAX_HEALTH, 30.0D)
+				.add(Attributes.MOVEMENT_SPEED, 0.3F)
+				.add(Attributes.ATTACK_DAMAGE, 6.0D)
+				.add(Attributes.FOLLOW_RANGE, 35.0D).build());
+
+
+		event.put(ET_CURSED_ARCHER.get(), Monster.createMonsterAttributes()
+				.add(Attributes.MAX_HEALTH, 20.0D)
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.35F)
+				.add(Attributes.ATTACK_DAMAGE, 4.0D)
+				.add(Attributes.FOLLOW_RANGE, 35.0D).build());
+
+
+		event.put(ET_CURSED_SHIELD.get(), Monster.createMonsterAttributes()
+				.add(Attributes.MAX_HEALTH, 40.0D)
+				.add(Attributes.MOVEMENT_SPEED, 0.25F)
 				.add(Attributes.ATTACK_DAMAGE, 4.0D)
 				.add(Attributes.FOLLOW_RANGE, 35.0D).build());
 
