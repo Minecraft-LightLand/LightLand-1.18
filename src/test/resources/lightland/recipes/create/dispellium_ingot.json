@@ -1,13 +1,19 @@
 {
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
   "type": "create:compacting",
   "ingredients": [
     {
       "fluid": "create:potion",
       "nbt": {
         "Bottle": "REGULAR",
-        "Potion": "lightland:holy_water"
+        "Potion": "minecraft:strong_harming"
       },
-      "amount": 250
+      "amount": 1000
     },
     {
       "item": "lightland:dispell_dust"

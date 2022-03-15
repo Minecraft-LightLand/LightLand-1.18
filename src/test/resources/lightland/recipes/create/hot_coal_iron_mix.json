@@ -1,4 +1,10 @@
 {
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "create"
+    }
+  ],
   "type": "minecraft:blasting",
   "ingredient": {
     "item": "lightland:coal_iron_mix"
