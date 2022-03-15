@@ -2,9 +2,8 @@ package dev.hikarishima.lightland.content.questline.common.mobs;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
@@ -17,6 +16,8 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import org.jetbrains.annotations.Nullable;
 
 public class BipedMonster<T extends BipedMonster<T>> extends BaseMonster<T> implements RangedAttackMob {
 
@@ -62,9 +63,18 @@ public class BipedMonster<T extends BipedMonster<T>> extends BaseMonster<T> impl
 		}
 	}
 
-	public void readAdditionalSaveData(CompoundTag tag) {
+	public final void readAdditionalSaveData(CompoundTag tag) {
 		super.readAdditionalSaveData(tag);
 		this.reassessWeaponGoal();
+	}
+
+	@Nullable
+	@Override
+	public final SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
+											  @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+		groupData = super.finalizeSpawn(level, difficulty, spawnType, groupData, tag);
+		reassessWeaponGoal();
+		return groupData;
 	}
 
 	public void setItemSlot(EquipmentSlot slot, ItemStack stack) {

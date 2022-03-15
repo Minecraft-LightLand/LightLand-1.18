@@ -16,6 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -43,11 +44,14 @@ public class LaylineProperties {
 	public static final SimpleEquipment LAYLINE_BOW = genEquip(EquipmentSlot.MAINHAND, 1, 10, 30,
 			wrap(Items.BOW, 100));
 
-	public static final BaseMonster.EntityConfig CONFIG_ZOMBIE = new BaseMonster.EntityConfig(MobType.UNDEAD, SOUND_ZOMBIE,
-			List.of(LAYLINE_HEAD, LAYLINE_CHEST, LAYLINE_LEGS, LAYLINE_FEET, LAYLINE_MEELEE), List.of());
+	public static final Set<EntityType<?>> ALLY_TYPE = Set.of(
+			EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), EntityRegistrate.ET_LAYLINE_SKELETON.get());
 
-	public static final BaseMonster.EntityConfig CONFIG_SKELETON = new BaseMonster.EntityConfig(MobType.UNDEAD, SOUND_ZOMBIE,
-			List.of(LAYLINE_HEAD, LAYLINE_CHEST, LAYLINE_LEGS, LAYLINE_FEET, LAYLINE_BOW), List.of());
+	public static final BaseMonster.EntityConfig CONFIG_ZOMBIE = new BaseMonster.EntityConfig(MobType.UNDEAD, SOUND_ZOMBIE,
+			List.of(LAYLINE_HEAD, LAYLINE_CHEST, LAYLINE_LEGS, LAYLINE_FEET, LAYLINE_MEELEE), List.of(), ALLY_TYPE);
+
+	public static final BaseMonster.EntityConfig CONFIG_SKELETON = new BaseMonster.EntityConfig(MobType.UNDEAD, SOUND_SKELETON,
+			List.of(LAYLINE_HEAD, LAYLINE_CHEST, LAYLINE_LEGS, LAYLINE_FEET, LAYLINE_BOW), List.of(), ALLY_TYPE);
 
 	public static final Set<EntityType<?>> CONVERT_TYPE_ZOMBIE = Set.of(
 			EntityType.PLAYER, EntityType.VILLAGER, EntityType.ZOMBIE, EntityType.DROWNED, EntityType.HUSK,
@@ -60,7 +64,7 @@ public class LaylineProperties {
 			EntityType.SKELETON, EntityType.STRAY, EntityType.WITHER_SKELETON
 	);
 
-	public static final Set<EntityType<?>> CONVERT_TYPE = Set.of();
+	public static final Set<EntityType<?>> CONVERT_TYPE = new HashSet<>();
 
 	static {
 		CONVERT_TYPE.addAll(CONVERT_TYPE_ZOMBIE);
@@ -82,18 +86,21 @@ public class LaylineProperties {
 			monster = new LaylineZombie(EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), level);
 		if (LaylineProperties.CONVERT_TYPE_SKELETON.contains(target.getType()))
 			monster = new LaylineSkeleton(EntityRegistrate.ET_LAYLINE_SKELETON.get(), level);
+		if (target.getType() == EntityRegistrate.ET_LAYLINE_ZOMBIE.get())
+			monster = new LaylineSkeleton(EntityRegistrate.ET_LAYLINE_SKELETON.get(), level);
 		if (monster != null) {
 			monster.copyPosition(target);
 			if (target.hasCustomName())
 				monster.setCustomName(target.getCustomName());
 			else if (target instanceof Player player)
 				target.setCustomName(player.getDisplayName());
-			for (EquipmentSlot slot : EquipmentSlot.values()) {
-				ItemStack stack = target.getItemBySlot(slot);
-				if (stack.isEmpty()) continue;
-				monster.setItemSlot(slot, stack);
-				monster.setDropChance(slot, 0);
-			}
+			if (!(target instanceof Player))
+				for (EquipmentSlot slot : EquipmentSlot.values()) {
+					ItemStack stack = target.getItemBySlot(slot);
+					if (stack.isEmpty()) continue;
+					monster.setItemSlot(slot, stack);
+					monster.setDropChance(slot, 0);
+				}
 			monster.finalizeSpawn(level, level.getCurrentDifficultyAt(monster.blockPosition()),
 					MobSpawnType.CONVERSION, null, null);
 			level.addFreshEntity(monster);

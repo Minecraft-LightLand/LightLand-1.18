@@ -47,7 +47,9 @@
 	"tnt_arrow_lv1": "爆裂箭",
 	"tnt_arrow_lv2": "TNT箭",
 	"tnt_arrow_lv3": "末影水晶箭",
-	"wind_bow": "八坂的神风"
+	"wind_bow": "八坂的神风",
+	"layline_orb": "游离的地脉能量",
+	"cursed_droplet": "诅咒泪滴"
   },
   "block.lightland": {
 	"enchant_gold_block": "蓄魔金块",

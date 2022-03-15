@@ -23,7 +23,7 @@ public class LaylineZombie extends BipedMonster<LaylineZombie> {
 				.withPool(LootTableTemplate.getPool(1, 0)
 						.add(LootTableTemplate.getItem(Items.ROTTEN_FLESH, 0, 2, 1)))
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.ENC_GOLD_NUGGET.get(), 0, 1))
+						.add(LootTableTemplate.getItem(ItemRegistrate.LAYLINE_ORB.get(), 0, 1))
 						.when(LootTableTemplate.byPlayer())
 						.when(LootTableTemplate.chance(0.1f, 0.01f)))
 		);
@@ -54,4 +54,5 @@ public class LaylineZombie extends BipedMonster<LaylineZombie> {
 		}
 		super.remove(reason);
 	}
+
 }

@@ -19,6 +19,11 @@ public class LootTableTemplate {
 		return LootPool.lootPool().setRolls(ConstantValue.exactly(roll)).setBonusRolls(ConstantValue.exactly(0));
 	}
 
+	public static LootPoolSingletonContainer.Builder<?> getItem(Item item, int count) {
+		return LootItem.lootTableItem(item)
+				.apply(SetItemCountFunction.setCount(ConstantValue.exactly(count)));
+	}
+
 	public static LootPoolSingletonContainer.Builder<?> getItem(Item item, int min, int max) {
 		return LootItem.lootTableItem(item)
 				.apply(SetItemCountFunction.setCount(UniformGenerator.between(min, max)));

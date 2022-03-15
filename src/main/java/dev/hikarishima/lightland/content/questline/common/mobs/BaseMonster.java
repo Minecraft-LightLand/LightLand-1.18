@@ -21,13 +21,15 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 
 	public record EntityConfig(MobType type, SoundPackage sound,
 							   List<SpawnedEquipment> equipment,
-							   List<DataHolder<?>> data) {
+							   List<DataHolder<?>> data,
+							   Set<EntityType<?>> ally) {
 
 	}
 
@@ -103,7 +105,7 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 
 	@Nullable
 	@Override
-	public final SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType,
 											  @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
 		this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * difficulty.getSpecialMultiplier());
 		for (SpawnedEquipment e : getConfig().equipment())
@@ -141,6 +143,11 @@ public class BaseMonster<T extends BaseMonster<T>> extends Monster {
 			caller(holder, (h, data) -> h.onSyncedDataUpdated(data, accessor));
 		}
 		super.onSyncedDataUpdated(accessor);
+	}
+
+	@Override
+	public boolean canAttackType(EntityType<?> type) {
+		return !getConfig().ally.contains(type) && super.canAttackType(type);
 	}
 
 	@Override

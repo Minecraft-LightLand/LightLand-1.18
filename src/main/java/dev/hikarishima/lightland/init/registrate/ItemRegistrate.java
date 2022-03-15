@@ -85,7 +85,7 @@ public class ItemRegistrate {
 	public static final ItemEntry<RecordPearl> RECORD_PEARL;
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
-	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET;
+	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	static {
@@ -95,33 +95,25 @@ public class ItemRegistrate {
 			BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
 					.tag(AllTags.AllItemTags.BACKPACKS.tag).model(ItemRegistrate::createBackpackModel).defaultLang().register();
 		}
-		ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new)
-				.model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
-		STRONG_LEATHER = REGISTRATE.item("strong_leather", Item::new)
-				.defaultModel().defaultLang().register();
-		ENDER_POCKET = REGISTRATE.item("ender_pocket", Item::new)
-				.defaultModel().defaultLang().register();
-		RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1)))
-				.defaultModel().defaultLang().register();
+		ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
+		RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1))).defaultModel().defaultLang().register();
 
-		MAGIC_BOOK = REGISTRATE.item("magic_book", p -> new ScreenBook(p, () -> MagicTreeScreen::new))
-				.defaultModel().defaultLang().register();
-		ABILITY_BOOK = REGISTRATE.item("ability_book", p -> new ScreenBook(p, () -> ProfessionScreen::new))
-				.defaultModel().defaultLang().register();
-		ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_ARCANE))
-				.defaultModel().defaultLang().register();
-		DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_DISENC))
-				.defaultModel().defaultLang().register();
-		SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_SPCRAFT))
-				.defaultModel().defaultLang().register();
+		MAGIC_BOOK = REGISTRATE.item("magic_book", p -> new ScreenBook(p, () -> MagicTreeScreen::new)).defaultModel().defaultLang().register();
+		ABILITY_BOOK = REGISTRATE.item("ability_book", p -> new ScreenBook(p, () -> ProfessionScreen::new)).defaultModel().defaultLang().register();
+		ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_ARCANE)).defaultModel().defaultLang().register();
+		DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_DISENC)).defaultModel().defaultLang().register();
+		SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_SPCRAFT)).defaultModel().defaultLang().register();
 
-		LEAD_INGOT = LightLand.REGISTRATE.item("lead_ingot", Item::new)
-				.defaultModel().defaultLang().register();
-		LEAD_NUGGET = LightLand.REGISTRATE.item("lead_nugget", Item::new)
-				.defaultModel().defaultLang().register();
 
 		MAT_INGOTS = GenItem.genMats("_ingot");
 		MAT_NUGGETS = GenItem.genMats("_nugget");
+
+		LEAD_INGOT = simpleItem("lead_ingot");
+		LEAD_NUGGET = simpleItem("lead_nugget");
+		STRONG_LEATHER = simpleItem("strong_leather");
+		ENDER_POCKET = simpleItem("ender_pocket");
+		LAYLINE_ORB = simpleItem("layline_orb");
+		CURSED_DROPLET = simpleItem("cursed_droplet");
 
 	}
 
@@ -344,6 +336,10 @@ public class ItemRegistrate {
 		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "minecraft:generated");
 		builder.texture("layer0", "item/" + ctx.getName());
 		builder.texture("layer1", "item/" + ctx.getName() + "_overlay");
+	}
+
+	public static ItemEntry<Item> simpleItem(String id) {
+		return REGISTRATE.item(id, Item::new).defaultModel().defaultLang().register();
 	}
 
 }
