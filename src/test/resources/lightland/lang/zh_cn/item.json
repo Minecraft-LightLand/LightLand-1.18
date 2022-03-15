@@ -196,7 +196,11 @@
 		  "effect": ""
 		},
 		{
-		  "holy_water": "净化药水"
+		  "holy_water": "净化药水",
+		  "long_holy_water": "净化药水",
+		  "dispell": "破魔药水",
+		  "long_dispell": "破魔药水",
+		  "strong_dispell": "破魔药水"
 		}
 	  ]
 	}

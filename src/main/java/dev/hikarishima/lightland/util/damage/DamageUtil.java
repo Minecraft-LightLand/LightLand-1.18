@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.util.damage;
 
+import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -21,7 +22,9 @@ public class DamageUtil {
 		MobEffectInstance ins = target.getEffect(MobEffects.DAMAGE_RESISTANCE);
 		if (ins != null) level += (ins.getAmplifier() + 1) * 20;
 		level += EnchantmentHelper.getDamageProtection(target.getArmorSlots(), source) * 4;
-		return damage * Math.exp(-0.01 * level);
+		MobEffectInstance dis = target.getEffect(VanillaMagicRegistrate.DISPELL.get());
+		int dispell = dis == null ? 1 : (2 << dis.getAmplifier());
+		return damage * Math.exp(-0.01 * level / dispell);
 	}
 
 }

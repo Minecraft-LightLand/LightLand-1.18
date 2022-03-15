@@ -23,7 +23,7 @@
   "results": [
     {
       "fluid": "lightland:holy_water",
-      "amount": 5
+      "amount": 25
     }
   ],
   "heatRequirement": "heated"

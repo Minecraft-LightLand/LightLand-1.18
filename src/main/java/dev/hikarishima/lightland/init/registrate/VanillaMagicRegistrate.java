@@ -16,6 +16,7 @@ import dev.hikarishima.lightland.content.common.effect.*;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.Potions;
@@ -52,10 +53,16 @@ public class VanillaMagicRegistrate {
 	public static final RegistryEntry<TargetHideEffect> T_HIDE = genEffect("target_hide", () -> new TargetHideEffect(MobEffectCategory.NEUTRAL, 0xffffff));
 
 	public static final RegistryEntry<CleanseEffect> CLEANSE = genEffect("cleanse", () -> new CleanseEffect(MobEffectCategory.NEUTRAL, 0xffffff));
+	public static final RegistryEntry<DispellEffect> DISPELL = genEffect("dispell", () -> new DispellEffect(MobEffectCategory.NEUTRAL, 0x9f9f9f));
+
 
 	public static final List<RegistryEntry<? extends Potion>> POTION_LIST = new ArrayList<>();
 
 	public static final RegistryEntry<Potion> P_HOLY_WATER = genPotion("holy_water", () -> new Potion(new MobEffectInstance(CLEANSE.get(), 600)));
+	public static final RegistryEntry<Potion> P_HOLY_WATER_L = genPotion("long_holy_water", () -> new Potion(new MobEffectInstance(CLEANSE.get(), 1200)));
+	public static final RegistryEntry<Potion> P_DISPELL = genPotion("dispell", () -> new Potion(new MobEffectInstance(DISPELL.get(), 600)));
+	public static final RegistryEntry<Potion> P_DISPELL_S = genPotion("strong_dispell", () -> new Potion(new MobEffectInstance(DISPELL.get(), 400, 1)));
+	public static final RegistryEntry<Potion> P_DISPELL_L = genPotion("long_dispell", () -> new Potion(new MobEffectInstance(DISPELL.get(), 1200)));
 
 	public static <T extends MobEffect> RegistryEntry<T> genEffect(String name, NonNullSupplier<T> sup) {
 		return REGISTRATE.entry(name, cb -> new NoConfigBuilder<>(REGISTRATE, REGISTRATE, name, cb, MobEffect.class, sup))
@@ -73,7 +80,12 @@ public class VanillaMagicRegistrate {
 	}
 
 	public static void registerBrewingRecipe() {
-		PotionBrewing.addMix(Potions.AWKWARD, ItemRegistrate.DISPELL_DUST.get(), P_HOLY_WATER.get());
+		PotionBrewing.addMix(Potions.AWKWARD, ItemRegistrate.HOLY_WATER_BOTTLE.get(), P_HOLY_WATER.get());
+		PotionBrewing.addMix(P_HOLY_WATER.get(), Items.REDSTONE, P_HOLY_WATER_L.get());
+		PotionBrewing.addMix(P_HOLY_WATER.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL.get());
+		PotionBrewing.addMix(P_HOLY_WATER_L.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL_L.get());
+		PotionBrewing.addMix(P_DISPELL.get(), Items.GLOWSTONE_DUST, P_DISPELL_S.get());
+		PotionBrewing.addMix(P_DISPELL.get(), Items.REDSTONE, P_DISPELL_L.get());
 	}
 
 }

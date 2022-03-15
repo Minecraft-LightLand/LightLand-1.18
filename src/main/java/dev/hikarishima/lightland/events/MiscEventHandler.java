@@ -111,7 +111,9 @@ public class MiscEventHandler {
 
 	@SubscribeEvent
 	public static void onPotionTest(PotionEvent.PotionApplicableEvent event) {
-		if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.CLEANSE.get())) {
+		boolean flag = event.getEntityLiving().hasEffect(VanillaMagicRegistrate.CLEANSE.get());
+		flag |= event.getEntityLiving().hasEffect(VanillaMagicRegistrate.DISPELL.get());
+		if (flag) {
 			if (event.getPotionEffect().getEffect() instanceof ForceEffect)
 				return;
 			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.FORCE)
@@ -122,18 +124,24 @@ public class MiscEventHandler {
 				return;
 			if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get())
 				return;
+			if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.DISPELL.get())
+				return;
 			event.setResult(Event.Result.DENY);
 		}
 	}
 
 	@SubscribeEvent
 	public static void onPotionAdded(PotionEvent.PotionAddedEvent event) {
-		if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get()) {
+		boolean flag = event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get();
+		flag |= event.getPotionEffect().getEffect() == VanillaMagicRegistrate.DISPELL.get();
+		if (flag) {
 			List<MobEffectInstance> list = new ArrayList<>(event.getEntityLiving().getActiveEffects());
 			for (MobEffectInstance ins : list) {
 				if (ins.getEffect() instanceof ForceEffect)
 					continue;
 				if (ins.getEffect() == VanillaMagicRegistrate.CLEANSE.get())
+					continue;
+				if (ins.getEffect() == VanillaMagicRegistrate.DISPELL.get())
 					continue;
 				event.getEntityLiving().removeEffect(ins.getEffect());
 			}

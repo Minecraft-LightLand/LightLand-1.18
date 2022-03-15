@@ -22,7 +22,8 @@
 	"target_hide": "完全隐身",
 	"target_remove": "混乱",
 	"water_trap": "水牢",
-	"cleanse": "净化"
+	"cleanse": "净化",
+	"dispell": "破魔"
   },
   "entity.lightland": {
 	"fire_arrow": "魔法火箭",
