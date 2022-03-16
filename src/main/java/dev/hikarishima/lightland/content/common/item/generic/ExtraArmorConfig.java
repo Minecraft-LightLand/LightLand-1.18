@@ -1,7 +1,12 @@
 package dev.hikarishima.lightland.content.common.item.generic;
 
+import com.google.common.collect.Multimap;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -24,6 +29,17 @@ public class ExtraArmorConfig {
 		}
 	}
 
+	public int getMagicImmune() {
+		return magic_immune;
+	}
+
+	public Multimap<Attribute, AttributeModifier> modify(Multimap<Attribute, AttributeModifier> map, EquipmentSlot slot, ItemStack stack) {
+		return map;
+	}
+
+	public void onArmorTick(ItemStack stack, Level world, Player player) {
+	}
+
 	public ExtraArmorConfig repairChance(double chance) {
 		this.repair_chance = chance;
 		return this;
@@ -34,12 +50,9 @@ public class ExtraArmorConfig {
 		return this;
 	}
 
-	public ExtraArmorConfig setMagicImmune(int percent){
+	public ExtraArmorConfig setMagicImmune(int percent) {
 		magic_immune = percent;
 		return this;
 	}
 
-	public int getMagicImmune() {
-		return magic_immune;
-	}
 }

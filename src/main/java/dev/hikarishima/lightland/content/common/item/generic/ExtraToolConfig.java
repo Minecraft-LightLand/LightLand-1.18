@@ -1,9 +1,13 @@
 package dev.hikarishima.lightland.content.common.item.generic;
 
+import com.google.common.collect.Multimap;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -66,4 +70,7 @@ public class ExtraToolConfig {
 		return this;
 	}
 
+	public Multimap<Attribute, AttributeModifier> modify(Multimap<Attribute, AttributeModifier> map, EquipmentSlot slot, ItemStack stack) {
+		return map;
+	}
 }
