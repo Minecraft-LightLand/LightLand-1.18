@@ -81,6 +81,7 @@ public class ClientRegister {
 		ClientRegistry.registerKeyBinding(LangData.Keys.SKILL_2.map);
 		ClientRegistry.registerKeyBinding(LangData.Keys.SKILL_3.map);
 		ClientRegistry.registerKeyBinding(LangData.Keys.SKILL_4.map);
+
 	}
 
 }

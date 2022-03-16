@@ -98,7 +98,7 @@ public class BipedMonster<T extends BipedMonster<T>> extends BaseMonster<T> impl
 		this.level.addFreshEntity(arrow);
 	}
 
-	private AbstractArrow getArrow(ItemStack itemstack, float damage) {
+	protected AbstractArrow getArrow(ItemStack itemstack, float damage) {
 		AbstractArrow arrow = ((ArrowItem) Items.ARROW).createArrow(level, itemstack, this);
 		arrow.setEnchantmentEffectsFromEntity(this, damage);
 		return arrow;

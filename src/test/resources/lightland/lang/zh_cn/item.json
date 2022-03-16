@@ -59,7 +59,10 @@
 	"lead_block": "铅块",
 	"ritual_core": "仪式祭坛",
 	"ritual_side": "仪式祭台",
-	"steel_block": "钢块"
+	"steel_block": "钢块",
+	"layline_head": "地脉根冠",
+	"layroot_body": "世界树根",
+	"layroot_head": "世界树根"
   },
   "-cartesian": {
 	"backpack": {

@@ -9,6 +9,8 @@ import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.MobType;
@@ -55,6 +57,14 @@ public class CursedKnightProperties {
 							wrap(GenItem.Mats.HEAVYSTEEL.getTool(GenItem.Tools.AXE), 100)),
 					GenItem.Mats.KNIGHTSTEEL, GenItem.Mats.HEAVYSTEEL),
 			List.of(), ALLY_TYPE);
+
+	public static final WeightedRandomList<WeightedEntry.Wrapper<MobEffectInstance>> EFFECTS = WeightedRandomList.create(
+			WeightedEntry.wrap(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1), 100),
+			WeightedEntry.wrap(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3), 100),
+			WeightedEntry.wrap(new MobEffectInstance(MobEffects.POISON, 100, 0), 100),
+			WeightedEntry.wrap(new MobEffectInstance(MobEffects.BLINDNESS, 100), 50),
+			WeightedEntry.wrap(new MobEffectInstance(MobEffects.HARM, 1), 50)
+	);
 
 	public static WeightedEntry.Wrapper<Item> wrap(Item item, int weight) {
 		return WeightedEntry.wrap(item, weight);
