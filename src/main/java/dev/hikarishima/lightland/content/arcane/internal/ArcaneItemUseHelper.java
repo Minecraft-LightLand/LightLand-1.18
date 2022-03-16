@@ -144,10 +144,6 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 	@DoubleSidedCall
 	@Override
 	public void onPlayerLeftClickEntity(ItemStack stack, AttackEntityEvent event) {
-		float charge = event.getPlayer().getAttackStrengthScale(0.5f);
-		if (!event.getPlayer().level.isClientSide() && event.getEntityLiving() != null && charge > 0.9f) {
-			addArcaneMana(stack, 1);
-		}
 	}
 
 	@ServerOnly
@@ -157,7 +153,6 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 			return;
 		Player player = event.getPlayer();
 		LLPlayerData magic = LLPlayerData.get(player);
-		Entity e = event.getTarget();
 		LivingEntity le = toLiving(event.getTarget());
 		ArcaneType type = null;
 		boolean cr = event.isVanillaCritical();

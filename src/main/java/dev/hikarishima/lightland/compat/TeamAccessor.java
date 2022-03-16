@@ -17,12 +17,14 @@ public class TeamAccessor {
 
 	@ServerOnly
 	public static boolean arePlayersInSameTeam(ServerPlayer a, ServerPlayer b) {
+		if (a == null || b == null) return false;
 		if (b.isAlliedTo(a) || a.isAlliedTo(b)) return true;
 		return playerSameTeam(a.getUUID(), b.getUUID());
 	}
 
 	@ServerOnly
 	public static boolean arePlayerAndEntityInSameTeam(ServerPlayer a, LivingEntity b) {
+		if (a == null || b == null) return false;
 		if (b.isAlliedTo(a) || a.isAlliedTo(b)) return true;
 		UUID bid = getPotentialOwner(b);
 		return bid != null && playerSameTeam(a.getUUID(), bid);
@@ -30,6 +32,7 @@ public class TeamAccessor {
 
 	@ServerOnly
 	public static boolean areEntitiesInSameTeam(LivingEntity a, LivingEntity b) {
+		if (a == null || b == null) return false;
 		if (b.isAlliedTo(a) || a.isAlliedTo(b)) return true;
 		UUID aid = getPotentialOwner(a);
 		UUID bid = getPotentialOwner(b);

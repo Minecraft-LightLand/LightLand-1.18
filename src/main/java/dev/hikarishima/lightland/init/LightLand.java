@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.init;
 import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.content.common.command.*;
-import dev.hikarishima.lightland.events.ArcaneDamageEventHandler;
+import dev.hikarishima.lightland.events.DamageEventHandler;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
 import dev.hikarishima.lightland.events.MiscEventHandler;
 import dev.hikarishima.lightland.events.generic.CapabilityEvents;
@@ -56,7 +56,7 @@ public class LightLand {
 		MinecraftForge.EVENT_BUS.register(ItemUseEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
 		MinecraftForge.EVENT_BUS.register(GenericEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(ArcaneDamageEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(DamageEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
 	}
 
