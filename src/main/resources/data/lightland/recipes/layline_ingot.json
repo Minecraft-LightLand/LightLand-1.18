@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"cac",
+	"aba",
+	"cac"
+  ],
+  "key": {
+	"a": {
+	  "item": "lightland:layline_head"
+	},
+	"b": {
+	  "item": "lightland:enchant_gold_nugget"
+	},
+	"c": {
+	  "item": "lightland:steel_nugget"
+	}
+  },
+  "result": {
+	"item": "lightland:layline_ingot"
+  }
+}

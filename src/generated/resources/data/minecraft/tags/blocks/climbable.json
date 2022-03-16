@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "lightland:layroot_body",
     "lightland:layroot_head",
+    "lightland:layroot_body",
     "lightland:layline_head"
   ]
 }

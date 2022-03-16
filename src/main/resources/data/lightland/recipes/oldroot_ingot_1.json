@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "lightland:oldroot",
+  "pattern": [
+	" a ",
+	"aba",
+	" a "
+  ],
+  "key": {
+	"a": {
+	  "item": "lightland:layroot_ingot"
+	},
+	"b": {
+	  "item": "lightland:layline_heart"
+	}
+  },
+  "result": {
+	"item": "lightland:oldroot_ingot",
+	"count": 4
+  }
+}

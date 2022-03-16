@@ -52,7 +52,9 @@
 	"cursed_droplet": "诅咒泪滴",
 	"knight_scrap": "骑士甲碎片",
 	"dispell_dust": "驱魔粉",
-	"holy_water_bottle": "瓶装圣水"
+	"holy_water_bottle": "瓶装圣水",
+	"oldroot": "石化世界树根",
+	"layline_heart": "地脉之心"
   },
   "block.lightland": {
 	"enchant_gold_block": "蓄魔金块",

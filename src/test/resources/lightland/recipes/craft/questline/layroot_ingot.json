@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"cac",
+	"aba",
+	"cac"
+  ],
+  "key": {
+	"a": {
+	  "item": "lightland:layroot_head"
+	},
+	"b": {
+	  "item": "lightland:enchant_gold_nugget"
+	},
+	"c": {
+	  "item": "minecraft:iron_nugget"
+	}
+  },
+  "result": {
+	"item": "lightland:layroot_ingot"
+  }
+}

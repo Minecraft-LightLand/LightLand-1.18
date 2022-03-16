@@ -92,7 +92,7 @@ public class ItemRegistrate {
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
 	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET, KNIGHT_SCRAP,
-			DISPELL_DUST;
+			DISPELL_DUST, OLDROOT, LAYLINE_HEART;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	public static final ItemEntry<HolyWaterBottle> HOLY_WATER_BOTTLE;
@@ -132,6 +132,8 @@ public class ItemRegistrate {
 			CURSED_DROPLET = simpleItem("cursed_droplet");
 			KNIGHT_SCRAP = simpleItem("knight_scrap");
 			DISPELL_DUST = simpleItem("dispell_dust");
+			OLDROOT = simpleItem("oldroot");
+			LAYLINE_HEART = simpleItem("layline_heart");
 
 			HOLY_WATER_BOTTLE = REGISTRATE.item("holy_water_bottle", p -> new HolyWaterBottle(
 							p.craftRemainder(Items.GLASS_BOTTLE).food(new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().build()).stacksTo(16)))
