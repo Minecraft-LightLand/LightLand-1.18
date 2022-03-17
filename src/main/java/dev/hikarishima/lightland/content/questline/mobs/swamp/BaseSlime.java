@@ -25,7 +25,7 @@ public class BaseSlime<T extends BaseSlime<T>> extends Slime {
 
 	@Override
 	public void remove(RemovalReason reason) {
-		level.getEntitiesOfClass(BossSlime.class, new AABB(position(), position()).inflate(8))
+		level.getEntitiesOfClass(BossSlime.class, new AABB(position(), position()).inflate(16))
 				.forEach(e -> e.seeDeath(this));
 		super.remove(reason);
 	}

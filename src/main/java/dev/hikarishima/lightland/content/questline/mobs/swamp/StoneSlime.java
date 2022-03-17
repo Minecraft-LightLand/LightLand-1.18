@@ -44,6 +44,7 @@ public class StoneSlime extends MaterialSlime<StoneSlime> {
 		super.setSize(size, regen);
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue((size + 3) * (size + 3));
 		this.getAttribute(Attributes.ARMOR).setBaseValue(size * 5);
+		this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(size * 0.1);
 		if (regen) {
 			this.setHealth(this.getMaxHealth());
 		}

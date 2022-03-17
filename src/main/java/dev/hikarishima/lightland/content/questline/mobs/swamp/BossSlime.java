@@ -83,6 +83,7 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 		this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue((size + 8));
 		this.getAttribute(Attributes.ARMOR).setBaseValue(Mth.clamp(10, size + 8, 20));
 		this.getAttribute(Attributes.ARMOR_TOUGHNESS).setBaseValue(Mth.clamp(5, size + 4, 10));
+		this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(Math.min(0.8, size * 0.1));
 		if (regen) {
 			this.setHealth(size >= MAX_LV ? this.getMaxHealth() : this.getMaxHealth() / 2);
 		}
