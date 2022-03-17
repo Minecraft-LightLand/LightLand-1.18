@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.SerializableUUID;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -74,6 +75,7 @@ public class Automator {
 		new RegistryClassHandler<>(Block.class, () -> ForgeRegistries.BLOCKS);
 		new RegistryClassHandler<>(Item.class, () -> ForgeRegistries.ITEMS);
 		new RegistryClassHandler<>(Enchantment.class, () -> ForgeRegistries.ENCHANTMENTS);
+		new RegistryClassHandler<>(MobEffect.class, () -> ForgeRegistries.MOB_EFFECTS);
 	}
 
 	public static Object fromTag(CompoundTag tag, Class<?> cls, Object obj, Predicate<SerialClass.SerialField> pred)

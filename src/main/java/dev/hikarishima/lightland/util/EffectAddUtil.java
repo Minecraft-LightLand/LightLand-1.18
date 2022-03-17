@@ -33,11 +33,12 @@ public class EffectAddUtil {
 	}
 
 	public static void addEffect(LivingEntity entity, MobEffectInstance ins, AddReason reason, Entity source) {
-		ins = new MobEffectInstance(ins);
 		if (entity == source)
 			reason = AddReason.SELF;
 		if (ins.getEffect() instanceof ForceEffect)
 			reason = AddReason.FORCE;
+		ins = new MobEffectInstance(ins.getEffect(), ins.getDuration(), ins.getAmplifier(),
+				ins.isAmbient(), reason != AddReason.FORCE && ins.isVisible(), ins.showIcon());
 		REASON.set(reason);
 		if (ins.getEffect() instanceof ForceEffect)
 			forceAddEffect(entity, ins, source);

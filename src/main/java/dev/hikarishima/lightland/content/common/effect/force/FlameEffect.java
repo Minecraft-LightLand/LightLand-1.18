@@ -1,5 +1,6 @@
-package dev.hikarishima.lightland.content.common.effect;
+package dev.hikarishima.lightland.content.common.effect.force;
 
+import dev.hikarishima.lightland.content.common.effect.ForceEffect;
 import dev.hikarishima.lightland.util.damage.DamageUtil;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;

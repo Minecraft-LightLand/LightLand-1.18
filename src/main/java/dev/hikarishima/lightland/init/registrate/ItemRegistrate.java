@@ -217,6 +217,7 @@ public class ItemRegistrate {
 		registerEgg("cursed_knight_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_KNIGHT);
 		registerEgg("cursed_archer_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_ARCHER);
 		registerEgg("cursed_shield_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_SHIELD);
+		registerEgg("potion_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_SLIME);
 	}
 
 	private static void registerEgg(String id, int col_0, int col_1, Supplier<EntityEntry<? extends Mob>> sup) {

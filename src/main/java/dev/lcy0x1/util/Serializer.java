@@ -4,6 +4,7 @@ import com.google.gson.*;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
@@ -58,6 +59,7 @@ public class Serializer {
 		new RLClassHandler<>(Block.class, () -> ForgeRegistries.BLOCKS);
 		new RLClassHandler<>(Potion.class, () -> ForgeRegistries.POTIONS);
 		new RLClassHandler<>(Enchantment.class, () -> ForgeRegistries.ENCHANTMENTS);
+		new RLClassHandler<>(MobEffect.class, () -> ForgeRegistries.MOB_EFFECTS);
 	}
 
 	@SuppressWarnings("unchecked")

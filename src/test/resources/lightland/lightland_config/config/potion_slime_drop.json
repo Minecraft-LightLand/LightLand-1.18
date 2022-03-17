@@ -1,0 +1,53 @@
+{
+  "_class": "dev.hikarishima.lightland.content.questline.mobs.swamp.SlimeProperties",
+  "map": {
+	"poison": {
+	  "effect": "minecraft:poison",
+	  "weight": 100,
+	  "drop": "minecraft:spider_eye",
+	  "chance": 0.1,
+	  "duration": 100,
+	  "amplifier": 0
+	},
+	"weakness": {
+	  "effect": "minecraft:weakness",
+	  "weight": 50,
+	  "drop": "minecraft:brown_mushroom",
+	  "chance": 0.1,
+	  "duration": 100,
+	  "amplifier": 1
+	},
+	"slowness": {
+	  "effect": "minecraft:slowness",
+	  "weight": 50,
+	  "drop": "minecraft:red_mushroom",
+	  "chance": 0.1,
+	  "duration": 100,
+	  "amplifier": 3
+	},
+	"wither": {
+	  "effect": "minecraft:wither",
+	  "weight": 20,
+	  "drop": "minecraft:wither_rose",
+	  "chance": 0.02,
+	  "duration": 100,
+	  "amplifier": 0
+	},
+	"blindness": {
+	  "effect": "minecraft:blindness",
+	  "weight": 50,
+	  "drop": "minecraft:carrot",
+	  "chance": 0.1,
+	  "duration": 100,
+	  "amplifier": 1
+	},
+	"regeneration": {
+	  "effect": "minecraft:regeneration",
+	  "weight": 50,
+	  "drop": "minecraft:ghast_tear",
+	  "chance": 0.02,
+	  "duration": 100,
+	  "amplifier": 1
+	}
+  }
+}
