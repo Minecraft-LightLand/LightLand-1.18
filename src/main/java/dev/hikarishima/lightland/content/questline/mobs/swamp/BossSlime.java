@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import dev.hikarishima.lightland.content.common.item.generic.GenericTieredItem;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
@@ -36,7 +37,7 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 				.withPool(LootTableTemplate.getPool(1, 0)
 						.add(LootTableTemplate.getItem(Items.SLIME_BALL, 4, 8, 1)))
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.DIRTY_SLIME.get(), 1, 3, 1))
+						.add(LootTableTemplate.getItem(ItemRegistrate.SLIME_TENTACLE.get(), 1, 3, 1))
 						.when(LootTableTemplate.byPlayer())));
 	}
 
@@ -62,9 +63,20 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 			} else {
 				hurt(DamageSource.MAGIC.bypassMagic().bypassArmor(), 2);
 			}
+		}
+		if (this.tickCount % 200 == 0) {
 			if (this.getTarget() != null) {
 				Vec3 vec = this.getTarget().getEyePosition().subtract(getEyePosition()).normalize().scale(getSize() / 2f);
 				summon(getRandomSummon(), (float) vec.x, (float) vec.y, (float) vec.z);
+			}
+		}
+		if (this.tickCount % 200 == 100) {
+			LivingEntity target = getTarget();
+			if (target != null && target.getEyePosition().distanceTo(getEyePosition()) > 8) {
+				SlimeTentacle snowball = new SlimeTentacle(level, this);
+				Vec3 vec = target.getEyePosition().subtract(getEyePosition());
+				snowball.shoot(vec.x, vec.y, vec.z, 1.5f, 0);
+				level.addFreshEntity(snowball);
 			}
 		}
 
@@ -82,26 +94,6 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 			new_damage = damage - (damage - new_damage) / factor;
 		}
 		super.actuallyHurt(source, new_damage);
-	}
-
-	private float recalculateDamage(DamageSource source, float damage) {
-		if (source.isBypassMagic())
-			return damage;
-		if (source.isFire() || source.isExplosion())
-			return damage;
-		if (source.isFall())
-			return damage * 0.1f;
-		if (source.isMagic())
-			return damage * 0.2f;
-		if (source.isProjectile())
-			return damage * 0.1f;
-		if (source.getDirectEntity() instanceof LivingEntity le) {
-			ItemStack stack = le.getMainHandItem();
-			if (stack.getItem() instanceof ShovelItem)
-				return damage * 2f;
-			return damage * 0.2f;
-		}
-		return damage;
 	}
 
 	@SuppressWarnings("ConstantConditions")
@@ -135,6 +127,19 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 			this.gameEvent(GameEvent.ENTITY_KILLED);
 		}
 		this.invalidateCaps();
+	}
+
+	@Nullable
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type,
+										@Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+		groupData = super.finalizeSpawn(level, difficulty, type, groupData, tag);
+		setSize(MAX_LV, true);
+		return groupData;
+	}
+
+	public void seeDeath(BaseSlime<?> slime) {
+		heal(slime.getMaxHealth());
 	}
 
 	private void summon(EntityType<? extends BaseSlime<?>> type, float f1, float f2, float f3) {
@@ -177,16 +182,27 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 				.getRandom(random).get().getData();
 	}
 
-	@Nullable
-	@Override
-	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type,
-										@Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
-		groupData = super.finalizeSpawn(level, difficulty, type, groupData, tag);
-		setSize(MAX_LV, true);
-		return groupData;
+	private float recalculateDamage(DamageSource source, float damage) {
+		if (source.getDirectEntity() instanceof LivingEntity le) {
+			ItemStack stack = le.getMainHandItem();
+			if (stack.getItem() instanceof ShovelItem)
+				return damage * 4f;
+			if (stack.getItem() instanceof GenericTieredItem tier) {
+				if (tier.getExtraConfig().bypassMagic)
+					return damage * 2f;
+			}
+		}
+		if (source.isBypassMagic() || source.isFire() || source.isExplosion())
+			return damage;
+		if (source.isFall())
+			return damage * 0.1f;
+		if (source.isMagic())
+			return damage * 0.2f;
+		if (source.isProjectile())
+			return damage * 0.2f;
+		if (source.getDirectEntity() instanceof LivingEntity)
+			return damage * 0.4f;
+		return damage;
 	}
 
-	public void seeDeath(BaseSlime<?> slime) {
-		heal(slime.getMaxHealth());
-	}
 }

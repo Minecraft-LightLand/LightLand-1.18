@@ -58,7 +58,8 @@
 	"layline_heart": "地脉之心",
 	"acid_slime": "酸性史莱姆球",
 	"dirty_slime": "浑浊史莱姆球",
-	"acid_arrow": "酸液箭"
+	"acid_arrow": "酸液箭",
+	"slime_tentacle": "史莱姆触手"
   },
   "block.lightland": {
 	"enchant_gold_block": "蓄魔金块",

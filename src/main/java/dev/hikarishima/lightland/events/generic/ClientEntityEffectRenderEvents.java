@@ -153,6 +153,7 @@ public class ClientEntityEffectRenderEvents {
 	public static final ResourceLocation ARCANE_ICON = new ResourceLocation(LightLand.MODID, "textures/effect_overlay/arcane.png");
 	public static final ResourceLocation WATER_TRAP_ICON = new ResourceLocation(LightLand.MODID, "textures/effect_overlay/water_trap.png");
 	public static final ResourceLocation FLAME_ICON = new ResourceLocation(LightLand.MODID, "textures/effect_overlay/flame.png");
+	public static final ResourceLocation ICE_ICON = new ResourceLocation(LightLand.MODID, "textures/effect_overlay/flame.png");
 
 	private static final ArrayList<DelayedEntityRender> ICONS = new ArrayList<>();
 
@@ -185,6 +186,9 @@ public class ClientEntityEffectRenderEvents {
 			}
 			if (map.containsKey(VanillaMagicRegistrate.FLAME.get())) {
 				ICONS.add(new DelayedEntityRender(entity, FLAME_ICON));
+			}
+			if (map.containsKey(VanillaMagicRegistrate.ICE.get())) {
+				ICONS.add(new DelayedEntityRender(entity, ICE_ICON));
 			}
 			if (map.containsKey(VanillaMagicRegistrate.EMERALD.get())) {
 				if (!Minecraft.getInstance().isPaused() && entity != Proxy.getClientPlayer()) {

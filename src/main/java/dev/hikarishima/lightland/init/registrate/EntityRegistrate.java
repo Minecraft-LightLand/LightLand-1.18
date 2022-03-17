@@ -23,6 +23,7 @@ public class EntityRegistrate {
 	public static final EntityEntry<SpellEntity> ET_SPELL;
 	public static final EntityEntry<FireArrowEntity> ET_FIRE_ARROW;
 	public static final EntityEntry<MagicFireBallEntity> ET_FIRE_BALL;
+	public static final EntityEntry<SlimeTentacle> ET_SLIME_TENTACLE;
 
 	static {
 		ET_ARROW = REGISTRATE
@@ -60,6 +61,14 @@ public class EntityRegistrate {
 				.<MagicFireBallEntity>entity("fire_ball", MagicFireBallEntity::new, MobCategory.MISC)
 				.properties(e -> e.sized(1f, 1f).clientTrackingRange(4).updateInterval(10))
 				.renderer(() -> ctx -> new SpecialSpriteRenderer<>(ctx, ctx.getItemRenderer(), true))
+				.defaultLang().register();
+
+		ET_SLIME_TENTACLE = REGISTRATE
+				.<SlimeTentacle>entity("slime_tentacle", SlimeTentacle::new, MobCategory.MISC)
+				.properties(e -> e.sized(0.5F, 0.5F)
+						.clientTrackingRange(4).updateInterval(20)
+						.setShouldReceiveVelocityUpdates(true))
+				.renderer(() -> ctx -> new SpecialSpriteRenderer<>(ctx, ctx.getItemRenderer(), false))
 				.defaultLang().register();
 	}
 
@@ -152,7 +161,8 @@ public class EntityRegistrate {
 		event.put(ET_POTION_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(ET_STONE_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(ET_VINE_SLIME.get(), Monster.createMonsterAttributes().build());
-		event.put(ET_BOSS_SLIME.get(), Monster.createMonsterAttributes().build());
+		event.put(ET_BOSS_SLIME.get(), Monster.createMonsterAttributes()
+				.add(Attributes.FOLLOW_RANGE, 64).build());
 
 	}
 

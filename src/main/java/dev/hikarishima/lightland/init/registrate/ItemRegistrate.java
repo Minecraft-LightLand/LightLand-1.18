@@ -31,6 +31,7 @@ import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
 import dev.hikarishima.lightland.content.magic.item.PotionCore;
 import dev.hikarishima.lightland.content.questline.item.DispellWaterBottle;
+import dev.hikarishima.lightland.content.questline.item.SlimeTentacleItem;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.GenItem;
@@ -96,6 +97,7 @@ public class ItemRegistrate {
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	public static final ItemEntry<DispellWaterBottle> CLEANSE_WATER_BOTTLE, HOLY_WATER_BOTTLE;
+	public static final ItemEntry<SlimeTentacleItem> SLIME_TENTACLE;
 
 	public static final FluidEntry<VirtualFluid> CLEANSE_WATER, HOLY_WATER;
 
@@ -146,6 +148,8 @@ public class ItemRegistrate {
 
 			CLEANSE_WATER = REGISTRATE.virtualFluid("cleanse_water").defaultLang().register();
 			HOLY_WATER = REGISTRATE.virtualFluid("holy_water").defaultLang().register();
+			SLIME_TENTACLE = REGISTRATE.item("slime_tentacle", SlimeTentacleItem::new)
+					.defaultModel().defaultLang().register();
 		}
 	}
 

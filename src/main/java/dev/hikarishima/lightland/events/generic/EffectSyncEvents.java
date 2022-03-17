@@ -23,6 +23,7 @@ public class EffectSyncEvents {
 		TRACKED.add(VanillaMagicRegistrate.WATER_TRAP.get());
 		TRACKED.add(VanillaMagicRegistrate.FLAME.get());
 		TRACKED.add(VanillaMagicRegistrate.EMERALD.get());
+		TRACKED.add(VanillaMagicRegistrate.ICE.get());
 	}
 
 	@OnlyIn(Dist.CLIENT)
