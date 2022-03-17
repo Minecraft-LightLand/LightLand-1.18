@@ -88,10 +88,14 @@ public class PotionSlime extends BaseSlime<PotionSlime> {
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType type, @Nullable SpawnGroupData groupData, @Nullable CompoundTag tag) {
+		setupPotion();
+		return super.finalizeSpawn(level, difficulty, type, groupData, tag);
+	}
+
+	public void setupPotion() {
 		if (getConfig() == SlimeProperties.DEF) {
 			this.entityData.set(ID_EFFECT, SlimeProperties.getRandomConfig(level.getRandom()));
 		}
-		return super.finalizeSpawn(level, difficulty, type, groupData, tag);
 	}
 
 	@Override

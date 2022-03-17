@@ -8,7 +8,6 @@ import dev.hikarishima.lightland.content.questline.mobs.layline.LaylineSkeletonR
 import dev.hikarishima.lightland.content.questline.mobs.layline.LaylineZombie;
 import dev.hikarishima.lightland.content.questline.mobs.layline.LaylineZombieRenderer;
 import dev.hikarishima.lightland.content.questline.mobs.swamp.*;
-import net.minecraft.client.renderer.entity.SlimeRenderer;
 import net.minecraft.client.renderer.entity.TippableArrowRenderer;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -72,6 +71,7 @@ public class EntityRegistrate {
 	public static final EntityEntry<PotionSlime> ET_POTION_SLIME;
 	public static final EntityEntry<StoneSlime> ET_STONE_SLIME;
 	public static final EntityEntry<VineSlime> ET_VINE_SLIME;
+	public static final EntityEntry<BossSlime> ET_BOSS_SLIME;
 
 	static {
 		ET_LAYLINE_ZOMBIE = REGISTRATE
@@ -96,17 +96,21 @@ public class EntityRegistrate {
 				.renderer(() -> CursedKnightRenderer::new).loot(BaseCursedKnight::loot).defaultLang().register();
 
 		ET_POTION_SLIME = REGISTRATE
-				.entity("potion_slime",PotionSlime::new, MobCategory.MONSTER)
-				.properties(e->e.sized(2.04F, 2.04F).clientTrackingRange(10))
-				.renderer(()-> PotionSlimeRenderer::new).loot(PotionSlime::loot).defaultLang().register();
+				.entity("potion_slime", PotionSlime::new, MobCategory.MONSTER)
+				.properties(e -> e.sized(2.04F, 2.04F).clientTrackingRange(10))
+				.renderer(() -> PotionSlimeRenderer::new).loot(PotionSlime::loot).defaultLang().register();
 		ET_STONE_SLIME = REGISTRATE
-				.entity("stone_slime",StoneSlime::new, MobCategory.MONSTER)
-				.properties(e->e.sized(2.04F, 2.04F).clientTrackingRange(10))
-				.renderer(()-> MaterialSlimeRenderer::new).loot(StoneSlime::loot).defaultLang().register();
+				.entity("stone_slime", StoneSlime::new, MobCategory.MONSTER)
+				.properties(e -> e.sized(2.04F, 2.04F).clientTrackingRange(10))
+				.renderer(() -> MaterialSlimeRenderer::new).loot(StoneSlime::loot).defaultLang().register();
 		ET_VINE_SLIME = REGISTRATE
-				.entity("vine_slime",VineSlime::new, MobCategory.MONSTER)
-				.properties(e->e.sized(2.04F, 2.04F).clientTrackingRange(10))
-				.renderer(()-> MaterialSlimeRenderer::new).loot(VineSlime::loot).defaultLang().register();
+				.entity("vine_slime", VineSlime::new, MobCategory.MONSTER)
+				.properties(e -> e.sized(2.04F, 2.04F).clientTrackingRange(10))
+				.renderer(() -> MaterialSlimeRenderer::new).loot(VineSlime::loot).defaultLang().register();
+		ET_BOSS_SLIME = REGISTRATE
+				.entity("boss_slime", BossSlime::new, MobCategory.MONSTER)
+				.properties(e -> e.sized(2.04F, 2.04F).clientTrackingRange(10))
+				.renderer(() -> MaterialSlimeRenderer::new).loot(BossSlime::loot).defaultLang().register();
 	}
 
 	public static void register() {
@@ -144,10 +148,11 @@ public class EntityRegistrate {
 				.add(Attributes.MOVEMENT_SPEED, 0.25F)
 				.add(Attributes.ATTACK_DAMAGE, 4.0D)
 				.add(Attributes.FOLLOW_RANGE, 35.0D).build());
-		
+
 		event.put(ET_POTION_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(ET_STONE_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(ET_VINE_SLIME.get(), Monster.createMonsterAttributes().build());
+		event.put(ET_BOSS_SLIME.get(), Monster.createMonsterAttributes().build());
 
 	}
 

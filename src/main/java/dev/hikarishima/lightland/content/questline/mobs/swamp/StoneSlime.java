@@ -40,7 +40,7 @@ public class StoneSlime extends MaterialSlime<StoneSlime> {
 
 	@SuppressWarnings("ConstantConditions")
 	@Override
-	protected void setSize(int size, boolean regen) {
+	public void setSize(int size, boolean regen) {
 		super.setSize(size, regen);
 		this.getAttribute(Attributes.MAX_HEALTH).setBaseValue((size + 3) * (size + 3));
 		this.getAttribute(Attributes.ARMOR).setBaseValue(size * 5);
