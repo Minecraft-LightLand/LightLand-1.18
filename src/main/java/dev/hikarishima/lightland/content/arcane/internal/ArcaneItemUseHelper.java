@@ -4,6 +4,7 @@ import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
+import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
@@ -17,10 +18,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.eventbus.api.Event;
 
 public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler {
 
@@ -173,6 +176,11 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 
 	@Override
 	public void onPlayerRightClickBlock(ItemStack stack, PlayerInteractEvent.RightClickBlock event) {
+		BlockState block = event.getWorld().getBlockState(event.getHitVec().getBlockPos());
+		if (block.is(BlockRegistrate.LAYLINE_CHARGER.get())) {
+			event.setUseBlock(Event.Result.ALLOW);
+			return;
+		}
 		handleRightClickEvent(stack, event, null);
 	}
 

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"cac",
+	"aba",
+	"cac"
+  ],
+  "key": {
+	"a": {
+	  "item": "lightland:oldroot"
+	},
+	"b": {
+	  "item": "lightland:layline_heart"
+	},
+	"c": {
+	  "item": "lightland:layline_ingot"
+	}
+  },
+  "result": {
+	"item": "lightland:layline_charger"
+  }
+}

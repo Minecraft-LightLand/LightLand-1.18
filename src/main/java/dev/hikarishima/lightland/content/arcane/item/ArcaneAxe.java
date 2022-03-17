@@ -95,4 +95,8 @@ public class ArcaneAxe extends AxeItem implements IArcaneItem {
 		}
 	}
 
+	@Override
+	public int getEnchantmentValue() {
+		return 0;
+	}
 }

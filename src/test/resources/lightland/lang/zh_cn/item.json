@@ -64,7 +64,8 @@
 	"steel_block": "钢块",
 	"layline_head": "地脉根冠",
 	"layroot_body": "世界树根",
-	"layroot_head": "世界树根"
+	"layroot_head": "世界树根",
+	"layline_charger": "地脉充能器"
   },
   "-cartesian": {
 	"backpack": {

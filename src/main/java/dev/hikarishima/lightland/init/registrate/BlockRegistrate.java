@@ -5,6 +5,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
 import dev.hikarishima.lightland.content.magic.block.RitualSide;
+import dev.hikarishima.lightland.content.questline.block.LaylineChargerBlock;
 import dev.hikarishima.lightland.content.questline.block.LaylineHead;
 import dev.hikarishima.lightland.content.questline.block.LayrootBody;
 import dev.hikarishima.lightland.content.questline.block.LayrootHead;
@@ -39,6 +40,7 @@ public class BlockRegistrate {
 	public static final BlockEntry<LayrootBody> LAYROOT_BODY;
 	public static final BlockEntry<LayrootHead> LAYROOT_HEAD;
 	public static final BlockEntry<LaylineHead> LAYLINE_HEAD;
+	public static final BlockEntry<LaylineChargerBlock> LAYLINE_CHARGER;
 
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
@@ -78,6 +80,7 @@ public class BlockRegistrate {
 					.noCollission().instabreak();
 			BlockBehaviour.Properties prop_line = BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.WOOD)
 					.noCollission().instabreak().randomTicks();
+			BlockBehaviour.Properties prop_charger = BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK);
 			LAYROOT_HEAD = REGISTRATE.block("layroot_head", p -> new LayrootHead(prop_root))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
 					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()
@@ -90,6 +93,9 @@ public class BlockRegistrate {
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
 					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()
 					.defaultLoot().defaultLang().addLayer(() -> RenderType::cutout).tag(BlockTags.CLIMBABLE).register();
+			LAYLINE_CHARGER = REGISTRATE.block("layline_charger", LaylineChargerBlock::new)
+					.defaultBlockstate().simpleItem().defaultLoot().defaultLang().register();
+
 		}
 	}
 

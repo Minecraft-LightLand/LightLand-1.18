@@ -77,4 +77,9 @@ public class ArcaneSword extends SwordItem implements IArcaneItem {
 		}
 	}
 
+	@Override
+	public int getEnchantmentValue() {
+		return 0;
+	}
+
 }
