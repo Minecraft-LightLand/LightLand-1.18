@@ -10,11 +10,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-public class HolyWaterBottle extends Item {
+public class DispellWaterBottle extends Item {
 
 	private static final int DRINK_DURATION = 10;
 
-	public HolyWaterBottle(Item.Properties p_41346_) {
+	public DispellWaterBottle(Item.Properties p_41346_) {
 		super(p_41346_);
 	}
 

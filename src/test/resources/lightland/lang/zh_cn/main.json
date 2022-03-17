@@ -43,10 +43,15 @@
 	"profession": "职业装备",
 	"generated": "通用装备"
   },
-  "key.categories.lightland": "Light Land 按键",
-  "key.lightland.skill_1": "技能 1",
-  "key.lightland.skill_2": "技能 2",
-  "key.lightland.skill_3": "技能 3",
-  "key.lightland.skill_4": "技能 4",
-  "fluid.lightland.holy_water": "圣水"
+  "key": {
+	"categories.lightland": "Light Land 按键",
+	"lightland.skill_1": "技能 1",
+	"lightland.skill_2": "技能 2",
+	"lightland.skill_3": "技能 3",
+	"lightland.skill_4": "技能 4"
+  },
+  "fluid.lightland": {
+	"cleanse_water": "净化水",
+	"holy_water": "圣水"
+  }
 }

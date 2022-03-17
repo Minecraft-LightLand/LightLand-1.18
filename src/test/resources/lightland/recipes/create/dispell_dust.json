@@ -8,7 +8,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "fluid": "lightland:holy_water",
+      "fluid": "lightland:cleanse_water",
       "amount": 250
     },
     {

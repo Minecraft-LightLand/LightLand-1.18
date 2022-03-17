@@ -1,0 +1,23 @@
+{
+  "conditions": [
+	{
+	  "type": "forge:mod_loaded",
+	  "modid": "create"
+	}
+  ],
+  "type": "create:emptying",
+  "ingredients": [
+	{
+	  "item": "lightland:cleanse_water_bottle"
+	}
+  ],
+  "results": [
+	{
+	  "item": "minecraft:glass_bottle"
+	},
+	{
+	  "fluid": "lightland:cleanse_water",
+	  "amount": 250
+	}
+  ]
+}

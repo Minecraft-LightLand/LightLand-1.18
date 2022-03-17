@@ -30,7 +30,7 @@ import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
 import dev.hikarishima.lightland.content.magic.item.PotionCore;
-import dev.hikarishima.lightland.content.questline.item.HolyWaterBottle;
+import dev.hikarishima.lightland.content.questline.item.DispellWaterBottle;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.GenItem;
@@ -95,9 +95,9 @@ public class ItemRegistrate {
 			DISPELL_DUST, OLDROOT, LAYLINE_HEART;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
-	public static final ItemEntry<HolyWaterBottle> HOLY_WATER_BOTTLE;
+	public static final ItemEntry<DispellWaterBottle> CLEANSE_WATER_BOTTLE, HOLY_WATER_BOTTLE;
 
-	public static final FluidEntry<VirtualFluid> HOLY_WATER;
+	public static final FluidEntry<VirtualFluid> CLEANSE_WATER, HOLY_WATER;
 
 	static {
 		// Backpacks
@@ -135,10 +135,14 @@ public class ItemRegistrate {
 			OLDROOT = simpleItem("oldroot");
 			LAYLINE_HEART = simpleItem("layline_heart");
 
-			HOLY_WATER_BOTTLE = REGISTRATE.item("holy_water_bottle", p -> new HolyWaterBottle(
+			CLEANSE_WATER_BOTTLE = REGISTRATE.item("cleanse_water_bottle", p -> new DispellWaterBottle(
+							p.craftRemainder(Items.GLASS_BOTTLE).food(new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().build()).stacksTo(16)))
+					.defaultModel().defaultLang().register();
+			HOLY_WATER_BOTTLE = REGISTRATE.item("holy_water_bottle", p -> new DispellWaterBottle(
 							p.craftRemainder(Items.GLASS_BOTTLE).food(new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().build()).stacksTo(16)))
 					.defaultModel().defaultLang().register();
 
+			CLEANSE_WATER = REGISTRATE.virtualFluid("cleanse_water").defaultLang().register();
 			HOLY_WATER = REGISTRATE.virtualFluid("holy_water").defaultLang().register();
 		}
 	}

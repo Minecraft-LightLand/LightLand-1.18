@@ -52,6 +52,7 @@
 	"cursed_droplet": "诅咒泪滴",
 	"knight_scrap": "骑士甲碎片",
 	"dispell_dust": "驱魔粉",
+	"cleanse_water_bottle": "瓶装净化水",
 	"holy_water_bottle": "瓶装圣水",
 	"oldroot": "石化世界树根",
 	"layline_heart": "地脉之心"
@@ -203,8 +204,10 @@
 		  "effect": ""
 		},
 		{
-		  "holy_water": "净化药水",
-		  "long_holy_water": "净化药水",
+		  "cleanse_water": "净化药水",
+		  "long_cleanse_water": "净化药水",
+		  "holy_water": "神圣药水",
+		  "long_holy_water": "神圣药水",
 		  "dispell": "破魔药水",
 		  "long_dispell": "破魔药水",
 		  "strong_dispell": "破魔药水"

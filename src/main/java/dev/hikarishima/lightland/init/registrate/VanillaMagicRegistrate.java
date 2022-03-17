@@ -56,6 +56,8 @@ public class VanillaMagicRegistrate {
 
 	public static final List<RegistryEntry<? extends Potion>> POTION_LIST = new ArrayList<>();
 
+	public static final RegistryEntry<Potion> P_CLEANSE_WATER = genPotion("cleanse_water", () -> new Potion(new MobEffectInstance(CLEANSE.get(), 600)));
+	public static final RegistryEntry<Potion> P_CLEANSE_WATER_L = genPotion("long_cleanse_water", () -> new Potion(new MobEffectInstance(CLEANSE.get(), 1200)));
 	public static final RegistryEntry<Potion> P_HOLY_WATER = genPotion("holy_water", () -> new Potion(new MobEffectInstance(CLEANSE.get(), 600)));
 	public static final RegistryEntry<Potion> P_HOLY_WATER_L = genPotion("long_holy_water", () -> new Potion(new MobEffectInstance(CLEANSE.get(), 1200)));
 	public static final RegistryEntry<Potion> P_DISPELL = genPotion("dispell", () -> new Potion(new MobEffectInstance(DISPELL.get(), 600)));
@@ -78,10 +80,10 @@ public class VanillaMagicRegistrate {
 	}
 
 	public static void registerBrewingRecipe() {
-		PotionBrewing.addMix(Potions.AWKWARD, ItemRegistrate.HOLY_WATER_BOTTLE.get(), P_HOLY_WATER.get());
-		PotionBrewing.addMix(P_HOLY_WATER.get(), Items.REDSTONE, P_HOLY_WATER_L.get());
-		PotionBrewing.addMix(P_HOLY_WATER.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL.get());
-		PotionBrewing.addMix(P_HOLY_WATER_L.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL_L.get());
+		PotionBrewing.addMix(Potions.AWKWARD, ItemRegistrate.CLEANSE_WATER_BOTTLE.get(), P_CLEANSE_WATER.get());
+		PotionBrewing.addMix(P_CLEANSE_WATER.get(), Items.REDSTONE, P_CLEANSE_WATER_L.get());
+		PotionBrewing.addMix(P_CLEANSE_WATER.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL.get());
+		PotionBrewing.addMix(P_CLEANSE_WATER_L.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL_L.get());
 		PotionBrewing.addMix(P_DISPELL.get(), Items.GLOWSTONE_DUST, P_DISPELL_S.get());
 		PotionBrewing.addMix(P_DISPELL.get(), Items.REDSTONE, P_DISPELL_L.get());
 	}
