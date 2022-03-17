@@ -246,7 +246,7 @@ public class ItemRegistrate {
 
 	public static final ItemEntry<GenericArrowItem> STARTER_ARROW, COPPER_ARROW, IRON_ARROW, OBSIDIAN_ARROW,
 			NO_FALL_ARROW, ENDER_ARROW, TNT_1_ARROW, TNT_2_ARROW, TNT_3_ARROW, FIRE_1_ARROW, FIRE_2_ARROW,
-			ICE_ARROW, DISPELL_ARROW;
+			ICE_ARROW, DISPELL_ARROW, ACID_ARROW;
 
 	static {
 		STARTER_BOW = genBow("starter_bow", 600, 0, 0, FeatureList::end);
@@ -280,6 +280,8 @@ public class ItemRegistrate {
 		ICE_ARROW = genArrow("frozen_arrow", 0, 0, false, e -> e.add(new PotionArrowFeature(
 				new MobEffectInstance(VanillaMagicRegistrate.ICE.get(), 600),
 				new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), 200))));
+		ACID_ARROW = genArrow("acid_arrow", 2, 0, false, e -> e.add(new PotionArrowFeature(
+				new MobEffectInstance(VanillaMagicRegistrate.ARMOR_BREAKER.get(), 600))));
 		DISPELL_ARROW = genArrow("dispell_arrow", 0, 0, false, e -> e.add(new DamageArrowFeature(
 				a -> DamageSource.arrow(a, a.getOwner()).bypassMagic(),
 				a -> (float) (a.getBaseDamage() * a.getDeltaMovement().length())
