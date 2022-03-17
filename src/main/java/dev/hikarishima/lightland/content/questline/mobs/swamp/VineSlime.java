@@ -54,10 +54,12 @@ public class VineSlime extends MaterialSlime<VineSlime> {
 	}
 
 	@Override
-	protected void actuallyHurt(DamageSource source, float damage) {
+	public void actuallyHurt(DamageSource source, float damage) {
 		super.actuallyHurt(source, damage);
 		if (isDeadOrDying() && source.getDirectEntity() instanceof LivingEntity le) {
-			EffectAddUtil.addEffect(le, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 4), EffectAddUtil.AddReason.NONE, this);
+			if (!source.isExplosion() && !source.isMagic())
+				EffectAddUtil.addEffect(le, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 4),
+						EffectAddUtil.AddReason.NONE, this);
 		}
 	}
 

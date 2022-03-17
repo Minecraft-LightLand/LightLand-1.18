@@ -19,7 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '6.1.8'
+version = '6.1.9'
 group = 'dev.hikarishima.lightland' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'lightland'
 
@@ -139,8 +139,8 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
-    //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-4.5.4")
-    //runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-4.5.4")
+    compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-4.5.4")
+    runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-4.5.4")
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.11')
     implementation fg.deobf("com.simibubi.create:Create:mc1.18.1_v0.4d+87")

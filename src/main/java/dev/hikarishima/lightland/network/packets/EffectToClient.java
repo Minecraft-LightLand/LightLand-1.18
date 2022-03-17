@@ -26,9 +26,9 @@ public class EffectToClient extends SimplePacketBase {
 
 	public EffectToClient(FriendlyByteBuf buf) {
 		entity = buf.readUUID();
+		effect = ForgeRegistries.MOB_EFFECTS.getValue(buf.readResourceLocation());
 		exist = buf.readBoolean();
 		if (exist) {
-			effect = ForgeRegistries.MOB_EFFECTS.getValue(buf.readResourceLocation());
 			level = buf.readInt();
 		}
 	}
@@ -36,9 +36,9 @@ public class EffectToClient extends SimplePacketBase {
 	@Override
 	public void write(FriendlyByteBuf buffer) {
 		buffer.writeUUID(entity);
+		buffer.writeResourceLocation(effect.getRegistryName());
 		buffer.writeBoolean(exist);
 		if (exist) {
-			buffer.writeResourceLocation(effect.getRegistryName());
 			buffer.writeInt(level);
 		}
 	}
