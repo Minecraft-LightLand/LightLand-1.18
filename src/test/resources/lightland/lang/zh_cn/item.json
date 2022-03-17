@@ -56,7 +56,8 @@
 	"holy_water_bottle": "瓶装圣水",
 	"oldroot": "石化世界树根",
 	"layline_heart": "地脉之心",
-	"acid_slime": "酸性史莱姆球"
+	"acid_slime": "酸性史莱姆球",
+	"dirty_slime": "浑浊史莱姆球"
   },
   "block.lightland": {
 	"enchant_gold_block": "蓄魔金块",
@@ -185,7 +186,9 @@
 		  "cursed_knight": "诅咒骑士",
 		  "cursed_archer": "诅咒射手",
 		  "cursed_shield": "诅咒重盾",
-		  "potion_slime": "药水史莱姆"
+		  "potion_slime": "药水史莱姆",
+		  "stone_slime": "石莱姆",
+		  "vine_slime": "藤蔓史莱姆"
 		},
 		{
 		  "spawn_egg": "生成蛋"

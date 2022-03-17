@@ -92,7 +92,7 @@ public class ItemRegistrate {
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
 	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET, KNIGHT_SCRAP,
-			DISPELL_DUST, OLDROOT, LAYLINE_HEART, ACID_SLIME;
+			DISPELL_DUST, OLDROOT, LAYLINE_HEART, ACID_SLIME, DIRTY_SLIME;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	public static final ItemEntry<DispellWaterBottle> CLEANSE_WATER_BOTTLE, HOLY_WATER_BOTTLE;
@@ -135,6 +135,7 @@ public class ItemRegistrate {
 			OLDROOT = simpleItem("oldroot");
 			LAYLINE_HEART = simpleItem("layline_heart");
 			ACID_SLIME = simpleItem("acid_slime");
+			DIRTY_SLIME = simpleItem("dirty_slime");
 
 			CLEANSE_WATER_BOTTLE = REGISTRATE.item("cleanse_water_bottle", p -> new DispellWaterBottle(
 							p.craftRemainder(Items.GLASS_BOTTLE).food(new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().build()).stacksTo(16)))
@@ -222,7 +223,9 @@ public class ItemRegistrate {
 		registerEgg("cursed_knight_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_KNIGHT);
 		registerEgg("cursed_archer_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_ARCHER);
 		registerEgg("cursed_shield_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_SHIELD);
-		registerEgg("potion_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_SLIME);
+		registerEgg("potion_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_POTION_SLIME);
+		registerEgg("stone_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_STONE_SLIME);
+		registerEgg("vine_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_VINE_SLIME);
 	}
 
 	private static void registerEgg(String id, int col_0, int col_1, Supplier<EntityEntry<? extends Mob>> sup) {

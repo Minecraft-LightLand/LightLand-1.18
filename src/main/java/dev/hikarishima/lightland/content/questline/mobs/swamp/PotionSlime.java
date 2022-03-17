@@ -4,7 +4,6 @@ import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -12,28 +11,26 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class PotionSlime extends Slime {
+public class PotionSlime extends BaseSlime<PotionSlime> {
 
 	private static final EntityDataAccessor<String> ID_EFFECT = SynchedEntityData.defineId(PotionSlime.class, EntityDataSerializers.STRING);
 
 	public static void loot(RegistrateEntityLootTables table, EntityType<?> type) {
 		table.add(type, new LootTable.Builder()
 				.withPool(LootTableTemplate.getPool(1, 0).add(
-						LootTableTemplate.getItem(Items.SLIME_BALL, 0, 1, 1))));
+						LootTableTemplate.getItem(Items.SLIME_BALL, 0, 2, 1))));
 	}
 
-	private static ThreadLocal<String> TEMP = new ThreadLocal<>();
+	private static final ThreadLocal<String> TEMP = new ThreadLocal<>();
 
-	public PotionSlime(EntityType<? extends Slime> type, Level level) {
+	public PotionSlime(EntityType<PotionSlime> type, Level level) {
 		super(type, level);
 		String str = TEMP.get();
 		if (str != null && str.length() > 0)
@@ -86,11 +83,6 @@ public class PotionSlime extends Slime {
 	public void addAdditionalSaveData(CompoundTag tag) {
 		super.addAdditionalSaveData(tag);
 		tag.putString("slime_potion", getPotionID());
-	}
-
-	@Override
-	public final Packet<?> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
 	@Nullable
