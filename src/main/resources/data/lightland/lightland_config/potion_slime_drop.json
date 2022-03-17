@@ -36,8 +36,8 @@
 	"blindness": {
 	  "effect": "minecraft:blindness",
 	  "weight": 50,
-	  "drop": "minecraft:carrot",
-	  "chance": 0.1,
+	  "drop": "minecraft:lapis_lazuli",
+	  "chance": 0.06,
 	  "duration": 100,
 	  "amplifier": 1
 	},
@@ -48,6 +48,14 @@
 	  "chance": 0.02,
 	  "duration": 100,
 	  "amplifier": 1
+	},
+	"acid": {
+	  "effect": "lightland:armor_reduce",
+	  "weight": 50,
+	  "drop": "lightland:acid_slime",
+	  "chance": 0.1,
+	  "duration": 100,
+	  "amplifier": 0
 	}
   }
 }
