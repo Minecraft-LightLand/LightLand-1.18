@@ -59,7 +59,10 @@
 	"acid_slime": "酸性史莱姆球",
 	"dirty_slime": "浑浊史莱姆球",
 	"acid_arrow": "酸液箭",
-	"slime_tentacle": "史莱姆触手"
+	"slime_tentacle": "史莱姆触手",
+	"good_soul": "解放的灵魂",
+	"bad_soul": "怨灵",
+	"holy_powder": "神圣粉末"
   },
   "block.lightland": {
 	"enchant_gold_block": "蓄魔金块",

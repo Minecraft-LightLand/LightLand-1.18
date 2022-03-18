@@ -1,0 +1,25 @@
+{
+  "conditions": [
+	{
+	  "type": "forge:mod_loaded",
+	  "modid": "create"
+	}
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+	{
+	  "fluid": "lightland:cleanse_water",
+	  "amount": 1000
+	},
+	{
+	  "item": "lightland:holy_powder"
+	}
+  ],
+  "results": [
+	{
+	  "fluid": "lightland:holy_water",
+	  "amount": 500
+	}
+  ],
+  "heatRequirement": "heated"
+}

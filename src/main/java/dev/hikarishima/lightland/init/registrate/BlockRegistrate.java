@@ -99,7 +99,7 @@ public class BlockRegistrate {
 			BlockBehaviour.Properties prop_slime = BlockBehaviour.Properties.of(Material.WEB).noCollission().strength(4.0F);
 			SLIME_CARPET = REGISTRATE.block("slime_carpet", p -> new SlimeCarpet(prop_slime))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().carpet(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
-					.simpleItem().loot((table, self) -> table.dropOther(self, Items.SLIME_BALL)).defaultLang().register();
+					.simpleItem().loot((table, self) -> {}).defaultLang().register();
 			SLIME_VINE = REGISTRATE.block("slime_vine", p -> new WebBlock(prop_slime))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
 					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()

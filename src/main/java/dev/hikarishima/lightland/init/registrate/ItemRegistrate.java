@@ -93,7 +93,7 @@ public class ItemRegistrate {
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
 	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET, KNIGHT_SCRAP,
-			DISPELL_DUST, OLDROOT, LAYLINE_HEART, ACID_SLIME, DIRTY_SLIME;
+			DISPELL_DUST, OLDROOT, LAYLINE_HEART, ACID_SLIME, DIRTY_SLIME, GOOD_SOUL, BAD_SOUL, HOLY_POWDER;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	public static final ItemEntry<DispellWaterBottle> CLEANSE_WATER_BOTTLE, HOLY_WATER_BOTTLE;
@@ -138,6 +138,9 @@ public class ItemRegistrate {
 			LAYLINE_HEART = simpleItem("layline_heart");
 			ACID_SLIME = simpleItem("acid_slime");
 			DIRTY_SLIME = simpleItem("dirty_slime");
+			GOOD_SOUL = simpleItem("good_soul");
+			BAD_SOUL = simpleItem("bad_soul");
+			HOLY_POWDER = simpleItem("holy_powder");
 
 			CLEANSE_WATER_BOTTLE = REGISTRATE.item("cleanse_water_bottle", p -> new DispellWaterBottle(
 							p.craftRemainder(Items.GLASS_BOTTLE).food(new FoodProperties.Builder().nutrition(1).saturationMod(2).alwaysEat().build()).stacksTo(16)))
