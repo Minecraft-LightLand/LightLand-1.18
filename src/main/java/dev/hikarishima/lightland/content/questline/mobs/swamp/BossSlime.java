@@ -170,7 +170,8 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 		list.add(EntityRegistrate.ET_BOSS_SLIME.get());
 		list.add(EntityRegistrate.ET_STONE_SLIME.get());
 		list.add(EntityRegistrate.ET_VINE_SLIME.get());
-		for (int i = 0; i < 5; i++)
+		list.add(EntityRegistrate.ET_CARPET_SLIME.get());
+		for (int i = 0; i < 4; i++)
 			list.add(EntityRegistrate.ET_POTION_SLIME.get());
 		return list;
 	}
@@ -179,7 +180,8 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 		return WeightedRandomList.create(
 						WeightedEntry.wrap(EntityRegistrate.ET_STONE_SLIME.get(), 20),
 						WeightedEntry.wrap(EntityRegistrate.ET_VINE_SLIME.get(), 20),
-						WeightedEntry.wrap(EntityRegistrate.ET_POTION_SLIME.get(), 80))
+						WeightedEntry.wrap(EntityRegistrate.ET_CARPET_SLIME.get(), 20),
+						WeightedEntry.wrap(EntityRegistrate.ET_POTION_SLIME.get(), 60))
 				.getRandom(random).get().getData();
 	}
 

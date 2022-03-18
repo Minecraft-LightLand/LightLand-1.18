@@ -230,6 +230,7 @@ public class ItemRegistrate {
 		registerEgg("potion_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_POTION_SLIME);
 		registerEgg("stone_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_STONE_SLIME);
 		registerEgg("vine_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_VINE_SLIME);
+		registerEgg("carpet_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CARPET_SLIME);
 		registerEgg("boss_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_BOSS_SLIME);
 	}
 

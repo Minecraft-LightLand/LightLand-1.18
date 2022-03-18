@@ -2,11 +2,10 @@ package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
+import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
-import dev.hikarishima.lightland.util.EffectAddUtil;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -57,9 +56,13 @@ public class VineSlime extends MaterialSlime<VineSlime> {
 	public void actuallyHurt(DamageSource source, float damage) {
 		super.actuallyHurt(source, damage);
 		if (isDeadOrDying() && source.getDirectEntity() instanceof LivingEntity le) {
-			if (!source.isExplosion() && !source.isMagic())
-				EffectAddUtil.addEffect(le, new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 4),
-						EffectAddUtil.AddReason.NONE, this);
+			if (!source.isExplosion() && !source.isMagic()) {
+				BlockPos pos = le.blockPosition();
+				if (level.getBlockState(pos).isAir())
+					level.setBlockAndUpdate(pos, BlockRegistrate.SLIME_VINE.getDefaultState());
+				else if (level.getBlockState(pos.above()).isAir())
+					level.setBlockAndUpdate(pos.above(), BlockRegistrate.SLIME_VINE.getDefaultState());
+			}
 		}
 	}
 

@@ -5,18 +5,17 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
 import dev.hikarishima.lightland.content.magic.block.RitualSide;
-import dev.hikarishima.lightland.content.questline.block.LaylineChargerBlock;
-import dev.hikarishima.lightland.content.questline.block.LaylineHead;
-import dev.hikarishima.lightland.content.questline.block.LayrootBody;
-import dev.hikarishima.lightland.content.questline.block.LayrootHead;
+import dev.hikarishima.lightland.content.questline.block.*;
 import dev.hikarishima.lightland.init.data.GenItem;
 import dev.lcy0x1.block.BlockProxy;
 import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WebBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
@@ -41,6 +40,8 @@ public class BlockRegistrate {
 	public static final BlockEntry<LayrootHead> LAYROOT_HEAD;
 	public static final BlockEntry<LaylineHead> LAYLINE_HEAD;
 	public static final BlockEntry<LaylineChargerBlock> LAYLINE_CHARGER;
+	public static final BlockEntry<SlimeCarpet> SLIME_CARPET;
+	public static final BlockEntry<WebBlock> SLIME_VINE;
 
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
@@ -95,6 +96,13 @@ public class BlockRegistrate {
 					.defaultLoot().defaultLang().addLayer(() -> RenderType::cutout).tag(BlockTags.CLIMBABLE).register();
 			LAYLINE_CHARGER = REGISTRATE.block("layline_charger", LaylineChargerBlock::new)
 					.defaultBlockstate().simpleItem().defaultLoot().defaultLang().register();
+			BlockBehaviour.Properties prop_slime = BlockBehaviour.Properties.of(Material.WEB).noCollission().strength(4.0F);
+			SLIME_CARPET = REGISTRATE.block("slime_carpet", p -> new SlimeCarpet(prop_slime))
+					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().carpet(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
+					.simpleItem().loot((table, self) -> table.dropOther(self, Items.SLIME_BALL)).defaultLang().register();
+			SLIME_VINE = REGISTRATE.block("slime_vine", p -> new WebBlock(prop_slime))
+					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
+					.simpleItem().loot((table, self) -> table.dropOther(self, Items.VINE)).addLayer(() -> RenderType::cutout).defaultLang().register();
 
 		}
 	}

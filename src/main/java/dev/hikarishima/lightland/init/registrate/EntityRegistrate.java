@@ -80,6 +80,7 @@ public class EntityRegistrate {
 	public static final EntityEntry<PotionSlime> ET_POTION_SLIME;
 	public static final EntityEntry<StoneSlime> ET_STONE_SLIME;
 	public static final EntityEntry<VineSlime> ET_VINE_SLIME;
+	public static final EntityEntry<CarpetSlime> ET_CARPET_SLIME;
 	public static final EntityEntry<BossSlime> ET_BOSS_SLIME;
 
 	static {
@@ -116,6 +117,10 @@ public class EntityRegistrate {
 				.entity("vine_slime", VineSlime::new, MobCategory.MONSTER)
 				.properties(e -> e.sized(2.04F, 2.04F).clientTrackingRange(10))
 				.renderer(() -> MaterialSlimeRenderer::new).loot(VineSlime::loot).defaultLang().register();
+		ET_CARPET_SLIME = REGISTRATE
+				.entity("carpet_slime", CarpetSlime::new, MobCategory.MONSTER)
+				.properties(e -> e.sized(2.04F, 2.04F).clientTrackingRange(10))
+				.renderer(() -> MaterialSlimeRenderer::new).loot(CarpetSlime::loot).defaultLang().register();
 		ET_BOSS_SLIME = REGISTRATE
 				.entity("boss_slime", BossSlime::new, MobCategory.MONSTER)
 				.properties(e -> e.sized(2.04F, 2.04F).clientTrackingRange(10))
@@ -161,6 +166,7 @@ public class EntityRegistrate {
 		event.put(ET_POTION_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(ET_STONE_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(ET_VINE_SLIME.get(), Monster.createMonsterAttributes().build());
+		event.put(ET_CARPET_SLIME.get(), Monster.createMonsterAttributes().build());
 		event.put(ET_BOSS_SLIME.get(), Monster.createMonsterAttributes()
 				.add(Attributes.FOLLOW_RANGE, 64).build());
 
