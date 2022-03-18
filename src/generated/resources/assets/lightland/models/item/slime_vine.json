@@ -1,3 +1,6 @@
 {
-  "parent": "lightland:block/slime_vine"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lightland:block/slime_vine"
+  }
 }

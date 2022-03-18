@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -28,8 +29,14 @@ public class CarpetSlime extends MaterialSlime<CarpetSlime> {
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (level.getBlockState(blockPosition()).isAir()){
-			level.setBlockAndUpdate(blockPosition(), BlockRegistrate.SLIME_CARPET.getDefaultState());
+		if (isOnGround()) {
+			int r = getSize() >= 3 ? 1 : 0;
+			for (int x = -r; x <= r; x++)
+				for (int z = -r; z <= r; z++) {
+					BlockPos pos = blockPosition().offset(x, 0, z);
+					if (level.getBlockState(pos).isAir())
+						level.setBlockAndUpdate(pos, BlockRegistrate.SLIME_CARPET.getDefaultState());
+				}
 		}
 	}
 

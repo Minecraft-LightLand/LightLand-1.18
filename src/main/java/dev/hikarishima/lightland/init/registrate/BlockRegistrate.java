@@ -102,7 +102,8 @@ public class BlockRegistrate {
 					.simpleItem().loot((table, self) -> table.dropOther(self, Items.SLIME_BALL)).defaultLang().register();
 			SLIME_VINE = REGISTRATE.block("slime_vine", p -> new WebBlock(prop_slime))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
-					.simpleItem().loot((table, self) -> table.dropOther(self, Items.VINE)).addLayer(() -> RenderType::cutout).defaultLang().register();
+					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()
+					.loot((table, self) -> table.dropOther(self, Items.VINE)).addLayer(() -> RenderType::cutout).defaultLang().register();
 
 		}
 	}
