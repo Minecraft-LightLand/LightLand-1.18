@@ -6,6 +6,7 @@ import dev.hikarishima.lightland.content.common.command.*;
 import dev.hikarishima.lightland.events.DamageEventHandler;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
 import dev.hikarishima.lightland.events.MiscEventHandler;
+import dev.hikarishima.lightland.events.WorldGenEventHandler;
 import dev.hikarishima.lightland.events.generic.CapabilityEvents;
 import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;
 import dev.hikarishima.lightland.events.generic.EffectSyncEvents;
@@ -46,6 +47,7 @@ public class LightLand {
 		RecipeRegistrate.register();
 		VanillaMagicRegistrate.register();
 		ParticleRegistrate.register();
+		BiomeRegistrate.register();
 		AllTags.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
 	}
@@ -58,6 +60,8 @@ public class LightLand {
 		MinecraftForge.EVENT_BUS.register(GenericEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(DamageEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
+		MinecraftForge.EVENT_BUS.register(WorldGenEventHandler.class);
+
 	}
 
 	private static void registerModBusEvents(IEventBus bus) {

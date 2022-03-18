@@ -27,6 +27,11 @@ public class BaseLaylineMob<T extends BaseLaylineMob<T>> extends BipedMonster<T>
 	}
 
 	@Override
+	public boolean canPickUpLoot() {
+		return false;
+	}
+
+	@Override
 	public void killed(ServerLevel level, LivingEntity target) {
 		LaylineProperties.convert(level, target);
 	}
