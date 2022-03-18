@@ -75,7 +75,8 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 			if (target != null && target.getEyePosition().distanceTo(getEyePosition()) > 8) {
 				SlimeTentacle snowball = new SlimeTentacle(level, this);
 				Vec3 vec = target.getEyePosition().subtract(getEyePosition());
-				snowball.shoot(vec.x, vec.y, vec.z, 1.5f, 0);
+				double speed = 1.5 + 1.5 * Math.log(getSize()) / Math.log(MAX_LV);
+				snowball.shoot(vec.x, vec.y, vec.z, (float) speed, 0);
 				level.addFreshEntity(snowball);
 			}
 		}

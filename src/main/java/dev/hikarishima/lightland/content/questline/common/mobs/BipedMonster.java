@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class BipedMonster<T extends BipedMonster<T>> extends BaseMonster<T> implements RangedAttackMob {
 
-
 	private final RangedBowAttackGoal<T> bowGoal = new RangedBowAttackGoal<>(this, 1.0D, 20, 15.0F);
+
 	private final MeleeAttackGoal meleeGoal = new MeleeAttackGoal(this, 1.2D, false) {
 		public void stop() {
 			super.stop();
