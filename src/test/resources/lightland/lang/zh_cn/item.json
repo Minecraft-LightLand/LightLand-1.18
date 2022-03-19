@@ -56,13 +56,15 @@
 	"holy_water_bottle": "瓶装圣水",
 	"oldroot": "石化世界树根",
 	"layline_heart": "地脉之心",
-	"acid_slime": "酸性史莱姆球",
-	"dirty_slime": "浑浊史莱姆球",
+	"acid_slime": "酸液球",
+	"dirty_slime": "结合源质",
 	"acid_arrow": "酸液箭",
 	"slime_tentacle": "史莱姆触手",
 	"good_soul": "解放的灵魂",
 	"bad_soul": "怨灵",
-	"holy_powder": "神圣粉末"
+	"holy_powder": "神圣粉末",
+	"unstable_slime": "不稳定生命源质",
+	"boss_slime": "变异源质"
   },
   "block.lightland": {
 	"enchant_gold_block": "蓄魔金块",
@@ -157,7 +159,9 @@
 		  "oldroot": "古木",
 		  "knightsteel": "骑士钢",
 		  "heavysteel": "重装钢",
-		  "dispellium": "破魔钢"
+		  "dispellium": "破魔钢",
+		  "magicium": "魔导合金",
+		  "ethernium": "永恒钢"
 		},
 		{
 		  "ingot": "锭",

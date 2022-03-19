@@ -93,7 +93,8 @@ public class ItemRegistrate {
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
 	public static final ItemEntry<Item> LEAD_INGOT, LEAD_NUGGET, LAYLINE_ORB, CURSED_DROPLET, KNIGHT_SCRAP,
-			DISPELL_DUST, OLDROOT, LAYLINE_HEART, ACID_SLIME, DIRTY_SLIME, GOOD_SOUL, BAD_SOUL, HOLY_POWDER;
+			DISPELL_DUST, OLDROOT, LAYLINE_HEART, ACID_SLIME, DIRTY_SLIME, UNSTABLE_SLIME, BOSS_SLIME,
+			GOOD_SOUL, BAD_SOUL, HOLY_POWDER;
 	public static final ItemEntry<Item>[] MAT_INGOTS, MAT_NUGGETS;
 
 	public static final ItemEntry<DispellWaterBottle> CLEANSE_WATER_BOTTLE, HOLY_WATER_BOTTLE;
@@ -138,6 +139,8 @@ public class ItemRegistrate {
 			LAYLINE_HEART = simpleItem("layline_heart");
 			ACID_SLIME = simpleItem("acid_slime");
 			DIRTY_SLIME = simpleItem("dirty_slime");
+			UNSTABLE_SLIME = simpleItem("unstable_slime");
+			BOSS_SLIME = simpleItem("boss_slime");
 			GOOD_SOUL = simpleItem("good_soul");
 			BAD_SOUL = simpleItem("bad_soul");
 			HOLY_POWDER = simpleItem("holy_powder");
@@ -180,6 +183,7 @@ public class ItemRegistrate {
 	public static final ItemEntry<PotionCore> POTION_CORE;
 	public static final ItemEntry<MagicScroll> SPELL_CARD, SPELL_PARCHMENT, SPELL_SCROLL;
 	public static final ItemEntry<ManaStorage> ENC_GOLD_NUGGET, ENC_GOLD_INGOT, COOKIE, MELON, CARROT, APPLE;
+	public static final ItemEntry<Item> MAGICIUM_INGOT, MAGICIUM_NUGGET, ETHERNIUM_NUGGET, ETHERNIUM_INGOT;
 
 	static {
 		ARCANE_SWORD_GILDED = REGISTRATE.item("gilded_arcane_sword", p ->
@@ -213,6 +217,11 @@ public class ItemRegistrate {
 				.defaultModel().defaultLang().register();
 		ENC_GOLD_INGOT = REGISTRATE.item("enchant_gold_ingot", p -> new ManaStorage(p, Items.GOLD_INGOT, MANA * 9))
 				.defaultModel().defaultLang().register();
+
+		MAGICIUM_INGOT = simpleItem("magicium_ingot");
+		MAGICIUM_NUGGET = simpleItem("magicium_nugget");
+		ETHERNIUM_INGOT = simpleItem("ethernium_ingot");
+		ETHERNIUM_NUGGET = simpleItem("ethernium_nugget");
 	}
 
 	// -------- questline--------
