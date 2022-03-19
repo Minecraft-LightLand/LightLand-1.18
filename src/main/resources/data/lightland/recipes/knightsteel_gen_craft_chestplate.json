@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "b b",
+    "bbb",
+    "bbb"
+  ],
+  "key": {
+    "b": {
+      "item": "lightland:knightsteel_ingot"
+    }
+  },
+  "result": {
+    "item": "lightland:knightsteel_chestplate"
+  }
+}
+

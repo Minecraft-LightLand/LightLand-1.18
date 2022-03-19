@@ -80,9 +80,17 @@
             "a": "^m:^n",
             "b": "^m:magicium_ingot"
         },
+        "magicium_ingot": {
+            "a": "^m:^n",
+            "b": "^m:magicium_block"
+        },
         "ethernium_nugget": {
             "a": "^m:^n",
             "b": "^m:ethernium_ingot"
+        },
+        "ethernium_ingot": {
+            "a": "^m:^n",
+            "b": "^m:ethernium_block"
         }
     },
     "-potion": {
@@ -216,6 +224,51 @@
         },
         "black": {
             "c": "^n"
+        }
+    },
+    "-gen_craft": {
+        "-list": [
+            "gen_craft_axe",
+            "gen_craft_sword",
+            "gen_craft_pickaxe",
+            "gen_craft_shovel",
+            "gen_craft_hoe",
+            "gen_craft_helmet",
+            "gen_craft_chestplate",
+            "gen_craft_leggings",
+            "gen_craft_boots"
+        ],
+        "steel": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
+        },
+        "layroot": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
+        },
+        "layline": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
+        },
+        "oldroot": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
+        },
+        "knightsteel": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
+        },
+        "heavysteel": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
+        },
+        "dispell": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
+        },
+        "ethernium": {
+            "a": "^m:^n_ingot",
+            "b": "^m:^n"
         }
     }
 }

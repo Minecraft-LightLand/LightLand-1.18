@@ -34,8 +34,7 @@ public class BlockRegistrate {
 	}
 
 	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
-	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK;
-	public static final BlockEntry<Block> LEAD_BLOCK;
+	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, LEAD_BLOCK, MAGICIUM_BLOCK;
 	public static final BlockEntry<LayrootBody> LAYROOT_BODY;
 	public static final BlockEntry<LayrootHead> LAYROOT_HEAD;
 	public static final BlockEntry<LaylineHead> LAYLINE_HEAD;
@@ -73,6 +72,9 @@ public class BlockRegistrate {
 							new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)))
 					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
 			LEAD_BLOCK = REGISTRATE.block("lead_block",
+							p -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)))
+					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
+			MAGICIUM_BLOCK = REGISTRATE.block("magicium_block",
 							p -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)))
 					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
 		}

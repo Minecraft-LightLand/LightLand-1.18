@@ -29,6 +29,9 @@
         },
         "lightland:heavysteel": {
             "ingredient_weight": 100
+        },
+        "lightland:ethernium": {
+            "ingredient_weight": 70
         }
     }
 }
