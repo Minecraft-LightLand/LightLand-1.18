@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"a a",
+	" b ",
+	"a a"
+  ],
+  "key": {
+	"b": {
+	  "item": "lightland:unstable_slime"
+	},
+	"a": {
+	  "item": "minecraft:vine"
+	}
+  },
+  "result": {
+	"item": "lightland:slime_vine"
+  }
+}

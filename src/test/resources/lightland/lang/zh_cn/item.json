@@ -67,11 +67,8 @@
 	"boss_slime": "变异源质"
   },
   "block.lightland": {
-	"enchant_gold_block": "蓄魔金块",
-	"lead_block": "铅块",
 	"ritual_core": "仪式祭坛",
 	"ritual_side": "仪式祭台",
-	"steel_block": "钢块",
 	"layline_head": "地脉根冠",
 	"layroot_body": "世界树根",
 	"layroot_head": "世界树根",
@@ -132,7 +129,8 @@
 		  "oldroot": "古木",
 		  "knightsteel": "骑士",
 		  "heavysteel": "重装",
-		  "dispellium": "破魔"
+		  "dispellium": "破魔",
+		  "ethernium": "永恒"
 		},
 		{
 		  "helmet": "头盔",
@@ -181,7 +179,9 @@
 		  "oldroot": "古木",
 		  "knightsteel": "骑士",
 		  "heavysteel": "重装",
-		  "dispellium": "破魔钢"
+		  "dispellium": "破魔钢",
+		  "magicium": "魔导合金",
+		  "ethernium": "永恒钢"
 		},
 		{
 		  "block": "块"

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"aba"
+  ],
+  "key": {
+	"b": {
+	  "item": "lightland:unstable_slime"
+	},
+	"a": {
+	  "item": "minecraft:slime_ball"
+	}
+  },
+  "result": {
+	"item": "lightland:slime_carpet",
+	"count": 8
+  }
+}

@@ -34,7 +34,7 @@ public class CarpetSlime extends MaterialSlime<CarpetSlime> {
 			for (int x = -r; x <= r; x++)
 				for (int z = -r; z <= r; z++) {
 					BlockPos pos = blockPosition().offset(x, 0, z);
-					if (level.getBlockState(pos).isAir())
+					if (level.getBlockState(pos).isAir() && level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below()))
 						level.setBlockAndUpdate(pos, BlockRegistrate.SLIME_CARPET.getDefaultState());
 				}
 		}

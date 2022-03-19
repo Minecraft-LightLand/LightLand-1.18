@@ -75,6 +75,14 @@
         "dispellium_ingot": {
             "a": "^m:^n",
             "b": "^m:dispellium_block"
+        },
+        "magicium_nugget": {
+            "a": "^m:^n",
+            "b": "^m:magicium_ingot"
+        },
+        "ethernium_nugget": {
+            "a": "^m:^n",
+            "b": "^m:ethernium_ingot"
         }
     },
     "-potion": {
