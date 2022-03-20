@@ -38,7 +38,7 @@ public class ConfigSyncManager {
 	@SerialClass
 	public static class SyncPacket extends SerialPacketBase {
 
-		@SerialClass.SerialField(generic = {String.class, BaseConfig.class})
+		@SerialClass.SerialField
 		public HashMap<String, BaseConfig> map = null;
 
 		@Deprecated

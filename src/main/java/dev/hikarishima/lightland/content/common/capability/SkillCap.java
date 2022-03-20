@@ -64,7 +64,7 @@ public class SkillCap {
 
 	private final LLPlayerData parent;
 
-	@SerialClass.SerialField(generic = Cont.class)
+	@SerialClass.SerialField
 	public ArrayList<Cont<?, ?, ?>> list = new ArrayList<>();
 
 	public SkillCap(LLPlayerData parent) {

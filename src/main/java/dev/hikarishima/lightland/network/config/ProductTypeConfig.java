@@ -11,7 +11,7 @@ import java.util.Objects;
 @SerialClass
 public class ProductTypeConfig extends ConfigSyncManager.BaseConfig {
 
-	@SerialClass.SerialField(generic = {String.class, TypeConfig.class})
+	@SerialClass.SerialField
 	public HashMap<String, TypeConfig> map = new HashMap<>();
 
 	@Nullable

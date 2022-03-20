@@ -12,7 +12,7 @@ import java.util.TreeMap;
 @SerialClass
 public class DefMagicRecipe extends IMagicRecipe<DefMagicRecipe> {
 
-	@SerialClass.SerialField(generic = {String.class, MagicElement.class})
+	@SerialClass.SerialField
 	public TreeMap<String, MagicElement> elements = new TreeMap<>();
 	@SerialClass.SerialField
 	public String[] flows;

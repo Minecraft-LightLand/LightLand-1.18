@@ -28,7 +28,7 @@ public class SpriteManager {
 	private final ResourceLocation coords, texture;
 	@SerialClass.SerialField
 	public int height;
-	@SerialClass.SerialField(generic = {String.class, Rect.class})
+	@SerialClass.SerialField
 	public HashMap<String, Rect> side, comp;
 	private boolean loaded = false;
 

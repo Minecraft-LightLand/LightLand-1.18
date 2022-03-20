@@ -11,7 +11,7 @@ import java.util.Objects;
 @SerialClass
 public class SkillDataConfig extends ConfigSyncManager.BaseConfig {
 
-	@SerialClass.SerialField(generic = {String.class, SkillConfig.class})
+	@SerialClass.SerialField
 	public HashMap<String, SkillConfig<?>> map = new HashMap<>();
 
 	@Nullable

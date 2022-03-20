@@ -48,17 +48,16 @@ public class ArmorWeight extends ConfigSyncManager.BaseConfig {
 		return ans;
 	}
 
-	@SerialClass.SerialField(generic = {String.class, Entry.class})
-	public HashMap<String, Entry> entries = new HashMap<>();
+	@SerialClass.SerialField
+	private HashMap<String, Entry> entries = new HashMap<>();
 
-	@SerialClass.SerialField(generic = {String.class, String.class})
+	@SerialClass.SerialField
 	public HashMap<String, String> materials = new HashMap<>();
 
 	@SerialClass.SerialField
 	public String[] suffixes;
 
 	@SerialClass
-
 	public static class Entry {
 
 		@SerialClass.SerialField

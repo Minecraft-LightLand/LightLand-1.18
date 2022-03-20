@@ -11,17 +11,14 @@ import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;
 import dev.hikarishima.lightland.events.generic.EffectSyncEvents;
 import dev.hikarishima.lightland.events.generic.GenericEventHandler;
 import dev.hikarishima.lightland.init.data.AllTags;
-import dev.hikarishima.lightland.init.data.EnchantmentIngredient;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.*;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
 import dev.hikarishima.lightland.network.PacketHandler;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -96,7 +93,6 @@ public class LightLand {
 			PacketHandler.registerPackets();
 			EffectSyncEvents.init();
 			VanillaMagicRegistrate.registerBrewingRecipe();
-			CraftingHelper.register(new ResourceLocation(MODID, "enchantment"), EnchantmentIngredient.SERIALIZER);
 		});
 	}
 

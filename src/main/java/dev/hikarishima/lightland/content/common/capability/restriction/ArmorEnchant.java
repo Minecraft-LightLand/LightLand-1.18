@@ -79,7 +79,7 @@ public class ArmorEnchant extends ConfigSyncManager.BaseConfig {
 		return ans > affinity;
 	}
 
-	@SerialClass.SerialField(generic = {Enchantment.class, Integer.class})
+	@SerialClass.SerialField
 	public HashMap<Enchantment, Integer> map = new HashMap<>();
 
 }
