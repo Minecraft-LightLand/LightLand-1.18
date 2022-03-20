@@ -42,6 +42,8 @@ public class BlockRegistrate {
 	public static final BlockEntry<SlimeCarpet> SLIME_CARPET;
 	public static final BlockEntry<WebBlock> SLIME_VINE;
 
+	public static final BlockEntry<DelegateBlock> MAZE_WALL;
+
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
 
@@ -107,6 +109,16 @@ public class BlockRegistrate {
 					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()
 					.loot(RegistrateBlockLootTables::dropWhenSilkTouch).addLayer(() -> RenderType::cutout).defaultLang().register();
 
+		}
+		{
+			DelegateBlockProperties BP_METAL = DelegateBlockProperties.copy(Blocks.OBSIDIAN).make(BlockBehaviour.Properties::noDrops);
+
+			MAZE_WALL = REGISTRATE.block("maze_wall", p -> DelegateBlock.newBaseBlock(BP_METAL,
+							MazeWallBlock.NEIGHBOR, MazeWallBlock.FATIGUE, MazeWallBlock.ALL_DIRE_STATE))
+					.blockstate((ctx, pvd) -> {
+					}).loot((table, block) -> table.accept((rl, b) -> b.build()))
+					.tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
+					.defaultLang().simpleItem().register();
 		}
 	}
 

@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "lightland:block/maze_block_out"
+    }
+}

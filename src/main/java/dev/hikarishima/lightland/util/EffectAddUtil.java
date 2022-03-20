@@ -48,6 +48,12 @@ public class EffectAddUtil {
 		REASON.set(AddReason.NONE);
 	}
 
+	public static void refreshEffect(LivingEntity entity, MobEffectInstance ins, AddReason reason, Entity source) {
+		MobEffectInstance cur = entity.getEffect(ins.getEffect());
+		if (cur == null || cur.getAmplifier() < ins.getAmplifier())
+			addEffect(entity, ins, reason, source);
+	}
+
 	public static void addArcane(LivingEntity target, Entity source) {
 		addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), AddReason.SKILL, source);
 	}

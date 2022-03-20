@@ -1,10 +1,7 @@
 package dev.lcy0x1.block;
 
 import dev.lcy0x1.block.mult.*;
-import dev.lcy0x1.block.one.BlockEntityBlockMethod;
-import dev.lcy0x1.block.one.BlockPowerBlockMethod;
-import dev.lcy0x1.block.one.LightBlockMethod;
-import dev.lcy0x1.block.one.MirrorRotateBlockMethod;
+import dev.lcy0x1.block.one.*;
 import dev.lcy0x1.block.type.BlockMethod;
 import dev.lcy0x1.block.type.MultipleBlockMethod;
 import dev.lcy0x1.block.type.SingletonBlockMethod;
@@ -16,6 +13,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -26,7 +24,10 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -143,6 +144,32 @@ public class DelegateBlockImpl extends DelegateBlock {
 	@Override
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random r) {
 		impl.execute(AnimateTickBlockMethod.class).forEach(e -> e.animateTick(state, world, pos, r));
+	}
+
+	@Override
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+		impl.one(EntityInsideBlockMethod.class).ifPresent(e -> e.entityInside(state, level, pos, entity));
+	}
+
+	public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+		return impl.one(ShapeBlockMethod.class).map(e -> e.getCollisionShape(state, level, pos, ctx))
+				.orElse(super.getCollisionShape(state, level, pos, ctx));
+	}
+
+	public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
+		return impl.one(ShapeBlockMethod.class).map(e -> e.getBlockSupportShape(state, level, pos))
+				.orElse(super.getBlockSupportShape(state, level, pos));
+	}
+
+	public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+		return impl.one(ShapeBlockMethod.class).map(e -> e.getVisualShape(state, level, pos, ctx))
+				.orElse(super.getVisualShape(state, level, pos, ctx));
+	}
+
+	@Override
+	public PushReaction getPistonPushReaction(BlockState state) {
+		return impl.one(PushReactionBlockMethod.class).map(e -> e.getPistonPushReaction(state))
+				.orElse(super.getPistonPushReaction(state));
 	}
 
 	public static class BlockImplementor {
