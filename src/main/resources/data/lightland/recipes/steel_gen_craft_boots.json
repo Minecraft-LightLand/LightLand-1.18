@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "b b",
+    "b b"
+  ],
+  "key": {
+    "b": {
+      "item": "lightland:steel_ingot"
+    }
+  },
+  "result": {
+    "item": "lightland:steel_boots"
+  }
+}
+

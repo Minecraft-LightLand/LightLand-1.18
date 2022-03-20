@@ -7,12 +7,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:vine"
+          "name": "lightland:slime_vine"
         }
       ],
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "enchantments": [
+              {
+                "enchantment": "minecraft:silk_touch",
+                "levels": {
+                  "min": 1
+                }
+              }
+            ]
+          }
         }
       ]
     }

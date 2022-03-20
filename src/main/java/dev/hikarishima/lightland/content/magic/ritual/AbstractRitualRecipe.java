@@ -33,7 +33,7 @@ public class AbstractRitualRecipe<R extends AbstractRitualRecipe<R>> extends Bas
 	@SerialClass.SerialField
 	public Entry core;
 
-	@SerialClass.SerialField(generic = Entry.class)
+	@SerialClass.SerialField
 	public ArrayList<Entry> side;
 
 	public AbstractRitualRecipe(ResourceLocation id, RecType<R, AbstractRitualRecipe<?>, RitualCore.Inv> fac) {

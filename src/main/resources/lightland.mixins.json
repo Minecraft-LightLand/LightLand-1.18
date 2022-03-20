@@ -6,7 +6,8 @@
   "refmap": "lightland.refmap.json",
   "mixins": [
 	"EntityMixin",
-	"LivingEntityMixin"
+	"LivingEntityMixin",
+	"ShapedRecipeMixin"
   ],
   "client": [
 	"ClientLocalPlayerMixin",

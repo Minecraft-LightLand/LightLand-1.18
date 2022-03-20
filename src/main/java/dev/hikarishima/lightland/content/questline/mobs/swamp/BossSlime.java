@@ -18,7 +18,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -35,9 +34,13 @@ public class BossSlime extends MaterialSlime<BossSlime> {
 	public static void loot(RegistrateEntityLootTables table, EntityType<?> type) {
 		table.add(type, new LootTable.Builder()
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(Items.SLIME_BALL, 4, 8, 1)))
+						.add(LootTableTemplate.getItem(ItemRegistrate.SLIME_TENTACLE.get(), 4, 8, 1))
+						.when(LootTableTemplate.byPlayer()))
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.SLIME_TENTACLE.get(), 1, 3, 1))
+						.add(LootTableTemplate.getItem(ItemRegistrate.UNSTABLE_SLIME.get(), 4, 8, 1))
+						.when(LootTableTemplate.byPlayer()))
+				.withPool(LootTableTemplate.getPool(1, 0)
+						.add(LootTableTemplate.getItem(ItemRegistrate.BOSS_SLIME.get(), 1, 2, 1))
 						.when(LootTableTemplate.byPlayer())));
 	}
 

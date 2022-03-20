@@ -17,8 +17,8 @@ public class CarpetSlime extends MaterialSlime<CarpetSlime> {
 				.withPool(LootTableTemplate.getPool(1, 0)
 						.add(LootTableTemplate.getItem(Items.SLIME_BALL, 0, 2, 1)))
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.DIRTY_SLIME.get(), 1))
-						.when(LootTableTemplate.chance(0.2f))
+						.add(LootTableTemplate.getItem(ItemRegistrate.UNSTABLE_SLIME.get(), 1))
+						.when(LootTableTemplate.chance(0.05f))
 						.when(LootTableTemplate.byPlayer())));
 	}
 
@@ -34,7 +34,7 @@ public class CarpetSlime extends MaterialSlime<CarpetSlime> {
 			for (int x = -r; x <= r; x++)
 				for (int z = -r; z <= r; z++) {
 					BlockPos pos = blockPosition().offset(x, 0, z);
-					if (level.getBlockState(pos).isAir())
+					if (level.getBlockState(pos).isAir() && level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below()))
 						level.setBlockAndUpdate(pos, BlockRegistrate.SLIME_CARPET.getDefaultState());
 				}
 		}

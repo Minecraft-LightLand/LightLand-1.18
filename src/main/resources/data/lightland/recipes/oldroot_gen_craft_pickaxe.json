@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    " a ",
+    " a "
+  ],
+  "key": {
+    "b": {
+      "item": "lightland:oldroot_ingot"
+    },
+    "a": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "lightland:oldroot_pickaxe"
+  }
+}
+

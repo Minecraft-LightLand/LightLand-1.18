@@ -1,0 +1,32 @@
+{
+  "conditions": [
+	{
+	  "type": "forge:mod_loaded",
+	  "modid": "create"
+	}
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+	{
+	  "fluid": "lightland:cleanse_water",
+	  "amount": 1000
+	},
+	{
+	  "item": "lightland:knight_scrap"
+	}
+  ],
+  "results": [
+	{
+	  "item": "lightland:steel_nugget"
+	},
+	{
+	  "item": "lightland:good_soul",
+	  "chance": 0.25
+	},
+	{
+	  "item": "lightland:holy_powder",
+	  "chance": 0.05
+	}
+  ],
+  "heatRequirement": "superheated"
+}

@@ -1,0 +1,29 @@
+{
+  "conditions": [
+	{
+	  "type": "forge:mod_loaded",
+	  "modid": "create"
+	}
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+	{
+	  "fluid": "lightland:cleanse_water",
+	  "amount": 1000
+	},
+	{
+	  "item": "minecraft:ghast_tear"
+	}
+  ],
+  "results": [
+	{
+	  "item": "lightland:good_soul",
+	  "chance": 0.50
+	},
+	{
+	  "item": "lightland:bad_soul",
+	  "chance": 0.25
+	}
+  ],
+  "heatRequirement": "superheated"
+}

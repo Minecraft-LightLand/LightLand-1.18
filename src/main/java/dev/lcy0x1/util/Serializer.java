@@ -64,29 +64,29 @@ public class Serializer {
 
 	@SuppressWarnings("unchecked")
 	public static <T> T from(JsonElement obj, Class<T> cls, T ans) {
-		return ExceptionHandler.get(() -> (T) fromRaw(obj, cls, ans, null));
+		return ExceptionHandler.get(() -> (T) fromRaw(obj, TypeInfo.of(cls), ans));
 	}
 
 	@SuppressWarnings("unchecked")
 	public static <T> T from(FriendlyByteBuf buf, Class<T> cls, T ans) {
-		return ExceptionHandler.get(() -> (T) fromRaw(buf, cls, ans, null));
+		return ExceptionHandler.get(() -> (T) fromRaw(buf, TypeInfo.of(cls), ans));
 	}
 
-	public static Object fromImpl(JsonObject obj, Class<?> cls, Object ans, SerialClass.SerialField anno) throws Exception {
+	public static Object fromImpl(JsonObject obj, Class<?> cls, Object ans) throws Exception {
 		if (obj.has("_class")) {
 			cls = Class.forName(obj.get("_class").getAsString());
 		}
 		if (cls.getAnnotation(SerialClass.class) == null)
 			throw new Exception("invalid class " + cls + " with object " + obj);
 		if (ans == null)
-			ans = cls.newInstance();
+			ans = cls.getConstructor().newInstance();
 		Class<?> mcls = cls;
 		while (cls.getAnnotation(SerialClass.class) != null) {
 			for (Field f : cls.getDeclaredFields()) {
 				if (f.getAnnotation(SerialClass.SerialField.class) != null) {
 					if (obj.has(f.getName())) {
 						f.setAccessible(true);
-						f.set(ans, fromRaw(obj.get(f.getName()), f.getType(), null, f.getAnnotation(SerialClass.SerialField.class)));
+						f.set(ans, fromRaw(obj.get(f.getName()), TypeInfo.of(f), null));
 					}
 				}
 			}
@@ -109,11 +109,11 @@ public class Serializer {
 		return ans;
 	}
 
-	public static Object fromImpl(FriendlyByteBuf buf, Class<?> cls, Object ans, SerialClass.SerialField anno) throws Exception {
+	public static Object fromImpl(FriendlyByteBuf buf, Class<?> cls, Object ans) throws Exception {
 		if (cls.getAnnotation(SerialClass.class) == null)
 			throw new Exception("cannot deserialize " + cls);
 		if (ans == null)
-			ans = cls.newInstance();
+			ans = cls.getConstructor().newInstance();
 		Class<?> mcls = cls;
 		while (cls.getAnnotation(SerialClass.class) != null) {
 			TreeMap<String, Field> map = new TreeMap<>();
@@ -124,7 +124,7 @@ public class Serializer {
 			}
 			for (Field f : map.values()) {
 				f.setAccessible(true);
-				f.set(ans, fromRaw(buf, f.getType(), null, f.getAnnotation(SerialClass.SerialField.class)));
+				f.set(ans, fromRaw(buf, TypeInfo.of(f), null));
 			}
 			cls = cls.getSuperclass();
 		}
@@ -146,110 +146,111 @@ public class Serializer {
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public static Object fromRaw(JsonElement e, Class<?> cls, Object ans, SerialClass.SerialField anno) throws Exception {
+	public static Object fromRaw(JsonElement e, TypeInfo cls, Object ans) throws Exception {
 		if (cls.isArray()) {
 			JsonArray arr = e.getAsJsonArray();
-			Class<?> com = cls.getComponentType();
+			TypeInfo com = cls.getComponentType();
 			int n = arr.size();
-			if (ans == null) ans = Array.newInstance(com, n);
+			if (ans == null) ans = Array.newInstance(com.getAsClass(), n);
 			for (int i = 0; i < n; i++) {
-				Array.set(ans, i, fromRaw(arr.get(i), com, null, anno));
+				Array.set(ans, i, fromRaw(arr.get(i), com, null));
 			}
 			return ans;
 		}
-		if (List.class.isAssignableFrom(cls)) {
+		if (List.class.isAssignableFrom(cls.getAsClass())) {
 			JsonArray arr = e.getAsJsonArray();
-			Class<?> com = anno.generic()[0];
+			TypeInfo com = cls.getGenericType(0);
 			int n = arr.size();
 			if (ans == null) ans = cls.newInstance();
 			List list = (List) ans;
 			for (int i = 0; i < n; i++) {
-				list.add(fromRaw(arr.get(i), com, null, null));
+				list.add(fromRaw(arr.get(i), com, null));
 			}
 			return ans;
 		}
-		if (Map.class.isAssignableFrom(cls)) {
+		if (Map.class.isAssignableFrom(cls.getAsClass())) {
 			if (ans == null)
 				ans = cls.newInstance();
-			Class<?> ckey = anno.generic()[0];
-			Class<?> cval = anno.generic()[1];
+			TypeInfo ckey = cls.getGenericType(0);
+			TypeInfo cval = cls.getGenericType(1);
 			if (e.isJsonArray()) {
 				for (JsonElement je : e.getAsJsonArray()) {
 					JsonObject jeo = je.getAsJsonObject();
-					((Map) ans).put(fromRaw(jeo.get("_key"), ckey, null, null), fromRaw(jeo.get("_val"), cval, null, null));
+					((Map) ans).put(fromRaw(jeo.get("_key"), ckey, null), fromRaw(jeo.get("_val"), cval, null));
 				}
 				return ans;
 			}
 			if (e.isJsonObject()) {
 				for (Map.Entry<String, JsonElement> ent : e.getAsJsonObject().entrySet()) {
-					Object key = ckey == String.class ? ent.getKey() : MAP.get(ckey).fromJson.apply(new JsonPrimitive(ent.getKey()));
-					((Map) ans).put(key, fromRaw(ent.getValue(), cval, null, null));
+					Object key = ckey.getAsClass() == String.class ? ent.getKey() :
+							MAP.get(ckey.getAsClass()).fromJson.apply(new JsonPrimitive(ent.getKey()));
+					((Map) ans).put(key, fromRaw(ent.getValue(), cval, null));
 				}
 				return ans;
 			}
 		}
-		if (cls.isEnum())
-			return Enum.valueOf((Class) cls, e.getAsString());
-		if (cls == JsonElement.class)
+		if (cls.getAsClass().isEnum())
+			return Enum.valueOf((Class) cls.getAsClass(), e.getAsString());
+		if (cls.getAsClass() == JsonElement.class)
 			return e;
-		if (MAP.containsKey(cls))
-			return MAP.get(cls).fromJson.apply(e);
-		return fromImpl(e.getAsJsonObject(), cls, ans, anno);
+		if (MAP.containsKey(cls.getAsClass()))
+			return MAP.get(cls.getAsClass()).fromJson.apply(e);
+		return fromImpl(e.getAsJsonObject(), cls.getAsClass(), ans);
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public static Object fromRaw(FriendlyByteBuf buf, Class<?> cls, Object ans, SerialClass.SerialField anno) throws Exception {
+	public static Object fromRaw(FriendlyByteBuf buf, TypeInfo cls, Object ans) throws Exception {
 		byte type = buf.readByte();
 		if (type == 0)
 			return null;
 		else if (type == 2) {
-			cls = Class.forName(buf.readUtf());
+			cls = TypeInfo.of(Class.forName(buf.readUtf()));
 		}
 		if (cls.isArray()) {
 			int n = buf.readInt();
-			Class<?> com = cls.getComponentType();
+			TypeInfo com = cls.getComponentType();
 			if (ans == null)
-				ans = Array.newInstance(com, n);
+				ans = Array.newInstance(com.getAsClass(), n);
 			for (int i = 0; i < n; i++) {
-				Array.set(ans, i, fromRaw(buf, com, null, anno));
+				Array.set(ans, i, fromRaw(buf, com, null));
 			}
 			return ans;
 		}
-		if (List.class.isAssignableFrom(cls)) {
+		if (List.class.isAssignableFrom(cls.getAsClass())) {
 			int n = buf.readInt();
-			Class<?> com = anno.generic()[0];
+			TypeInfo com = cls.getGenericType(0);
 			if (ans == null) ans = cls.newInstance();
 			List list = (List) ans;
 			for (int i = 0; i < n; i++) {
-				list.add(fromRaw(buf, com, null, null));
+				list.add(fromRaw(buf, com, null));
 			}
 			return ans;
 		}
-		if (Map.class.isAssignableFrom(cls)) {
+		if (Map.class.isAssignableFrom(cls.getAsClass())) {
 			if (ans == null)
 				ans = cls.newInstance();
 			int n = buf.readInt();
-			Class<?> ckey = anno.generic()[0];
-			Class<?> cval = anno.generic()[1];
+			TypeInfo ckey = cls.getGenericType(0);
+			TypeInfo cval = cls.getGenericType(1);
 			for (int i = 0; i < n; i++) {
-				Object key = fromRaw(buf, ckey, null, null);
-				Object val = fromRaw(buf, cval, null, null);
+				Object key = fromRaw(buf, ckey, null);
+				Object val = fromRaw(buf, cval, null);
 				((Map) ans).put(key, val);
 			}
 			return ans;
 		}
-		if (cls.isEnum())
-			return Enum.valueOf((Class) cls, buf.readUtf());
-		if (MAP.containsKey(cls))
-			return MAP.get(cls).fromPacket.apply(buf);
-		return fromImpl(buf, cls, ans, anno);
+		if (cls.getAsClass().isEnum())
+			return Enum.valueOf((Class) cls.getAsClass(), buf.readUtf());
+		if (MAP.containsKey(cls.getAsClass()))
+			return MAP.get(cls.getAsClass()).fromPacket.apply(buf);
+		return fromImpl(buf, cls.getAsClass(), ans);
 	}
 
 	public static <T> void to(FriendlyByteBuf buf, T obj) {
-		ExceptionHandler.run(() -> toRaw(buf, obj.getClass(), obj, null));
+		ExceptionHandler.run(() -> toRaw(buf, TypeInfo.of(obj.getClass()), obj));
 	}
 
-	public static void toImpl(FriendlyByteBuf buf, Class<?> cls, Object obj, SerialClass.SerialField anno) throws Exception {
+	public static void toImpl(FriendlyByteBuf buf, Class<?> cls, Object obj) throws Exception {
 		if (cls.getAnnotation(SerialClass.class) == null)
 			throw new Exception("cannot serialize " + cls);
 		while (cls.getAnnotation(SerialClass.class) != null) {
@@ -261,52 +262,52 @@ public class Serializer {
 			}
 			for (Field f : map.values()) {
 				f.setAccessible(true);
-				toRaw(buf, f.getType(), f.get(obj), f.getAnnotation(SerialClass.SerialField.class));
+				toRaw(buf, TypeInfo.of(f), f.get(obj));
 			}
 			cls = cls.getSuperclass();
 		}
 	}
 
-	public static void toRaw(FriendlyByteBuf buf, Class<?> cls, Object obj, SerialClass.SerialField anno) throws Exception {
+	public static void toRaw(FriendlyByteBuf buf, TypeInfo cls, Object obj) throws Exception {
 		if (obj == null) {
 			buf.writeByte(0);
 			return;
-		} else if (obj.getClass() != cls && obj.getClass().isAnnotationPresent(SerialClass.class)) {
+		} else if (obj.getClass() != cls.getAsClass() && obj.getClass().isAnnotationPresent(SerialClass.class)) {
 			buf.writeByte(2);
-			cls = obj.getClass();
-			buf.writeUtf(cls.getName());
+			cls = TypeInfo.of(obj.getClass());
+			buf.writeUtf(cls.getAsClass().getName());
 		} else {
 			buf.writeByte(1);
 		}
 		if (cls.isArray()) {
 			int n = Array.getLength(obj);
 			buf.writeInt(n);
-			Class<?> com = cls.getComponentType();
+			TypeInfo com = cls.getComponentType();
 			for (int i = 0; i < n; i++) {
-				toRaw(buf, com, Array.get(obj, i), anno);
+				toRaw(buf, com, Array.get(obj, i));
 			}
-		} else if (List.class.isAssignableFrom(cls)) {
+		} else if (List.class.isAssignableFrom(cls.getAsClass())) {
 			List<?> list = (List<?>) obj;
 			buf.writeInt(list.size());
-			Class<?> com = anno.generic()[0];
+			TypeInfo com = cls.getGenericType(0);
 			for (Object o : list) {
-				toRaw(buf, com, o, null);
+				toRaw(buf, com, o);
 			}
-		} else if (Map.class.isAssignableFrom(cls)) {
+		} else if (Map.class.isAssignableFrom(cls.getAsClass())) {
 			Map<?, ?> map = (Map<?, ?>) obj;
 			buf.writeInt(map.size());
-			Class<?> ckey = anno.generic()[0];
-			Class<?> cval = anno.generic()[1];
+			TypeInfo ckey = cls.getGenericType(0);
+			TypeInfo cval = cls.getGenericType(1);
 			for (Map.Entry<?, ?> ent : map.entrySet()) {
-				toRaw(buf, ckey, ent.getKey(), null);
-				toRaw(buf, cval, ent.getValue(), null);
+				toRaw(buf, ckey, ent.getKey());
+				toRaw(buf, cval, ent.getValue());
 			}
-		} else if (cls.isEnum())
+		} else if (cls.getAsClass().isEnum())
 			buf.writeUtf(((Enum<?>) obj).name());
-		else if (MAP.containsKey(cls))
-			MAP.get(cls).toPacket.accept(buf, obj);
+		else if (MAP.containsKey(cls.getAsClass()))
+			MAP.get(cls.getAsClass()).toPacket.accept(buf, obj);
 		else
-			toImpl(buf, cls, obj, anno);
+			toImpl(buf, cls.getAsClass(), obj);
 
 	}
 

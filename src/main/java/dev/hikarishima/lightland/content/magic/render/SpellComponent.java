@@ -20,10 +20,10 @@ public class SpellComponent {
 		return SpellEntityConfig.getConfig(new ResourceLocation(s));
 	}
 
-	@SerialClass.SerialField(generic = Stroke.class)
+	@SerialClass.SerialField
 	public ArrayList<Stroke> strokes = new ArrayList<>();
 
-	@SerialClass.SerialField(generic = Layer.class)
+	@SerialClass.SerialField
 	public ArrayList<Layer> layers = new ArrayList<>();
 
 	@OnlyIn(Dist.CLIENT)
@@ -111,7 +111,7 @@ public class SpellComponent {
 	@SerialClass
 	public static class Layer {
 
-		@SerialClass.SerialField(generic = String.class)
+		@SerialClass.SerialField
 		public ArrayList<String> children = new ArrayList<>();
 
 		private List<SpellComponent> _children;

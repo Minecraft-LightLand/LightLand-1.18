@@ -1,0 +1,29 @@
+{
+  "conditions": [
+	{
+	  "type": "forge:mod_loaded",
+	  "modid": "create"
+	}
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+	{
+	  "fluid": "lightland:cleanse_water",
+	  "amount": 100
+	},
+	{
+	  "item": "minecraft:rotten_flesh"
+	}
+  ],
+  "results": [
+	{
+	  "item": "lightland:good_soul",
+	  "chance": 0.01
+	},
+	{
+	  "item": "lightland:bad_soul",
+	  "chance": 0.01
+	}
+  ],
+  "heatRequirement": "superheated"
+}

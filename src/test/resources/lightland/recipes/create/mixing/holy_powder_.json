@@ -1,0 +1,27 @@
+{
+  "conditions": [
+	{
+	  "type": "forge:mod_loaded",
+	  "modid": "create"
+	}
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+	{
+	  "fluid": "lightland:holy_water",
+	  "amount": 250
+	},
+	{
+	  "item": "lightland:good_soul"
+	},
+	{
+	  "item": "minecraft:lapis_lazuli"
+	}
+  ],
+  "results": [
+	{
+	  "item": "lightland:holy_powder"
+	}
+  ],
+  "heatRequirement": "superheated"
+}

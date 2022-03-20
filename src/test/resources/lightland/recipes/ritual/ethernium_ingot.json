@@ -1,0 +1,77 @@
+{
+  "type": "lightland:ritual_default",
+  "core": {
+	"input": {
+	  "item": "lightland:knightsteel_ingot"
+	},
+	"output": {
+	  "item": "lightland:ethernium_ingot"
+	}
+  },
+  "side": [
+	{
+	  "input": {
+		"enchant_book": {
+		  "id": "minecraft:mending",
+		  "lvl": 1
+		}
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:layline_ingot"
+	  },
+	  "output": {
+		"item": "lightland:layroot_ingot"
+	  }
+	},
+	{
+	  "input": {
+		"enchant_book": {
+		  "id": "minecraft:protection",
+		  "lvl": 3
+		}
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:layline_ingot"
+	  },
+	  "output": {
+		"item": "lightland:layroot_ingot"
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:layline_ingot"
+	  },
+	  "output": {
+		"item": "lightland:layroot_ingot"
+	  }
+	},
+	{
+	  "input": {
+		"enchant_book": {
+		  "id": "minecraft:unbreaking",
+		  "lvl": 3
+		}
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:layline_ingot"
+	  },
+	  "output": {
+		"item": "lightland:layroot_ingot"
+	  }
+	},
+	{
+	  "input": {
+		"enchant_book": {
+		  "id": "minecraft:infinity",
+		  "lvl": 1
+		}
+	  }
+	}
+  ]
+}

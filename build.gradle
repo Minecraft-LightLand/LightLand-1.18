@@ -143,7 +143,7 @@ dependencies {
     //runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-4.5.4")
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.11')
-    implementation fg.deobf("com.simibubi.create:Create:mc1.18.1_v0.4d+87")
+    implementation fg.deobf("curse.maven:create-328085:3687358")
     implementation fg.deobf("curse.maven:appleskin-248787:3626712")
     implementation fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:1.18-0.6.1.62")
     implementation fg.deobf("dev.architectury:architectury-forge:3.7.22")

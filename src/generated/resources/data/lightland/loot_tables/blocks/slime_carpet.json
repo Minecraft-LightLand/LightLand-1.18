@@ -7,12 +7,22 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:slime_ball"
+          "name": "lightland:slime_carpet"
         }
       ],
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "enchantments": [
+              {
+                "enchantment": "minecraft:silk_touch",
+                "levels": {
+                  "min": 1
+                }
+              }
+            ]
+          }
         }
       ]
     }

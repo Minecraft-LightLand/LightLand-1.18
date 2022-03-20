@@ -1,0 +1,71 @@
+{
+  "type": "lightland:ritual_default",
+  "core": {
+	"input": {
+	  "item": "lightland:layroot_ingot"
+	},
+	"output": {
+	  "item": "lightland:magicium_ingot"
+	}
+  },
+  "side": [
+	{
+	  "input": {
+		"item": "lightland:enchant_gold_ingot"
+	  },
+	  "output": {
+		"item": "minecraft:gold_ingot"
+	  }
+	},
+	{
+	  "input": {
+		"item": "minecraft:lapis_lazuli"
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:enchant_gold_ingot"
+	  },
+	  "output": {
+		"item": "minecraft:gold_ingot"
+	  }
+	},
+	{
+	  "input": {
+		"enchant_book": {
+		  "id": "minecraft:protection",
+		  "lvl": 1
+		}
+	  }
+	},
+	{
+	  "input": {
+		"enchant_book": {
+		  "id": "minecraft:unbreaking",
+		  "lvl": 1
+		}
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:enchant_gold_ingot"
+	  },
+	  "output": {
+		"item": "minecraft:gold_ingot"
+	  }
+	},
+	{
+	  "input": {
+		"item": "minecraft:lapis_lazuli"
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:enchant_gold_ingot"
+	  },
+	  "output": {
+		"item": "minecraft:gold_ingot"
+	  }
+	}
+  ]
+}

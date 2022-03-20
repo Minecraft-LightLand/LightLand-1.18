@@ -45,7 +45,7 @@ public class SlimeProperties extends ConfigSyncManager.BaseConfig {
 		return (SlimeProperties) ConfigSyncManager.CONFIGS.get("lightland:potion_slime_drop");
 	}
 
-	@SerialClass.SerialField(generic = {String.class, SlimeConfig.class})
+	@SerialClass.SerialField
 	public HashMap<String, SlimeConfig> map = new HashMap<>();
 
 	@SerialClass.OnInject

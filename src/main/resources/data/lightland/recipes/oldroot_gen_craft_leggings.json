@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bbb",
+    "b b",
+    "b b"
+  ],
+  "key": {
+    "b": {
+      "item": "lightland:oldroot_ingot"
+    }
+  },
+  "result": {
+    "item": "lightland:oldroot_leggings"
+  }
+}
+

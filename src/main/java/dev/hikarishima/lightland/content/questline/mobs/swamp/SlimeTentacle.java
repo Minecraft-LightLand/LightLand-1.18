@@ -111,7 +111,7 @@ public class SlimeTentacle extends Projectile implements ISizedItemEntity, ItemS
 			Entity owner = getOwner();
 			if (result.getEntity() instanceof LivingEntity le && owner instanceof LivingEntity) {
 				le.hasImpulse = true;
-				Vec3 diff = le.getPosition(1).subtract(getOwnerPos()).multiply(1, 0, 1).normalize();
+				Vec3 diff = le.getPosition(1).subtract(getOwnerPos()).normalize();
 				le.setDeltaMovement(diff.scale(-3).add(0, 0.4f, 0));
 			}
 		}

@@ -150,7 +150,7 @@ public class MagicProduct<I extends IForgeRegistryEntry<I>, P extends MagicProdu
 		@SerialClass.SerialField
 		public int[] order;
 
-		@SerialClass.SerialField(generic = MagicElement.class)
+		@SerialClass.SerialField
 		public ArrayList<MagicElement> list = new ArrayList<>();
 
 	}

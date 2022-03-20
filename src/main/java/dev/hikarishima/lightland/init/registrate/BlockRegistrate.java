@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.init.registrate;
 
+import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
@@ -12,7 +13,6 @@ import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WebBlock;
@@ -34,8 +34,7 @@ public class BlockRegistrate {
 	}
 
 	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
-	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK;
-	public static final BlockEntry<Block> LEAD_BLOCK;
+	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, LEAD_BLOCK, MAGICIUM_BLOCK;
 	public static final BlockEntry<LayrootBody> LAYROOT_BODY;
 	public static final BlockEntry<LayrootHead> LAYROOT_HEAD;
 	public static final BlockEntry<LaylineHead> LAYLINE_HEAD;
@@ -75,6 +74,9 @@ public class BlockRegistrate {
 			LEAD_BLOCK = REGISTRATE.block("lead_block",
 							p -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)))
 					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
+			MAGICIUM_BLOCK = REGISTRATE.block("magicium_block",
+							p -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)))
+					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
 		}
 		{
 			BlockBehaviour.Properties prop_root = BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.WOOD)
@@ -99,11 +101,11 @@ public class BlockRegistrate {
 			BlockBehaviour.Properties prop_slime = BlockBehaviour.Properties.of(Material.WEB).noCollission().strength(4.0F);
 			SLIME_CARPET = REGISTRATE.block("slime_carpet", p -> new SlimeCarpet(prop_slime))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().carpet(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
-					.simpleItem().loot((table, self) -> table.dropOther(self, Items.SLIME_BALL)).defaultLang().register();
+					.simpleItem().loot(RegistrateBlockLootTables::dropWhenSilkTouch).defaultLang().register();
 			SLIME_VINE = REGISTRATE.block("slime_vine", p -> new WebBlock(prop_slime))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
 					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()
-					.loot((table, self) -> table.dropOther(self, Items.VINE)).addLayer(() -> RenderType::cutout).defaultLang().register();
+					.loot(RegistrateBlockLootTables::dropWhenSilkTouch).addLayer(() -> RenderType::cutout).defaultLang().register();
 
 		}
 	}

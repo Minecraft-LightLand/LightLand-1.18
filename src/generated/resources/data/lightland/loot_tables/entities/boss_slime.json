@@ -26,7 +26,46 @@
               }
             }
           ],
-          "name": "minecraft:slime_ball"
+          "name": "lightland:slime_tentacle"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        }
+      ]
+    },
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 8.0
+              },
+              "add": false
+            },
+            {
+              "function": "minecraft:looting_enchant",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 0.0,
+                "max": 1.0
+              }
+            }
+          ],
+          "name": "lightland:unstable_slime"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
         }
       ]
     },
@@ -42,7 +81,7 @@
               "count": {
                 "type": "minecraft:uniform",
                 "min": 1.0,
-                "max": 3.0
+                "max": 2.0
               },
               "add": false
             },
@@ -55,7 +94,7 @@
               }
             }
           ],
-          "name": "lightland:slime_tentacle"
+          "name": "lightland:boss_slime"
         }
       ],
       "conditions": [

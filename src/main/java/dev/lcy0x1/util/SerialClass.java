@@ -19,8 +19,6 @@ public @interface SerialClass {
 
 		boolean toClient() default false;
 
-		Class<?>[] generic() default {};
-
 	}
 
 	@Documented
