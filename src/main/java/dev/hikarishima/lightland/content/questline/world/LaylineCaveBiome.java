@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.questline.world;
 
-import dev.hikarishima.lightland.init.registrate.BiomeRegistrate;
+import dev.hikarishima.lightland.init.registrate.WorldGenRegistrate;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.placement.CavePlacements;
@@ -22,7 +22,7 @@ public class LaylineCaveBiome {
 		BiomeGenerationSettings.Builder settings = new BiomeGenerationSettings.Builder();
 		addFeatures(settings);
 		Music music = Musics.createGameMusic(SoundEvents.MUSIC_BIOME_LUSH_CAVES);
-		return BiomeRegistrate.biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND,
+		return WorldGenRegistrate.biome(Biome.Precipitation.RAIN, Biome.BiomeCategory.UNDERGROUND,
 				0.5F, 0.5F, mobs, settings, music);
 	}
 

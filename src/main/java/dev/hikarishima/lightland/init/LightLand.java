@@ -47,7 +47,7 @@ public class LightLand {
 		RecipeRegistrate.register();
 		VanillaMagicRegistrate.register();
 		ParticleRegistrate.register();
-		BiomeRegistrate.register();
+		WorldGenRegistrate.register();
 		AllTags.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
 	}
