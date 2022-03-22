@@ -25,7 +25,7 @@ public class CKMazeGenerator {
 		STRAIGHT, CORNER, END;
 
 		public String getID(RoomType type) {
-			return (name() + "_" + type.name()).toLowerCase(Locale.ROOT);
+			return (type.name() + "_" + name()).toLowerCase(Locale.ROOT);
 		}
 	}
 
@@ -129,11 +129,10 @@ public class CKMazeGenerator {
 		};
 	}
 
-	public static final int LENGTH = 15, HEIGHT = 9;
-	public static final int[] LAYERS = {7, 7, 7, 7, 7};
+	public static final int LENGTH = 5, HEIGHT = 9;
+	public static final int[] LAYERS = {12};
 
-	public static void addPieces(StructureManager manager, BlockPos pos, List<StructurePiece> children, WorldgenRandom r,
-								 MazeConfig conf) {
+	public static void addPieces(StructureManager manager, BlockPos pos, List<StructurePiece> children, WorldgenRandom r, MazeConfig conf) {
 		MazeGen[] mazes = new MazeGen[LAYERS.length];
 		for (int i = 0; i < LAYERS.length; i++) {
 			mazes[i] = new MazeGen(LAYERS[i], r, conf, new MazeGen.Debugger());

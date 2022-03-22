@@ -6,11 +6,11 @@
   ],
   "key": {
     "b": {
-      "item": "lightland:dispell_ingot"
+      "item": "lightland:dispellium_ingot"
     }
   },
   "result": {
-    "item": "lightland:dispell_helmet"
+    "item": "lightland:dispellium_helmet"
   }
 }
 

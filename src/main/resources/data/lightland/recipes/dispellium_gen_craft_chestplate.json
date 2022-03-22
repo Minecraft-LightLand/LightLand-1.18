@@ -7,11 +7,11 @@
   ],
   "key": {
     "b": {
-      "item": "lightland:dispell_ingot"
+      "item": "lightland:dispellium_ingot"
     }
   },
   "result": {
-    "item": "lightland:dispell_chestplate"
+    "item": "lightland:dispellium_chestplate"
   }
 }
 

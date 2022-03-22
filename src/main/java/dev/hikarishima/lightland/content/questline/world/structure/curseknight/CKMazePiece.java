@@ -26,7 +26,9 @@ public class CKMazePiece extends TemplateStructurePiece {
 
 	public CKMazePiece(StructureManager manager, CompoundTag tag) {
 		super(StructurePieceType.END_CITY_PIECE, tag, manager, (id) ->
-				makeSettings(tag.getBoolean("OW"), Rotation.valueOf(tag.getString("Rot")), Mirror.valueOf(tag.getString("Mir"))));
+				makeSettings(tag.getBoolean("OW"),
+						Rotation.valueOf(tag.getString("Rot")),
+						Mirror.valueOf(tag.getString("Mir"))));
 	}
 
 	private static StructurePlaceSettings makeSettings(boolean ow, Rotation rotation, Mirror mirror) {
@@ -39,7 +41,7 @@ public class CKMazePiece extends TemplateStructurePiece {
 	}
 
 	private static ResourceLocation makeResourceLocation(String id) {
-		return new ResourceLocation("end_city/" + id);
+		return new ResourceLocation("cursedknight_maze/" + id);
 	}
 
 	protected void addAdditionalSaveData(StructurePieceSerializationContext context, CompoundTag tag) {
@@ -49,14 +51,13 @@ public class CKMazePiece extends TemplateStructurePiece {
 		tag.putBoolean("OW", this.placeSettings.getProcessors().get(0) == BlockIgnoreProcessor.STRUCTURE_BLOCK);
 	}
 
-	protected void handleDataMarker(String id, BlockPos pos, ServerLevelAccessor leevel, Random random, BoundingBox box) {
+	protected void handleDataMarker(String id, BlockPos pos, ServerLevelAccessor level, Random random, BoundingBox box) {
 		if (id.startsWith("Chest")) {
 			BlockPos blockpos = pos.below();
 			if (box.isInside(blockpos)) {
-				RandomizableContainerBlockEntity.setLootTable(leevel, random, blockpos, BuiltInLootTables.END_CITY_TREASURE);
+				RandomizableContainerBlockEntity.setLootTable(level, random, blockpos, BuiltInLootTables.END_CITY_TREASURE);
 			}
 		}
-
 	}
 
 }

@@ -64,7 +64,6 @@ public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatu
 					QuartPos.fromBlock(blockpos.getY()),
 					QuartPos.fromBlock(blockpos.getZ()))) ?
 					Optional.empty() : Optional.of((builder, ctx) -> {
-				//Rotation rotation = Rotation.getRandom(ctx.random());
 				List<StructurePiece> list = Lists.newArrayList();
 				CKMazeGenerator.addPieces(ctx.structureManager(), blockpos, list, ctx.random(), new MazeConfig());
 				list.forEach(builder::addPiece);

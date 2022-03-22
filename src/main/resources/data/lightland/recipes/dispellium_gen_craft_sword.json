@@ -7,14 +7,14 @@
   ],
   "key": {
     "b": {
-      "item": "lightland:dispell_ingot"
+      "item": "lightland:dispellium_ingot"
     },
     "a": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "lightland:dispell_sword"
+    "item": "lightland:dispellium_sword"
   }
 }
 

@@ -56,7 +56,7 @@ public class StructureRegistrate {
 			this.feature_id = new ResourceLocation(LightLand.MODID, feature_name);
 			this.piece_id = new ResourceLocation(LightLand.MODID, piece_name);
 			this.piece_type = Registry.register(Registry.STRUCTURE_PIECE, piece_id, piece_gen);
-			this.entry = LightLand.REGISTRATE.simple(feature_id, StructureFeature.class, structure_gen);
+			this.entry = LightLand.REGISTRATE.simple(feature_name, StructureFeature.class, structure_gen);
 			this.feature_config = feature_config;
 			this.config = config;
 			this.biomes = biomes;

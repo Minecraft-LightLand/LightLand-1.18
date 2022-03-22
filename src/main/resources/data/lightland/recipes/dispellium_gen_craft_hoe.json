@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "bb",
-    "ab",
+    "a ",
     "a "
   ],
   "key": {
     "b": {
-      "item": "lightland:dispell_ingot"
+      "item": "lightland:dispellium_ingot"
     },
     "a": {
       "item": "minecraft:stick"
     }
   },
   "result": {
-    "item": "lightland:dispell_axe"
+    "item": "lightland:dispellium_hoe"
   }
 }
 
