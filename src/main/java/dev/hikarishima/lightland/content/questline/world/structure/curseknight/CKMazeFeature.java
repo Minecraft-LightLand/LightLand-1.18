@@ -1,7 +1,8 @@
-package dev.hikarishima.lightland.content.questline.world.structure;
+package dev.hikarishima.lightland.content.questline.world.structure.curseknight;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
+import dev.hikarishima.lightland.content.questline.world.structure.BaseStructureFeature;
 import dev.lcy0x1.maze.generator.MazeConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.QuartPos;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class Registry {
+public class MazeRegistry {
 
 	public static class Entry<T extends MazeCellData<T, E>, E extends MazeGeneralData> {
 

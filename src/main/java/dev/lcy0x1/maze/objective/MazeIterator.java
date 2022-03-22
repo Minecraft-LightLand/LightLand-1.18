@@ -10,11 +10,11 @@ public class MazeIterator<T extends MazeCellData<T,E>, E extends MazeGeneralData
 	public final T[][] value;
 	public final int[][] maze;
 	public final int n;
-	public final Registry.Entry<T,E> ent;
+	public final MazeRegistry.Entry<T,E> ent;
 	public final E global;
 
 	@SuppressWarnings("unchecked")
-	public MazeIterator(int[][] maze, Registry.Entry<T,E> entry) {
+	public MazeIterator(int[][] maze, MazeRegistry.Entry<T,E> entry) {
 		this.maze = maze;
 		this.ent = entry;
 		this.global = entry.gen.get();

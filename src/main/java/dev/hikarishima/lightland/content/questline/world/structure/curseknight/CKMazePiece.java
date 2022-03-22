@@ -1,9 +1,10 @@
-package dev.hikarishima.lightland.content.questline.world.structure;
+package dev.hikarishima.lightland.content.questline.world.structure.curseknight;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.feature.StructurePieceType;
@@ -19,18 +20,18 @@ import java.util.Random;
 
 public class CKMazePiece extends TemplateStructurePiece {
 
-	public CKMazePiece(StructureManager manager, String id, BlockPos pos, Rotation rotation, boolean ow) {
-		super(StructurePieceType.END_CITY_PIECE, 0, manager, makeResourceLocation(id), id, makeSettings(ow, rotation), pos);
+	public CKMazePiece(StructureManager manager, CKMazeGenerator.CellInstance ins, BlockPos pos, boolean ow) {
+		super(StructurePieceType.END_CITY_PIECE, 0, manager, makeResourceLocation(ins.id()), ins.id(), makeSettings(ow, ins.rot(), ins.mir()), pos);
 	}
 
 	public CKMazePiece(StructureManager manager, CompoundTag tag) {
 		super(StructurePieceType.END_CITY_PIECE, tag, manager, (id) ->
-				makeSettings(tag.getBoolean("OW"), Rotation.valueOf(tag.getString("Rot"))));
+				makeSettings(tag.getBoolean("OW"), Rotation.valueOf(tag.getString("Rot")), Mirror.valueOf(tag.getString("Mir"))));
 	}
 
-	private static StructurePlaceSettings makeSettings(boolean ow, Rotation rotation) {
+	private static StructurePlaceSettings makeSettings(boolean ow, Rotation rotation, Mirror mirror) {
 		BlockIgnoreProcessor blockignoreprocessor = ow ? BlockIgnoreProcessor.STRUCTURE_BLOCK : BlockIgnoreProcessor.STRUCTURE_AND_AIR;
-		return (new StructurePlaceSettings()).setIgnoreEntities(true).addProcessor(blockignoreprocessor).setRotation(rotation);
+		return (new StructurePlaceSettings()).setIgnoreEntities(true).addProcessor(blockignoreprocessor).setRotation(rotation).setMirror(mirror);
 	}
 
 	protected ResourceLocation makeTemplateLocation() {
@@ -44,6 +45,7 @@ public class CKMazePiece extends TemplateStructurePiece {
 	protected void addAdditionalSaveData(StructurePieceSerializationContext context, CompoundTag tag) {
 		super.addAdditionalSaveData(context, tag);
 		tag.putString("Rot", this.placeSettings.getRotation().name());
+		tag.putString("Mir", this.placeSettings.getMirror().name());
 		tag.putBoolean("OW", this.placeSettings.getProcessors().get(0) == BlockIgnoreProcessor.STRUCTURE_BLOCK);
 	}
 
