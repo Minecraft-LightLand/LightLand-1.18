@@ -15,11 +15,14 @@ import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.*;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
+import dev.hikarishima.lightland.init.worldgenreg.StructureRegistrate;
+import dev.hikarishima.lightland.init.worldgenreg.WorldGenRegistrate;
 import dev.hikarishima.lightland.network.PacketHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -48,6 +51,7 @@ public class LightLand {
 		VanillaMagicRegistrate.register();
 		ParticleRegistrate.register();
 		WorldGenRegistrate.register();
+		StructureRegistrate.register();
 		AllTags.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
 	}
@@ -98,6 +102,7 @@ public class LightLand {
 			EffectSyncEvents.init();
 			VanillaMagicRegistrate.registerBrewingRecipe();
 		});
+		StructureRegistrate.commonSetup(event);
 	}
 
 	public static void gatherData(GatherDataEvent event) {
@@ -110,6 +115,10 @@ public class LightLand {
 
 	public static void registerCaps(RegisterCapabilitiesEvent event) {
 		event.register(LLPlayerData.class);
+	}
+
+	public static void onServerStart(ServerAboutToStartEvent event){
+		StructureRegistrate.addDefaultStructureBiomes();
 	}
 
 }

@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.questline.world.structure;
 
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
-import dev.lcy0x1.maze.MazeConfig;
+import dev.lcy0x1.maze.generator.MazeConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.QuartPos;
 import net.minecraft.world.level.ChunkPos;
@@ -10,7 +10,6 @@ import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
-public class CKMazeFeature extends StructureFeature<NoneFeatureConfiguration> {
+public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatureConfiguration> {
 
 	public CKMazeFeature(Codec<NoneFeatureConfiguration> codec) {
 		super(codec, CKMazeFeature::pieceGeneratorSupplier);
@@ -55,7 +54,7 @@ public class CKMazeFeature extends StructureFeature<NoneFeatureConfiguration> {
 
 	private static Optional<PieceGenerator<NoneFeatureConfiguration>> pieceGeneratorSupplier(PieceGeneratorSupplier.Context<NoneFeatureConfiguration> context) {
 		int i = getYPositionForFeature(context.chunkPos(), context.chunkGenerator(), context.heightAccessor());
-		if (i < 60) {
+		if (i < -64) {
 			return Optional.empty();
 		} else {
 			BlockPos blockpos = context.chunkPos().getMiddleBlockPosition(i);
@@ -66,7 +65,7 @@ public class CKMazeFeature extends StructureFeature<NoneFeatureConfiguration> {
 					Optional.empty() : Optional.of((builder, ctx) -> {
 				//Rotation rotation = Rotation.getRandom(ctx.random());
 				List<StructurePiece> list = Lists.newArrayList();
-				CKMazePieces.addPieces(ctx.structureManager(), blockpos, list, ctx.random(), new MazeConfig());
+				CKMazeGenerator.addPieces(ctx.structureManager(), blockpos, list, ctx.random(), new MazeConfig());
 				list.forEach(builder::addPiece);
 			});
 		}

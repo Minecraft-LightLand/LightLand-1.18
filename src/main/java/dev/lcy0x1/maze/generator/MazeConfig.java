@@ -1,19 +1,18 @@
-package dev.lcy0x1.maze;
+package dev.lcy0x1.maze.generator;
 
 import java.util.Random;
 
-import dev.lcy0x1.maze.MazeGen.StateRim;
-
 public class MazeConfig {
 
-	private static final int[] PATH = { 3, 6, 51, 0, 0, 0, 0 };
-	private static final int[] LOOP = { 5, 55, 0, 0, 0, 0, 0 };
+	private static final int[] PATH = {3, 6, 51, 0, 0, 0, 0};
+	private static final int[] LOOP = {5, 55, 0, 0, 0, 0, 0};
 	private static final double PATH_FAC = 0.35;
 	private static final double LOOP_FAC = 0.65;
 	private static final double CONN_PRI = 0.05;
 	private static final double CONN_SEC = 0.75;
 	public int[] path, loop;
 	public double path_fac, loop_fac, conn_pri, conn_sec;
+	public int invariant = 2, survive = 4;
 
 	public MazeConfig() {
 		path = PATH;
@@ -37,14 +36,16 @@ public class MazeConfig {
 		return b ? r.nextDouble() < conn_pri : r.nextDouble() < conn_sec;
 	}
 
-	int randLoop(StateRim rim, Random r) {
+	int randLoop(int i, MazeGen.StateRim rim, Random r) {
+		if (i < invariant) return 0;
 		int len = (int) Math.ceil(rim.aviLoop() * loop_fac);
 		return randSel(r, loop, rim.path == 0, len);
 	}
 
-	int randPath(StateRim rim, Random r, int c) {
+	int randPath(int i, MazeGen.StateRim rim, Random r, int c) {
+		if (i < invariant) return 1;
 		int len = (int) Math.ceil(rim.aviPath() * path_fac);
-		return randSel(r, path, c == 1 || !rim.state.isRoot(), len);
+		return randSel(r, path, i < survive || c == 1 || !rim.state.isRoot(), len);
 	}
 
 	private int randSel(Random r, int[] arr, boolean beg, int len) {
