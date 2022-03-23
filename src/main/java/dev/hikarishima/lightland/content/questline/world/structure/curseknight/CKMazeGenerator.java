@@ -151,7 +151,7 @@ public class CKMazeGenerator {
 							(x - mazes[i].r) * LENGTH,
 							i * HEIGHT,
 							(z - mazes[i].r) * LENGTH
-					), false));
+					), true));
 				}
 		}
 	}
