@@ -30,6 +30,13 @@ public class LeafMarker extends MazeCellData<LeafMarker, LeafMarker.LeafSetData>
 		}
 	}
 
+	/**
+	 * color == 0 means it's leave
+	 */
+	public boolean isLeaf(int[] colors) {
+		return level == 0 && colors[getColor()] != 0;
+	}
+
 	public int getColor() {
 		if (parent == null) {
 			return color;

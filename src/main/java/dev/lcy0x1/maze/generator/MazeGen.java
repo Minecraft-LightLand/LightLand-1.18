@@ -120,6 +120,8 @@ public class MazeGen {
 			}
 			// debug.showRim(this);
 			int[] rarr = randArray(paths.length, rand);
+			if (r - 1 < config.INVARIANCE_RIM.length && len() == config.INVARIANCE_RIM[r - 1].length)
+				rarr = config.INVARIANCE_RIM[r - 1];
 			State[] sts = new State[loop];
 			for (int i = 0; i < loop; i++)
 				sts[i] = new State();

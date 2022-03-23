@@ -12,7 +12,9 @@ public class MazeConfig {
 	private static final double CONN_SEC = 0.75;
 	public int[] path, loop;
 	public double path_fac, loop_fac, conn_pri, conn_sec;
-	public int invariant = 2, survive = 4;
+
+	public int invariant = 0, survive = 0;
+	public int[][] INVARIANCE_RIM = {};
 
 	public MazeConfig() {
 		path = PATH;
@@ -43,7 +45,7 @@ public class MazeConfig {
 	}
 
 	int randPath(int i, MazeGen.StateRim rim, Random r, int c) {
-		if (i < invariant) return 1;
+		if (i <= invariant) return i <= 1 ? 1 : i == 2 ? 4 : 1;
 		int len = (int) Math.ceil(rim.aviPath() * path_fac);
 		return randSel(r, path, i < survive || c == 1 || !rim.state.isRoot(), len);
 	}

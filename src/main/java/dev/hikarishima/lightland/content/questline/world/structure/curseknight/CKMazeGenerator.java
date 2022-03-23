@@ -92,6 +92,11 @@ public class CKMazeGenerator {
 
 	}
 
+	public static final String BOSS_ROOM = "boss_room", TOP_FLAT = "top_flat",
+			EDGE_TOP_WALL = "edge_top_wall", EDGE_TOP_CORNER = "edge_top_corner",
+			EDGE_HIGH_WALL = "edge_high_wall", EDGE_HIGH_CORNER = "edge_high_corner",
+			EDGE_CORNER = "edge_corner", EDGE_WALL = "edge_wall", EDGE_DOOR = "edge_door";
+
 	public record CellInstance(String id, Rotation rot, Mirror mir) {
 
 	}
@@ -104,10 +109,10 @@ public class CKMazeGenerator {
 		// 8 = down
 
 		RoomType room = RoomType.values()[values[x][z].level == 0 ? sets[values[x][z].getColor()] : 0];
-		boolean d1 = values[x][z].level > 0 && x > 0 && values[x - 1][z].level == 0;
-		boolean d2 = values[x][z].level > 0 && x < maze.w - 1 && values[x + 1][z].level == 0;
-		boolean d4 = values[x][z].level > 0 && z > 0 && values[x][z - 1].level == 0;
-		boolean d8 = values[x][z].level > 0 && z < maze.w - 1 && values[x][z + 1].level == 0;
+		boolean d1 = values[x][z].level > 0 && x > 0 && values[x - 1][z].isLeaf(sets);
+		boolean d2 = values[x][z].level > 0 && x < maze.w - 1 && values[x + 1][z].isLeaf(sets);
+		boolean d4 = values[x][z].level > 0 && z > 0 && values[x][z - 1].isLeaf(sets);
+		boolean d8 = values[x][z].level > 0 && z < maze.w - 1 && values[x][z + 1].isLeaf(sets);
 
 		return switch (dire) {
 			case 1 -> new CellInstance(RoomCellType.END.getID(room), Rotation.NONE, Mirror.NONE);
@@ -133,7 +138,10 @@ public class CKMazeGenerator {
 	public static final int[] LAYERS = {7, 7, 7};
 
 	public static void addPieces(StructureManager manager, BlockPos pos, List<StructurePiece> children, WorldgenRandom r, MazeConfig conf) {
+		pos = pos.above();
 		MazeGen[] mazes = new MazeGen[LAYERS.length];
+
+		// maze body
 		for (int i = 0; i < LAYERS.length; i++) {
 			mazes[i] = new MazeGen(LAYERS[i], r, conf, new MazeGen.Debugger());
 			mazes[i].gen();
@@ -142,6 +150,16 @@ public class CKMazeGenerator {
 			for (int c = 0; c < sets.length; c++) {
 				sets[c] = r.nextInt(RoomType.values().length - 1) + 1;
 			}
+			if (i == 1) {
+				sets[itr.value[0][mazes[i].r].getColor()] = 0;
+				sets[itr.value[mazes[i].w - 1][mazes[i].r].getColor()] = 0;
+				sets[itr.value[mazes[i].r][0].getColor()] = 0;
+				sets[itr.value[mazes[i].r][mazes[i].w - 1].getColor()] = 0;
+				mazes[i].ans[0][mazes[i].r] |= 1;
+				mazes[i].ans[mazes[i].w - 1][mazes[i].r] |= 2;
+				mazes[i].ans[mazes[i].r][0] |= 4;
+				mazes[i].ans[mazes[i].r][mazes[i].w - 1] |= 8;
+			}
 			for (int x = 0; x < mazes[i].w; x++)
 				for (int z = 0; z < mazes[i].w; z++) {
 					if (Math.abs(x - mazes[i].r) <= 1 && Math.abs(z - mazes[i].r) <= 1)
@@ -149,11 +167,60 @@ public class CKMazeGenerator {
 					CellInstance ins = parseCell(mazes[i], sets, itr.value, x, z);
 					children.add(new CKMazePiece(manager, ins, pos.offset(
 							(x - mazes[i].r) * LENGTH,
-							i * HEIGHT,
+							(i - 1) * HEIGHT,
 							(z - mazes[i].r) * LENGTH
-					), true));
+					), CKMazePiece.ShiftType.FLAT, true));
 				}
 		}
+
+		// boos room
+		children.add(new CKMazePiece(manager, new CellInstance(BOSS_ROOM, Rotation.NONE, Mirror.NONE), pos.offset(
+				-LENGTH, -HEIGHT, -LENGTH), CKMazePiece.ShiftType.FLAT, true));
+
+		// roof
+		for (int x = 0; x < mazes[2].w; x++) {
+			for (int z = 0; z < mazes[2].w; z++) {
+				children.add(new CKMazePiece(manager, new CellInstance(TOP_FLAT, Rotation.NONE, Mirror.NONE), pos.offset(
+						(x - mazes[2].r) * LENGTH,
+						2 * HEIGHT,
+						(z - mazes[2].r) * LENGTH
+				), CKMazePiece.ShiftType.FLAT, false));
+			}
+		}
+
+		// roof edge
+		int start_pos = -mazes[2].r * LENGTH - 1;
+		int end_pos = (mazes[2].w - mazes[2].r) * LENGTH;
+		for (int i = 0; i < mazes[2].w; i++) {
+			int ix = (i - mazes[2].r) * LENGTH;
+			addEdges(manager, children, pos, end_pos, ix, Rotation.NONE, i == mazes[1].r);
+			addEdges(manager, children, pos, start_pos, ix + LENGTH - 1, Rotation.CLOCKWISE_180, i == mazes[1].r);
+			addEdges(manager, children, pos, ix + LENGTH - 1, end_pos, Rotation.CLOCKWISE_90, i == mazes[1].r);
+			addEdges(manager, children, pos, ix, start_pos, Rotation.COUNTERCLOCKWISE_90, i == mazes[1].r);
+		}
+		addCorners(manager, children, pos, end_pos, end_pos, Rotation.NONE);
+		addCorners(manager, children, pos, start_pos, start_pos, Rotation.CLOCKWISE_180);
+		addCorners(manager, children, pos, start_pos, end_pos, Rotation.CLOCKWISE_90);
+		addCorners(manager, children, pos, end_pos, start_pos, Rotation.COUNTERCLOCKWISE_90);
+
+	}
+
+	private static void addEdges(StructureManager manager, List<StructurePiece> children, BlockPos pos, int x, int z, Rotation rot, boolean door) {
+		children.add(new CKMazePiece(manager, new CellInstance(EDGE_TOP_WALL, rot, Mirror.NONE),
+				pos.offset(x, 2 * HEIGHT, z), CKMazePiece.ShiftType.EDGE, false));
+		children.add(new CKMazePiece(manager, new CellInstance(EDGE_HIGH_WALL, rot, Mirror.NONE),
+				pos.offset(x, HEIGHT, z), CKMazePiece.ShiftType.EDGE, false));
+		children.add(new CKMazePiece(manager, new CellInstance(door ? EDGE_DOOR : EDGE_WALL, rot, Mirror.NONE),
+				pos.offset(x, 0, z), CKMazePiece.ShiftType.EDGE, true));
+	}
+
+	private static void addCorners(StructureManager manager, List<StructurePiece> children, BlockPos pos, int x, int z, Rotation rot) {
+		children.add(new CKMazePiece(manager, new CellInstance(EDGE_TOP_CORNER, rot, Mirror.NONE),
+				pos.offset(x, 2 * HEIGHT, z), CKMazePiece.ShiftType.NONE, false));
+		children.add(new CKMazePiece(manager, new CellInstance(EDGE_HIGH_CORNER, rot, Mirror.NONE),
+				pos.offset(x, HEIGHT, z), CKMazePiece.ShiftType.NONE, false));
+		children.add(new CKMazePiece(manager, new CellInstance(EDGE_CORNER, rot, Mirror.NONE),
+				pos.offset(x, 0, z), CKMazePiece.ShiftType.NONE, false));
 	}
 
 }

@@ -6,8 +6,10 @@ import dev.hikarishima.lightland.content.questline.world.structure.BaseStructure
 import dev.lcy0x1.maze.generator.MazeConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.QuartPos;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -21,6 +23,10 @@ import java.util.Optional;
 import java.util.Random;
 
 public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatureConfiguration> {
+
+	private static final List<MobSpawnSettings.SpawnerData> SPAWN_LIST = List.of(
+
+	);
 
 	public CKMazeFeature(Codec<NoneFeatureConfiguration> codec) {
 		super(codec, CKMazeFeature::pieceGeneratorSupplier);
@@ -64,12 +70,20 @@ public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatu
 					QuartPos.fromBlock(blockpos.getY()),
 					QuartPos.fromBlock(blockpos.getZ()))) ?
 					Optional.empty() : Optional.of((builder, ctx) -> {
+				MazeConfig config = new MazeConfig();
+				config.invariant = 2;
+				config.survive = 4;
+				config.INVARIANCE_RIM = new int[][]{{0, 1, 2, 3, 4, 5, 6, 7}, {0, 4, 8, 12, 1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15}};
 				List<StructurePiece> list = Lists.newArrayList();
-				CKMazeGenerator.addPieces(ctx.structureManager(), blockpos, list, ctx.random(), new MazeConfig());
+				CKMazeGenerator.addPieces(ctx.structureManager(), blockpos, list, ctx.random(), config);
 				list.forEach(builder::addPiece);
 
 			});
 		}
 	}
 
+	@Override
+	public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList(MobCategory category) {
+		return SPAWN_LIST;
+	}
 }
