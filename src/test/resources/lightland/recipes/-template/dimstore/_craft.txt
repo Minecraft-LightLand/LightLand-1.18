@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "lightland_dimstore_craft",
+  "pattern": [
+	"aba",
+	"bcb",
+	"aba"
+  ],
+  "key": {
+	"a": {
+      "tag": "forge:dyes/^c"
+	},
+	"b": {
+	  "item": "lightland:ender_pocket"
+	},
+	"c": {
+	  "item": "minecraft:ender_chest"
+	}
+  },
+  "result": {
+	"item": "lightland:dimensional_storage_^c"
+  }
+}

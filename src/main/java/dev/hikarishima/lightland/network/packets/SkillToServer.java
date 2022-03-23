@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.network.packets;
 
-import dev.hikarishima.lightland.content.common.capability.CapProxy;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.content.common.capability.SkillCap;
+import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
 import dev.hikarishima.lightland.network.SerialPacketBase;
 import dev.lcy0x1.base.Proxy;
 import dev.lcy0x1.util.SerialClass;

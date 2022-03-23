@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.arcane.internal;
 
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;

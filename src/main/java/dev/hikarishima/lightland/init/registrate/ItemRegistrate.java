@@ -22,6 +22,7 @@ import dev.hikarishima.lightland.content.common.gui.ability.ProfessionScreen;
 import dev.hikarishima.lightland.content.common.item.api.Mat;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
 import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
+import dev.hikarishima.lightland.content.common.item.backpack.WorldChestItem;
 import dev.hikarishima.lightland.content.common.item.misc.ContainerBook;
 import dev.hikarishima.lightland.content.common.item.misc.RecordPearl;
 import dev.hikarishima.lightland.content.common.item.misc.ScreenBook;
@@ -87,6 +88,7 @@ public class ItemRegistrate {
 
 	// -------- common --------
 	public static final ItemEntry<BackpackItem>[] BACKPACKS;
+	public static final ItemEntry<WorldChestItem>[] DIMENSIONAL_STORAGE;
 	public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
 	public static final ItemEntry<Item> STRONG_LEATHER, ENDER_POCKET;
 	public static final ItemEntry<RecordPearl> RECORD_PEARL;
@@ -109,7 +111,17 @@ public class ItemRegistrate {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-						.tag(AllTags.AllItemTags.BACKPACKS.tag).model(ItemRegistrate::createBackpackModel).defaultLang().register();
+						.tag(AllTags.AllItemTags.BACKPACKS.tag).model(ItemRegistrate::createBackpackModel)
+						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
+						.defaultLang().register();
+			}
+			DIMENSIONAL_STORAGE = new ItemEntry[16];
+			for (int i = 0; i < 16; i++) {
+				DyeColor color = DyeColor.values()[i];
+				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p.stacksTo(1)))
+						.tag(AllTags.AllItemTags.DIMENSIONAL_STORAGES.tag).model(ItemRegistrate::createWorldChestModel)
+						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
+						.defaultLang().register();
 			}
 			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
 			RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1))).defaultModel().defaultLang().register();
@@ -163,6 +175,10 @@ public class ItemRegistrate {
 		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:backpack");
 		builder.override().predicate(new ResourceLocation("open"), 1).model(
 				new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/backpack_open"));
+	}
+
+	private static void createWorldChestModel(DataGenContext<Item, WorldChestItem> ctx, RegistrateItemModelProvider pvd) {
+		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:dimensional_storage");
 	}
 
 	private static void createEnderBackpackModel(DataGenContext<Item, EnderBackpackItem> ctx, RegistrateItemModelProvider pvd) {
@@ -311,13 +327,17 @@ public class ItemRegistrate {
 
 	static {
 		MEDICINE_LEATHER = REGISTRATE.item("medicine_leather", p -> new MedicineLeather(14, p))
+				.color(() -> () -> (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack))
 				.defaultModel().defaultLang().register();
 		KING_MED_LEATHER = REGISTRATE.item("king_med_leather", p -> new MedicineLeather(100, p))
+				.color(() -> () -> (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack))
 				.defaultModel().defaultLang().register();
 		MEDICINE_ARMOR = genArmor("medicine_leather",
-				(slot, p) -> new MedicineArmor(Mat.MEDICINE_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
+				(slot, p) -> new MedicineArmor(Mat.MEDICINE_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel)
+						.color(() -> () -> (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack)));
 		KING_MED_ARMOR = genArmor("king_leather",
-				(slot, p) -> new MedicineArmor(Mat.KING_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel));
+				(slot, p) -> new MedicineArmor(Mat.KING_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel)
+						.color(() -> () -> (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack)));
 	}
 
 

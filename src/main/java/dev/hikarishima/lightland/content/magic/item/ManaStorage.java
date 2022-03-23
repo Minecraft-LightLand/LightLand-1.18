@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.magic.item;
 
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.network.packets.CapToClient;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.server.level.ServerPlayer;

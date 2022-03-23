@@ -1,16 +1,19 @@
 package dev.hikarishima.lightland.events.generic;
 
-import dev.hikarishima.lightland.content.common.capability.LLPlayerCapability;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerCapability;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.worldstorage.WorldStorageCapability;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.network.packets.CapToClient;
 import dev.lcy0x1.util.Automator;
 import dev.lcy0x1.util.ExceptionHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
@@ -22,13 +25,23 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 public class CapabilityEvents {
 
 	@SubscribeEvent
-	public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
-		if (event.getObject() instanceof Player) {
+	public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event) {
+		if (event.getObject() instanceof Player player) {
 			event.addCapability(new ResourceLocation(LightLand.MODID, "player_data"),
-					new LLPlayerCapability((Player) event.getObject(), event.getObject().level));
+					new LLPlayerCapability(player, player.level));
 		}
 	}
 
+
+	@SubscribeEvent
+	public static void onAttachLevelCapabilities(AttachCapabilitiesEvent<Level> event) {
+		if (event.getObject() instanceof ServerLevel level) {
+			if (level.dimension() == Level.OVERWORLD) {
+				event.addCapability(new ResourceLocation(LightLand.MODID, "world_storage"),
+						new WorldStorageCapability(level));
+			}
+		}
+	}
 
 	@SubscribeEvent
 	public static void onPlayerTick(TickEvent.PlayerTickEvent event) {

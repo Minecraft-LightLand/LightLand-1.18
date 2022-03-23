@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.network.packets;
 
-import dev.hikarishima.lightland.content.common.capability.*;
+import dev.hikarishima.lightland.content.common.capability.player.*;
 import dev.hikarishima.lightland.network.SerialPacketBase;
 import dev.lcy0x1.base.Proxy;
 import dev.lcy0x1.util.Automator;

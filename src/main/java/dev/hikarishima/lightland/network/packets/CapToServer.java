@@ -1,10 +1,10 @@
 package dev.hikarishima.lightland.network.packets;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
-import dev.hikarishima.lightland.content.common.capability.AbilityPoints;
-import dev.hikarishima.lightland.content.common.capability.CapProxy;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.content.common.capability.MagicHolder;
+import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
+import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.MagicHolder;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.MagicProduct;

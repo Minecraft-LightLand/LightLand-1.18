@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.capability;
+package dev.hikarishima.lightland.content.common.capability.player;
 
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.MagicProduct;

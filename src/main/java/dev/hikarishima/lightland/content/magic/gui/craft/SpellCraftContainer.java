@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.gui.craft;
 
 import com.google.common.collect.Maps;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;

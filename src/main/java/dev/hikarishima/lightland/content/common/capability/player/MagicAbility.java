@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.capability;
+package dev.hikarishima.lightland.content.common.capability.player;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant;

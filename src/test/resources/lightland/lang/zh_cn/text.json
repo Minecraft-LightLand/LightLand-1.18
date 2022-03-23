@@ -108,7 +108,8 @@
 	  "target.all": "全部",
 	  "target.ally": "队友",
 	  "target.enemy": "敌人",
-	  "weight": "重量: %s"
+	  "weight": "重量: %s",
+	  "owner": "所有者: %s"
 	}
   }
 }

@@ -40,24 +40,6 @@ public class ClientRegister {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public static void registerItemColors(ColorHandlerEvent.Item event) {
-		{
-			ItemColor color = (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack);
-			for (ItemEntry<MedicineArmor> entry : ItemRegistrate.MEDICINE_ARMOR)
-				event.getItemColors().register(color, entry.get());
-			for (ItemEntry<MedicineArmor> entry : ItemRegistrate.KING_MED_ARMOR)
-				event.getItemColors().register(color, entry.get());
-			event.getItemColors().register(color, ItemRegistrate.MEDICINE_LEATHER.get());
-			event.getItemColors().register(color, ItemRegistrate.KING_MED_LEATHER.get());
-		}
-		{
-			ItemColor color = (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col;
-			for (ItemEntry<BackpackItem> entry : ItemRegistrate.BACKPACKS)
-				event.getItemColors().register(color, entry.get());
-		}
-	}
-
-	@OnlyIn(Dist.CLIENT)
 	public static void registerOverlays() {
 		OverlayRegistry.enableOverlay(ForgeIngameGui.HOTBAR_ELEMENT, false);
 		OverlayRegistry.enableOverlay(ForgeIngameGui.EXPERIENCE_BAR_ELEMENT, false);

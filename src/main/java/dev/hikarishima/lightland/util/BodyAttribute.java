@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.util;
 
-import dev.hikarishima.lightland.content.common.capability.AbilityPoints;
+import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

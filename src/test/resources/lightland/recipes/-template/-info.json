@@ -175,7 +175,9 @@
         "-list": [
             "backpack_craft",
             "backpack_dye",
-            "backpack_upgrade"
+            "backpack_upgrade",
+            "dimstore_craft",
+            "dimstore_dye"
         ],
         "white": {
             "c": "^n"

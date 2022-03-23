@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.magic.gui.craft;
 
 import com.google.common.collect.Maps;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.content.common.capability.MagicHolder;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.MagicHolder;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.LightLand;

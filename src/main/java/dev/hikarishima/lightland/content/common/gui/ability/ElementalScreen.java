@@ -2,8 +2,8 @@ package dev.hikarishima.lightland.content.common.gui.ability;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import dev.hikarishima.lightland.content.common.capability.CapProxy;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.init.data.LangData;

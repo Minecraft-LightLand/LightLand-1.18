@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.magic.gui.tree;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.hikarishima.lightland.content.common.capability.MagicHolder;
+import dev.hikarishima.lightland.content.common.capability.player.MagicHolder;
 import dev.hikarishima.lightland.content.common.gui.GuiTabType;
 import dev.hikarishima.lightland.content.magic.gui.hex.MagicHexScreen;
 import dev.hikarishima.lightland.content.magic.products.MagicProduct;

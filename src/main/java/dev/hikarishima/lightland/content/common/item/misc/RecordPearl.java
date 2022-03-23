@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.item.misc;
 
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.lcy0x1.util.Automator;
 import dev.lcy0x1.util.ExceptionHandler;
 import net.minecraft.nbt.CompoundTag;

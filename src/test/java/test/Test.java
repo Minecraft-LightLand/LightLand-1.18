@@ -1,14 +1,10 @@
 package test;
 
-import dev.hikarishima.lightland.content.common.capability.SkillCap;
+import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
 import dev.lcy0x1.util.TypeInfo;
 import org.apache.logging.log4j.LogManager;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

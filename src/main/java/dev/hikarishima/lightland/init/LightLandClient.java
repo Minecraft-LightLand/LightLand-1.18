@@ -7,7 +7,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class LightLandClient {
 
 	public static void onCtorClient(IEventBus bus, IEventBus eventBus) {
-		bus.addListener(ClientRegister::registerItemColors);
 	}
 
 	@SubscribeEvent

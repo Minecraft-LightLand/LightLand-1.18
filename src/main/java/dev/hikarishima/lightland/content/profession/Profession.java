@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.profession;
 
-import dev.hikarishima.lightland.content.common.capability.AbilityPoints;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.lcy0x1.base.NamedEntry;

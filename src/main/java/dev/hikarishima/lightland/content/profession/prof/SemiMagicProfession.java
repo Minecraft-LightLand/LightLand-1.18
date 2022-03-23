@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.profession.prof;
 
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.profession.Profession;
 
 public abstract class SemiMagicProfession extends Profession {

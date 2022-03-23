@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.capability;
+package dev.hikarishima.lightland.content.common.capability.player;
 
 import dev.lcy0x1.base.Proxy;
 import dev.lcy0x1.util.Automator;

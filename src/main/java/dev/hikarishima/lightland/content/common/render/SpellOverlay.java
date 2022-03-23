@@ -2,8 +2,8 @@ package dev.hikarishima.lightland.content.common.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.hikarishima.lightland.content.common.capability.CapProxy;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.AttackIndicatorStatus;

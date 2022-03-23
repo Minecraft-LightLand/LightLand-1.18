@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.magic.item;
 
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.common.item.api.IGlowingTarget;
 import dev.hikarishima.lightland.content.magic.products.MagicProduct;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;

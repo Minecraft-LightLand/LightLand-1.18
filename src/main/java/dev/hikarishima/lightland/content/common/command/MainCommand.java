@@ -2,8 +2,8 @@ package dev.hikarishima.lightland.content.common.command;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.content.common.capability.SkillCap;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
 import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.data.LangData;

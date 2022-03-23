@@ -2,9 +2,9 @@ package dev.hikarishima.lightland.content.common.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
-import dev.hikarishima.lightland.content.common.capability.CapProxy;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.content.common.capability.SkillCap;
+import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
 import dev.hikarishima.lightland.content.skill.internal.SkillData;

@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.arcane.internal;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.compat.TeamAccessor;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;

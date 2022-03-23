@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.gui.hex;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.MagicProduct;
 import dev.hikarishima.lightland.content.magic.products.info.ProductState;

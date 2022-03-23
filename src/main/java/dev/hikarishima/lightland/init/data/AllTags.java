@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 
+import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.function.Function;
 
@@ -149,6 +150,7 @@ public class AllTags {
 
 	public enum AllItemTags {
 		BACKPACKS,
+		DIMENSIONAL_STORAGES,
 		DYES;
 
 		public final Tag.Named<Item> tag;
@@ -169,7 +171,7 @@ public class AllTags {
 			this(namespace, null, optional, alwaysDatagen);
 		}
 
-		AllItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+		AllItemTags(NameSpace namespace, @Nullable String path, boolean optional, boolean alwaysDatagen) {
 			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? name().toLowerCase(Locale.ROOT) : path);
 			if (optional) {
 				tag = ItemTags.createOptional(id);

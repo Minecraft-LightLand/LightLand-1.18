@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.capability.restriction;
 
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
-import dev.hikarishima.lightland.content.common.capability.MagicAbility;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.MagicAbility;
 import dev.hikarishima.lightland.network.config.ConfigSyncManager;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.client.player.AbstractClientPlayer;

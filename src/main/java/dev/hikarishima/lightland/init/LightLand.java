@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init;
 
 import dev.hikarishima.lightland.compat.GeneralCompatHandler;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.common.command.*;
 import dev.hikarishima.lightland.events.DamageEventHandler;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
@@ -22,7 +22,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
-import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;

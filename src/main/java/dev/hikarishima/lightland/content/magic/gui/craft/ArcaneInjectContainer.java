@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemCraftHelper;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
-import dev.hikarishima.lightland.content.common.capability.LLPlayerData;
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
 import dev.hikarishima.lightland.content.magic.item.ManaStorage;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
