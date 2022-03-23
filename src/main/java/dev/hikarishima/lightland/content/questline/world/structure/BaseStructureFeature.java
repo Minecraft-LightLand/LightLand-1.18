@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.content.questline.world.structure;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
@@ -24,6 +25,11 @@ public class BaseStructureFeature<S extends BaseStructureFeature<S, C>, C extend
 	@SuppressWarnings("unchecked")
 	public S getThis() {
 		return (S) this;
+	}
+
+	@Override
+	public GenerationStep.Decoration step() {
+		return GenerationStep.Decoration.SURFACE_STRUCTURES;
 	}
 
 }

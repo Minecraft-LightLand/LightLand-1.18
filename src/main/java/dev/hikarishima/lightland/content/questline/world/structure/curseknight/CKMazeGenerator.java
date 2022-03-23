@@ -68,7 +68,7 @@ public class CKMazeGenerator {
 
 		public static CellInstance get(boolean left, boolean center, boolean right, Rotation rot) {
 			Mirror none = Mirror.NONE;
-			Mirror mir = Mirror.FRONT_BACK;
+			Mirror mir = Mirror.LEFT_RIGHT;
 			if (left) {
 				if (center) {
 					return new CellInstance(LEFT_WAY.getID(), rot, mir);
@@ -140,14 +140,14 @@ public class CKMazeGenerator {
 			MazeIterator<LeafMarker, LeafMarker.LeafSetData> itr = MazeRegistry.MARKER.generate(mazes[i].ans, mazes[i].r, mazes[i].r);
 			int[] sets = new int[itr.global.current_color + 1];
 			for (int c = 0; c < sets.length; c++) {
-				sets[c] = r.nextInt(RoomType.values().length);
+				sets[c] = r.nextInt(RoomType.values().length - 1) + 1;
 			}
 			for (int x = 0; x < mazes[i].w; x++)
 				for (int z = 0; z < mazes[i].w; z++) {
 					CellInstance ins = parseCell(mazes[i], sets, itr.value, x, z);
 					children.add(new CKMazePiece(manager, ins, pos.offset(
 							(x - mazes[i].r) * LENGTH,
-							-i * HEIGHT,
+							50 - i * HEIGHT,
 							(z - mazes[i].r) * LENGTH
 					), false));
 				}

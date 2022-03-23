@@ -1,9 +1,11 @@
 package dev.hikarishima.lightland.events;
 
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.worldgenreg.StructureRegistrate;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraftforge.event.server.ServerAboutToStartEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -36,6 +38,11 @@ public class WorldGenEventHandler {
 					EntityRegistrate.ET_VINE_SLIME.get(), 200, 4, 4));
 		}
 
+	}
+
+	@SubscribeEvent
+	public static void onServerStart(ServerAboutToStartEvent event){
+		StructureRegistrate.addDefaultStructureBiomes();
 	}
 
 }

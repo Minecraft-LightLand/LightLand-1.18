@@ -67,6 +67,7 @@ public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatu
 				List<StructurePiece> list = Lists.newArrayList();
 				CKMazeGenerator.addPieces(ctx.structureManager(), blockpos, list, ctx.random(), new MazeConfig());
 				list.forEach(builder::addPiece);
+
 			});
 		}
 	}

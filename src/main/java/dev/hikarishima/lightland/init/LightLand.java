@@ -117,8 +117,4 @@ public class LightLand {
 		event.register(LLPlayerData.class);
 	}
 
-	public static void onServerStart(ServerAboutToStartEvent event){
-		StructureRegistrate.addDefaultStructureBiomes();
-	}
-
 }
