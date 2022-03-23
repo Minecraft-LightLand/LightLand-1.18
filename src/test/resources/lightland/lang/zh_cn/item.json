@@ -75,7 +75,8 @@
 	"layline_charger": "地脉充能器",
 	"slime_carpet": "粘液层",
 	"slime_vine": "粘液藤蔓",
-	"maze_wall": "再生石"
+	"maze_wall": "再生石",
+	"dimensional_storage": "空间箱子"
   },
   "-cartesian": {
 	"backpack": {

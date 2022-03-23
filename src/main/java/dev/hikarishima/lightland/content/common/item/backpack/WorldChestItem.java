@@ -12,15 +12,18 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,7 +76,7 @@ public class WorldChestItem extends BlockItem {
 		public void open() {
 			if (!stack.getOrCreateTag().contains("owner_id")) {
 				stack.getOrCreateTag().putUUID("owner_id", player.getUUID());
-				stack.getOrCreateTag().putString("owner_name",player.getName().getString());
+				stack.getOrCreateTag().putString("owner_name", player.getName().getString());
 				stack.getOrCreateTag().putLong("password", color);
 			}
 			if (player.level.isClientSide() || getContainer((ServerLevel) player.level).isEmpty())
@@ -102,6 +105,20 @@ public class WorldChestItem extends BlockItem {
 	}
 
 	@Override
+	public InteractionResult useOn(UseOnContext context) {
+		if (context.getPlayer() != null && !context.getPlayer().isCrouching()) {
+			ItemStack stack = context.getItemInHand();
+			if (!context.getLevel().isClientSide()) {
+				new MenuPvd((ServerPlayer) context.getPlayer(), stack, color.getId()).open();
+			} else {
+				context.getPlayer().playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
+			}
+			return InteractionResult.SUCCESS;
+		}
+		return super.useOn(context);
+	}
+
+	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		CompoundTag tag = stack.getTag();
 		if (tag == null) return;
@@ -109,6 +126,10 @@ public class WorldChestItem extends BlockItem {
 			String name = tag.getString("owner_name");
 			list.add(LangData.IDS.STORAGE_OWNER.get(name));
 		}
+	}
+
+	public String getDescriptionId() {
+		return this.getOrCreateDescriptionId();
 	}
 
 }

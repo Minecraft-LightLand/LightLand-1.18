@@ -6,7 +6,9 @@ import dev.lcy0x1.block.type.BlockMethod;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -40,6 +42,17 @@ public class DelegateEntityBlockImpl extends DelegateBlockImpl implements Entity
 	@Override
 	public final BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return impl.one(BlockEntityBlockMethod.class).map(e -> e.createTileEntity(pos, state)).orElse(null);
+	}
+
+
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
+		if (stack.hasCustomHoverName()) {
+			BlockEntity blockentity = level.getBlockEntity(pos);
+			if (blockentity instanceof NameSetable) {
+				((NameSetable) blockentity).setCustomName(stack.getHoverName());
+			}
+		}
+
 	}
 
 	@Nullable

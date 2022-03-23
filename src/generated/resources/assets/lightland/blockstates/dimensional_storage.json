@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "color=white": {
+      "model": "lightland:block/dimensional_storage_white"
+    },
+    "color=orange": {
+      "model": "lightland:block/dimensional_storage_orange"
+    },
+    "color=magenta": {
+      "model": "lightland:block/dimensional_storage_magenta"
+    },
+    "color=light_blue": {
+      "model": "lightland:block/dimensional_storage_light_blue"
+    },
+    "color=yellow": {
+      "model": "lightland:block/dimensional_storage_yellow"
+    },
+    "color=lime": {
+      "model": "lightland:block/dimensional_storage_lime"
+    },
+    "color=pink": {
+      "model": "lightland:block/dimensional_storage_pink"
+    },
+    "color=gray": {
+      "model": "lightland:block/dimensional_storage_gray"
+    },
+    "color=light_gray": {
+      "model": "lightland:block/dimensional_storage_light_gray"
+    },
+    "color=cyan": {
+      "model": "lightland:block/dimensional_storage_cyan"
+    },
+    "color=purple": {
+      "model": "lightland:block/dimensional_storage_purple"
+    },
+    "color=blue": {
+      "model": "lightland:block/dimensional_storage_blue"
+    },
+    "color=brown": {
+      "model": "lightland:block/dimensional_storage_brown"
+    },
+    "color=green": {
+      "model": "lightland:block/dimensional_storage_green"
+    },
+    "color=red": {
+      "model": "lightland:block/dimensional_storage_red"
+    },
+    "color=black": {
+      "model": "lightland:block/dimensional_storage_black"
+    }
+  }
+}

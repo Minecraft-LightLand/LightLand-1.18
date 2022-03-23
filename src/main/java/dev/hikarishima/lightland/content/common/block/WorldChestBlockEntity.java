@@ -2,11 +2,19 @@ package dev.hikarishima.lightland.content.common.block;
 
 import dev.hikarishima.lightland.content.common.capability.worldstorage.StorageContainer;
 import dev.hikarishima.lightland.content.common.capability.worldstorage.WorldStorage;
+import dev.hikarishima.lightland.content.common.item.backpack.WorldChestContainer;
+import dev.hikarishima.lightland.init.data.LangData;
 import dev.lcy0x1.base.BaseBlockEntity;
+import dev.lcy0x1.block.NameSetable;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -21,7 +29,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @SerialClass
-public class WorldChestBlockEntity extends BaseBlockEntity {
+public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvider, NameSetable {
 
 	@SerialClass.SerialField
 	public UUID owner_id;
@@ -31,6 +39,8 @@ public class WorldChestBlockEntity extends BaseBlockEntity {
 	long password;
 	@SerialClass.SerialField(toClient = true)
 	private int color;
+
+	private Component name;
 
 	private LazyOptional<IItemHandler> handler;
 
@@ -58,6 +68,30 @@ public class WorldChestBlockEntity extends BaseBlockEntity {
 		handler = null;
 		this.color = color;
 		this.setChanged();
+	}
+
+	@Override
+	public Component getName() {
+		return name == null ? LangData.IDS.STORAGE_OWNER.get(owner_name) : name;
+	}
+
+	@Override
+	public Component getDisplayName() {
+		return getName();
+	}
+
+	@Nullable
+	@Override
+	public AbstractContainerMenu createMenu(int wid, Inventory inventory, Player player) {
+		if (level == null) return null;
+		Optional<StorageContainer> storage = WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
+		if (storage.isEmpty()) return null;
+		return new WorldChestContainer(wid, inventory, owner_id, storage.get().container, storage.get());
+	}
+
+	@Override
+	public void setCustomName(Component component) {
+		name = component;
 	}
 
 }

@@ -16,7 +16,7 @@ public class BlockFileOrganizer extends ResourceOrganizer {
 
     @Override
     public void organize(File f) throws Exception {
-        texture = getTargetFolder() + "textures/blocks/";
+        texture = getTargetFolder() + "textures/block/";
         process("", f);
     }
 

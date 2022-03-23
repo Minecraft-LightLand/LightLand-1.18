@@ -9,12 +9,15 @@ import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
 import dev.hikarishima.lightland.content.magic.block.RitualSide;
 import dev.hikarishima.lightland.content.questline.block.*;
+import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.GenItem;
 import dev.lcy0x1.block.BlockProxy;
 import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WebBlock;
@@ -22,6 +25,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 import static dev.hikarishima.lightland.init.registrate.ItemRegistrate.TAB_MAIN;
@@ -58,7 +63,16 @@ public class BlockRegistrate {
 			DelegateBlockProperties CHEST = DelegateBlockProperties.copy(Blocks.ENDER_CHEST);
 			WORLD_CHEST = REGISTRATE.block("dimensional_storage", p -> DelegateBlock.newBaseBlock(
 							CHEST, WorldChestBlock.INSTANCE, WorldChestBlock.TILE_ENTITY_SUPPLIER_BUILDER
-					)).defaultBlockstate().loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
+					)).blockstate((ctx, pvd) -> {
+						for (DyeColor color : DyeColor.values()) {
+							pvd.models().cubeAll("dimensional_storage_" + color.getName(), new ResourceLocation(LightLand.MODID,
+									"block/dimensional_storage_" + color.getName()));
+						}
+						pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state ->
+								ConfiguredModel.builder().modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(LightLand.MODID,
+												"block/dimensional_storage_" + state.getValue(WorldChestBlock.COLOR).getName())))
+										.build());
+					}).loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
 					.defaultLang().register();
 			TE_WORLD_CHEST = REGISTRATE.blockEntity("dimensional_storage", WorldChestBlockEntity::new)
 					.validBlock(WORLD_CHEST).register();
