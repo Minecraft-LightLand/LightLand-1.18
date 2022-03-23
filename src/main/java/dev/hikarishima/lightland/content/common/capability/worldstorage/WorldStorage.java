@@ -27,7 +27,7 @@ public class WorldStorage {
 	@SerialClass.SerialField
 	private final HashMap<String, CompoundTag> storage = new HashMap<>();
 
-	private final HashMap<UUID, StorageContainer> cache = new HashMap<>();
+	private final HashMap<UUID, StorageContainer[]> cache = new HashMap<>();
 
 	public WorldStorage(ServerLevel level) {
 		this.level = level;
@@ -35,16 +35,18 @@ public class WorldStorage {
 
 	public Optional<StorageContainer> getOrCreateStorage(UUID id, int color, long password) {
 		if (cache.containsKey(id)) {
-			StorageContainer storage = cache.get(id);
-			if (storage.password == password)
-				return Optional.of(storage);
-			return Optional.empty();
+			StorageContainer storage = cache.get(id)[color];
+			if (storage != null) {
+				if (storage.password == password)
+					return Optional.of(storage);
+				return Optional.empty();
+			}
 		}
 		CompoundTag col = getCol(id, color, password);
 		if (col.getLong("password") != password)
 			return Optional.empty();
 		StorageContainer storage = new StorageContainer(id, col);
-		cache.put(id, storage);
+		putStorage(id, color, storage);
 		return Optional.of(storage);
 	}
 
@@ -53,16 +55,25 @@ public class WorldStorage {
 		CompoundTag col = getCol(id, color, password);
 		col.putLong("password", password);
 		StorageContainer storage = new StorageContainer(id, col);
-		cache.put(id, storage);
+		putStorage(id, color, storage);
 		return storage;
+	}
+
+	private void putStorage(UUID id, int color, StorageContainer storage) {
+		StorageContainer[] arr;
+		if (cache.containsKey(id))
+			arr = cache.get(id);
+		else cache.put(id, arr = new StorageContainer[16]);
+		arr[color] = storage;
 	}
 
 	private CompoundTag getCol(UUID id, int color, long password) {
 		CompoundTag ans;
-		if (!storage.containsKey(id.toString())) {
-			storage.put(id.toString(), ans = new CompoundTag());
+		String sid = id.toString();
+		if (!storage.containsKey(sid)) {
+			storage.put(sid, ans = new CompoundTag());
 			ans.putUUID("owner_id", id);
-		} else ans = storage.get(id);
+		} else ans = storage.get(sid);
 		CompoundTag col;
 		if (ans.contains("color_" + color)) {
 			col = ans.getCompound("color_" + color);
