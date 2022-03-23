@@ -22,7 +22,7 @@ import java.util.Random;
 
 public class CKMazePiece extends TemplateStructurePiece {
 
-	private static final int SHIFT = 2;
+	private static final int SHIFT = 7;
 
 	private static StructurePlaceSettings makeSettings(boolean ow, Rotation rotation, Mirror mirror) {
 		BlockIgnoreProcessor blockignoreprocessor = ow ? BlockIgnoreProcessor.STRUCTURE_BLOCK : BlockIgnoreProcessor.STRUCTURE_AND_AIR;

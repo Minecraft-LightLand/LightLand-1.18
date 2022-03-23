@@ -129,8 +129,8 @@ public class CKMazeGenerator {
 		};
 	}
 
-	public static final int LENGTH = 5, HEIGHT = 9;
-	public static final int[] LAYERS = {12};
+	public static final int LENGTH = 15, HEIGHT = 11;
+	public static final int[] LAYERS = {7, 7, 7};
 
 	public static void addPieces(StructureManager manager, BlockPos pos, List<StructurePiece> children, WorldgenRandom r, MazeConfig conf) {
 		MazeGen[] mazes = new MazeGen[LAYERS.length];
@@ -144,10 +144,12 @@ public class CKMazeGenerator {
 			}
 			for (int x = 0; x < mazes[i].w; x++)
 				for (int z = 0; z < mazes[i].w; z++) {
+					if (Math.abs(x - mazes[i].r) <= 1 && Math.abs(z - mazes[i].r) <= 1)
+						continue;
 					CellInstance ins = parseCell(mazes[i], sets, itr.value, x, z);
 					children.add(new CKMazePiece(manager, ins, pos.offset(
 							(x - mazes[i].r) * LENGTH,
-							50 - i * HEIGHT,
+							i * HEIGHT,
 							(z - mazes[i].r) * LENGTH
 					), false));
 				}

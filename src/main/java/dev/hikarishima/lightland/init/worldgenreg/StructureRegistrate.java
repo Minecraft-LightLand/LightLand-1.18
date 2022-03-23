@@ -84,7 +84,7 @@ public class StructureRegistrate {
 			new StructureEntry<>("cursedknight_maze", "cursedknight_mae_piece",
 					CKMazePiece::new, () -> new CKMazeFeature(NoneFeatureConfiguration.CODEC),
 					NoneFeatureConfiguration.INSTANCE,
-					new StructureFeatureConfiguration(30, 10, 26243534),
+					new StructureFeatureConfiguration(80, 10, 26243534),
 					() -> List.of(Biomes.PLAINS, Biomes.DARK_FOREST));
 
 	public static void commonSetup(FMLCommonSetupEvent event) {

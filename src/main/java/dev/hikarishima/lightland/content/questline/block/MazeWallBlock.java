@@ -47,7 +47,6 @@ public class MazeWallBlock {
 
 	public static final Neighbor NEIGHBOR = new Neighbor();
 	public static final AllDireState ALL_DIRE_STATE = new AllDireState();
-	public static final Fatigue FATIGUE = new Fatigue();
 	public static final Spawner SPAWNER = new Spawner();
 
 	public static final int DELAY = 4;
@@ -61,25 +60,6 @@ public class MazeWallBlock {
 			level.scheduleTick(pos, self, DELAY);
 		}
 	}
-
-	public static class Fatigue implements EntityInsideBlockMethod {
-
-		private static final MobEffectInstance FATIGUE = new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 100, 2);
-		private static final MobEffectInstance SLOW = new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 3);
-		private static final MobEffectInstance WEAK = new MobEffectInstance(MobEffects.WEAKNESS, 100, 1);
-
-		@Override
-		public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-			if (world.isClientSide())
-				return;
-			if (entity instanceof Player player && !player.getAbilities().instabuild) {
-				EffectAddUtil.refreshEffect(player, FATIGUE, EffectAddUtil.AddReason.NONE, null);
-				EffectAddUtil.refreshEffect(player, SLOW, EffectAddUtil.AddReason.NONE, null);
-				EffectAddUtil.refreshEffect(player, WEAK, EffectAddUtil.AddReason.NONE, null);
-			}
-		}
-	}
-
 	public static class Spawner implements NeighborUpdateBlockMethod, DefaultStateBlockMethod, ScheduleTickBlockMethod, CreateBlockStateBlockMethod {
 
 		@Override
@@ -128,7 +108,7 @@ public class MazeWallBlock {
 	}
 
 	public static class AllDireState implements
-			CreateBlockStateBlockMethod, DefaultStateBlockMethod, PlacementBlockMethod, ShapeBlockMethod,
+			CreateBlockStateBlockMethod, DefaultStateBlockMethod, PlacementBlockMethod,
 			ScheduleTickBlockMethod, MirrorRotateBlockMethod, OnClickBlockMethod, PushReactionBlockMethod {
 
 		public static final BooleanProperty[] PROPS = {BlockStateProperties.DOWN, BlockStateProperties.UP,
@@ -246,20 +226,6 @@ public class MazeWallBlock {
 			return PushReaction.BLOCK;
 		}
 
-		@Override
-		public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-			return state.getValue(BlockStateProperties.UP) ? Shapes.block() : SHAPE;
-		}
-
-		@Override
-		public VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
-			return Shapes.block();
-		}
-
-		@Override
-		public VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
-			return Shapes.block();
-		}
 	}
 
 }
