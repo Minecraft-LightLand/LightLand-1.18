@@ -3,6 +3,8 @@ package dev.hikarishima.lightland.init.registrate;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.hikarishima.lightland.content.common.block.WorldChestBlock;
+import dev.hikarishima.lightland.content.common.block.WorldChestBlockEntity;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
 import dev.hikarishima.lightland.content.magic.block.RitualSide;
@@ -33,7 +35,7 @@ public class BlockRegistrate {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
 	}
 
-	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
+	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE, WORLD_CHEST;
 	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, LEAD_BLOCK, MAGICIUM_BLOCK;
 	public static final BlockEntry<LayrootBody> LAYROOT_BODY;
 	public static final BlockEntry<LayrootHead> LAYROOT_HEAD;
@@ -46,11 +48,21 @@ public class BlockRegistrate {
 
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
+	public static final BlockEntityEntry<WorldChestBlockEntity> TE_WORLD_CHEST;
 
 
 	public static final BlockEntry<Block>[] GEN_BLOCK = GenItem.genBlockMats();
 
 	static {
+		{
+			DelegateBlockProperties CHEST = DelegateBlockProperties.copy(Blocks.ENDER_CHEST);
+			WORLD_CHEST = REGISTRATE.block("dimensional_storage", p -> DelegateBlock.newBaseBlock(
+							CHEST, WorldChestBlock.INSTANCE, WorldChestBlock.TILE_ENTITY_SUPPLIER_BUILDER
+					)).defaultBlockstate().loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
+					.defaultLang().register();
+			TE_WORLD_CHEST = REGISTRATE.blockEntity("dimensional_storage", WorldChestBlockEntity::new)
+					.validBlock(WORLD_CHEST).register();
+		}
 		{
 			DelegateBlockProperties PEDESTAL = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
 					.noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)

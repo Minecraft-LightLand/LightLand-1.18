@@ -28,7 +28,7 @@ public abstract class ResourceOrganizer {
     public static void main(String[] args) throws Exception {
         new LangFileOrganizer();
         new ItemFileOrganizer();
-        //new BlockFileOrganizer();
+        new BlockFileOrganizer();
         //new ArmorFileOrganizer();
         new RecipeFileOrganizer();
         new AssetMisc();
@@ -38,6 +38,7 @@ public abstract class ResourceOrganizer {
         for (File fi : f.listFiles()) {
             MODID = fi.getName();
             delete(new File("./src/main/resources/assets/lightland/textures/item"));
+            delete(new File("./src/main/resources/assets/lightland/textures/block"));
             delete(new File("./src/main/resources/data/lightland/recipes"));
             if (!fi.isDirectory())
                 continue;
