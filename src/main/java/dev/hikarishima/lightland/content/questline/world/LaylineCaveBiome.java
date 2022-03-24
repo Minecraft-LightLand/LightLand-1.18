@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.questline.world;
 
-import dev.hikarishima.lightland.init.worldgenreg.WorldGenRegistrate;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.worldgenreg.WorldGenRegistrate;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.sounds.Music;

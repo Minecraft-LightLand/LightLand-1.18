@@ -17,6 +17,6 @@ public class SlimeCarpet extends CarpetBlock {
 	@Override
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		if (!(entity instanceof Slime) && entity.isOnGround() && entity.getY() - pos.getY() < 1 / 16f)
-			entity.makeStuckInBlock(state, new Vec3(0.25D, (double) 0.05F, 0.25D));
+			entity.makeStuckInBlock(state, new Vec3(0.25D, 0.05F, 0.25D));
 	}
 }

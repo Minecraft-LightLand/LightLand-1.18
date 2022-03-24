@@ -9,10 +9,10 @@ public class MazeGen {
 	public static class Debugger {
 
 		MazeGen maze;
-		StateRim cur_rims[];
+		StateRim[] cur_rims;
 		StateRim cur_rim;
 		int root_count;
-		private boolean skip = true;
+		private final boolean skip = true;
 
 		private void begin(MazeGen gen) {
 			maze = gen;
@@ -34,7 +34,7 @@ public class MazeGen {
 
 	class State {
 
-		private int ind;
+		private final int ind;
 		private State parent;
 
 		private State() {
@@ -209,7 +209,7 @@ public class MazeGen {
 	private class PostRim {
 
 		private int x0, x1;
-		private State state;
+		private final State state;
 
 		private PostRim(int i, int j0, State val) {
 			x0 = j0;

@@ -52,7 +52,7 @@ public class GenericPickaxeItem extends PickaxeItem implements GenericTieredItem
 
 	@Override
 	public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
-		if (config.tool_mine > 0 &&state.getDestroySpeed(level, pos) != 0.0F) {
+		if (config.tool_mine > 0 && state.getDestroySpeed(level, pos) != 0.0F) {
 			stack.hurtAndBreak(config.tool_mine, entity, (l) -> l.broadcastBreakEvent(EquipmentSlot.MAINHAND));
 		}
 		return true;
@@ -73,5 +73,5 @@ public class GenericPickaxeItem extends PickaxeItem implements GenericTieredItem
 	public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
 		return config.modify(super.getAttributeModifiers(slot, stack), slot, stack);
 	}
-	
+
 }

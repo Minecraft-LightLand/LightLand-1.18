@@ -3,18 +3,18 @@ package dev.lcy0x1.maze.objective;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
-public class MazeIterator<T extends MazeCellData<T,E>, E extends MazeGeneralData> {
+public class MazeIterator<T extends MazeCellData<T, E>, E extends MazeGeneralData> {
 
-	public static final int[][] DIRE = { { 0, -1, 4 }, { 0, 1, 8 }, { -1, 0, 1 }, { 1, 0, 2 } };
+	public static final int[][] DIRE = {{0, -1, 4}, {0, 1, 8}, {-1, 0, 1}, {1, 0, 2}};
 
 	public final T[][] value;
 	public final int[][] maze;
 	public final int n;
-	public final MazeRegistry.Entry<T,E> ent;
+	public final MazeRegistry.Entry<T, E> ent;
 	public final E global;
 
 	@SuppressWarnings("unchecked")
-	public MazeIterator(int[][] maze, MazeRegistry.Entry<T,E> entry) {
+	public MazeIterator(int[][] maze, MazeRegistry.Entry<T, E> entry) {
 		this.maze = maze;
 		this.ent = entry;
 		this.global = entry.gen.get();

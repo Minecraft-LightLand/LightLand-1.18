@@ -4,14 +4,12 @@ import dev.hikarishima.lightland.content.common.capability.worldstorage.StorageC
 import dev.hikarishima.lightland.init.registrate.MenuRegistrate;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import dev.lcy0x1.menu.BaseContainerMenu;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.MenuType;
 
 import javax.annotation.Nullable;
-import java.util.UUID;
 
 public class WorldChestContainer extends BaseContainerMenu<WorldChestContainer> {
 

@@ -1,6 +1,6 @@
 package dev.lcy0x1.maze.objective;
 
-public abstract class MazeCellData<T extends MazeCellData<T,E>, E extends MazeGeneralData> {
+public abstract class MazeCellData<T extends MazeCellData<T, E>, E extends MazeGeneralData> {
 
 	public int access_direction, x, y, n;
 

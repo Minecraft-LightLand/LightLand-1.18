@@ -60,12 +60,12 @@ public class ExtraToolConfig {
 		return this;
 	}
 
-	public ExtraToolConfig setBypassArmor(){
+	public ExtraToolConfig setBypassArmor() {
 		bypassArmor = true;
 		return this;
 	}
 
-	public ExtraToolConfig setBypassMagic(){
+	public ExtraToolConfig setBypassMagic() {
 		bypassMagic = true;
 		return this;
 	}

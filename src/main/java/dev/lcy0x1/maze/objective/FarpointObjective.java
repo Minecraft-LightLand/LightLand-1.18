@@ -2,9 +2,13 @@ package dev.lcy0x1.maze.objective;
 
 public class FarpointObjective extends MazeCellData<FarpointObjective, MazeGeneralData> {
 
-	/** maximum distance to the root node */
+	/**
+	 * maximum distance to the root node
+	 */
 	public int to_root;
-	/** maximum distance between known nodes */
+	/**
+	 * maximum distance between known nodes
+	 */
 	public int internal;
 
 	@Override

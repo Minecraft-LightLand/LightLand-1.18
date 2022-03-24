@@ -4,7 +4,6 @@ import dev.hikarishima.lightland.compat.TeamAccessor;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.IArcaneItem;
 import dev.hikarishima.lightland.content.common.item.generic.ExtraToolConfig;
-import dev.hikarishima.lightland.content.common.item.generic.GenericArmorItem;
 import dev.hikarishima.lightland.content.common.item.generic.GenericTieredItem;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import net.minecraft.world.damagesource.DamageSource;

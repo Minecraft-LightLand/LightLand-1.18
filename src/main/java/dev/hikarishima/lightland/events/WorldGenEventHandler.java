@@ -41,7 +41,7 @@ public class WorldGenEventHandler {
 	}
 
 	@SubscribeEvent
-	public static void onServerStart(ServerAboutToStartEvent event){
+	public static void onServerStart(ServerAboutToStartEvent event) {
 		StructureRegistrate.addDefaultStructureBiomes();
 	}
 

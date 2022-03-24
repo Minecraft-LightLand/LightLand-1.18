@@ -68,12 +68,12 @@ public class StructureRegistrate {
 					feature_id, entry.get().configured(feature_config));
 		}
 
-		ImmutableMultimap<ConfiguredStructureFeature<?,?>, ResourceKey<Biome>> mapBiome() {
+		ImmutableMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>> mapBiome() {
 			return multimapOf(configured, biomes.get());
 		}
 
-		private static <K,V> ImmutableMultimap<K,V> multimapOf(K key, Collection<V> values) {
-			ImmutableMultimap.Builder<K,V> builder = ImmutableMultimap.builder();
+		private static <K, V> ImmutableMultimap<K, V> multimapOf(K key, Collection<V> values) {
+			ImmutableMultimap.Builder<K, V> builder = ImmutableMultimap.builder();
 			builder.putAll(key, values);
 			return builder.build();
 		}
@@ -111,7 +111,7 @@ public class StructureRegistrate {
 			if (!settings.configuredStructures.containsKey(CKMAZE.entry.get())) {
 				ImmutableMap.Builder<StructureFeature<?>, ImmutableMultimap<ConfiguredStructureFeature<?, ?>, ResourceKey<Biome>>> builder = ImmutableMap.builder();
 				builder.putAll(settings.configuredStructures);
-				LIST.forEach(e->builder.put(e.entry.get(), e.mapBiome()));
+				LIST.forEach(e -> builder.put(e.entry.get(), e.mapBiome()));
 				settings.configuredStructures = builder.build();
 			}
 		}

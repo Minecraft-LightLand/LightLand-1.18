@@ -2,7 +2,9 @@ package dev.lcy0x1.maze.objective;
 
 public class BranchCountObjective extends MazeCellData<BranchCountObjective, MazeGeneralData> {
 
-	/** branch count */
+	/**
+	 * branch count
+	 */
 	public int count;
 
 	@Override

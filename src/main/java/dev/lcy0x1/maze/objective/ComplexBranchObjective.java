@@ -2,7 +2,9 @@ package dev.lcy0x1.maze.objective;
 
 public class ComplexBranchObjective extends MazeCellData<ComplexBranchObjective, MazeGeneralData> {
 
-	/** branch count */
+	/**
+	 * branch count
+	 */
 	public int count;
 	public boolean isLeaf;
 
