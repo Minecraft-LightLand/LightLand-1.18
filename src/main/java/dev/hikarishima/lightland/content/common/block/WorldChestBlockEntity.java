@@ -67,6 +67,7 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 			return;
 		handler = null;
 		this.color = color;
+		this.password = color;
 		this.setChanged();
 	}
 
@@ -83,10 +84,10 @@ public class WorldChestBlockEntity extends BaseBlockEntity implements MenuProvid
 	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int wid, Inventory inventory, Player player) {
-		if (level == null) return null;
+		if (level == null || owner_id == null) return null;
 		Optional<StorageContainer> storage = WorldStorage.get((ServerLevel) level).getOrCreateStorage(owner_id, color, password);
 		if (storage.isEmpty()) return null;
-		return new WorldChestContainer(wid, inventory, owner_id, storage.get().container, storage.get());
+		return new WorldChestContainer(wid, inventory, storage.get().container, storage.get());
 	}
 
 	@Override

@@ -128,4 +128,9 @@ public class BackpackItem extends Item {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> list, TooltipFlag flag) {
 		list.add(LangData.IDS.BACKPACK_SLOT.get(Math.max(1, stack.getOrCreateTag().getInt("rows")), 6));
 	}
+
+	@Override
+	public boolean canFitInsideContainerItems() {
+		return false;
+	}
 }

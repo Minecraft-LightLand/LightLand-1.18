@@ -5,8 +5,8 @@ import dev.hikarishima.lightland.content.common.capability.worldstorage.WorldSto
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,10 +18,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.NetworkHooks;
@@ -33,17 +30,7 @@ import java.util.UUID;
 
 public class WorldChestItem extends BlockItem {
 
-	public static final class MenuPvd implements MenuProvider {
-
-		private final ServerPlayer player;
-		private final ItemStack stack;
-		private final int color;
-
-		public MenuPvd(ServerPlayer player, ItemStack stack, int color) {
-			this.player = player;
-			this.stack = stack;
-			this.color = color;
-		}
+	public record MenuPvd(ServerPlayer player, ItemStack stack, WorldChestItem item) implements MenuProvider {
 
 		@Override
 		public Component getDisplayName() {
@@ -54,14 +41,7 @@ public class WorldChestItem extends BlockItem {
 		@Override
 		public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
 			StorageContainer container = getContainer((ServerLevel) player.level).get();
-			return new WorldChestContainer(id, inventory, container.id, container.container, container);
-		}
-
-		@ServerOnly
-		public void writeBuffer(FriendlyByteBuf buf) {
-			CompoundTag tag = stack.getOrCreateTag();
-			UUID id = tag.getUUID("owner_id");
-			buf.writeUUID(id);
+			return new WorldChestContainer(id, inventory, container.container, container);
 		}
 
 		@ServerOnly
@@ -69,19 +49,15 @@ public class WorldChestItem extends BlockItem {
 			CompoundTag tag = stack.getOrCreateTag();
 			UUID id = tag.getUUID("owner_id");
 			long pwd = tag.getLong("password");
-			return WorldStorage.get(level).getOrCreateStorage(id, color, pwd);
+			return WorldStorage.get(level).getOrCreateStorage(id, item.color.getId(), pwd);
 		}
 
 		@ServerOnly
 		public void open() {
-			if (!stack.getOrCreateTag().contains("owner_id")) {
-				stack.getOrCreateTag().putUUID("owner_id", player.getUUID());
-				stack.getOrCreateTag().putString("owner_name", player.getName().getString());
-				stack.getOrCreateTag().putLong("password", color);
-			}
+			item.refresh(stack, player);
 			if (player.level.isClientSide() || getContainer((ServerLevel) player.level).isEmpty())
 				return;
-			NetworkHooks.openGui(player, this, this::writeBuffer);
+			NetworkHooks.openGui(player, this);
 		}
 
 	}
@@ -93,11 +69,25 @@ public class WorldChestItem extends BlockItem {
 		this.color = color;
 	}
 
+	void refresh(ItemStack stack, Player player) {
+		if (!stack.getOrCreateTag().contains("owner_id")) {
+			stack.getOrCreateTag().putUUID("owner_id", player.getUUID());
+			stack.getOrCreateTag().putString("owner_name", player.getName().getString());
+			stack.getOrCreateTag().putLong("password", color.getId());
+		}
+	}
+
+	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> list) {
+		if (this.allowdedIn(tab)) {
+			list.add(new ItemStack(this));
+		}
+	}
+
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
 		if (!level.isClientSide()) {
-			new MenuPvd((ServerPlayer) player, stack, color.getId()).open();
+			new MenuPvd((ServerPlayer) player, stack, this).open();
 		} else {
 			player.playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
 		}
@@ -106,15 +96,19 @@ public class WorldChestItem extends BlockItem {
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
+		if (!context.getLevel().isClientSide() && context.getPlayer() != null)
+			refresh(context.getItemInHand(), context.getPlayer());
 		if (context.getPlayer() != null && !context.getPlayer().isCrouching()) {
 			ItemStack stack = context.getItemInHand();
 			if (!context.getLevel().isClientSide()) {
-				new MenuPvd((ServerPlayer) context.getPlayer(), stack, color.getId()).open();
+				new MenuPvd((ServerPlayer) context.getPlayer(), stack, this).open();
 			} else {
 				context.getPlayer().playSound(SoundEvents.ENDER_CHEST_OPEN, 1, 1);
 			}
 			return InteractionResult.SUCCESS;
 		}
+		if (!context.getItemInHand().getOrCreateTag().contains("owner_id"))
+			return InteractionResult.FAIL;
 		return super.useOn(context);
 	}
 

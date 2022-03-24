@@ -14,6 +14,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -33,6 +34,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.*;
 import java.util.stream.Stream;
@@ -181,9 +183,14 @@ public class DelegateBlockImpl extends DelegateBlock {
 	}
 
 	@Override
-	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+	public final List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
 		return impl.one(SpecialDropBlockMethod.class).map(e -> e.getDrops(state, builder))
 				.orElse(super.getDrops(state, builder));
+	}
+
+	@Override
+	public final void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
+		impl.execute(SetPlacedByBlockMethod.class).forEach(e -> e.setPlacedBy(level, pos, state, entity, stack));
 	}
 
 	public static class BlockImplementor {

@@ -44,17 +44,6 @@ public class DelegateEntityBlockImpl extends DelegateBlockImpl implements Entity
 		return impl.one(BlockEntityBlockMethod.class).map(e -> e.createTileEntity(pos, state)).orElse(null);
 	}
 
-
-	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
-		if (stack.hasCustomHoverName()) {
-			BlockEntity blockentity = level.getBlockEntity(pos);
-			if (blockentity instanceof NameSetable) {
-				((NameSetable) blockentity).setCustomName(stack.getHoverName());
-			}
-		}
-
-	}
-
 	@Nullable
 	public final <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
 		if (level.isClientSide())

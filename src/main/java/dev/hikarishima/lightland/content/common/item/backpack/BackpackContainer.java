@@ -41,7 +41,7 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
 		this.player = inventory.player;
 		this.item_slot = hand;
 		this.uuid = uuid;
-		this.addSlot("grid", stack -> !(stack.getItem() instanceof BackpackItem));
+		this.addSlot("grid", stack -> stack.getItem().canFitInsideContainerItems());
 		if (!this.player.level.isClientSide()) {
 			ItemStack stack = getStack();
 			if (!stack.isEmpty()) {

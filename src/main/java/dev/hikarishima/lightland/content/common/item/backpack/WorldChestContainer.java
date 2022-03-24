@@ -15,19 +15,16 @@ import java.util.UUID;
 
 public class WorldChestContainer extends BaseContainerMenu<WorldChestContainer> {
 
-	public static WorldChestContainer fromNetwork(MenuType<WorldChestContainer> type, int windowId, Inventory inv, FriendlyByteBuf buf) {
-		UUID id = buf.readUUID();
-		return new WorldChestContainer(windowId, inv, id, new SimpleContainer(27), null);
+	public static WorldChestContainer fromNetwork(MenuType<WorldChestContainer> type, int windowId, Inventory inv) {
+		return new WorldChestContainer(windowId, inv, new SimpleContainer(27), null);
 	}
 
 	protected final Player player;
-	protected final UUID uuid;
 	protected final StorageContainer storage;
 
-	public WorldChestContainer(int windowId, Inventory inventory, UUID uuid, SimpleContainer cont, @Nullable StorageContainer storage) {
+	public WorldChestContainer(int windowId, Inventory inventory, SimpleContainer cont, @Nullable StorageContainer storage) {
 		super(MenuRegistrate.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont, false);
 		this.player = inventory.player;
-		this.uuid = uuid;
 		this.addSlot("grid", stack -> true);
 		this.storage = storage;
 	}

@@ -1,20 +1,17 @@
 package dev.hikarishima.lightland.content.common.block;
 
 import dev.hikarishima.lightland.content.common.item.backpack.WorldChestItem;
-import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
-import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
-import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
-import dev.lcy0x1.block.mult.OnClickBlockMethod;
-import dev.lcy0x1.block.mult.PlacementBlockMethod;
+import dev.lcy0x1.block.mult.*;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.one.GetBlockItemBlockMethod;
 import dev.lcy0x1.block.one.SpecialDropBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
@@ -32,9 +29,10 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 
 import java.util.List;
+import java.util.UUID;
 
 public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStateBlockMethod, PlacementBlockMethod,
-		OnClickBlockMethod, GetBlockItemBlockMethod, SpecialDropBlockMethod {
+		OnClickBlockMethod, GetBlockItemBlockMethod, SpecialDropBlockMethod, SetPlacedByBlockMethod {
 
 	public static final WorldChestBlock INSTANCE = new WorldChestBlock();
 
@@ -95,5 +93,19 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 	@Override
 	public BlockState getStateForPlacement(BlockState def, BlockPlaceContext context) {
 		return def.setValue(COLOR, ((WorldChestItem) context.getItemInHand().getItem()).color);
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity entity, ItemStack stack) {
+		BlockEntity blockentity = level.getBlockEntity(pos);
+		UUID id = stack.getOrCreateTag().getUUID("owner_id");
+		String name = stack.getOrCreateTag().getString("owner_name");
+		long pwd = stack.getOrCreateTag().getLong("password");
+		if (blockentity instanceof WorldChestBlockEntity chest) {
+			chest.owner_id = id;
+			chest.owner_name = name;
+			chest.password = pwd;
+			chest.setColor(state.getValue(COLOR).getId());
+		}
 	}
 }
