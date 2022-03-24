@@ -85,7 +85,7 @@ public class StructureRegistrate {
 					CKMazePiece::new, () -> new CKMazeFeature(NoneFeatureConfiguration.CODEC),
 					NoneFeatureConfiguration.INSTANCE,
 					new StructureFeatureConfiguration(80, 10, 26243534),
-					() -> List.of(Biomes.PLAINS, Biomes.DARK_FOREST));
+					() -> List.of(Biomes.PLAINS, Biomes.DARK_FOREST, Biomes.OCEAN));
 
 	public static void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {

@@ -37,12 +37,10 @@ public class CKMazePiece extends TemplateStructurePiece {
 	}
 
 	private static StructurePlaceSettings makeSettings(boolean inner, Rotation rotation, Mirror mirror, ShiftType shift) {
-		BlockIgnoreProcessor blockignoreprocessor = inner ? BlockIgnoreProcessor.STRUCTURE_BLOCK : BlockIgnoreProcessor.STRUCTURE_AND_AIR;
-		StructurePlaceSettings settings = (new StructurePlaceSettings()).setIgnoreEntities(true)
-				.addProcessor(blockignoreprocessor)
+		BlockIgnoreProcessor processor = inner ? BlockIgnoreProcessor.STRUCTURE_BLOCK : BlockIgnoreProcessor.STRUCTURE_AND_AIR;
+		return (new StructurePlaceSettings()).setIgnoreEntities(true)
+				.addProcessor(processor).setKeepLiquids(false)
 				.setRotation(rotation).setMirror(mirror);
-		//settings.setRotationPivot(shift.pos);
-		return settings;
 	}
 
 	private static BlockPos shiftPos(StructurePlaceSettings settings, BlockPos pos, ShiftType shift) {
