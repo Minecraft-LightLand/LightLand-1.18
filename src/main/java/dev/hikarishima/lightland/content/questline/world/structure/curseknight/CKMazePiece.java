@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.content.questline.world.structure.curseknight;
 
 import dev.hikarishima.lightland.init.LightLand;
+import dev.hikarishima.lightland.init.worldgenreg.StructureRegistrate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -8,10 +9,10 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
-import net.minecraft.world.level.levelgen.feature.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -69,7 +70,7 @@ public class CKMazePiece extends TemplateStructurePiece {
 	}
 
 	public CKMazePiece(StructureManager manager, CompoundTag tag) {
-		super(StructurePieceType.END_CITY_PIECE, tag, manager, (id) ->
+		super(StructureRegistrate.CKMAZE.piece_type, tag, manager, (id) ->
 				makeSettings(tag.getBoolean("OW"),
 						Rotation.valueOf(tag.getString("Rot")),
 						Mirror.valueOf(tag.getString("Mir")),

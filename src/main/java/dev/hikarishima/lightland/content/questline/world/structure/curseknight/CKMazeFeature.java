@@ -116,8 +116,4 @@ public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatu
 
 	}
 
-	@Override
-	public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList(MobCategory category) {
-		return SPAWN_LIST;
-	}
 }

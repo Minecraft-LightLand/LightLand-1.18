@@ -12,7 +12,9 @@ import dev.hikarishima.lightland.content.profession.prof.*;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
 
 public class LightLandRegistry {
@@ -26,30 +28,32 @@ public class LightLandRegistry {
 	public static IForgeRegistry<Skill<?, ?>> SKILL;
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void createRegistries() {
-		ELEMENT = new RegistryBuilder<MagicElement>()
+	public static void createRegistries(NewRegistryEvent event) {
+		ELEMENT = event.create(new RegistryBuilder<MagicElement>()
 				.setName(new ResourceLocation(LightLand.MODID, "magic_element"))
-				.setType(MagicElement.class).create();
+				.setType(MagicElement.class)).get();
 
-		PRODUCT_TYPE = new RegistryBuilder()
+		PRODUCT_TYPE = (IForgeRegistry<MagicProductType<?, ?>>) event.create(new RegistryBuilder()
 				.setName(new ResourceLocation(LightLand.MODID, "magic_product_type"))
-				.setType(MagicProductType.class).create();
+				.setType(MagicProductType.class)).get();
 
-		ARCANE_TYPE = new RegistryBuilder<ArcaneType>()
+		ARCANE_TYPE = event.create(new RegistryBuilder<ArcaneType>()
 				.setName(new ResourceLocation(LightLand.MODID, "arcane_type"))
-				.setType(ArcaneType.class).create();
+				.setType(ArcaneType.class)).get();
 
-		ARCANE = new RegistryBuilder<Arcane>()
+		ARCANE = event.create(new RegistryBuilder<Arcane>()
 				.setName(new ResourceLocation(LightLand.MODID, "arcane"))
-				.setType(Arcane.class).create();
+				.setType(Arcane.class)).get();
 
-		SPELL = new RegistryBuilder().setName(new ResourceLocation(LightLand.MODID, "spell")).setType(Spell.class).create();
+		SPELL = (IForgeRegistry<Spell<?, ?>>) event.create(new RegistryBuilder()
+				.setName(new ResourceLocation(LightLand.MODID, "spell")).setType(Spell.class)).get();
 
-		PROFESSION = new RegistryBuilder<Profession>()
+		PROFESSION = event.create(new RegistryBuilder<Profession>()
 				.setName(new ResourceLocation(LightLand.MODID, "profession"))
-				.setType(Profession.class).create();
+				.setType(Profession.class)).get();
 
-		SKILL = new RegistryBuilder().setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class).create();
+		SKILL = (IForgeRegistry<Skill<?, ?>>) event.create(new RegistryBuilder()
+				.setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class)).get();
 
 		MagicRegistry.register();
 		ArcaneType.register();

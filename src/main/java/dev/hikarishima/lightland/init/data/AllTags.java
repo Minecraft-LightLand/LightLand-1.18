@@ -9,39 +9,42 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nullable;
-import java.util.Locale;
-import java.util.function.Function;
+import java.util.Collections;
+
+import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
 public class AllTags {
 
-	public static <T> Tag.Named<T> tag(Function<ResourceLocation, Tag.Named<T>> wrapperFactory, String namespace,
-									   String path) {
-		return wrapperFactory.apply(new ResourceLocation(namespace, path));
+	public static <T extends IForgeRegistryEntry<T>> TagKey<T> optionalTag(IForgeRegistry<T> registry, ResourceLocation id) {
+		return registry.tags().createOptionalTagKey(id, Collections.emptySet());
 	}
 
-	public static <T> Tag.Named<T> forgeTag(Function<ResourceLocation, Tag.Named<T>> wrapperFactory, String path) {
-		return tag(wrapperFactory, "forge", path);
+	public static <T extends IForgeRegistryEntry<T>> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path) {
+		return optionalTag(registry, new ResourceLocation("forge", path));
 	}
 
-	public static Tag.Named<Block> forgeBlockTag(String path) {
-		return forgeTag(BlockTags::createOptional, path);
+	public static TagKey<Block> forgeBlockTag(String path) {
+		return forgeTag(ForgeRegistries.BLOCKS, path);
 	}
 
-	public static Tag.Named<Item> forgeItemTag(String path) {
-		return forgeTag(ItemTags::createOptional, path);
+	public static TagKey<Item> forgeItemTag(String path) {
+		return forgeTag(ForgeRegistries.ITEMS, path);
 	}
 
-	public static Tag.Named<Fluid> forgeFluidTag(String path) {
-		return forgeTag(FluidTags::createOptional, path);
+	public static TagKey<Fluid> forgeFluidTag(String path) {
+		return forgeTag(ForgeRegistries.FLUIDS, path);
 	}
 
 	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, BlockBuilder<T, P>> axeOrPickaxe() {
@@ -58,16 +61,22 @@ public class AllTags {
 	}
 
 	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> tagBlockAndItem(
-			String path) {
-		return b -> b.tag(forgeBlockTag(path))
-				.item()
-				.tag(forgeItemTag(path));
+			String... path) {
+		return b -> {
+			for (String p : path)
+				b.tag(forgeBlockTag(p));
+			ItemBuilder<BlockItem, BlockBuilder<T, P>> item = b.item();
+			for (String p : path)
+				item.tag(forgeItemTag(p));
+			return item;
+		};
 	}
 
 	public enum NameSpace {
 
 		MOD(LightLand.MODID, false, true),
-		FORGE("forge");
+		FORGE("forge"),
+		TIC("tconstruct");
 
 		public final String id;
 		public final boolean optionalDefault;
@@ -86,10 +95,9 @@ public class AllTags {
 	}
 
 	public enum AllBlockTags {
-
 		;
 
-		public final Tag.Named<Block> tag;
+		public final TagKey<Block> tag;
 
 		AllBlockTags() {
 			this(NameSpace.MOD);
@@ -108,41 +116,42 @@ public class AllTags {
 		}
 
 		AllBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? name().toLowerCase(Locale.ROOT) : path);
+			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? LangData.asId(name()) : path);
 			if (optional) {
-				tag = BlockTags.createOptional(id);
+				tag = optionalTag(ForgeRegistries.BLOCKS, id);
 			} else {
-				tag = BlockTags.bind(id.toString());
+				tag = BlockTags.create(id);
 			}
 			if (alwaysDatagen) {
-				LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag));
+				REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag));
 			}
 		}
 
+		@SuppressWarnings("deprecation")
 		public boolean matches(Block block) {
-			return tag.contains(block);
+			return block.builtInRegistryHolder().is(tag);
 		}
 
 		public boolean matches(BlockState state) {
-			return matches(state.getBlock());
+			return state.is(tag);
 		}
 
 		public void add(Block... values) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
+			REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
 					.add(values));
 		}
 
-		public void includeIn(Tag.Named<Block> parent) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(parent)
+		public void includeIn(TagKey<Block> parent) {
+			REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(parent)
 					.addTag(tag));
 		}
 
-		public void includeIn(AllBlockTags parent) {
+		public void includeIn(com.simibubi.create.AllTags.AllBlockTags parent) {
 			includeIn(parent.tag);
 		}
 
-		public void includeAll(Tag.Named<Block> child) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
+		public void includeAll(TagKey<Block> child) {
+			REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
 					.addTag(child));
 		}
 
@@ -150,10 +159,10 @@ public class AllTags {
 
 	public enum AllItemTags {
 		BACKPACKS,
-		DIMENSIONAL_STORAGES,
-		DYES;
+		DIMENSIONAL_STORAGES
+		;
 
-		public final Tag.Named<Item> tag;
+		public final TagKey<Item> tag;
 
 		AllItemTags() {
 			this(NameSpace.MOD);
@@ -171,29 +180,34 @@ public class AllTags {
 			this(namespace, null, optional, alwaysDatagen);
 		}
 
-		AllItemTags(NameSpace namespace, @Nullable String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? name().toLowerCase(Locale.ROOT) : path);
+		AllItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? LangData.asId(name()) : path);
 			if (optional) {
-				tag = ItemTags.createOptional(id);
+				tag = optionalTag(ForgeRegistries.ITEMS, id);
 			} else {
-				tag = ItemTags.bind(id.toString());
+				tag = ItemTags.create(id);
 			}
 			if (alwaysDatagen) {
-				LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag));
+				REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag));
 			}
+		}
+
+		@SuppressWarnings("deprecation")
+		public boolean matches(Item item) {
+			return item.builtInRegistryHolder().is(tag);
 		}
 
 		public boolean matches(ItemStack stack) {
-			return tag.contains(stack.getItem());
+			return stack.is(tag);
 		}
 
 		public void add(Item... values) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
+			REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
 					.add(values));
 		}
 
-		public void includeIn(Tag.Named<Item> parent) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(parent)
+		public void includeIn(TagKey<Item> parent) {
+			REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(parent)
 					.addTag(tag));
 		}
 
@@ -201,8 +215,8 @@ public class AllTags {
 			includeIn(parent.tag);
 		}
 
-		public void includeAll(Tag.Named<Item> child) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
+		public void includeAll(TagKey<Item> child) {
+			REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
 					.addTag(child));
 		}
 
@@ -211,7 +225,7 @@ public class AllTags {
 	public enum AllFluidTags {
 		;
 
-		public final Tag.Named<Fluid> tag;
+		public final TagKey<Fluid> tag;
 
 		AllFluidTags() {
 			this(NameSpace.MOD);
@@ -230,47 +244,48 @@ public class AllTags {
 		}
 
 		AllFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? name().toLowerCase(Locale.ROOT) : path);
+			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? LangData.asId(name()) : path);
 			if (optional) {
-				tag = FluidTags.createOptional(id);
+				tag = optionalTag(ForgeRegistries.FLUIDS, id);
 			} else {
-				tag = FluidTags.bind(id.toString());
+				tag = FluidTags.create(id);
 			}
 			if (alwaysDatagen) {
-				LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag));
+				REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag));
 			}
 		}
 
+		@SuppressWarnings("deprecation")
 		public boolean matches(Fluid fluid) {
-			return fluid != null && fluid.is(tag);
+			return fluid.is(tag);
+		}
+
+		public boolean matches(FluidState state) {
+			return state.is(tag);
 		}
 
 		public void add(Fluid... values) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
+			REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
 					.add(values));
 		}
 
-		public void includeIn(Tag.Named<Fluid> parent) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(parent)
+		public void includeIn(TagKey<Fluid> parent) {
+			REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(parent)
 					.addTag(tag));
 		}
 
-		public void includeIn(AllFluidTags parent) {
+		public void includeIn(com.simibubi.create.AllTags.AllFluidTags parent) {
 			includeIn(parent.tag);
 		}
 
-		public void includeAll(Tag.Named<Fluid> child) {
-			LightLand.REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
+		public void includeAll(TagKey<Fluid> child) {
+			REGISTRATE.addDataGenerator(ProviderType.FLUID_TAGS, prov -> prov.tag(tag)
 					.addTag(child));
-		}
-
-		private static void loadClass() {
 		}
 
 	}
 
 	public static void register() {
-		AllFluidTags.loadClass();
 	}
 
 }

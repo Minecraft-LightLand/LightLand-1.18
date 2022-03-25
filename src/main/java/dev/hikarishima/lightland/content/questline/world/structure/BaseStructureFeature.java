@@ -18,10 +18,6 @@ public class BaseStructureFeature<S extends BaseStructureFeature<S, C>, C extend
 		super(codec, gen, post);
 	}
 
-	public ConfiguredStructureFeature<C, S> configured(C config) {
-		return new ConfiguredStructureFeature<>(getThis(), config);
-	}
-
 	@SuppressWarnings("unchecked")
 	public S getThis() {
 		return (S) this;

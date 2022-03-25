@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -180,7 +181,7 @@ public class GenItem {
 	public record ArmorConfig(EntryProcessor func, ArmorFactory sup) {
 	}
 
-	private static Tag<Block> getBlockTag(int level) {
+	private static TagKey<Block> getBlockTag(int level) {
 		return switch (level) {
 			case 0 -> Tags.Blocks.NEEDS_WOOD_TOOL;
 			case 1 -> BlockTags.NEEDS_STONE_TOOL;

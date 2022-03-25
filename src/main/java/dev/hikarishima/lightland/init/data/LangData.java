@@ -221,4 +221,8 @@ public class LangData {
 		return pad.toString();
 	}
 
+	public static String asId(String name) {
+		return LightLand.MODID + ":" + name;
+	}
+
 }
