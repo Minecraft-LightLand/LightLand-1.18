@@ -140,16 +140,18 @@ dependencies {
     //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-4.5.4")
     //runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-4.5.4")
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.11')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.12')
     implementation fg.deobf("curse.maven:appleskin-248787:3686482")
     implementation fg.deobf("com.simibubi.create:Create:mc1.18.2_v0.4.1+106")
-    implementation fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:1.18-0.6.1.62")
-    implementation fg.deobf("dev.architectury:architectury-forge:3.7.22")
-    implementation fg.deobf("dev.ftb.mods:ftb-library-forge:1801.3.5-build.109")
-    implementation fg.deobf("dev.ftb.mods:ftb-teams-forge:1801.2.4-build.46")
-    implementation fg.deobf("dev.ftb.mods:ftb-chunks-forge:1801.3.4-build.127")
-    //runtimeOnly fg.deobf("dev.ftb.mods:ftb-quests-forge:1801.3.7-build.94")
+    implementation fg.deobf("com.jozufozu.flywheel:Flywheel-Forge:1.18-0.6.2.64")
+
+    implementation fg.deobf("dev.architectury:architectury-forge:4.1.34")
+    implementation fg.deobf("dev.ftb.mods:ftb-library-forge:1802.3.6-build.112")
+    implementation fg.deobf("dev.ftb.mods:ftb-teams-forge:1802.2.6-build.49")
+    implementation fg.deobf("dev.ftb.mods:ftb-chunks-forge:1802.3.5-build.128")
     runtimeOnly fg.deobf("dev.latvian.mods:item-filters-forge:1801.2.6-build.16")
+
+    //runtimeOnly fg.deobf("dev.ftb.mods:ftb-quests-forge:1801.3.7-build.94")
     //runtimeOnly fg.deobf("dev.latvian.mods:rhino-forge:1801.1.8-build.102")
     //runtimeOnly fg.deobf("dev.latvian.mods:kubejs-forge:1801.4.2-build.300")
 

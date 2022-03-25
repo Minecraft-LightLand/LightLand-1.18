@@ -333,7 +333,6 @@ ae0aa147a141cbb849a2b539a9b69286b74a4d54 data/lightland/loot_tables/entities/lay
 ddd14d71bfc25e6a8f2123e4f6e549bb0bd81d53 data/lightland/loot_tables/entities/vine_slime.json
 4883e3459dd6a18cece1f766800846b3692e3eeb data/lightland/tags/items/backpacks.json
 bd9247bb833ede81317d3889184d90a30e1f6bb2 data/lightland/tags/items/dimensional_storages.json
-74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/lightland/tags/items/dyes.json
 7630a37228ff19c521fe3998c010a94926d70c44 data/minecraft/tags/blocks/climbable.json
 feaf227ce97d630fa47d811b33d24de9454c5bf0 data/minecraft/tags/blocks/dragon_immune.json
 236d9c4a7986071eb4e9e92ada90b37f49c3632b data/minecraft/tags/blocks/mineable/hoe.json

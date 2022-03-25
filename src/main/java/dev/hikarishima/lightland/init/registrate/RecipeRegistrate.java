@@ -19,8 +19,8 @@ import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
 public class RecipeRegistrate {
 
-	public static final RecipeType<AbstractRitualRecipe<?>> RT_RITUAL = RecipeType.register("lightland:ritual");
-	public static final RecipeType<IMagicRecipe<?>> RT_MAGIC = RecipeType.register("lightland:magic");
+	public static RecipeType<AbstractRitualRecipe<?>> RT_RITUAL;
+	public static RecipeType<IMagicRecipe<?>> RT_MAGIC;
 
 	public static final RegistryEntry<BaseRecipe.RecType<BasicRitualRecipe, AbstractRitualRecipe<?>, RitualCore.Inv>> RS_DEF =
 			REGISTRATE.simple("ritual_default", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(BasicRitualRecipe.class, RT_RITUAL));
@@ -47,6 +47,10 @@ public class RecipeRegistrate {
 	public static final RegistryEntry<BaseRecipe.RecType<DefMagicRecipe, IMagicRecipe<?>, IMagicRecipe.Inv>> RSM_DEF =
 			REGISTRATE.simple("magic_default", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(DefMagicRecipe.class, RT_MAGIC));
 
+	public static void registerRecipeType() {
+		RT_RITUAL = RecipeType.register("lightland:ritual");
+		RT_MAGIC = RecipeType.register("lightland:magic");
+	}
 
 	public static void register() {
 

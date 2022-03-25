@@ -222,7 +222,7 @@ public class LangData {
 	}
 
 	public static String asId(String name) {
-		return LightLand.MODID + ":" + name;
+		return name.toLowerCase(Locale.ROOT);
 	}
 
 }

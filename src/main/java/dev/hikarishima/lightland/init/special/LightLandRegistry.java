@@ -11,9 +11,11 @@ import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.content.profession.prof.*;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.LightLand;
+import dev.lcy0x1.util.Automator;
+import dev.lcy0x1.util.Serializer;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
 
@@ -29,31 +31,33 @@ public class LightLandRegistry {
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static void createRegistries(NewRegistryEvent event) {
-		ELEMENT = event.create(new RegistryBuilder<MagicElement>()
+		event.create(new RegistryBuilder<MagicElement>()
 				.setName(new ResourceLocation(LightLand.MODID, "magic_element"))
-				.setType(MagicElement.class)).get();
+				.setType(MagicElement.class), e -> ELEMENT = regSerializer(e));
 
-		PRODUCT_TYPE = (IForgeRegistry<MagicProductType<?, ?>>) event.create(new RegistryBuilder()
+		event.create(new RegistryBuilder()
 				.setName(new ResourceLocation(LightLand.MODID, "magic_product_type"))
-				.setType(MagicProductType.class)).get();
+				.setType(MagicProductType.class), e -> PRODUCT_TYPE = regSerializer(e));
 
-		ARCANE_TYPE = event.create(new RegistryBuilder<ArcaneType>()
+		event.create(new RegistryBuilder<ArcaneType>()
 				.setName(new ResourceLocation(LightLand.MODID, "arcane_type"))
-				.setType(ArcaneType.class)).get();
+				.setType(ArcaneType.class), e -> ARCANE_TYPE = regSerializer(e));
 
-		ARCANE = event.create(new RegistryBuilder<Arcane>()
+		event.create(new RegistryBuilder<Arcane>()
 				.setName(new ResourceLocation(LightLand.MODID, "arcane"))
-				.setType(Arcane.class)).get();
+				.setType(Arcane.class), e -> ARCANE = regSerializer(e));
 
-		SPELL = (IForgeRegistry<Spell<?, ?>>) event.create(new RegistryBuilder()
-				.setName(new ResourceLocation(LightLand.MODID, "spell")).setType(Spell.class)).get();
+		event.create(new RegistryBuilder()
+				.setName(new ResourceLocation(LightLand.MODID, "spell"))
+				.setType(Spell.class), e -> SPELL = regSerializer(e));
 
-		PROFESSION = event.create(new RegistryBuilder<Profession>()
+		event.create(new RegistryBuilder<Profession>()
 				.setName(new ResourceLocation(LightLand.MODID, "profession"))
-				.setType(Profession.class)).get();
+				.setType(Profession.class), e -> PROFESSION = regSerializer(e));
 
-		SKILL = (IForgeRegistry<Skill<?, ?>>) event.create(new RegistryBuilder()
-				.setName(new ResourceLocation(LightLand.MODID, "skill")).setType(Skill.class)).get();
+		event.create(new RegistryBuilder()
+				.setName(new ResourceLocation(LightLand.MODID, "skill"))
+				.setType(Skill.class), e -> SKILL = regSerializer(e));
 
 		MagicRegistry.register();
 		ArcaneType.register();
@@ -77,6 +81,13 @@ public class LightLandRegistry {
 
 	private static <V extends Profession> RegistryEntry<V> genProf(String name, NonNullSupplier<V> v) {
 		return LightLand.REGISTRATE.generic(Profession.class, name, v).defaultLang().register();
+	}
+
+	@SuppressWarnings({"rawtypes"})
+	private static <T extends IForgeRegistryEntry<T>> IForgeRegistry regSerializer(IForgeRegistry<T> r) {
+		new Serializer.RLClassHandler<>(r.getRegistrySuperType(), () -> r);
+		new Automator.RegistryClassHandler<>(r.getRegistrySuperType(), () -> r);
+		return r;
 	}
 
 }
