@@ -44,7 +44,7 @@ public class ElemIngredientHelper implements IIngredientHelper<ElementIngredient
 
 	@Override
 	public String getResourceId(ElementIngredient magicElement) {
-		return magicElement.elem.getIcon().toString();
+		return magicElement.elem.getRegistryName().getPath();
 	}
 
 	@Override

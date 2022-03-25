@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "lightland:cursedknight_maze",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 8258958,
+    "spacing": 40,
+    "separation": 20,
+    "type": "minecraft:random_spread"
+  }
+}

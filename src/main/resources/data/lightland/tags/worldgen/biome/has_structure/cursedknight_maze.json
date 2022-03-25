@@ -2,7 +2,7 @@
     "replace": false,
     "values": [
       "minecraft:dark_forest",
-      "minecraft:plain",
+      "minecraft:plains",
       "#minecraft:is_ocean"
     ]
   }
