@@ -81,7 +81,7 @@ public class StructureRegistrate {
 	}
 
 	public static final StructureEntry<CKMazeFeature, CKMazePiece, NoneFeatureConfiguration> CKMAZE =
-			new StructureEntry<>("cursedknight_maze", "cursedknight_mae_piece",
+			new StructureEntry<>("cursedknight_maze", "cursedknight_maze_piece",
 					CKMazePiece::new, () -> new CKMazeFeature(NoneFeatureConfiguration.CODEC),
 					NoneFeatureConfiguration.INSTANCE,
 					new StructureFeatureConfiguration(80, 10, 26243534),

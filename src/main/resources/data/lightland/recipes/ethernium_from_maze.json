@@ -1,0 +1,53 @@
+{
+  "type": "lightland:ritual_default",
+  "core": {
+	"input": {
+	  "item": "lightland:steel_ingot"
+	},
+	"output": {
+	  "item": "lightland:ethernium_ingot"
+	}
+  },
+  "side": [
+	{
+	},
+	{
+	  "input": {
+		"item": "lightland:maze_wall"
+	  },
+	  "output": {
+		"item": "minecraft:cobblestone"
+	  }
+	},
+	{
+	},
+	{
+	  "input": {
+		"item": "lightland:maze_wall"
+	  },
+	  "output": {
+		"item": "minecraft:cobblestone"
+	  }
+	},
+	{
+	  "input": {
+		"item": "lightland:maze_wall"
+	  },
+	  "output": {
+		"item": "minecraft:cobblestone"
+	  }
+	},
+	{
+	},
+	{
+	  "input": {
+		"item": "lightland:maze_wall"
+	  },
+	  "output": {
+		"item": "minecraft:cobblestone"
+	  }
+	},
+	{
+	}
+  ]
+}

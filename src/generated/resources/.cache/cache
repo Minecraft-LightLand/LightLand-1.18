@@ -336,4 +336,7 @@ bd9247bb833ede81317d3889184d90a30e1f6bb2 data/lightland/tags/items/dimensional_s
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/lightland/tags/items/dyes.json
 7630a37228ff19c521fe3998c010a94926d70c44 data/minecraft/tags/blocks/climbable.json
 feaf227ce97d630fa47d811b33d24de9454c5bf0 data/minecraft/tags/blocks/dragon_immune.json
+236d9c4a7986071eb4e9e92ada90b37f49c3632b data/minecraft/tags/blocks/mineable/hoe.json
+fffba5239baad560998a6c97e134a2e488ea8d72 data/minecraft/tags/blocks/mineable/pickaxe.json
+6107807803dc881c04a1d98903c69e851c374aaa data/minecraft/tags/blocks/needs_diamond_tool.json
 feaf227ce97d630fa47d811b33d24de9454c5bf0 data/minecraft/tags/blocks/wither_immune.json

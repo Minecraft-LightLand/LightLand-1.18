@@ -6,6 +6,7 @@ import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.lcy0x1.block.mult.*;
 import dev.lcy0x1.block.one.MirrorRotateBlockMethod;
 import dev.lcy0x1.block.one.PushReactionBlockMethod;
+import dev.lcy0x1.block.one.SpecialDropBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -27,10 +28,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -101,7 +104,8 @@ public class MazeWallBlock {
 
 	public static class AllDireState implements
 			CreateBlockStateBlockMethod, DefaultStateBlockMethod, PlacementBlockMethod,
-			ScheduleTickBlockMethod, MirrorRotateBlockMethod, OnClickBlockMethod, PushReactionBlockMethod {
+			ScheduleTickBlockMethod, MirrorRotateBlockMethod, OnClickBlockMethod, PushReactionBlockMethod,
+			SpecialDropBlockMethod {
 
 		public static final BooleanProperty[] PROPS = {BlockStateProperties.DOWN, BlockStateProperties.UP,
 				BlockStateProperties.NORTH, BlockStateProperties.SOUTH,
@@ -218,6 +222,15 @@ public class MazeWallBlock {
 			return PushReaction.BLOCK;
 		}
 
+		@Override
+		public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+			for (Direction dire : Direction.values()) {
+				if (state.getValue(MAP.get(dire))) {
+					return List.of();
+				}
+			}
+			return List.of(new ItemStack(state.getBlock()));
+		}
 	}
 
 }

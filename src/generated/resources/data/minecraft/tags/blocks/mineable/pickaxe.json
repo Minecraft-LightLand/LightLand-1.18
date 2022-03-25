@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:dimensional_storage",
+    "lightland:ritual_core",
+    "lightland:ritual_side",
+    "lightland:enchant_gold_block",
+    "lightland:lead_block",
+    "lightland:magicium_block",
+    "lightland:layline_charger",
+    "lightland:maze_wall"
+  ]
+}

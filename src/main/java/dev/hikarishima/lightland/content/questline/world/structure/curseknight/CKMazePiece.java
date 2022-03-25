@@ -39,7 +39,7 @@ public class CKMazePiece extends TemplateStructurePiece {
 	private static StructurePlaceSettings makeSettings(boolean inner, Rotation rotation, Mirror mirror, ShiftType shift) {
 		BlockIgnoreProcessor processor = inner ? BlockIgnoreProcessor.STRUCTURE_BLOCK : BlockIgnoreProcessor.STRUCTURE_AND_AIR;
 		return (new StructurePlaceSettings()).setIgnoreEntities(true)
-				.addProcessor(processor).setKeepLiquids(false)
+				.addProcessor(processor).setKeepLiquids(!inner)
 				.setRotation(rotation).setMirror(mirror);
 	}
 

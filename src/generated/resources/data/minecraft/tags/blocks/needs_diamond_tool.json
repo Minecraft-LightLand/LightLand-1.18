@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:dimensional_storage",
+    "lightland:maze_wall"
+  ]
+}

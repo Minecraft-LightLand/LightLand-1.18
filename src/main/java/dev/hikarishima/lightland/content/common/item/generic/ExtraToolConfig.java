@@ -18,7 +18,7 @@ public class ExtraToolConfig {
 
 	public int tool_hit = 2, tool_mine = 1, sword_hit = 1, sword_mine = 2;
 	public double repair_chance = 0, damage_chance = 1;
-	public boolean canBeDepleted, bypassArmor, bypassMagic;
+	public boolean canBeDepleted = true, bypassArmor, bypassMagic;
 	public List<MobEffectInstance> effects = new ArrayList<>();
 
 	public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity) {

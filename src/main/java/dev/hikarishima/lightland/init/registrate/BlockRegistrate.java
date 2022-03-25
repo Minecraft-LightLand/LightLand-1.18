@@ -73,6 +73,7 @@ public class BlockRegistrate {
 												"block/dimensional_storage_" + state.getValue(WorldChestBlock.COLOR).getName())))
 										.build());
 					}).loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 					.defaultLang().register();
 			TE_WORLD_CHEST = REGISTRATE.blockEntity("dimensional_storage", WorldChestBlockEntity::new)
 					.validBlock(WORLD_CHEST).register();
@@ -85,11 +86,11 @@ public class BlockRegistrate {
 							(p) -> DelegateBlock.newBaseBlock(PEDESTAL, RitualCore.ACTIVATE, RitualCore.CLICK,
 									BlockProxy.TRIGGER, RitualCore.TILE_ENTITY_SUPPLIER_BUILDER))
 					.blockstate((a, b) -> {
-					}).defaultLoot().defaultLang().simpleItem().register();
+					}).tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang().simpleItem().register();
 			B_RITUAL_SIDE = REGISTRATE.block("ritual_side",
 							(p) -> DelegateBlock.newBaseBlock(PEDESTAL, RitualCore.CLICK, RitualSide.TILE_ENTITY_SUPPLIER_BUILDER))
 					.blockstate((a, b) -> {
-					}).defaultLoot().defaultLang().simpleItem().register();
+					}).tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang().simpleItem().register();
 			TE_RITUAL_CORE = REGISTRATE.blockEntity("ritual_core", RitualCore.TE::new)
 					.validBlock(B_RITUAL_CORE).renderer(() -> RitualRenderer::new).register();
 			TE_RITUAL_SIDE = REGISTRATE.blockEntity("ritual_side", RitualSide.TE::new)
@@ -98,12 +99,15 @@ public class BlockRegistrate {
 		{
 			ENCHANT_GOLD_BLOCK = REGISTRATE.block("enchant_gold_block", p ->
 							new Block(BlockBehaviour.Properties.copy(Blocks.GOLD_BLOCK)))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
 			LEAD_BLOCK = REGISTRATE.block("lead_block",
 							p -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
 			MAGICIUM_BLOCK = REGISTRATE.block("magicium_block",
 							p -> new Block(Block.Properties.copy(Blocks.IRON_BLOCK)))
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultBlockstate().defaultLoot().defaultLang().simpleItem().register();
 		}
 		{
@@ -125,14 +129,17 @@ public class BlockRegistrate {
 					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()
 					.defaultLoot().defaultLang().addLayer(() -> RenderType::cutout).tag(BlockTags.CLIMBABLE).register();
 			LAYLINE_CHARGER = REGISTRATE.block("layline_charger", LaylineChargerBlock::new)
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE)
 					.defaultBlockstate().simpleItem().defaultLoot().defaultLang().register();
 			BlockBehaviour.Properties prop_slime = BlockBehaviour.Properties.of(Material.WEB).noCollission().strength(4.0F);
 			SLIME_CARPET = REGISTRATE.block("slime_carpet", p -> new SlimeCarpet(prop_slime))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().carpet(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
+					.tag(BlockTags.MINEABLE_WITH_HOE)
 					.simpleItem().loot(RegistrateBlockLootTables::dropWhenSilkTouch).defaultLang().register();
 			SLIME_VINE = REGISTRATE.block("slime_vine", p -> new WebBlock(prop_slime))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
 					.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry, pvd.modLoc("block/" + ctx.getName()))).build()
+					.tag(BlockTags.MINEABLE_WITH_HOE)
 					.loot(RegistrateBlockLootTables::dropWhenSilkTouch).addLayer(() -> RenderType::cutout).defaultLang().register();
 
 		}
@@ -144,6 +151,7 @@ public class BlockRegistrate {
 					.blockstate((ctx, pvd) -> {
 					}).loot((table, block) -> table.accept((rl, b) -> b.build()))
 					.tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 					.defaultLang().simpleItem().register();
 		}
 	}
