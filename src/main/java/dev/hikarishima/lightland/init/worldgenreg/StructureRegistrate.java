@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.StructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,13 @@ public class StructureRegistrate {
 
 	public static class StructureEntry<S extends BaseStructureFeature<S, C>, P extends StructurePiece, C extends FeatureConfiguration> {
 
+		public StructurePieceType piece_type;
+
 		final ResourceLocation feature_id, piece_id;
-		public final StructurePieceType piece_type;
 		final RegistryEntry<S> entry;
 		final C feature_config;
+
+		private final StructurePieceType.StructureTemplateType piece_gen;
 
 
 		StructureEntry(String feature_name, String piece_name,
@@ -35,10 +39,14 @@ public class StructureRegistrate {
 					   C feature_config) {
 			this.feature_id = new ResourceLocation(LightLand.MODID, feature_name);
 			this.piece_id = new ResourceLocation(LightLand.MODID, piece_name);
-			this.piece_type = Registry.register(Registry.STRUCTURE_PIECE, piece_id, piece_gen);
 			this.entry = LightLand.REGISTRATE.simple(feature_name, StructureFeature.class, structure_gen);
 			this.feature_config = feature_config;
+			this.piece_gen = piece_gen;
 			LIST.add(this);
+		}
+
+		void registerType() {
+			this.piece_type = Registry.register(Registry.STRUCTURE_PIECE, piece_id, piece_gen);
 		}
 
 	}
@@ -47,6 +55,10 @@ public class StructureRegistrate {
 			new StructureEntry<>("cursedknight_maze", "cursedknight_maze_piece",
 					CKMazePiece::new, () -> new CKMazeFeature(NoneFeatureConfiguration.CODEC),
 					NoneFeatureConfiguration.INSTANCE);
+
+	public static void commonSetup(FMLCommonSetupEvent event) {
+		event.enqueueWork(() -> LIST.forEach(StructureEntry::registerType));
+	}
 
 	public static void register() {
 	}

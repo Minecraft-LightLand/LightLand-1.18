@@ -101,6 +101,7 @@ public class LightLand {
 			EffectSyncEvents.init();
 			VanillaMagicRegistrate.registerBrewingRecipe();
 		});
+		StructureRegistrate.commonSetup(event);
 	}
 
 	public static void gatherData(GatherDataEvent event) {
