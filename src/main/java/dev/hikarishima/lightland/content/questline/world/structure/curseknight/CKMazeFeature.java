@@ -29,7 +29,7 @@ import java.util.Random;
 public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatureConfiguration> {
 
 	public CKMazeFeature(Codec<NoneFeatureConfiguration> codec) {
-		super(codec, CKMazeFeature::pieceGeneratorSupplier);
+		super(codec, CKMazeFeature::pieceGeneratorSupplier, CKMazeFeature::afterPlace);
 	}
 
 	private static Optional<PieceGenerator<NoneFeatureConfiguration>> pieceGeneratorSupplier(PieceGeneratorSupplier.Context<NoneFeatureConfiguration> context) {
@@ -37,7 +37,7 @@ public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatu
 		int topLandY = context.chunkGenerator().getFirstFreeHeight(pos.getX(), pos.getZ(),
 				Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
 		BlockPos blockpos = pos.above(topLandY);
-		LightLand.LOGGER.log(Level.INFO, "Attempt to generate maze at {}", blockpos);
+		LightLand.LOGGER.log(Level.WARN, "Attempt to generate maze at {}", blockpos);
 		Optional<PieceGenerator<NoneFeatureConfiguration>> generator =
 				!context.validBiome().test(context.chunkGenerator().getNoiseBiome(
 						QuartPos.fromBlock(blockpos.getX()),
@@ -54,7 +54,7 @@ public class CKMazeFeature extends BaseStructureFeature<CKMazeFeature, NoneFeatu
 
 				});
 		if (generator.isPresent()) {
-			LightLand.LOGGER.log(Level.INFO, "Cursed Knight Maze at {}", blockpos);
+			LightLand.LOGGER.log(Level.WARN, "Cursed Knight Maze at {}", blockpos);
 		}
 		return generator;
 	}

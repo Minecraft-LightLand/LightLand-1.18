@@ -12,7 +12,6 @@ import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.TemplateStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
@@ -64,7 +63,7 @@ public class CKMazePiece extends TemplateStructurePiece {
 	}
 
 	private CKMazePiece(StructureManager manager, CKMazeGenerator.CellInstance ins, StructurePlaceSettings settings, BlockPos pos, ShiftType shift) {
-		super(StructurePieceType.END_CITY_PIECE, 0, manager,
+		super(StructureRegistrate.CKMAZE.piece_type, 0, manager,
 				makeResourceLocation(ins.id()), ins.id(), settings, shiftPos(settings, pos, shift));
 		this.shift = shift;
 	}

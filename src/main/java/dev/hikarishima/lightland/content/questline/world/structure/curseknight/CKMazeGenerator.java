@@ -138,7 +138,6 @@ public class CKMazeGenerator {
 	public static final int[] LAYERS = {7, 7, 7};
 
 	public static void addPieces(StructureManager manager, BlockPos pos, List<StructurePiece> children, WorldgenRandom r, MazeConfig conf) {
-		pos = pos.above();
 		MazeGen[] mazes = new MazeGen[LAYERS.length];
 
 		// maze body
