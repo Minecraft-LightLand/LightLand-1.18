@@ -7,6 +7,7 @@ import dev.hikarishima.lightland.network.SerialPacketBase;
 import dev.lcy0x1.util.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
@@ -19,16 +20,17 @@ public class SlotClickToServer extends SerialPacketBase {
 	 * slot click for backpack
 	 */
 	@SerialClass.SerialField
-	private int index, slot;
+	private int index, slot, wid;
 
 	@Deprecated
 	public SlotClickToServer() {
 
 	}
 
-	public SlotClickToServer(int index, int slot) {
+	public SlotClickToServer(int index, int slot, int wid) {
 		this.index = index;
 		this.slot = slot;
+		this.wid = wid;
 	}
 
 	@Override
@@ -36,8 +38,13 @@ public class SlotClickToServer extends SerialPacketBase {
 		ServerPlayer player = ctx.getSender();
 		if (player == null) return;
 		ItemStack stack;
-		if (slot >= 0) stack = ctx.getSender().getInventory().getItem(slot);
-		else stack = ctx.getSender().containerMenu.getSlot(index).getItem();
+		if (slot >= 0) {
+			stack = ctx.getSender().getInventory().getItem(slot);
+		} else {
+			AbstractContainerMenu menu = ctx.getSender().containerMenu;
+			if (wid == 0 || menu.containerId == 0 || wid != menu.containerId) return;
+			stack = ctx.getSender().containerMenu.getSlot(index).getItem();
+		}
 		if (slot >= 0 && stack.getItem() instanceof BackpackItem) {
 			new BackpackItem.MenuPvd(player, slot, stack).open();
 		} else if (stack.getItem() instanceof EnderBackpackItem) {

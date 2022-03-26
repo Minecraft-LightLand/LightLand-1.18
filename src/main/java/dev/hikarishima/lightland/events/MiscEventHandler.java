@@ -17,7 +17,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.inventory.Slot;
@@ -48,14 +47,15 @@ public class MiscEventHandler {
 			Slot slot = cont.findSlot(event.getMouseX(), event.getMouseY());
 			boolean b0 = slot != null;
 			boolean b1 = b0 && slot.container == Proxy.getClientPlayer().getInventory();
-			boolean b2 = b0 && !(cont.getMenu() instanceof CreativeModeInventoryScreen.ItemPickerMenu);
+			boolean b2 = b0 && cont.getMenu().containerId > 0;
 			if (b1 || b2) {
 				int inv = b1 ? slot.getSlotIndex() : -1;
 				int ind = inv == -1 ? slot.index : -1;
+				int wid = cont.getMenu().containerId;
 				if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem ||
 						slot.getItem().getItem() instanceof WorldChestItem ||
 						inv >= 0 && slot.getItem().getItem() instanceof BackpackItem)) {
-					new SlotClickToServer(ind, inv).toServer();
+					new SlotClickToServer(ind, inv, wid).toServer();
 					event.setCanceled(true);
 				}
 			}
