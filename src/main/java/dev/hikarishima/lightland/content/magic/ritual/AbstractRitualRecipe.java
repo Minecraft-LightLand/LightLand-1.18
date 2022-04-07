@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.magic.ritual;
 import com.mojang.datafixers.util.Pair;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.lcy0x1.base.BaseRecipe;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;

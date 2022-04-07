@@ -1,4 +1,4 @@
-package dev.lcy0x1.util;
+package dev.lcy0x1.serial;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;

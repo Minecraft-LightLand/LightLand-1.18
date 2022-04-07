@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.hikarishima.lightland.util.math.MathHelper;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;

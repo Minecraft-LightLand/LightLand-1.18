@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.common.entity.SpellEntity;
 import dev.hikarishima.lightland.content.magic.spell.internal.ActivationConfig;
 import dev.hikarishima.lightland.content.magic.spell.internal.SimpleSpell;
 import dev.hikarishima.lightland.content.magic.spell.internal.SpellConfig;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.EvokerFangs;

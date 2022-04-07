@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
 import dev.hikarishima.lightland.network.SerialPacketBase;
 import dev.lcy0x1.base.Proxy;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;

@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.magic.products.recipe;
 
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 

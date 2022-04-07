@@ -16,6 +16,9 @@ public class AppleSkinCompatHandler {
 	@OnlyIn(Dist.CLIENT)
 	public static void modifyOverlay() {
 		OverlayRegistry.enableOverlay(GeneralCompatHandler.getOverlay("AppleSkin Health Overlay").getOverlay(), false);
+		OverlayRegistry.enableOverlay(GeneralCompatHandler.getOverlay("AppleSkin Food Overlay").getOverlay(), false);
+		OverlayRegistry.enableOverlay(GeneralCompatHandler.getOverlay("AppleSkin Exhaustion").getOverlay(), false);
+
 	}
 
 }

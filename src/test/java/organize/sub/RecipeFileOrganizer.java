@@ -4,9 +4,7 @@ import com.google.common.io.Files;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import dev.lcy0x1.util.Serializer;
 import organize.ResourceOrganizer;
-import organize.json.JsonPart;
 
 import java.io.File;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package dev.lcy0x1.util;
+package dev.lcy0x1.serial;
 
 import com.google.gson.JsonObject;
 import net.minecraft.network.FriendlyByteBuf;

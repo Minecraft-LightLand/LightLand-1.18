@@ -7,7 +7,7 @@ import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.network.packets.SkillToServer;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

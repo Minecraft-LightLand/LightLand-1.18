@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
 import dev.hikarishima.lightland.util.BodyAttribute;
 import dev.hikarishima.lightland.util.EffectAddUtil;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Consumer;

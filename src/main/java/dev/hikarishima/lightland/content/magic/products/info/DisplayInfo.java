@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.magic.products.info;
 
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

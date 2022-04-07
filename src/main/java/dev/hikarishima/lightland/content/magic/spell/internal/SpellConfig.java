@@ -2,8 +2,8 @@ package dev.hikarishima.lightland.content.magic.spell.internal;
 
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.network.config.SpellDataConfig;
-import dev.lcy0x1.util.Automator;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

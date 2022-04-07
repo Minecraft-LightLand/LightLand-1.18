@@ -14,7 +14,7 @@ import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.lcy0x1.menu.BaseContainerMenu;
-import dev.lcy0x1.util.SpriteManager;
+import dev.lcy0x1.menu.SpriteManager;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;

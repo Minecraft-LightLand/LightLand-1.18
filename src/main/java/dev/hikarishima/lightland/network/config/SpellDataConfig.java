@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.network.config;
 
 import dev.hikarishima.lightland.content.magic.spell.internal.SpellConfig;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;

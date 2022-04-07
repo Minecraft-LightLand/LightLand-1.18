@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.common.item.backpack;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.lcy0x1.menu.BaseContainerScreen;
-import dev.lcy0x1.util.SpriteManager;
+import dev.lcy0x1.menu.SpriteManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 

@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.magic.block;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;

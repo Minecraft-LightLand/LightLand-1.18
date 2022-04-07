@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.common.item.backpack.WorldChestContaine
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.lcy0x1.base.BaseBlockEntity;
 import dev.lcy0x1.block.NameSetable;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

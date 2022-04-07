@@ -7,7 +7,7 @@ import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.lcy0x1.menu.BaseContainerScreen;
-import dev.lcy0x1.util.SpriteManager;
+import dev.lcy0x1.menu.SpriteManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

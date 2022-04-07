@@ -4,7 +4,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import dev.hikarishima.lightland.content.common.command.BaseCommand;
 import dev.hikarishima.lightland.network.config.ConfigSyncManager;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
-import dev.lcy0x1.util.SpriteManager;
+import dev.lcy0x1.menu.SpriteManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraftforge.event.AddReloadListenerEvent;

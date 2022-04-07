@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.capability.worldstorage;
 
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.capabilities.Capability;

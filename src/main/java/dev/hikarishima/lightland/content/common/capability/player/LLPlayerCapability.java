@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.common.capability.player;
 
-import dev.lcy0x1.util.Automator;
-import dev.lcy0x1.util.ExceptionHandler;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.ExceptionHandler;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;

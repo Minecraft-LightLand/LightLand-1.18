@@ -1,6 +1,5 @@
 package dev.lcy0x1.menu;
 
-import dev.lcy0x1.util.SpriteManager;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

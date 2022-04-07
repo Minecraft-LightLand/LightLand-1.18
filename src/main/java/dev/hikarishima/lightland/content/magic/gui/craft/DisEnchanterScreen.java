@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.compat.jei.screen.ExtraInfo;
 import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.lcy0x1.menu.BaseContainerScreen;
-import dev.lcy0x1.util.SpriteManager;
+import dev.lcy0x1.menu.SpriteManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 

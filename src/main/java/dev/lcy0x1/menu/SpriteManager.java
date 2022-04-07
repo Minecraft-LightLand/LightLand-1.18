@@ -1,14 +1,18 @@
-package dev.lcy0x1.util;
+package dev.lcy0x1.menu;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import dev.lcy0x1.serial.ExceptionHandler;
+import dev.lcy0x1.serial.SerialClass;
+import dev.lcy0x1.serial.Serializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.inventory.Slot;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -128,7 +132,7 @@ public class SpriteManager {
 
 	private void load() {
 		JsonObject jo = DistExecutor.unsafeRunForDist(() -> () ->
-				ExceptionHandler.get(() -> new JsonParser().parse(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(
+				ExceptionHandler.get(() -> GsonHelper.parse(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(
 						new ResourceLocation(coords.getNamespace(), "textures/gui/coords/" + coords.getPath() + ".json")
 				).getInputStream())).getAsJsonObject()), () -> () -> CACHE.get(coords).getAsJsonObject());
 		Serializer.from(jo, SpriteManager.class, this);

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.network;
 
-import dev.lcy0x1.util.Automator;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

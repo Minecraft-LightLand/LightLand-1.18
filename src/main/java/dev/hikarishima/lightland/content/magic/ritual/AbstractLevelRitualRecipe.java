@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.magic.ritual;
 
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.lcy0x1.base.BaseRecipe;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;

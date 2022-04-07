@@ -19,7 +19,7 @@ import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.mult.ScheduleTickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.type.BlockMethod;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;

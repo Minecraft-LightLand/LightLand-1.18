@@ -1,4 +1,4 @@
-package dev.lcy0x1.util;
+package dev.lcy0x1.serial;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

@@ -1,4 +1,4 @@
-package dev.lcy0x1.util;
+package dev.lcy0x1.serial;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

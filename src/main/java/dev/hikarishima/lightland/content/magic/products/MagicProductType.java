@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.network.config.ProductTypeConfig;
 import dev.lcy0x1.base.NamedEntry;
-import dev.lcy0x1.util.NBTObj;
+import dev.lcy0x1.serial.NBTObj;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;

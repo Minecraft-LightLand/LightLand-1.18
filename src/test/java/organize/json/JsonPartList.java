@@ -3,7 +3,7 @@ package organize.json;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 
 @SerialClass
 public class JsonPartList extends JsonPart {

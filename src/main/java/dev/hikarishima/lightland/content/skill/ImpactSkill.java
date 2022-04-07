@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
 import dev.hikarishima.lightland.content.skill.internal.SkillData;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

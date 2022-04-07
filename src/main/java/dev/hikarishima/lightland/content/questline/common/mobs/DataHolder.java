@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.questline.common.mobs;
 
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 

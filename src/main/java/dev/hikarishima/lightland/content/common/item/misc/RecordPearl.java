@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.common.item.misc;
 
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
-import dev.lcy0x1.util.Automator;
-import dev.lcy0x1.util.ExceptionHandler;
+import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.ExceptionHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

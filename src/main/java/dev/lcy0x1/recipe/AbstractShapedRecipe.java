@@ -1,4 +1,4 @@
-package dev.lcy0x1.base;
+package dev.lcy0x1.recipe;
 
 import com.google.gson.JsonObject;
 import net.minecraft.MethodsReturnNonnullByDefault;

@@ -1,9 +1,9 @@
 package dev.lcy0x1.base;
 
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
-import dev.lcy0x1.util.Automator;
-import dev.lcy0x1.util.ExceptionHandler;
-import dev.lcy0x1.util.SerialClass;
+import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.ExceptionHandler;
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
