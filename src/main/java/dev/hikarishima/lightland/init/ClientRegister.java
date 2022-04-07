@@ -46,12 +46,10 @@ public class ClientRegister {
 		OverlayRegistry.enableOverlay(ForgeIngameGui.CROSSHAIR_ELEMENT, false);
 		OverlayRegistry.enableOverlay(ForgeIngameGui.AIR_LEVEL_ELEMENT, false);
 		OverlayRegistry.enableOverlay(ForgeIngameGui.FOOD_LEVEL_ELEMENT, false);
+		OverlayRegistry.enableOverlay(ForgeIngameGui.MOUNT_HEALTH_ELEMENT, false);
 		OverlayRegistry.registerOverlayTop("MagicWand", MagicWandOverlay.INSTANCE);
-		OverlayRegistry.registerOverlayTop("SpellHotbar", new SpellOverlay());
-		OverlayRegistry.registerOverlayTop("LLExperience", new BarOverlay());
+		OverlayRegistry.registerOverlayTop("lightland main", new LLOverlay());
 		OverlayRegistry.registerOverlayTop("ItemShifted", new ItemNameOverlay());
-		OverlayRegistry.registerOverlayTop("PlayerHealth", new HealthOverlay());
-		OverlayRegistry.registerOverlayTop("SkillBar", new SkillOverlay());
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.OVERLAY);
 	}
 
@@ -60,7 +58,6 @@ public class ClientRegister {
 		ClientRegistry.registerKeyBinding(LangData.Keys.SKILL_1.map);
 		ClientRegistry.registerKeyBinding(LangData.Keys.SKILL_2.map);
 		ClientRegistry.registerKeyBinding(LangData.Keys.SKILL_3.map);
-		ClientRegistry.registerKeyBinding(LangData.Keys.SKILL_4.map);
 
 	}
 

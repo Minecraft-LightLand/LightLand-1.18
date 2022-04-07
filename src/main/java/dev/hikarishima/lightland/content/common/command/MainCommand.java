@@ -7,6 +7,7 @@ import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
 import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.data.LangData;
+import dev.hikarishima.lightland.init.special.SkillRegistry;
 import dev.hikarishima.lightland.network.packets.CapToClient;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -71,7 +72,7 @@ public class MainCommand extends BaseCommand {
 						}))));
 
 		registerCommand("set_skill", getPlayer()
-				.then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))
+				.then(Commands.argument("slot", IntegerArgumentType.integer(1, SkillRegistry.MAX))
 						.then(Commands.argument("skill", RegistryParser.SKILL)
 								.executes(withPlayer((context, e) -> {
 									LLPlayerData handler = LLPlayerData.get(e);
@@ -86,7 +87,7 @@ public class MainCommand extends BaseCommand {
 								})))));
 
 		registerCommand("remove_skill", getPlayer()
-				.then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))
+				.then(Commands.argument("slot", IntegerArgumentType.integer(1, SkillRegistry.MAX))
 						.executes(withPlayer((context, e) -> {
 							LLPlayerData handler = LLPlayerData.get(e);
 							int slot = context.getArgument("slot", Integer.class);
@@ -100,7 +101,7 @@ public class MainCommand extends BaseCommand {
 
 
 		registerCommand("set_skill_level", getPlayer()
-				.then(Commands.argument("slot", IntegerArgumentType.integer(1, 4))
+				.then(Commands.argument("slot", IntegerArgumentType.integer(1, SkillRegistry.MAX))
 						.then(Commands.argument("level", IntegerArgumentType.integer(1))
 								.executes(withPlayer((context, e) -> {
 									LLPlayerData handler = LLPlayerData.get(e);

@@ -6,102 +6,178 @@ import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
 import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.lcy0x1.base.Proxy;
 import dev.lcy0x1.menu.OverlayManager;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodData;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.IIngameOverlay;
 
 public class LLOverlay implements IIngameOverlay {
 
-	public static OverlayManager MANAGER = new OverlayManager(LightLand.MODID, "widgets");
-
-	private boolean shouldRenderSpecial(ForgeIngameGui gui) {
-		if (gui.minecraft.player.isRidingJumpable()) return false;
-		Player player = Proxy.getClientPlayer();
-		if (player == null) return false;
-		if (player != gui.minecraft.cameraEntity) return false;
-		if (!LLPlayerData.isProper(player)) return false;
-		LLPlayerData data = CapProxy.getHandler();
-		return data.abilityPoints.profession != null;
-	}
+	public static OverlayManager MANAGER = OverlayManager.get(LightLand.MODID, "widgets");
 
 	@Override
 	public void render(ForgeIngameGui gui, PoseStack mStack, float partialTicks, int width, int height) {
 		if (gui.minecraft.options.hideGui) return;
 		if (gui.minecraft.player == null) return;
-		if (!shouldRenderSpecial(gui)) {
-			if (gui.minecraft.player.isRidingJumpable())
-				ForgeIngameGui.JUMP_BAR_ELEMENT.render(gui, mStack, partialTicks, width, height);
-			else ForgeIngameGui.EXPERIENCE_BAR_ELEMENT.render(gui, mStack, partialTicks, width, height);
-			return;
-		}
-		if (gui.minecraft.player.isRidingJumpable()) {
-			ForgeIngameGui.JUMP_BAR_ELEMENT.render(gui, mStack, partialTicks, width, height);
-		}
-		RenderSystem.setShaderTexture(0, GUI_ICONS_LOCATION);
+		OverlayManager.ScreenRenderer renderer = MANAGER.getRenderer(gui, mStack);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderSystem.disableBlend();
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		renderer.start();
+		renderItem(renderer, partialTicks);
+		SkillOverlay.render(renderer);
+		renderHealth(renderer);
+		renderFood(renderer);
+		renderMagicBars(renderer);
+		renderExperience(renderer);
+		renderMiddle(renderer);
+	}
 
-		RenderSystem.setShaderTexture(0, GuiComponent.GUI_ICONS_LOCATION);
+	private void renderItem(OverlayManager.ScreenRenderer renderer, float partialTicks) {
+		if (renderer.localPlayer == null) return;
+		int x = 0;
+		Player player = renderer.localPlayer;
+		int sel = player.getInventory().selected;
+		if (LLPlayerData.isProper(player)) {
+			x = CapProxy.getHandler().magicAbility.spell_level;
+		}
+		// render hotbar
+		if (x > 0) {
+			int tlen = x == 9 ? 182 : 1 + x * 20;
+			renderer.drawLeftRight("spell_list", tlen, 182);
+		}
+		if (x < 9) {
+			int left = x == 0 ? 0 : 20 * x + 1;
+			renderer.blit("item_list", left, 0, left, 0, -left, 0);
+		}
+		if (sel < x) {
+			renderer.draw("spell_select", 20 * sel, 0);
+		}
+		if (sel >= x) {
+			renderer.draw("item_select", 20 * sel, 0);
+		}
 
-		int h = gui.screenHeight - 32 + 3;
+		ItemStack itemstack = player.getOffhandItem();
+		if (!itemstack.isEmpty()) {
+			renderer.draw("assistant_list");
+		}
+		// render items
+		int i1 = 1;
+		int i = renderer.gui.screenWidth / 2;
+		for (int j1 = 0; j1 < 9; ++j1) {
+			int k1 = i - 90 + j1 * 20 + 2;
+			int l1 = renderer.gui.screenHeight - 16 - 3;
+			renderer.gui.renderSlot(k1, l1, partialTicks, player, player.getInventory().items.get(j1), i1++);
+		}
+		if (!itemstack.isEmpty()) {
+			int j2 = renderer.gui.screenHeight - 16 - 3;
+			renderer.gui.renderSlot(i - 91 - 26, j2, partialTicks, player, itemstack, i1);
+
+		}
+		renderer.start();
+	}
+
+	private void renderHealth(OverlayManager.ScreenRenderer renderer) {
+		if (renderer.cameraEntity instanceof LivingEntity entity) {
+			AttributeInstance attrMaxHealth = entity.getAttribute(Attributes.MAX_HEALTH);
+			if (attrMaxHealth == null) return;
+			double healthMax = attrMaxHealth.getValue();
+			double absorb = entity.getAbsorptionAmount();
+			double health = entity.getHealth();
+			renderer.draw("hp_strip_empty");
+			boolean poison = entity.hasEffect(MobEffects.POISON);
+			boolean wither = entity.hasEffect(MobEffects.WITHER);
+			boolean frozen = entity.isFullyFrozen();
+			if (wither) {
+				renderer.drawLeftRight("hp_wither_strip", health, healthMax);
+				renderer.draw("hp_wither");
+			} else if (poison) {
+				renderer.drawLeftRight("hp_poison_strip", health, healthMax);
+				renderer.draw("hp_poison");
+			} else if (frozen) {
+				renderer.drawLeftRight("hp_freezing_strip", health, healthMax);
+				renderer.draw("hp_freezing");
+			} else if (absorb > 0.1) {
+				renderer.drawLeftRight("hp_strip", health, healthMax);
+				renderer.drawLeftRight("hp_gold_strip", absorb, healthMax);
+				renderer.draw("hp_gold");
+			} else {
+				renderer.drawLeftRight("hp_strip", health, healthMax);
+				renderer.draw("hp");
+			}
+		}
+	}
+
+	private void renderFood(OverlayManager.ScreenRenderer renderer) {
+		LocalPlayer player = renderer.localPlayer;
+		if (player == null) return;
+		renderer.draw("food_strip_empty");
+		if (player.getVehicle() instanceof LivingEntity mount) {
+			double health = Math.ceil(mount.getHealth());
+			double healthMax = mount.getMaxHealth();
+			renderer.drawRightLeft("hp_mount_strip", health, healthMax);
+			renderer.draw("hp_mount");
+		} else if (player.isUnderWater() && player.getAirSupply() < 300) {
+			int air = player.getAirSupply();
+			renderer.drawRightLeft("oxygen_strip", air, 300);
+			renderer.draw("oxygen");
+		} else {
+			FoodData stats = player.getFoodData();
+			int level = stats.getFoodLevel();
+			float sat = stats.getSaturationLevel();
+			float ext = stats.getExhaustionLevel();
+			renderer.drawRightLeft("food_strip", level, 20);
+			renderer.drawRightLeft("saturation_strip", sat, 20);
+			renderer.drawRightLeft("exhaustion", ext, 4);
+		}
+	}
+
+	private void renderExperience(OverlayManager.ScreenRenderer renderer) {
+		LocalPlayer player = renderer.localPlayer;
+		if (player == null) return;
+		renderer.draw("exp_empty");
+		if (player.isRidingJumpable()) {
+			renderer.drawLeftRight("jump", player.getJumpRidingScale(), 1);
+		} else {
+			renderer.drawLeftRight("exp", player.experienceProgress, 1);
+		}
+	}
+
+	private void renderMagicBars(OverlayManager.ScreenRenderer renderer) {
+		if (renderer.localPlayer == null || !LLPlayerData.isProper(renderer.localPlayer)) return;
 		LLPlayerData data = CapProxy.getHandler();
+		int mana = data.magicAbility.getMana();
+		int mana_max = data.magicAbility.getMaxMana();
+		int load = data.magicAbility.getSpellLoad();
+		int load_max = data.magicAbility.getMaxSpellEndurance();
+		renderer.draw("mp_strip_empty");
+		renderer.drawLeftRight("mp_strip", mana, mana_max);
+		renderer.draw("mp");
 
-		int len = 81;
-		int left = -91;
-		if (data.magicAbility.getSpellLoad() > 0) {
-			double prog = Math.min(1, data.magicAbility.getMaxSpellEndurance() == 0 ? 0 :
-					data.magicAbility.getSpellLoad() * 1.0 / data.magicAbility.getMaxSpellEndurance());
-			String str = "Load: " + data.magicAbility.getSpellLoad() + "/" + data.magicAbility.getMaxSpellEndurance();
-			RenderSystem.setShaderTexture(0, BARS);
-			renderBar(gui, mStack, left, len, h, prog, 20);
-			renderText(gui, mStack, str, len, left, h, 0xFF5F32);
-		} else {
-			renderBar(gui, mStack, left, len, h, gui.minecraft.player.experienceProgress, 64);
-			renderText(gui, mStack, "" + gui.minecraft.player.experienceLevel, len, left, h, 8453920);
-		}
-		left = 10;
-		if (data.magicAbility.getMana() < data.magicAbility.getMaxMana()) {
-			double prog = data.magicAbility.getMaxMana() == 0 ? 0 :
-					data.magicAbility.getMana() * 1.0 / data.magicAbility.getMaxMana();
-			String str = "Mana: " + data.magicAbility.getMana() + "/" + data.magicAbility.getMaxMana();
-			RenderSystem.setShaderTexture(0, BARS);
-			renderBar(gui, mStack, left, len, h, prog, 10);
-			renderText(gui, mStack, str, len, left, h, 0x34D1FF);
-		} else {
-			double prog = data.abilityPoints.exp * 1.0 / AbilityPoints.expRequirement(data.abilityPoints.level);
-			String str = "Lv." + data.abilityPoints.level;
-			RenderSystem.setShaderTexture(0, BARS);
-			renderBar(gui, mStack, left, len, h, prog, 60);
-			renderText(gui, mStack, str, len, left, h, 0xFFFFFF);
-		}
-		RenderSystem.enableBlend();
-		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		renderer.draw("spell_strip_empty");
+		renderer.drawLeftRight("spell_strip", load, load_max);
+		renderer.draw("spell");
 	}
 
-	private void renderBar(ForgeIngameGui gui, PoseStack mStack, int left, int length, int height, double percent, int col) {
-		int k = (int) (percent * (length + 1f));
-		int l = gui.screenWidth / 2 + left;
-		gui.blit(mStack, l, height, 0, col, length / 2, 5);
-		gui.blit(mStack, l + length / 2, height, 182 - length + length / 2, col, length - length / 2, 5);
-		if (k > 0 && k <= length / 2) {
-			gui.blit(mStack, l, height, 0, col + 5, k, 5);
-		} else if (k > length / 2) {
-			gui.blit(mStack, l, height, 0, col + 5, length / 2, 5);
-			gui.blit(mStack, l + length / 2, height, 182 - length + length / 2, col + 5, k - length / 2, 5);
-		}
-	}
+	private void renderMiddle(OverlayManager.ScreenRenderer renderer) {
+		renderer.draw("mid_list");
+		renderer.draw("armor_column");
+		renderer.draw("armor_tag");
 
-	private void renderText(ForgeIngameGui gui, PoseStack mStack, String s, int len, int shift, int height, int col) {
-		int i1 = (gui.screenWidth - gui.getFont().width(s) + len) / 2 + shift;
-		int j1 = height - 1;
-		gui.getFont().draw(mStack, s, (float) (i1 + 1), (float) j1, 0);
-		gui.getFont().draw(mStack, s, (float) (i1 - 1), (float) j1, 0);
-		gui.getFont().draw(mStack, s, (float) i1, (float) (j1 + 1), 0);
-		gui.getFont().draw(mStack, s, (float) i1, (float) (j1 - 1), 0);
-		gui.getFont().draw(mStack, s, (float) i1, (float) j1, col);
+		if (renderer.localPlayer == null || !LLPlayerData.isProper(renderer.localPlayer)) return;
+		LLPlayerData data = CapProxy.getHandler();
+		int exp = data.abilityPoints.exp;
+		int max = AbilityPoints.expRequirement(data.abilityPoints.level);
+		renderer.draw("lv_empty");
+		renderer.drawBottomUp("lv_strip", exp, max);
+		renderer.draw("lv");
 	}
 
 }

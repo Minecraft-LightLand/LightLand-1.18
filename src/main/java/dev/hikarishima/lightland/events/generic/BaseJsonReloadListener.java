@@ -19,8 +19,8 @@ public class BaseJsonReloadListener extends SimpleJsonResourceReloadListener {
 
 	private final Consumer<Map<ResourceLocation, JsonElement>> consumer;
 
-	public BaseJsonReloadListener(Consumer<Map<ResourceLocation, JsonElement>> consumer) {
-		super(GSON, "gui/coords");
+	public BaseJsonReloadListener(String path, Consumer<Map<ResourceLocation, JsonElement>> consumer) {
+		super(GSON, path);
 		this.consumer = consumer;
 	}
 

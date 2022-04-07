@@ -98,8 +98,7 @@ public class LangData {
 	public enum Keys {
 		SKILL_1("key.lightland.skill_1", GLFW.GLFW_KEY_Z),
 		SKILL_2("key.lightland.skill_2", GLFW.GLFW_KEY_X),
-		SKILL_3("key.lightland.skill_3", GLFW.GLFW_KEY_C),
-		SKILL_4("key.lightland.skill_4", GLFW.GLFW_KEY_V);
+		SKILL_3("key.lightland.skill_3", GLFW.GLFW_KEY_C);
 
 		public final String id;
 		public final int key;

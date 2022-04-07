@@ -10,6 +10,8 @@ import dev.hikarishima.lightland.init.LightLand;
 
 public class SkillRegistry {
 
+	public static final int MAX = 3;
+
 	public static final RegistryEntry<EffectSkill> NO_KB = reg("no_knockback", EffectSkill::new);
 	public static final RegistryEntry<EffectSkill> BLOOD_THIRST = reg("blood_thirst", EffectSkill::new);
 	public static final RegistryEntry<MovementSkill> QUICK_MOVE = reg("quick_move", MovementSkill::new);

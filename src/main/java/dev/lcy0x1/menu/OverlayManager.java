@@ -1,37 +1,53 @@
 package dev.lcy0x1.menu;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
 import dev.lcy0x1.serial.Serializer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.gui.ForgeIngameGui;
 
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.Map;
 
 @SerialClass
 public class OverlayManager {
+
+	public static final Map<ResourceLocation, OverlayManager> MAP = new HashMap<>();
+
+	public static OverlayManager get(String modid, String path) {
+		OverlayManager old = MAP.get(new ResourceLocation(modid, path));
+		if (old != null) return old;
+		return new OverlayManager(modid, path);
+	}
 
 	private final String name;
 	private final ResourceLocation coords, texture;
 	@SerialClass.SerialField
 	public HashMap<String, Rect> elements;
-	private boolean loaded = false;
+	public boolean loaded = false;
 
-	public OverlayManager(String mod, String str) {
+	private OverlayManager(String mod, String str) {
 		name = mod + ":" + str;
 		coords = new ResourceLocation(mod, str);
-		texture = new ResourceLocation(mod, "textures/gui/overlays/" + str + ".png");
+		texture = new ResourceLocation(mod, "textures/gui/widgets/" + str + ".png");
 		check();
+		MAP.put(new ResourceLocation(mod, str), this);
+	}
+
+	public void reset(JsonElement elem) {
+		Serializer.from(elem.getAsJsonObject(), OverlayManager.class, this);
+		loaded = true;
 	}
 
 	/**
@@ -43,9 +59,9 @@ public class OverlayManager {
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	public ScreenRenderer getRenderer(Screen gui, int x, int y, int w, int h) {
+	public ScreenRenderer getRenderer(ForgeIngameGui gui, PoseStack stack) {
 		check();
-		return new ScreenRenderer(gui, x, y, w, h);
+		return new ScreenRenderer(gui, stack);
 	}
 
 	@Override
@@ -82,64 +98,82 @@ public class OverlayManager {
 	@OnlyIn(Dist.CLIENT)
 	public class ScreenRenderer {
 
-		private final int x, y, w, h;
-		private final Screen scr;
+		private final int x, y;
 
-		public ScreenRenderer(Screen gui, int x, int y, int w, int h) {
-			scr = gui;
-			this.x = x;
-			this.y = y;
-			this.w = w;
-			this.h = h;
+		public final ForgeIngameGui gui;
+		public final PoseStack stack;
+		public final Entity cameraEntity;
+		public final LocalPlayer localPlayer;
+
+		public ScreenRenderer(ForgeIngameGui gui, PoseStack stack) {
+			this.gui = gui;
+			this.stack = stack;
+			this.x = gui.screenWidth / 2;
+			this.y = gui.screenHeight;
+			localPlayer = gui.minecraft.player;
+			cameraEntity = gui.minecraft.getCameraEntity();
 		}
 
-		private ScreenRenderer(AbstractContainerScreen<?> scrIn) {
-			x = scrIn.getGuiLeft();
-			y = scrIn.getGuiTop();
-			w = scrIn.getXSize();
-			h = scrIn.getYSize();
-			scr = scrIn;
+		public void start() {
+			gui.setupOverlayRenderState(true, false, texture);
 		}
 
 		/**
 		 * Draw a side sprite on the location specified by the component
 		 */
-		public void draw(PoseStack mat, String c, String s) {
+		public void draw(String c) {
 			Rect cr = getComp(c);
-			scr.blit(mat, x + cr.sx, y + cr.sy, cr.tx, cr.ty, cr.w, cr.h);
+			gui.blit(stack, x + cr.sx, y + cr.sy, cr.tx, cr.ty, cr.w, cr.h);
+		}
+
+		/**
+		 * Draw a side sprite on the location specified by the component with an offset
+		 */
+		public void draw(String c, int dx, int dy) {
+			Rect cr = getComp(c);
+			gui.blit(stack, x + cr.sx + dx, y + cr.sy + dy, cr.tx, cr.ty, cr.w, cr.h);
+		}
+
+		/**
+		 * Draw a side sprite on the location specified by the component with an offset on all variables
+		 */
+		public void blit(String c, int sx, int sy, int tx, int ty, int dw, int dh) {
+			Rect cr = getComp(c);
+			gui.blit(stack, x + cr.sx + sx, y + cr.sy + sy, cr.tx + tx, cr.ty + ty, cr.w + dw, cr.h + dh);
 		}
 
 		/**
 		 * Draw a side sprite on the location specified by the component. Draw partially
 		 * from bottom to top
 		 */
-		public void drawBottomUp(PoseStack mat, String c, String s, int prog, int max) {
+		public void drawBottomUp(String c, int prog, int max) {
 			if (prog == 0 || max == 0)
 				return;
 			Rect cr = getComp(c);
 			int dh = cr.h * prog / max;
-			scr.blit(mat, x + cr.sx, y + cr.sy + cr.h - dh, cr.tx, cr.ty + cr.h - dh, cr.w, dh);
+			gui.blit(stack, x + cr.sx, y + cr.sy + cr.h - dh, cr.tx, cr.ty + cr.h - dh, cr.w, dh);
 		}
 
 		/**
 		 * Draw a side sprite on the location specified by the component. Draw partially
 		 * from left to right
 		 */
-		public void drawLeftRight(PoseStack mat, String c, String s, int prog, int max) {
+		public void drawLeftRight(String c, double prog, double max) {
 			if (prog == 0 || max == 0)
 				return;
 			Rect cr = getComp(c);
-			int dw = cr.w * prog / max;
-			scr.blit(mat, x + cr.sx, y + cr.sy, cr.tx, cr.ty, dw, cr.h);
+			prog = Math.min(prog, max);
+			int dw = (int) Math.floor(cr.w * prog / max);
+			gui.blit(stack, x + cr.sx, y + cr.sy, cr.tx, cr.ty, dw, cr.h);
 		}
 
-		/**
-		 * bind texture, draw background color, and GUI background
-		 */
-		public void start(PoseStack mat) {
-			RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-			RenderSystem.setShaderTexture(0, texture);
-			scr.blit(mat, x, y, 0, 0, w, h);
+		public void drawRightLeft(String c, double prog, double max) {
+			if (prog == 0 || max == 0)
+				return;
+			Rect cr = getComp(c);
+			prog = Math.min(prog, max);
+			int dw = (int) Math.floor(cr.w * prog / max);
+			gui.blit(stack, x + cr.sx + cr.w - dw, y + cr.sy, cr.tx + cr.w - dw, cr.ty, dw, cr.h);
 		}
 
 	}
