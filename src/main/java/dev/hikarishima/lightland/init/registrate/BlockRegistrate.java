@@ -5,6 +5,9 @@ import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.content.common.block.WorldChestBlock;
 import dev.hikarishima.lightland.content.common.block.WorldChestBlockEntity;
+import dev.hikarishima.lightland.content.common.test.PanBlock;
+import dev.hikarishima.lightland.content.common.test.PanBlockEntity;
+import dev.hikarishima.lightland.content.common.test.PanBlockEntityRenderer;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
 import dev.hikarishima.lightland.content.magic.block.RitualSide;
@@ -40,7 +43,7 @@ public class BlockRegistrate {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
 	}
 
-	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE, WORLD_CHEST;
+	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE, WORLD_CHEST, SAUCEPAN;
 	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, LEAD_BLOCK, MAGICIUM_BLOCK;
 	public static final BlockEntry<LayrootBody> LAYROOT_BODY;
 	public static final BlockEntry<LayrootHead> LAYROOT_HEAD;
@@ -54,6 +57,7 @@ public class BlockRegistrate {
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
 	public static final BlockEntityEntry<WorldChestBlockEntity> TE_WORLD_CHEST;
+	public static final BlockEntityEntry<PanBlockEntity> TE_PAN;
 
 
 	public static final BlockEntry<Block>[] GEN_BLOCK = GenItem.genBlockMats();
@@ -153,6 +157,16 @@ public class BlockRegistrate {
 					.tag(BlockTags.WITHER_IMMUNE, BlockTags.DRAGON_IMMUNE)
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
 					.defaultLang().simpleItem().register();
+		}
+		{
+			DelegateBlockProperties PAN = DelegateBlockProperties.copy(Blocks.STONE).make(BlockBehaviour.Properties::noOcclusion);
+			SAUCEPAN = REGISTRATE.block("saucepan", p -> DelegateBlock.newBaseBlock(PAN, PanBlock.TE, new PanBlock()))
+					.item().defaultModel().build().blockstate((ctx, pvd) -> pvd.getMultipartBuilder(ctx.getEntry()).part()
+							.modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(LightLand.MODID, "block/saucepan_lit")))
+							.addModel().condition(BlockStateProperties.LIT, true).end())
+					.addLayer(() -> RenderType::cutout).defaultLoot().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
+			TE_PAN = REGISTRATE.blockEntity("saucepan", PanBlockEntity::new).validBlock(SAUCEPAN)
+					.renderer(() -> PanBlockEntityRenderer::new).register();
 		}
 	}
 

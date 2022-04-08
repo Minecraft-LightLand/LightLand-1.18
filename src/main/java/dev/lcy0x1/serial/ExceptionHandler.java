@@ -3,7 +3,13 @@ package dev.lcy0x1.serial;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
+import java.util.function.Supplier;
+
 public class ExceptionHandler {
+
+	public static <T> T parse(Supplier<T> sup){
+		return sup.get();
+	}
 
 	public static void run(ExcRun run) {
 		try {

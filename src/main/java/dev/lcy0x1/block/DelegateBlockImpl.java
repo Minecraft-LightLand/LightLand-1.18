@@ -22,6 +22,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -191,6 +192,12 @@ public class DelegateBlockImpl extends DelegateBlock {
 	@Override
 	public final void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity entity, ItemStack stack) {
 		impl.execute(SetPlacedByBlockMethod.class).forEach(e -> e.setPlacedBy(level, pos, state, entity, stack));
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	@Override
+	public RenderShape getRenderShape(BlockState state) {
+		return impl.one(RenderShapeBlockMethod.class).map(e -> e.getRenderShape(state)).orElseGet(() -> super.getRenderShape(state));
 	}
 
 	public static class BlockImplementor {

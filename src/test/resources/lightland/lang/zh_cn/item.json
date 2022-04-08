@@ -76,7 +76,8 @@
 	"slime_carpet": "粘液层",
 	"slime_vine": "粘液藤蔓",
 	"maze_wall": "再生石",
-	"dimensional_storage": "空间箱子"
+	"dimensional_storage": "空间箱子",
+	"saucepan": "锅"
   },
   "-cartesian": {
 	"backpack": {
