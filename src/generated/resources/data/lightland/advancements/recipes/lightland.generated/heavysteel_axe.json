@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_axe"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_axe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_axe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_axe",
+      "has_the_recipe"
+    ]
+  ]
+}

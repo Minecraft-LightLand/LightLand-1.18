@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:dispellium_shovel"
+    ]
+  },
+  "criteria": {
+    "has_dispellium_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:dispellium_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:dispellium_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dispellium_shovel",
+      "has_the_recipe"
+    ]
+  ]
+}

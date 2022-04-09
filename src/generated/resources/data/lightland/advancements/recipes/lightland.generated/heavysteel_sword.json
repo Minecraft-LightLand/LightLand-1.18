@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_sword"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_sword"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_sword",
+      "has_the_recipe"
+    ]
+  ]
+}

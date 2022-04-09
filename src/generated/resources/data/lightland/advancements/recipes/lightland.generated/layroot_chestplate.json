@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layroot_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_layroot_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layroot_chestplate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layroot_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layroot_chestplate",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:steel_hoe"
+    ]
+  },
+  "criteria": {
+    "has_steel_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:steel_hoe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:steel_hoe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_steel_hoe",
+      "has_the_recipe"
+    ]
+  ]
+}

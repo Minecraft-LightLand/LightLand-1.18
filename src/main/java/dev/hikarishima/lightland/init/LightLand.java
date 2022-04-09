@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.init;
 
+import com.tterrag.registrate.providers.ProviderType;
 import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.common.command.*;
@@ -13,6 +14,7 @@ import dev.hikarishima.lightland.events.generic.EffectSyncEvents;
 import dev.hikarishima.lightland.events.generic.GenericEventHandler;
 import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.LangData;
+import dev.hikarishima.lightland.init.data.RecipeGen;
 import dev.hikarishima.lightland.init.registrate.*;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
 import dev.hikarishima.lightland.init.worldgenreg.StructureRegistrate;
@@ -55,6 +57,7 @@ public class LightLand {
 		AllTags.register();
 		Handlers.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
+		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 	}
 
 	private static void registerForgeEvents() {

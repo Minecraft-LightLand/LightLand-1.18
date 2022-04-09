@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_block"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

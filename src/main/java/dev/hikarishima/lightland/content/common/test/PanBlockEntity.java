@@ -1,23 +1,21 @@
 package dev.hikarishima.lightland.content.common.test;
 
-import dev.lcy0x1.base.BaseBlockEntity;
-import dev.lcy0x1.base.BaseContainer;
-import dev.lcy0x1.base.BaseContainerListener;
-import dev.lcy0x1.base.BaseTank;
+import dev.hikarishima.lightland.content.common.render.TileInfoOverlay;
+import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.Containers;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -32,22 +30,44 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 @SerialClass
-public class PanBlockEntity extends BaseBlockEntity implements IAnimatable, BlockContainer, BaseContainerListener<BaseContainer> {
+public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEntity, IAnimatable, BlockContainer,
+		BaseContainerListener<BaseContainer>, TileInfoOverlay.TileInfoProvider {
+
+	public class RecipeContainer extends BaseContainer {
+
+		public RecipeContainer(int size) {
+			super(size);
+		}
+
+		public PanBlockEntity getTile(){
+			return PanBlockEntity.this;
+		}
+
+	}
+
+	public static final int MAX_FLUID = 10;
 
 	private final AnimationFactory manager = new AnimationFactory(this);
 
-	@SerialClass.SerialField
-	protected final BaseContainer inputInventory = new BaseContainer(9).setMax(1).add(this);
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
+	protected final RecipeContainer inputInventory = (RecipeContainer) new RecipeContainer(6).setMax(1).setPredicate(e -> canAccess()).add(this);
+
+	@SerialClass.SerialField(toClient = true)
 	protected final BaseContainer outputInventory = new BaseContainer(1).setPredicate(e -> false).add(this);
-	@SerialClass.SerialField
-	protected final BaseTank fluids = new BaseTank(9, 250);
+	@SerialClass.SerialField(toClient = true)
+	protected final BaseTank fluids = new BaseTank(6, MAX_FLUID).setPredicate(e -> canAccess()).setExtract(this::canAccess).add(this);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
+
+	@SerialClass.SerialField(toClient = true)
+	public int cooking_max = 0, cooking = 0;
+	@SerialClass.SerialField(toClient = true)
+	public ItemStack result = ItemStack.EMPTY, interrupt = ItemStack.EMPTY;
 
 	public PanBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -94,9 +114,74 @@ public class PanBlockEntity extends BaseBlockEntity implements IAnimatable, Bloc
 	}
 
 	@Override
-	public void notifyTile(BaseContainer cont) {
+	public void notifyTile(@Nullable BaseContainer cont) {
 		this.setChanged();
 		this.sync();
 	}
 
+	private boolean canAccess() {
+		return !getBlockState().getValue(BlockStateProperties.SIGNAL_FIRE);
+	}
+
+	public void stopCooking() {
+		if (cooking_max > 0) {
+			if (cooking == 0) {
+				outputInventory.setItem(0, result);
+			} else {
+				outputInventory.setItem(0, interrupt);
+			}
+			cooking = 0;
+			cooking_max = 0;
+			result = ItemStack.EMPTY;
+			interrupt = ItemStack.EMPTY;
+		}
+		notifyTile(null);
+	}
+
+	public void dumpInventory() {
+		if (level == null) return;
+		Containers.dropContents(level, this.getBlockPos(), inputInventory);
+		Containers.dropContents(level, this.getBlockPos(), outputInventory);
+		fluids.clear();
+		notifyTile(null);
+	}
+
+	public boolean startCooking() {
+		inputInventory.clear();
+		fluids.clear();
+		boolean ans = outputInventory.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
+		if (ans) {
+			cooking_max = 100;
+			cooking = cooking_max;
+			result = Items.COOKED_BEEF.getDefaultInstance();
+			interrupt = Items.POISONOUS_POTATO.getDefaultInstance();
+			notifyTile(null);
+		}
+		return ans;
+	}
+
+	@Override
+	public void tick() {
+		if (cooking > 0) {
+			cooking--;
+			if (level != null && cooking == 0 && !level.isClientSide()) {
+				level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.SIGNAL_FIRE, false));
+				stopCooking();
+			}
+		}
+	}
+
+	@Override
+	public List<TileInfoOverlay.IDrawable> getContents() {
+		List<TileInfoOverlay.IDrawable> list = new ArrayList<>();
+		for (ItemStack stack : inputInventory.getAsList()) {
+			if (!stack.isEmpty())
+				list.add(new TileInfoOverlay.ItemDrawable(stack));
+		}
+		for (FluidStack stack : fluids.getAsList()) {
+			if (!stack.isEmpty())
+				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID));
+		}
+		return list;
+	}
 }

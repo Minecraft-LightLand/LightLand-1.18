@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:magicium_ingot"
+    ]
+  },
+  "criteria": {
+    "has_magicium_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:magicium_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:magicium_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_magicium_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

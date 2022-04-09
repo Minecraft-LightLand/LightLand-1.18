@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layline_hoe"
+    ]
+  },
+  "criteria": {
+    "has_layline_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layline_hoe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layline_hoe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layline_hoe",
+      "has_the_recipe"
+    ]
+  ]
+}

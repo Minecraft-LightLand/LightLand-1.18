@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:dispellium_leggings"
+    ]
+  },
+  "criteria": {
+    "has_dispellium_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:dispellium_leggings"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:dispellium_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dispellium_leggings",
+      "has_the_recipe"
+    ]
+  ]
+}

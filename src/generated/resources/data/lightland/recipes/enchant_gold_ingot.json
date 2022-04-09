@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lightland:enchant_gold_nugget"
+    }
+  },
+  "result": {
+    "item": "lightland:enchant_gold_ingot"
+  }
+}

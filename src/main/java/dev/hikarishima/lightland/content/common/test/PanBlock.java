@@ -6,6 +6,7 @@ import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
 import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
+import dev.lcy0x1.block.one.LightBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,14 +15,23 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
-public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockMethod, OnClickBlockMethod {
+import java.util.Objects;
+
+public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockMethod, OnClickBlockMethod, LightBlockMethod {
 
 	public static final BlockEntityBlockMethod<PanBlockEntity> TE = new BlockEntityBlockMethodImpl<>(BlockRegistrate.TE_PAN, PanBlockEntity.class);
 
@@ -35,27 +45,27 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 		return state.setValue(BlockStateProperties.LIT, false).setValue(BlockStateProperties.SIGNAL_FIRE, false).setValue(BlockStateProperties.OPEN, false);
 	}
 
-	/**
-	 * Logic:
-	 * Flint and Steel Right Click: lit fire
-	 * Shift Click + lit: take out fire
-	 * Shift Click + no lit + close lid: FAIL
-	 * Shift Click + no lit + open lid: dump content
-	 * Close Lid right click
-	 */
 	@Override
 	public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
 		ItemStack stack = pl.getItemInHand(h);
 		boolean open = bs.getValue(BlockStateProperties.OPEN);
 		boolean lit = bs.getValue(BlockStateProperties.LIT);
 		boolean cooking = bs.getValue(BlockStateProperties.SIGNAL_FIRE);
+		PanBlockEntity te = Objects.requireNonNull((PanBlockEntity) w.getBlockEntity(pos));
 		if (stack.getItem() instanceof FlintAndSteelItem) {
 			if (!lit) {
 				w.playSound(pl, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, w.getRandom().nextFloat() * 0.4F + 0.8F);
-				if (!w.isClientSide()) {
-					w.setBlockAndUpdate(pos, bs.setValue(BlockStateProperties.LIT, true));
-				}
+				BlockState state = bs.setValue(BlockStateProperties.LIT, true);
 				stack.hurtAndBreak(1, pl, (player) -> player.broadcastBreakEvent(h));
+				if (!w.isClientSide()) {
+					if (!open) {
+						if (te.startCooking()) {
+							state.setValue(BlockStateProperties.SIGNAL_FIRE, true)
+									.setValue(BlockStateProperties.OPEN, false);
+						}
+					}
+					w.setBlockAndUpdate(pos, state);
+				}
 				return InteractionResult.SUCCESS;
 			} else {
 				return InteractionResult.CONSUME;
@@ -64,36 +74,70 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 		if (lit && pl.isShiftKeyDown()) {
 			BlockState unlit = bs.setValue(BlockStateProperties.LIT, false)
 					.setValue(BlockStateProperties.SIGNAL_FIRE, false);
-			// TODO stop cooking
 			if (!w.isClientSide()) {
+				te.stopCooking();
 				w.setBlockAndUpdate(pos, unlit);
 			}
 			return InteractionResult.SUCCESS;
 		}
 		if (!lit && open && pl.isShiftKeyDown()) {
-			// TODO clear inventory
+			if (!w.isClientSide())
+				te.dumpInventory();
 			return InteractionResult.SUCCESS;
 		}
 		if (pl.isShiftKeyDown()) {
 			return InteractionResult.PASS;
 		}
-		if (stack.isEmpty() || !open) {
+		if (!open || stack.isEmpty() && te.outputInventory.isEmpty()) {
 			if (!w.isClientSide()) {
 				BlockState toggle_cap = bs.setValue(BlockStateProperties.OPEN, !open);
 				if (!open && cooking) {
 					toggle_cap = bs.setValue(BlockStateProperties.SIGNAL_FIRE, false);
-					//TODO stop cooking
+					te.stopCooking();
 				}
 				if (open && lit) {
-					//toggle_cap = bs.setValue(BlockStateProperties.SIGNAL_FIRE, true);
-					//TODO start cooking
+					if (te.startCooking())
+						toggle_cap = bs.setValue(BlockStateProperties.SIGNAL_FIRE, true)
+								.setValue(BlockStateProperties.OPEN, false);
 				}
 				w.setBlockAndUpdate(pos, toggle_cap);
 			}
 			return InteractionResult.SUCCESS;
 		}
+		if (!te.outputInventory.isEmpty()) {
+			if (!w.isClientSide()) {
+				int count = te.outputInventory.getItem(0).getCount();
+				pl.getInventory().placeItemBackInInventory(te.outputInventory.removeItem(0, count));
+			}
+			return InteractionResult.SUCCESS;
+		}
+		if (!stack.isEmpty()) {
+			LazyOptional<IFluidHandlerItem> opt = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
+			if (opt.resolve().isPresent()) {
+				IFluidHandlerItem item = opt.resolve().get();
+				FluidStack fluidStack = item.getFluidInTank(0);
+				if (!fluidStack.isEmpty()) {
+					FluidStack copy = fluidStack.copy();
+					copy.setAmount(1);
+					te.fluids.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+					return InteractionResult.SUCCESS;
+				}
+			}
+			if (stack.isEdible() || stack.is(Items.BOWL)) {
+				ItemStack copy = stack.copy();
+				copy.setCount(1);
+				ItemStack remain = te.inputInventory.addItem(copy);
+				if (remain.isEmpty()) stack.shrink(1);
+				return InteractionResult.SUCCESS;
+			}
+			return InteractionResult.FAIL;
+		}
 
 		return InteractionResult.FAIL;
 	}
 
+	@Override
+	public int getLightValue(BlockState bs, BlockGetter w, BlockPos pos) {
+		return bs.getValue(BlockStateProperties.LIT) ? 15 : 0;
+	}
 }

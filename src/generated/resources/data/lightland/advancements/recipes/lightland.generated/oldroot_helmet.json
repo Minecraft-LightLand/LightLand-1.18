@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:oldroot_helmet"
+    ]
+  },
+  "criteria": {
+    "has_oldroot_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:oldroot_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:oldroot_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_oldroot_helmet",
+      "has_the_recipe"
+    ]
+  ]
+}

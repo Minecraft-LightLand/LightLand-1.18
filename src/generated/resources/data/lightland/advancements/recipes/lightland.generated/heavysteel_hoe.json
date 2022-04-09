@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_hoe"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_hoe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_hoe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_hoe",
+      "has_the_recipe"
+    ]
+  ]
+}

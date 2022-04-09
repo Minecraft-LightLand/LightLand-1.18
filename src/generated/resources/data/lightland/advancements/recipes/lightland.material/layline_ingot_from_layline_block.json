@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layline_ingot_from_layline_block"
+    ]
+  },
+  "criteria": {
+    "has_layline_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layline_block"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layline_ingot_from_layline_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layline_block",
+      "has_the_recipe"
+    ]
+  ]
+}

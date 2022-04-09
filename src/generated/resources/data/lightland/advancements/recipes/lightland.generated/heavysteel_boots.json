@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_boots"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_boots": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_boots"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_boots"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_boots",
+      "has_the_recipe"
+    ]
+  ]
+}

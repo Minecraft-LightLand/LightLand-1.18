@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:ethernium_sword"
+    ]
+  },
+  "criteria": {
+    "has_ethernium_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:ethernium_sword"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:ethernium_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ethernium_sword",
+      "has_the_recipe"
+    ]
+  ]
+}

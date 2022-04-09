@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layline_ingot"
+    ]
+  },
+  "criteria": {
+    "has_layline_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layline_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layline_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layline_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:oldroot_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_oldroot_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:oldroot_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:oldroot_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_oldroot_pickaxe",
+      "has_the_recipe"
+    ]
+  ]
+}

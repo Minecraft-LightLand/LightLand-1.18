@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:oldroot_ingot"
+    ]
+  },
+  "criteria": {
+    "has_oldroot_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:oldroot_nugget"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:oldroot_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_oldroot_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

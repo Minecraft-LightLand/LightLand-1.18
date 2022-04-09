@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layline_leggings"
+    ]
+  },
+  "criteria": {
+    "has_layline_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layline_leggings"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layline_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layline_leggings",
+      "has_the_recipe"
+    ]
+  ]
+}

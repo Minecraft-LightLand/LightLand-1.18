@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layroot_sword"
+    ]
+  },
+  "criteria": {
+    "has_layroot_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layroot_sword"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layroot_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layroot_sword",
+      "has_the_recipe"
+    ]
+  ]
+}

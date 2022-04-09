@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AA",
+    "AB",
+    " B"
+  ],
+  "key": {
+    "A": {
+      "item": "lightland:oldroot_ingot"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "lightland:oldroot_axe"
+  }
+}

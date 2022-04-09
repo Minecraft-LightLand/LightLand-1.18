@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_pickaxe",
+      "has_the_recipe"
+    ]
+  ]
+}

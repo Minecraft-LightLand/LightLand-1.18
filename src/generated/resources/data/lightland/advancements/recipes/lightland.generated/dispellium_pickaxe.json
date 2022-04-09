@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:dispellium_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_dispellium_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:dispellium_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:dispellium_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dispellium_pickaxe",
+      "has_the_recipe"
+    ]
+  ]
+}

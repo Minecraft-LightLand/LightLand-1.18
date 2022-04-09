@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layroot_leggings"
+    ]
+  },
+  "criteria": {
+    "has_layroot_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layroot_leggings"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layroot_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layroot_leggings",
+      "has_the_recipe"
+    ]
+  ]
+}

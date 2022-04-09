@@ -27,15 +27,15 @@ public class RitualRenderer implements BlockEntityRenderer<RitualTE> {
 
 	@Override
 	public void render(RitualTE te, float partial, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
-		renderItemAbove(te.getItem(0), te.getLevel(), partial, matrix, buffer, light, overlay);
+		renderItemAbove(te.getItem(0),1.5, te.getLevel(), partial, matrix, buffer, light, overlay);
 	}
 
-	public static void renderItemAbove(ItemStack stack, Level level, float partial, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
+	public static void renderItemAbove(ItemStack stack, double height, Level level, float partial, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
 		float time = Math.floorMod(level.getGameTime(), 80L) + partial;
 		if (!stack.isEmpty()) {
 			matrix.pushPose();
 			double offset = (Math.sin(time * 2 * Math.PI / 40.0) - 3) / 16;
-			matrix.translate(0.5, 1.5 + offset, 0.5);
+			matrix.translate(0.5, height + offset, 0.5);
 			matrix.mulPose(Vector3f.YP.rotationDegrees(time * 4.5f));
 			Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemTransforms.TransformType.GROUND, light,
 					overlay, matrix, buffer, 0);

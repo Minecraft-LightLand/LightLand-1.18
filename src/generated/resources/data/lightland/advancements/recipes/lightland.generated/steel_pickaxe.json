@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:steel_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_steel_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:steel_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:steel_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_steel_pickaxe",
+      "has_the_recipe"
+    ]
+  ]
+}

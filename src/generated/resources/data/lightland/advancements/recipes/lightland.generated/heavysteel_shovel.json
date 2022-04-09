@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_shovel"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_shovel",
+      "has_the_recipe"
+    ]
+  ]
+}

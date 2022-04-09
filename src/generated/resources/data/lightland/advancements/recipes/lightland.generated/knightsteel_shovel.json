@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:knightsteel_shovel"
+    ]
+  },
+  "criteria": {
+    "has_knightsteel_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:knightsteel_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:knightsteel_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_knightsteel_shovel",
+      "has_the_recipe"
+    ]
+  ]
+}

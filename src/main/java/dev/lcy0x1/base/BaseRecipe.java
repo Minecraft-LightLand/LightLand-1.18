@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public abstract class BaseRecipe<
 		Rec extends SRec,
 		SRec extends BaseRecipe<?, SRec, Inv>,
-		Inv extends BaseRecipe.RecInv<SRec>>
+		Inv extends Container>
 		implements Recipe<Inv> {
 
 	private final RecType<Rec, SRec, Inv> factory;
@@ -59,7 +59,7 @@ public abstract class BaseRecipe<
 
 	}
 
-	public static class RecType<Rec extends SRec, SRec extends BaseRecipe<?, SRec, Inv>, Inv extends RecInv<SRec>>
+	public static class RecType<Rec extends SRec, SRec extends BaseRecipe<?, SRec, Inv>, Inv extends Container>
 			extends RecSerializer<Rec, Inv> {
 
 		public final RecipeType<SRec> type;

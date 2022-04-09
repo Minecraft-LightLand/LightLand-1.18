@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lightland:layroot_ingot"
+    }
+  },
+  "result": {
+    "item": "lightland:layroot_block"
+  }
+}

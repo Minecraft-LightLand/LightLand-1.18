@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:knightsteel_pickaxe"
+    ]
+  },
+  "criteria": {
+    "has_knightsteel_pickaxe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:knightsteel_pickaxe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:knightsteel_pickaxe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_knightsteel_pickaxe",
+      "has_the_recipe"
+    ]
+  ]
+}

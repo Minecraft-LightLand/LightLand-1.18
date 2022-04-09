@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XXX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lightland:magicium_nugget"
+    }
+  },
+  "result": {
+    "item": "lightland:magicium_ingot"
+  }
+}

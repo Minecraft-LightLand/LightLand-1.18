@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:layroot_shovel"
+    ]
+  },
+  "criteria": {
+    "has_layroot_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:layroot_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:layroot_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_layroot_shovel",
+      "has_the_recipe"
+    ]
+  ]
+}

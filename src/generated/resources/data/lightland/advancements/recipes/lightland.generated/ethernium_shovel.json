@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:ethernium_shovel"
+    ]
+  },
+  "criteria": {
+    "has_ethernium_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:ethernium_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:ethernium_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ethernium_shovel",
+      "has_the_recipe"
+    ]
+  ]
+}

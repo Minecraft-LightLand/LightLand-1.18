@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:magicium_block"
+    }
+  ],
+  "result": {
+    "item": "lightland:magicium_ingot",
+    "count": 9
+  }
+}

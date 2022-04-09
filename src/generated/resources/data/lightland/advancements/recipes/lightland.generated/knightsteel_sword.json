@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:knightsteel_sword"
+    ]
+  },
+  "criteria": {
+    "has_knightsteel_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:knightsteel_sword"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:knightsteel_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_knightsteel_sword",
+      "has_the_recipe"
+    ]
+  ]
+}

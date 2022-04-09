@@ -1,0 +1,15 @@
+{
+  "type": "lightland:backpack_dye",
+  "group": "backpack_dye",
+  "ingredients": [
+    {
+      "tag": "lightland:backpacks"
+    },
+    {
+      "item": "minecraft:yellow_dye"
+    }
+  ],
+  "result": {
+    "item": "lightland:backpack_yellow"
+  }
+}

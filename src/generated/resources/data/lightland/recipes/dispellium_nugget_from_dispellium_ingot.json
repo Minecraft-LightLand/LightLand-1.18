@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:dispellium_ingot"
+    }
+  ],
+  "result": {
+    "item": "lightland:dispellium_nugget",
+    "count": 9
+  }
+}

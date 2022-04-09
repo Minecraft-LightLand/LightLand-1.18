@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:oldroot_block"
+    }
+  ],
+  "result": {
+    "item": "lightland:oldroot_ingot",
+    "count": 9
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:knightsteel_leggings"
+    ]
+  },
+  "criteria": {
+    "has_knightsteel_leggings": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:knightsteel_leggings"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:knightsteel_leggings"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_knightsteel_leggings",
+      "has_the_recipe"
+    ]
+  ]
+}

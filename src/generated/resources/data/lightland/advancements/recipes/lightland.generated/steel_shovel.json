@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:steel_shovel"
+    ]
+  },
+  "criteria": {
+    "has_steel_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:steel_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:steel_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_steel_shovel",
+      "has_the_recipe"
+    ]
+  ]
+}

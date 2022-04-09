@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:oldroot_sword"
+    ]
+  },
+  "criteria": {
+    "has_oldroot_sword": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:oldroot_sword"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:oldroot_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_oldroot_sword",
+      "has_the_recipe"
+    ]
+  ]
+}

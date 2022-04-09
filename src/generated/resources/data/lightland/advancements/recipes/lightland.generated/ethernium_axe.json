@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:ethernium_axe"
+    ]
+  },
+  "criteria": {
+    "has_ethernium_axe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:ethernium_axe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:ethernium_axe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ethernium_axe",
+      "has_the_recipe"
+    ]
+  ]
+}

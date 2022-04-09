@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:dispellium_block"
+    ]
+  },
+  "criteria": {
+    "has_dispellium_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:dispellium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:dispellium_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dispellium_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

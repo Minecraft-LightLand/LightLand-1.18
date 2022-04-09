@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:oldroot_shovel"
+    ]
+  },
+  "criteria": {
+    "has_oldroot_shovel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:oldroot_shovel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:oldroot_shovel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_oldroot_shovel",
+      "has_the_recipe"
+    ]
+  ]
+}

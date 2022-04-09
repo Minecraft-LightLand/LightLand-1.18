@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:dispellium_hoe"
+    ]
+  },
+  "criteria": {
+    "has_dispellium_hoe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:dispellium_hoe"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:dispellium_hoe"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dispellium_hoe",
+      "has_the_recipe"
+    ]
+  ]
+}

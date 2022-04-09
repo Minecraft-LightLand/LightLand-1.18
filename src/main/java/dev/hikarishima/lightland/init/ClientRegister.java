@@ -47,9 +47,10 @@ public class ClientRegister {
 		OverlayRegistry.enableOverlay(ForgeIngameGui.AIR_LEVEL_ELEMENT, false);
 		OverlayRegistry.enableOverlay(ForgeIngameGui.FOOD_LEVEL_ELEMENT, false);
 		OverlayRegistry.enableOverlay(ForgeIngameGui.MOUNT_HEALTH_ELEMENT, false);
-		OverlayRegistry.registerOverlayTop("MagicWand", MagicWandOverlay.INSTANCE);
-		OverlayRegistry.registerOverlayTop("lightland main", new LLOverlay());
-		OverlayRegistry.registerOverlayTop("ItemShifted", new ItemNameOverlay());
+		OverlayRegistry.registerOverlayAbove(ForgeIngameGui.CROSSHAIR_ELEMENT, "MagicWand", MagicWandOverlay.INSTANCE);
+		OverlayRegistry.registerOverlayAbove(ForgeIngameGui.HOTBAR_ELEMENT, "lightland main", new LLOverlay());
+		OverlayRegistry.registerOverlayAbove(ForgeIngameGui.ITEM_NAME_ELEMENT, "ItemShifted", new ItemNameOverlay());
+		OverlayRegistry.registerOverlayAbove(ForgeIngameGui.CROSSHAIR_ELEMENT, "Block Info", new TileInfoOverlay());
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.OVERLAY);
 	}
 

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:dispellium_helmet"
+    ]
+  },
+  "criteria": {
+    "has_dispellium_helmet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:dispellium_helmet"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:dispellium_helmet"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dispellium_helmet",
+      "has_the_recipe"
+    ]
+  ]
+}

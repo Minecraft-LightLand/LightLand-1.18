@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "A A",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "lightland:dispellium_ingot"
+    }
+  },
+  "result": {
+    "item": "lightland:dispellium_leggings"
+  }
+}

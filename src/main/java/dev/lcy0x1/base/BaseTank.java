@@ -7,12 +7,19 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
+import java.util.function.Predicate;
 
 @SerialClass
 public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 
 	private final int size, capacity;
+	private final List<BaseContainerListener<BaseContainer>> listeners = new ArrayList<>();
+
+	private Predicate<FluidStack> predicate = e -> true;
+	private BooleanSupplier allowExtract = () -> true;
 
 	@SerialClass.SerialField
 	public NonNullList<FluidStack> list;
@@ -21,6 +28,21 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 		this.size = size;
 		this.capacity = capacity;
 		list = NonNullList.withSize(size, FluidStack.EMPTY);
+	}
+
+	public BaseTank add(BaseContainerListener<BaseContainer> listener) {
+		listeners.add(listener);
+		return this;
+	}
+
+	public BaseTank setPredicate(Predicate<FluidStack> predicate) {
+		this.predicate = predicate;
+		return this;
+	}
+
+	public BaseTank setExtract(BooleanSupplier allowExtract) {
+		this.allowExtract = allowExtract;
+		return this;
 	}
 
 	@Override
@@ -46,6 +68,8 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 
 	@Override
 	public int fill(FluidStack resource, FluidAction action) {
+		if (resource.isEmpty()) return 0;
+		if (!predicate.test(resource)) return 0;
 		int to_fill = resource.getAmount();
 		int filled = 0;
 		for (int i = 0; i < size; i++) {
@@ -64,13 +88,13 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 				filled += fill;
 				to_fill -= fill;
 				if (action == FluidAction.EXECUTE) {
-					resource.shrink(fill);
 					FluidStack rep = resource.copy();
 					rep.setAmount(fill);
 					list.set(i, rep);
+					resource.shrink(fill);
 				}
 			}
-			if (to_fill == 0) break;
+			if (resource.isEmpty() || to_fill == 0) break;
 		}
 		if (action == FluidAction.EXECUTE && filled > 0) {
 			setChanged();
@@ -81,6 +105,8 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 	@NotNull
 	@Override
 	public FluidStack drain(FluidStack resource, FluidAction action) {
+		if (resource.isEmpty()) return resource;
+		if (!allowExtract.getAsBoolean()) return FluidStack.EMPTY;
 		int to_drain = resource.getAmount();
 		int drained = 0;
 		for (int i = 0; i < size; i++) {
@@ -107,6 +133,7 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 	@NotNull
 	@Override
 	public FluidStack drain(int maxDrain, FluidAction action) {
+		if (!allowExtract.getAsBoolean()) return FluidStack.EMPTY;
 		FluidStack ans = null;
 		int to_drain = maxDrain;
 		int drained = 0;
@@ -137,7 +164,7 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 	}
 
 	public void setChanged() {
-
+		listeners.forEach(e -> e.notifyTile(null));
 	}
 
 	@Override
@@ -147,7 +174,7 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 
 	@Override
 	public void clear() {
-
+		list.clear();
 	}
 
 	@Override
@@ -158,5 +185,13 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 	@Override
 	public Class<FluidStack> getElemClass() {
 		return FluidStack.class;
+	}
+
+	public boolean isEmpty() {
+		for (FluidStack stack : list) {
+			if (!stack.isEmpty())
+				return false;
+		}
+		return true;
 	}
 }

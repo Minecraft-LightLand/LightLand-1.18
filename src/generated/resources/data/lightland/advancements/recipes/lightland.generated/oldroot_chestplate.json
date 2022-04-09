@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:oldroot_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_oldroot_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:oldroot_chestplate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:oldroot_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_oldroot_chestplate",
+      "has_the_recipe"
+    ]
+  ]
+}

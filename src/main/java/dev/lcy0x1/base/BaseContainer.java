@@ -49,7 +49,7 @@ public class BaseContainer extends SimpleContainer implements AliasCollection<It
 
 	@Override
 	public void clear() {
-
+		super.clearContent();
 	}
 
 	@Override

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:heavysteel_chestplate"
+    ]
+  },
+  "criteria": {
+    "has_heavysteel_chestplate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:heavysteel_chestplate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:heavysteel_chestplate"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_heavysteel_chestplate",
+      "has_the_recipe"
+    ]
+  ]
+}

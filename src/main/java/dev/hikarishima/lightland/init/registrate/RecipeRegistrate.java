@@ -4,14 +4,16 @@ import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.berserker.recipe.MedArmorRecipe;
 import dev.hikarishima.lightland.content.common.recipe.BackpackDyeRecipe;
 import dev.hikarishima.lightland.content.common.recipe.BackpackUpgradeRecipe;
+import dev.hikarishima.lightland.content.common.test.PanBlockEntity;
+import dev.hikarishima.lightland.content.common.test.SaucePanRecipe;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.products.recipe.DefMagicRecipe;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.*;
+import dev.lcy0x1.base.BaseRecipe;
 import dev.lcy0x1.recipe.AbstractShapedRecipe;
 import dev.lcy0x1.recipe.AbstractShapelessRecipe;
 import dev.lcy0x1.recipe.AbstractSmithingRecipe;
-import dev.lcy0x1.base.BaseRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -21,6 +23,7 @@ public class RecipeRegistrate {
 
 	public static RecipeType<AbstractRitualRecipe<?>> RT_RITUAL;
 	public static RecipeType<IMagicRecipe<?>> RT_MAGIC;
+	public static RecipeType<SaucePanRecipe> RT_PAN;
 
 	public static final RegistryEntry<BaseRecipe.RecType<BasicRitualRecipe, AbstractRitualRecipe<?>, RitualCore.Inv>> RS_DEF =
 			REGISTRATE.simple("ritual_default", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(BasicRitualRecipe.class, RT_RITUAL));
@@ -47,9 +50,13 @@ public class RecipeRegistrate {
 	public static final RegistryEntry<BaseRecipe.RecType<DefMagicRecipe, IMagicRecipe<?>, IMagicRecipe.Inv>> RSM_DEF =
 			REGISTRATE.simple("magic_default", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(DefMagicRecipe.class, RT_MAGIC));
 
+	public static final RegistryEntry<BaseRecipe.RecType<SaucePanRecipe, SaucePanRecipe, PanBlockEntity.RecipeContainer>> RS_PAN =
+			REGISTRATE.simple("sauce_pan", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(SaucePanRecipe.class, RT_PAN));
+
 	public static void registerRecipeType() {
 		RT_RITUAL = RecipeType.register("lightland:ritual");
 		RT_MAGIC = RecipeType.register("lightland:magic");
+		RT_PAN = RecipeType.register("lightland:sauce_pan");
 	}
 
 	public static void register() {

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:steel_block"
+    }
+  ],
+  "result": {
+    "item": "lightland:steel_ingot",
+    "count": 9
+  }
+}
