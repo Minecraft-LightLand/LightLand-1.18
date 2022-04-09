@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lightland:ender_pocket"
+      "minecraft:saucepan/rabbit_stew"
     ]
   },
   "criteria": {
-    "has_ender_pocket": {
+    "has_rabbit_stew": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "lightland:ender_pocket"
+              "minecraft:rabbit_stew"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lightland:ender_pocket"
+        "recipe": "minecraft:saucepan/rabbit_stew"
       }
     }
   },
   "requirements": [
     [
-      "has_ender_pocket",
+      "has_rabbit_stew",
       "has_the_recipe"
     ]
   ]

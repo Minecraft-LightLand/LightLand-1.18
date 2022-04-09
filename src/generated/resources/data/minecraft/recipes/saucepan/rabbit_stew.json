@@ -1,0 +1,20 @@
+{
+  "type": "lightland:sauce_pan",
+  "item_ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:rabbit"
+    }
+  ],
+  "fluid_ingredients": [
+    {
+      "fluid": "minecraft:water",
+      "amount": 5
+    }
+  ],
+  "result": {
+    "item": "minecraft:rabbit_stew"
+  }
+}

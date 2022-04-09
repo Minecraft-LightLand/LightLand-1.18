@@ -49,17 +49,17 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	}
 
-	public static final int MAX_FLUID = 10;
+	public static final int MAX_FLUID = 8;
 
 	private final AnimationFactory manager = new AnimationFactory(this);
 
 	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inputInventory = (RecipeContainer) new RecipeContainer(6).setMax(1).setPredicate(e -> canAccess()).add(this);
+	protected final RecipeContainer inputInventory = (RecipeContainer) new RecipeContainer(8).setMax(1).setPredicate(e -> canAccess()).add(this);
 
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseContainer outputInventory = new BaseContainer(1).setPredicate(e -> false).add(this);
 	@SerialClass.SerialField(toClient = true)
-	protected final BaseTank fluids = new BaseTank(6, MAX_FLUID).setPredicate(e -> canAccess()).setExtract(this::canAccess).add(this);
+	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID).setPredicate(e -> canAccess()).setExtract(this::canAccess).add(this);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;

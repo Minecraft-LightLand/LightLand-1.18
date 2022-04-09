@@ -1,5 +1,6 @@
 package dev.hikarishima.lightland.content.common.test;
 
+import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.lcy0x1.base.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
@@ -22,8 +23,8 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 	@SerialClass.SerialField
 	public ItemStack result;
 
-	public SaucePanRecipe(ResourceLocation id, RecType<SaucePanRecipe, SaucePanRecipe, PanBlockEntity.RecipeContainer> fac) {
-		super(id, fac);
+	public SaucePanRecipe(ResourceLocation id) {
+		super(id, RecipeRegistrate.RS_PAN.get());
 	}
 
 	@Override
@@ -46,6 +47,7 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 			if (!match)
 				return false;
 		}
+		if (items.size() > 0) return false;
 		List<FluidStack> fluids = new ArrayList<>(fluid_ingredients);
 		for (FluidStack stack : inv.getTile().fluids.getAsList()) {
 			if (stack.isEmpty())
@@ -64,6 +66,7 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 			if (!match)
 				return false;
 		}
+		if (fluids.size() > 0) return false;
 		return true;
 	}
 

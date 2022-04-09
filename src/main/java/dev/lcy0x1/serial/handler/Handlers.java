@@ -62,7 +62,7 @@ public class Handlers {
 
 		// minecraft
 		new ClassHandler<>(ItemStack.class, (e) -> ShapedRecipe.itemStackFromJson(e.getAsJsonObject()), FriendlyByteBuf::readItem, (p, is) -> p.writeItemStack(is, false), ItemStack::of, is -> is.save(new CompoundTag()));
-		new ClassHandler<>(FluidStack.class, null, FluidStack::readFromPacket, (p, f) -> f.writeToPacket(p), FluidStack::loadFluidStackFromNBT, f -> f.writeToNBT(new CompoundTag()));
+		new ClassHandler<>(FluidStack.class, Helper::deserializeFluidStack, FluidStack::readFromPacket, (p, f) -> f.writeToPacket(p), FluidStack::loadFluidStackFromNBT, f -> f.writeToNBT(new CompoundTag()));
 
 		new StringClassHandler<>(ResourceLocation.class, ResourceLocation::new, ResourceLocation::toString);
 		new StringClassHandler<>(UUID.class, UUID::fromString, UUID::toString);
@@ -110,8 +110,8 @@ public class Handlers {
 				});
 	}
 
-	public static void register(){
-		
+	public static void register() {
+
 	}
 
 }

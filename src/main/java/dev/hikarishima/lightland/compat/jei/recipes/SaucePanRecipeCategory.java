@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.compat.jei.recipes;
 
+import dev.hikarishima.lightland.content.common.test.PanBlockEntity;
 import dev.hikarishima.lightland.content.common.test.SaucePanRecipe;
-import dev.hikarishima.lightland.content.magic.ritual.AbstractRitualRecipe;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import mezz.jei.api.constants.VanillaTypes;
@@ -28,7 +28,8 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 
 	private static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
 
-	private static final FluidStackRenderer RENDERER = new FluidStackRenderer(10, true, 16, 16, null);
+	private static final FluidStackRenderer RENDERER = new FluidStackRenderer(PanBlockEntity.MAX_FLUID,
+			true, 16, 16, null);
 
 	private final ResourceLocation id;
 	private IDrawable background, icon;
@@ -51,7 +52,7 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public Class getRecipeClass() {
-		return AbstractRitualRecipe.class;
+		return SaucePanRecipe.class;
 	}
 
 	@Override
@@ -79,12 +80,17 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 	@Override
 	public void setRecipe(IRecipeLayout layout, SaucePanRecipe sl, IIngredients list) {
 		setItem(layout.getItemStacks(), list.getOutputs(VanillaTypes.ITEM).get(0), 0, false, 144, 9);
+		int index = 0;
 		List<List<ItemStack>> items = list.getInputs(VanillaTypes.ITEM);
-		for (int i = 0; i < items.size(); i++)
-			setItem(layout.getItemStacks(), items.get(i), i + 1, true, i * 18, 0);
+		for (int i = 0; i < items.size(); i++) {
+			setItem(layout.getItemStacks(), items.get(i), i + 1, true, index % 6 * 18, index / 6 * 18);
+			index++;
+		}
 		List<List<FluidStack>> fluids = list.getInputs(VanillaTypes.FLUID);
-		for (int i = 0; i < fluids.size(); i++)
-			setFluid(layout.getFluidStacks(), fluids.get(i), i + 1, true, i * 18, 18);
+		for (int i = 0; i < fluids.size(); i++) {
+			setFluid(layout.getFluidStacks(), fluids.get(i), i + 1, true, index % 6 * 18, index / 6 * 18);
+			index++;
+		}
 	}
 
 	private static void setItem(IGuiIngredientGroup<ItemStack> group, List<ItemStack> t, int ind, boolean bool, int x, int y) {
@@ -93,7 +99,7 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 	}
 
 	private static void setFluid(IGuiIngredientGroup<FluidStack> group, List<FluidStack> t, int ind, boolean bool, int x, int y) {
-		group.init(ind, bool, RENDERER, x, y, 16, 16, 0, 0);
+		group.init(ind, bool, RENDERER, x, y, 16, 16, 1, 1);
 		group.set(ind, t);
 	}
 

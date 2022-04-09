@@ -20,7 +20,7 @@ public class StringClassHandler<T> extends ClassHandler<StringTag, T> {
 						return null;
 					return fj.apply(str);
 				}, (p, t) -> p.writeUtf(t == null ? "" : tp.apply(t)),
-				t -> fj.apply(t.toString()),
+				t -> fj.apply(t.getAsString()),
 				e -> StringTag.valueOf(tp.apply(e)));
 	}
 
