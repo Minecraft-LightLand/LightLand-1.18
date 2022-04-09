@@ -1,5 +1,7 @@
 package dev.lcy0x1.serial.handler;
 
+import com.google.gson.JsonNull;
+import com.google.gson.JsonPrimitive;
 import net.minecraft.nbt.StringTag;
 
 import java.util.function.Function;
@@ -7,7 +9,7 @@ import java.util.function.Function;
 public class StringClassHandler<T> extends ClassHandler<StringTag, T> {
 
 	public StringClassHandler(Class<T> cls, Function<String, T> fj, Function<T, String> tp) {
-		super(cls, e -> {
+		super(cls, e -> tp == null ? JsonNull.INSTANCE : new JsonPrimitive(tp.apply(e)), e -> {
 					if (e.isJsonNull())
 						return null;
 					String str = e.getAsString();

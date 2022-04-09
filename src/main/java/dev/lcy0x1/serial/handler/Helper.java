@@ -8,6 +8,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -15,6 +16,16 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class Helper {
 
 	private static final Gson GSON = new Gson();
+
+	public static JsonElement serializeItemStack(ItemStack stack) {
+		JsonObject ans = new JsonObject();
+		ans.addProperty("item", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
+		if (stack.getCount() > 1) {
+			ans.addProperty("count", stack.getCount());
+		}
+
+		return ans;
+	}
 
 	public static FluidStack deserializeFluidStack(JsonElement e) {
 		JsonObject json = e.getAsJsonObject();

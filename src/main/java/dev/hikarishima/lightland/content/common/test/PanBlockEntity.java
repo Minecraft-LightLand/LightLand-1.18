@@ -1,6 +1,7 @@
 package dev.hikarishima.lightland.content.common.test;
 
 import dev.hikarishima.lightland.content.common.render.TileInfoOverlay;
+import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
@@ -32,6 +33,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SerialClass
 public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEntity, IAnimatable, BlockContainer,
@@ -43,7 +45,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			super(size);
 		}
 
-		public PanBlockEntity getTile(){
+		public PanBlockEntity getTile() {
 			return PanBlockEntity.this;
 		}
 
@@ -64,6 +66,8 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
 
+	private BlockState prevState = null;
+
 	@SerialClass.SerialField(toClient = true)
 	public int cooking_max = 0, cooking = 0;
 	@SerialClass.SerialField(toClient = true)
@@ -79,16 +83,33 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	public void registerControllers(AnimationData data) {
 		data.addAnimationController(new AnimationController<>(this, "main", 0, e -> {
 			BlockState state = e.getAnimatable().getBlockState();
+			boolean shouldUpdate = prevState != state;
+			if (prevState == null) prevState = state;
 			boolean lit = state.getValue(BlockStateProperties.LIT);
 			boolean open = state.getValue(BlockStateProperties.OPEN);
 			boolean cooking = state.getValue(BlockStateProperties.SIGNAL_FIRE);
-			if (cooking) {
-				e.getController().setAnimation(new AnimationBuilder().addAnimation("ing", true));
-			} else if (open) {
-				e.getController().setAnimation(new AnimationBuilder().addAnimation("open_normal", true));
-			} else {
-				e.getController().setAnimation(new AnimationBuilder().addAnimation("close_normal", true));
+			boolean prev_open = prevState.getValue(BlockStateProperties.OPEN);
+			if (shouldUpdate) {
+				if (cooking) {
+					e.getController().setAnimation(new AnimationBuilder().addAnimation("ing", true));
+				} else if (open) {
+					if (!prev_open) {
+						e.getController().setAnimation(new AnimationBuilder().addAnimation("open_ing", false)
+								.addAnimation("open_normal", true));
+					} else {
+						e.getController().setAnimation(new AnimationBuilder().addAnimation("open_normal", true));
+					}
+				} else {
+					if (prev_open) {
+						e.getController().setAnimation(new AnimationBuilder().addAnimation("close_ing", false)
+								.addAnimation("close_normal", true));
+					} else {
+
+						e.getController().setAnimation(new AnimationBuilder().addAnimation("close_normal", true));
+					}
+				}
 			}
+			prevState = state;
 			return PlayState.CONTINUE;
 		}));
 	}
@@ -149,15 +170,18 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	public boolean startCooking() {
 		inputInventory.clear();
 		fluids.clear();
+		if (level == null) return false;
 		boolean ans = outputInventory.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
-		if (ans) {
-			cooking_max = 100;
-			cooking = cooking_max;
-			result = Items.COOKED_BEEF.getDefaultInstance();
-			interrupt = Items.POISONOUS_POTATO.getDefaultInstance();
-			notifyTile(null);
-		}
-		return ans;
+		if (!ans) return false;
+		Optional<SaucePanRecipe> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_PAN, inputInventory, level);
+		if (r.isEmpty()) return false;
+		SaucePanRecipe recipe = r.get();
+		cooking_max = recipe.time;
+		cooking = cooking_max;
+		result = recipe.result.copy();
+		interrupt = recipe.interrupt.copy();
+		notifyTile(null);
+		return true;
 	}
 
 	@Override

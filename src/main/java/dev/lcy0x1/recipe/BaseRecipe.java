@@ -1,6 +1,5 @@
-package dev.lcy0x1.base;
+package dev.lcy0x1.recipe;
 
-import dev.lcy0x1.serial.RecSerializer;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;

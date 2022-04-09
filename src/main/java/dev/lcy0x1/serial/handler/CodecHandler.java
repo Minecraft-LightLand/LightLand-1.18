@@ -12,7 +12,8 @@ import java.util.function.Function;
 public class CodecHandler<T> extends ClassHandler<Tag, T> {
 
 	public CodecHandler(Class<T> cls, Codec<T> codec, Function<FriendlyByteBuf, T> fp, BiConsumer<FriendlyByteBuf, T> tp) {
-		super(cls, e -> codec.decode(JsonOps.INSTANCE, e).result().get().getFirst(), fp, tp,
+		super(cls, e -> codec.encodeStart(JsonOps.INSTANCE, e).result().get(),
+				e -> codec.decode(JsonOps.INSTANCE, e).result().get().getFirst(), fp, tp,
 				e -> codec.decode(NbtOps.INSTANCE, e).result().get().getFirst(),
 				e -> codec.encodeStart(NbtOps.INSTANCE, e).result().get());
 	}

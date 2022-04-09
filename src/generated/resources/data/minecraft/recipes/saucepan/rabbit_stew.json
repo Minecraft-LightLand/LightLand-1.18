@@ -1,5 +1,13 @@
 {
-  "type": "lightland:sauce_pan",
+  "fluid_ingredients": [
+    {
+      "fluid": "minecraft:water",
+      "amount": 5
+    }
+  ],
+  "interrupt": {
+    "item": "minecraft:bowl"
+  },
   "item_ingredients": [
     {
       "item": "minecraft:bowl"
@@ -8,13 +16,9 @@
       "item": "minecraft:rabbit"
     }
   ],
-  "fluid_ingredients": [
-    {
-      "fluid": "minecraft:water",
-      "amount": 5
-    }
-  ],
   "result": {
     "item": "minecraft:rabbit_stew"
-  }
+  },
+  "time": 100,
+  "type": "lightland:sauce_pan"
 }

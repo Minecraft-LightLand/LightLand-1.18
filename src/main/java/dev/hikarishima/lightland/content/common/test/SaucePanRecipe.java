@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.test;
 
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
-import dev.lcy0x1.base.BaseRecipe;
+import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +22,10 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 	public ArrayList<FluidStack> fluid_ingredients;
 	@SerialClass.SerialField
 	public ItemStack result;
+	@SerialClass.SerialField
+	public ItemStack interrupt;
+	@SerialClass.SerialField
+	public int time;
 
 	public SaucePanRecipe(ResourceLocation id) {
 		super(id, RecipeRegistrate.RS_PAN.get());

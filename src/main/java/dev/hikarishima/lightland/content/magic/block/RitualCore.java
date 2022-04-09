@@ -11,7 +11,7 @@ import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.hikarishima.lightland.network.packets.CapToClient;
-import dev.lcy0x1.base.BaseRecipe;
+import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.AnimateTickBlockMethod;

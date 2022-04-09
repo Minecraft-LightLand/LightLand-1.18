@@ -10,7 +10,7 @@ import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.products.recipe.DefMagicRecipe;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.*;
-import dev.lcy0x1.base.BaseRecipe;
+import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.recipe.AbstractShapedRecipe;
 import dev.lcy0x1.recipe.AbstractShapelessRecipe;
 import dev.lcy0x1.recipe.AbstractSmithingRecipe;

@@ -10,6 +10,7 @@ import java.util.function.Function;
 @SuppressWarnings({"unsafe", "unchecked"})
 public class ClassHandler<R extends Tag, T> implements Handlers.JsonClassHandler<T>, Handlers.NBTClassHandler<R, T>, Handlers.PacketClassHandler<T> {
 
+	public final Function<Object, JsonElement> toJson;
 	public final Function<JsonElement, ?> fromJson;
 	public final Function<FriendlyByteBuf, ?> fromPacket;
 	public final BiConsumer<FriendlyByteBuf, Object> toPacket;
@@ -17,8 +18,9 @@ public class ClassHandler<R extends Tag, T> implements Handlers.JsonClassHandler
 	public final Function<Object, Tag> toTag;
 
 	@SuppressWarnings("unchecked")
-	public ClassHandler(Class<T> cls, Function<JsonElement, T> fj, Function<FriendlyByteBuf, T> fp,
+	public ClassHandler(Class<T> cls, Function<T, JsonElement> tj, Function<JsonElement, T> fj, Function<FriendlyByteBuf, T> fp,
 						BiConsumer<FriendlyByteBuf, T> tp, Function<R, T> ft, Function<T, Tag> tt, Class<?>... others) {
+		this.toJson = (Function<Object, JsonElement>) tj;
 		this.fromJson = fj;
 		this.fromPacket = fp;
 		this.toPacket = (BiConsumer<FriendlyByteBuf, Object>) tp;
@@ -30,7 +32,7 @@ public class ClassHandler<R extends Tag, T> implements Handlers.JsonClassHandler
 	}
 
 	private void put(Class<?> cls) {
-		if (fromJson != null) Handlers.JSON_MAP.put(cls, this);
+		if (toJson != null && fromJson != null) Handlers.JSON_MAP.put(cls, this);
 		if (fromTag != null && toTag != null) Handlers.NBT_MAP.put(cls, this);
 		if (fromPacket != null && toPacket != null) Handlers.PACKET_MAP.put(cls, this);
 	}
@@ -43,6 +45,11 @@ public class ClassHandler<R extends Tag, T> implements Handlers.JsonClassHandler
 	@Override
 	public R toTag(Object obj) {
 		return (R) toTag.apply(obj);
+	}
+
+	@Override
+	public JsonElement toJson(Object obj) {
+		return toJson.apply(obj);
 	}
 
 	@Override

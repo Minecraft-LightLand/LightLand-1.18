@@ -1,6 +1,7 @@
 package dev.lcy0x1.serial.handler;
 
 import com.google.gson.JsonElement;
+import com.google.gson.JsonPrimitive;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.*;
 import net.minecraft.network.FriendlyByteBuf;
@@ -36,6 +37,8 @@ public class Handlers {
 
 	public interface JsonClassHandler<T> {
 
+		JsonElement toJson(Object obj);
+
 		T fromJson(JsonElement e);
 	}
 
@@ -49,20 +52,20 @@ public class Handlers {
 	static {
 		// primitives
 
-		new ClassHandler<>(long.class, JsonElement::getAsLong, FriendlyByteBuf::readLong, FriendlyByteBuf::writeLong, LongTag::getAsLong, LongTag::valueOf, Long.class);
-		new ClassHandler<>(int.class, JsonElement::getAsInt, FriendlyByteBuf::readInt, FriendlyByteBuf::writeInt, IntTag::getAsInt, IntTag::valueOf, Integer.class);
-		new ClassHandler<ShortTag, Short>(short.class, JsonElement::getAsShort, FriendlyByteBuf::readShort, FriendlyByteBuf::writeShort, ShortTag::getAsShort, ShortTag::valueOf, Short.class);
-		new ClassHandler<ByteTag, Byte>(byte.class, JsonElement::getAsByte, FriendlyByteBuf::readByte, FriendlyByteBuf::writeByte, ByteTag::getAsByte, ByteTag::valueOf, Byte.class);
-		new ClassHandler<ByteTag, Boolean>(boolean.class, JsonElement::getAsBoolean, FriendlyByteBuf::readBoolean, FriendlyByteBuf::writeBoolean, tag -> tag.getAsByte() != 0, ByteTag::valueOf, Boolean.class);
-		new ClassHandler<ByteTag, Character>(char.class, JsonElement::getAsCharacter, FriendlyByteBuf::readChar, FriendlyByteBuf::writeChar, t -> (char) t.getAsByte(), c -> ByteTag.valueOf((byte) (char) c), Character.class);
-		new ClassHandler<>(double.class, JsonElement::getAsDouble, FriendlyByteBuf::readDouble, FriendlyByteBuf::writeDouble, DoubleTag::getAsDouble, DoubleTag::valueOf, Double.class);
-		new ClassHandler<>(float.class, JsonElement::getAsFloat, FriendlyByteBuf::readFloat, FriendlyByteBuf::writeFloat, FloatTag::getAsFloat, FloatTag::valueOf, Float.class);
+		new ClassHandler<>(long.class, JsonPrimitive::new, JsonElement::getAsLong, FriendlyByteBuf::readLong, FriendlyByteBuf::writeLong, LongTag::getAsLong, LongTag::valueOf, Long.class);
+		new ClassHandler<>(int.class, JsonPrimitive::new, JsonElement::getAsInt, FriendlyByteBuf::readInt, FriendlyByteBuf::writeInt, IntTag::getAsInt, IntTag::valueOf, Integer.class);
+		new ClassHandler<ShortTag, Short>(short.class, JsonPrimitive::new, JsonElement::getAsShort, FriendlyByteBuf::readShort, FriendlyByteBuf::writeShort, ShortTag::getAsShort, ShortTag::valueOf, Short.class);
+		new ClassHandler<ByteTag, Byte>(byte.class, JsonPrimitive::new, JsonElement::getAsByte, FriendlyByteBuf::readByte, FriendlyByteBuf::writeByte, ByteTag::getAsByte, ByteTag::valueOf, Byte.class);
+		new ClassHandler<ByteTag, Boolean>(boolean.class, JsonPrimitive::new, JsonElement::getAsBoolean, FriendlyByteBuf::readBoolean, FriendlyByteBuf::writeBoolean, tag -> tag.getAsByte() != 0, ByteTag::valueOf, Boolean.class);
+		new ClassHandler<ByteTag, Character>(char.class, JsonPrimitive::new, JsonElement::getAsCharacter, FriendlyByteBuf::readChar, FriendlyByteBuf::writeChar, t -> (char) t.getAsByte(), c -> ByteTag.valueOf((byte) (char) c), Character.class);
+		new ClassHandler<>(double.class, JsonPrimitive::new, JsonElement::getAsDouble, FriendlyByteBuf::readDouble, FriendlyByteBuf::writeDouble, DoubleTag::getAsDouble, DoubleTag::valueOf, Double.class);
+		new ClassHandler<>(float.class, JsonPrimitive::new, JsonElement::getAsFloat, FriendlyByteBuf::readFloat, FriendlyByteBuf::writeFloat, FloatTag::getAsFloat, FloatTag::valueOf, Float.class);
 
-		new ClassHandler<>(String.class, JsonElement::getAsString, FriendlyByteBuf::readUtf, FriendlyByteBuf::writeUtf, Tag::getAsString, StringTag::valueOf);
+		new ClassHandler<>(String.class, JsonPrimitive::new, JsonElement::getAsString, FriendlyByteBuf::readUtf, FriendlyByteBuf::writeUtf, Tag::getAsString, StringTag::valueOf);
 
 		// minecraft
-		new ClassHandler<>(ItemStack.class, (e) -> ShapedRecipe.itemStackFromJson(e.getAsJsonObject()), FriendlyByteBuf::readItem, (p, is) -> p.writeItemStack(is, false), ItemStack::of, is -> is.save(new CompoundTag()));
-		new ClassHandler<>(FluidStack.class, Helper::deserializeFluidStack, FluidStack::readFromPacket, (p, f) -> f.writeToPacket(p), FluidStack::loadFluidStackFromNBT, f -> f.writeToNBT(new CompoundTag()));
+		new ClassHandler<>(ItemStack.class, Helper::serializeItemStack, (e) -> ShapedRecipe.itemStackFromJson(e.getAsJsonObject()), FriendlyByteBuf::readItem, (p, is) -> p.writeItemStack(is, false), ItemStack::of, is -> is.save(new CompoundTag()));
+		new ClassHandler<>(FluidStack.class, Helper::serializeFluidStack, Helper::deserializeFluidStack, FluidStack::readFromPacket, (p, f) -> f.writeToPacket(p), FluidStack::loadFluidStackFromNBT, f -> f.writeToNBT(new CompoundTag()));
 
 		new StringClassHandler<>(ResourceLocation.class, ResourceLocation::new, ResourceLocation::toString);
 		new StringClassHandler<>(UUID.class, UUID::fromString, UUID::toString);
@@ -76,21 +79,21 @@ public class Handlers {
 		// partials
 
 		// no NBT
-		new ClassHandler<>(Ingredient.class, Ingredient::fromJson, Ingredient::fromNetwork, (p, o) -> o.toNetwork(p), null, null);
+		new ClassHandler<>(Ingredient.class, Ingredient::toJson, Ingredient::fromJson, Ingredient::fromNetwork, (p, o) -> o.toNetwork(p), null, null);
 
 		// no JSON
-		new ClassHandler<CompoundTag, CompoundTag>(CompoundTag.class, null, FriendlyByteBuf::readAnySizeNbt, FriendlyByteBuf::writeNbt, e -> e, e -> e);
-		new ClassHandler<ListTag, ListTag>(ListTag.class, null, buf -> (ListTag) buf.readAnySizeNbt().get("warp"), (buf, tag) -> {
+		new ClassHandler<CompoundTag, CompoundTag>(CompoundTag.class, null, null, FriendlyByteBuf::readAnySizeNbt, FriendlyByteBuf::writeNbt, e -> e, e -> e);
+		new ClassHandler<ListTag, ListTag>(ListTag.class, null, null, buf -> (ListTag) buf.readAnySizeNbt().get("warp"), (buf, tag) -> {
 			CompoundTag comp = new CompoundTag();
 			comp.put("warp", tag);
 			buf.writeNbt(comp);
 		}, e -> e, e -> e);
 
 		// NBT only
-		new ClassHandler<>(long[].class, null, null, null, LongArrayTag::getAsLongArray, LongArrayTag::new);
-		new ClassHandler<>(int[].class, null, null, null, IntArrayTag::getAsIntArray, IntArrayTag::new);
-		new ClassHandler<>(byte[].class, null, null, null, ByteArrayTag::getAsByteArray, ByteArrayTag::new);
-		new ClassHandler<CompoundTag, BlockPos>(BlockPos.class, null, null, null,
+		new ClassHandler<>(long[].class, null, null, null, null, LongArrayTag::getAsLongArray, LongArrayTag::new);
+		new ClassHandler<>(int[].class, null, null, null, null, IntArrayTag::getAsIntArray, IntArrayTag::new);
+		new ClassHandler<>(byte[].class, null, null, null, null, ByteArrayTag::getAsByteArray, ByteArrayTag::new);
+		new ClassHandler<CompoundTag, BlockPos>(BlockPos.class, null, null, null, null,
 				tag -> new BlockPos(tag.getInt("x"), tag.getInt("y"), tag.getInt("z")),
 				obj -> {
 					CompoundTag tag = new CompoundTag();
@@ -99,7 +102,7 @@ public class Handlers {
 					tag.putInt("z", obj.getZ());
 					return tag;
 				});
-		new ClassHandler<CompoundTag, Vec3>(Vec3.class, null, null, null,
+		new ClassHandler<CompoundTag, Vec3>(Vec3.class, null, null, null, null,
 				tag -> new Vec3(tag.getDouble("x"), tag.getDouble("y"), tag.getDouble("z")),
 				obj -> {
 					CompoundTag tag = new CompoundTag();

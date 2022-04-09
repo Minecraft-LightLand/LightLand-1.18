@@ -72,7 +72,7 @@ public class RecipeGen {
 					.save(pvd);
 		}
 		{
-			unlock(pvd, new SaucePanRecipeBuilder(Items.RABBIT_STEW, 1)::unlockedBy, Items.RABBIT_STEW)
+			unlock(pvd, new SaucePanRecipeBuilder(Items.RABBIT_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.RABBIT_STEW)
 					.requires(new FluidStack(Fluids.WATER, 5)).requires(Items.BOWL).requires(Items.RABBIT)
 					.save(pvd);
 		}

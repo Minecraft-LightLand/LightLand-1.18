@@ -1,6 +1,7 @@
 package dev.lcy0x1.serial.codec;
 
 import com.google.gson.*;
+import com.mojang.datafixers.util.Pair;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
 import dev.lcy0x1.serial.handler.Handlers;
@@ -8,8 +9,10 @@ import dev.lcy0x1.serial.handler.Handlers;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Capable of serializing primitive type, Arrays, Item, ItemStacl, Ingredient
@@ -23,6 +26,10 @@ public class JsonCodec {
 	@SuppressWarnings("unchecked")
 	public static <T> T from(JsonElement obj, Class<T> cls, T ans) {
 		return ExceptionHandler.get(() -> (T) fromRaw(obj, TypeInfo.of(cls), ans));
+	}
+
+	public static <T> JsonElement toJson(T obj) {
+		return ExceptionHandler.get(() -> toRaw(TypeInfo.of(obj.getClass()), obj));
 	}
 
 	private static Object fromImpl(JsonObject obj, Class<?> cls, Object ans) throws Exception {
@@ -122,6 +129,103 @@ public class JsonCodec {
 		if (Handlers.JSON_MAP.containsKey(cls.getAsClass()))
 			return Handlers.JSON_MAP.get(cls.getAsClass()).fromJson(e);
 		return fromImpl(e.getAsJsonObject(), cls.getAsClass(), ans);
+	}
+
+	private static JsonObject toImpl(Class<?> cls, Object obj) throws Exception {
+		JsonObject ans = new JsonObject();
+		if (obj.getClass() != cls && obj.getClass().isAnnotationPresent(SerialClass.class)) {
+			cls = obj.getClass();
+			ans.addProperty("_class", cls.getName());
+		}
+		if (cls.getAnnotation(SerialClass.class) == null)
+			throw new Exception("cannot serialize " + cls);
+		while (cls.getAnnotation(SerialClass.class) != null) {
+			TreeMap<String, Field> map = new TreeMap<>();
+			for (Field f : cls.getDeclaredFields()) {
+				if (f.getAnnotation(SerialClass.SerialField.class) != null) {
+					map.put(f.getName(), f);
+				}
+			}
+			for (Map.Entry<String, Field> entry : map.entrySet()) {
+				Field f = entry.getValue();
+				f.setAccessible(true);
+				ans.add(entry.getKey(), toRaw(TypeInfo.of(f), f.get(obj)));
+			}
+			cls = cls.getSuperclass();
+		}
+		return ans;
+	}
+
+	private static JsonElement toRaw(TypeInfo cls, Object obj) throws Exception {
+		if (obj == null) {
+			return JsonNull.INSTANCE;
+		}
+		if (obj.getClass() != cls.getAsClass() && obj.getClass().isAnnotationPresent(SerialClass.class)) {
+			return toImpl(obj.getClass(), obj);
+		}
+		if (cls.isArray()) {
+			int n = Array.getLength(obj);
+			JsonArray ans = new JsonArray(n);
+			TypeInfo com = cls.getComponentType();
+			for (int i = 0; i < n; i++) {
+				ans.add(toRaw(com, Array.get(obj, i)));
+			}
+			return ans;
+		}
+		if (obj instanceof AliasCollection<?> alias) {
+			List<?> list = alias.getAsList();
+			JsonArray ans = new JsonArray(list.size());
+			TypeInfo com = TypeInfo.of(alias.getElemClass());
+			for (Object o : list) {
+				ans.add(toRaw(com, o));
+			}
+			return ans;
+		}
+		if (List.class.isAssignableFrom(cls.getAsClass())) {
+			List<?> list = (List<?>) obj;
+			JsonArray ans = new JsonArray(list.size());
+			TypeInfo com = cls.getGenericType(0);
+			for (Object o : list) {
+				ans.add(toRaw(com, o));
+			}
+			return ans;
+		}
+		if (Map.class.isAssignableFrom(cls.getAsClass())) {
+			Map<?, ?> map = (Map<?, ?>) obj;
+			TypeInfo ckey = cls.getGenericType(0);
+			TypeInfo cval = cls.getGenericType(1);
+			List<Pair<JsonElement, JsonElement>> list = new ArrayList<>();
+			boolean can_be_map = true;
+			for (Map.Entry<?, ?> ent : map.entrySet()) {
+				JsonElement k = toRaw(ckey, ent.getKey());
+				JsonElement v = toRaw(cval, ent.getValue());
+				list.add(Pair.of(k, v));
+				can_be_map &= k instanceof JsonPrimitive p && p.isString();
+			}
+			if (can_be_map) {
+				JsonObject ans = new JsonObject();
+				for (Pair<JsonElement, JsonElement> p : list) {
+					ans.add(p.getFirst().getAsString(), p.getSecond());
+				}
+				return ans;
+			} else {
+				JsonArray ans = new JsonArray(list.size());
+				for (Pair<JsonElement, JsonElement> p : list) {
+					JsonObject entry = new JsonObject();
+					entry.add("_key", p.getFirst());
+					entry.add("_val", p.getSecond());
+					ans.add(entry);
+				}
+				return ans;
+			}
+		}
+		if (cls.getAsClass().isEnum()) {
+			return new JsonPrimitive(((Enum<?>) obj).name());
+		}
+		if (Handlers.JSON_MAP.containsKey(cls.getAsClass())) {
+			return Handlers.JSON_MAP.get(cls.getAsClass()).toJson(obj);
+		}
+		return toImpl(cls.getAsClass(), obj);
 	}
 
 }
