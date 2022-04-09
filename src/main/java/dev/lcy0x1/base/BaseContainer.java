@@ -1,12 +1,14 @@
 package dev.lcy0x1.base;
 
+import dev.lcy0x1.serial.codec.AliasCollection;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
 import java.util.function.Predicate;
 
-public class BaseContainer extends SimpleContainer {
+public class BaseContainer extends SimpleContainer implements AliasCollection<ItemStack> {
 
 	private int max = 64;
 	private Predicate<ItemStack> predicate = e -> true;
@@ -25,7 +27,7 @@ public class BaseContainer extends SimpleContainer {
 		return this;
 	}
 
-	public BaseContainer add(BaseContainerListener<BaseContainer> t){
+	public BaseContainer add(BaseContainerListener<BaseContainer> t) {
 		addListener(t);
 		return this;
 	}
@@ -40,4 +42,23 @@ public class BaseContainer extends SimpleContainer {
 		return max;
 	}
 
+	@Override
+	public List<ItemStack> getAsList() {
+		return items;
+	}
+
+	@Override
+	public void clear() {
+
+	}
+
+	@Override
+	public void set(int n, int i, ItemStack elem) {
+		items.set(i, elem);
+	}
+
+	@Override
+	public Class<ItemStack> getElemClass() {
+		return ItemStack.class;
+	}
 }

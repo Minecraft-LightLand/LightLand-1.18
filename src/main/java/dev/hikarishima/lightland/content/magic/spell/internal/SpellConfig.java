@@ -1,6 +1,10 @@
 package dev.hikarishima.lightland.content.magic.spell.internal;
 
+import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
+import dev.hikarishima.lightland.content.magic.products.MagicProduct;
+import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
+import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.hikarishima.lightland.network.config.SpellDataConfig;
 import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.SerialClass;
@@ -21,8 +25,8 @@ public class SpellConfig {
 
 	public static <C extends SpellConfig> C get(Spell<C, ?> spell, Level world, Player player) {
 		C ans = SpellDataConfig.getConfig(spell.getRegistryName());
-        /*
-        IMagicRecipe<?> r = IMagicRecipe.getMap(world, MagicRegistry.MPT_SPELL).get(spell);
+
+        IMagicRecipe<?> r = IMagicRecipe.getMap(world, MagicRegistry.MPT_SPELL.get()).get(spell);
         if (r == null)
             return ans;
         MagicProduct<?, ?> p = LLPlayerData.get(player).magicHolder.getProduct(r);
@@ -31,7 +35,7 @@ public class SpellConfig {
         ans = makeCopy(ans);
         ans.mana_cost += p.getCost() * ans.factor;
         ans.spell_load += p.getCost() * ans.factor;
-         */
+
 		return ans;
 	}
 

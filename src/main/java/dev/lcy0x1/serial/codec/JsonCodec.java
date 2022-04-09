@@ -18,14 +18,14 @@ import java.util.Map;
  */
 public class JsonCodec {
 
-	public static final Gson gson = new Gson();
+	private static final Gson GSON = new Gson();
 
 	@SuppressWarnings("unchecked")
 	public static <T> T from(JsonElement obj, Class<T> cls, T ans) {
 		return ExceptionHandler.get(() -> (T) fromRaw(obj, TypeInfo.of(cls), ans));
 	}
 
-	public static Object fromImpl(JsonObject obj, Class<?> cls, Object ans) throws Exception {
+	private static Object fromImpl(JsonObject obj, Class<?> cls, Object ans) throws Exception {
 		if (obj.has("_class")) {
 			cls = Class.forName(obj.get("_class").getAsString());
 		}
@@ -63,7 +63,7 @@ public class JsonCodec {
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public static Object fromRaw(JsonElement e, TypeInfo cls, Object ans) throws Exception {
+	private static Object fromRaw(JsonElement e, TypeInfo cls, Object ans) throws Exception {
 		if (cls.isArray()) {
 			JsonArray arr = e.getAsJsonArray();
 			TypeInfo com = cls.getComponentType();
@@ -73,6 +73,15 @@ public class JsonCodec {
 				Array.set(ans, i, fromRaw(arr.get(i), com, null));
 			}
 			return ans;
+		}
+		if (ans instanceof AliasCollection<?> alias) {
+			JsonArray arr = e.getAsJsonArray();
+			TypeInfo com = TypeInfo.of(alias.getElemClass());
+			int n = arr.size();
+			for (int i = 0; i < n; i++) {
+				alias.setRaw(n, i, fromRaw(arr.get(i), com, null));
+			}
+			return alias;
 		}
 		if (List.class.isAssignableFrom(cls.getAsClass())) {
 			JsonArray arr = e.getAsJsonArray();

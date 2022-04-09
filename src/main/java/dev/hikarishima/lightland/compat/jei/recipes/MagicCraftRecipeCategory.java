@@ -1,6 +1,8 @@
 package dev.hikarishima.lightland.compat.jei.recipes;
 
+import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
 import dev.hikarishima.lightland.content.magic.item.MagicWand;
+import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.AbstractRitualRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.PotionBoostRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.PotionSpellRecipe;
@@ -128,12 +130,12 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualR
 		}
 		MagicWand wand = ItemRegistrate.MAGIC_WAND.get();
 		ItemStack wand_stack = wand.getDefaultInstance();
-        /*
-        IMagicRecipe<?> magic = sl.getMagic() == null ? null : MagicProxy.getHandler().magicHolder.getRecipe(sl.getMagic());
+
+        IMagicRecipe<?> magic = sl.getMagic() == null ? null : CapProxy.getHandler().magicHolder.getRecipe(sl.getMagic());
         if (magic != null) {
             wand.setMagic(magic, wand_stack);
         }
-         */
+
 		set(layout.getItemStacks(), Collections.singletonList(wand_stack), in, true, 63, 0);
 	}
 

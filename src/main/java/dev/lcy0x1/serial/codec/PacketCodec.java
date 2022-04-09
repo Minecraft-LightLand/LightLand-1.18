@@ -13,12 +13,17 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class PacketCodec {
+
 	@SuppressWarnings("unchecked")
 	public static <T> T from(FriendlyByteBuf buf, Class<T> cls, T ans) {
 		return ExceptionHandler.get(() -> (T) fromRaw(buf, TypeInfo.of(cls), ans));
 	}
 
-	public static Object fromImpl(FriendlyByteBuf buf, Class<?> cls, Object ans) throws Exception {
+	public static <T> void to(FriendlyByteBuf buf, T obj) {
+		ExceptionHandler.run(() -> toRaw(buf, TypeInfo.of(obj.getClass()), obj));
+	}
+
+	private static Object fromImpl(FriendlyByteBuf buf, Class<?> cls, Object ans) throws Exception {
 		if (cls.getAnnotation(SerialClass.class) == null)
 			throw new Exception("cannot deserialize " + cls);
 		if (ans == null)
@@ -55,7 +60,7 @@ public class PacketCodec {
 	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public static Object fromRaw(FriendlyByteBuf buf, TypeInfo cls, Object ans) throws Exception {
+	private static Object fromRaw(FriendlyByteBuf buf, TypeInfo cls, Object ans) throws Exception {
 		byte type = buf.readByte();
 		if (type == 0)
 			return null;
@@ -69,6 +74,14 @@ public class PacketCodec {
 				ans = Array.newInstance(com.getAsClass(), n);
 			for (int i = 0; i < n; i++) {
 				Array.set(ans, i, fromRaw(buf, com, null));
+			}
+			return ans;
+		}
+		if (ans instanceof AliasCollection<?> alias) {
+			int n = buf.readInt();
+			TypeInfo com = TypeInfo.of(alias.getElemClass());
+			for (int i = 0; i < n; i++) {
+				alias.setRaw(n, i, fromRaw(buf, com, null));
 			}
 			return ans;
 		}
@@ -102,11 +115,7 @@ public class PacketCodec {
 		return fromImpl(buf, cls.getAsClass(), ans);
 	}
 
-	public static <T> void to(FriendlyByteBuf buf, T obj) {
-		ExceptionHandler.run(() -> toRaw(buf, TypeInfo.of(obj.getClass()), obj));
-	}
-
-	public static void toImpl(FriendlyByteBuf buf, Class<?> cls, Object obj) throws Exception {
+	private static void toImpl(FriendlyByteBuf buf, Class<?> cls, Object obj) throws Exception {
 		if (cls.getAnnotation(SerialClass.class) == null)
 			throw new Exception("cannot serialize " + cls);
 		while (cls.getAnnotation(SerialClass.class) != null) {
@@ -124,7 +133,7 @@ public class PacketCodec {
 		}
 	}
 
-	public static void toRaw(FriendlyByteBuf buf, TypeInfo cls, Object obj) throws Exception {
+	private static void toRaw(FriendlyByteBuf buf, TypeInfo cls, Object obj) throws Exception {
 		if (obj == null) {
 			buf.writeByte(0);
 			return;
@@ -141,6 +150,13 @@ public class PacketCodec {
 			TypeInfo com = cls.getComponentType();
 			for (int i = 0; i < n; i++) {
 				toRaw(buf, com, Array.get(obj, i));
+			}
+		} else if (obj instanceof AliasCollection<?> alias) {
+			List<?> list = alias.getAsList();
+			buf.writeInt(list.size());
+			TypeInfo com = TypeInfo.of(alias.getElemClass());
+			for (Object o : list) {
+				toRaw(buf, com, o);
 			}
 		} else if (List.class.isAssignableFrom(cls.getAsClass())) {
 			List<?> list = (List<?>) obj;
@@ -166,4 +182,5 @@ public class PacketCodec {
 			toImpl(buf, cls.getAsClass(), obj);
 
 	}
+
 }

@@ -3,7 +3,10 @@ package dev.lcy0x1.serial.codec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
 import dev.lcy0x1.serial.handler.Handlers;
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 import java.lang.reflect.Array;
@@ -19,6 +22,15 @@ import java.util.function.Predicate;
  * Not capable of handing collections
  */
 public class TagCodec {
+
+	@SuppressWarnings("unchecked")
+	public static <T> T fromTag(CompoundTag tag, Class<?> cls) {
+		return (T) ExceptionHandler.get(() -> fromTag(tag, cls, null, f -> true));
+	}
+
+	public static CompoundTag toTag(CompoundTag tag, Object obj) {
+		return ExceptionHandler.get(() -> toTag(tag, obj.getClass(), obj, f -> true));
+	}
 
 	public static Object fromTag(CompoundTag tag, Class<?> cls, Object obj, Predicate<SerialClass.SerialField> pred)
 			throws Exception {
@@ -56,8 +68,30 @@ public class TagCodec {
 		return obj;
 	}
 
+	public static CompoundTag toTag(CompoundTag tag, Class<?> cls, Object obj, Predicate<SerialClass.SerialField> pred)
+			throws Exception {
+		if (obj == null)
+			return tag;
+		if (obj.getClass() != cls) {
+			tag.putString("_class", obj.getClass().getName());
+			cls = obj.getClass();
+		}
+		while (cls.getAnnotation(SerialClass.class) != null) {
+			for (Field f : cls.getDeclaredFields()) {
+				SerialClass.SerialField sf = f.getAnnotation(SerialClass.SerialField.class);
+				if (sf == null || !pred.test(sf))
+					continue;
+				f.setAccessible(true);
+				if (f.get(obj) != null)
+					tag.put(f.getName(), toTagRaw(TypeInfo.of(f), f.get(obj), pred));
+			}
+			cls = cls.getSuperclass();
+		}
+		return tag;
+	}
+
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public static Object fromTagRaw(Tag tag, TypeInfo cls, Object def, Predicate<SerialClass.SerialField> pred) throws Exception {
+	private static Object fromTagRaw(Tag tag, TypeInfo cls, Object def, Predicate<SerialClass.SerialField> pred) throws Exception {
 		if (tag == null)
 			if (cls.getAsClass() == ItemStack.class)
 				return ItemStack.EMPTY;
@@ -72,6 +106,15 @@ public class TagCodec {
 			Object ans = Array.newInstance(com.getAsClass(), n);
 			for (int i = 0; i < n; i++) {
 				Array.set(ans, i, fromTagRaw(list.get(i), com, null, pred));
+			}
+			return ans;
+		}
+		if (def instanceof AliasCollection<?> ans) {
+			ListTag list = (ListTag) tag;
+			int n = list.size();
+			TypeInfo com = TypeInfo.of(ans.getElemClass());
+			for (int i = 0; i < n; i++) {
+				ans.setRaw(n, i, fromTagRaw(list.get(i), com, null, pred));
 			}
 			return ans;
 		}
@@ -110,38 +153,7 @@ public class TagCodec {
 		throw new Exception("unsupported class " + cls);
 	}
 
-	public static CompoundTag toTag(CompoundTag tag, Class<?> cls, Object obj, Predicate<SerialClass.SerialField> pred)
-			throws Exception {
-		if (obj == null)
-			return tag;
-		if (obj.getClass() != cls) {
-			tag.putString("_class", obj.getClass().getName());
-			cls = obj.getClass();
-		}
-		while (cls.getAnnotation(SerialClass.class) != null) {
-			for (Field f : cls.getDeclaredFields()) {
-				SerialClass.SerialField sf = f.getAnnotation(SerialClass.SerialField.class);
-				if (sf == null || !pred.test(sf))
-					continue;
-				f.setAccessible(true);
-				if (f.get(obj) != null)
-					tag.put(f.getName(), toTagRaw(TypeInfo.of(f), f.get(obj), pred));
-			}
-			cls = cls.getSuperclass();
-		}
-		return tag;
-	}
-
-	public static CompoundTag toTag(CompoundTag tag, Object obj) {
-		return ExceptionHandler.get(() -> toTag(tag, obj.getClass(), obj, f -> true));
-	}
-
-	@SuppressWarnings("unchecked")
-	public static <T> T fromTag(CompoundTag tag, Class<?> cls) {
-		return (T) ExceptionHandler.get(() -> fromTag(tag, cls, null, f -> true));
-	}
-
-	public static Tag toTagRaw(TypeInfo cls, Object obj, Predicate<SerialClass.SerialField> pred) throws Exception {
+	private static Tag toTagRaw(TypeInfo cls, Object obj, Predicate<SerialClass.SerialField> pred) throws Exception {
 		if (Handlers.NBT_MAP.containsKey(cls.getAsClass()))
 			return Handlers.NBT_MAP.get(cls.getAsClass()).toTag(obj);
 		if (cls.isArray()) {
@@ -150,6 +162,15 @@ public class TagCodec {
 			TypeInfo com = cls.getComponentType();
 			for (int i = 0; i < n; i++) {
 				list.add(toTagRaw(com, Array.get(obj, i), pred));
+			}
+			return list;
+		}
+		if (obj instanceof AliasCollection<?> alias) {
+			ListTag list = new ListTag();
+			int n = alias.getAsList().size();
+			TypeInfo com = TypeInfo.of(alias.getElemClass());
+			for (int i = 0; i < n; i++) {
+				list.add(toTagRaw(com, alias.getAsList().get(i), pred));
 			}
 			return list;
 		}

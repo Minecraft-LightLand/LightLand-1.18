@@ -1,13 +1,16 @@
 package dev.lcy0x1.base;
 
 import dev.lcy0x1.serial.SerialClass;
+import dev.lcy0x1.serial.codec.AliasCollection;
 import net.minecraft.core.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 @SerialClass
-public class BaseTank implements IFluidHandler {
+public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 
 	private final int size, capacity;
 
@@ -137,4 +140,23 @@ public class BaseTank implements IFluidHandler {
 
 	}
 
+	@Override
+	public List<FluidStack> getAsList() {
+		return list;
+	}
+
+	@Override
+	public void clear() {
+
+	}
+
+	@Override
+	public void set(int n, int i, FluidStack elem) {
+		list.set(i, elem);
+	}
+
+	@Override
+	public Class<FluidStack> getElemClass() {
+		return FluidStack.class;
+	}
 }
