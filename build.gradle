@@ -137,8 +137,6 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
-    //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-4.5.4")
-    //runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-4.5.4")
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.12')
     implementation fg.deobf("curse.maven:appleskin-248787:3686482")

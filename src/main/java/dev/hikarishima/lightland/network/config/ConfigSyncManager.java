@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import dev.hikarishima.lightland.network.SerialPacketBase;
 import dev.lcy0x1.serial.SerialClass;
-import dev.lcy0x1.serial.Serializer;
+import dev.lcy0x1.serial.codec.JsonCodec;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -28,7 +28,7 @@ public class ConfigSyncManager {
 		@Override
 		protected void apply(Map<ResourceLocation, JsonElement> map, ResourceManager manager, ProfilerFiller filler) {
 			map.forEach((k, v) -> {
-				BaseConfig config = Serializer.from(v, BaseConfig.class, null);
+				BaseConfig config = JsonCodec.from(v, BaseConfig.class, null);
 				if (config != null)
 					CONFIGS.put(k.toString(), config);
 			});

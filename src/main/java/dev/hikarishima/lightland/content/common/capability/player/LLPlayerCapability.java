@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.capability.player;
 
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.core.Direction;
@@ -42,12 +42,12 @@ public class LLPlayerCapability implements ICapabilitySerializable<CompoundTag> 
 
 	@Override
 	public CompoundTag serializeNBT() {
-		return Automator.toTag(new CompoundTag(), lo.resolve().get());
+		return TagCodec.toTag(new CompoundTag(), lo.resolve().get());
 	}
 
 	@Override
 	public void deserializeNBT(CompoundTag tag) {
-		ExceptionHandler.get(() -> Automator.fromTag(tag, LLPlayerData.class, handler, f -> true));
+		ExceptionHandler.get(() -> TagCodec.fromTag(tag, LLPlayerData.class, handler, f -> true));
 		handler.init();
 	}
 

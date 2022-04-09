@@ -18,6 +18,7 @@ import dev.hikarishima.lightland.init.special.LLRegistrate;
 import dev.hikarishima.lightland.init.worldgenreg.StructureRegistrate;
 import dev.hikarishima.lightland.init.worldgenreg.WorldGenRegistrate;
 import dev.hikarishima.lightland.network.PacketHandler;
+import dev.lcy0x1.serial.handler.Handlers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -52,6 +53,7 @@ public class LightLand {
 		WorldGenRegistrate.register();
 		StructureRegistrate.register();
 		AllTags.register();
+		Handlers.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
 	}
 

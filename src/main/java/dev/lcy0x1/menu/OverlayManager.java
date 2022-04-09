@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
-import dev.lcy0x1.serial.Serializer;
+import dev.lcy0x1.serial.codec.JsonCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.resources.ResourceLocation;
@@ -46,7 +46,7 @@ public class OverlayManager {
 	}
 
 	public void reset(JsonElement elem) {
-		Serializer.from(elem.getAsJsonObject(), OverlayManager.class, this);
+		JsonCodec.from(elem.getAsJsonObject(), OverlayManager.class, this);
 		loaded = true;
 	}
 
@@ -78,7 +78,7 @@ public class OverlayManager {
 		JsonObject jo = ExceptionHandler.get(() -> GsonHelper.parse(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(
 				new ResourceLocation(coords.getNamespace(), "textures/gui/overlays/" + coords.getPath() + ".json")
 		).getInputStream(), StandardCharsets.UTF_8)));
-		Serializer.from(jo, OverlayManager.class, this);
+		JsonCodec.from(jo, OverlayManager.class, this);
 		loaded = true;
 	}
 

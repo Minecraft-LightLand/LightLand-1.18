@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.magic.spell.internal;
 
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.network.config.SpellDataConfig;
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
@@ -36,7 +36,7 @@ public class SpellConfig {
 	}
 
 	public static <C extends SpellConfig> C makeCopy(C config) {
-		return Automator.fromTag(Automator.toTag(new CompoundTag(), config), config.getClass());
+		return TagCodec.fromTag(TagCodec.toTag(new CompoundTag(), config), config.getClass());
 	}
 
 	@SerialClass

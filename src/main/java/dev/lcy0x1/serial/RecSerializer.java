@@ -1,6 +1,8 @@
 package dev.lcy0x1.serial;
 
 import com.google.gson.JsonObject;
+import dev.lcy0x1.serial.codec.JsonCodec;
+import dev.lcy0x1.serial.codec.PacketCodec;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -21,20 +23,20 @@ public class RecSerializer<R extends Recipe<I>, I extends Container> extends For
 
 	@Override
 	public R fromJson(ResourceLocation id, JsonObject json) {
-		return Serializer.from(json, cls,
+		return JsonCodec.from(json, cls,
 				ExceptionHandler.get(() -> cls.getConstructor(ResourceLocation.class).newInstance(id)));
 
 	}
 
 	@Override
 	public R fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-		return Serializer.from(buf, cls,
+		return PacketCodec.from(buf, cls,
 				ExceptionHandler.get(() -> cls.getConstructor(ResourceLocation.class).newInstance(id)));
 	}
 
 	@Override
 	public void toNetwork(FriendlyByteBuf buf, R recipe) {
-		Serializer.to(buf, recipe);
+		PacketCodec.to(buf, recipe);
 	}
 
 }

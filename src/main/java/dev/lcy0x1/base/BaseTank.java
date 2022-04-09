@@ -1,14 +1,17 @@
 package dev.lcy0x1.base;
 
+import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.core.NonNullList;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 
+@SerialClass
 public class BaseTank implements IFluidHandler {
 
 	private final int size, capacity;
 
+	@SerialClass.SerialField
 	public NonNullList<FluidStack> list;
 
 	public BaseTank(int size, int capacity) {

@@ -1,9 +1,9 @@
 package dev.lcy0x1.base;
 
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.PacketCodec;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
-import dev.lcy0x1.serial.Serializer;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -27,14 +27,14 @@ public abstract class BaseEntity extends Entity implements IEntityAdditionalSpaw
 
 	@Override
 	protected void addAdditionalSaveData(CompoundTag tag) {
-		tag.put("auto-serial", Automator.toTag(new CompoundTag(), this));
+		tag.put("auto-serial", TagCodec.toTag(new CompoundTag(), this));
 	}
 
 	@Override
 	protected void readAdditionalSaveData(CompoundTag tag) {
 		if (!tag.contains("auto-serial"))
 			return;
-		ExceptionHandler.run(() -> Automator.fromTag(tag.getCompound("auto-serial"), this.getClass(), this, f -> true));
+		ExceptionHandler.run(() -> TagCodec.fromTag(tag.getCompound("auto-serial"), this.getClass(), this, f -> true));
 	}
 
 	@Override
@@ -44,13 +44,13 @@ public abstract class BaseEntity extends Entity implements IEntityAdditionalSpaw
 
 	@Override
 	public void writeSpawnData(FriendlyByteBuf buffer) {
-		Serializer.to(buffer, this);
+		PacketCodec.to(buffer, this);
 	}
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	@Override
 	public void readSpawnData(FriendlyByteBuf data) {
-		Serializer.from(data, (Class) this.getClass(), this);
+		PacketCodec.from(data, (Class) this.getClass(), this);
 	}
 
 }

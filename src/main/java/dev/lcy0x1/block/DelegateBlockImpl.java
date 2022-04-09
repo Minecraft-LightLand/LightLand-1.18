@@ -110,6 +110,10 @@ public class DelegateBlockImpl extends DelegateBlock {
 				if (tileentity instanceof Container) {
 					Containers.dropContents(worldIn, pos, (Container) tileentity);
 					worldIn.updateNeighbourForOutputSignal(pos, this);
+				} else if (tileentity instanceof BlockContainer blockContainer) {
+					for (Container c : blockContainer.getContainers())
+						Containers.dropContents(worldIn, pos, c);
+					worldIn.updateNeighbourForOutputSignal(pos, this);
 				}
 				worldIn.removeBlockEntity(pos);
 			}

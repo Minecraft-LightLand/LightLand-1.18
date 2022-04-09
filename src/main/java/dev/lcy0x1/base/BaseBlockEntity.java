@@ -1,7 +1,7 @@
 package dev.lcy0x1.base;
 
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -28,13 +28,13 @@ public class BaseBlockEntity extends BlockEntity {
 	public void load(CompoundTag tag) {
 		super.load(tag);
 		if (tag.contains("auto-serial"))
-			ExceptionHandler.run(() -> Automator.fromTag(tag.getCompound("auto-serial"), getClass(), this, f -> true));
+			ExceptionHandler.run(() -> TagCodec.fromTag(tag.getCompound("auto-serial"), getClass(), this, f -> true));
 	}
 
 	@Override
 	public void saveAdditional(CompoundTag tag) {
 		super.saveAdditional(tag);
-		CompoundTag ser = ExceptionHandler.get(() -> Automator.toTag(new CompoundTag(), getClass(), this, f -> true));
+		CompoundTag ser = ExceptionHandler.get(() -> TagCodec.toTag(new CompoundTag(), getClass(), this, f -> true));
 		if (ser != null) tag.put("auto-serial", ser);
 	}
 
@@ -45,7 +45,7 @@ public class BaseBlockEntity extends BlockEntity {
 
 	@Override
 	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-		ExceptionHandler.run(() -> Automator.fromTag(pkt.getTag(), getClass(), this, SerialClass.SerialField::toClient));
+		ExceptionHandler.run(() -> TagCodec.fromTag(pkt.getTag(), getClass(), this, SerialClass.SerialField::toClient));
 		super.onDataPacket(net, pkt);
 	}
 
@@ -62,7 +62,7 @@ public class BaseBlockEntity extends BlockEntity {
 	@Override
 	public CompoundTag getUpdateTag() {
 		CompoundTag ans = super.getUpdateTag();
-		CompoundTag ser = ExceptionHandler.get(() -> Automator.toTag(new CompoundTag(), getClass(), this, SerialClass.SerialField::toClient));
+		CompoundTag ser = ExceptionHandler.get(() -> TagCodec.toTag(new CompoundTag(), getClass(), this, SerialClass.SerialField::toClient));
 		if (ser != null) ans.put("auto-serial", ser);
 		return ans;
 	}

@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.magic.products.info.ProductState;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.lcy0x1.magic.HexHandler;
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.NBTObj;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.ChatFormatting;
@@ -60,7 +60,7 @@ public class MagicProduct<I extends IForgeRegistryEntry<I>, P extends MagicProdu
 	public void updateBestSolution(HexHandler hex, HexData data, int cost) {
 		int prev = getBase().tag.getInt("cost");
 		tag.tag.remove("hex");
-		Automator.toTag(tag.getSub("misc").tag, data);
+		TagCodec.toTag(tag.getSub("misc").tag, data);
 		hex.write(tag.getSub("hex"));
 		getBase().tag.putInt("cost", cost);
 	}
@@ -90,7 +90,7 @@ public class MagicProduct<I extends IForgeRegistryEntry<I>, P extends MagicProdu
 	public HexData getMiscData() {
 		HexData data;
 		if (tag.tag.contains("misc")) {
-			data = Automator.fromTag(tag.getSub("misc").tag, HexData.class);
+			data = TagCodec.fromTag(tag.getSub("misc").tag, HexData.class);
 		} else {
 			data = new HexData();
 		}

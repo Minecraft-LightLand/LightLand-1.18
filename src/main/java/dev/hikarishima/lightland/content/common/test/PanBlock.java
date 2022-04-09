@@ -35,21 +35,65 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 		return state.setValue(BlockStateProperties.LIT, false).setValue(BlockStateProperties.SIGNAL_FIRE, false).setValue(BlockStateProperties.OPEN, false);
 	}
 
+	/**
+	 * Logic:
+	 * Flint and Steel Right Click: lit fire
+	 * Shift Click + lit: take out fire
+	 * Shift Click + no lit + close lid: FAIL
+	 * Shift Click + no lit + open lid: dump content
+	 * Close Lid right click
+	 */
 	@Override
 	public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
 		ItemStack stack = pl.getItemInHand(h);
+		boolean open = bs.getValue(BlockStateProperties.OPEN);
+		boolean lit = bs.getValue(BlockStateProperties.LIT);
+		boolean cooking = bs.getValue(BlockStateProperties.SIGNAL_FIRE);
 		if (stack.getItem() instanceof FlintAndSteelItem) {
-			w.playSound(pl, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, w.getRandom().nextFloat() * 0.4F + 0.8F);
-			if (!w.isClientSide()) {
-				w.setBlockAndUpdate(pos, bs.setValue(BlockStateProperties.LIT, true));
-			}
-			stack.hurtAndBreak(1, pl, (player) -> player.broadcastBreakEvent(h));
-		} else {
-			if (!w.isClientSide()) {
-				w.setBlockAndUpdate(pos, bs.setValue(BlockStateProperties.OPEN, !bs.getValue(BlockStateProperties.OPEN)));
+			if (!lit) {
+				w.playSound(pl, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, w.getRandom().nextFloat() * 0.4F + 0.8F);
+				if (!w.isClientSide()) {
+					w.setBlockAndUpdate(pos, bs.setValue(BlockStateProperties.LIT, true));
+				}
+				stack.hurtAndBreak(1, pl, (player) -> player.broadcastBreakEvent(h));
+				return InteractionResult.SUCCESS;
+			} else {
+				return InteractionResult.CONSUME;
 			}
 		}
-		return InteractionResult.SUCCESS;
+		if (lit && pl.isShiftKeyDown()) {
+			BlockState unlit = bs.setValue(BlockStateProperties.LIT, false)
+					.setValue(BlockStateProperties.SIGNAL_FIRE, false);
+			// TODO stop cooking
+			if (!w.isClientSide()) {
+				w.setBlockAndUpdate(pos, unlit);
+			}
+			return InteractionResult.SUCCESS;
+		}
+		if (!lit && open && pl.isShiftKeyDown()) {
+			// TODO clear inventory
+			return InteractionResult.SUCCESS;
+		}
+		if (pl.isShiftKeyDown()) {
+			return InteractionResult.PASS;
+		}
+		if (stack.isEmpty() || !open) {
+			if (!w.isClientSide()) {
+				BlockState toggle_cap = bs.setValue(BlockStateProperties.OPEN, !open);
+				if (!open && cooking) {
+					toggle_cap = bs.setValue(BlockStateProperties.SIGNAL_FIRE, false);
+					//TODO stop cooking
+				}
+				if (open && lit) {
+					//toggle_cap = bs.setValue(BlockStateProperties.SIGNAL_FIRE, true);
+					//TODO start cooking
+				}
+				w.setBlockAndUpdate(pos, toggle_cap);
+			}
+			return InteractionResult.SUCCESS;
+		}
+
+		return InteractionResult.FAIL;
 	}
 
 }

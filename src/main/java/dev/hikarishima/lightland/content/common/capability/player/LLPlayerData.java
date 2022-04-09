@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.capability.player;
 
 import dev.lcy0x1.base.Proxy;
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -44,7 +44,7 @@ public class LLPlayerData {
 		if (!force && pl != null && pl.getCapability(CAPABILITY).cast().resolve().isPresent()) {
 			LLPlayerData m = LLPlayerData.get(pl);
 			m.reset(Reset.FOR_INJECT);
-			ExceptionHandler.run(() -> Automator.fromTag(tag, LLPlayerData.class, m, f -> true));
+			ExceptionHandler.run(() -> TagCodec.fromTag(tag, LLPlayerData.class, m, f -> true));
 			m.init();
 		} else revive_cache = tag;
 	}
@@ -54,7 +54,7 @@ public class LLPlayerData {
 		CompoundTag tag = revive_cache;
 		revive_cache = null;
 		if (tag == null)
-			tag = Automator.toTag(new CompoundTag(), get(pl));
+			tag = TagCodec.toTag(new CompoundTag(), get(pl));
 		return tag;
 	}
 

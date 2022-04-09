@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.network.packets;
 import dev.hikarishima.lightland.content.common.capability.player.*;
 import dev.hikarishima.lightland.network.SerialPacketBase;
 import dev.lcy0x1.base.Proxy;
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
@@ -45,42 +45,42 @@ public class CapToClient extends SerialPacketBase {
 	}
 
 	public enum Action {
-		DEBUG((m) -> Automator.toTag(new CompoundTag(), m), (tag) -> {
+		DEBUG((m) -> TagCodec.toTag(new CompoundTag(), m), (tag) -> {
 			LLPlayerData m = CapProxy.getHandler();
-			CompoundTag comp = ExceptionHandler.get(() -> Automator.toTag(new CompoundTag(), LLPlayerData.class, m, f -> true));
+			CompoundTag comp = ExceptionHandler.get(() -> TagCodec.toTag(new CompoundTag(), LLPlayerData.class, m, f -> true));
 			CapToServer.sendDebugInfo(tag, comp);
 		}),
 		ALL((m) -> {
 			m.magicAbility.time_after_sync = 0;
-			return Automator.toTag(new CompoundTag(), m);
+			return TagCodec.toTag(new CompoundTag(), m);
 		}, tag -> LLPlayerData.cacheSet(tag, false)),
 		CLONE((m) -> {
 			m.magicAbility.time_after_sync = 0;
-			return Automator.toTag(new CompoundTag(), m);
+			return TagCodec.toTag(new CompoundTag(), m);
 		}, tag -> LLPlayerData.cacheSet(tag, true)),
 		ARCANE_TYPE((m) -> m.magicAbility.arcane_type, (tag) -> {
 			MagicAbility abi = CapProxy.getHandler().magicAbility;
 			abi.arcane_type = tag;
 		}), MAGIC_ABILITY((m) -> {
 			m.magicAbility.time_after_sync = 0;
-			return Automator.toTag(new CompoundTag(), m.magicAbility);
+			return TagCodec.toTag(new CompoundTag(), m.magicAbility);
 		}, (tag) -> {
 			LLPlayerData h = CapProxy.getHandler();
 			h.magicAbility = new MagicAbility(h);
-			ExceptionHandler.run(() -> Automator.fromTag(tag, MagicAbility.class, h.magicAbility, f -> true));
+			ExceptionHandler.run(() -> TagCodec.fromTag(tag, MagicAbility.class, h.magicAbility, f -> true));
 			h.reInit();
-		}), ABILITY_POINT((m) -> Automator.toTag(new CompoundTag(), m.abilityPoints), (tag) -> {
+		}), ABILITY_POINT((m) -> TagCodec.toTag(new CompoundTag(), m.abilityPoints), (tag) -> {
 			LLPlayerData h = CapProxy.getHandler();
 			h.abilityPoints = new AbilityPoints(h);
-			ExceptionHandler.run(() -> Automator.fromTag(tag, AbilityPoints.class, h.abilityPoints, f -> true));
+			ExceptionHandler.run(() -> TagCodec.fromTag(tag, AbilityPoints.class, h.abilityPoints, f -> true));
 			h.reInit();
 		}), RESET(m -> new CompoundTag(), tag -> {
 			LLPlayerData h = CapProxy.getHandler();
 			h.reset(LLPlayerData.Reset.values()[tag.getInt("ordinal")]);
-		}), SKILL(m -> Automator.toTag(new CompoundTag(), m.skillCap), tag -> {
+		}), SKILL(m -> TagCodec.toTag(new CompoundTag(), m.skillCap), tag -> {
 			LLPlayerData h = CapProxy.getHandler();
 			h.skillCap = new SkillCap(h);
-			ExceptionHandler.run(() -> Automator.fromTag(tag, SkillCap.class, h.skillCap, f -> true));
+			ExceptionHandler.run(() -> TagCodec.fromTag(tag, SkillCap.class, h.skillCap, f -> true));
 		});
 
 		public final Function<LLPlayerData, CompoundTag> server;

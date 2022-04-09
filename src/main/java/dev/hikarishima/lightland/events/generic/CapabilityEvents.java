@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.common.capability.worldstorage.WorldStorageCapability;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.network.packets.CapToClient;
-import dev.lcy0x1.serial.Automator;
+import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -59,8 +59,8 @@ public class CapabilityEvents {
 
 	@SubscribeEvent
 	public static void onPlayerClone(PlayerEvent.Clone event) {
-		CompoundTag tag0 = Automator.toTag(new CompoundTag(), LLPlayerData.get(event.getOriginal()));
-		ExceptionHandler.run(() -> Automator.fromTag(tag0, LLPlayerData.class, LLPlayerData.get(event.getPlayer()), f -> true));
+		CompoundTag tag0 = TagCodec.toTag(new CompoundTag(), LLPlayerData.get(event.getOriginal()));
+		ExceptionHandler.run(() -> TagCodec.fromTag(tag0, LLPlayerData.class, LLPlayerData.get(event.getPlayer()), f -> true));
 		LLPlayerData.get(event.getPlayer());
 		ServerPlayer e = (ServerPlayer) event.getPlayer();
 		new CapToClient(CapToClient.Action.CLONE, LLPlayerData.get(e)).toClientPlayer(e);
@@ -70,7 +70,7 @@ public class CapabilityEvents {
 	@SubscribeEvent
 	public static void onPlayerRespawn(ClientPlayerNetworkEvent.RespawnEvent event) {
 		CompoundTag tag0 = LLPlayerData.getCache(event.getOldPlayer());
-		ExceptionHandler.run(() -> Automator.fromTag(tag0, LLPlayerData.class, LLPlayerData.get(event.getNewPlayer()), f -> true));
+		ExceptionHandler.run(() -> TagCodec.fromTag(tag0, LLPlayerData.class, LLPlayerData.get(event.getNewPlayer()), f -> true));
 		LLPlayerData.get(event.getNewPlayer());
 	}
 

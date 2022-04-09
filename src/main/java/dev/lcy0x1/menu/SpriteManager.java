@@ -2,12 +2,11 @@ package dev.lcy0x1.menu;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
-import dev.lcy0x1.serial.Serializer;
+import dev.lcy0x1.serial.codec.JsonCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -135,7 +134,7 @@ public class SpriteManager {
 				ExceptionHandler.get(() -> GsonHelper.parse(new InputStreamReader(Minecraft.getInstance().getResourceManager().getResource(
 						new ResourceLocation(coords.getNamespace(), "textures/gui/coords/" + coords.getPath() + ".json")
 				).getInputStream())).getAsJsonObject()), () -> () -> CACHE.get(coords).getAsJsonObject());
-		Serializer.from(jo, SpriteManager.class, this);
+		JsonCodec.from(jo, SpriteManager.class, this);
 		loaded = true;
 	}
 

@@ -5,7 +5,7 @@ import com.google.common.io.Files;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import dev.lcy0x1.serial.Serializer;
+import dev.lcy0x1.serial.codec.JsonCodec;
 import organize.ResourceOrganizer;
 import organize.json.JsonPart;
 
@@ -104,7 +104,7 @@ public class ConfigFileOrganizer extends ResourceOrganizer {
             return;
         }
         JsonElement je = new JsonParser().parse(new FileReader(f));
-        JsonPart part = Serializer.from(je, JsonPart.class, null);
+        JsonPart part = JsonCodec.from(je, JsonPart.class, null);
         List<JsonPart> list = parts.getOrDefault(part.file, new ArrayList<>());
         list.add(part);
         parts.put(part.file, list);

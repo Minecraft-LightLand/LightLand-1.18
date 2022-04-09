@@ -11,8 +11,7 @@ import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.content.profession.prof.*;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.lcy0x1.serial.Automator;
-import dev.lcy0x1.serial.Serializer;
+import dev.lcy0x1.serial.handler.RLClassHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -85,8 +84,7 @@ public class LightLandRegistry {
 
 	@SuppressWarnings({"rawtypes"})
 	private static <T extends IForgeRegistryEntry<T>> IForgeRegistry regSerializer(IForgeRegistry<T> r) {
-		new Serializer.RLClassHandler<>(r.getRegistrySuperType(), () -> r);
-		new Automator.RegistryClassHandler<>(r.getRegistrySuperType(), () -> r);
+		new RLClassHandler<>(r.getRegistrySuperType(), () -> r);
 		return r;
 	}
 
