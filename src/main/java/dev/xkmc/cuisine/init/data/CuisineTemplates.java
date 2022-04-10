@@ -14,9 +14,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
+
+import java.util.Locale;
 
 public class CuisineTemplates {
 
@@ -75,13 +78,18 @@ public class CuisineTemplates {
 			return getEntry().get().asItem();
 		}
 
+		/* --- Data Gen --- */
+
+		public String getName() {
+			return name().toLowerCase(Locale.ROOT);
+		}
+
 		public BlockCuisineCrops createBlock(BlockBehaviour.Properties p) {
 			//TODO corn
 			//TODO double
 			return new BlockCuisineCrops(this, p);
 		}
 
-		/* --- Data Gen --- */
 
 		private static final ResourceLocation MODEL = new ResourceLocation(Cuisine.MODID, "cross_crop");
 		private static final ResourceLocation MODEL_DOUBLE = new ResourceLocation(Cuisine.MODID, "double_crop");
@@ -102,16 +110,17 @@ public class CuisineTemplates {
 
 		public void loot(RegistrateBlockLootTables table, BlockCuisineCrops block) {
 			//TODO double upper
-			table.accept((id, builder) -> builder
+			table.add(block, LootTable.lootTable()
 					.withPool(LootTableTemplate.getPool(1, 0).add(LootTableTemplate.getItem(getSeed(), 1)))
 					.withPool(LootTableTemplate.getPool(1, 0).add(LootTableTemplate.cropDrop(getSeed())
 							.when(LootTableTemplate.withBlockState(getEntry().get(), getAge(), getMaxAge()))))
-					.apply(ApplyExplosionDecay.explosionDecay()).build());
+					.apply(ApplyExplosionDecay.explosionDecay()));
 		}
 
 		private int getModelStage(int stage) {
 			return stage == 0 ? 0 : (stage - 1) * (getStage() - 2) / (getMaxAge() - 1) + 1;
 		}
+
 	}
 
 }

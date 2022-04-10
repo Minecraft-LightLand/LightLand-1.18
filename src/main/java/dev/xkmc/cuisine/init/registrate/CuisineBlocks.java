@@ -23,7 +23,7 @@ public class CuisineBlocks {
 		VEGES = new BlockEntry[n];
 		for (int i = 0; i < n; i++) {
 			CuisineTemplates.Veges type = CuisineTemplates.Veges.values()[i];
-			VEGES[i] = REGISTRATE.block(p-> type.createBlock(p))
+			VEGES[i] = REGISTRATE.block(type.getName(), p-> type.createBlock(p))
 					.addLayer(()-> RenderType::cutout)
 					.blockstate(type::generate).item().defaultModel().build()
 					.loot(type::loot).defaultLang().register();
