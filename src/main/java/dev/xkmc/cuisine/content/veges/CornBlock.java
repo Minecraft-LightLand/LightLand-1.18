@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.veges;
 
-import dev.xkmc.cuisine.init.data.CuisineTemplates;
+import dev.xkmc.cuisine.init.data.CuisineCropType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -16,9 +16,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import javax.annotation.Nullable;
 
-public class CornBlock extends DoubleCrops {
+public class CornBlock extends DoubleCropBlock {
 
-	public CornBlock(CuisineTemplates.Veges type, Properties props) {
+	public CornBlock(CuisineCropType type, Properties props) {
 		super(type, props);
 	}
 
@@ -27,7 +27,7 @@ public class CornBlock extends DoubleCrops {
 		if (!isLower(state)) {
 			BlockState lower = level.getBlockState(pos.below());
 			if (isLower(lower))
-				return CuisineCrops.SHAPE_BY_AGE[lower.getValue(getAgeProperty())];
+				return CuisineCropBlock.SHAPE_BY_AGE[lower.getValue(getAgeProperty())];
 		}
 		return Shapes.block();
 	}

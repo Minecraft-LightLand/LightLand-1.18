@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.init.registrate;
 
 import dev.hikarishima.lightland.init.LightLand;
-import dev.xkmc.cuisine.init.data.CuisineTemplates;
+import dev.xkmc.cuisine.init.data.CuisineCropType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,7 +25,7 @@ public class CuisineItems {
 		}
 	}
 
-	public static final Tab TAB_MAIN = new Tab("cuisine", () -> CuisineTemplates.Veges.CHILI::getSeed);
+	public static final Tab TAB_MAIN = new Tab("cuisine", () -> CuisineCropType.CHILI::getSeed);
 
 
 	public static void register() {

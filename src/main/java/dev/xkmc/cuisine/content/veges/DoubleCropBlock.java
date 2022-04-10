@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.veges;
 
-import dev.xkmc.cuisine.init.data.CuisineTemplates;
+import dev.xkmc.cuisine.init.data.CuisineCropType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -25,9 +25,9 @@ import net.minecraftforge.common.PlantType;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class DoubleCrops extends CuisineCrops {
+public class DoubleCropBlock extends CuisineCropBlock {
 
-	public DoubleCrops(CuisineTemplates.Veges type, Properties props) {
+	public DoubleCropBlock(CuisineCropType type, Properties props) {
 		super(type, props);
 	}
 
@@ -139,17 +139,17 @@ public class DoubleCrops extends CuisineCrops {
 	}
 
 	protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-		return state.is(Blocks.FARMLAND) && (getType().type != CuisineTemplates.ModelType.WATER || level.getFluidState(pos.above()).is(Fluids.WATER));
+		return state.is(Blocks.FARMLAND) && (getType().type != CuisineCropType.ModelType.WATER || level.getFluidState(pos.above()).is(Fluids.WATER));
 	}
 
 	@Override
 	public PlantType getPlantType(BlockGetter level, BlockPos pos) {
-		return getType().type == CuisineTemplates.ModelType.WATER ? PlantType.WATER : PlantType.CROP;
+		return getType().type == CuisineCropType.ModelType.WATER ? PlantType.WATER : PlantType.CROP;
 	}
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return !isLower(state) || getType().type != CuisineTemplates.ModelType.WATER ? super.getFluidState(state) : Fluids.WATER.getSource(false);
+		return !isLower(state) || getType().type != CuisineCropType.ModelType.WATER ? super.getFluidState(state) : Fluids.WATER.getSource(false);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.veges;
 
-import dev.xkmc.cuisine.init.data.CuisineTemplates;
+import dev.xkmc.cuisine.init.data.CuisineCropType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class CuisineCrops extends CropBlock {
+public class CuisineCropBlock extends CropBlock {
 
 	static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
@@ -24,21 +24,21 @@ public class CuisineCrops extends CropBlock {
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
 			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
 
-	private static final ThreadLocal<CuisineTemplates.Veges> TEMP = new ThreadLocal<>();
+	private static final ThreadLocal<CuisineCropType> TEMP = new ThreadLocal<>();
 
-	private static Properties warp(CuisineTemplates.Veges type, Properties props) {
+	private static Properties warp(CuisineCropType type, Properties props) {
 		TEMP.set(type);
 		return props;
 	}
 
-	private CuisineTemplates.Veges type;
+	private CuisineCropType type;
 
-	public CuisineCrops(CuisineTemplates.Veges type, Properties props) {
+	public CuisineCropBlock(CuisineCropType type, Properties props) {
 		super(warp(type, props));
 		getType();
 	}
 
-	public CuisineTemplates.Veges getType() {
+	public CuisineCropType getType() {
 		if (this.type != null) {
 			return type;
 		}
