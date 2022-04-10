@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.questline.common.mobs;
+package dev.hikarishima.lightland.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootPool;

@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.common.item.generic.GenericTieredItem;
-import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
+import dev.hikarishima.lightland.util.LootTableTemplate;
 import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;

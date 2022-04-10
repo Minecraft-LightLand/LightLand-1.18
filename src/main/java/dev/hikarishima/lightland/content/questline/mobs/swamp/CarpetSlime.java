@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
-import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
+import dev.hikarishima.lightland.util.LootTableTemplate;
 import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import net.minecraft.core.BlockPos;
