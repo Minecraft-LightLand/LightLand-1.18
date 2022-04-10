@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.item.backpack;
 
 import dev.hikarishima.lightland.content.common.capability.worldstorage.StorageContainer;
-import dev.hikarishima.lightland.init.registrate.MenuRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandMenu;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import dev.lcy0x1.menu.BaseContainerMenu;
 import net.minecraft.world.SimpleContainer;
@@ -21,7 +21,7 @@ public class WorldChestContainer extends BaseContainerMenu<WorldChestContainer> 
 	protected final StorageContainer storage;
 
 	public WorldChestContainer(int windowId, Inventory inventory, SimpleContainer cont, @Nullable StorageContainer storage) {
-		super(MenuRegistrate.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont, false);
+		super(LightlandMenu.MT_WORLD_CHEST.get(), windowId, inventory, BackpackContainer.MANAGERS[2], menu -> cont, false);
 		this.player = inventory.player;
 		this.addSlot("grid", stack -> true);
 		this.storage = storage;

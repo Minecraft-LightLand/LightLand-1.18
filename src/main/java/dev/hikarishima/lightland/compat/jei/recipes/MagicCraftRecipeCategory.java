@@ -8,8 +8,8 @@ import dev.hikarishima.lightland.content.magic.ritual.PotionBoostRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.PotionSpellRecipe;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.LangData;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -50,7 +50,7 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualR
 
 	public MagicCraftRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 36, 145, 54);
-		icon = guiHelper.createDrawableIngredient(BlockRegistrate.B_RITUAL_CORE.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(LightlandBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance());
 		return this;
 	}
 
@@ -89,7 +89,7 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualR
 				input.add(Ingredient.of(ent.input));
 			}
 		}
-		input.add(Ingredient.of(ItemRegistrate.MAGIC_WAND.get().getDefaultInstance()));
+		input.add(Ingredient.of(LightlandItems.MAGIC_WAND.get().getDefaultInstance()));
 		list.setInputIngredients(input);
 		List<ItemStack> output = new ArrayList<>();
 		output.add(sl.core.output);
@@ -128,7 +128,7 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualR
 							in++, false, 90 + j * 18, i * 18);
 			}
 		}
-		MagicWand wand = ItemRegistrate.MAGIC_WAND.get();
+		MagicWand wand = LightlandItems.MAGIC_WAND.get();
 		ItemStack wand_stack = wand.getDefaultInstance();
 
         IMagicRecipe<?> magic = sl.getMagic() == null ? null : CapProxy.getHandler().magicHolder.getRecipe(sl.getMagic());

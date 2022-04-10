@@ -5,12 +5,11 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.common.item.api.Mat;
 import dev.hikarishima.lightland.content.common.item.generic.*;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
@@ -119,7 +118,7 @@ public class GenItem {
 			 SoundEvent equip_sound, ToolStats tool, ArmorStats armor,
 			 ToolConfig tool_config, ArmorConfig armor_config,
 			 ExtraToolConfig tool_extra, ExtraArmorConfig armor_extra) {
-			Supplier<Ingredient> ing = () -> Ingredient.of(ItemRegistrate.MAT_INGOTS[ordinal()].get());
+			Supplier<Ingredient> ing = () -> Ingredient.of(LightlandItems.MAT_INGOTS[ordinal()].get());
 			this.id = name;
 			this.tier = new ForgeTier(level, tool.durability, tool.speed, 0, tool.enchant,
 					getBlockTag(level), ing);
@@ -133,11 +132,11 @@ public class GenItem {
 		}
 
 		public Item getArmor(EquipmentSlot slot) {
-			return ItemRegistrate.GEN_ITEM[ordinal()][slot.getIndex()].get();
+			return LightlandItems.GEN_ITEM[ordinal()][slot.getIndex()].get();
 		}
 
 		public Item getTool(Tools tool) {
-			return ItemRegistrate.GEN_ITEM[ordinal()][4 + tool.ordinal()].get();
+			return LightlandItems.GEN_ITEM[ordinal()][4 + tool.ordinal()].get();
 		}
 
 	}

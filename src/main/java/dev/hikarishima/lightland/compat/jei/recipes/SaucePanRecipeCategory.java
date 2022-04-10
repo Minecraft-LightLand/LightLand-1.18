@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.compat.jei.recipes;
 import dev.hikarishima.lightland.content.secondary.pan.PanBlockEntity;
 import dev.hikarishima.lightland.content.secondary.pan.SaucePanRecipe;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -40,7 +40,7 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 
 	public SaucePanRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 90, 162, 36);
-		icon = guiHelper.createDrawableIngredient(BlockRegistrate.SAUCEPAN.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(LightlandBlocks.SAUCEPAN.get().asItem().getDefaultInstance());
 		return this;
 	}
 
@@ -57,7 +57,7 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 
 	@Override
 	public Component getTitle() {
-		return new TranslatableComponent(BlockRegistrate.SAUCEPAN.get().getDescriptionId());
+		return new TranslatableComponent(LightlandBlocks.SAUCEPAN.get().getDescriptionId());
 	}
 
 	@Override

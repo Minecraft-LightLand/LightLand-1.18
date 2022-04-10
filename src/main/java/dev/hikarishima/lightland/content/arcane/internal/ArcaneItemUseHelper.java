@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.events.ItemUseEventHandler;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
@@ -177,7 +177,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 	@Override
 	public void onPlayerRightClickBlock(ItemStack stack, PlayerInteractEvent.RightClickBlock event) {
 		BlockState block = event.getWorld().getBlockState(event.getHitVec().getBlockPos());
-		if (block.is(BlockRegistrate.LAYLINE_CHARGER.get())) {
+		if (block.is(LightlandBlocks.LAYLINE_CHARGER.get())) {
 			event.setUseBlock(Event.Result.ALLOW);
 			return;
 		}

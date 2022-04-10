@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.products.recipe;
 
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +18,7 @@ public class DefMagicRecipe extends IMagicRecipe<DefMagicRecipe> {
 	public String[] flows;
 
 	public DefMagicRecipe(ResourceLocation id) {
-		super(id, RecipeRegistrate.RSM_DEF.get());
+		super(id, LightlandRecipe.RSM_DEF.get());
 	}
 
 	private static boolean flowRegex(char[] chars, String s0, String s1, boolean[][] bools, boolean bidirect) {

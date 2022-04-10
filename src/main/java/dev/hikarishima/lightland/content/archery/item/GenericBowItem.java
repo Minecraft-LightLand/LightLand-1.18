@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.archery.feature.FeatureList;
 import dev.hikarishima.lightland.content.archery.feature.bow.WindBowFeature;
 import dev.hikarishima.lightland.content.common.item.api.FastItem;
 import dev.hikarishima.lightland.init.ClientRegister;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.util.GenericItemStack;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.sounds.SoundEvents;
@@ -128,7 +128,7 @@ public class GenericBowItem extends BowItem implements FastItem {
 
 	public float getPullForTime(LivingEntity entity, float time) {
 		float f = time / config.pull_time();
-		MobEffectInstance ins = entity.getEffect(VanillaMagicRegistrate.QUICK_PULL.get());
+		MobEffectInstance ins = entity.getEffect(LightlandVanillaMagic.QUICK_PULL.get());
 		if (ins != null) {
 			f *= (1.5 + 0.5 * ins.getAmplifier());
 		}
@@ -210,7 +210,7 @@ public class GenericBowItem extends BowItem implements FastItem {
 
 	@Override
 	public boolean isFast(ItemStack stack) {
-		if (Proxy.getPlayer().hasEffect(VanillaMagicRegistrate.RUN_BOW.get()))
+		if (Proxy.getPlayer().hasEffect(LightlandVanillaMagic.RUN_BOW.get()))
 			return true;
 		return config.feature().pull.stream().anyMatch(e -> e instanceof WindBowFeature);
 	}

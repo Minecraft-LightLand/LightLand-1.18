@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.assassin.item;
 
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +16,7 @@ public class AssassinSwordItem extends SwordItem {
 	@Override
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
 		if (!user.level.isClientSide()) {
-			target.addEffect(new MobEffectInstance(VanillaMagicRegistrate.T_CLEAR.get(), 100));
+			target.addEffect(new MobEffectInstance(LightlandVanillaMagic.T_CLEAR.get(), 100));
 		}
 		return super.hurtEnemy(stack, user, target);
 	}

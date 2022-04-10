@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
-public class ParticleRegistrate {
+public class LightlandParticle {
 
 	public static final RegistryEntry<SimpleParticleType> EMERALD = REGISTRATE.simple("emerald", ParticleType.class, () -> new SimpleParticleType(false));
 

@@ -4,7 +4,7 @@ import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.AlertClassGoal;
 import dev.hikarishima.lightland.content.questline.common.mobs.BipedMonster;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
@@ -21,10 +21,10 @@ public class BaseCursedKnight<T extends BaseCursedKnight<T>> extends BipedMonste
 	public static void loot(RegistrateEntityLootTables table, EntityType<?> type) {
 		table.add(type, new LootTable.Builder()
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.KNIGHT_SCRAP.get(), 0, 1, 1))
+						.add(LootTableTemplate.getItem(LightlandItems.KNIGHT_SCRAP.get(), 0, 1, 1))
 						.when(LootTableTemplate.byPlayer()))
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.CURSED_DROPLET.get(), 0, 1))
+						.add(LootTableTemplate.getItem(LightlandItems.CURSED_DROPLET.get(), 0, 1))
 						.when(LootTableTemplate.byPlayer())
 						.when(LootTableTemplate.chance(0.1f, 0.01f)))
 		);

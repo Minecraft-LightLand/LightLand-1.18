@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.ritual;
 
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class EnchantRitualRecipe extends AbstractLevelRitualRecipe<EnchantRitualRecipe> {
 
 	public EnchantRitualRecipe(ResourceLocation id) {
-		super(id, RecipeRegistrate.RS_ENCH.get());
+		super(id, LightlandRecipe.RS_ENCH.get());
 	}
 
 	public void assemble(RitualCore.Inv inv, int level) {

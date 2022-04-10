@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.questline.block;
 
 import dev.hikarishima.lightland.content.questline.mobs.cursedknight.BaseCursedKnight;
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.lcy0x1.block.mult.*;
 import dev.lcy0x1.block.one.MirrorRotateBlockMethod;
 import dev.lcy0x1.block.one.PushReactionBlockMethod;
@@ -89,9 +89,9 @@ public class MazeWallBlock {
 					new AABB(pos.above(height - 1)).inflate(radius, height, radius), e -> true).size();
 			if (count > 6)
 				return;
-			spawn(EntityRegistrate.ET_CURSED_KNIGHT.get(), level, pos.offset(0, 1, 0));
-			spawn(EntityRegistrate.ET_CURSED_SHIELD.get(), level, pos.offset(0, 1, 1));
-			spawn(EntityRegistrate.ET_CURSED_ARCHER.get(), level, pos.offset(0, 1, -1));
+			spawn(LightlandEntities.ET_CURSED_KNIGHT.get(), level, pos.offset(0, 1, 0));
+			spawn(LightlandEntities.ET_CURSED_SHIELD.get(), level, pos.offset(0, 1, 1));
+			spawn(LightlandEntities.ET_CURSED_ARCHER.get(), level, pos.offset(0, 1, -1));
 		}
 
 		private void spawn(EntityType<? extends BaseCursedKnight<?>> type, ServerLevel level, BlockPos pos) {
@@ -197,7 +197,7 @@ public class MazeWallBlock {
 		@Override
 		public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
 			ItemStack stack = player.getItemInHand(hand);
-			if (stack.is(ItemRegistrate.DISPELL_DUST.get())) {
+			if (stack.is(LightlandItems.DISPELL_DUST.get())) {
 				if (!level.isClientSide()) {
 					for (Direction dire : Direction.values()) {
 						BlockPos next = pos.relative(dire);

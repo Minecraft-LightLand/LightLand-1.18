@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.secondary.pan;
 
 import dev.hikarishima.lightland.init.data.AllTags;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
 import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
@@ -33,7 +33,7 @@ import java.util.Objects;
 
 public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockMethod, OnClickBlockMethod, LightBlockMethod {
 
-	public static final BlockEntityBlockMethod<PanBlockEntity> TE = new BlockEntityBlockMethodImpl<>(BlockRegistrate.TE_PAN, PanBlockEntity.class);
+	public static final BlockEntityBlockMethod<PanBlockEntity> TE = new BlockEntityBlockMethodImpl<>(LightlandBlocks.TE_PAN, PanBlockEntity.class);
 
 	@Override
 	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

@@ -10,8 +10,8 @@ import dev.hikarishima.lightland.content.common.effect.EmeraldPopeEffect;
 import dev.hikarishima.lightland.content.common.item.api.IGlowingTarget;
 import dev.hikarishima.lightland.content.common.render.LLRenderState;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.registrate.ParticleRegistrate;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandParticle;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.base.Proxy;
 import net.minecraft.client.Camera;
@@ -114,7 +114,7 @@ public class ClientEntityEffectRenderEvents {
 			EffectSyncEvents.EFFECT_MAP.clear();
 		} else {
 			AbstractClientPlayer player = Proxy.getClientPlayer();
-			MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.EMERALD.get());
+			MobEffectInstance ins = player.getEffect(LightlandVanillaMagic.EMERALD.get());
 			if (ins != null) {
 				int lv = ins.getAmplifier();
 				int r = EmeraldPopeEffect.RADIUS * (1 + lv);
@@ -137,7 +137,7 @@ public class ClientEntityEffectRenderEvents {
 		if (player.getMainHandItem().getItem() instanceof GenericBowItem bow) {
 			float f = event.getFov();
 			float i = player.getTicksUsingItem();
-			MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.QUICK_PULL.get());
+			MobEffectInstance ins = player.getEffect(LightlandVanillaMagic.QUICK_PULL.get());
 			if (ins != null) {
 				i *= 1.5 + 0.5 * ins.getAmplifier();
 			}
@@ -178,21 +178,21 @@ public class ClientEntityEffectRenderEvents {
 		LivingEntity entity = event.getEntity();
 		if (EffectSyncEvents.EFFECT_MAP.containsKey(entity.getUUID())) {
 			Map<MobEffect, Integer> map = EffectSyncEvents.EFFECT_MAP.get(entity.getUUID());
-			if (map.containsKey(VanillaMagicRegistrate.ARCANE.get())) {
+			if (map.containsKey(LightlandVanillaMagic.ARCANE.get())) {
 				ICONS.add(new DelayedEntityRender(entity, ARCANE_ICON));
 			}
-			if (map.containsKey(VanillaMagicRegistrate.WATER_TRAP.get())) {
+			if (map.containsKey(LightlandVanillaMagic.WATER_TRAP.get())) {
 				ICONS.add(new DelayedEntityRender(entity, WATER_TRAP_ICON));
 			}
-			if (map.containsKey(VanillaMagicRegistrate.FLAME.get())) {
+			if (map.containsKey(LightlandVanillaMagic.FLAME.get())) {
 				ICONS.add(new DelayedEntityRender(entity, FLAME_ICON));
 			}
-			if (map.containsKey(VanillaMagicRegistrate.ICE.get())) {
+			if (map.containsKey(LightlandVanillaMagic.ICE.get())) {
 				ICONS.add(new DelayedEntityRender(entity, ICE_ICON));
 			}
-			if (map.containsKey(VanillaMagicRegistrate.EMERALD.get())) {
+			if (map.containsKey(LightlandVanillaMagic.EMERALD.get())) {
 				if (!Minecraft.getInstance().isPaused() && entity != Proxy.getClientPlayer()) {
-					int lv = map.get(VanillaMagicRegistrate.EMERALD.get());
+					int lv = map.get(LightlandVanillaMagic.EMERALD.get());
 					int r = EmeraldPopeEffect.RADIUS * (1 + lv);
 					int count = (1 + lv) * (1 + lv) * 4;
 					for (int i = 0; i < count; i++) {
@@ -246,7 +246,7 @@ public class ClientEntityEffectRenderEvents {
 		float b0 = (float) Math.acos(2 * Math.random() - 1);
 		v0 = v0.xRot(a0).yRot(b0);
 		v1 = v1.xRot(a0).yRot(b0);
-		w.addAlwaysVisibleParticle(ParticleRegistrate.EMERALD.get(),
+		w.addAlwaysVisibleParticle(LightlandParticle.EMERALD.get(),
 				vec.x + v0.x,
 				vec.y + v0.y,
 				vec.z + v0.z,

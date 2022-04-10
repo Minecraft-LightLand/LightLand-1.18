@@ -3,8 +3,8 @@ package dev.hikarishima.lightland.content.magic.ritual;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.block.RitualSide;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,7 +19,7 @@ import java.util.List;
 public class PotionSpellRecipe extends AbstractRitualRecipe<PotionSpellRecipe> {
 
 	public PotionSpellRecipe(ResourceLocation id) {
-		super(id, RecipeRegistrate.RSP_SPELL.get());
+		super(id, LightlandRecipe.RSP_SPELL.get());
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class PotionSpellRecipe extends AbstractRitualRecipe<PotionSpellRecipe> {
 		inv.setItem(5, assemble(inv));
 		for (RitualSide.TE te : inv.sides) {
 			ItemStack stack = te.getItem(0);
-			if (stack.getItem() == ItemRegistrate.SPELL_CARD.get()) {
+			if (stack.getItem() == LightlandItems.SPELL_CARD.get()) {
 				MagicScroll.initEffect(list, stack);
 				MagicScroll.setTarget(target, stack);
 				MagicScroll.setRadius(radius, stack);

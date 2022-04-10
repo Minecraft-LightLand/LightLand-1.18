@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.berserker.item;
 
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,15 +24,15 @@ public class BerserkAxe extends AxeItem {
 	public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity user) {
 		if (user instanceof ServerPlayer player) {
 			{
-				MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.BLOOD_THURST.get());
+				MobEffectInstance ins = player.getEffect(LightlandVanillaMagic.BLOOD_THURST.get());
 				if (ins != null) {
 					player.addEffect(new MobEffectInstance(MobEffects.SATURATION, (ins.getAmplifier() + 1) * 4));
 				}
 			}
 			{
-				MobEffectInstance ins = player.getEffect(VanillaMagicRegistrate.ARMOR_BREAKER.get());
+				MobEffectInstance ins = player.getEffect(LightlandVanillaMagic.ARMOR_BREAKER.get());
 				if (ins != null) {
-					target.addEffect(new MobEffectInstance(VanillaMagicRegistrate.ARMOR_REDUCE.get(), 200, ins.getAmplifier()));
+					target.addEffect(new MobEffectInstance(LightlandVanillaMagic.ARMOR_REDUCE.get(), 200, ins.getAmplifier()));
 				}
 			}
 		}

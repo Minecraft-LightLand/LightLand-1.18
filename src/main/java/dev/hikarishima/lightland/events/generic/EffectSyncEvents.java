@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.events.generic;
 
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.network.packets.EffectToClient;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
@@ -19,11 +19,11 @@ public class EffectSyncEvents {
 	public static final Set<MobEffect> TRACKED = new HashSet<>();
 
 	public static void init() {
-		TRACKED.add(VanillaMagicRegistrate.ARCANE.get());
-		TRACKED.add(VanillaMagicRegistrate.WATER_TRAP.get());
-		TRACKED.add(VanillaMagicRegistrate.FLAME.get());
-		TRACKED.add(VanillaMagicRegistrate.EMERALD.get());
-		TRACKED.add(VanillaMagicRegistrate.ICE.get());
+		TRACKED.add(LightlandVanillaMagic.ARCANE.get());
+		TRACKED.add(LightlandVanillaMagic.WATER_TRAP.get());
+		TRACKED.add(LightlandVanillaMagic.FLAME.get());
+		TRACKED.add(LightlandVanillaMagic.EMERALD.get());
+		TRACKED.add(LightlandVanillaMagic.ICE.get());
 	}
 
 	@OnlyIn(Dist.CLIENT)

@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.world.item.Item;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
-import static dev.hikarishima.lightland.init.registrate.ItemRegistrate.TAB_MAIN;
+import static dev.hikarishima.lightland.init.registrate.LightlandItems.TAB_MAIN;
 
 public class CreateItems {
 

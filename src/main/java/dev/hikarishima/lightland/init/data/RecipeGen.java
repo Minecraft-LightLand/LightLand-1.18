@@ -5,9 +5,9 @@ import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.secondary.pan.SaucePanRecipeBuilder;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.CustomShapelessBuilder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -31,16 +31,16 @@ public class RecipeGen {
 			for (int i = 0; i < GenItem.Mats.values().length; i++) {
 				genTools(pvd, i, Items.STICK);
 			}
-			storage(pvd, ItemRegistrate.ENC_GOLD_NUGGET, ItemRegistrate.ENC_GOLD_INGOT, BlockRegistrate.ENCHANT_GOLD_BLOCK);
-			storage(pvd, ItemRegistrate.LEAD_NUGGET, ItemRegistrate.LEAD_INGOT, BlockRegistrate.LEAD_BLOCK);
-			storage(pvd, ItemRegistrate.MAGICIUM_NUGGET, ItemRegistrate.MAGICIUM_INGOT, BlockRegistrate.MAGICIUM_BLOCK);
+			storage(pvd, LightlandItems.ENC_GOLD_NUGGET, LightlandItems.ENC_GOLD_INGOT, LightlandBlocks.ENCHANT_GOLD_BLOCK);
+			storage(pvd, LightlandItems.LEAD_NUGGET, LightlandItems.LEAD_INGOT, LightlandBlocks.LEAD_BLOCK);
+			storage(pvd, LightlandItems.MAGICIUM_NUGGET, LightlandItems.MAGICIUM_INGOT, LightlandBlocks.MAGICIUM_BLOCK);
 		}
 		{
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				Item wool = ForgeRegistries.ITEMS.getValue(new ResourceLocation(color.getName() + "_wool"));
 				Item dye = ForgeRegistries.ITEMS.getValue(new ResourceLocation(color.getName() + "_dye"));
-				Item backpack = ItemRegistrate.BACKPACKS[i].get();
+				Item backpack = LightlandItems.BACKPACKS[i].get();
 
 				unlock(pvd, new ShapedRecipeBuilder(backpack, 1)::unlockedBy, backpack)
 						.group("backpack_craft").pattern("ADA").pattern("BCB").pattern("ADA")
@@ -48,23 +48,23 @@ public class RecipeGen {
 						.define('C', Items.CHEST).define('D', Items.IRON_INGOT)
 						.save(pvd, "lightland:shaped/craft_backpack_" + color.getName());
 
-				unlock(pvd, new CustomShapelessBuilder<>(RecipeRegistrate.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
+				unlock(pvd, new CustomShapelessBuilder<>(LightlandRecipe.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
 						.group("backpack_dye").requires(Ingredient.of(AllTags.AllItemTags.BACKPACKS.tag))
 						.requires(Ingredient.of(dye)).save(pvd, "polaris_rpg:shapeless/dye_backpack_" + color.getName());
 
-				unlock(pvd, new UpgradeRecipeBuilder(RecipeRegistrate.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
-						Ingredient.of(ItemRegistrate.ENDER_POCKET.get()), backpack)::unlocks, backpack)
+				unlock(pvd, new UpgradeRecipeBuilder(LightlandRecipe.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
+						Ingredient.of(LightlandItems.ENDER_POCKET.get()), backpack)::unlocks, backpack)
 						.save(pvd, "lightland:smithing/upgrade_backpack_" + color.getName());
 
-				Item storage = ItemRegistrate.DIMENSIONAL_STORAGE[i].get();
+				Item storage = LightlandItems.DIMENSIONAL_STORAGE[i].get();
 
 				unlock(pvd, new ShapedRecipeBuilder(storage, 1)::unlockedBy, storage)
 						.group("dimensional_storage_craft").pattern("DAD").pattern("ACA").pattern("BAB")
-						.define('A', ItemRegistrate.ENDER_POCKET.get()).define('B', wool)
+						.define('A', LightlandItems.ENDER_POCKET.get()).define('B', wool)
 						.define('C', Items.ENDER_CHEST).define('D', Items.POPPED_CHORUS_FRUIT)
 						.save(pvd, "lightland:shaped/craft_storage_" + color.getName());
 			}
-			Item ender = ItemRegistrate.ENDER_BACKPACK.get();
+			Item ender = LightlandItems.ENDER_BACKPACK.get();
 			unlock(pvd, new ShapedRecipeBuilder(ender, 1)::unlockedBy, ender)
 					.pattern("ADA").pattern("BCB").pattern("ADA")
 					.define('A', Tags.Items.LEATHER).define('B', Items.ENDER_PEARL)
@@ -89,9 +89,9 @@ public class RecipeGen {
 	}
 
 	private static void genTools(RegistrateRecipeProvider pvd, int i, Item stick) {
-		storage(pvd, ItemRegistrate.MAT_NUGGETS[i], ItemRegistrate.MAT_INGOTS[i], BlockRegistrate.GEN_BLOCK[i]);
-		Item item = ItemRegistrate.MAT_INGOTS[i].get();
-		ItemEntry<?>[] arr = ItemRegistrate.GEN_ITEM[i];
+		storage(pvd, LightlandItems.MAT_NUGGETS[i], LightlandItems.MAT_INGOTS[i], LightlandBlocks.GEN_BLOCK[i]);
+		Item item = LightlandItems.MAT_INGOTS[i].get();
+		ItemEntry<?>[] arr = LightlandItems.GEN_ITEM[i];
 		unlock(pvd, new ShapedRecipeBuilder(arr[0].get(), 1)::unlockedBy, arr[0].get())
 				.pattern("A A").pattern("A A").define('A', item).save(pvd);
 		unlock(pvd, new ShapedRecipeBuilder(arr[1].get(), 1)::unlockedBy, arr[1].get())

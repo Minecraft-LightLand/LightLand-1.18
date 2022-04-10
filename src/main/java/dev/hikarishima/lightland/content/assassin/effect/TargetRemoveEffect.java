@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.assassin.effect;
 
 import dev.hikarishima.lightland.content.common.effect.SkillEffect;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,8 +22,8 @@ public class TargetRemoveEffect extends MobEffect implements SkillEffect {
 	public void applyEffectTick(LivingEntity self, int level) {
 		if (self instanceof Mob mob) {
 			LivingEntity old = mob.getTarget();
-			if (old != null && !old.hasEffect(VanillaMagicRegistrate.T_SINK.get())) {
-				if (level > 0 || old.hasEffect(VanillaMagicRegistrate.T_HIDE.get()))
+			if (old != null && !old.hasEffect(LightlandVanillaMagic.T_SINK.get())) {
+				if (level > 0 || old.hasEffect(LightlandVanillaMagic.T_HIDE.get()))
 					mob.setTarget(null);
 			}
 		}

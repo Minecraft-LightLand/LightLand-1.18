@@ -2,8 +2,8 @@ package dev.hikarishima.lightland.content.questline.block;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
 import dev.hikarishima.lightland.content.arcane.internal.IArcaneItem;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -24,16 +24,16 @@ public class LaylineChargerBlock extends Block {
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		ItemStack stack = player.getItemInHand(hand);
 		BlockState below = level.getBlockState(pos.below());
-		if (below.is(BlockRegistrate.LAYROOT_HEAD.get())) {
-			if (stack.is(ItemRegistrate.LAYLINE_ORB.get())) {
+		if (below.is(LightlandBlocks.LAYROOT_HEAD.get())) {
+			if (stack.is(LightlandItems.LAYLINE_ORB.get())) {
 				stack.shrink(1);
-				level.setBlockAndUpdate(pos.below(), BlockRegistrate.LAYLINE_HEAD.getDefaultState());
+				level.setBlockAndUpdate(pos.below(), LightlandBlocks.LAYLINE_HEAD.getDefaultState());
 				return InteractionResult.SUCCESS;
 			}
 			if (stack.getItem() instanceof IArcaneItem) {
 				if (ArcaneItemUseHelper.getArcaneMana(stack) >= 20) {
 					ArcaneItemUseHelper.addArcaneMana(stack, -20);
-					level.setBlockAndUpdate(pos.below(), BlockRegistrate.LAYLINE_HEAD.getDefaultState());
+					level.setBlockAndUpdate(pos.below(), LightlandBlocks.LAYLINE_HEAD.getDefaultState());
 					return InteractionResult.SUCCESS;
 				}
 				return InteractionResult.FAIL;

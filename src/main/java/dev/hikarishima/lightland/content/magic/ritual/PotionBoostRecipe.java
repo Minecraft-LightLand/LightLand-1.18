@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.ritual;
 
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -23,7 +23,7 @@ public class PotionBoostRecipe extends AbstractLevelRitualRecipe<PotionBoostReci
 	public int modify_level;
 
 	public PotionBoostRecipe(ResourceLocation id) {
-		super(id, RecipeRegistrate.RSP_BOOST.get());
+		super(id, LightlandRecipe.RSP_BOOST.get());
 	}
 
 	public void assemble(RitualCore.Inv inv, int level) {

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.berserker.recipe;
 
 import dev.hikarishima.lightland.content.berserker.item.MedicineItem;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.AbstractShapedRecipe;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.NonNullList;
@@ -60,7 +60,7 @@ public class MedArmorRecipe extends AbstractShapedRecipe<MedArmorRecipe> {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return RecipeRegistrate.RSC_MED_ARMOR.get();
+		return LightlandRecipe.RSC_MED_ARMOR.get();
 	}
 
 }

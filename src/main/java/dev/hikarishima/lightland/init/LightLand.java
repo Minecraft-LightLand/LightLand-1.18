@@ -47,13 +47,13 @@ public class LightLand {
 
 	private static void registerRegistrates() {
 		ForgeMod.enableMilkFluid();
-		BlockRegistrate.register();
-		EntityRegistrate.register();
-		ItemRegistrate.register();
-		MenuRegistrate.register();
-		RecipeRegistrate.register();
-		VanillaMagicRegistrate.register();
-		ParticleRegistrate.register();
+		LightlandBlocks.register();
+		LightlandEntities.register();
+		LightlandItems.register();
+		LightlandMenu.register();
+		LightlandRecipe.register();
+		LightlandVanillaMagic.register();
+		LightlandParticle.register();
 		WorldGenRegistrate.register();
 		StructureRegistrate.register();
 		AllTags.register();
@@ -80,7 +80,7 @@ public class LightLand {
 		bus.addListener(EventPriority.LOWEST, LightLand::gatherData);
 		bus.addListener(LightLand::onParticleRegistryEvent);
 		bus.addListener(LightLand::registerCaps);
-		bus.addListener(EntityRegistrate::registerEntityAttributes);
+		bus.addListener(LightlandEntities::registerEntityAttributes);
 	}
 
 	private static void registerCommands() {
@@ -106,7 +106,7 @@ public class LightLand {
 		event.enqueueWork(() -> {
 			PacketHandler.registerPackets();
 			EffectSyncEvents.init();
-			VanillaMagicRegistrate.registerBrewingRecipe();
+			LightlandVanillaMagic.registerBrewingRecipe();
 		});
 		StructureRegistrate.commonSetup(event);
 	}
@@ -116,7 +116,7 @@ public class LightLand {
 	}
 
 	public static void onParticleRegistryEvent(ParticleFactoryRegisterEvent event) {
-		ParticleRegistrate.registerClient();
+		LightlandParticle.registerClient();
 	}
 
 	public static void registerCaps(RegisterCapabilitiesEvent event) {

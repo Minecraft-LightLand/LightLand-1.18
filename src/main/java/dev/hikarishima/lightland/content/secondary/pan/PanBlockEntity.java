@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.secondary.pan;
 
 import dev.hikarishima.lightland.content.common.render.TileInfoOverlay;
 import dev.hikarishima.lightland.init.data.AllTags;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
@@ -174,7 +174,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 		if (level == null) return false;
 		boolean ans = outputInventory.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
 		if (!ans) return false;
-		Optional<SaucePanRecipe> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_PAN, inputInventory, level);
+		Optional<SaucePanRecipe> r = level.getRecipeManager().getRecipeFor(LightlandRecipe.RT_PAN, inputInventory, level);
 		inputInventory.clear();
 		fluids.clear();
 		if (r.isEmpty()) {

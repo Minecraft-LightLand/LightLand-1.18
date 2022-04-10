@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.common.gui.ability;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hikarishima.lightland.content.common.gui.GuiTabType;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
@@ -105,8 +105,8 @@ public abstract class AbstractAbilityScreen extends Screen {
 	public enum AbilityTab {
 		PROFESSION(0, Items.IRON_SWORD::getDefaultInstance, ProfessionScreen::canAccess, ProfessionScreen::new, ProfessionScreen.TITLE),
 		ABILITY(1, Items.GOLDEN_APPLE::getDefaultInstance, () -> true, AbilityScreen::new, AbilityScreen.TITLE),
-		ELEMENT(2, () -> ItemRegistrate.MAGIC_WAND.get().getDefaultInstance(), ElementalScreen::canAccess, ElementalScreen::new, ElementalScreen.TITLE),
-		ARCANE(3, () -> ItemRegistrate.ARCANE_AXE_GILDED.get().getDefaultInstance(), ArcaneScreen::canAccess, ArcaneScreen::new, ArcaneScreen.TITLE);
+		ELEMENT(2, () -> LightlandItems.MAGIC_WAND.get().getDefaultInstance(), ElementalScreen::canAccess, ElementalScreen::new, ElementalScreen.TITLE),
+		ARCANE(3, () -> LightlandItems.ARCANE_AXE_GILDED.get().getDefaultInstance(), ArcaneScreen::canAccess, ArcaneScreen::new, ArcaneScreen.TITLE);
 
 		public final GuiTabType type = GuiTabType.ABOVE;
 		public final int index;

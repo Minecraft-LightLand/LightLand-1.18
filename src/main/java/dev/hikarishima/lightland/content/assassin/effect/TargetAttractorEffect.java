@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.assassin.effect;
 
 import dev.hikarishima.lightland.content.common.effect.SkillEffect;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -30,9 +30,9 @@ public class TargetAttractorEffect extends MobEffect implements SkillEffect {
 			if (e.distanceToSqr(self) > radius * radius) continue;
 			LivingEntity le = mob.getTarget();
 			if (le != null) {
-				if (le.hasEffect(VanillaMagicRegistrate.T_SINK.get())) continue;
+				if (le.hasEffect(LightlandVanillaMagic.T_SINK.get())) continue;
 			}
-			if (mob.hasEffect(VanillaMagicRegistrate.T_SOURCE.get()) || e.distanceToSqr(self) < ar * ar) {
+			if (mob.hasEffect(LightlandVanillaMagic.T_SOURCE.get()) || e.distanceToSqr(self) < ar * ar) {
 				mob.setTarget(self);
 			}
 		}

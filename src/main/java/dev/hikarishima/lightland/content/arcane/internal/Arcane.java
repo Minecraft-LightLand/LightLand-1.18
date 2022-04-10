@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.arcane.internal;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.compat.TeamAccessor;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.util.annotation.DoubleSidedCall;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
@@ -40,7 +40,7 @@ public abstract class Arcane extends NamedEntry<Arcane> {
 				return false;
 			if (e.getPosition(1).distanceToSqr(center) > radius * radius)
 				return false;
-			return !require_mark || ((LivingEntity) e).hasEffect(VanillaMagicRegistrate.ARCANE.get());
+			return !require_mark || ((LivingEntity) e).hasEffect(LightlandVanillaMagic.ARCANE.get());
 		}).forEach(e -> strike.strike(w, player, (LivingEntity) e));
 	}
 

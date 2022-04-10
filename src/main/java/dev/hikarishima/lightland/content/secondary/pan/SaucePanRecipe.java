@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.secondary.pan;
 
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +28,7 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 	public int time;
 
 	public SaucePanRecipe(ResourceLocation id) {
-		super(id, RecipeRegistrate.RS_PAN.get());
+		super(id, LightlandRecipe.RS_PAN.get());
 	}
 
 	@Override

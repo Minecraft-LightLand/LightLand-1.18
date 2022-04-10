@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.item.backpack;
 
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.registrate.MenuRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandMenu;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import dev.lcy0x1.menu.BaseContainerMenu;
 import dev.lcy0x1.menu.SpriteManager;
@@ -37,7 +37,7 @@ public class BackpackContainer extends BaseContainerMenu<BackpackContainer> {
 	protected final UUID uuid;
 
 	public BackpackContainer(int windowId, Inventory inventory, int hand, UUID uuid, int row) {
-		super(MenuRegistrate.MT_BACKPACK.get(), windowId, inventory, MANAGERS[row - 1], menu -> new BaseContainer<>(row * 9, menu), false);
+		super(LightlandMenu.MT_BACKPACK.get(), windowId, inventory, MANAGERS[row - 1], menu -> new BaseContainer<>(row * 9, menu), false);
 		this.player = inventory.player;
 		this.item_slot = hand;
 		this.uuid = uuid;

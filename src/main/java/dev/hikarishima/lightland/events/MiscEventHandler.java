@@ -9,7 +9,7 @@ import dev.hikarishima.lightland.content.common.item.backpack.WorldChestItem;
 import dev.hikarishima.lightland.content.common.render.MagicWandOverlay;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.data.Lore;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.network.packets.SlotClickToServer;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.lcy0x1.base.Proxy;
@@ -65,21 +65,21 @@ public class MiscEventHandler {
 
 	@SubscribeEvent
 	public static void onTargetSet(LivingSetAttackTargetEvent event) {
-		if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.T_CLEAR.get()))
+		if (event.getEntityLiving().hasEffect(LightlandVanillaMagic.T_CLEAR.get()))
 			event.setCanceled(true);
-		if (event.getTarget() != null && event.getTarget().hasEffect(VanillaMagicRegistrate.T_HIDE.get()))
+		if (event.getTarget() != null && event.getTarget().hasEffect(LightlandVanillaMagic.T_HIDE.get()))
 			event.setCanceled(true);
 	}
 
 	@SubscribeEvent
 	public static void onVisibilityGet(LivingEvent.LivingVisibilityEvent event) {
-		if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.T_HIDE.get()))
+		if (event.getEntityLiving().hasEffect(LightlandVanillaMagic.T_HIDE.get()))
 			event.modifyVisibility(0);
 	}
 
 	@SubscribeEvent
 	public static void onEntityKnockBack(LivingKnockBackEvent event) {
-		if (event.getEntityLiving().hasEffect(VanillaMagicRegistrate.NO_KB.get()))
+		if (event.getEntityLiving().hasEffect(LightlandVanillaMagic.NO_KB.get()))
 			event.setCanceled(true);
 	}
 
@@ -119,8 +119,8 @@ public class MiscEventHandler {
 
 	@SubscribeEvent
 	public static void onPotionTest(PotionEvent.PotionApplicableEvent event) {
-		boolean flag = event.getEntityLiving().hasEffect(VanillaMagicRegistrate.CLEANSE.get());
-		flag |= event.getEntityLiving().hasEffect(VanillaMagicRegistrate.DISPELL.get());
+		boolean flag = event.getEntityLiving().hasEffect(LightlandVanillaMagic.CLEANSE.get());
+		flag |= event.getEntityLiving().hasEffect(LightlandVanillaMagic.DISPELL.get());
 		if (flag) {
 			if (event.getPotionEffect().getEffect() instanceof ForceEffect)
 				return;
@@ -130,9 +130,9 @@ public class MiscEventHandler {
 				return;
 			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.SKILL)
 				return;
-			if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get())
+			if (event.getPotionEffect().getEffect() == LightlandVanillaMagic.CLEANSE.get())
 				return;
-			if (event.getPotionEffect().getEffect() == VanillaMagicRegistrate.DISPELL.get())
+			if (event.getPotionEffect().getEffect() == LightlandVanillaMagic.DISPELL.get())
 				return;
 			event.setResult(Event.Result.DENY);
 		}
@@ -140,16 +140,16 @@ public class MiscEventHandler {
 
 	@SubscribeEvent
 	public static void onPotionAdded(PotionEvent.PotionAddedEvent event) {
-		boolean flag = event.getPotionEffect().getEffect() == VanillaMagicRegistrate.CLEANSE.get();
-		flag |= event.getPotionEffect().getEffect() == VanillaMagicRegistrate.DISPELL.get();
+		boolean flag = event.getPotionEffect().getEffect() == LightlandVanillaMagic.CLEANSE.get();
+		flag |= event.getPotionEffect().getEffect() == LightlandVanillaMagic.DISPELL.get();
 		if (flag) {
 			List<MobEffectInstance> list = new ArrayList<>(event.getEntityLiving().getActiveEffects());
 			for (MobEffectInstance ins : list) {
 				if (ins.getEffect() instanceof ForceEffect)
 					continue;
-				if (ins.getEffect() == VanillaMagicRegistrate.CLEANSE.get())
+				if (ins.getEffect() == LightlandVanillaMagic.CLEANSE.get())
 					continue;
-				if (ins.getEffect() == VanillaMagicRegistrate.DISPELL.get())
+				if (ins.getEffect() == LightlandVanillaMagic.DISPELL.get())
 					continue;
 				event.getEntityLiving().removeEffect(ins.getEffect());
 			}
