@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bowl",
+    "minecraft:egg",
+    "minecraft:beef",
+    "minecraft:porkchop",
+    "minecraft:chicken",
+    "minecraft:rabbit",
+    "minecraft:potato",
+    "minecraft:carrot",
+    "minecraft:beetroot",
+    "minecraft:cocoa_beans",
+    "minecraft:melon_slice",
+    "minecraft:pumpkin",
+    "minecraft:tropical_fish",
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:pufferfish",
+    "minecraft:red_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:crimson_fungus",
+    "minecraft:warped_fungus",
+    "minecraft:wheat",
+    "minecraft:rabbit_foot",
+    "minecraft:sugar",
+    "#minecraft:flowers"
+  ]
+}

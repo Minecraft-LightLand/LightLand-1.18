@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.test;
+package dev.hikarishima.lightland.content.secondary.pan;
 
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.lcy0x1.recipe.BaseRecipe;
@@ -56,12 +56,12 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 		for (FluidStack stack : inv.getTile().fluids.getAsList()) {
 			if (stack.isEmpty())
 				continue;
-			if (items.isEmpty())
+			if (fluids.isEmpty())
 				return false;
 			boolean match = false;
 			for (Iterator<FluidStack> itr = fluids.iterator(); itr.hasNext(); ) {
 				FluidStack ing = itr.next();
-				if (ing.isFluidEqual(stack)) {
+				if (ing.isFluidEqual(stack) && stack.getAmount() >= ing.getAmount()) {
 					itr.remove();
 					match = true;
 					break;

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.compat.jei.recipes;
 
-import dev.hikarishima.lightland.content.common.test.PanBlockEntity;
-import dev.hikarishima.lightland.content.common.test.SaucePanRecipe;
+import dev.hikarishima.lightland.content.secondary.pan.PanBlockEntity;
+import dev.hikarishima.lightland.content.secondary.pan.SaucePanRecipe;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import mezz.jei.api.constants.VanillaTypes;

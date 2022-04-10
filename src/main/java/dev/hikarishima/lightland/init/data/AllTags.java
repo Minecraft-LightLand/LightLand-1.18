@@ -13,10 +13,12 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -60,8 +62,7 @@ public class AllTags {
 		return b -> b.tag(BlockTags.MINEABLE_WITH_PICKAXE);
 	}
 
-	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> tagBlockAndItem(
-			String... path) {
+	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> tagBlockAndItem(String... path) {
 		return b -> {
 			for (String p : path)
 				b.tag(forgeBlockTag(p));
@@ -75,7 +76,7 @@ public class AllTags {
 	public enum NameSpace {
 
 		MOD(LightLand.MODID, false, true),
-		FORGE("forge"),
+		FORGE("forge", false, true),
 		TIC("tconstruct");
 
 		public final String id;
@@ -159,8 +160,8 @@ public class AllTags {
 
 	public enum AllItemTags {
 		BACKPACKS,
-		DIMENSIONAL_STORAGES
-		;
+		DIMENSIONAL_STORAGES,
+		PAN_ACCEPT;
 
 		public final TagKey<Item> tag;
 
@@ -223,6 +224,11 @@ public class AllTags {
 	}
 
 	public enum AllFluidTags {
+		MILK(NameSpace.FORGE),
+		CHOCOLATE(NameSpace.FORGE),
+		HONEY(NameSpace.FORGE),
+		TEA(NameSpace.FORGE),
+		PAN_ACCEPT,
 		;
 
 		public final TagKey<Fluid> tag;
@@ -283,9 +289,28 @@ public class AllTags {
 					.addTag(child));
 		}
 
+		static void register() {
+
+		}
+
 	}
 
 	public static void register() {
+		AllFluidTags.register();
+		AllItemTags.PAN_ACCEPT.add(Items.BOWL, Items.EGG, Items.BEEF, Items.PORKCHOP, Items.CHICKEN,
+				Items.RABBIT, Items.POTATO, Items.CARROT, Items.BEETROOT, Items.COCOA_BEANS, Items.MELON_SLICE,
+				Items.PUMPKIN, Items.TROPICAL_FISH, Items.COD, Items.SALMON, Items.PUFFERFISH,
+				Items.RED_MUSHROOM, Items.BROWN_MUSHROOM, Items.CRIMSON_FUNGUS, Items.WARPED_FUNGUS,
+				Items.WHEAT, Items.RABBIT_FOOT, Items.SUGAR, Items.MUTTON, Items.SWEET_BERRIES, Items.GLOW_BERRIES,
+				Items.KELP, Items.DRIED_KELP, Items.CHORUS_FRUIT, Items.NETHER_WART, Items.SUGAR_CANE,
+				Items.SPIDER_EYE, Items.PUMPKIN_SEEDS, Items.APPLE, Items.SEAGRASS, Items.ROTTEN_FLESH,
+				Items.BONE, Items.HONEYCOMB);
+		AllItemTags.PAN_ACCEPT.includeAll(ItemTags.FLOWERS);
+		AllFluidTags.PAN_ACCEPT.add(Fluids.WATER);
+		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.MILK.tag);
+		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.CHOCOLATE.tag);
+		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.TEA.tag);
+		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.HONEY.tag);
 	}
 
 }

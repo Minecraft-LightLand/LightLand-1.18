@@ -1,5 +1,6 @@
-package dev.hikarishima.lightland.content.common.test;
+package dev.hikarishima.lightland.content.secondary.pan;
 
+import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
@@ -15,7 +16,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -60,7 +60,7 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 				if (!w.isClientSide()) {
 					if (!open) {
 						if (te.startCooking()) {
-							state.setValue(BlockStateProperties.SIGNAL_FIRE, true)
+							state = state.setValue(BlockStateProperties.SIGNAL_FIRE, true)
 									.setValue(BlockStateProperties.OPEN, false);
 						}
 					}
@@ -116,14 +116,14 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 			if (opt.resolve().isPresent()) {
 				IFluidHandlerItem item = opt.resolve().get();
 				FluidStack fluidStack = item.getFluidInTank(0);
-				if (!fluidStack.isEmpty()) {
+				if (!fluidStack.isEmpty() && AllTags.AllFluidTags.PAN_ACCEPT.matches(fluidStack.getFluid())) {
 					FluidStack copy = fluidStack.copy();
 					copy.setAmount(1);
 					te.fluids.fill(copy, IFluidHandler.FluidAction.EXECUTE);
 					return InteractionResult.SUCCESS;
 				}
 			}
-			if (stack.isEdible() || stack.is(Items.BOWL)) {
+			if (stack.is(AllTags.AllItemTags.PAN_ACCEPT.tag)) {
 				ItemStack copy = stack.copy();
 				copy.setCount(1);
 				ItemStack remain = te.inputInventory.addItem(copy);

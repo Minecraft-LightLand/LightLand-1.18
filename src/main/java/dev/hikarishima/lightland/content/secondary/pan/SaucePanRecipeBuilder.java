@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.test;
+package dev.hikarishima.lightland.content.secondary.pan;
 
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.lcy0x1.recipe.BaseRecipeBuilder;

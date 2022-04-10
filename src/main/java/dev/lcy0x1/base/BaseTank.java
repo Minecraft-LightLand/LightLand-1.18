@@ -139,7 +139,7 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 		int drained = 0;
 		for (int i = 0; i < size; i++) {
 			FluidStack stack = list.get(i);
-			if (ans == null || stack.isFluidEqual(ans)) {
+			if (!stack.isEmpty() && (ans == null || stack.isFluidEqual(ans))) {
 				int remain = stack.getAmount();
 				int drain = Math.min(to_drain, remain);
 				drained += drain;

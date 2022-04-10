@@ -23,6 +23,7 @@ import dev.hikarishima.lightland.network.PacketHandler;
 import dev.lcy0x1.serial.handler.Handlers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -45,6 +46,7 @@ public class LightLand {
 	public static final LLRegistrate REGISTRATE = new LLRegistrate(MODID);
 
 	private static void registerRegistrates() {
+		ForgeMod.enableMilkFluid();
 		BlockRegistrate.register();
 		EntityRegistrate.register();
 		ItemRegistrate.register();

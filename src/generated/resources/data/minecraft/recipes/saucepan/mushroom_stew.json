@@ -13,15 +13,6 @@
       "item": "minecraft:bowl"
     },
     {
-      "item": "minecraft:rabbit"
-    },
-    {
-      "item": "minecraft:potato"
-    },
-    {
-      "item": "minecraft:carrot"
-    },
-    {
       "item": "minecraft:red_mushroom"
     },
     {
@@ -29,7 +20,7 @@
     }
   ],
   "result": {
-    "item": "minecraft:rabbit_stew"
+    "item": "minecraft:mushroom_stew"
   },
   "time": 100,
   "type": "lightland:sauce_pan"

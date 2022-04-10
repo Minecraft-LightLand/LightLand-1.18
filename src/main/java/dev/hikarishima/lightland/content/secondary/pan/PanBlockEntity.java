@@ -1,6 +1,7 @@
-package dev.hikarishima.lightland.content.common.test;
+package dev.hikarishima.lightland.content.secondary.pan;
 
 import dev.hikarishima.lightland.content.common.render.TileInfoOverlay;
+import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
@@ -10,7 +11,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -56,12 +56,15 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	private final AnimationFactory manager = new AnimationFactory(this);
 
 	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inputInventory = (RecipeContainer) new RecipeContainer(8).setMax(1).setPredicate(e -> canAccess()).add(this);
+	protected final RecipeContainer inputInventory = (RecipeContainer) new RecipeContainer(8).setMax(1)
+			.setPredicate(e -> canAccess() && AllTags.AllItemTags.PAN_ACCEPT.matches(e)).add(this);
 
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseContainer outputInventory = new BaseContainer(1).setPredicate(e -> false).add(this);
 	@SerialClass.SerialField(toClient = true)
-	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID).setPredicate(e -> canAccess()).setExtract(this::canAccess).add(this);
+	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID)
+			.setPredicate(e -> canAccess() && AllTags.AllFluidTags.PAN_ACCEPT.matches(e.getFluid()))
+			.setExtract(this::canAccess).add(this);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
@@ -168,18 +171,24 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	}
 
 	public boolean startCooking() {
-		inputInventory.clear();
-		fluids.clear();
 		if (level == null) return false;
 		boolean ans = outputInventory.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
 		if (!ans) return false;
 		Optional<SaucePanRecipe> r = level.getRecipeManager().getRecipeFor(RecipeRegistrate.RT_PAN, inputInventory, level);
-		if (r.isEmpty()) return false;
-		SaucePanRecipe recipe = r.get();
-		cooking_max = recipe.time;
-		cooking = cooking_max;
-		result = recipe.result.copy();
-		interrupt = recipe.interrupt.copy();
+		inputInventory.clear();
+		fluids.clear();
+		if (r.isEmpty()) {
+			cooking_max = 100;
+			cooking = cooking_max;
+			result = ItemStack.EMPTY;
+			interrupt = ItemStack.EMPTY;
+		} else {
+			SaucePanRecipe recipe = r.get();
+			cooking_max = recipe.time;
+			cooking = cooking_max;
+			result = recipe.result.copy();
+			interrupt = recipe.interrupt.copy();
+		}
 		notifyTile(null);
 		return true;
 	}

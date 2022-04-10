@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.test;
+package dev.hikarishima.lightland.content.secondary.pan;
 
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;

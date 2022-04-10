@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.test;
+package dev.hikarishima.lightland.content.secondary.pan;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;

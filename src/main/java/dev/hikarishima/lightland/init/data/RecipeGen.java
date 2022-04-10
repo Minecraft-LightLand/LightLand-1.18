@@ -4,7 +4,7 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import dev.hikarishima.lightland.content.common.test.SaucePanRecipeBuilder;
+import dev.hikarishima.lightland.content.secondary.pan.SaucePanRecipeBuilder;
 import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
 import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
 import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
@@ -73,7 +73,12 @@ public class RecipeGen {
 		}
 		{
 			unlock(pvd, new SaucePanRecipeBuilder(Items.RABBIT_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.RABBIT_STEW)
-					.requires(new FluidStack(Fluids.WATER, 5)).requires(Items.BOWL).requires(Items.RABBIT)
+					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL).requires(Items.RABBIT)
+					.requires(Items.POTATO).requires(Items.CARROT).requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
+					.save(pvd);
+			unlock(pvd, new SaucePanRecipeBuilder(Items.MUSHROOM_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.MUSHROOM_STEW)
+					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL)
+					.requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
 					.save(pvd);
 		}
 	}

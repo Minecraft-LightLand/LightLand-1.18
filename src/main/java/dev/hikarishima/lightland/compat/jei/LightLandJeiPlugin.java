@@ -7,7 +7,6 @@ import dev.hikarishima.lightland.compat.jei.recipes.DisEnchanterRecipeCategory;
 import dev.hikarishima.lightland.compat.jei.recipes.MagicCraftRecipeCategory;
 import dev.hikarishima.lightland.compat.jei.recipes.SaucePanRecipeCategory;
 import dev.hikarishima.lightland.compat.jei.screen.ExtraInfoScreen;
-import dev.hikarishima.lightland.content.common.test.SaucePanRecipe;
 import dev.hikarishima.lightland.content.magic.gui.craft.ArcaneInjectScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.DisEnchanterScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.SpellCraftScreen;
@@ -29,7 +28,6 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @JeiPlugin
