@@ -30,7 +30,7 @@ import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 /**
  * handles enchantment, mob effects, and potions
  */
-public class VanillaMagicRegistrate {
+public class LightlandVanillaMagic {
 
 	public static final RegistryEntry<ArcaneEffect> ARCANE = genEffect("arcane", () -> new ArcaneEffect(MobEffectCategory.NEUTRAL, 0x4800FF));
 	public static final RegistryEntry<WaterTrapEffect> WATER_TRAP = genEffect("water_trap", () -> new WaterTrapEffect(MobEffectCategory.HARMFUL, 0x00007f));
@@ -83,10 +83,10 @@ public class VanillaMagicRegistrate {
 	}
 
 	public static void registerBrewingRecipe() {
-		PotionBrewing.addMix(Potions.AWKWARD, ItemRegistrate.CLEANSE_WATER_BOTTLE.get(), P_CLEANSE_WATER.get());
+		PotionBrewing.addMix(Potions.AWKWARD, LightlandItems.CLEANSE_WATER_BOTTLE.get(), P_CLEANSE_WATER.get());
 		PotionBrewing.addMix(P_CLEANSE_WATER.get(), Items.REDSTONE, P_CLEANSE_WATER_L.get());
-		PotionBrewing.addMix(P_CLEANSE_WATER.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL.get());
-		PotionBrewing.addMix(P_CLEANSE_WATER_L.get(), ItemRegistrate.DISPELL_DUST.get(), P_DISPELL_L.get());
+		PotionBrewing.addMix(P_CLEANSE_WATER.get(), LightlandItems.DISPELL_DUST.get(), P_DISPELL.get());
+		PotionBrewing.addMix(P_CLEANSE_WATER_L.get(), LightlandItems.DISPELL_DUST.get(), P_DISPELL_L.get());
 		PotionBrewing.addMix(P_DISPELL.get(), Items.GLOWSTONE_DUST, P_DISPELL_S.get());
 		PotionBrewing.addMix(P_DISPELL.get(), Items.REDSTONE, P_DISPELL_L.get());
 	}

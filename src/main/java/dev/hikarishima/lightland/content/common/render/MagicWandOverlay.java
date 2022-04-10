@@ -13,7 +13,7 @@ import dev.hikarishima.lightland.content.magic.ritual.AbstractLevelRitualRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.AbstractRitualRecipe;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.init.data.LangData;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.hikarishima.lightland.network.packets.CapToServer;
 import dev.lcy0x1.base.Proxy;
@@ -109,7 +109,7 @@ public class MagicWandOverlay implements IIngameOverlay {
 				if (pl != null) {
 					x = (width / 2 + 60);
 					int cost = p.getCost();
-					Optional<AbstractRitualRecipe<?>> opr = Proxy.getWorld().getRecipeManager().getAllRecipesFor(RecipeRegistrate.RT_RITUAL).stream()
+					Optional<AbstractRitualRecipe<?>> opr = Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_RITUAL).stream()
 							.filter(e -> e instanceof AbstractLevelRitualRecipe<?>).filter(e -> p.recipe.id.equals(e.getMagic()))
 							.findFirst();
 					if (opr.isPresent()) {

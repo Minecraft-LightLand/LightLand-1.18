@@ -19,7 +19,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
-public class RecipeRegistrate {
+public class LightlandRecipe {
 
 	public static RecipeType<AbstractRitualRecipe<?>> RT_RITUAL;
 	public static RecipeType<IMagicRecipe<?>> RT_MAGIC;

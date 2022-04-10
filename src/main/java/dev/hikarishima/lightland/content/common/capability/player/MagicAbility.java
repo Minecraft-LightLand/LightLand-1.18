@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.network.packets.CapToClient;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.lcy0x1.serial.NBTObj;
@@ -73,17 +73,17 @@ public class MagicAbility {
 				parent.player.hurt(LOAD, 1);
 			}
 			if (load == 2) {
-				add(VanillaMagicRegistrate.HEAVY.get(), 4);
+				add(LightlandVanillaMagic.HEAVY.get(), 4);
 				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 4);
 			}
 			if (load == 3) {
-				add(VanillaMagicRegistrate.HEAVY.get(), 4);
+				add(LightlandVanillaMagic.HEAVY.get(), 4);
 				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 16);
 			}
 			if (load >= 4) {
-				add(VanillaMagicRegistrate.HEAVY.get(), 4);
+				add(LightlandVanillaMagic.HEAVY.get(), 4);
 				add(MobEffects.BLINDNESS, 0);
 				parent.player.hurt(LOAD, 64);
 			}

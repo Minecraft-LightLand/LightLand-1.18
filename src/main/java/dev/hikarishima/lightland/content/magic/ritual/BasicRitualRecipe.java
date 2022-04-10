@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.magic.ritual;
 
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 
@@ -8,6 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 public class BasicRitualRecipe extends AbstractRitualRecipe<BasicRitualRecipe> {
 
 	public BasicRitualRecipe(ResourceLocation id) {
-		super(id, RecipeRegistrate.RS_DEF.get());
+		super(id, LightlandRecipe.RS_DEF.get());
 	}
 }

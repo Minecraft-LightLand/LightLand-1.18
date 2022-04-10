@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.questline.common.mobs.BaseMonster;
 import dev.hikarishima.lightland.content.questline.common.mobs.SimpleEquipment;
 import dev.hikarishima.lightland.content.questline.common.mobs.SoundPackage;
 import dev.hikarishima.lightland.init.data.GenItem;
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.random.WeightedEntry;
@@ -45,7 +45,7 @@ public class LaylineProperties {
 			wrap(Items.BOW, 100));
 
 	public static final Set<EntityType<?>> ALLY_TYPE = Set.of(
-			EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), EntityRegistrate.ET_LAYLINE_SKELETON.get());
+			LightlandEntities.ET_LAYLINE_ZOMBIE.get(), LightlandEntities.ET_LAYLINE_SKELETON.get());
 
 	public static final BaseMonster.EntityConfig CONFIG_ZOMBIE = new BaseMonster.EntityConfig(MobType.UNDEAD, SOUND_ZOMBIE,
 			List.of(LAYLINE_HEAD, LAYLINE_CHEST, LAYLINE_LEGS, LAYLINE_FEET, LAYLINE_MEELEE), List.of(), ALLY_TYPE);
@@ -83,11 +83,11 @@ public class LaylineProperties {
 	public static void convert(ServerLevel level, LivingEntity target) {
 		Monster monster = null;
 		if (LaylineProperties.CONVERT_TYPE_ZOMBIE.contains(target.getType()))
-			monster = new LaylineZombie(EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), level);
+			monster = new LaylineZombie(LightlandEntities.ET_LAYLINE_ZOMBIE.get(), level);
 		if (LaylineProperties.CONVERT_TYPE_SKELETON.contains(target.getType()))
-			monster = new LaylineSkeleton(EntityRegistrate.ET_LAYLINE_SKELETON.get(), level);
-		if (target.getType() == EntityRegistrate.ET_LAYLINE_ZOMBIE.get())
-			monster = new LaylineSkeleton(EntityRegistrate.ET_LAYLINE_SKELETON.get(), level);
+			monster = new LaylineSkeleton(LightlandEntities.ET_LAYLINE_SKELETON.get(), level);
+		if (target.getType() == LightlandEntities.ET_LAYLINE_ZOMBIE.get())
+			monster = new LaylineSkeleton(LightlandEntities.ET_LAYLINE_SKELETON.get(), level);
 		if (monster != null) {
 			monster.copyPosition(target);
 			if (target.hasCustomName())

@@ -12,9 +12,9 @@ import dev.hikarishima.lightland.content.magic.gui.craft.DisEnchanterScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.SpellCraftScreen;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.lcy0x1.base.Proxy;
@@ -88,8 +88,8 @@ public class LightLandJeiPlugin implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addRecipes(IMagicRecipe.getMap(Proxy.getWorld(), MagicRegistry.MPT_ENCH.get()).values(), DISENCHANT.getUid());
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(RecipeRegistrate.RT_RITUAL), MAGIC_CRAFT.getUid());
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(RecipeRegistrate.RT_PAN), SAUCEPAN.getUid());
+		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_RITUAL), MAGIC_CRAFT.getUid());
+		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_PAN), SAUCEPAN.getUid());
 	}
 
 	@Override
@@ -98,9 +98,9 @@ public class LightLandJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(ItemRegistrate.DISENC_BOOK.get().getDefaultInstance(), DISENCHANT.getUid());
-		registration.addRecipeCatalyst(BlockRegistrate.B_RITUAL_CORE.get().asItem().getDefaultInstance(), MAGIC_CRAFT.getUid());
-		registration.addRecipeCatalyst(BlockRegistrate.SAUCEPAN.get().asItem().getDefaultInstance(), SAUCEPAN.getUid());
+		registration.addRecipeCatalyst(LightlandItems.DISENC_BOOK.get().getDefaultInstance(), DISENCHANT.getUid());
+		registration.addRecipeCatalyst(LightlandBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance(), MAGIC_CRAFT.getUid());
+		registration.addRecipeCatalyst(LightlandBlocks.SAUCEPAN.get().asItem().getDefaultInstance(), SAUCEPAN.getUid());
 	}
 
 	@Override

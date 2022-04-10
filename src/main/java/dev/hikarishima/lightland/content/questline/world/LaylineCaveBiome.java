@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.questline.world;
 
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import dev.hikarishima.lightland.init.worldgenreg.WorldGenRegistrate;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.placement.CavePlacements;
@@ -32,8 +32,8 @@ public class LaylineCaveBiome {
 		mobs.addSpawn(MobCategory.AMBIENT, new MobSpawnSettings.SpawnerData(EntityType.BAT, 10, 8, 8));
 		mobs.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 10, 4, 6));
 
-		mobs.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistrate.ET_LAYLINE_ZOMBIE.get(), 100, 4, 4));
-		mobs.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityRegistrate.ET_LAYLINE_SKELETON.get(), 100, 4, 4));
+		mobs.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(LightlandEntities.ET_LAYLINE_ZOMBIE.get(), 100, 4, 4));
+		mobs.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(LightlandEntities.ET_LAYLINE_SKELETON.get(), 100, 4, 4));
 		mobs.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SPIDER, 100, 4, 4));
 		mobs.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.ZOMBIE, 100, 4, 4));
 		mobs.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SKELETON, 100, 4, 4));

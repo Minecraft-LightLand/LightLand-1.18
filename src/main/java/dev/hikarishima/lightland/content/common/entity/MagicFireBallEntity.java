@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.entity;
 
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityDimensions;
@@ -24,7 +24,7 @@ public class MagicFireBallEntity extends LargeFireball implements IEntityAdditio
 	private float size;
 
 	public MagicFireBallEntity(Level world, LivingEntity owner, Vec3 vec, float size) {
-		this(EntityRegistrate.ET_FIRE_BALL.get(), world);
+		this(LightlandEntities.ET_FIRE_BALL.get(), world);
 		this.setOwner(owner);
 		this.setPos(vec.x, vec.y, vec.z);
 		this.size = size;

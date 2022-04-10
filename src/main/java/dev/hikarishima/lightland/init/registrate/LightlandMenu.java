@@ -15,18 +15,18 @@ import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
  * handles container menu
  */
 @MethodsReturnNonnullByDefault
-public class MenuRegistrate {
+public class LightlandMenu {
 
 	public static final MenuEntry<BackpackContainer> MT_BACKPACK = REGISTRATE.menu("backpack",
-			BackpackContainer::fromNetwork, () -> BackpackScreen::new).lang(MenuRegistrate::getLangKey).register();
+			BackpackContainer::fromNetwork, () -> BackpackScreen::new).lang(LightlandMenu::getLangKey).register();
 	public static final MenuEntry<WorldChestContainer> MT_WORLD_CHEST = REGISTRATE.menu("dimensional_storage",
-			WorldChestContainer::fromNetwork, () -> WorldChestScreen::new).lang(MenuRegistrate::getLangKey).register();
+			WorldChestContainer::fromNetwork, () -> WorldChestScreen::new).lang(LightlandMenu::getLangKey).register();
 	public static final MenuEntry<ArcaneInjectContainer> MT_ARCANE = REGISTRATE.menu("arcane_inject",
-			ArcaneInjectContainer::new, () -> ArcaneInjectScreen::new).lang(MenuRegistrate::getLangKey).register();
+			ArcaneInjectContainer::new, () -> ArcaneInjectScreen::new).lang(LightlandMenu::getLangKey).register();
 	public static final MenuEntry<DisEnchanterContainer> MT_DISENC = REGISTRATE.menu("disenchanter",
-			DisEnchanterContainer::new, () -> DisEnchanterScreen::new).lang(MenuRegistrate::getLangKey).register();
+			DisEnchanterContainer::new, () -> DisEnchanterScreen::new).lang(LightlandMenu::getLangKey).register();
 	public static final MenuEntry<SpellCraftContainer> MT_SPCRAFT = REGISTRATE.menu("spell_craft",
-			SpellCraftContainer::new, () -> SpellCraftScreen::new).lang(MenuRegistrate::getLangKey).register();
+			SpellCraftContainer::new, () -> SpellCraftScreen::new).lang(LightlandMenu::getLangKey).register();
 
 	public static void register() {
 

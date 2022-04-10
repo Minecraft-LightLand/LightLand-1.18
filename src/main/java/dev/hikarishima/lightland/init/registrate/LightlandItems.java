@@ -61,7 +61,7 @@ import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
 @SuppressWarnings({"rawtypes", "unchecked", "unsafe"})
 @MethodsReturnNonnullByDefault
-public class ItemRegistrate {
+public class LightlandItems {
 
 	public static class Tab extends CreativeModeTab {
 
@@ -78,9 +78,9 @@ public class ItemRegistrate {
 		}
 	}
 
-	public static final Tab TAB_MAIN = new Tab("material", () -> ItemRegistrate.MAGIC_WAND);
-	public static final Tab TAB_PROF = new Tab("profession", () -> ItemRegistrate.STARTER_BOW);
-	public static final Tab TAB_QUEST = new Tab("generated", () -> ItemRegistrate.GEN_ITEM[0][0]);
+	public static final Tab TAB_MAIN = new Tab("material", () -> LightlandItems.MAGIC_WAND);
+	public static final Tab TAB_PROF = new Tab("profession", () -> LightlandItems.STARTER_BOW);
+	public static final Tab TAB_QUEST = new Tab("generated", () -> LightlandItems.GEN_ITEM[0][0]);
 
 	static {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
@@ -111,7 +111,7 @@ public class ItemRegistrate {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-						.tag(AllTags.AllItemTags.BACKPACKS.tag).model(ItemRegistrate::createBackpackModel)
+						.tag(AllTags.AllItemTags.BACKPACKS.tag).model(LightlandItems::createBackpackModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
 			}
@@ -119,20 +119,20 @@ public class ItemRegistrate {
 			for (int i = 0; i < 16; i++) {
 				DyeColor color = DyeColor.values()[i];
 				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p.stacksTo(1)))
-						.tag(AllTags.AllItemTags.DIMENSIONAL_STORAGES.tag).model(ItemRegistrate::createWorldChestModel)
+						.tag(AllTags.AllItemTags.DIMENSIONAL_STORAGES.tag).model(LightlandItems::createWorldChestModel)
 						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
 						.defaultLang().register();
 			}
-			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(ItemRegistrate::createEnderBackpackModel).defaultLang().register();
+			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(LightlandItems::createEnderBackpackModel).defaultLang().register();
 			RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1))).defaultModel().defaultLang().register();
 		}
 		// Books
 		{
 			MAGIC_BOOK = REGISTRATE.item("magic_book", p -> new ScreenBook(p, () -> MagicTreeScreen::new)).defaultModel().defaultLang().register();
 			ABILITY_BOOK = REGISTRATE.item("ability_book", p -> new ScreenBook(p, () -> ProfessionScreen::new)).defaultModel().defaultLang().register();
-			ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_ARCANE)).defaultModel().defaultLang().register();
-			DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_DISENC)).defaultModel().defaultLang().register();
-			SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> MenuRegistrate.MT_SPCRAFT)).defaultModel().defaultLang().register();
+			ARCANE_INJECT_BOOK = REGISTRATE.item("arcane_inject_book", p -> new ContainerBook(p, () -> LightlandMenu.MT_ARCANE)).defaultModel().defaultLang().register();
+			DISENC_BOOK = REGISTRATE.item("disenchant_book", p -> new ContainerBook(p, () -> LightlandMenu.MT_DISENC)).defaultModel().defaultLang().register();
+			SPCRAFT_BOOK = REGISTRATE.item("spell_craft_book", p -> new ContainerBook(p, () -> LightlandMenu.MT_SPCRAFT)).defaultModel().defaultLang().register();
 		}
 		// materials
 		{
@@ -250,16 +250,16 @@ public class ItemRegistrate {
 	}
 
 	static {
-		registerEgg("layline_zombie_spawn_egg", 0, 0, () -> EntityRegistrate.ET_LAYLINE_ZOMBIE);
-		registerEgg("layline_skeleton_spawn_egg", 0, 0, () -> EntityRegistrate.ET_LAYLINE_SKELETON);
-		registerEgg("cursed_knight_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_KNIGHT);
-		registerEgg("cursed_archer_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_ARCHER);
-		registerEgg("cursed_shield_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CURSED_SHIELD);
-		registerEgg("potion_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_POTION_SLIME);
-		registerEgg("stone_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_STONE_SLIME);
-		registerEgg("vine_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_VINE_SLIME);
-		registerEgg("carpet_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_CARPET_SLIME);
-		registerEgg("boss_slime_spawn_egg", 0, 0, () -> EntityRegistrate.ET_BOSS_SLIME);
+		registerEgg("layline_zombie_spawn_egg", 0, 0, () -> LightlandEntities.ET_LAYLINE_ZOMBIE);
+		registerEgg("layline_skeleton_spawn_egg", 0, 0, () -> LightlandEntities.ET_LAYLINE_SKELETON);
+		registerEgg("cursed_knight_spawn_egg", 0, 0, () -> LightlandEntities.ET_CURSED_KNIGHT);
+		registerEgg("cursed_archer_spawn_egg", 0, 0, () -> LightlandEntities.ET_CURSED_ARCHER);
+		registerEgg("cursed_shield_spawn_egg", 0, 0, () -> LightlandEntities.ET_CURSED_SHIELD);
+		registerEgg("potion_slime_spawn_egg", 0, 0, () -> LightlandEntities.ET_POTION_SLIME);
+		registerEgg("stone_slime_spawn_egg", 0, 0, () -> LightlandEntities.ET_STONE_SLIME);
+		registerEgg("vine_slime_spawn_egg", 0, 0, () -> LightlandEntities.ET_VINE_SLIME);
+		registerEgg("carpet_slime_spawn_egg", 0, 0, () -> LightlandEntities.ET_CARPET_SLIME);
+		registerEgg("boss_slime_spawn_egg", 0, 0, () -> LightlandEntities.ET_BOSS_SLIME);
 	}
 
 	private static void registerEgg(String id, int col_0, int col_1, Supplier<EntityEntry<? extends Mob>> sup) {
@@ -306,15 +306,15 @@ public class ItemRegistrate {
 		TNT_3_ARROW = genArrow("tnt_arrow_lv3", 0, 0, false, e -> e.add(new ExplodeArrowFeature(6)));
 		FIRE_1_ARROW = genArrow("fire_arrow_lv1", 0, 0, false, e -> e
 				.add(new FireArrowFeature(100)).add(new PotionArrowFeature(
-						new MobEffectInstance(VanillaMagicRegistrate.FLAME.get(), 100, 0))));
+						new MobEffectInstance(LightlandVanillaMagic.FLAME.get(), 100, 0))));
 		FIRE_2_ARROW = genArrow("fire_arrow_lv2", 0, 0, false, e -> e
 				.add(new FireArrowFeature(200)).add(new PotionArrowFeature(
-						new MobEffectInstance(VanillaMagicRegistrate.FLAME.get(), 100, 1))));
+						new MobEffectInstance(LightlandVanillaMagic.FLAME.get(), 100, 1))));
 		ICE_ARROW = genArrow("frozen_arrow", 0, 0, false, e -> e.add(new PotionArrowFeature(
-				new MobEffectInstance(VanillaMagicRegistrate.ICE.get(), 600),
-				new MobEffectInstance(VanillaMagicRegistrate.WATER_TRAP.get(), 200))));
+				new MobEffectInstance(LightlandVanillaMagic.ICE.get(), 600),
+				new MobEffectInstance(LightlandVanillaMagic.WATER_TRAP.get(), 200))));
 		ACID_ARROW = genArrow("acid_arrow", 2, 0, false, e -> e.add(new PotionArrowFeature(
-				new MobEffectInstance(VanillaMagicRegistrate.ARMOR_BREAKER.get(), 600))));
+				new MobEffectInstance(LightlandVanillaMagic.ARMOR_BREAKER.get(), 600))));
 		DISPELL_ARROW = genArrow("dispell_arrow", 0, 0, false, e -> e.add(new DamageArrowFeature(
 				a -> DamageSource.arrow(a, a.getOwner()).bypassMagic(),
 				a -> (float) (a.getBaseDamage() * a.getDeltaMovement().length())
@@ -333,10 +333,10 @@ public class ItemRegistrate {
 				.color(() -> () -> (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack))
 				.defaultModel().defaultLang().register();
 		MEDICINE_ARMOR = genArmor("medicine_leather",
-				(slot, p) -> new MedicineArmor(Mat.MEDICINE_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel)
+				(slot, p) -> new MedicineArmor(Mat.MEDICINE_LEATHER, slot, p), e -> e.model(LightlandItems::createDoubleLayerModel)
 						.color(() -> () -> (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack)));
 		KING_MED_ARMOR = genArmor("king_leather",
-				(slot, p) -> new MedicineArmor(Mat.KING_LEATHER, slot, p), e -> e.model(ItemRegistrate::createDoubleLayerModel)
+				(slot, p) -> new MedicineArmor(Mat.KING_LEATHER, slot, p), e -> e.model(LightlandItems::createDoubleLayerModel)
 						.color(() -> () -> (stack, val) -> val > 0 ? -1 : ((DyeableLeatherItem) stack.getItem()).getColor(stack)));
 	}
 
@@ -369,7 +369,7 @@ public class ItemRegistrate {
 		consumer.accept(features);
 		return REGISTRATE.item(id, p -> new GenericBowItem(p.stacksTo(1).durability(durability),
 						new GenericBowItem.BowConfig(damage, punch, pull_time, speed, fov_time, fov, features)))
-				.model(ItemRegistrate::createBowModel).defaultLang().register();
+				.model(LightlandItems::createBowModel).defaultLang().register();
 	}
 
 	public static ItemEntry<GenericArrowItem> genArrow(String id, float damage, int punch, boolean is_inf, Consumer<FeatureList> consumer) {

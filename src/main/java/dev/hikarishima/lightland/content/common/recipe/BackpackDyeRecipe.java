@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.recipe;
 
 import dev.hikarishima.lightland.init.data.AllTags;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.AbstractShapelessRecipe;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
@@ -31,6 +31,6 @@ public class BackpackDyeRecipe extends AbstractShapelessRecipe<BackpackDyeRecipe
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return RecipeRegistrate.RSC_BAG_DYE.get();
+		return LightlandRecipe.RSC_BAG_DYE.get();
 	}
 }

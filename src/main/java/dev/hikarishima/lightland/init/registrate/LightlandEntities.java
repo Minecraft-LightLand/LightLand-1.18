@@ -16,7 +16,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
-public class EntityRegistrate {
+public class LightlandEntities {
 
 	public static final EntityEntry<GenericArrowEntity> ET_ARROW;
 	public static final EntityEntry<WindBladeEntity> ET_WIND_BLADE;

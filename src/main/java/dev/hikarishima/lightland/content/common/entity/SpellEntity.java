@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.common.entity;
 import dev.hikarishima.lightland.content.magic.render.SpellComponent;
 import dev.hikarishima.lightland.content.magic.spell.internal.ActivationConfig;
 import dev.hikarishima.lightland.content.magic.spell.internal.SpellConfig;
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import dev.hikarishima.lightland.util.math.RayTraceUtil;
 import dev.lcy0x1.base.BaseEntity;
 import dev.lcy0x1.serial.SerialClass;
@@ -31,7 +31,7 @@ public class SpellEntity extends BaseEntity {
 	}
 
 	public SpellEntity(Level w) {
-		this(EntityRegistrate.ET_SPELL.get(), w);
+		this(LightlandEntities.ET_SPELL.get(), w);
 	}
 
 	public void setData(double x, double y, double z, int time, int setup, int close, float xr, float yr, String id) {

@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.arcane.internal;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.lcy0x1.base.NamedEntry;
 import net.minecraft.world.item.ItemStack;
@@ -36,7 +36,7 @@ public class ArcaneType extends NamedEntry<ArcaneType> {
 		this.weapon = weapon;
 		this.hit = hit;
 		this.mana = mana;
-		stack = (weapon == Weapon.AXE ? ItemRegistrate.ARCANE_AXE_GILDED : ItemRegistrate.ARCANE_SWORD_GILDED).get().getDefaultInstance();
+		stack = (weapon == Weapon.AXE ? LightlandItems.ARCANE_AXE_GILDED : LightlandItems.ARCANE_SWORD_GILDED).get().getDefaultInstance();
 		if (mana == Mana.ACTIVE) {
 			stack.getOrCreateTag().putBoolean("foil", true);
 		}

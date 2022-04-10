@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.common.block;
 
 import dev.hikarishima.lightland.content.common.item.backpack.WorldChestItem;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.*;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
@@ -37,7 +37,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 	public static final WorldChestBlock INSTANCE = new WorldChestBlock();
 
 	public static final BlockEntityBlockMethod<WorldChestBlockEntity> TILE_ENTITY_SUPPLIER_BUILDER =
-			new BlockEntityBlockMethodImpl<>(BlockRegistrate.TE_WORLD_CHEST, WorldChestBlockEntity.class);
+			new BlockEntityBlockMethodImpl<>(LightlandBlocks.TE_WORLD_CHEST, WorldChestBlockEntity.class);
 
 	public static final EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
 
@@ -71,7 +71,7 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 		if (be instanceof WorldChestBlockEntity chest) {
 			return buildStack(state, chest);
 		}
-		return ItemRegistrate.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
+		return LightlandItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
 	}
 
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
@@ -79,11 +79,11 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 		if (blockentity instanceof WorldChestBlockEntity chest) {
 			return List.of(buildStack(state, chest));
 		}
-		return List.of(ItemRegistrate.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack());
+		return List.of(LightlandItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack());
 	}
 
 	private ItemStack buildStack(BlockState state, WorldChestBlockEntity chest) {
-		ItemStack stack = ItemRegistrate.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
+		ItemStack stack = LightlandItems.DIMENSIONAL_STORAGE[state.getValue(COLOR).getId()].asStack();
 		stack.getOrCreateTag().putUUID("owner_id", chest.owner_id);
 		stack.getOrCreateTag().putString("owner_name", chest.owner_name);
 		stack.getOrCreateTag().putLong("password", chest.password);

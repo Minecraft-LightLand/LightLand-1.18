@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.util;
 
 import dev.hikarishima.lightland.content.common.effect.ForceEffect;
-import dev.hikarishima.lightland.init.registrate.VanillaMagicRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.init.special.ArcaneRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -55,7 +55,7 @@ public class EffectAddUtil {
 	}
 
 	public static void addArcane(LivingEntity target, Entity source) {
-		addEffect(target, new MobEffectInstance(VanillaMagicRegistrate.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), AddReason.SKILL, source);
+		addEffect(target, new MobEffectInstance(LightlandVanillaMagic.ARCANE.get(), ArcaneRegistry.ARCANE_TIME), AddReason.SKILL, source);
 	}
 
 	public static AddReason getReason() {

@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.questline.mobs.layline;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
@@ -16,7 +16,7 @@ public class LaylineZombie extends BaseLaylineMob<LaylineZombie> {
 				.withPool(LootTableTemplate.getPool(1, 0)
 						.add(LootTableTemplate.getItem(Items.ROTTEN_FLESH, 0, 2, 1)))
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.LAYLINE_ORB.get(), 0, 1))
+						.add(LootTableTemplate.getItem(LightlandItems.LAYLINE_ORB.get(), 0, 1))
 						.when(LootTableTemplate.byPlayer())
 						.when(LootTableTemplate.chance(0.1f, 0.01f)))
 		);

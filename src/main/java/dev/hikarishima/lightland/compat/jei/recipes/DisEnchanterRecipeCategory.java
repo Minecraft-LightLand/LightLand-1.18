@@ -5,8 +5,8 @@ import dev.hikarishima.lightland.compat.jei.LightLandJeiPlugin;
 import dev.hikarishima.lightland.compat.jei.ingredients.ElementIngredient;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
-import dev.hikarishima.lightland.init.registrate.MenuRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
+import dev.hikarishima.lightland.init.registrate.LightlandMenu;
 import mezz.jei.api.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -47,7 +47,7 @@ public class DisEnchanterRecipeCategory implements IRecipeCategory<IMagicRecipe<
 
 	public DisEnchanterRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 18, 176, 18);
-		icon = guiHelper.createDrawableIngredient(ItemRegistrate.DISENC_BOOK.get().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(LightlandItems.DISENC_BOOK.get().getDefaultInstance());
 		return this;
 	}
 
@@ -64,7 +64,7 @@ public class DisEnchanterRecipeCategory implements IRecipeCategory<IMagicRecipe<
 
 	@Override
 	public Component getTitle() {
-		return new TranslatableComponent(MenuRegistrate.getLangKey(MenuRegistrate.MT_DISENC.get()));
+		return new TranslatableComponent(LightlandMenu.getLangKey(LightlandMenu.MT_DISENC.get()));
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class DisEnchanterRecipeCategory implements IRecipeCategory<IMagicRecipe<
 		for (int i = 1; i <= ench.getMaxLevel(); i++) {
 			l0.add(EnchantedBookItem.createForEnchantment(new EnchantmentInstance(ench, i)));
 			l1.add(new ItemStack(Items.GOLD_NUGGET, i));
-			l2.add(new ItemStack(ItemRegistrate.ENC_GOLD_NUGGET.get(), i));
+			l2.add(new ItemStack(LightlandItems.ENC_GOLD_NUGGET.get(), i));
 		}
 		List<List<ElementIngredient>> l3 = elem.stream().map(e -> {
 			List<ElementIngredient> ans = new ArrayList<>();

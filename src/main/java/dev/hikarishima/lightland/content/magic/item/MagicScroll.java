@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.common.capability.player.MagicAbility;
 import dev.hikarishima.lightland.content.common.item.api.IGlowingTarget;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.init.data.LangData;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.lcy0x1.base.Proxy;
@@ -188,9 +188,9 @@ public class MagicScroll extends Item implements IGlowingTarget {
 	}
 
 	public enum ScrollType {
-		CARD(64, ItemRegistrate.SPELL_CARD),
-		PARCHMENT(16, ItemRegistrate.SPELL_PARCHMENT),
-		SCROLL(4, ItemRegistrate.SPELL_SCROLL);
+		CARD(64, LightlandItems.SPELL_CARD),
+		PARCHMENT(16, LightlandItems.SPELL_PARCHMENT),
+		SCROLL(4, LightlandItems.SPELL_SCROLL);
 
 		public final int stack;
 		private final Supplier<MagicScroll> item;

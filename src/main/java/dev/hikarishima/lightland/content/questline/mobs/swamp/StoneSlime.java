@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.LootTableTemplate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -21,7 +21,7 @@ public class StoneSlime extends MaterialSlime<StoneSlime> {
 				.withPool(LootTableTemplate.getPool(1, 0)
 						.add(LootTableTemplate.getItem(Items.COBBLESTONE, 0, 1)))
 				.withPool(LootTableTemplate.getPool(1, 0)
-						.add(LootTableTemplate.getItem(ItemRegistrate.DIRTY_SLIME.get(), 1))
+						.add(LootTableTemplate.getItem(LightlandItems.DIRTY_SLIME.get(), 1))
 						.when(LootTableTemplate.chance(0.2f))
 						.when(LootTableTemplate.byPlayer())));
 	}

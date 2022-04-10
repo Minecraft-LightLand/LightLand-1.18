@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.questline.block;
 
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -24,7 +24,7 @@ public class LayrootBody extends GrowingPlantBodyBlock {
 
 	@Override
 	protected GrowingPlantHeadBlock getHeadBlock() {
-		return BlockRegistrate.LAYROOT_HEAD.get();
+		return LightlandBlocks.LAYROOT_HEAD.get();
 	}
 
 }

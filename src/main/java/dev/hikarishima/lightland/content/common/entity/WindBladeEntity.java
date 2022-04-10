@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.entity;
 
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneItemUseHelper;
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.hikarishima.lightland.util.math.MathHelper;
 import dev.lcy0x1.serial.SerialClass;
@@ -41,7 +41,7 @@ public class WindBladeEntity extends ThrowableProjectile implements IEntityAddit
 	}
 
 	public WindBladeEntity(Level w) {
-		this(EntityRegistrate.ET_WIND_BLADE.get(), w);
+		this(LightlandEntities.ET_WIND_BLADE.get(), w);
 	}
 
 	@Override

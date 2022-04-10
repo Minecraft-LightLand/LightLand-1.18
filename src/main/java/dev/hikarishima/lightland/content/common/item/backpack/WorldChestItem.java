@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.content.common.item.backpack;
 import dev.hikarishima.lightland.content.common.capability.worldstorage.StorageContainer;
 import dev.hikarishima.lightland.content.common.capability.worldstorage.WorldStorage;
 import dev.hikarishima.lightland.init.data.LangData;
-import dev.hikarishima.lightland.init.registrate.BlockRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -65,7 +65,7 @@ public class WorldChestItem extends BlockItem {
 	public final DyeColor color;
 
 	public WorldChestItem(DyeColor color, Properties props) {
-		super(BlockRegistrate.WORLD_CHEST.get(), props);
+		super(LightlandBlocks.WORLD_CHEST.get(), props);
 		this.color = color;
 	}
 

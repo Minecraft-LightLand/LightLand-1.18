@@ -32,12 +32,12 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
-import static dev.hikarishima.lightland.init.registrate.ItemRegistrate.TAB_MAIN;
+import static dev.hikarishima.lightland.init.registrate.LightlandItems.TAB_MAIN;
 
 /**
  * handles blocks and block entities
  */
-public class BlockRegistrate {
+public class LightlandBlocks {
 
 	static {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.item.misc;
 
 import com.tterrag.registrate.util.entry.MenuEntry;
-import dev.hikarishima.lightland.init.registrate.MenuRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.sounds.SoundEvents;
@@ -39,7 +39,7 @@ public class ContainerBook extends Item implements MenuProvider {
 
 	@Override
 	public Component getDisplayName() {
-		return new TranslatableComponent(MenuRegistrate.getLangKey(cont.get().get()));
+		return new TranslatableComponent(LightlandMenu.getLangKey(cont.get().get()));
 	}
 
 	@Nullable

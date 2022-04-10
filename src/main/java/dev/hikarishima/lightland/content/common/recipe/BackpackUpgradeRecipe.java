@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.recipe;
 
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.AbstractSmithingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -30,6 +30,6 @@ public class BackpackUpgradeRecipe extends AbstractSmithingRecipe<BackpackUpgrad
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return RecipeRegistrate.RSC_BAG_UPGRADE.get();
+		return LightlandRecipe.RSC_BAG_UPGRADE.get();
 	}
 }

@@ -9,8 +9,8 @@ import dev.hikarishima.lightland.content.archery.feature.types.FlightControlFeat
 import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.util.GenericItemStack;
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import net.minecraft.FieldsAreNonnullByDefault;
@@ -49,8 +49,8 @@ public class GenericArrowEntity extends AbstractArrow implements IEntityAddition
 		)));
 
 		public static final ArrowEntityData DEFAULT = new ArrowEntityData(
-				GenericItemStack.from(ItemRegistrate.STARTER_BOW.get()),
-				GenericItemStack.from(ItemRegistrate.STARTER_ARROW.get()),
+				GenericItemStack.from(LightlandItems.STARTER_BOW.get()),
+				GenericItemStack.from(LightlandItems.STARTER_ARROW.get()),
 				false, 1);
 
 	}
@@ -66,7 +66,7 @@ public class GenericArrowEntity extends AbstractArrow implements IEntityAddition
 	}
 
 	public GenericArrowEntity(Level level, LivingEntity user, ArrowEntityData data, FeatureList features) {
-		super(EntityRegistrate.ET_ARROW.get(), user, level);
+		super(LightlandEntities.ET_ARROW.get(), user, level);
 		this.data = data;
 		this.features = features;
 	}

@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.common.capability.player.MagicHolder;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.registrate.ItemRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.lcy0x1.menu.BaseContainerMenu;
@@ -89,7 +89,7 @@ public class DisEnchanterContainer extends BaseContainerMenu<DisEnchanterContain
 				container.setItem(1, ItemStack.EMPTY);
 			} else gold.shrink(arr[0]);
 			if (res.isEmpty()) {
-				container.setItem(2, new ItemStack(ItemRegistrate.ENC_GOLD_NUGGET.get(), arr[0]));
+				container.setItem(2, new ItemStack(LightlandItems.ENC_GOLD_NUGGET.get(), arr[0]));
 			} else res.grow(arr[0]);
 			slotsChanged(container);
 			return true;

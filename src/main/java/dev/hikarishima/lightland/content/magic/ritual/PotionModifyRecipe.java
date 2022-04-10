@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.magic.ritual;
 
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.item.MagicScroll;
-import dev.hikarishima.lightland.init.registrate.RecipeRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class PotionModifyRecipe extends AbstractRitualRecipe<PotionModifyRecipe> {
 
 	public PotionModifyRecipe(ResourceLocation id) {
-		super(id, RecipeRegistrate.RSP_MODIFY.get());
+		super(id, LightlandRecipe.RSP_MODIFY.get());
 	}
 
 	@Override

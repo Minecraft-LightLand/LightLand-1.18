@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.entity;
 
-import dev.hikarishima.lightland.init.registrate.EntityRegistrate;
+import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,7 +15,7 @@ public class FireArrowEntity extends Arrow {
 	}
 
 	public FireArrowEntity(Level world, LivingEntity owner) {
-		this(EntityRegistrate.ET_FIRE_ARROW.get(), world);
+		this(LightlandEntities.ET_FIRE_ARROW.get(), world);
 		this.setOwner(owner);
 	}
 
