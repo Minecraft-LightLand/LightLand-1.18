@@ -4,30 +4,30 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.hikarishima.lightland.util.LootTableTemplate;
 import dev.xkmc.cuisine.content.veges.BlockCuisineCrops;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
-import net.minecraft.world.level.storage.loot.functions.LootItemFunctions;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 public class CuisineTemplates {
 
 	public enum Veges {
-		CHILLI, CHINESE_CABBAGE, CORN(4, 3), CUCUMBER(4, 4), EGGPLANT, GARLIC,
+		CHILLI, CHINESE_CABBAGE, EGGPLANT, GARLIC,
 		GINGER, GREEN_PEPPER, LEEK, LETTUCE, ONION, PEANUT, RED_PEPPER,
-		RICE(4, 4, "root", "stage"),
-		SCALLION, SESAME, SICHUAN_PEPPER(5), SOYBEAN, SPINACH, TOMATO, TURNIP;
+		SCALLION, SESAME, SICHUAN_PEPPER(5), SOYBEAN, SPINACH, TOMATO, TURNIP,
+		//CORN(4, 3),
+		//CUCUMBER(4, 4),
+		//RICE(4, 4, "root", "stage"),
+		;
 
 		public final int stage_lower, stage_upper;
 		public final String lower, upper;
@@ -71,6 +71,10 @@ public class CuisineTemplates {
 			return 7;
 		}
 
+		public Item getSeed() {
+			return getEntry().get().asItem();
+		}
+
 		public BlockCuisineCrops createBlock(BlockBehaviour.Properties p) {
 			//TODO corn
 			//TODO double
@@ -98,11 +102,11 @@ public class CuisineTemplates {
 
 		public void loot(RegistrateBlockLootTables table, BlockCuisineCrops block) {
 			//TODO double upper
-			table.accept((id, builder) -> {
-				builder.withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).setBonusRolls(ConstantValue.exactly(0))
-						.add()
-				).apply(ApplyExplosionDecay.explosionDecay()).build();
-			});
+			table.accept((id, builder) -> builder
+					.withPool(LootTableTemplate.getPool(1, 0).add(LootTableTemplate.getItem(getSeed(), 1)))
+					.withPool(LootTableTemplate.getPool(1, 0).add(LootTableTemplate.cropDrop(getSeed())
+							.when(LootTableTemplate.withBlockState(getEntry().get(), getAge(), getMaxAge()))))
+					.apply(ApplyExplosionDecay.explosionDecay()).build());
 		}
 
 		private int getModelStage(int stage) {
