@@ -1,14 +1,28 @@
 package dev.xkmc.cuisine.content.veges;
 
 import dev.xkmc.cuisine.init.data.CuisineTemplates;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BlockCuisineCrops extends CropBlock {
+public class CuisineCrops extends CropBlock {
+
+	static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 10.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 14.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D)};
 
 	private static final ThreadLocal<CuisineTemplates.Veges> TEMP = new ThreadLocal<>();
 
@@ -19,7 +33,7 @@ public class BlockCuisineCrops extends CropBlock {
 
 	private CuisineTemplates.Veges type;
 
-	public BlockCuisineCrops(CuisineTemplates.Veges type, Properties props) {
+	public CuisineCrops(CuisineTemplates.Veges type, Properties props) {
 		super(warp(type, props));
 		getType();
 	}
@@ -50,6 +64,11 @@ public class BlockCuisineCrops extends CropBlock {
 
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(getAgeProperty());
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext col) {
+		return SHAPE_BY_AGE[state.getValue(getAgeProperty())];
 	}
 
 }

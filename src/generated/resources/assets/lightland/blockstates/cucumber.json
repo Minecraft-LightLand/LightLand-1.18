@@ -25,7 +25,7 @@
       "model": "lightland:block/cucumber_stage_3"
     },
     "age=8": {
-      "model": "lightland:block/void"
+      "model": "lightland:block/cucumber_upper"
     }
   }
 }

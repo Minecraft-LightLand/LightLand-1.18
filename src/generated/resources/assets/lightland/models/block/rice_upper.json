@@ -1,0 +1,6 @@
+{
+  "parent": "lightland:block/void",
+  "textures": {
+    "crop": "lightland:block/rice_stage_1"
+  }
+}

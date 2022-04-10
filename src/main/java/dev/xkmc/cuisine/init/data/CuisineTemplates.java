@@ -5,7 +5,9 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.util.LootTableTemplate;
-import dev.xkmc.cuisine.content.veges.BlockCuisineCrops;
+import dev.xkmc.cuisine.content.veges.CornBlock;
+import dev.xkmc.cuisine.content.veges.CuisineCrops;
+import dev.xkmc.cuisine.content.veges.DoubleCrops;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.resources.ResourceLocation;
@@ -27,8 +29,8 @@ import java.util.Locale;
 
 public class CuisineTemplates {
 
-	enum ModelType {
-		CROP(Veges::crop), CROSS(Veges::cross), DOUBLE(Veges::cropHigh), CORN(Veges::crossHigh), RICE(Veges::water);
+	public enum ModelType {
+		CROP(Veges::crop), CROSS(Veges::cross), DOUBLE(Veges::cropHigh), CORN(Veges::crossHigh), WATER(Veges::water);
 
 		public final ModelSupplier sup;
 
@@ -44,7 +46,7 @@ public class CuisineTemplates {
 		GARLIC(4, ModelType.CROP),
 		CUCUMBER(4, 4, ModelType.DOUBLE),
 		CORN(4, 3, ModelType.CORN),
-		RICE(4, 4, ModelType.RICE),
+		RICE(4, 4, ModelType.WATER),
 		;
 
 		public final int stage_lower, stage_upper;
@@ -112,18 +114,18 @@ public class CuisineTemplates {
 			return name().toLowerCase(Locale.ROOT);
 		}
 
-		public BlockCuisineCrops createBlock(BlockBehaviour.Properties p) {
-			//TODO corn
-			//TODO double
-			return new BlockCuisineCrops(this, PROPERTIES);
+		public CuisineCrops createBlock(BlockBehaviour.Properties p) {
+			if (type == ModelType.CORN) return new CornBlock(this, PROPERTIES);
+			if (isDouble()) return new DoubleCrops(this, PROPERTIES);
+			return new CuisineCrops(this, PROPERTIES);
 		}
 
-		public void generate(DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd) {
+		public void generate(DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd) {
 			ModelFile[] models = new ModelFile[getStage()];
 			for (int i = 0; i < getStage(); i++) {
 				models[i] = type.sup.get(this, ctx, pvd, i);
 			}
-			ModelFile air = new ModelFile.UncheckedModelFile(VOID);
+			ModelFile air = isDouble() ? upper(ctx, pvd, type == ModelType.WATER ? "_stage_1" : "_upper_1") : null;
 			pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state -> {
 				int age = state.getValue(getAge());
 				if (age > getMaxAge()) {
@@ -134,7 +136,7 @@ public class CuisineTemplates {
 			});
 		}
 
-		public void loot(RegistrateBlockLootTables table, BlockCuisineCrops block) {
+		public void loot(RegistrateBlockLootTables table, CuisineCrops block) {
 			LootPoolEntryContainer.Builder<?> base = LootTableTemplate.getItem(getSeed(), 1);
 			if (isDouble()) {
 				base.when(LootTableTemplate.withBlockState(getEntry().get(), getAge(), 0, getMaxAge()));
@@ -146,20 +148,27 @@ public class CuisineTemplates {
 					.apply(ApplyExplosionDecay.explosionDecay()));
 		}
 
-		private BlockModelBuilder crop(DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
+		private BlockModelBuilder crop(DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
 			String modelname = ctx.getName() + "_stage_" + i;
 			ResourceLocation texture = new ResourceLocation(Cuisine.MODID, "block/" + modelname);
 			return pvd.models().crop(modelname, texture);
 		}
 
-		private BlockModelBuilder cross(DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
+		private BlockModelBuilder cross(DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
 			String modelname = ctx.getName() + "_stage_" + i;
 			ResourceLocation texture = new ResourceLocation(Cuisine.MODID, "block/" + modelname);
 			return pvd.models().getBuilder(modelname).parent(new ModelFile.UncheckedModelFile(MODEL))
 					.texture("crop", texture);
 		}
 
-		private BlockModelBuilder cropHigh(DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
+		private BlockModelBuilder upper(DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd, String mid) {
+			String modelname = ctx.getName() + "_upper";
+			ResourceLocation texture = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + mid);
+			return pvd.models().getBuilder(modelname).parent(new ModelFile.UncheckedModelFile(VOID))
+					.texture("crop", texture);
+		}
+
+		private BlockModelBuilder cropHigh(DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
 			String modelname = ctx.getName() + "_stage_" + i;
 			ResourceLocation lower = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + "_lower_" + i);
 			ResourceLocation upper = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + "_upper_" + i);
@@ -169,7 +178,7 @@ public class CuisineTemplates {
 					.texture("lower", lower).texture("upper", upper);
 		}
 
-		private BlockModelBuilder crossHigh(DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
+		private BlockModelBuilder crossHigh(DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
 			String modelname = ctx.getName() + "_stage_" + i;
 			ResourceLocation lower = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + "_lower_" + i);
 			ResourceLocation upper = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + "_upper_" + i);
@@ -180,7 +189,7 @@ public class CuisineTemplates {
 					.texture("lower", lower).texture("upper", upper);
 		}
 
-		private BlockModelBuilder water(DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
+		private BlockModelBuilder water(DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i) {
 			String modelname = ctx.getName() + "_stage_" + i;
 			ResourceLocation crop = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + "_stage_" + i);
 			ResourceLocation root = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + "_root_" + i);
@@ -196,7 +205,7 @@ public class CuisineTemplates {
 
 	private interface ModelSupplier {
 
-		BlockModelBuilder get(Veges veges, DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i);
+		BlockModelBuilder get(Veges veges, DataGenContext<Block, CuisineCrops> ctx, RegistrateBlockstateProvider pvd, int i);
 
 	}
 
