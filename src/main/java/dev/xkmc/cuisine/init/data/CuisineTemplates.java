@@ -11,9 +11,11 @@ import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -80,6 +82,15 @@ public class CuisineTemplates {
 
 		/* --- Data Gen --- */
 
+
+		private static final BlockBehaviour.Properties PROPERTIES = BlockBehaviour.Properties.of(Material.PLANT)
+				.noCollission().randomTicks().instabreak().sound(SoundType.CROP);
+
+		private static final ResourceLocation MODEL = new ResourceLocation(Cuisine.MODID, "block/cross_crop");
+		private static final ResourceLocation MODEL_DOUBLE = new ResourceLocation(Cuisine.MODID, "block/double_crop");
+		private static final ResourceLocation MODEL_CORN = new ResourceLocation(Cuisine.MODID, "block/double_cross_crop");
+		private static final ResourceLocation MODEL_RICE = new ResourceLocation(Cuisine.MODID, "block/water_crop");
+
 		public String getName() {
 			return name().toLowerCase(Locale.ROOT);
 		}
@@ -87,14 +98,8 @@ public class CuisineTemplates {
 		public BlockCuisineCrops createBlock(BlockBehaviour.Properties p) {
 			//TODO corn
 			//TODO double
-			return new BlockCuisineCrops(this, p);
+			return new BlockCuisineCrops(this, PROPERTIES);
 		}
-
-
-		private static final ResourceLocation MODEL = new ResourceLocation(Cuisine.MODID, "cross_crop");
-		private static final ResourceLocation MODEL_DOUBLE = new ResourceLocation(Cuisine.MODID, "double_crop");
-		private static final ResourceLocation MODEL_CORN = new ResourceLocation(Cuisine.MODID, "double_cross_crop");
-		private static final ResourceLocation MODEL_RICE = new ResourceLocation(Cuisine.MODID, "water_crop");
 
 		public void generate(DataGenContext<Block, BlockCuisineCrops> ctx, RegistrateBlockstateProvider pvd) {
 			//TODO double

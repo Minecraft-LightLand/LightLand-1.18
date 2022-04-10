@@ -1,5 +1,5 @@
 {
-  "parent": "lightland:cross_crop",
+  "parent": "lightland:block/cross_crop",
   "textures": {
     "crop": "lightland:block/ginger_stage_0"
   }
