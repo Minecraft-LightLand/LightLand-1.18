@@ -24,6 +24,21 @@
     "minecraft:wheat",
     "minecraft:rabbit_foot",
     "minecraft:sugar",
+    "minecraft:mutton",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:kelp",
+    "minecraft:dried_kelp",
+    "minecraft:chorus_fruit",
+    "minecraft:nether_wart",
+    "minecraft:sugar_cane",
+    "minecraft:spider_eye",
+    "minecraft:pumpkin_seeds",
+    "minecraft:apple",
+    "minecraft:seagrass",
+    "minecraft:rotten_flesh",
+    "minecraft:bone",
+    "minecraft:honeycomb",
     "#minecraft:flowers"
   ]
 }
