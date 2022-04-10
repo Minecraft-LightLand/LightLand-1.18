@@ -49,6 +49,12 @@ public class LootTableTemplate {
 		return LootItemRandomChanceWithLootingCondition.randomChanceAndLootingBoost(chance, add);
 	}
 
+	public static LootItemBlockStatePropertyCondition.Builder withBlockState(Block block, Property<Integer> prop, int low, int high) {
+		StatePropertiesPredicate.Builder builder = StatePropertiesPredicate.Builder.properties();
+		builder.matchers.add(new StatePropertiesPredicate.RangedPropertyMatcher(prop.getName(), Integer.toString(low), Integer.toString(high)));
+		return LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(builder);
+	}
+
 	public static LootItemBlockStatePropertyCondition.Builder withBlockState(Block block, Property<Integer> prop, int val) {
 		return LootItemBlockStatePropertyCondition.hasBlockStateProperties(block).setProperties(
 				StatePropertiesPredicate.Builder.properties().hasProperty(prop, val)

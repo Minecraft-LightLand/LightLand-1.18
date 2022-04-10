@@ -1,0 +1,7 @@
+{
+  "parent": "lightland:block/water_crop",
+  "textures": {
+    "crop": "lightland:block/rice_stage_2",
+    "root": "lightland:block/rice_root_2"
+  }
+}
