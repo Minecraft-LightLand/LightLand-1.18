@@ -195,8 +195,8 @@ public class TileInfoOverlay implements IIngameOverlay {
 				margin * 2 + row_n * spacing, margin * 2 + col_n * spacing);
 		for (int i = 0; i < list.size(); i++) {
 			poseStack.pushPose();
-			int x = width / 2 + x_off + margin + i % row_n * spacing;
-			int y = height / 2 + y_off + margin + i / row_n * spacing;
+			int x = width / 2 + x_off + margin + 1 + i % row_n * spacing;
+			int y = height / 2 + y_off + margin + 1 + i / row_n * spacing;
 			poseStack.translate(x, y, 0);
 			list.get(i).render(poseStack);
 			poseStack.popPose();
@@ -205,9 +205,9 @@ public class TileInfoOverlay implements IIngameOverlay {
 
 
 	public static void drawHoveringText(PoseStack pStack, int x, int y, int w, int h) {
-		int backgroundColor = GuiUtils.DEFAULT_BACKGROUND_COLOR;
-		int borderColorStart = GuiUtils.DEFAULT_BORDER_COLOR_START;
-		int borderColorEnd = GuiUtils.DEFAULT_BORDER_COLOR_END;
+		int backgroundColor = 0x80100010;
+		int borderColorStart = 0xF0FFDA00;
+		int borderColorEnd = 0xF0FFDA00;
 		RenderSystem.disableDepthTest();
 		final int zLevel = -400;
 		pStack.pushPose();

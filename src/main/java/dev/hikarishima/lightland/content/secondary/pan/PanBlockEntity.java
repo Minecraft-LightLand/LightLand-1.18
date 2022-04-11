@@ -164,8 +164,8 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	public void dumpInventory() {
 		if (level == null) return;
-		Containers.dropContents(level, this.getBlockPos(), inputInventory);
-		Containers.dropContents(level, this.getBlockPos(), outputInventory);
+		Containers.dropContents(level, this.getBlockPos().above(), inputInventory);
+		Containers.dropContents(level, this.getBlockPos().above(), outputInventory);
 		fluids.clear();
 		notifyTile(null);
 	}
