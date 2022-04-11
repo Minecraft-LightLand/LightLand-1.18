@@ -5,7 +5,6 @@ import dev.hikarishima.lightland.compat.jei.ingredients.ElemIngredientRenderer;
 import dev.hikarishima.lightland.compat.jei.ingredients.ElementIngredient;
 import dev.hikarishima.lightland.compat.jei.recipes.DisEnchanterRecipeCategory;
 import dev.hikarishima.lightland.compat.jei.recipes.MagicCraftRecipeCategory;
-import dev.hikarishima.lightland.compat.jei.recipes.SaucePanRecipeCategory;
 import dev.hikarishima.lightland.compat.jei.screen.ExtraInfoScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.ArcaneInjectScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.DisEnchanterScreen;
@@ -37,11 +36,10 @@ public class LightLandJeiPlugin implements IModPlugin {
 
 	public static LightLandJeiPlugin INSTANCE;
 
-	public final ResourceLocation UID = new ResourceLocation(LightLand.MODID, "jei_plugin");
+	public final ResourceLocation UID = new ResourceLocation(LightLand.MODID, "main");
 
 	public final DisEnchanterRecipeCategory DISENCHANT = new DisEnchanterRecipeCategory();
 	public final MagicCraftRecipeCategory MAGIC_CRAFT = new MagicCraftRecipeCategory();
-	public final SaucePanRecipeCategory SAUCEPAN = new SaucePanRecipeCategory();
 
 	public final ElemIngredientHelper ELEM_HELPER = new ElemIngredientHelper();
 	public final ElemIngredientRenderer ELEM_RENDERER = new ElemIngredientRenderer();
@@ -77,7 +75,6 @@ public class LightLandJeiPlugin implements IModPlugin {
 		IGuiHelper helper = registration.getJeiHelpers().getGuiHelper();
 		registration.addRecipeCategories(DISENCHANT.init(helper));
 		registration.addRecipeCategories(MAGIC_CRAFT.init(helper));
-		registration.addRecipeCategories(SAUCEPAN.init(helper));
 		GUI_HELPER = helper;
 	}
 
@@ -89,7 +86,6 @@ public class LightLandJeiPlugin implements IModPlugin {
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addRecipes(IMagicRecipe.getMap(Proxy.getWorld(), MagicRegistry.MPT_ENCH.get()).values(), DISENCHANT.getUid());
 		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_RITUAL), MAGIC_CRAFT.getUid());
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_PAN), SAUCEPAN.getUid());
 	}
 
 	@Override
@@ -100,7 +96,6 @@ public class LightLandJeiPlugin implements IModPlugin {
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(LightlandItems.DISENC_BOOK.get().getDefaultInstance(), DISENCHANT.getUid());
 		registration.addRecipeCatalyst(LightlandBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance(), MAGIC_CRAFT.getUid());
-		registration.addRecipeCatalyst(LightlandBlocks.SAUCEPAN.get().asItem().getDefaultInstance(), SAUCEPAN.getUid());
 	}
 
 	@Override

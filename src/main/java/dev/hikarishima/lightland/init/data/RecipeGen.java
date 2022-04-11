@@ -4,7 +4,6 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import dev.hikarishima.lightland.content.secondary.pan.SaucePanRecipeBuilder;
 import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
@@ -17,9 +16,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.BiFunction;
@@ -69,16 +66,6 @@ public class RecipeGen {
 					.pattern("ADA").pattern("BCB").pattern("ADA")
 					.define('A', Tags.Items.LEATHER).define('B', Items.ENDER_PEARL)
 					.define('C', Items.ENDER_CHEST).define('D', Items.IRON_INGOT)
-					.save(pvd);
-		}
-		{
-			unlock(pvd, new SaucePanRecipeBuilder(Items.RABBIT_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.RABBIT_STEW)
-					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL).requires(Items.RABBIT)
-					.requires(Items.POTATO).requires(Items.CARROT).requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
-					.save(pvd);
-			unlock(pvd, new SaucePanRecipeBuilder(Items.MUSHROOM_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.MUSHROOM_STEW)
-					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL)
-					.requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
 					.save(pvd);
 		}
 	}
