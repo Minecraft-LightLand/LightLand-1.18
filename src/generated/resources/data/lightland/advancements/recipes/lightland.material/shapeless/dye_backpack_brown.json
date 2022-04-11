@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "polaris_rpg:shapeless/dye_backpack_brown"
+      "lightland:shapeless/dye_backpack_brown"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "polaris_rpg:shapeless/dye_backpack_brown"
+        "recipe": "lightland:shapeless/dye_backpack_brown"
       }
     }
   },

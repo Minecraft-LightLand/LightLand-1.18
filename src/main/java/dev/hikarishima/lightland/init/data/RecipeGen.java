@@ -50,7 +50,7 @@ public class RecipeGen {
 
 				unlock(pvd, new CustomShapelessBuilder<>(LightlandRecipe.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
 						.group("backpack_dye").requires(Ingredient.of(AllTags.AllItemTags.BACKPACKS.tag))
-						.requires(Ingredient.of(dye)).save(pvd, "polaris_rpg:shapeless/dye_backpack_" + color.getName());
+						.requires(Ingredient.of(dye)).save(pvd, "lightland:shapeless/dye_backpack_" + color.getName());
 
 				unlock(pvd, new UpgradeRecipeBuilder(LightlandRecipe.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
 						Ingredient.of(LightlandItems.ENDER_POCKET.get()), backpack)::unlocks, backpack)
