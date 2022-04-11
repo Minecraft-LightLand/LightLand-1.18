@@ -1102,10 +1102,6 @@ bc7fe3d0e89d23b4f40aa90e5cdea23e95792175 data/lightland/tags/fluids/pan_accept.j
 4883e3459dd6a18cece1f766800846b3692e3eeb data/lightland/tags/items/backpacks.json
 bd9247bb833ede81317d3889184d90a30e1f6bb2 data/lightland/tags/items/dimensional_storages.json
 b9d323fa6157e927e555d0112396fd49b55122bd data/lightland/tags/items/pan_accept.json
-f21b800da555ae3c64ad00a7f0bcda284098805e data/minecraft/advancements/recipes/saucepan/saucepan/mushroom_stew.json
-a946af9692315f3faa631191014d58dd2c7dd2bd data/minecraft/advancements/recipes/saucepan/saucepan/rabbit_stew.json
-f0a0168e4d3b9147bd688d4798a66a287ab84324 data/minecraft/recipes/saucepan/mushroom_stew.json
-7a8904a82d9bd794460222140b0809450791e324 data/minecraft/recipes/saucepan/rabbit_stew.json
 d241020a2a2ada6bbc9577541ff3a3c03886547b data/minecraft/tags/blocks/buttons.json
 7630a37228ff19c521fe3998c010a94926d70c44 data/minecraft/tags/blocks/climbable.json
 05c47d8eecdd4ddeb58edf8a2e90dd27c7ab9f7e data/minecraft/tags/blocks/doors.json
@@ -1117,7 +1113,7 @@ feaf227ce97d630fa47d811b33d24de9454c5bf0 data/minecraft/tags/blocks/dragon_immun
 50e31f78a8a77e1f5a5e92512a7f2902ec482753 data/minecraft/tags/blocks/logs_that_burn.json
 55b58734f364c4017177694d24f55a8f19276522 data/minecraft/tags/blocks/mineable/axe.json
 3a30618b0ee537d000c1798e45ff0ca5ca3a5455 data/minecraft/tags/blocks/mineable/hoe.json
-772f16ce85fcaa9b610fc19207a93c2ef0e3c34b data/minecraft/tags/blocks/mineable/pickaxe.json
+ac7229d593f03412690ccfe4e7c8f266b8002cae data/minecraft/tags/blocks/mineable/pickaxe.json
 6107807803dc881c04a1d98903c69e851c374aaa data/minecraft/tags/blocks/needs_diamond_tool.json
 f688560a9ea7d70f2dfb4b08902da2072674c545 data/minecraft/tags/blocks/planks.json
 cb46833a11389f2b08cc1cf813d330429e819b47 data/minecraft/tags/blocks/pressure_plates.json
