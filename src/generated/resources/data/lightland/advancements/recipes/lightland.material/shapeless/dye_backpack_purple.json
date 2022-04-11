@@ -2,17 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "polaris_rpg:shapeless/dye_backpack_white"
+      "lightland:shapeless/dye_backpack_purple"
     ]
   },
   "criteria": {
-    "has_backpack_white": {
+    "has_backpack_purple": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "lightland:backpack_white"
+              "lightland:backpack_purple"
             ]
           }
         ]
@@ -21,13 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "polaris_rpg:shapeless/dye_backpack_white"
+        "recipe": "lightland:shapeless/dye_backpack_purple"
       }
     }
   },
   "requirements": [
     [
-      "has_backpack_white",
+      "has_backpack_purple",
       "has_the_recipe"
     ]
   ]
