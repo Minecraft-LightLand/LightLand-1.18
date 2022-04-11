@@ -44,12 +44,11 @@ public enum WoodType {
 				.tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.DOORS, BlockTags.WOODEN_DOORS).register();
 		BUTTON = REGISTRATE.block(getName() + "_button", p -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)))
 				.blockstate((ctx, pvd) -> pvd.buttonBlock(ctx.getEntry(), pvd.blockTexture(PLANK.get())))
-				.simpleItem().tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.BUTTONS, BlockTags.WOODEN_BUTTONS).register();
+				.item().model((ctx, pvd) -> pvd.buttonInventory(ctx.getName(), pvd.modLoc("block/" + getName() + "_planks"))).build()
+				.tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.BUTTONS, BlockTags.WOODEN_BUTTONS).register();
 		FENCE = REGISTRATE.block(getName() + "_fence", p -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)))
 				.blockstate((ctx, pvd) -> pvd.fenceBlock(ctx.getEntry(), pvd.blockTexture(PLANK.get())))
-				.item().model((ctx, pvd) -> pvd.getBuilder(ctx.getName())
-						.parent(new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID,
-								"block/" + getName() + "_fence_post")))).build()
+				.item().model((ctx, pvd) -> pvd.fenceInventory(ctx.getName(), pvd.modLoc("block/" + getName() + "_planks"))).build()
 				.tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.FENCES, BlockTags.WOODEN_FENCES).register();
 		FENCE_GATE = REGISTRATE.block(getName() + "_fence_gate", p -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE)))
 				.blockstate((ctx, pvd) -> pvd.fenceGateBlock(ctx.getEntry(), pvd.blockTexture(PLANK.get())))

@@ -57,7 +57,9 @@ public class CuisineBlocks {
 								BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
 						.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(),
 								pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
-						.addLayer(() -> RenderType::cutoutMipped).tag(BlockTags.SAPLINGS).simpleItem().register();
+						.addLayer(() -> RenderType::cutoutMipped).tag(BlockTags.SAPLINGS)
+						.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry,
+								pvd.modLoc("block/" + ctx.getName()))).build().register();
 			}
 			WoodType.register();
 		}

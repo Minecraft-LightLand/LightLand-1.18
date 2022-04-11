@@ -1,3 +1,6 @@
 {
-  "parent": "lightland:block/fruittree_fence_post"
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "lightland:block/fruittree_planks"
+  }
 }

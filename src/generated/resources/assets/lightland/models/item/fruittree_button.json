@@ -1,3 +1,6 @@
 {
-  "parent": "lightland:block/fruittree_button"
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "lightland:block/fruittree_planks"
+  }
 }
