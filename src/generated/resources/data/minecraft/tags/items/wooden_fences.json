@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "lightland:fruittree_fence"
+    "lightland:fruittree_fence",
+    "lightland:empowered_fence",
+    "lightland:mystic_fence"
   ]
 }

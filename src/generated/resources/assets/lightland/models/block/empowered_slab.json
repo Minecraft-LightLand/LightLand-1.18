@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "side": "lightland:block/empowered_planks",
+    "bottom": "lightland:block/empowered_planks",
+    "top": "lightland:block/empowered_planks"
+  }
+}

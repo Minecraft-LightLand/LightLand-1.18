@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "lightland:block/empowered_slab_top"
+    },
+    "type=bottom": {
+      "model": "lightland:block/empowered_slab"
+    },
+    "type=double": {
+      "model": "lightland:block/empowered_planks"
+    }
+  }
+}

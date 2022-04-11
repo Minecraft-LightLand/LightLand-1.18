@@ -61,7 +61,7 @@ import java.util.function.Predicate;
 import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
 
 public enum WoodType {
-	FRUITTREE;
+	FRUITTREE, EMPOWERED, MYSTIC;
 	public final BlockEntry<RotatedPillarBlock> LOG;
 	public final BlockEntry<Block> PLANK;
 	public final BlockEntry<TrapDoorBlock> TRAPDOOR;
@@ -261,7 +261,7 @@ class BoatEntityRenderer extends BoatRenderer {
 
 	public BoatEntityRenderer(EntityRendererProvider.Context context, WoodType type) {
 		super(context);
-		id = new ResourceLocation(Cuisine.MODID, "textures/entity/boat/" + type.getName() + "_boat.png");
+		id = new ResourceLocation(Cuisine.MODID, "textures/entity/" + type.getName() + "_boat.png");
 		model = new BoatModel(context.bakeLayer(type.layer));
 	}
 
