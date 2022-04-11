@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "lightland:block/leaves_lemon"
+    },
+    "age=1": {
+      "model": "lightland:block/leaves_lemon"
+    },
+    "age=2": {
+      "model": "lightland:block/flowers_leaves_lemon"
+    },
+    "age=3": {
+      "model": "lightland:block/fruit_leaves_lemon"
+    }
+  }
+}

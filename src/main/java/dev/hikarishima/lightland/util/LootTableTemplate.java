@@ -1,7 +1,11 @@
 package dev.hikarishima.lightland.util;
 
+import net.minecraft.advancements.critereon.EnchantmentPredicate;
+import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -14,6 +18,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.minecraftforge.common.Tags;
 
 public class LootTableTemplate {
 
@@ -76,6 +81,18 @@ public class LootTableTemplate {
 	public static LootPoolSingletonContainer.Builder<?> cropDrop(Item item) {
 		return LootItem.lootTableItem(item).apply(ApplyBonusCount
 				.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.57f, 3));
+	}
+
+	public static EnchantmentPredicate hasEnchantment(Enchantment enchant, int min) {
+		return new EnchantmentPredicate(enchant, MinMaxBounds.Ints.atLeast(min));
+	}
+
+	public static LootItemCondition.Builder shearOrSilk(boolean inverted) {
+		AlternativeLootItemCondition.Builder ans = AlternativeLootItemCondition.alternative(
+				MatchTool.toolMatches(ItemPredicate.Builder.item().of(Tags.Items.SHEARS)),
+				MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(hasEnchantment(Enchantments.SILK_TOUCH, 1)))
+		);
+		return inverted ? InvertedLootItemCondition.invert(ans) : ans;
 	}
 
 }

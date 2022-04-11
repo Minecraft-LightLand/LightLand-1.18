@@ -1,8 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"textures": {
-		"0": "cuisine:block/fruit"
-	},
 	"elements": [
 		{
 			"from": [10, 6, 9],

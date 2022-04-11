@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "lightland:block/leaves_pomelo"
+    },
+    "age=1": {
+      "model": "lightland:block/leaves_pomelo"
+    },
+    "age=2": {
+      "model": "lightland:block/flowers_leaves_pomelo"
+    },
+    "age=3": {
+      "model": "lightland:block/fruit_leaves_pomelo"
+    }
+  }
+}

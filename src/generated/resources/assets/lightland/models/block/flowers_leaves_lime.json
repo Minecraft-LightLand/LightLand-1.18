@@ -1,0 +1,6 @@
+{
+  "parent": "lightland:block/flowers",
+  "textures": {
+    "0": "lightland:block/flowers_lime"
+  }
+}

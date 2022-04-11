@@ -1,0 +1,6 @@
+{
+  "parent": "lightland:block/fruit_lg",
+  "textures": {
+    "0": "lightland:item/pomelo"
+  }
+}
