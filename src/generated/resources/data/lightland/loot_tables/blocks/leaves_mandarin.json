@@ -40,7 +40,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:air"
+          "name": "lightland:leaves_mandarin"
         }
       ],
       "conditions": [
@@ -98,7 +98,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:air"
+          "name": "lightland:sapling_mandarin"
         },
         {
           "type": "minecraft:item",

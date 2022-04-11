@@ -40,7 +40,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:air"
+          "name": "lightland:leaves_citron"
         }
       ],
       "conditions": [
@@ -98,7 +98,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:air"
+          "name": "lightland:sapling_citron"
         },
         {
           "type": "minecraft:item",

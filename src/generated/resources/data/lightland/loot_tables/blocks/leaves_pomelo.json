@@ -40,7 +40,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:air"
+          "name": "lightland:leaves_pomelo"
         }
       ],
       "conditions": [
@@ -98,7 +98,7 @@
               "add": false
             }
           ],
-          "name": "minecraft:air"
+          "name": "lightland:sapling_pomelo"
         },
         {
           "type": "minecraft:item",
