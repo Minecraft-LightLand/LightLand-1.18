@@ -3,6 +3,7 @@ package dev.xkmc.cuisine.content.tools.pan;
 import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -28,7 +29,7 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 	public int time;
 
 	public SaucePanRecipe(ResourceLocation id) {
-		super(id, LightlandRecipe.RS_PAN.get());
+		super(id, CuisineRecipe.RS_PAN.get());
 	}
 
 	@Override

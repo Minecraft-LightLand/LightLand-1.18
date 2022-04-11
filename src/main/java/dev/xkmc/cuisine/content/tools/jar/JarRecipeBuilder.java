@@ -1,7 +1,5 @@
 package dev.xkmc.cuisine.content.tools.jar;
 
-import dev.hikarishima.lightland.content.secondary.pan.PanBlockEntity;
-import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.BaseRecipeBuilder;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.data.recipes.FinishedRecipe;

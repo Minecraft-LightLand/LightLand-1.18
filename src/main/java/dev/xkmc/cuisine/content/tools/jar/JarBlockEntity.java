@@ -34,10 +34,12 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	}
 
+	public static final int MAX_FLUID = 1000;
+
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseContainer inventory = new BaseContainer(3).add(this);
 	@SerialClass.SerialField(toClient = true)
-	protected final BaseTank fluids = new BaseTank(1, 1000)
+	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> AllTags.AllFluidTags.PAN_ACCEPT.matches(e.getFluid())).add(this);
 
 	@SerialClass.SerialField
@@ -89,7 +91,7 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 		}
 		for (FluidStack stack : fluids.getAsList()) {
 			if (!stack.isEmpty())
-				list.add(new TileInfoOverlay.FluidDrawable(stack, 1000));
+				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID));
 		}
 		return list;
 	}

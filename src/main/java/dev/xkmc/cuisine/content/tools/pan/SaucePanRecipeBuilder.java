@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.BaseRecipeBuilder;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 public class SaucePanRecipeBuilder extends BaseRecipeBuilder<SaucePanRecipeBuilder, SaucePanRecipe, SaucePanRecipe, PanBlockEntity.RecipeContainer> {
 
 	public SaucePanRecipeBuilder(ItemLike result, int count, int time, Item interrupt) {
-		super(LightlandRecipe.RS_PAN.get());
+		super(CuisineRecipe.RS_PAN.get());
 		recipe.item_ingredients = new ArrayList<>();
 		recipe.fluid_ingredients = new ArrayList<>();
 		recipe.result = new ItemStack(result.asItem(), count);

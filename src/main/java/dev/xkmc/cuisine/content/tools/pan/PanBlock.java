@@ -8,6 +8,7 @@ import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.one.LightBlockMethod;
+import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -33,7 +34,7 @@ import java.util.Objects;
 
 public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockMethod, OnClickBlockMethod, LightBlockMethod {
 
-	public static final BlockEntityBlockMethod<PanBlockEntity> TE = new BlockEntityBlockMethodImpl<>(LightlandBlocks.TE_PAN, PanBlockEntity.class);
+	public static final BlockEntityBlockMethod<PanBlockEntity> TE = new BlockEntityBlockMethodImpl<>(CuisineBlocks.TE_PAN, PanBlockEntity.class);
 
 	@Override
 	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
