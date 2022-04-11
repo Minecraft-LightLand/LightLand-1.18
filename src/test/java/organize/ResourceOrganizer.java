@@ -37,6 +37,7 @@ public abstract class ResourceOrganizer {
         File f = new File("./src/test/resources");
         for (File fi : f.listFiles()) {
             MODID = fi.getName();
+            delete(new File("./src/main/resources/assets/lightland/models"));
             delete(new File("./src/main/resources/assets/lightland/textures/item"));
             delete(new File("./src/main/resources/assets/lightland/textures/block"));
             delete(new File("./src/main/resources/data/lightland/recipes"));
