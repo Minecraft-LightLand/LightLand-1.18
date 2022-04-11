@@ -46,11 +46,11 @@ public class CuisineBlocks {
 				CuisineTreeType type = CuisineTreeType.values()[i];
 				LEAVE[i] = REGISTRATE.block("leaves_" + type.getName(), p -> new CuisineLeaveBlock(type,
 								BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).randomTicks().noCollission()))
-						.blockstate(type::generate).loot(type::loot).tag(BlockTags.LEAVES).register();
+						.blockstate(type::generate).loot(type::loot).tag(BlockTags.LEAVES).simpleItem().register();
 				SAPLING[i] = REGISTRATE.block("sapling_" + type.getName(), p -> new SaplingBlock(type.getGrower(), p))
 						.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(),
 								pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
-						.tag(BlockTags.SAPLINGS).register();
+						.tag(BlockTags.SAPLINGS).simpleItem().register();
 			}
 		}
 	}
