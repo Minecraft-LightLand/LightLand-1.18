@@ -7,7 +7,6 @@ import dev.xkmc.cuisine.init.data.CuisineCropType;
 import dev.xkmc.cuisine.init.data.CuisineTreeType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -24,7 +23,8 @@ public class CuisineBlocks {
 	public static final BlockEntry<CuisineCropBlock>[] VEGES;
 
 
-	public static final BlockEntry<? extends Block>[] LEAVE, SAPLING;
+	public static final BlockEntry<CuisineLeaveBlock>[] LEAVE;
+	public static final BlockEntry<SaplingBlock>[] SAPLING;
 
 	static {
 		{
@@ -46,13 +46,13 @@ public class CuisineBlocks {
 				CuisineTreeType type = CuisineTreeType.values()[i];
 				LEAVE[i] = REGISTRATE.block("leaves_" + type.getName(), p -> new CuisineLeaveBlock(type,
 								BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).randomTicks().noCollission()))
-						.blockstate(type::generate).loot(type::loot).addLayer(() -> RenderType::cutout)
+						.blockstate(type::generate).loot(type::loot).addLayer(() -> RenderType::cutoutMipped)
 						.tag(BlockTags.LEAVES).simpleItem().register();
 				SAPLING[i] = REGISTRATE.block("sapling_" + type.getName(), p -> new SaplingBlock(type.getGrower(),
 								BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
 						.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(),
 								pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
-						.addLayer(() -> RenderType::cutout).tag(BlockTags.SAPLINGS).simpleItem().register();
+						.addLayer(() -> RenderType::cutoutMipped).tag(BlockTags.SAPLINGS).simpleItem().register();
 			}
 		}
 	}

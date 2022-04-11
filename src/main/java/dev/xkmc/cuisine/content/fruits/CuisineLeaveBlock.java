@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
-public class CuisineLeaveBlock extends LeavesBlock {
+public class CuisineLeaveBlock extends VanillaLeavesBlock {
 
 	private static final ThreadLocal<CuisineTreeType> TEMP = new ThreadLocal<>();
 

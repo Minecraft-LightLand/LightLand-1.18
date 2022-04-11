@@ -1,6 +1,0 @@
-{
-  "parent": "lightland:block/fruit_md",
-  "textures": {
-    "0": "lightland:item/lemon"
-  }
-}

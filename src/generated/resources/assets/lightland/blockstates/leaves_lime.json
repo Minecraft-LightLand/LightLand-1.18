@@ -18,7 +18,7 @@
         "age": "3"
       },
       "apply": {
-        "model": "lightland:block/fruit_lime"
+        "model": "lightland:block/fruit_md"
       }
     }
   ]

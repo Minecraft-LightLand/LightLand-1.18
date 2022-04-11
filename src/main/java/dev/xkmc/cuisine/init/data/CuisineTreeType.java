@@ -24,14 +24,21 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import java.util.Locale;
 
 public enum CuisineTreeType {
-	CITRON("sm"), GRAPEFRUIT("lg"), LEMON("md"), LIME("md"),
-	MANDARIN("sm"), ORANGE("md"), POMELO("lg");
+	CITRON("sm", 0xDDCC58),
+	GRAPEFRUIT("lg", 0xF4502B),
+	LEMON("md", 0xEBCA4B),
+	LIME("md", 0xCADA76),
+	MANDARIN("sm", 0xF08A19),
+	ORANGE("md", 0xF08A19),
+	POMELO("lg", 0xF7F67E);
 
 	private final CuisineTreeGrower grower = new CuisineTreeGrower(this);
 	private final ResourceLocation fruit_type;
+	public final int color;
 
-	CuisineTreeType(String fruit_type) {
+	CuisineTreeType(String fruit_type, int color) {
 		this.fruit_type = new ResourceLocation(Cuisine.MODID, "block/fruit_" + fruit_type);
+		this.color = color;
 	}
 
 	public String getName() {
@@ -61,8 +68,7 @@ public enum CuisineTreeType {
 				.texture("all", new ResourceLocation(Cuisine.MODID, "block/leaves_" + getName()));
 		ModelFile flower = pvd.models().getBuilder("flowers_" + getName()).parent(new ModelFile.UncheckedModelFile(FLOWER))
 				.texture("0", new ResourceLocation(Cuisine.MODID, "block/flowers_" + getName()));
-		ModelFile fruit = pvd.models().getBuilder("fruit_" + getName()).parent(new ModelFile.UncheckedModelFile(fruit_type))
-				.texture("0", new ResourceLocation(Cuisine.MODID, "item/" + getName()));
+		ModelFile fruit = new ModelFile.UncheckedModelFile(fruit_type);
 		pvd.getMultipartBuilder(ctx.getEntry())
 				.part().modelFile(leave).addModel().end()
 				.part().modelFile(flower).addModel().condition(CuisineLeaveBlock.AGE, 2).end()

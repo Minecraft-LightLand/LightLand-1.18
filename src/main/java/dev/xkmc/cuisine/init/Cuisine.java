@@ -6,6 +6,7 @@ import dev.xkmc.cuisine.content.veges.CornBlock;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import dev.xkmc.cuisine.init.registrate.CuisineItems;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class Cuisine {
 
@@ -16,6 +17,7 @@ public class Cuisine {
 		CuisineBlocks.register();
 		CuisineItems.register();
 		MinecraftForge.EVENT_BUS.register(CornBlock.class);
+		FMLJavaModLoadingContext.get().getModEventBus().register(CuisineBlockRendering.class);
 	}
 
 }
