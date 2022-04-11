@@ -3,6 +3,8 @@
   "values": [
     "lightland:fruittree_log",
     "lightland:fruittree_planks",
+    "lightland:fruittree_slab",
+    "lightland:fruittree_stairs",
     "lightland:fruittree_trapdoor",
     "lightland:fruittree_door",
     "lightland:fruittree_button",
