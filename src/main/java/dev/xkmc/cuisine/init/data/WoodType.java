@@ -15,11 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.Direction;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
@@ -126,7 +122,7 @@ public enum WoodType {
 		FENCE_GATE = REGISTRATE.block(getName() + "_fence_gate", p -> new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE_GATE)))
 				.blockstate((ctx, pvd) -> pvd.fenceGateBlock(ctx.getEntry(), pvd.blockTexture(PLANK.get())))
 				.simpleItem().tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.FENCE_GATES).register();
-		BOAT = REGISTRATE.<BoatEntity>entity(getName() + "_boat", BoatEntity::new, MobCategory.MISC)
+		BOAT = REGISTRATE.<BoatEntity>entity(getName() + "_boat", (type, level) -> new BoatEntity(type, level, this), MobCategory.MISC)
 				.properties(e -> e.sized(1.375F, 0.5625F).clientTrackingRange(10))
 				.renderer(() -> ctx -> new BoatEntityRenderer(ctx, this)).register();
 		BOAT_ITEM = REGISTRATE.item(getName() + "_boat", p -> new CustomBoatItem(this, p)).tag(ItemTags.BOATS).register();
@@ -173,20 +169,19 @@ public enum WoodType {
 
 class BoatEntity extends Boat {
 
-	private static final EntityDataAccessor<Integer> DATA_ID_TYPE = SynchedEntityData.defineId(BoatEntity.class, EntityDataSerializers.INT);
+	private final WoodType wood;
 
-	public BoatEntity(EntityType<BoatEntity> type, Level level) {
+	public BoatEntity(EntityType<BoatEntity> type, Level level, WoodType wood) {
 		super(type, level);
+		this.wood = wood;
 	}
 
-	public BoatEntity(Level level, double x, double y, double z) {
-		super(level, x, y, z);
-	}
-
-	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
-		this.entityData.define(DATA_ID_TYPE, 0);
+	public BoatEntity(Level level, WoodType wood, double x, double y, double z) {
+		this(wood.BOAT.get(), level, wood);
+		this.setPos(x, y, z);
+		this.xo = x;
+		this.yo = y;
+		this.zo = z;
 	}
 
 	@Override
@@ -194,29 +189,10 @@ class BoatEntity extends Boat {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
-	protected void addAdditionalSaveData(CompoundTag tag) {
-		super.addAdditionalSaveData(tag);
-		tag.putString("WoodType", this.getWoodType().getName());
-	}
-
-	public void setWoodType(WoodType type) {
-		this.entityData.set(DATA_ID_TYPE, type.ordinal());
-	}
-
-	public WoodType getWoodType() {
-		return WoodType.values()[this.entityData.get(DATA_ID_TYPE)];
-	}
-
-	protected void readAdditionalSaveData(CompoundTag tag) {
-		super.readAdditionalSaveData(tag);
-		if (tag.contains("WoodType", 8)) {
-			this.setWoodType(Enum.valueOf(WoodType.class, tag.getString("WoodType")));
-		}
-	}
 
 	@Override
 	public Item getDropItem() {
-		return getWoodType().BOAT_ITEM.get();
+		return wood.BOAT_ITEM.get();
 	}
 
 	protected void checkFallDamage(double p_38307_, boolean p_38308_, BlockState p_38309_, BlockPos p_38310_) {
@@ -234,7 +210,7 @@ class BoatEntity extends Boat {
 						this.kill();
 						if (this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
 							for (int i = 0; i < 3; ++i) {
-								this.spawnAtLocation(getWoodType().PLANK.get().asItem());
+								this.spawnAtLocation(wood.PLANK.get().asItem());
 							}
 
 							for (int j = 0; j < 2; ++j) {
@@ -303,8 +279,7 @@ class CustomBoatItem extends Item {
 			}
 
 			if (hitresult.getType() == HitResult.Type.BLOCK) {
-				BoatEntity boat = new BoatEntity(p_40622_, hitresult.getLocation().x, hitresult.getLocation().y, hitresult.getLocation().z);
-				boat.setWoodType(type);
+				BoatEntity boat = new BoatEntity(p_40622_, type, hitresult.getLocation().x, hitresult.getLocation().y, hitresult.getLocation().z);
 				boat.setYRot(p_40623_.getYRot());
 				if (!p_40622_.noCollision(boat, boat.getBoundingBox())) {
 					return InteractionResultHolder.fail(itemstack);
@@ -355,8 +330,7 @@ class BoatDispenseItemBehavior extends DefaultDispenseItemBehavior {
 			d3 = 0.0D;
 		}
 
-		BoatEntity boat = new BoatEntity(level, d0, d1 + d3, d2);
-		boat.setWoodType(this.type);
+		BoatEntity boat = new BoatEntity(level, type, d0, d1 + d3, d2);
 		boat.setYRot(direction.toYRot());
 		level.addFreshEntity(boat);
 		p_123376_.shrink(1);

@@ -160,6 +160,9 @@ public class CuisineTags {
 	}
 
 	public enum AllItemTags {
+		STAPLE, MEAT, VEGES, SIDE, CONDIMENT,
+		SEAFOOD, ABSORB_SALT,
+		GREASY, SALTY, SWEET, SPICY, NUMB, SOUR, KELP, SESAME
 		;
 
 		public final TagKey<Item> tag;

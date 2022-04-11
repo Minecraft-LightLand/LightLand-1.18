@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "lightland:block/mortar"
+      }
+    },
+    {
+      "apply": {
+        "model": "lightland:block/pestle"
+      }
+    }
+  ]
+}
