@@ -2,6 +2,13 @@
   "replace": false,
   "values": [
     "lightland:slime_carpet",
-    "lightland:slime_vine"
+    "lightland:slime_vine",
+    "lightland:leaves_citron",
+    "lightland:leaves_grapefruit",
+    "lightland:leaves_lemon",
+    "lightland:leaves_lime",
+    "lightland:leaves_mandarin",
+    "lightland:leaves_orange",
+    "lightland:leaves_pomelo"
   ]
 }

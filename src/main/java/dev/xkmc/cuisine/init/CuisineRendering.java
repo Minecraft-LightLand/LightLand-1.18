@@ -5,12 +5,15 @@ import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.world.item.BlockItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public final class CuisineBlockRendering {
+public final class CuisineRendering {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
@@ -24,6 +27,20 @@ public final class CuisineBlockRendering {
 		};
 		for (BlockEntry<?> entry : CuisineBlocks.LEAVE) {
 			blockColors.register(color, entry.get());
+		}
+	}
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	public static void onItemColorsInit(ColorHandlerEvent.Item event) {
+		ItemColors itemColors = event.getItemColors();
+		ItemColor color = (stack, index) -> {
+			if (stack.getItem() instanceof BlockItem block && block.getBlock() instanceof CuisineLeaveBlock leave)
+				return leave.getType().color;
+			return -1;
+		};
+		for (BlockEntry<?> entry : CuisineBlocks.LEAVE) {
+			itemColors.register(color, entry.get());
 		}
 	}
 

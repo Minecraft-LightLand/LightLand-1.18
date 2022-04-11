@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:fruittree_log",
+    "lightland:fruittree_planks",
+    "lightland:fruittree_trapdoor",
+    "lightland:fruittree_door",
+    "lightland:fruittree_button",
+    "lightland:fruittree_fence",
+    "lightland:fruittree_fence_gate"
+  ]
+}
