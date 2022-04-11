@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "lightland:block/fruittree_pressure_plate"
+    },
+    "powered=true": {
+      "model": "lightland:block/fruittree_pressure_plate_down"
+    }
+  }
+}

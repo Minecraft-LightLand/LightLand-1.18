@@ -2,6 +2,7 @@ package dev.xkmc.cuisine.init.data;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.xkmc.cuisine.init.Cuisine;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.*;
@@ -20,6 +21,7 @@ public enum WoodType {
 	public final BlockEntry<TrapDoorBlock> TRAPDOOR;
 	public final BlockEntry<DoorBlock> DOOR;
 	public final BlockEntry<WoodButtonBlock> BUTTON;
+	public final BlockEntry<PressurePlateBlock> PRESSURE_PLATE;
 	public final BlockEntry<FenceBlock> FENCE;
 	public final BlockEntry<FenceGateBlock> FENCE_GATE;
 
@@ -40,12 +42,17 @@ public enum WoodType {
 				.blockstate((ctx, pvd) -> pvd.doorBlock(ctx.getEntry(),
 						new ResourceLocation(Cuisine.MODID, "block/" + getName() + "_door_lower"),
 						new ResourceLocation(Cuisine.MODID, "block/" + getName() + "_door_upper")))
-				.item().defaultModel().build()
+				.item().defaultModel().build().addLayer(() -> RenderType::cutout)
 				.tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.DOORS, BlockTags.WOODEN_DOORS).register();
 		BUTTON = REGISTRATE.block(getName() + "_button", p -> new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.OAK_BUTTON)))
 				.blockstate((ctx, pvd) -> pvd.buttonBlock(ctx.getEntry(), pvd.blockTexture(PLANK.get())))
 				.item().model((ctx, pvd) -> pvd.buttonInventory(ctx.getName(), pvd.modLoc("block/" + getName() + "_planks"))).build()
 				.tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.BUTTONS, BlockTags.WOODEN_BUTTONS).register();
+		PRESSURE_PLATE = REGISTRATE.block(getName() + "_pressure_plate", p -> new PressurePlateBlock(
+						PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.OAK_PRESSURE_PLATE)))
+				.blockstate((ctx, pvd) -> pvd.pressurePlateBlock(ctx.getEntry(), pvd.blockTexture(PLANK.get())))
+				.simpleItem().tag(BlockTags.MINEABLE_WITH_AXE, BlockTags.PRESSURE_PLATES, BlockTags.WOODEN_PRESSURE_PLATES)
+				.register();
 		FENCE = REGISTRATE.block(getName() + "_fence", p -> new FenceBlock(BlockBehaviour.Properties.copy(Blocks.OAK_FENCE)))
 				.blockstate((ctx, pvd) -> pvd.fenceBlock(ctx.getEntry(), pvd.blockTexture(PLANK.get())))
 				.item().model((ctx, pvd) -> pvd.fenceInventory(ctx.getName(), pvd.modLoc("block/" + getName() + "_planks"))).build()
