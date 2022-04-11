@@ -24,7 +24,6 @@ import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
@@ -97,7 +96,7 @@ public enum CuisineCropType {
 	private static final ResourceLocation MODEL_DOUBLE = new ResourceLocation(Cuisine.MODID, "block/double_crop");
 	private static final ResourceLocation MODEL_DOUBLE_CROSS = new ResourceLocation(Cuisine.MODID, "block/double_cross_crop");
 	private static final ResourceLocation MODEL_WATER = new ResourceLocation(Cuisine.MODID, "block/water_crop");
-	private static final ResourceLocation VOID = new ResourceLocation(Cuisine.MODID, "block/void");
+	private static final ResourceLocation UPPER = new ResourceLocation(Cuisine.MODID, "block/upper_crop");
 
 	public String getName() {
 		return name().toLowerCase(Locale.ROOT);
@@ -153,7 +152,7 @@ public enum CuisineCropType {
 	private BlockModelBuilder upper(DataGenContext<Block, CuisineCropBlock> ctx, RegistrateBlockstateProvider pvd, String mid) {
 		String modelname = ctx.getName() + "_upper";
 		ResourceLocation texture = new ResourceLocation(Cuisine.MODID, "block/" + ctx.getName() + mid);
-		return pvd.models().getBuilder(modelname).parent(new ModelFile.UncheckedModelFile(VOID))
+		return pvd.models().getBuilder(modelname).parent(new ModelFile.UncheckedModelFile(UPPER))
 				.texture("crop", texture);
 	}
 

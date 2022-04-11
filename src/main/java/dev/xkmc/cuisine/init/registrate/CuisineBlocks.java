@@ -5,11 +5,7 @@ import dev.xkmc.cuisine.content.veges.CuisineCropBlock;
 import dev.xkmc.cuisine.init.data.CuisineCropType;
 import dev.xkmc.cuisine.init.data.CuisineTreeType;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.SaplingBlock;
 
 import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
 
@@ -43,9 +39,8 @@ public class CuisineBlocks {
 			SAPLING = new BlockEntry[n];
 			for (int i = 0; i < n; i++) {
 				CuisineTreeType type = CuisineTreeType.values()[i];
-				LEAVE[i] = REGISTRATE.block(type.getName() + "_leaves", LeavesBlock::new).tag(BlockTags.LEAVES).register();
-				SAPLING[i] = REGISTRATE.block("sapling_", type.getName(), p -> new SaplingBlock(type.getGrower(), p))
-						.tag(BlockTags.SAPLINGS).register();
+				//LEAVE[i] = REGISTRATE.block(type.getName() + "_leaves", LeavesBlock::new).tag(BlockTags.LEAVES).register();
+				//SAPLING[i] = REGISTRATE.block("sapling_", type.getName(), p -> new SaplingBlock(type.getGrower(), p)).tag(BlockTags.SAPLINGS).register();
 			}
 		}
 	}
