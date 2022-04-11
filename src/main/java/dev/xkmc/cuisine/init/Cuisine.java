@@ -21,6 +21,7 @@ public class Cuisine {
 	public Cuisine() {
 		CuisineBlocks.register();
 		CuisineItems.register();
+
 		MinecraftForge.EVENT_BUS.register(CornBlock.class);
 		FMLJavaModLoadingContext.get().getModEventBus().register(Cuisine.class);
 		FMLJavaModLoadingContext.get().getModEventBus().register(CuisineRendering.class);

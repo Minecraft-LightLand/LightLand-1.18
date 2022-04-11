@@ -140,7 +140,11 @@ public enum WoodType {
 	public static void register() {
 	}
 
+	private static boolean common_init = false, client_init = false;
+
 	public static void onCommonInit() {
+		if (common_init) return;
+		common_init = true;
 		for (WoodType type : WoodType.values()) {
 			DispenserBlock.registerBehavior(type.BOAT_ITEM.get(), new BoatDispenseItemBehavior(type));
 		}
@@ -148,6 +152,8 @@ public enum WoodType {
 
 	@OnlyIn(Dist.CLIENT)
 	public static void onClientInit() {
+		if (client_init) return;
+		client_init = true;
 		LayerDefinition layerDef = BoatModel.createBodyModel();
 		for (WoodType type : WoodType.values()) {
 			type.registerLayer(layerDef);
