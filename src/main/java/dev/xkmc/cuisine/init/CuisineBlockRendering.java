@@ -17,10 +17,8 @@ public final class CuisineBlockRendering {
 	public static void onBlockColorsInit(ColorHandlerEvent.Block event) {
 		BlockColors blockColors = event.getBlockColors();
 		BlockColor color = (state, tint, pos, index) -> {
-			if (index == 0) {
-				if (state.getBlock() instanceof CuisineLeaveBlock leave) {
-					return leave.getType().color;
-				}
+			if (state.getBlock() instanceof CuisineLeaveBlock leave) {
+				return leave.getType().color;
 			}
 			return -1;
 		};

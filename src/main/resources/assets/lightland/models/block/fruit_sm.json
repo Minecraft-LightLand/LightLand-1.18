@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "cuisine:block/fruit",
-		"particle": "cuisine:block/fruit"
+		"0": "lightland:block/fruit",
+		"particle": "lightland:block/fruit"
 	},
 	"elements": [
 		{
