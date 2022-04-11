@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.grower.AbstractTreeGrower;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.Locale;
@@ -60,15 +59,14 @@ public enum CuisineTreeType {
 	public void generate(DataGenContext<Block, CuisineLeaveBlock> ctx, RegistrateBlockstateProvider pvd) {
 		ModelFile leave = pvd.models().withExistingParent(ctx.getName(), "block/leaves")
 				.texture("all", new ResourceLocation(Cuisine.MODID, "block/leaves_" + getName()));
-		ModelFile flower = pvd.models().getBuilder("flowers_" + ctx.getName()).parent(new ModelFile.UncheckedModelFile(FLOWER))
+		ModelFile flower = pvd.models().getBuilder("flowers_" + getName()).parent(new ModelFile.UncheckedModelFile(FLOWER))
 				.texture("0", new ResourceLocation(Cuisine.MODID, "block/flowers_" + getName()));
-		ModelFile fruit = pvd.models().getBuilder("fruit_" + ctx.getName()).parent(new ModelFile.UncheckedModelFile(fruit_type))
+		ModelFile fruit = pvd.models().getBuilder("fruit_" + getName()).parent(new ModelFile.UncheckedModelFile(fruit_type))
 				.texture("0", new ResourceLocation(Cuisine.MODID, "item/" + getName()));
-		pvd.getVariantBuilder(ctx.getEntry())
-				.partialState().with(CuisineLeaveBlock.AGE, 0).addModels(ConfiguredModel.builder().modelFile(leave).build())
-				.partialState().with(CuisineLeaveBlock.AGE, 1).addModels(ConfiguredModel.builder().modelFile(leave).build())
-				.partialState().with(CuisineLeaveBlock.AGE, 2).addModels(ConfiguredModel.builder().modelFile(leave).modelFile(flower).build())
-				.partialState().with(CuisineLeaveBlock.AGE, 3).addModels(ConfiguredModel.builder().modelFile(leave).modelFile(fruit).build());
+		pvd.getMultipartBuilder(ctx.getEntry())
+				.part().modelFile(leave).addModel().end()
+				.part().modelFile(flower).addModel().condition(CuisineLeaveBlock.AGE, 2).end()
+				.part().modelFile(fruit).addModel().condition(CuisineLeaveBlock.AGE, 3).end();
 	}
 
 	public void loot(RegistrateBlockLootTables table, CuisineLeaveBlock block) {

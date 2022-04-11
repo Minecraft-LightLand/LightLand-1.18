@@ -1,16 +1,25 @@
 {
-  "variants": {
-    "age=0": {
-      "model": "lightland:block/leaves_pomelo"
+  "multipart": [
+    {
+      "apply": {
+        "model": "lightland:block/leaves_pomelo"
+      }
     },
-    "age=1": {
-      "model": "lightland:block/leaves_pomelo"
+    {
+      "when": {
+        "age": "2"
+      },
+      "apply": {
+        "model": "lightland:block/flowers_pomelo"
+      }
     },
-    "age=2": {
-      "model": "lightland:block/flowers_leaves_pomelo"
-    },
-    "age=3": {
-      "model": "lightland:block/fruit_leaves_pomelo"
+    {
+      "when": {
+        "age": "3"
+      },
+      "apply": {
+        "model": "lightland:block/fruit_pomelo"
+      }
     }
-  }
+  ]
 }

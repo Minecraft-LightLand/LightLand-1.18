@@ -1,16 +1,25 @@
 {
-  "variants": {
-    "age=0": {
-      "model": "lightland:block/leaves_citron"
+  "multipart": [
+    {
+      "apply": {
+        "model": "lightland:block/leaves_citron"
+      }
     },
-    "age=1": {
-      "model": "lightland:block/leaves_citron"
+    {
+      "when": {
+        "age": "2"
+      },
+      "apply": {
+        "model": "lightland:block/flowers_citron"
+      }
     },
-    "age=2": {
-      "model": "lightland:block/flowers_leaves_citron"
-    },
-    "age=3": {
-      "model": "lightland:block/fruit_leaves_citron"
+    {
+      "when": {
+        "age": "3"
+      },
+      "apply": {
+        "model": "lightland:block/fruit_citron"
+      }
     }
-  }
+  ]
 }

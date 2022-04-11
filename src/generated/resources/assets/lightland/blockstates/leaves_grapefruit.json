@@ -1,16 +1,25 @@
 {
-  "variants": {
-    "age=0": {
-      "model": "lightland:block/leaves_grapefruit"
+  "multipart": [
+    {
+      "apply": {
+        "model": "lightland:block/leaves_grapefruit"
+      }
     },
-    "age=1": {
-      "model": "lightland:block/leaves_grapefruit"
+    {
+      "when": {
+        "age": "2"
+      },
+      "apply": {
+        "model": "lightland:block/flowers_grapefruit"
+      }
     },
-    "age=2": {
-      "model": "lightland:block/flowers_leaves_grapefruit"
-    },
-    "age=3": {
-      "model": "lightland:block/fruit_leaves_grapefruit"
+    {
+      "when": {
+        "age": "3"
+      },
+      "apply": {
+        "model": "lightland:block/fruit_grapefruit"
+      }
     }
-  }
+  ]
 }

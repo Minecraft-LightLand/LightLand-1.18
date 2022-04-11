@@ -1,16 +1,25 @@
 {
-  "variants": {
-    "age=0": {
-      "model": "lightland:block/leaves_orange"
+  "multipart": [
+    {
+      "apply": {
+        "model": "lightland:block/leaves_orange"
+      }
     },
-    "age=1": {
-      "model": "lightland:block/leaves_orange"
+    {
+      "when": {
+        "age": "2"
+      },
+      "apply": {
+        "model": "lightland:block/flowers_orange"
+      }
     },
-    "age=2": {
-      "model": "lightland:block/flowers_leaves_orange"
-    },
-    "age=3": {
-      "model": "lightland:block/fruit_leaves_orange"
+    {
+      "when": {
+        "age": "3"
+      },
+      "apply": {
+        "model": "lightland:block/fruit_orange"
+      }
     }
-  }
+  ]
 }
