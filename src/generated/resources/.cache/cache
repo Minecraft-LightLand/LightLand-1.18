@@ -1120,6 +1120,7 @@ b258f983d2d8903ffbdccc6771217015aa3b93da data/lightland/recipes/smithing/upgrade
 796c1895e148a553d335ac3c2cb328dfe82a06b6 data/lightland/recipes/steel_pickaxe.json
 d8082d3ff70aa05e557c34bd573d981f33b3f8cb data/lightland/recipes/steel_shovel.json
 a013907c49a3ee7711f124b75324abd6a958d49d data/lightland/recipes/steel_sword.json
+3f04d6b3dcfe18fbe09024042512ad52e08b0086 data/lightland/tags/fluids/jar_accept.json
 bc7fe3d0e89d23b4f40aa90e5cdea23e95792175 data/lightland/tags/fluids/pan_accept.json
 fcdb322e81a261254b348a4bee96808db7691266 data/lightland/tags/items/absorb_salt.json
 4883e3459dd6a18cece1f766800846b3692e3eeb data/lightland/tags/items/backpacks.json

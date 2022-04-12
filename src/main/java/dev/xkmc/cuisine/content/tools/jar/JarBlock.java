@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.content.tools.jar;
 
-import dev.hikarishima.lightland.init.data.AllTags;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.AnimateTickBlockMethod;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
@@ -20,12 +19,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
-import net.minecraftforge.items.wrapper.InvWrapper;
 
 import java.util.Objects;
 import java.util.Random;
@@ -49,7 +46,7 @@ public class JarBlock implements OnClickBlockMethod, AnimateTickBlockMethod {
 			if (opt.resolve().isPresent()) {
 				IFluidHandlerItem item = opt.resolve().get();
 				FluidStack fluidStack = item.getFluidInTank(0);
-				if (fluidStack.isEmpty() || AllTags.AllFluidTags.PAN_ACCEPT.matches(fluidStack.getFluid())) {//TODO tag, test
+				if (fluidStack.isEmpty() || CuisineTags.AllFluidTags.JAR_ACCEPT.matches(fluidStack.getFluid())) {
 					return FluidUtil.interactWithFluidHandler(pl, h, w, pos, r.getDirection()) ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
 				}
 			}

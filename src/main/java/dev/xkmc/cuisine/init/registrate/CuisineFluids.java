@@ -1,15 +1,9 @@
 package dev.xkmc.cuisine.init.registrate;
 
-import com.tterrag.registrate.providers.DataGenContext;
-import com.tterrag.registrate.providers.RegistrateItemModelProvider;
-import com.tterrag.registrate.util.entry.ItemEntry;
-import dev.hikarishima.lightland.init.registrate.LightlandItems;
-import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
-import net.minecraft.world.item.Item;
+import dev.xkmc.cuisine.init.data.CuisineTags;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.common.ForgeMod;
 
 import javax.annotation.Nullable;
@@ -38,7 +32,7 @@ public enum CuisineFluids {
 		if (fluid != null) {
 			this.fluid = fluid;
 		} else {
-			this.fluid = REGISTRATE.virtualFluid(getName()).defaultLang().register()::get;
+			this.fluid = REGISTRATE.virtualFluid(getName()).tag(CuisineTags.AllFluidTags.JAR_ACCEPT.tag).defaultLang().register()::get;
 		}
 		this.color = color;
 	}

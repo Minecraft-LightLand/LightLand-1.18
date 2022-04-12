@@ -5,6 +5,7 @@ import dev.hikarishima.lightland.init.data.AllTags;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -52,7 +53,7 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(3).setMax(1).add(this);
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
-			.setPredicate(e -> AllTags.AllFluidTags.PAN_ACCEPT.matches(e.getFluid())).add(this);
+			.setPredicate(e -> CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid())).add(this);
 
 	@SerialClass.SerialField(toClient = true)
 	protected int max_time, time;

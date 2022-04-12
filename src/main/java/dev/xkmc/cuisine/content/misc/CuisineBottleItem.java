@@ -5,10 +5,13 @@ import dev.xkmc.cuisine.init.registrate.CuisineFluids;
 import dev.xkmc.cuisine.init.registrate.CuisineItems;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -19,6 +22,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class CuisineBottleItem extends Item {
 
@@ -34,10 +40,21 @@ public class CuisineBottleItem extends Item {
 			for (CuisineFluids fluids : CuisineFluids.values()) {
 				ItemStack stack = new ItemStack(this);
 				if (fluids.fluid.get() != Fluids.EMPTY)
-					getHandler(stack).fill(new FluidStack(fluids.fluid.get(), MAX), IFluidHandler.FluidAction.EXECUTE);
+					new FluidHandlerItemStack(stack, MAX)
+							.fill(new FluidStack(fluids.fluid.get(), MAX),
+									IFluidHandler.FluidAction.EXECUTE);
 				stacks.add(stack);
 			}
 		}
+	}
+
+	@Override
+	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
+		FluidStack fluid = getFluid(stack);
+		if (!fluid.isEmpty()) {
+			components.add(fluid.getDisplayName());
+		}
+		super.appendHoverText(stack, level, components, flag);
 	}
 
 	@Override
@@ -63,7 +80,7 @@ public class CuisineBottleItem extends Item {
 			if (type.fluid.get() == fluid.getFluid())
 				return type.color;
 		}
-		return 0xffffff;
+		return 0xff00ff;
 	}
 
 	public static FluidStack getFluid(ItemStack stack) {

@@ -19,6 +19,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -231,7 +233,7 @@ public class CuisineTags {
 	}
 
 	public enum AllFluidTags {
-		;
+		JAR_ACCEPT;
 
 		public final TagKey<Fluid> tag;
 
@@ -292,7 +294,7 @@ public class CuisineTags {
 		}
 
 		static void register() {
-
+			JAR_ACCEPT.add(Fluids.WATER);
 		}
 
 	}
