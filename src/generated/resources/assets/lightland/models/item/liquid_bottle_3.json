@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lightland:item/liquid_bottle_3",
+    "layer1": "lightland:item/liquid_bottle_base"
+  }
+}

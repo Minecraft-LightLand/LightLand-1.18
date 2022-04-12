@@ -3,6 +3,7 @@ package dev.xkmc.cuisine.init;
 import com.tterrag.registrate.providers.ProviderType;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.special.LLRegistrate;
+import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
 import dev.xkmc.cuisine.content.veges.CornBlock;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.data.RecipeGen;
@@ -31,6 +32,7 @@ public class Cuisine {
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 
 		MinecraftForge.EVENT_BUS.register(CornBlock.class);
+		MinecraftForge.EVENT_BUS.register(CuisineBottleItem.class);
 		FMLJavaModLoadingContext.get().getModEventBus().register(Cuisine.class);
 		FMLJavaModLoadingContext.get().getModEventBus().register(CuisineRendering.class);
 	}
@@ -51,6 +53,7 @@ public class Cuisine {
 	public static void onClientInit(FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
 			WoodType.onClientInit();
+			CuisineBottleItem.onClientInit();
 		});
 	}
 

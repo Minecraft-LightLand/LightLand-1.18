@@ -39,7 +39,7 @@ public class JarRecipeCategory implements IRecipeCategory<JarRecipe> {
 	}
 
 	public JarRecipeCategory init(IGuiHelper guiHelper) {
-		background = guiHelper.createDrawable(BG, 0, 108, 162, 18);
+		background = guiHelper.createDrawable(BG, 0, 126, 162, 18);
 		icon = guiHelper.createDrawableIngredient(CuisineBlocks.SAUCEPAN.get().asItem().getDefaultInstance());
 		return this;
 	}
@@ -107,7 +107,7 @@ public class JarRecipeCategory implements IRecipeCategory<JarRecipe> {
 	}
 
 	private static void setFluid(IGuiIngredientGroup<FluidStack> group, List<FluidStack> t, int ind, boolean bool, int x, int y) {
-		group.init(ind, bool, RENDERER, x, y, 16, 16, 1, 1);
+		group.init(ind, bool, RENDERER, x + 1, y + 1, 16, 16, 0, 0);
 		group.set(ind, t);
 	}
 

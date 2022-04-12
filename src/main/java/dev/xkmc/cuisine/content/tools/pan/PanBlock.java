@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
@@ -119,10 +120,7 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 				IFluidHandlerItem item = opt.resolve().get();
 				FluidStack fluidStack = item.getFluidInTank(0);
 				if (!fluidStack.isEmpty() && AllTags.AllFluidTags.PAN_ACCEPT.matches(fluidStack.getFluid())) { //TODO tag
-					FluidStack copy = fluidStack.copy();
-					copy.setAmount(1);
-					te.fluids.fill(copy, IFluidHandler.FluidAction.EXECUTE);
-					return InteractionResult.SUCCESS;
+					return FluidUtil.interactWithFluidHandler(pl, h, w, pos, r.getDirection()) ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
 				}
 			}
 			if (stack.is(CuisineTags.AllItemTags.CAN_COOK.tag)) {

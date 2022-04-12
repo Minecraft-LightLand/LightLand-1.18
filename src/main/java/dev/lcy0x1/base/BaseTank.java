@@ -24,6 +24,8 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 	@SerialClass.SerialField
 	public NonNullList<FluidStack> list;
 
+	private int click_max;
+
 	public BaseTank(int size, int capacity) {
 		this.size = size;
 		this.capacity = capacity;
@@ -42,6 +44,11 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 
 	public BaseTank setExtract(BooleanSupplier allowExtract) {
 		this.allowExtract = allowExtract;
+		return this;
+	}
+
+	public BaseTank setClickMax(int max) {
+		this.click_max = max;
 		return this;
 	}
 
@@ -70,7 +77,8 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 	public int fill(FluidStack resource, FluidAction action) {
 		if (resource.isEmpty()) return 0;
 		if (!predicate.test(resource)) return 0;
-		int to_fill = resource.getAmount();
+		int to_fill = click_max == 0 ? resource.getAmount() : resource.getAmount() >= click_max ? click_max : 0;
+		if (to_fill == 0) return 0;
 		int filled = 0;
 		for (int i = 0; i < size; i++) {
 			FluidStack stack = list.get(i);
@@ -108,6 +116,10 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 		if (resource.isEmpty()) return resource;
 		if (!allowExtract.getAsBoolean()) return FluidStack.EMPTY;
 		int to_drain = resource.getAmount();
+		if (click_max > 0) {
+			if (to_drain < click_max) return FluidStack.EMPTY;
+			to_drain = click_max;
+		}
 		int drained = 0;
 		for (int i = 0; i < size; i++) {
 			FluidStack stack = list.get(i);
@@ -136,6 +148,10 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 		if (!allowExtract.getAsBoolean()) return FluidStack.EMPTY;
 		FluidStack ans = null;
 		int to_drain = maxDrain;
+		if (click_max > 0) {
+			if (to_drain < click_max) return FluidStack.EMPTY;
+			to_drain = click_max;
+		}
 		int drained = 0;
 		for (int i = 0; i < size; i++) {
 			FluidStack stack = list.get(i);

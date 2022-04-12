@@ -49,9 +49,8 @@ public class JarBlock implements OnClickBlockMethod, AnimateTickBlockMethod {
 			if (opt.resolve().isPresent()) {
 				IFluidHandlerItem item = opt.resolve().get();
 				FluidStack fluidStack = item.getFluidInTank(0);
-				if (!fluidStack.isEmpty() && AllTags.AllFluidTags.PAN_ACCEPT.matches(fluidStack.getFluid())) {//TODO tag, test
-					FluidActionResult result = FluidUtil.tryFillContainerAndStow(stack, item, new InvWrapper(pl.getInventory()), JarBlockEntity.MAX_FLUID, pl, true);
-					return result.isSuccess() ? InteractionResult.SUCCESS : InteractionResult.FAIL;
+				if (fluidStack.isEmpty() || AllTags.AllFluidTags.PAN_ACCEPT.matches(fluidStack.getFluid())) {//TODO tag, test
+					return FluidUtil.interactWithFluidHandler(pl, h, w, pos, r.getDirection()) ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
 				}
 			}
 			if (stack.is(CuisineTags.AllItemTags.CAN_COOK.tag)) {

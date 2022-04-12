@@ -1,11 +1,10 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.hikarishima.lightland.content.common.render.TileInfoOverlay;
 import dev.hikarishima.lightland.init.data.AllTags;
-import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -52,7 +51,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	}
 
-	public static final int MAX_FLUID = 8;
+	public static final int MAX_FLUID = 8 * 50;
 
 	private final AnimationFactory manager = new AnimationFactory(this);
 
@@ -63,9 +62,9 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseContainer outputInventory = new BaseContainer(1).setPredicate(e -> false).add(this);
 	@SerialClass.SerialField(toClient = true)
-	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID)
+	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID).setClickMax(50)
 			.setPredicate(e -> canAccess() && AllTags.AllFluidTags.PAN_ACCEPT.matches(e.getFluid()))
-			.setExtract(this::canAccess).add(this);
+			.setExtract(() -> false).add(this);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
@@ -214,7 +213,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 		}
 		for (FluidStack stack : fluids.getAsList()) {
 			if (!stack.isEmpty())
-				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID));
+				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID, 50));
 		}
 		return list;
 	}

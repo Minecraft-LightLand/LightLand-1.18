@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.content.common.render;
+package dev.xkmc.cuisine.content.tools;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -51,7 +51,7 @@ public class TileInfoOverlay implements IIngameOverlay {
 
 	}
 
-	public record FluidDrawable(FluidStack stack, int cap) implements IDrawable {
+	public record FluidDrawable(FluidStack stack, int cap, int gran) implements IDrawable {
 
 		private static final int TEXTURE_SIZE = 16;
 		private static final int MIN_FLUID_HEIGHT = 1;
@@ -62,15 +62,16 @@ public class TileInfoOverlay implements IIngameOverlay {
 			drawFluid(poseStack, 16, 16, stack);
 			RenderSystem.setShaderColor(1, 1, 1, 1);
 			RenderSystem.disableBlend();
-			String s = String.valueOf(stack.getAmount());
-			Minecraft minecraft = Minecraft.getInstance();
-			ItemRenderer itemRenderer = minecraft.getItemRenderer();
-			poseStack.translate(0.0D, 0.0D, itemRenderer.blitOffset + 200.0F);
-			MultiBufferSource.BufferSource source = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-			minecraft.font.drawInBatch(s, (float) (19 - 2 - minecraft.font.width(s)), (float) (6 + 3), 16777215,
-					true, poseStack.last().pose(), source, false, 0, 15728880);
-			source.endBatch();
-
+			if (stack.getAmount() % gran == 0) {
+				String s = String.valueOf(stack.getAmount() / gran);
+				Minecraft minecraft = Minecraft.getInstance();
+				ItemRenderer itemRenderer = minecraft.getItemRenderer();
+				poseStack.translate(0.0D, 0.0D, itemRenderer.blitOffset + 200.0F);
+				MultiBufferSource.BufferSource source = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+				minecraft.font.drawInBatch(s, (float) (19 - 2 - minecraft.font.width(s)), (float) (6 + 3), 16777215,
+						true, poseStack.last().pose(), source, false, 0, 15728880);
+				source.endBatch();
+			}
 		}
 
 		private void drawFluid(PoseStack poseStack, final int width, final int height, FluidStack fluidStack) {
