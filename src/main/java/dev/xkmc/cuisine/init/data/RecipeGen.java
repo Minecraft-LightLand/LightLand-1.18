@@ -4,8 +4,11 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.pan.SaucePanRecipeBuilder;
+import dev.xkmc.cuisine.init.Cuisine;
+import dev.xkmc.cuisine.init.registrate.CuisineFluids;
 import dev.xkmc.cuisine.init.registrate.SimpleItem;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
@@ -27,9 +30,27 @@ public class RecipeGen {
 					.save(pvd);
 		}
 		{
-			unlock(pvd, new JarRecipeBuilder(SimpleItem.SALT.item.get(), 1, 100,
+			unlock(pvd, new JarRecipeBuilder(Items.AIR, 0, 100, new FluidStack(Fluids.WATER, 1000),
+							new FluidStack(CuisineFluids.SOY_SAUCE.fluid.get(), 250))::unlockedBy,
+					SimpleItem.SALT.item.get())
+					.requires(SimpleItem.SALT.item.get())
+					.requires(CuisineCropType.SOYBEAN.getSeed())
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/soy_sauce"));
+			unlock(pvd, new JarRecipeBuilder(Items.AIR, 0, 100, new FluidStack(Fluids.WATER, 1000),
+							new FluidStack(CuisineFluids.FRUIT_VINEGAR.fluid.get(), 250))::unlockedBy,
+					Items.APPLE)
+					.requires(CuisineTags.AllItemTags.FRUIT.tag)
+					.save(pvd);
+			unlock(pvd, new JarRecipeBuilder(SimpleItem.UNREFINED_SUGAR.item.get(), 1, 100,
+							new FluidStack(CuisineFluids.SUGARCANE_JUICE.fluid.get(), 250),
+							FluidStack.EMPTY)::unlockedBy,
+					Items.SUGAR_CANE)
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/unrefined_sugar"));
+			unlock(pvd, new JarRecipeBuilder(Items.SUGAR, 1, 100,
 							new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY)::unlockedBy,
-					SimpleItem.SALT.item.get()).save(pvd);
+					SimpleItem.UNREFINED_SUGAR.item.get())
+					.requires(SimpleItem.UNREFINED_SUGAR.item.get())
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/sugar"));
 		}
 	}
 

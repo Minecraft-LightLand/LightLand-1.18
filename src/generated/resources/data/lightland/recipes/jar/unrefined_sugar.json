@@ -1,7 +1,7 @@
 {
   "fluid_ingredient": {
-    "fluid": "minecraft:water",
-    "amount": 1000
+    "fluid": "lightland:flowing_sugarcane_juice",
+    "amount": 250
   },
   "item_ingredients": [],
   "remain": {
@@ -9,7 +9,7 @@
     "amount": 0
   },
   "result": {
-    "item": "lightland:salt"
+    "item": "lightland:unrefined_sugar"
   },
   "time": 100,
   "type": "lightland:jar"

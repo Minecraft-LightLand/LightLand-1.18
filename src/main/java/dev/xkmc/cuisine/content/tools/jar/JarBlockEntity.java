@@ -54,7 +54,7 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> AllTags.AllFluidTags.PAN_ACCEPT.matches(e.getFluid())).add(this);
 
-	@SerialClass.SerialField
+	@SerialClass.SerialField(toClient = true)
 	protected int max_time, time;
 	@SerialClass.SerialField
 	protected ResourceLocation recipe;
@@ -70,9 +70,9 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	@Override
 	public void notifyTile(@Nullable BaseContainer cont) {
+		this.resetProgress();
 		this.setChanged();
 		this.sync();
-		this.resetProgress();
 	}
 
 	@Override

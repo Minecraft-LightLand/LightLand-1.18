@@ -11,10 +11,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -64,7 +64,10 @@ public class Handlers {
 		new ClassHandler<>(String.class, JsonPrimitive::new, JsonElement::getAsString, FriendlyByteBuf::readUtf, FriendlyByteBuf::writeUtf, Tag::getAsString, StringTag::valueOf);
 
 		// minecraft
-		new ClassHandler<>(ItemStack.class, Helper::serializeItemStack, (e) -> ShapedRecipe.itemStackFromJson(e.getAsJsonObject()), FriendlyByteBuf::readItem, (p, is) -> p.writeItemStack(is, false), ItemStack::of, is -> is.save(new CompoundTag()));
+		new ClassHandler<>(ItemStack.class, Helper::serializeItemStack,
+				(e) -> CraftingHelper.getItemStack(e.getAsJsonObject(), true, false),
+				FriendlyByteBuf::readItem, (p, is) -> p.writeItemStack(is, false),
+				ItemStack::of, is -> is.save(new CompoundTag()));
 		new ClassHandler<>(FluidStack.class, Helper::serializeFluidStack, Helper::deserializeFluidStack, FluidStack::readFromPacket, (p, f) -> f.writeToPacket(p), FluidStack::loadFluidStackFromNBT, f -> f.writeToNBT(new CompoundTag()));
 
 		new StringClassHandler<>(ResourceLocation.class, ResourceLocation::new, ResourceLocation::toString);
