@@ -5,17 +5,21 @@ import dev.hikarishima.lightland.init.data.AllTags;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SerialClass
 public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEntity,
@@ -37,15 +41,15 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	public static final int MAX_FLUID = 1000;
 
 	@SerialClass.SerialField(toClient = true)
-	protected final BaseContainer inventory = new BaseContainer(3).add(this);
+	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(3).setMax(1).add(this);
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> AllTags.AllFluidTags.PAN_ACCEPT.matches(e.getFluid())).add(this);
 
 	@SerialClass.SerialField
-	private int max_time, time;
+	protected int max_time, time;
 	@SerialClass.SerialField
-	private ResourceLocation recipe;
+	protected ResourceLocation recipe;
 
 	public JarBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -69,7 +73,18 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			time--;
 			if (time == 0) {
 				if (level != null && recipe != null) {
-
+					Optional<JarRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_JAR, inventory, level);
+					inventory.clear();
+					fluids.clear();
+					max_time = 0;
+					time = 0;
+					if (optional.isPresent()) {
+						JarRecipe r = optional.get();
+						if (!r.result.isEmpty())
+							inventory.addItem(r.result.copy());
+						if (!r.remain.isEmpty())
+							fluids.fill(r.remain.copy(), IFluidHandler.FluidAction.EXECUTE);
+					}
 				}
 				notifyTile(null);
 			}
@@ -77,10 +92,27 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	}
 
 	public void resetProgress() {
-		// recipe
 		max_time = 0;
-		time = max_time;
+		time = 0;
+		recipe = null;
+		if (level != null) {
+			Optional<JarRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_JAR, inventory, level);
+			if (optional.isPresent()) {
+				JarRecipe r = optional.get();
+				max_time = r.time;
+				time = max_time;
+				recipe = r.id;
+			}
+		}
 	}
+
+	public void dumpInventory() {
+		if (level == null) return;
+		Containers.dropContents(level, this.getBlockPos().above(), inventory);
+		fluids.clear();
+		notifyTile(null);
+	}
+
 
 	@Override
 	public List<TileInfoOverlay.IDrawable> getContents() {

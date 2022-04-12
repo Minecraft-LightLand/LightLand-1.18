@@ -39,7 +39,7 @@ public class JarRecipeCategory implements IRecipeCategory<JarRecipe> {
 	}
 
 	public JarRecipeCategory init(IGuiHelper guiHelper) {
-		background = guiHelper.createDrawable(BG, 0, 90, 162, 36);
+		background = guiHelper.createDrawable(BG, 0, 108, 162, 18);
 		icon = guiHelper.createDrawableIngredient(CuisineBlocks.SAUCEPAN.get().asItem().getDefaultInstance());
 		return this;
 	}
@@ -73,24 +73,32 @@ public class JarRecipeCategory implements IRecipeCategory<JarRecipe> {
 	@Override
 	public void setIngredients(JarRecipe sl, IIngredients list) {
 		list.setInputIngredients(sl.item_ingredients);
-		list.setInputs(VanillaTypes.FLUID, sl.fluid_ingredients);
-		list.setOutput(VanillaTypes.ITEM, sl.result);
+		if (!sl.fluid_ingredient.isEmpty())
+			list.setInputs(VanillaTypes.FLUID, List.of(sl.fluid_ingredient));
+		if (!sl.result.isEmpty())
+			list.setOutput(VanillaTypes.ITEM, sl.result);
+		if (!sl.remain.isEmpty())
+			list.setOutput(VanillaTypes.FLUID, sl.remain);
 	}
 
 	@Override
 	public void setRecipe(IRecipeLayout layout, JarRecipe sl, IIngredients list) {
-		setItem(layout.getItemStacks(), list.getOutputs(VanillaTypes.ITEM).get(0), 0, false, 144, 9);
 		int index = 0;
 		List<List<ItemStack>> items = list.getInputs(VanillaTypes.ITEM);
 		for (int i = 0; i < items.size(); i++) {
-			setItem(layout.getItemStacks(), items.get(i), i + 1, true, index % 6 * 18, index / 6 * 18);
+			setItem(layout.getItemStacks(), items.get(i), i + 1, true, index * 18, 0);
 			index++;
 		}
 		List<List<FluidStack>> fluids = list.getInputs(VanillaTypes.FLUID);
 		for (int i = 0; i < fluids.size(); i++) {
-			setFluid(layout.getFluidStacks(), fluids.get(i), i + 1, true, index % 6 * 18, index / 6 * 18);
+			setFluid(layout.getFluidStacks(), fluids.get(i), i + 1, true, index * 18, 0);
 			index++;
 		}
+		index = 0;
+		if (!sl.result.isEmpty())
+			setItem(layout.getItemStacks(), List.of(sl.result), 0, false, 126 + (index++) * 18, 0);
+		if (!sl.remain.isEmpty())
+			setFluid(layout.getFluidStacks(), List.of(sl.remain), 0, false, 126 + (index++) * 18, 0);
 	}
 
 	private static void setItem(IGuiIngredientGroup<ItemStack> group, List<ItemStack> t, int ind, boolean bool, int x, int y) {

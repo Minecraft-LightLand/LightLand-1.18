@@ -16,12 +16,12 @@ import java.util.function.Consumer;
 
 public class JarRecipeBuilder extends BaseRecipeBuilder<JarRecipeBuilder, JarRecipe, JarRecipe, JarBlockEntity.RecipeContainer> {
 
-	public JarRecipeBuilder(ItemLike result, int count, int time, Item interrupt) {
+	public JarRecipeBuilder(ItemLike result, int count, int time, FluidStack in, FluidStack out) {
 		super(CuisineRecipe.RS_JAR.get());
 		recipe.item_ingredients = new ArrayList<>();
-		recipe.fluid_ingredients = new ArrayList<>();
 		recipe.result = new ItemStack(result.asItem(), count);
-		recipe.interrupt = new ItemStack(interrupt);
+		recipe.fluid_ingredient = in;
+		recipe.remain = out;
 		recipe.time = time;
 	}
 
@@ -45,11 +45,6 @@ public class JarRecipeBuilder extends BaseRecipeBuilder<JarRecipeBuilder, JarRec
 		return this.requires(ingredient, 1);
 	}
 
-	public JarRecipeBuilder requires(FluidStack stack) {
-		this.recipe.fluid_ingredients.add(stack);
-		return this;
-	}
-
 	public JarRecipeBuilder requires(Ingredient ingredient, int count) {
 		for (int i = 0; i < count; ++i) {
 			this.recipe.item_ingredients.add(ingredient);
@@ -62,7 +57,7 @@ public class JarRecipeBuilder extends BaseRecipeBuilder<JarRecipeBuilder, JarRec
 	}
 
 	public void save(Consumer<FinishedRecipe> pvd) {
-		save(pvd, new ResourceLocation(getResult().getRegistryName().getNamespace(), "saucepan/" + getResult().getRegistryName().getPath()));
+		save(pvd, new ResourceLocation(getResult().getRegistryName().getNamespace(), "jar/" + getResult().getRegistryName().getPath()));
 	}
 
 }

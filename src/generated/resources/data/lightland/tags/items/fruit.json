@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:citron",
+    "lightland:grapefruit",
+    "lightland:lemon",
+    "lightland:lime",
+    "lightland:mandarin",
+    "lightland:orange",
+    "lightland:pomelo",
+    "minecraft:apple",
+    "minecraft:melon_slice",
+    "minecraft:sugar_cane",
+    "minecraft:sweet_berries",
+    "minecraft:glow_berries",
+    "minecraft:chorus_fruit"
+  ]
+}

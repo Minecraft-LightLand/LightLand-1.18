@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:citron",
+    "lightland:lemon",
+    "lightland:lime",
+    "lightland:mandarin",
+    "lightland:orange"
+  ]
+}

@@ -19,11 +19,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
@@ -160,10 +160,10 @@ public class CuisineTags {
 	}
 
 	public enum AllItemTags {
-		STAPLE, MEAT, VEGES, SIDE, CONDIMENT,
+		STAPLE, MEAT, VEGES, SIDE, FRUIT, CONDIMENT,
 		SEAFOOD, ABSORB_SALT,
-		GREASY, SALTY, SWEET, SPICY, NUMB, SOUR, KELP, SESAME
-		;
+		GREASY, SALTY, SWEET, SPICY, NUMB, SOUR, KELP, SESAME,
+		CAN_COOK;
 
 		public final TagKey<Item> tag;
 
@@ -221,6 +221,11 @@ public class CuisineTags {
 		public void includeAll(TagKey<Item> child) {
 			REGISTRATE.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.tag(tag)
 					.addTag(child));
+		}
+
+		public void includeAll(AllItemTags... children) {
+			for (AllItemTags child : children)
+				includeAll(child.tag);
 		}
 
 	}
@@ -294,6 +299,32 @@ public class CuisineTags {
 
 	public static void register() {
 		AllFluidTags.register();
+		// vanilla
+		AllItemTags.STAPLE.add(Items.POTATO, Items.BEETROOT);
+		AllItemTags.MEAT.add(Items.CHICKEN, Items.PORKCHOP, Items.BEEF, Items.MUTTON,
+				Items.RABBIT, Items.RABBIT_FOOT, Items.EGG, Items.ROTTEN_FLESH,
+				Items.SALMON, Items.COD, Items.TROPICAL_FISH, Items.PUFFERFISH);
+		AllItemTags.VEGES.add(Items.CARROT, Items.KELP, Items.DRIED_KELP, Items.SEAGRASS,
+				Items.BROWN_MUSHROOM, Items.RED_MUSHROOM, Items.PUMPKIN, Items.PUMPKIN_SEEDS, Items.BAMBOO);
+		AllItemTags.FRUIT.add(Items.APPLE, Items.MELON_SLICE, Items.SUGAR_CANE,
+				Items.SWEET_BERRIES, Items.GLOW_BERRIES, Items.CHORUS_FRUIT);
+		AllItemTags.SIDE.add(Items.NETHER_WART, Items.WARPED_FUNGUS, Items.CRIMSON_FUNGUS,
+				Items.SPIDER_EYE, Items.BONE, Items.HONEYCOMB, Items.COCOA_BEANS);
+		AllItemTags.CONDIMENT.add(Items.SUGAR);
+
+		AllItemTags.ABSORB_SALT.add(Items.BROWN_MUSHROOM, Items.RED_MUSHROOM, Items.WARPED_FUNGUS, Items.CRIMSON_FUNGUS);
+		AllItemTags.GREASY.add(Items.PORKCHOP, Items.BEEF, Items.MUTTON, Items.SALMON, Items.COD);
+		AllItemTags.SWEET.add(Items.APPLE, Items.MELON_SLICE, Items.SUGAR_CANE,
+				Items.SWEET_BERRIES, Items.GLOW_BERRIES, Items.SUGAR, Items.HONEYCOMB, Items.COCOA_BEANS);
+		AllItemTags.KELP.add(Items.KELP, Items.DRIED_KELP);
+
+		AllItemTags.CAN_COOK.includeAll(AllItemTags.STAPLE, AllItemTags.MEAT, AllItemTags.VEGES, AllItemTags.FRUIT,
+				AllItemTags.SIDE, AllItemTags.CONDIMENT);
+	}
+
+	@SuppressWarnings({"unsafe", "unchecked"})
+	public static TagKey<Item>[] map(AllItemTags[] tags) {
+		return (TagKey<Item>[]) Arrays.stream(tags).map(e -> e.tag).toArray(TagKey[]::new);
 	}
 
 }

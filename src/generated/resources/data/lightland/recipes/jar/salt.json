@@ -1,0 +1,16 @@
+{
+  "fluid_ingredient": {
+    "fluid": "minecraft:water",
+    "amount": 1000
+  },
+  "item_ingredients": [],
+  "remain": {
+    "fluid": "minecraft:empty",
+    "amount": 0
+  },
+  "result": {
+    "item": "lightland:salt"
+  },
+  "time": 100,
+  "type": "lightland:jar"
+}

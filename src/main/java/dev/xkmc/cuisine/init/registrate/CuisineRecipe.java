@@ -7,6 +7,7 @@ import dev.xkmc.cuisine.content.tools.jar.JarRecipe;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.SaucePanRecipe;
 import dev.xkmc.cuisine.init.Cuisine;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -28,7 +29,6 @@ public class CuisineRecipe {
 	}
 
 	public static void register() {
-
 	}
 
 }

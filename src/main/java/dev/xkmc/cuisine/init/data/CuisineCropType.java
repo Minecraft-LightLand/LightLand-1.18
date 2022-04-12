@@ -10,7 +10,9 @@ import dev.xkmc.cuisine.content.veges.CuisineCropBlock;
 import dev.xkmc.cuisine.content.veges.DoubleCropBlock;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -25,37 +27,63 @@ import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
+import java.util.Arrays;
 import java.util.Locale;
 
+import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
+import static dev.xkmc.cuisine.init.data.CuisineTags.AllItemTags.*;
+
 public enum CuisineCropType {
-	CHILI, CHINESE_CABBAGE, EGGPLANT,
-	GINGER, GREEN_PEPPER, LEEK, LETTUCE, ONION, PEANUT, RED_PEPPER,
-	SCALLION, SESAME, SICHUAN_PEPPER(5), SOYBEAN, SPINACH, TOMATO, TURNIP,
-	GARLIC(4, ModelType.CROP),
-	CUCUMBER(4, 4, ModelType.DOUBLE),
-	CORN(4, 3, ModelType.CORN),
-	RICE(4, 4, ModelType.WATER),
+	CHILI(SIDE, SPICY),
+	CHINESE_CABBAGE(VEGES),
+	CORN(4, 3, ModelType.CORN, STAPLE),
+	CUCUMBER(4, 4, ModelType.DOUBLE, VEGES),
+	EGGPLANT(VEGES),
+	GARLIC(4, ModelType.CROP, SIDE),
+	GINGER(SIDE),
+	GREEN_PEPPER(VEGES, SPICY),
+	LEEK(VEGES),
+	LETTUCE(VEGES),
+	ONION(SIDE),
+	PEANUT(STAPLE),
+	RED_PEPPER(VEGES, SPICY),
+	RICE(4, 4, ModelType.WATER, STAPLE),
+	SCALLION(SIDE),
+	SESAME(SIDE),
+	SICHUAN_PEPPER(5, CONDIMENT, NUMB),
+	SOYBEAN(STAPLE),
+	SPINACH(VEGES),
+	TOMATO(VEGES),
+	TURNIP(VEGES),
 	;
 
 	public final int stage_lower, stage_upper;
 	public final ModelType type;
+	public final CuisineTags.AllItemTags[] tags;
+	public final BlockEntry<CuisineCropBlock> entry;
 
-	CuisineCropType() {
-		this(4);
+	CuisineCropType(CuisineTags.AllItemTags... tags) {
+		this(4, tags);
 	}
 
-	CuisineCropType(int stage) {
-		this(stage, ModelType.CROSS);
+	CuisineCropType(int stage, CuisineTags.AllItemTags... tags) {
+		this(stage, ModelType.CROSS, tags);
 	}
 
-	CuisineCropType(int stage, ModelType type) {
-		this(stage, 0, type);
+	CuisineCropType(int stage, ModelType type, CuisineTags.AllItemTags... tags) {
+		this(stage, 0, type, tags);
 	}
 
-	CuisineCropType(int stage, int stage_high, ModelType type) {
+	CuisineCropType(int stage, int stage_high, ModelType type, CuisineTags.AllItemTags... tags) {
 		this.stage_lower = stage;
 		this.stage_upper = stage_high;
 		this.type = type;
+		this.tags = tags;
+
+		entry = REGISTRATE.block(getName(), this::createBlock)
+				.addLayer(() -> RenderType::cutout).blockstate(this::generate).loot(this::loot)
+				.item().tag(CuisineTags.map(tags))
+				.defaultModel().build().defaultLang().register();
 	}
 
 	/* --- Behavior --- */
@@ -72,7 +100,7 @@ public enum CuisineCropType {
 	}
 
 	public BlockEntry<?> getEntry() {
-		return CuisineBlocks.VEGES[ordinal()];
+		return entry;
 	}
 
 	public IntegerProperty getAge() {
@@ -187,6 +215,9 @@ public enum CuisineCropType {
 
 	private int getModelStage(int stage) {
 		return stage == 0 ? 0 : (stage - 1) * (getStage() - 2) / (getMaxAge() - 1) + 1;
+	}
+
+	public static void register() {
 	}
 
 	public enum ModelType {

@@ -1,0 +1,36 @@
+{
+  "fluid_ingredients": [
+    {
+      "fluid": "minecraft:water",
+      "amount": 2
+    }
+  ],
+  "interrupt": {
+    "item": "minecraft:bowl"
+  },
+  "item_ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:rabbit"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:red_mushroom"
+    },
+    {
+      "item": "minecraft:brown_mushroom"
+    }
+  ],
+  "result": {
+    "item": "minecraft:rabbit_stew"
+  },
+  "time": 100,
+  "type": "lightland:sauce_pan"
+}

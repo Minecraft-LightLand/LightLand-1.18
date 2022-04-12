@@ -9,11 +9,11 @@ import dev.hikarishima.lightland.util.LootTableTemplate;
 import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
-import dev.xkmc.cuisine.init.registrate.CuisineItems;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
@@ -35,22 +35,28 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
+import static dev.xkmc.cuisine.init.data.CuisineTags.AllItemTags.*;
+
 public enum CuisineTreeType {
-	CITRON("sm", 0xDDCC58),
-	GRAPEFRUIT("lg", 0xF4502B),
-	LEMON("md", 0xEBCA4B),
-	LIME("md", 0xCADA76),
-	MANDARIN("sm", 0xF08A19),
-	ORANGE("md", 0xF08A19),
-	POMELO("lg", 0xF7F67E);
+	CITRON("sm", 0xDDCC58, FRUIT, SOUR),
+	GRAPEFRUIT("lg", 0xF4502B, FRUIT, SWEET),
+	LEMON("md", 0xEBCA4B, FRUIT, SOUR),
+	LIME("md", 0xCADA76, FRUIT, SOUR),
+	MANDARIN("sm", 0xF08A19, FRUIT, SWEET, SOUR),
+	ORANGE("md", 0xF08A19, FRUIT, SWEET, SOUR),
+	POMELO("lg", 0xF7F67E, FRUIT, SWEET);
 
 	private final CuisineTreeGrower grower = new CuisineTreeGrower();
 	private final ResourceLocation fruit_type;
 	public final int color;
 
-	CuisineTreeType(String fruit_type, int color) {
+	public final ItemEntry<Item> fruit;
+
+	CuisineTreeType(String fruit_type, int color, CuisineTags.AllItemTags... tags) {
 		this.fruit_type = new ResourceLocation(Cuisine.MODID, "block/fruit_" + fruit_type);
 		this.color = color;
+		this.fruit = REGISTRATE.item(getName(), Item::new).tag(CuisineTags.map(tags)).register();
 	}
 
 	public String getName() {
@@ -70,7 +76,7 @@ public enum CuisineTreeType {
 	}
 
 	public ItemEntry<?> getFruit() {
-		return CuisineItems.FRUITS[ordinal()];
+		return fruit;
 	}
 
 	/* --- Data Gen --- */
@@ -123,6 +129,9 @@ public enum CuisineTreeType {
 				new StraightTrunkPlacer(4, 2, 0), BlockStateProvider.simple(leaf),
 				new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
 				new TwoLayersFeatureSize(1, 0, 1));
+	}
+
+	public static void register() {
 	}
 
 	class CuisineTreeGrower extends AbstractTreeGrower {

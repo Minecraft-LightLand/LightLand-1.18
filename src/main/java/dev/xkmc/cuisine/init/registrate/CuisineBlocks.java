@@ -5,11 +5,11 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
 import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
+import dev.xkmc.cuisine.content.tools.jar.JarBlock;
 import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanBlock;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntityRenderer;
-import dev.xkmc.cuisine.content.veges.CuisineCropBlock;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.data.CuisineCropType;
 import dev.xkmc.cuisine.init.data.CuisineTreeType;
@@ -33,9 +33,6 @@ public class CuisineBlocks {
 		REGISTRATE.creativeModeTab(() -> CuisineItems.TAB_MAIN);
 	}
 
-	public static final BlockEntry<CuisineCropBlock>[] VEGES;
-
-
 	public static final BlockEntry<CuisineLeaveBlock>[] LEAVE;
 	public static final BlockEntry<SaplingBlock>[] SAPLING;
 
@@ -48,18 +45,8 @@ public class CuisineBlocks {
 	public static final BlockEntityEntry<JarBlockEntity> TE_JAR;
 
 	static {
-		// crop
-		{
-			int n = CuisineCropType.values().length;
-			VEGES = new BlockEntry[n];
-			for (int i = 0; i < n; i++) {
-				CuisineCropType type = CuisineCropType.values()[i];
-				VEGES[i] = REGISTRATE.block(type.getName(), type::createBlock)
-						.addLayer(() -> RenderType::cutout)
-						.blockstate(type::generate).item().defaultModel().build()
-						.loot(type::loot).defaultLang().register();
-			}
-		}
+		CuisineCropType.register();
+		CuisineTreeType.register();
 		// tree
 		{
 			int n = CuisineTreeType.values().length;
@@ -110,13 +97,11 @@ public class CuisineBlocks {
 			TE_PAN = REGISTRATE.blockEntity("saucepan", PanBlockEntity::new).validBlock(SAUCEPAN)
 					.renderer(() -> PanBlockEntityRenderer::new).register();
 
-			JAR = REGISTRATE.block("jar", p -> DelegateBlock.newBaseBlock(prop))
+			JAR = REGISTRATE.block("jar", p -> DelegateBlock.newBaseBlock(prop, JarBlock.TE, new JarBlock()))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/jar"))))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE).simpleItem().register();
 			TE_JAR = REGISTRATE.blockEntity("jar", JarBlockEntity::new).validBlock(JAR).register();
-
-
 		}
 	}
 
