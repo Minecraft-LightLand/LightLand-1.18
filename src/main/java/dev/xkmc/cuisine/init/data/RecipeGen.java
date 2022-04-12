@@ -3,7 +3,7 @@ package dev.xkmc.cuisine.init.data;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipeBuilder;
-import dev.xkmc.cuisine.content.tools.pan.SaucePanRecipeBuilder;
+import dev.xkmc.cuisine.content.tools.pan.PanRecipeBuilder;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineFluids;
 import dev.xkmc.cuisine.init.registrate.SimpleItem;
@@ -20,11 +20,11 @@ public class RecipeGen {
 
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
 		{
-			unlock(pvd, new SaucePanRecipeBuilder(Items.RABBIT_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.RABBIT_STEW)
+			unlock(pvd, new PanRecipeBuilder(Items.RABBIT_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.RABBIT_STEW)
 					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL).requires(Items.RABBIT)
 					.requires(Items.POTATO).requires(Items.CARROT).requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
 					.save(pvd);
-			unlock(pvd, new SaucePanRecipeBuilder(Items.MUSHROOM_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.MUSHROOM_STEW)
+			unlock(pvd, new PanRecipeBuilder(Items.MUSHROOM_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.MUSHROOM_STEW)
 					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL)
 					.requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
 					.save(pvd);

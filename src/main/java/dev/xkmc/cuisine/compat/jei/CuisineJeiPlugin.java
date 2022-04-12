@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.compat.jei.screen.ExtraInfoScreen;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.base.Proxy;
 import dev.xkmc.cuisine.compat.jei.recipes.JarRecipeCategory;
-import dev.xkmc.cuisine.compat.jei.recipes.SaucePanRecipeCategory;
+import dev.xkmc.cuisine.compat.jei.recipes.PanRecipeCategory;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import mezz.jei.api.IModPlugin;
@@ -26,7 +26,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 
 	public final ResourceLocation UID = new ResourceLocation(LightLand.MODID, "cuisine");
 
-	public final SaucePanRecipeCategory PAN = new SaucePanRecipeCategory();
+	public final PanRecipeCategory PAN = new PanRecipeCategory();
 	public final JarRecipeCategory JAR = new JarRecipeCategory();
 
 	public IGuiHelper GUI_HELPER;
@@ -73,7 +73,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(CuisineBlocks.SAUCEPAN.get().asItem().getDefaultInstance(), PAN.getUid());
+		registration.addRecipeCatalyst(CuisineBlocks.PAN.get().asItem().getDefaultInstance(), PAN.getUid());
 		registration.addRecipeCatalyst(CuisineBlocks.JAR.get().asItem().getDefaultInstance(), JAR.getUid());
 	}
 

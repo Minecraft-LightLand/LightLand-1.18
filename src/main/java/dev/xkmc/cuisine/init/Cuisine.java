@@ -6,6 +6,7 @@ import dev.hikarishima.lightland.init.special.LLRegistrate;
 import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
 import dev.xkmc.cuisine.content.veges.CornBlock;
 import dev.xkmc.cuisine.init.data.CuisineTags;
+import dev.xkmc.cuisine.init.data.LangData;
 import dev.xkmc.cuisine.init.data.RecipeGen;
 import dev.xkmc.cuisine.init.data.WoodType;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
@@ -29,6 +30,7 @@ public class Cuisine {
 		CuisineItems.register();
 		CuisineFluids.register();
 		CuisineTags.register();
+		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::genLang);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 
 		MinecraftForge.EVENT_BUS.register(CornBlock.class);

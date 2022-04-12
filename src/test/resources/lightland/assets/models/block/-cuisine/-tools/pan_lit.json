@@ -5,8 +5,8 @@
 	32
   ],
   "textures": {
-	"1": "lightland:block/saucepan_lit",
-	"particle": "lightland:block/saucepan_lit"
+	"1": "lightland:block/pan_lit",
+	"particle": "lightland:block/pan_lit"
   },
   "elements": [
 	{

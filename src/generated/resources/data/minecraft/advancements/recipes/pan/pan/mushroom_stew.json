@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:saucepan/mushroom_stew"
+      "minecraft:pan/mushroom_stew"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:saucepan/mushroom_stew"
+        "recipe": "minecraft:pan/mushroom_stew"
       }
     }
   },

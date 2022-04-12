@@ -50,14 +50,11 @@ public class JarBlock implements OnClickBlockMethod, AnimateTickBlockMethod {
 					return FluidUtil.interactWithFluidHandler(pl, h, w, pos, r.getDirection()) ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
 				}
 			}
-			if (stack.is(CuisineTags.AllItemTags.CAN_COOK.tag)) {
-				ItemStack copy = stack.copy();
-				copy.setCount(1);
-				ItemStack remain = te.inventory.addItem(copy);
-				if (remain.isEmpty()) stack.shrink(1);
-				return InteractionResult.SUCCESS;
-			}
-			return InteractionResult.FAIL;
+			ItemStack copy = stack.copy();
+			copy.setCount(1);
+			ItemStack remain = te.inventory.addItem(copy);
+			if (remain.isEmpty()) stack.shrink(1);
+			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;
 	}

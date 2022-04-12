@@ -174,7 +174,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 		if (level == null) return false;
 		boolean ans = outputInventory.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
 		if (!ans) return false;
-		Optional<SaucePanRecipe> r = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_PAN, inputInventory, level);
+		Optional<PanRecipe> r = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_PAN, inputInventory, level);
 		inputInventory.clear();
 		fluids.clear();
 		if (r.isEmpty()) {
@@ -183,7 +183,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			result = ItemStack.EMPTY;
 			interrupt = ItemStack.EMPTY;
 		} else {
-			SaucePanRecipe recipe = r.get();
+			PanRecipe recipe = r.get();
 			cooking_max = recipe.time;
 			cooking = cooking_max;
 			result = recipe.result.copy();

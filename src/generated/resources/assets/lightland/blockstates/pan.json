@@ -5,7 +5,7 @@
         "lit": "true"
       },
       "apply": {
-        "model": "lightland:block/saucepan_lit"
+        "model": "lightland:block/pan_lit"
       }
     }
   ]

@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.compat.jei.recipes;
 
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
-import dev.xkmc.cuisine.content.tools.pan.SaucePanRecipe;
+import dev.xkmc.cuisine.content.tools.pan.PanRecipe;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import mezz.jei.api.constants.VanillaTypes;
@@ -24,7 +24,7 @@ import java.util.List;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
+public class PanRecipeCategory implements IRecipeCategory<PanRecipe> {
 
 	private static final ResourceLocation BG = new ResourceLocation(Cuisine.MODID, "textures/jei/background.png");
 
@@ -34,13 +34,13 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 	private final ResourceLocation id;
 	private IDrawable background, icon;
 
-	public SaucePanRecipeCategory() {
-		this.id = new ResourceLocation(Cuisine.MODID, "saucepan");
+	public PanRecipeCategory() {
+		this.id = new ResourceLocation(Cuisine.MODID, "pan");
 	}
 
-	public SaucePanRecipeCategory init(IGuiHelper guiHelper) {
+	public PanRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 90, 162, 36);
-		icon = guiHelper.createDrawableIngredient(CuisineBlocks.SAUCEPAN.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(CuisineBlocks.PAN.get().asItem().getDefaultInstance());
 		return this;
 	}
 
@@ -52,12 +52,12 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
 	public Class getRecipeClass() {
-		return SaucePanRecipe.class;
+		return PanRecipe.class;
 	}
 
 	@Override
 	public Component getTitle() {
-		return new TranslatableComponent(CuisineBlocks.SAUCEPAN.get().getDescriptionId());
+		return new TranslatableComponent(CuisineBlocks.PAN.get().getDescriptionId());
 	}
 
 	@Override
@@ -71,14 +71,14 @@ public class SaucePanRecipeCategory implements IRecipeCategory<SaucePanRecipe> {
 	}
 
 	@Override
-	public void setIngredients(SaucePanRecipe sl, IIngredients list) {
+	public void setIngredients(PanRecipe sl, IIngredients list) {
 		list.setInputIngredients(sl.item_ingredients);
 		list.setInputs(VanillaTypes.FLUID, sl.fluid_ingredients);
 		list.setOutput(VanillaTypes.ITEM, sl.result);
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayout layout, SaucePanRecipe sl, IIngredients list) {
+	public void setRecipe(IRecipeLayout layout, PanRecipe sl, IIngredients list) {
 		setItem(layout.getItemStacks(), list.getOutputs(VanillaTypes.ITEM).get(0), 0, false, 144, 9);
 		int index = 0;
 		List<List<ItemStack>> items = list.getInputs(VanillaTypes.ITEM);

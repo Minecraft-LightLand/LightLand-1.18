@@ -36,7 +36,7 @@ public class CuisineBlocks {
 	public static final BlockEntry<CuisineLeaveBlock>[] LEAVE;
 	public static final BlockEntry<SaplingBlock>[] SAPLING;
 
-	public static final BlockEntry<DelegateBlock> SAUCEPAN, JAR;
+	public static final BlockEntry<DelegateBlock> PAN, JAR;
 
 	public static final BlockEntry<Block> MORTAR;
 	public static final BlockEntry<Block> BASIN;
@@ -89,12 +89,12 @@ public class CuisineBlocks {
 		}
 		{
 			DelegateBlockProperties prop = DelegateBlockProperties.copy(Blocks.STONE).make(BlockBehaviour.Properties::noOcclusion);
-			SAUCEPAN = REGISTRATE.block("saucepan", p -> DelegateBlock.newBaseBlock(prop, PanBlock.TE, new PanBlock()))
+			PAN = REGISTRATE.block("pan", p -> DelegateBlock.newBaseBlock(prop, PanBlock.TE, new PanBlock()))
 					.item().defaultModel().build().blockstate((ctx, pvd) -> pvd.getMultipartBuilder(ctx.getEntry()).part()
-							.modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/saucepan_lit")))
+							.modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/pan_lit")))
 							.addModel().condition(BlockStateProperties.LIT, true).end())
 					.addLayer(() -> RenderType::cutout).defaultLoot().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
-			TE_PAN = REGISTRATE.blockEntity("saucepan", PanBlockEntity::new).validBlock(SAUCEPAN)
+			TE_PAN = REGISTRATE.blockEntity("pan", PanBlockEntity::new).validBlock(PAN)
 					.renderer(() -> PanBlockEntityRenderer::new).register();
 
 			JAR = REGISTRATE.block("jar", p -> DelegateBlock.newBaseBlock(prop, JarBlock.TE, new JarBlock()))

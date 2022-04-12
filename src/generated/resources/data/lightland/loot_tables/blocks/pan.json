@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "lightland:saucepan"
+          "name": "lightland:pan"
         }
       ],
       "conditions": [

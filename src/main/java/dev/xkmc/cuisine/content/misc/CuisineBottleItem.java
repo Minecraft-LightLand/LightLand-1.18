@@ -1,6 +1,8 @@
 package dev.xkmc.cuisine.content.misc;
 
 import dev.xkmc.cuisine.init.Cuisine;
+import dev.xkmc.cuisine.init.data.CuisineTags;
+import dev.xkmc.cuisine.init.data.LangData;
 import dev.xkmc.cuisine.init.registrate.CuisineFluids;
 import dev.xkmc.cuisine.init.registrate.CuisineItems;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -22,13 +24,14 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class CuisineBottleItem extends Item {
 
-	public static final int MAX = 250;
+	public static final int GRAN = 50, USE = 5, MAX = GRAN * USE;
 
 	public CuisineBottleItem(Item.Properties prop) {
 		super(prop);
@@ -52,7 +55,12 @@ public class CuisineBottleItem extends Item {
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 		FluidStack fluid = getFluid(stack);
 		if (!fluid.isEmpty()) {
+			components.add(LangData.TOOLTIP_FLUID_TITLE.get());
 			components.add(fluid.getDisplayName());
+			if (fluid.getAmount() % GRAN == 0)
+				components.add(LangData.TOOLTIP_FLUID_USES.get(fluid.getAmount() / GRAN, USE));
+			else
+				components.add(LangData.TOOLTIP_FLUID_AMOUNT.get(fluid.getAmount(), MAX));
 		}
 		super.appendHoverText(stack, level, components, flag);
 	}
@@ -60,7 +68,7 @@ public class CuisineBottleItem extends Item {
 	@Override
 	public boolean isBarVisible(ItemStack stack) {
 		FluidStack fluid = getFluid(stack);
-		return fluid.getAmount() % 50 != 0;
+		return fluid.getAmount() % GRAN != 0;
 	}
 
 	@Override
@@ -85,19 +93,14 @@ public class CuisineBottleItem extends Item {
 
 	public static FluidStack getFluid(ItemStack stack) {
 		IFluidHandlerItem item = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null).resolve().orElse(null);
-		return (item instanceof FluidHandlerItemStack ans) ? ans.getFluid() : FluidStack.EMPTY;
-	}
-
-	public static FluidHandlerItemStack getHandler(ItemStack stack) {
-		IFluidHandlerItem item = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY, null).resolve().orElse(null);
-		return (FluidHandlerItemStack) item;
+		return (item instanceof BottleHandler ans) ? ans.getFluid() : FluidStack.EMPTY;
 	}
 
 	@SubscribeEvent
 	public static void onItemStackCapability(AttachCapabilitiesEvent<ItemStack> event) {
-		if (event.getObject().getItem() instanceof CuisineBottleItem item) {
+		if (event.getObject().getItem() instanceof CuisineBottleItem) {
 			event.addCapability(new ResourceLocation(Cuisine.MODID, "fluid"),
-					new FluidHandlerItemStack(event.getObject(), MAX));
+					new BottleHandler(event.getObject(), MAX));
 		}
 	}
 
@@ -107,4 +110,16 @@ public class CuisineBottleItem extends Item {
 				(stack, level, entity, i) -> getFluid(stack).getAmount() * 1f / MAX);
 	}
 
+}
+
+class BottleHandler extends FluidHandlerItemStack {
+
+	public BottleHandler(@NotNull ItemStack container, int capacity) {
+		super(container, capacity);
+	}
+
+	@Override
+	public boolean isFluidValid(int tank, @NotNull FluidStack stack) {
+		return CuisineTags.AllFluidTags.JAR_ACCEPT.matches(stack.getFluid());
+	}
 }

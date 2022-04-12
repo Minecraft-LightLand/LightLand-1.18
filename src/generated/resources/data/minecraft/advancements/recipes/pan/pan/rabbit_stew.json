@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "minecraft:saucepan/rabbit_stew"
+      "minecraft:pan/rabbit_stew"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "minecraft:saucepan/rabbit_stew"
+        "recipe": "minecraft:pan/rabbit_stew"
       }
     }
   },

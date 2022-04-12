@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
@@ -15,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @SerialClass
-public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, PanBlockEntity.RecipeContainer> {
+public class PanRecipe extends BaseRecipe<PanRecipe, PanRecipe, PanBlockEntity.RecipeContainer> {
 
 	@SerialClass.SerialField
 	public ArrayList<Ingredient> item_ingredients;
@@ -28,7 +27,7 @@ public class SaucePanRecipe extends BaseRecipe<SaucePanRecipe, SaucePanRecipe, P
 	@SerialClass.SerialField
 	public int time;
 
-	public SaucePanRecipe(ResourceLocation id) {
+	public PanRecipe(ResourceLocation id) {
 		super(id, CuisineRecipe.RS_PAN.get());
 	}
 

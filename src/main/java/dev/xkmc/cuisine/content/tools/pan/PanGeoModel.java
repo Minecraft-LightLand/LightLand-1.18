@@ -8,16 +8,16 @@ public class PanGeoModel extends AnimatedGeoModel<PanBlockEntity> {
 
 	@Override
 	public ResourceLocation getModelLocation(PanBlockEntity object) {
-		return new ResourceLocation(LightLand.MODID, "geo/saucepan.geo.json");
+		return new ResourceLocation(LightLand.MODID, "geo/pan.geo.json");
 	}
 
 	@Override
 	public ResourceLocation getTextureLocation(PanBlockEntity object) {
-		return new ResourceLocation(LightLand.MODID, "gecko/saucepan.png");
+		return new ResourceLocation(LightLand.MODID, "gecko/pan.png");
 	}
 
 	@Override
 	public ResourceLocation getAnimationFileLocation(PanBlockEntity animatable) {
-		return new ResourceLocation(LightLand.MODID, "animations/saucepan.animation.json");
+		return new ResourceLocation(LightLand.MODID, "animations/pan.animation.json");
 	}
 }
