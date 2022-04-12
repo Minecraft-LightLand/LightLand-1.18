@@ -2,6 +2,7 @@ package dev.xkmc.cuisine.init.data;
 
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
+import dev.xkmc.cuisine.content.tools.basin.BasinRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.pan.PanRecipeBuilder;
 import dev.xkmc.cuisine.init.Cuisine;
@@ -51,6 +52,13 @@ public class RecipeGen {
 					SimpleItem.UNREFINED_SUGAR.item.get())
 					.requires(SimpleItem.UNREFINED_SUGAR.item.get())
 					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/sugar"));
+		}
+		{
+			unlock(pvd, new BasinRecipeBuilder(Items.AIR, 0, 5,
+							new FluidStack(CuisineFluids.SOY_MILK.fluid.get(), 50))::unlockedBy,
+					CuisineCropType.SOYBEAN.getSeed())
+					.requires(CuisineCropType.SOYBEAN.getSeed())
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "basin/soy_milk"));
 		}
 	}
 

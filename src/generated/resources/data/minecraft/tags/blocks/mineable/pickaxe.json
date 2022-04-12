@@ -9,9 +9,9 @@
     "lightland:magicium_block",
     "lightland:layline_charger",
     "lightland:maze_wall",
-    "lightland:basin",
     "lightland:mortar",
     "lightland:pan",
-    "lightland:jar"
+    "lightland:jar",
+    "lightland:basin"
   ]
 }

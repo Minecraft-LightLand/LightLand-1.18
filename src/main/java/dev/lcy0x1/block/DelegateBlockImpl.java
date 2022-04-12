@@ -42,6 +42,7 @@ import java.util.stream.Stream;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
+@SuppressWarnings({"deprecation"})
 public class DelegateBlockImpl extends DelegateBlock {
 
 	private static final ThreadLocal<BlockImplementor> TEMP = new ThreadLocal<>();
@@ -160,19 +161,35 @@ public class DelegateBlockImpl extends DelegateBlock {
 		impl.one(EntityInsideBlockMethod.class).ifPresent(e -> e.entityInside(state, level, pos, entity));
 	}
 
+	@Override
 	public final VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
 		return impl.one(ShapeBlockMethod.class).map(e -> e.getCollisionShape(state, level, pos, ctx))
-				.orElse(super.getCollisionShape(state, level, pos, ctx));
+				.orElseGet(() -> super.getCollisionShape(state, level, pos, ctx));
 	}
 
+	@Override
 	public final VoxelShape getBlockSupportShape(BlockState state, BlockGetter level, BlockPos pos) {
 		return impl.one(ShapeBlockMethod.class).map(e -> e.getBlockSupportShape(state, level, pos))
-				.orElse(super.getBlockSupportShape(state, level, pos));
+				.orElseGet(() -> super.getBlockSupportShape(state, level, pos));
 	}
 
+	@Override
 	public final VoxelShape getVisualShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
 		return impl.one(ShapeBlockMethod.class).map(e -> e.getVisualShape(state, level, pos, ctx))
-				.orElse(super.getVisualShape(state, level, pos, ctx));
+				.orElseGet(() -> super.getVisualShape(state, level, pos, ctx));
+	}
+
+	@Override
+	public final VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext ctx) {
+		return impl.one(ShapeBlockMethod.class).map(e -> e.getShape(state, level, pos, ctx))
+				.orElseGet(() -> super.getShape(state, level, pos, ctx));
+	}
+
+	@Override
+	public final void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float height) {
+		if (impl.execute(FallOnBlockMethod.class).reduce(true, (a, e) -> a & e.fallOn(level, state, pos, entity, height), (a, b) -> a & b)) {
+			super.fallOn(level, state, pos, entity, height);
+		}
 	}
 
 	@Override
@@ -200,7 +217,7 @@ public class DelegateBlockImpl extends DelegateBlock {
 
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public RenderShape getRenderShape(BlockState state) {
+	public final RenderShape getRenderShape(BlockState state) {
 		return impl.one(RenderShapeBlockMethod.class).map(e -> e.getRenderShape(state)).orElseGet(() -> super.getRenderShape(state));
 	}
 

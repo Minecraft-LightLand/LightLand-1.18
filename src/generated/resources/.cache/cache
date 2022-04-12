@@ -653,6 +653,7 @@ bb160963941e097a9dd5bcc805642bc4009ae62e assets/lightland/models/item/wind_bow.j
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/forge/tags/fluids/honey.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/forge/tags/fluids/milk.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/forge/tags/fluids/tea.json
+2c00f42173d08c8f4fcc0aa219cb7970ec575d50 data/lightland/advancements/recipes/basin/basin/soy_milk.json
 2c0cc9db60d118c7ae18771776a6e06f4dbe38b8 data/lightland/advancements/recipes/jar/jar/soy_sauce.json
 132bdee8eae93871599ead8e31acbee469d5aa03 data/lightland/advancements/recipes/jar/jar/sugar.json
 9626490020394945aba9cf6f1cdef1ba0a0f9975 data/lightland/advancements/recipes/jar/jar/unrefined_sugar.json
@@ -936,6 +937,7 @@ ae0aa147a141cbb849a2b539a9b69286b74a4d54 data/lightland/loot_tables/entities/lay
 91864973b6ca49ea7a0a4e543dfedee520f2c207 data/lightland/loot_tables/entities/potion_slime.json
 91d4918bbfed415d8b72ee8ca69e78c76850ec5b data/lightland/loot_tables/entities/stone_slime.json
 ddd14d71bfc25e6a8f2123e4f6e549bb0bd81d53 data/lightland/loot_tables/entities/vine_slime.json
+085c0a6d935959b54ce95007f317693b849316a2 data/lightland/recipes/basin/soy_milk.json
 1e471a91984e3bf838878ce827166b8969660bc4 data/lightland/recipes/dispellium_axe.json
 3ae89b2625986f5263071079157cb662982388b4 data/lightland/recipes/dispellium_block.json
 4fd5766862c6de645c6c1aaea9571819b169140e data/lightland/recipes/dispellium_boots.json
@@ -1159,7 +1161,7 @@ feaf227ce97d630fa47d811b33d24de9454c5bf0 data/minecraft/tags/blocks/dragon_immun
 50e31f78a8a77e1f5a5e92512a7f2902ec482753 data/minecraft/tags/blocks/logs_that_burn.json
 55b58734f364c4017177694d24f55a8f19276522 data/minecraft/tags/blocks/mineable/axe.json
 3a30618b0ee537d000c1798e45ff0ca5ca3a5455 data/minecraft/tags/blocks/mineable/hoe.json
-25072cbdc38c5795ed9c0ba581d57ef59fd0c78d data/minecraft/tags/blocks/mineable/pickaxe.json
+bb13263d1a6f4cf037b7f33fa83f1b2e41870b4a data/minecraft/tags/blocks/mineable/pickaxe.json
 6107807803dc881c04a1d98903c69e851c374aaa data/minecraft/tags/blocks/needs_diamond_tool.json
 f688560a9ea7d70f2dfb4b08902da2072674c545 data/minecraft/tags/blocks/planks.json
 cb46833a11389f2b08cc1cf813d330429e819b47 data/minecraft/tags/blocks/pressure_plates.json
