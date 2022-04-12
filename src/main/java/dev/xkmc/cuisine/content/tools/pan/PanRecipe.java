@@ -70,8 +70,7 @@ public class PanRecipe extends BaseRecipe<PanRecipe, PanRecipe, PanBlockEntity.R
 			if (!match)
 				return false;
 		}
-		if (fluids.size() > 0) return false;
-		return true;
+		return fluids.size() <= 0;
 	}
 
 	@Override

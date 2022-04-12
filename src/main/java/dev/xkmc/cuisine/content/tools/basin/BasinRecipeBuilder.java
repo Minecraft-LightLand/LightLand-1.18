@@ -1,7 +1,6 @@
 package dev.xkmc.cuisine.content.tools.basin;
 
 import dev.lcy0x1.recipe.BaseRecipeBuilder;
-import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;

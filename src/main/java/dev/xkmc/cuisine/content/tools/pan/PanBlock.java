@@ -1,7 +1,6 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
 import dev.hikarishima.lightland.init.data.AllTags;
-import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
 import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
@@ -29,7 +28,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 
 import java.util.Objects;

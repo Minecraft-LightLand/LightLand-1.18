@@ -9,10 +9,8 @@ import dev.xkmc.cuisine.content.veges.CornBlock;
 import dev.xkmc.cuisine.content.veges.CuisineCropBlock;
 import dev.xkmc.cuisine.content.veges.DoubleCropBlock;
 import dev.xkmc.cuisine.init.Cuisine;
-import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -27,7 +25,6 @@ import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;

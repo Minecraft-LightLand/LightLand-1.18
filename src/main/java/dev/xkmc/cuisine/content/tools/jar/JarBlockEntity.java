@@ -1,10 +1,9 @@
 package dev.xkmc.cuisine.content.tools.jar;
 
-import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
-import dev.hikarishima.lightland.init.data.AllTags;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.core.BlockPos;
