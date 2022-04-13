@@ -9,6 +9,8 @@ import dev.xkmc.cuisine.content.tools.basin.BasinBlock;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;
 import dev.xkmc.cuisine.content.tools.jar.JarBlock;
 import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
+import dev.xkmc.cuisine.content.tools.mill.MillBlock;
+import dev.xkmc.cuisine.content.tools.mill.MillBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanBlock;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntityRenderer;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
@@ -38,13 +41,14 @@ public class CuisineBlocks {
 	public static final BlockEntry<CuisineLeaveBlock>[] LEAVE;
 	public static final BlockEntry<SaplingBlock>[] SAPLING;
 
-	public static final BlockEntry<DelegateBlock> PAN, JAR, BASIN;
+	public static final BlockEntry<DelegateBlock> PAN, JAR, BASIN, MILL;
 
 	public static final BlockEntry<Block> MORTAR;
 
 	public static final BlockEntityEntry<PanBlockEntity> TE_PAN;
 	public static final BlockEntityEntry<JarBlockEntity> TE_JAR;
 	public static final BlockEntityEntry<BasinBlockEntity> TE_BASIN;
+	public static final BlockEntityEntry<MillBlockEntity> TE_MILL;
 
 	static {
 		CuisineCropType.register();
@@ -106,6 +110,20 @@ public class CuisineBlocks {
 							new ResourceLocation(Cuisine.MODID, "block/basin"))))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE).simpleItem().register();
 			TE_BASIN = REGISTRATE.blockEntity("basin", BasinBlockEntity::new).validBlock(BASIN).register();
+
+			MILL = REGISTRATE.block("mill", p -> DelegateBlock.newBaseBlock(prop, MillBlock.TE, new MillBlock()))
+					.blockstate((ctx, pvd) -> {
+						ModelFile base = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/mill"));
+						ModelFile top = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/mill_top"));
+						pvd.getMultipartBuilder(ctx.getEntry())
+								.part().modelFile(base).addModel().end()
+								.part().modelFile(top).addModel().end();
+					}).tag(BlockTags.MINEABLE_WITH_PICKAXE)
+					.item().model((ctx,pvd)->{
+						ModelFile inv = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/mill_inventory"));
+						pvd.getBuilder(ctx.getName()).parent(inv);
+					}).build().register();
+			TE_MILL = REGISTRATE.blockEntity("mill", MillBlockEntity::new).validBlock(MILL).register();
 		}
 	}
 
