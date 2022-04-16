@@ -28,7 +28,8 @@ public class BasinRecipe extends BaseRecipe<BasinRecipe, BasinRecipe, BasinBlock
 
 	@Override
 	public boolean matches(BasinBlockEntity.RecipeContainer inv, Level world) {
-		if (step > 0) { // item -> fluid
+		boolean hasFire = inv.getTile().checkBlockBelow();
+		if (!hasFire && step > 0) { // item -> fluid
 			boolean match = false;
 			for (ItemStack stack : inv.getTile().inventory.getAsList()) {
 				if (item_ingredients.test(stack)) {
@@ -39,14 +40,15 @@ public class BasinRecipe extends BaseRecipe<BasinRecipe, BasinRecipe, BasinBlock
 			if (!match)
 				return false;
 			return inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.SIMULATE) == remain.getAmount();
-		} else { // fluid -> item
+		}
+		if (hasFire && time > 0) { // fluid -> item
 			FluidStack stack = inv.getTile().fluids.getFluidInTank(0);
 			boolean match = !stack.isEmpty() && stack.isFluidEqual(fluid_ingredient) && stack.getAmount() >= fluid_ingredient.getAmount();
 			if (!match)
 				return false;
 			return inv.getTile().inventory.canAddItem(result);
 		}
-
+		return false;
 	}
 
 	@Override

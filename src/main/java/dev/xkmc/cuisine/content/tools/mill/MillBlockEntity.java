@@ -94,8 +94,6 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 			step--;
 			if (!level.isClientSide && step == 0) {
 				Optional<MillRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MILL, inventory, level);
-				inventory.clear();
-				fluids.clear();
 				max_step = 0;
 				if (optional.isPresent()) {
 					MillRecipe r = optional.get();
