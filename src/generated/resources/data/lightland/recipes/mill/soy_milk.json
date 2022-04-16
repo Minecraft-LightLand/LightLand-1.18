@@ -1,0 +1,15 @@
+{
+  "fluid_ingredient": {
+    "fluid": "minecraft:water",
+    "amount": 50
+  },
+  "item_ingredients": {
+    "item": "lightland:soybean"
+  },
+  "remain": {
+    "fluid": "lightland:flowing_soy_milk",
+    "amount": 50
+  },
+  "step": 4,
+  "type": "lightland:mill"
+}

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lightland:basin/soy_milk"
+      "lightland:mill/soy_milk"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lightland:basin/soy_milk"
+        "recipe": "lightland:mill/soy_milk"
       }
     }
   },

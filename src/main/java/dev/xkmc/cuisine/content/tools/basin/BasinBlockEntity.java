@@ -1,9 +1,6 @@
 package dev.xkmc.cuisine.content.tools.basin;
 
-import dev.lcy0x1.base.BaseBlockEntity;
-import dev.lcy0x1.base.BaseContainer;
-import dev.lcy0x1.base.BaseContainerListener;
-import dev.lcy0x1.base.BaseTank;
+import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
@@ -33,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 @SerialClass
-public class BasinBlockEntity extends BaseBlockEntity implements
+public class BasinBlockEntity extends BaseBlockEntity implements TickableBlockEntity,
 		BaseContainerListener<BaseContainer>, BlockContainer,
 		TileInfoOverlay.TileInfoProvider {
 
@@ -59,7 +56,8 @@ public class BasinBlockEntity extends BaseBlockEntity implements
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid())).add(this);
 
-	protected int max_step, step;
+	@SerialClass.SerialField(toClient = true)
+	protected int max_step, step, max_time, time;
 	protected ResourceLocation recipe;
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
@@ -87,32 +85,49 @@ public class BasinBlockEntity extends BaseBlockEntity implements
 		if (step > 0 && level != null) {
 			step--;
 			if (!level.isClientSide && step == 0) {
-				Optional<BasinRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_BASIN, inventory, level);
-				max_step = 0;
-				if (optional.isPresent()) {
-					BasinRecipe r = optional.get();
-					if (!r.result.isEmpty())
-						inventory.addItem(r.assemble(inventory));
-					if (!r.remain.isEmpty())
-						fluids.fill(r.remain.copy(), IFluidHandler.FluidAction.EXECUTE);
-				}
-				notifyTile(null);
+				completeRecipe();
 			}
 		}
 	}
 
+	public void tick() {
+		if (time > 0 && level != null) {
+			time--;
+			if (!level.isClientSide && time == 0) {
+				completeRecipe();
+			}
+		}
+	}
+
+	private void completeRecipe() {
+		if (level == null || level.isClientSide) return;
+
+		Optional<BasinRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_BASIN, inventory, level);
+		max_step = 0;
+		max_time = 0;
+		step = 0;
+		time = 0;
+		if (optional.isPresent()) {
+			BasinRecipe r = optional.get();
+			r.assemble(inventory);
+		}
+		notifyTile(null);
+	}
+
 	public void resetProgress() {
 		max_step = 0;
+		max_time = 0;
 		step = 0;
+		time = 0;
 		recipe = null;
 		if (level != null) {
 			Optional<BasinRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_BASIN, inventory, level);
 			if (optional.isPresent()) {
 				BasinRecipe r = optional.get();
-				if (!inventory.canAddItem(r.result) || fluids.fill(r.remain.copy(), IFluidHandler.FluidAction.SIMULATE) != r.remain.getAmount())
-					return;
 				max_step = r.step;
+				max_time = r.time;
 				step = max_step;
+				time = max_time;
 				recipe = r.id;
 			}
 		}

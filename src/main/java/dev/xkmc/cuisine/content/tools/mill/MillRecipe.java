@@ -2,29 +2,23 @@ package dev.xkmc.cuisine.content.tools.mill;
 
 import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 @SerialClass
 public class MillRecipe extends BaseRecipe<MillRecipe, MillRecipe, MillBlockEntity.RecipeContainer> {
 
 	@SerialClass.SerialField
-	public ArrayList<Ingredient> item_ingredients;
-	@SerialClass.SerialField
-	public ItemStack result;
+	public Ingredient item_ingredients;
 	@SerialClass.SerialField
 	public FluidStack fluid_ingredient, remain;
 	@SerialClass.SerialField
-	public int time;
+	public int step;
 
 	public MillRecipe(ResourceLocation id) {
 		super(id, CuisineRecipe.RS_MILL.get());
@@ -32,31 +26,21 @@ public class MillRecipe extends BaseRecipe<MillRecipe, MillRecipe, MillBlockEnti
 
 	@Override
 	public boolean matches(MillBlockEntity.RecipeContainer inv, Level world) {
-		List<Ingredient> items = new ArrayList<>(item_ingredients);
-		for (ItemStack stack : inv.getTile().inventory.getAsList()) {
-			if (stack.isEmpty())
-				continue;
-			if (items.isEmpty())
-				return false;
-			boolean match = false;
-			for (Iterator<Ingredient> itr = items.iterator(); itr.hasNext(); ) {
-				Ingredient ing = itr.next();
-				if (ing.test(stack)) {
-					itr.remove();
-					match = true;
-					break;
-				}
-			}
-			if (!match)
-				return false;
-		}
-		if (items.size() > 0) return false;
-		return fluid_ingredient.isFluidStackIdentical(inv.getTile().fluids.getFluidInTank(0));
+		if (!item_ingredients.test(inv.getTile().inventory.getItem(0)))
+			return false;
+		if (!fluid_ingredient.isFluidEqual(inv.getTile().water.drain(fluid_ingredient.copy(), IFluidHandler.FluidAction.SIMULATE)))
+			return false;
+		return inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.SIMULATE) == remain.getAmount();
+
+
 	}
 
 	@Override
 	public ItemStack assemble(MillBlockEntity.RecipeContainer inv) {
-		return result.copy();
+		inv.getTile().inventory.getItem(0).shrink(1);
+		inv.getTile().water.drain(fluid_ingredient.copy(), IFluidHandler.FluidAction.EXECUTE);
+		inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.EXECUTE);
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -66,7 +50,7 @@ public class MillRecipe extends BaseRecipe<MillRecipe, MillRecipe, MillBlockEnti
 
 	@Override
 	public ItemStack getResultItem() {
-		return result;
+		return ItemStack.EMPTY;
 	}
 
 }

@@ -40,7 +40,7 @@ public class JarRecipeCategory implements IRecipeCategory<JarRecipe> {
 
 	public JarRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 126, 162, 18);
-		icon = guiHelper.createDrawableIngredient(CuisineBlocks.PAN.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM,CuisineBlocks.PAN.get().asItem().getDefaultInstance());
 		return this;
 	}
 

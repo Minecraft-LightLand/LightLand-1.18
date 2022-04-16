@@ -4,9 +4,6 @@ import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
-import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
-import dev.xkmc.cuisine.content.tools.jar.JarRecipe;
-import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +13,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
@@ -51,13 +49,15 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 	public static final int MAX_FLUID = 1000;
 
 	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(3).setMax(1).add(this);
+	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(1).add(this);
 	@SerialClass.SerialField(toClient = true)
-	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
-			.setPredicate(e -> CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid())).add(this);
+	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID).add(this);
+	@SerialClass.SerialField(toClient = true)
+	protected final BaseTank water = new BaseTank(1, MAX_FLUID)
+			.setPredicate(e -> e.getFluid() == Fluids.WATER).add(this);
 
 	@SerialClass.SerialField(toClient = true)
-	protected int max_time, time;
+	protected int max_step, step;
 	@SerialClass.SerialField
 	protected ResourceLocation recipe;
 
@@ -67,7 +67,10 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 	public MillBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
 		itemCapability = LazyOptional.of(() -> new InvWrapper(inventory));
-		fluidCapability = LazyOptional.of(() -> fluids);
+		fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper()
+				.add(CombinedTankWrapper.Type.INSERT, water)
+				.add(CombinedTankWrapper.Type.EXTRACT, fluids)
+				.build());
 	}
 
 	@Override
@@ -84,19 +87,19 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 
 	@Override
 	public void tick() {
-		if (time > 0 && level != null) {
-			time--;
-			if (!level.isClientSide && time == 0) {
+	}
+
+	public void step() {
+		if (step > 0 && level != null) {
+			step--;
+			if (!level.isClientSide && step == 0) {
 				Optional<MillRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MILL, inventory, level);
 				inventory.clear();
 				fluids.clear();
-				max_time = 0;
+				max_step = 0;
 				if (optional.isPresent()) {
 					MillRecipe r = optional.get();
-					if (!r.result.isEmpty())
-						inventory.addItem(r.result.copy());
-					if (!r.remain.isEmpty())
-						fluids.fill(r.remain.copy(), IFluidHandler.FluidAction.EXECUTE);
+					r.assemble(inventory);
 				}
 				notifyTile(null);
 			}
@@ -104,15 +107,15 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 	}
 
 	public void resetProgress() {
-		max_time = 0;
-		time = 0;
+		max_step = 0;
+		step = 0;
 		recipe = null;
 		if (level != null) {
 			Optional<MillRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MILL, inventory, level);
 			if (optional.isPresent()) {
 				MillRecipe r = optional.get();
-				max_time = r.time;
-				time = max_time;
+				max_step = r.step;
+				step = max_step;
 				recipe = r.id;
 			}
 		}
@@ -133,6 +136,10 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 			if (!stack.isEmpty())
 				list.add(new TileInfoOverlay.ItemDrawable(stack));
 		}
+		for (FluidStack stack : water.getAsList()) {
+			if (!stack.isEmpty())
+				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID, 50));
+		}
 		for (FluidStack stack : fluids.getAsList()) {
 			if (!stack.isEmpty())
 				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID, 50));
@@ -149,7 +156,6 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 			return fluidCapability.cast();
 		return super.getCapability(cap, side);
 	}
-
 
 
 }

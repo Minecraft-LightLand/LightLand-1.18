@@ -78,7 +78,9 @@ public class Handlers {
 		// partials
 
 		// no NBT
-		new ClassHandler<>(Ingredient.class, Ingredient::toJson, Ingredient::fromJson, Ingredient::fromNetwork, (p, o) -> o.toNetwork(p), null, null);
+		new ClassHandler<>(Ingredient.class, Ingredient::toJson,
+				e -> e.isJsonArray() && e.getAsJsonArray().size() == 0 ? Ingredient.EMPTY : Ingredient.fromJson(e),
+				Ingredient::fromNetwork, (p, o) -> o.toNetwork(p), null, null);
 
 		// no JSON
 		new ClassHandler<CompoundTag, CompoundTag>(CompoundTag.class, null, null, FriendlyByteBuf::readAnySizeNbt, FriendlyByteBuf::writeNbt, e -> e, e -> e);

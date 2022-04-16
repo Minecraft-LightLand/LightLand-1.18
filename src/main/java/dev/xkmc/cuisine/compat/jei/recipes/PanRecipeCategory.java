@@ -40,7 +40,7 @@ public class PanRecipeCategory implements IRecipeCategory<PanRecipe> {
 
 	public PanRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 90, 162, 36);
-		icon = guiHelper.createDrawableIngredient(CuisineBlocks.PAN.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, CuisineBlocks.PAN.get().asItem().getDefaultInstance());
 		return this;
 	}
 

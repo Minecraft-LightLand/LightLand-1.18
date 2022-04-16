@@ -10,6 +10,7 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IGuiIngredientGroup;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.plugins.vanilla.ingredients.fluid.FluidStackRenderer;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -40,7 +41,7 @@ public class MillRecipeCategory implements IRecipeCategory<MillRecipe> {
 
 	public MillRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 126, 162, 18);
-		icon = guiHelper.createDrawableIngredient(CuisineBlocks.PAN.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, CuisineBlocks.PAN.get().asItem().getDefaultInstance());
 		return this;
 	}
 
@@ -53,6 +54,11 @@ public class MillRecipeCategory implements IRecipeCategory<MillRecipe> {
 	@Override
 	public Class getRecipeClass() {
 		return MillRecipe.class;
+	}
+
+	@Override
+	public RecipeType<MillRecipe> getRecipeType() {
+		return IRecipeCategory.super.getRecipeType();
 	}
 
 	@Override
@@ -72,11 +78,12 @@ public class MillRecipeCategory implements IRecipeCategory<MillRecipe> {
 
 	@Override
 	public void setIngredients(MillRecipe sl, IIngredients list) {
-		list.setInputIngredients(sl.item_ingredients);
+		if (!sl.item_ingredients.isEmpty())
+			list.setInputIngredients(List.of(sl.item_ingredients));
+		if (!sl.fluid_ingredient.isEmpty())
+			list.setInput(VanillaTypes.FLUID, sl.fluid_ingredient);
 		if (!sl.fluid_ingredient.isEmpty())
 			list.setInputs(VanillaTypes.FLUID, List.of(sl.fluid_ingredient));
-		if (!sl.result.isEmpty())
-			list.setOutput(VanillaTypes.ITEM, sl.result);
 		if (!sl.remain.isEmpty())
 			list.setOutput(VanillaTypes.FLUID, sl.remain);
 	}
@@ -95,8 +102,6 @@ public class MillRecipeCategory implements IRecipeCategory<MillRecipe> {
 			index++;
 		}
 		index = 0;
-		if (!sl.result.isEmpty())
-			setItem(layout.getItemStacks(), List.of(sl.result), 0, false, 126 + (index++) * 18, 0);
 		if (!sl.remain.isEmpty())
 			setFluid(layout.getFluidStacks(), List.of(sl.remain), 0, false, 126 + (index++) * 18, 0);
 	}

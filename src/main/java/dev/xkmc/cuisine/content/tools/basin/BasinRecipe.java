@@ -8,22 +8,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 @SerialClass
 public class BasinRecipe extends BaseRecipe<BasinRecipe, BasinRecipe, BasinBlockEntity.RecipeContainer> {
 
 	@SerialClass.SerialField
-	public ArrayList<Ingredient> item_ingredients;
+	public Ingredient item_ingredients;
 	@SerialClass.SerialField
 	public ItemStack result;
 	@SerialClass.SerialField
-	public FluidStack remain;
+	public FluidStack fluid_ingredient, remain;
 	@SerialClass.SerialField
-	public int step;
+	public int step, time;
 
 	public BasinRecipe(ResourceLocation id) {
 		super(id, CuisineRecipe.RS_BASIN.get());
@@ -31,45 +28,42 @@ public class BasinRecipe extends BaseRecipe<BasinRecipe, BasinRecipe, BasinBlock
 
 	@Override
 	public boolean matches(BasinBlockEntity.RecipeContainer inv, Level world) {
-		List<Ingredient> items = new ArrayList<>(item_ingredients);
-		for (ItemStack stack : inv.getTile().inventory.getAsList()) {
-			if (stack.isEmpty())
-				continue;
-			if (items.isEmpty())
-				return true;
+		if (step > 0) { // item -> fluid
 			boolean match = false;
-			for (Iterator<Ingredient> itr = items.iterator(); itr.hasNext(); ) {
-				Ingredient ing = itr.next();
-				if (ing.test(stack)) {
-					itr.remove();
+			for (ItemStack stack : inv.getTile().inventory.getAsList()) {
+				if (item_ingredients.test(stack)) {
 					match = true;
 					break;
 				}
 			}
 			if (!match)
 				return false;
+			return inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.SIMULATE) == remain.getAmount();
+		} else { // fluid -> item
+			FluidStack stack = inv.getTile().fluids.getFluidInTank(0);
+			boolean match = !stack.isEmpty() && stack.isFluidEqual(fluid_ingredient) && stack.getAmount() >= fluid_ingredient.getAmount();
+			if (!match)
+				return false;
+			return inv.getTile().inventory.canAddItem(result);
 		}
-		return items.size() <= 0;
+
 	}
 
 	@Override
 	public ItemStack assemble(BasinBlockEntity.RecipeContainer inv) {
-		List<Ingredient> items = new ArrayList<>(item_ingredients);
-		for (ItemStack stack : inv.getTile().inventory.getAsList()) {
-			if (stack.isEmpty())
-				continue;
-			if (items.isEmpty())
-				break;
-			for (Iterator<Ingredient> itr = items.iterator(); itr.hasNext(); ) {
-				Ingredient ing = itr.next();
-				if (ing.test(stack)) {
-					itr.remove();
+		if (step > 0) { // item -> fluid
+			for (ItemStack stack : inv.getTile().inventory.getAsList()) {
+				if (item_ingredients.test(stack)) {
 					stack.shrink(1);
 					break;
 				}
 			}
+			inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.EXECUTE);
+		} else { // fluid -> item
+			inv.getTile().fluids.drain(fluid_ingredient.copy(), IFluidHandler.FluidAction.EXECUTE);
+			inv.getTile().inventory.addItem(result.copy());
 		}
-		return result.copy();
+		return ItemStack.EMPTY;
 	}
 
 	@Override

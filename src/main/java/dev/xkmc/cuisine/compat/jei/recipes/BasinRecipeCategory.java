@@ -40,7 +40,7 @@ public class BasinRecipeCategory implements IRecipeCategory<BasinRecipe> {
 
 	public BasinRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 126, 162, 18);
-		icon = guiHelper.createDrawableIngredient(CuisineBlocks.PAN.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, CuisineBlocks.PAN.get().asItem().getDefaultInstance());
 		return this;
 	}
 
@@ -72,7 +72,10 @@ public class BasinRecipeCategory implements IRecipeCategory<BasinRecipe> {
 
 	@Override
 	public void setIngredients(BasinRecipe sl, IIngredients list) {
-		list.setInputIngredients(sl.item_ingredients);
+		if (!sl.item_ingredients.isEmpty())
+			list.setInputIngredients(List.of(sl.item_ingredients));
+		if (!sl.fluid_ingredient.isEmpty())
+			list.setInput(VanillaTypes.FLUID, sl.fluid_ingredient);
 		if (!sl.result.isEmpty())
 			list.setOutput(VanillaTypes.ITEM, sl.result);
 		if (!sl.remain.isEmpty())

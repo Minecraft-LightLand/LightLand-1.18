@@ -4,6 +4,7 @@ import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
 import dev.xkmc.cuisine.content.tools.basin.BasinRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipeBuilder;
+import dev.xkmc.cuisine.content.tools.mill.MillRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.pan.PanRecipeBuilder;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineFluids;
@@ -12,6 +13,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -42,11 +44,6 @@ public class RecipeGen {
 					Items.APPLE)
 					.requires(CuisineTags.AllItemTags.FRUIT.tag)
 					.save(pvd);
-			unlock(pvd, new JarRecipeBuilder(SimpleItem.UNREFINED_SUGAR.item.get(), 1, 100,
-							new FluidStack(CuisineFluids.SUGARCANE_JUICE.fluid.get(), 250),
-							FluidStack.EMPTY)::unlockedBy,
-					Items.SUGAR_CANE)
-					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/unrefined_sugar"));
 			unlock(pvd, new JarRecipeBuilder(Items.SUGAR, 1, 100,
 							new FluidStack(Fluids.WATER, 1000), FluidStack.EMPTY)::unlockedBy,
 					SimpleItem.UNREFINED_SUGAR.item.get())
@@ -54,11 +51,20 @@ public class RecipeGen {
 					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/sugar"));
 		}
 		{
-			unlock(pvd, new BasinRecipeBuilder(Items.AIR, 0, 5,
-							new FluidStack(CuisineFluids.SOY_MILK.fluid.get(), 50))::unlockedBy,
+			unlock(pvd, new BasinRecipeBuilder(Ingredient.of(Items.SUGAR_CANE),
+					new FluidStack(CuisineFluids.SUGARCANE_JUICE.fluid.get(), 250),
+					5)::unlockedBy, Items.SUGAR_CANE)
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/sugarcane_juice"));
+			unlock(pvd, new BasinRecipeBuilder(new FluidStack(CuisineFluids.SUGARCANE_JUICE.fluid.get(), 250),
+					SimpleItem.UNREFINED_SUGAR.item.asStack(1), 100)::unlockedBy, Items.SUGAR_CANE)
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/unrefined_sugar"));
+		}
+		{
+
+			unlock(pvd, new MillRecipeBuilder(Ingredient.of(CuisineCropType.SOYBEAN.getSeed()),
+							new FluidStack(CuisineFluids.SOY_MILK.fluid.get(), 50), 50, 4)::unlockedBy,
 					CuisineCropType.SOYBEAN.getSeed())
-					.requires(CuisineCropType.SOYBEAN.getSeed())
-					.save(pvd, new ResourceLocation(Cuisine.MODID, "basin/soy_milk"));
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "mill/soy_milk"));
 		}
 	}
 
