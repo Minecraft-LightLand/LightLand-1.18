@@ -13,7 +13,7 @@ public class PanGeoModel extends AnimatedGeoModel<PanBlockEntity> {
 
 	@Override
 	public ResourceLocation getTextureLocation(PanBlockEntity object) {
-		return new ResourceLocation(LightLand.MODID, "gecko/pan.png");
+		return new ResourceLocation(LightLand.MODID, "textures/gecko/pan.png");
 	}
 
 	@Override
