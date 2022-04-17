@@ -44,7 +44,7 @@ import java.util.Random;
 public class BasinBlock implements OnClickBlockMethod, FallOnBlockMethod, AnimateTickBlockMethod, ShapeBlockMethod, EntityInsideBlockMethod {
 
 	private static final VoxelShape OUTSIDE = Block.box(0D, 0D, 0D, 16.0D, 8.0D, 16.0D);
-	private static final VoxelShape INSIDE = Block.box(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+	private static final VoxelShape INSIDE = Block.box(1.0D, 1.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 	protected static final VoxelShape SHAPE = Shapes.join(OUTSIDE, INSIDE, BooleanOp.ONLY_FIRST);
 
 	public static final BlockEntityBlockMethod<BasinBlockEntity> TE = new BlockEntityBlockMethodImpl<>(CuisineBlocks.TE_BASIN, BasinBlockEntity.class);

@@ -7,6 +7,7 @@ import dev.lcy0x1.block.DelegateBlockProperties;
 import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlock;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;
+import dev.xkmc.cuisine.content.tools.basin.BasinRenderer;
 import dev.xkmc.cuisine.content.tools.jar.JarBlock;
 import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.mill.MillBlock;
@@ -109,7 +110,8 @@ public class CuisineBlocks {
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/basin"))))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE).simpleItem().register();
-			TE_BASIN = REGISTRATE.blockEntity("basin", BasinBlockEntity::new).validBlock(BASIN).register();
+			TE_BASIN = REGISTRATE.blockEntity("basin", BasinBlockEntity::new).validBlock(BASIN)
+					.renderer(()-> BasinRenderer::new).register();
 
 			MILL = REGISTRATE.block("mill", p -> DelegateBlock.newBaseBlock(prop, MillBlock.TE, new MillBlock()))
 					.blockstate((ctx, pvd) -> {

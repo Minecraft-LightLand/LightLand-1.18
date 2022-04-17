@@ -221,6 +221,10 @@ public class DelegateBlockImpl extends DelegateBlock {
 		return impl.one(RenderShapeBlockMethod.class).map(e -> e.getRenderShape(state)).orElseGet(() -> super.getRenderShape(state));
 	}
 
+	public final BlockImplementor getImpl() {
+		return impl;
+	}
+
 	public static class BlockImplementor {
 
 		private final Properties props;

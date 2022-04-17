@@ -35,13 +35,13 @@ public class VirtualFluid extends ForgeFlowingFluid {
 	}
 
 	@Override
-	public boolean isSource(FluidState p_207193_1_) {
+	public boolean isSource(FluidState state) {
 		return false;
 	}
 
 	@Override
-	public int getAmount(FluidState p_207192_1_) {
-		return 0;
+	public int getAmount(FluidState state) {
+		return state.getValue(LEVEL);
 	}
 
 }
