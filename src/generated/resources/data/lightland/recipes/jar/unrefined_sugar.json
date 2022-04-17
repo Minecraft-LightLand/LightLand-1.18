@@ -1,0 +1,17 @@
+{
+  "fluid_ingredient": {
+    "fluid": "lightland:flowing_sugarcane_juice",
+    "amount": 250
+  },
+  "item_ingredients": [],
+  "remain": {
+    "fluid": "minecraft:empty",
+    "amount": 0
+  },
+  "result": {
+    "item": "lightland:unrefined_sugar"
+  },
+  "step": 0,
+  "time": 100,
+  "type": "lightland:basin"
+}

@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
@@ -64,7 +63,7 @@ public class Handlers {
 		new ClassHandler<>(String.class, JsonPrimitive::new, JsonElement::getAsString, FriendlyByteBuf::readUtf, FriendlyByteBuf::writeUtf, Tag::getAsString, StringTag::valueOf);
 
 		// minecraft
-		new ClassHandler<>(ItemStack.class, Helper::serializeItemStack, (e) -> ShapedRecipe.itemStackFromJson(e.getAsJsonObject()), FriendlyByteBuf::readItem, (p, is) -> p.writeItemStack(is, false), ItemStack::of, is -> is.save(new CompoundTag()));
+		new ClassHandler<>(ItemStack.class, Helper::serializeItemStack, Helper::deserializeItemStack, FriendlyByteBuf::readItem, (p, is) -> p.writeItemStack(is, false), ItemStack::of, is -> is.save(new CompoundTag()));
 		new ClassHandler<>(FluidStack.class, Helper::serializeFluidStack, Helper::deserializeFluidStack, FluidStack::readFromPacket, (p, f) -> f.writeToPacket(p), FluidStack::loadFluidStackFromNBT, f -> f.writeToNBT(new CompoundTag()));
 
 		new StringClassHandler<>(ResourceLocation.class, ResourceLocation::new, ResourceLocation::toString);
@@ -79,7 +78,9 @@ public class Handlers {
 		// partials
 
 		// no NBT
-		new ClassHandler<>(Ingredient.class, Ingredient::toJson, Ingredient::fromJson, Ingredient::fromNetwork, (p, o) -> o.toNetwork(p), null, null);
+		new ClassHandler<>(Ingredient.class, Ingredient::toJson,
+				e -> e.isJsonArray() && e.getAsJsonArray().size() == 0 ? Ingredient.EMPTY : Ingredient.fromJson(e),
+				Ingredient::fromNetwork, (p, o) -> o.toNetwork(p), null, null);
 
 		// no JSON
 		new ClassHandler<CompoundTag, CompoundTag>(CompoundTag.class, null, null, FriendlyByteBuf::readAnySizeNbt, FriendlyByteBuf::writeNbt, e -> e, e -> e);

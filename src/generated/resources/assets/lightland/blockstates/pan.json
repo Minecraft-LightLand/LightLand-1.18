@@ -1,0 +1,12 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "lit": "true"
+      },
+      "apply": {
+        "model": "lightland:block/pan_lit"
+      }
+    }
+  ]
+}

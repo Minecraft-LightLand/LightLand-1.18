@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:fruittree_trapdoor",
+    "lightland:empowered_trapdoor",
+    "lightland:mystic_trapdoor"
+  ]
+}

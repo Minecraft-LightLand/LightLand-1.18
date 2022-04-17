@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "lightland:block/corn_stage_0"
+    },
+    "age=1": {
+      "model": "lightland:block/corn_stage_1"
+    },
+    "age=2": {
+      "model": "lightland:block/corn_stage_1"
+    },
+    "age=3": {
+      "model": "lightland:block/corn_stage_1"
+    },
+    "age=4": {
+      "model": "lightland:block/corn_stage_2"
+    },
+    "age=5": {
+      "model": "lightland:block/corn_stage_2"
+    },
+    "age=6": {
+      "model": "lightland:block/corn_stage_2"
+    },
+    "age=7": {
+      "model": "lightland:block/corn_stage_3"
+    },
+    "age=8": {
+      "model": "lightland:block/corn_upper"
+    }
+  }
+}

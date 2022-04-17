@@ -1,0 +1,6 @@
+{
+  "parent": "lightland:block/upper_crop",
+  "textures": {
+    "crop": "lightland:block/rice_stage_1"
+  }
+}

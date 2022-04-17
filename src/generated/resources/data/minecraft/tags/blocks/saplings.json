@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:sapling_citron",
+    "lightland:sapling_grapefruit",
+    "lightland:sapling_lemon",
+    "lightland:sapling_lime",
+    "lightland:sapling_mandarin",
+    "lightland:sapling_orange",
+    "lightland:sapling_pomelo"
+  ]
+}

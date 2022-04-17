@@ -32,6 +32,15 @@ public class BaseContainer extends SimpleContainer implements AliasCollection<It
 		return this;
 	}
 
+	public int countSpace() {
+		int ans = 0;
+		for (ItemStack stack : items) {
+			if (stack.isEmpty())
+				ans++;
+		}
+		return ans;
+	}
+
 	@Override
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		return predicate.test(stack);

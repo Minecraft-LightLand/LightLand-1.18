@@ -8,8 +8,12 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -25,6 +29,18 @@ public class Helper {
 		}
 
 		return ans;
+	}
+
+	public static ItemStack deserializeItemStack(JsonElement elem) {
+		JsonObject obj = elem.getAsJsonObject();
+		if (obj.has("enchant_book")) {
+			JsonObject book = obj.getAsJsonObject("enchant_book");
+			Enchantment ench = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(book.get("id").getAsString()));
+			int lvl = book.get("lvl").getAsInt();
+			assert ench != null;
+			return EnchantedBookItem.createForEnchantment(new EnchantmentInstance(ench, lvl));
+		}
+		return CraftingHelper.getItemStack(obj, true, false);
 	}
 
 	public static FluidStack deserializeFluidStack(JsonElement e) {

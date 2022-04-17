@@ -44,8 +44,6 @@ public class DelegateEntityBlockImpl extends DelegateBlockImpl implements Entity
 
 	@Nullable
 	public final <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		if (level.isClientSide())
-			return null;
 		return impl.one(BlockEntityBlockMethod.class).map(e -> {
 			if (type != e.getType() || !TickableBlockEntity.class.isAssignableFrom(e.getEntityClass()))
 				return null;

@@ -14,17 +14,23 @@ public class AssetMisc extends ResourceOrganizer {
 	@Override
 	public void organize(File f) throws Exception {
 		for (File fi : f.listFiles())
-			process(fi, getTargetFolder());
+			process(fi, getTargetFolder(), "");
 	}
 
-	private void process(File f, String pre) throws Exception {
+	private void process(File f, String path, String pre) throws Exception {
 		if (f.getName().startsWith("."))
 			return;
 		if (f.isDirectory()) {
-			for (File fi : f.listFiles())
-				process(fi, f.getName().startsWith("-") ? pre : pre + f.getName() + "/");
+			for (File fi : f.listFiles()) {
+				String next = f.getName().startsWith("-") || f.getName().startsWith("@") ? path : path + f.getName() + "/";
+				String npre = f.getName().startsWith("_") ? pre + f.getName() :
+						f.getName().endsWith("_") ? f.getName() + pre :
+								f.getName().startsWith("@") ? f.getName().substring(1)
+										: pre;
+				process(fi, next, npre);
+			}
 		} else {
-			File t = new File(pre + f.getName());
+			File t = new File(path + pre + f.getName());
 			check(t);
 			Files.copy(f, t);
 		}

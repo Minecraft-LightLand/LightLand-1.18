@@ -1,0 +1,6 @@
+{
+  "parent": "lightland:block/cross_crop",
+  "textures": {
+    "crop": "lightland:block/onion_stage_2"
+  }
+}

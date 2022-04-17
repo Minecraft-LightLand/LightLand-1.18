@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:flowing_cuisine_juice",
+    "lightland:cuisine_juice",
+    "lightland:flowing_edible_oil",
+    "lightland:edible_oil",
+    "lightland:flowing_fruit_vinegar",
+    "lightland:fruit_vinegar",
+    "lightland:flowing_rice_vinegar",
+    "lightland:rice_vinegar",
+    "lightland:flowing_sesame_oil",
+    "lightland:sesame_oil",
+    "lightland:flowing_soy_milk",
+    "lightland:soy_milk",
+    "lightland:flowing_soy_sauce",
+    "lightland:soy_sauce",
+    "lightland:flowing_sugarcane_juice",
+    "lightland:sugarcane_juice",
+    "minecraft:water",
+    "#forge:milk",
+    "#forge:chocolate",
+    "#forge:tea",
+    "#forge:honey"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "lightland:block/mill"
+      }
+    },
+    {
+      "apply": {
+        "model": "lightland:block/mill_top"
+      }
+    }
+  ]
+}

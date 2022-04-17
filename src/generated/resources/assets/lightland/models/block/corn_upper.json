@@ -1,0 +1,6 @@
+{
+  "parent": "lightland:block/upper_crop",
+  "textures": {
+    "crop": "lightland:block/corn_upper_1"
+  }
+}
