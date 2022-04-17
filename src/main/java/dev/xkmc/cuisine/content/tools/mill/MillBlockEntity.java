@@ -23,6 +23,9 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -31,7 +34,7 @@ import java.util.Optional;
 
 @SerialClass
 public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEntity,
-		BaseContainerListener<BaseContainer>, BlockContainer,
+		BaseContainerListener<BaseContainer>, BlockContainer, IAnimatable,
 		TileInfoOverlay.TileInfoProvider {
 
 	public class RecipeContainer extends BaseContainer {
@@ -46,7 +49,9 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 
 	}
 
-	public static final int MAX_FLUID = 1000;
+	public static final int MAX_FLUID = 1000, ROTATE_TIME = 20, ROTATE_ALLOW = 10;
+
+	private final AnimationFactory manager = new AnimationFactory(this);
 
 	@SerialClass.SerialField(toClient = true)
 	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(1).add(this);
@@ -61,6 +66,8 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 	@SerialClass.SerialField
 	protected ResourceLocation recipe;
 
+	protected int rotate_time;
+
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
 
@@ -71,6 +78,17 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 				.add(CombinedTankWrapper.Type.INSERT, water)
 				.add(CombinedTankWrapper.Type.EXTRACT, fluids)
 				.build());
+	}
+
+	@Override
+	public void registerControllers(AnimationData data) {
+		MillAnimationController controller = new MillAnimationController(this);
+		data.addAnimationController(controller);
+	}
+
+	@Override
+	public AnimationFactory getFactory() {
+		return manager;
 	}
 
 	@Override
@@ -87,11 +105,15 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 
 	@Override
 	public void tick() {
+		if (rotate_time > 0) {
+			rotate_time--;
+		}
 	}
 
-	public void step() {
-		if (step > 0 && level != null) {
+	public boolean step() {
+		if (step > 0 && level != null && rotate_time <= ROTATE_ALLOW) {
 			step--;
+			rotate_time += ROTATE_TIME;
 			if (!level.isClientSide && step == 0) {
 				Optional<MillRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MILL, inventory, level);
 				max_step = 0;
@@ -101,7 +123,9 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 				}
 				notifyTile(null);
 			}
+			return true;
 		}
+		return false;
 	}
 
 	public void resetProgress() {
@@ -121,8 +145,12 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 
 	public void dumpInventory() {
 		if (level == null) return;
-		Containers.dropContents(level, this.getBlockPos().above(), inventory);
-		fluids.clear();
+		if (!inventory.isEmpty())
+			Containers.dropContents(level, this.getBlockPos().above(), inventory);
+		else {
+			water.clear();
+			fluids.clear();
+		}
 		notifyTile(null);
 	}
 

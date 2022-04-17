@@ -118,8 +118,10 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	public void dumpInventory() {
 		if (level == null) return;
-		Containers.dropContents(level, this.getBlockPos().above(), inventory);
-		fluids.clear();
+		if (!inventory.isEmpty())
+			Containers.dropContents(level, this.getBlockPos().above(), inventory);
+		else
+			fluids.clear();
 		notifyTile(null);
 	}
 

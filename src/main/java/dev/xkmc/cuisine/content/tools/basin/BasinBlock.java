@@ -85,9 +85,7 @@ public class BasinBlock implements OnClickBlockMethod, FallOnBlockMethod, Animat
 				double d0 = pos.getX() + 1 - r.nextFloat() * 0.5F;
 				double d1 = pos.getY() + 1 - r.nextFloat() * 0.5F;
 				double d2 = pos.getZ() + 1 - r.nextFloat() * 0.5F;
-				if (r.nextInt(5) == 0) {
-					level.addParticle(ParticleTypes.END_ROD, d0, d1, d2, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D);
-				}
+				level.addParticle(ParticleTypes.END_ROD, d0, d1, d2, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D);
 			}
 			te.step();
 		}

@@ -3,7 +3,7 @@ loaderVersion="[40,)"
 license="All rights reserved"
 [[mods]]
 modId="lightland"
-version="6.4.2" #mandatory
+version="6.4.4" #mandatory
 displayName="LightLand RPG" #mandatory
 logoFile="examplemod.png" #optional
 credits="Thanks for this example mod goes to Java" #optional
@@ -30,4 +30,9 @@ description='''
     modId="appleskin"
     mandatory=false
     versionRange="[2.3.0,)"
+    ordering="AFTER"
+[[dependencies.lightland]]
+    modId="create"
+    mandatory=true
+    versionRange="[0.4.1,)"
     ordering="AFTER"

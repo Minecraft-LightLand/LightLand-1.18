@@ -5,6 +5,7 @@ import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
+import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -57,13 +58,13 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	@SerialClass.SerialField(toClient = true)
 	protected final RecipeContainer inputInventory = (RecipeContainer) new RecipeContainer(8).setMax(1)
-			.setPredicate(e -> canAccess() && AllTags.AllItemTags.PAN_ACCEPT.matches(e)).add(this);
+			.setPredicate(e -> canAccess() && CuisineTags.AllItemTags.CAN_COOK.matches(e)).add(this);
 
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseContainer outputInventory = new BaseContainer(1).setPredicate(e -> false).add(this);
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID).setClickMax(50)
-			.setPredicate(e -> canAccess() && AllTags.AllFluidTags.PAN_ACCEPT.matches(e.getFluid()))
+			.setPredicate(e -> canAccess() && CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid()))
 			.setExtract(() -> false).add(this);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
@@ -164,9 +165,11 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	public void dumpInventory() {
 		if (level == null) return;
-		Containers.dropContents(level, this.getBlockPos().above(), inputInventory);
-		Containers.dropContents(level, this.getBlockPos().above(), outputInventory);
-		fluids.clear();
+		if (!inputInventory.isEmpty() || !outputInventory.isEmpty()) {
+			Containers.dropContents(level, this.getBlockPos().above(), inputInventory);
+			Containers.dropContents(level, this.getBlockPos().above(), outputInventory);
+		} else
+			fluids.clear();
 		notifyTile(null);
 	}
 

@@ -3,6 +3,7 @@ package dev.xkmc.cuisine.content.tools.mill;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
+import dev.lcy0x1.block.one.RenderShapeBlockMethod;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.common.util.LazyOptional;
@@ -23,7 +25,7 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import java.util.Objects;
 import java.util.Random;
 
-public class MillBlock implements OnClickBlockMethod {
+public class MillBlock implements OnClickBlockMethod, RenderShapeBlockMethod {
 
 	public static final BlockEntityBlockMethod<MillBlockEntity> TE = new BlockEntityBlockMethodImpl<>(CuisineBlocks.TE_MILL, MillBlockEntity.class);
 
@@ -52,22 +54,24 @@ public class MillBlock implements OnClickBlockMethod {
 			if (remain.isEmpty()) stack.shrink(1);
 			return InteractionResult.SUCCESS;
 		}
-		if (te.step > 0) {
+		if (te.step()) {
 			if (level.isClientSide()) {
 				Random random = level.getRandom();
 				double d0 = pos.getX() + 1 - random.nextFloat() * 0.5F;
 				double d1 = pos.getY() + 1 - random.nextFloat() * 0.5F;
 				double d2 = pos.getZ() + 1 - random.nextFloat() * 0.5F;
-				if (random.nextInt(5) == 0) {
-					level.addParticle(ParticleTypes.END_ROD, d0, d1, d2,
-							random.nextGaussian() * 0.005D,
-							random.nextGaussian() * 0.005D,
-							random.nextGaussian() * 0.005D);
-				}
+				level.addParticle(ParticleTypes.END_ROD, d0, d1, d2,
+						random.nextGaussian() * 0.005D,
+						random.nextGaussian() * 0.005D,
+						random.nextGaussian() * 0.005D);
+
 			}
-			te.step();
 		}
 		return InteractionResult.PASS;
 	}
 
+	@Override
+	public RenderShape getRenderShape(BlockState state) {
+		return RenderShape.ENTITYBLOCK_ANIMATED;
+	}
 }

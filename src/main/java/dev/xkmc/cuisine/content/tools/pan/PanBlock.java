@@ -117,7 +117,7 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 			if (opt.resolve().isPresent()) {
 				IFluidHandlerItem item = opt.resolve().get();
 				FluidStack fluidStack = item.getFluidInTank(0);
-				if (!fluidStack.isEmpty() && AllTags.AllFluidTags.PAN_ACCEPT.matches(fluidStack.getFluid())) { //TODO tag
+				if (!fluidStack.isEmpty() && CuisineTags.AllFluidTags.JAR_ACCEPT.matches(fluidStack.getFluid())) { //TODO tag
 					return FluidUtil.interactWithFluidHandler(pl, h, w, pos, r.getDirection()) ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
 				}
 			}

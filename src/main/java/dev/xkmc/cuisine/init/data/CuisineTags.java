@@ -4,6 +4,7 @@ import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
+import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraft.resources.ResourceLocation;
@@ -232,6 +233,10 @@ public class CuisineTags {
 	}
 
 	public enum AllFluidTags {
+		MILK(NameSpace.FORGE),
+		CHOCOLATE(NameSpace.FORGE),
+		HONEY(NameSpace.FORGE),
+		TEA(NameSpace.FORGE),
 		JAR_ACCEPT;
 
 		public final TagKey<Fluid> tag;
@@ -294,6 +299,10 @@ public class CuisineTags {
 
 		static void register() {
 			JAR_ACCEPT.add(Fluids.WATER);
+			JAR_ACCEPT.includeAll(MILK.tag);
+			JAR_ACCEPT.includeAll(CHOCOLATE.tag);
+			JAR_ACCEPT.includeAll(TEA.tag);
+			JAR_ACCEPT.includeAll(HONEY.tag);
 		}
 
 	}

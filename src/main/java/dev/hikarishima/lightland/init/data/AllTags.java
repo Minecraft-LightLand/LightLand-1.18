@@ -160,8 +160,7 @@ public class AllTags {
 
 	public enum AllItemTags {
 		BACKPACKS,
-		DIMENSIONAL_STORAGES,
-		PAN_ACCEPT;
+		DIMENSIONAL_STORAGES;
 
 		public final TagKey<Item> tag;
 
@@ -224,11 +223,6 @@ public class AllTags {
 	}
 
 	public enum AllFluidTags {
-		MILK(NameSpace.FORGE),
-		CHOCOLATE(NameSpace.FORGE),
-		HONEY(NameSpace.FORGE),
-		TEA(NameSpace.FORGE),
-		PAN_ACCEPT,
 		;
 
 		public final TagKey<Fluid> tag;
@@ -297,20 +291,6 @@ public class AllTags {
 
 	public static void register() {
 		AllFluidTags.register();
-		AllItemTags.PAN_ACCEPT.add(Items.BOWL, Items.EGG, Items.BEEF, Items.PORKCHOP, Items.CHICKEN,
-				Items.RABBIT, Items.POTATO, Items.CARROT, Items.BEETROOT, Items.COCOA_BEANS, Items.MELON_SLICE,
-				Items.PUMPKIN, Items.TROPICAL_FISH, Items.COD, Items.SALMON, Items.PUFFERFISH,
-				Items.RED_MUSHROOM, Items.BROWN_MUSHROOM, Items.CRIMSON_FUNGUS, Items.WARPED_FUNGUS,
-				Items.WHEAT, Items.RABBIT_FOOT, Items.SUGAR, Items.MUTTON, Items.SWEET_BERRIES, Items.GLOW_BERRIES,
-				Items.KELP, Items.DRIED_KELP, Items.CHORUS_FRUIT, Items.NETHER_WART, Items.SUGAR_CANE,
-				Items.SPIDER_EYE, Items.PUMPKIN_SEEDS, Items.APPLE, Items.SEAGRASS, Items.ROTTEN_FLESH,
-				Items.BONE, Items.HONEYCOMB);
-		AllItemTags.PAN_ACCEPT.includeAll(ItemTags.FLOWERS);
-		AllFluidTags.PAN_ACCEPT.add(Fluids.WATER);
-		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.MILK.tag);
-		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.CHOCOLATE.tag);
-		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.TEA.tag);
-		AllFluidTags.PAN_ACCEPT.includeAll(AllFluidTags.HONEY.tag);
 	}
 
 }
