@@ -17,6 +17,10 @@
     "lightland:soy_sauce",
     "lightland:flowing_sugarcane_juice",
     "lightland:sugarcane_juice",
-    "minecraft:water"
+    "minecraft:water",
+    "#forge:milk",
+    "#forge:chocolate",
+    "#forge:tea",
+    "#forge:honey"
   ]
 }

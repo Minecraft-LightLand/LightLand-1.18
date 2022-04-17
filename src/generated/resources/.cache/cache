@@ -1127,8 +1127,7 @@ b258f983d2d8903ffbdccc6771217015aa3b93da data/lightland/recipes/smithing/upgrade
 796c1895e148a553d335ac3c2cb328dfe82a06b6 data/lightland/recipes/steel_pickaxe.json
 d8082d3ff70aa05e557c34bd573d981f33b3f8cb data/lightland/recipes/steel_shovel.json
 a013907c49a3ee7711f124b75324abd6a958d49d data/lightland/recipes/steel_sword.json
-3f04d6b3dcfe18fbe09024042512ad52e08b0086 data/lightland/tags/fluids/jar_accept.json
-bc7fe3d0e89d23b4f40aa90e5cdea23e95792175 data/lightland/tags/fluids/pan_accept.json
+16c8a2db94a47535ab73f9c08f15fa4fe469f7f5 data/lightland/tags/fluids/jar_accept.json
 fcdb322e81a261254b348a4bee96808db7691266 data/lightland/tags/items/absorb_salt.json
 4883e3459dd6a18cece1f766800846b3692e3eeb data/lightland/tags/items/backpacks.json
 a550239bb5b94f566e1b5ec2a0f96fa6a4d2c3c6 data/lightland/tags/items/can_cook.json
@@ -1139,7 +1138,6 @@ bd9247bb833ede81317d3889184d90a30e1f6bb2 data/lightland/tags/items/dimensional_s
 8bf11ef6dc9ee899f9b708ea2d03093818884fc6 data/lightland/tags/items/kelp.json
 5ba6ef4736f5f1f09496fd8fe859e1678bdac21e data/lightland/tags/items/meat.json
 ec1631409b076a764deb3570b5e09492900796fc data/lightland/tags/items/numb.json
-b9d323fa6157e927e555d0112396fd49b55122bd data/lightland/tags/items/pan_accept.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/lightland/tags/items/salty.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/lightland/tags/items/seafood.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/lightland/tags/items/sesame.json
