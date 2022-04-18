@@ -32,11 +32,11 @@ public class LLOverlay implements IIngameOverlay {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		renderer.start();
 		renderItem(renderer, partialTicks);
+		renderExperience(renderer);
 		SkillOverlay.render(renderer);
 		renderHealth(renderer);
 		renderFood(renderer);
 		renderMagicBars(renderer);
-		renderExperience(renderer);
 		renderMiddle(renderer);
 	}
 
@@ -69,22 +69,25 @@ public class LLOverlay implements IIngameOverlay {
 			renderer.draw("assistant_list");
 		}
 		// render items
-		int i1 = 1;
-		int i = renderer.gui.screenWidth / 2;
-		for (int j1 = 0; j1 < 9; ++j1) {
-			int k1 = i - 90 + j1 * 20 + 2;
-			int l1 = renderer.gui.screenHeight - 16 - 3;
-			renderer.gui.renderSlot(k1, l1, partialTicks, player, player.getInventory().items.get(j1), i1++);
+		int index = 1;
+		int x0 = renderer.gui.screenWidth / 2;
+		OverlayManager.Rect items = renderer.get("item_list");
+		for (int slot = 0; slot < 9; ++slot) {
+			int x1 = x0 + slot * 20 + items.sx + 3;
+			int y1 = renderer.gui.screenHeight + items.sy + 3;
+			renderer.gui.renderSlot(x1, y1, partialTicks, player, player.getInventory().items.get(slot), index++);
 		}
 		if (!itemstack.isEmpty()) {
-			int j2 = renderer.gui.screenHeight - 16 - 3;
-			renderer.gui.renderSlot(i - 91 - 26, j2, partialTicks, player, itemstack, i1);
+			OverlayManager.Rect alt = renderer.get("assistant_list");
+			int j2 = renderer.gui.screenHeight + alt.sy + 3;
+			renderer.gui.renderSlot(x0 + alt.sx + 3, j2, partialTicks, player, itemstack, index);
 
 		}
 		renderer.start();
 	}
 
 	private void renderHealth(OverlayManager.ScreenRenderer renderer) {
+		if (!renderer.gui.shouldDrawSurvivalElements()) return;
 		if (renderer.cameraEntity instanceof LivingEntity entity) {
 			AttributeInstance attrMaxHealth = entity.getAttribute(Attributes.MAX_HEALTH);
 			if (attrMaxHealth == null) return;
@@ -116,6 +119,7 @@ public class LLOverlay implements IIngameOverlay {
 	}
 
 	private void renderFood(OverlayManager.ScreenRenderer renderer) {
+		if (!renderer.gui.shouldDrawSurvivalElements()) return;
 		LocalPlayer player = renderer.localPlayer;
 		if (player == null) return;
 		renderer.draw("food_strip_empty");
@@ -132,14 +136,22 @@ public class LLOverlay implements IIngameOverlay {
 			FoodData stats = player.getFoodData();
 			int level = stats.getFoodLevel();
 			float sat = stats.getSaturationLevel();
-			float ext = stats.getExhaustionLevel();
 			renderer.drawRightLeft("food_strip", level, 20);
 			renderer.drawRightLeft("saturation_strip", sat, 20);
-			renderer.drawRightLeft("exhaustion", ext, 4);
+		}
+
+		if (player.hasEffect(MobEffects.HUNGER))
+			renderer.draw("hunger");
+		else {
+			FoodData stats = player.getFoodData();
+			renderer.draw("food");
+			float ext = stats.getExhaustionLevel();
+			renderer.drawRightLeft("exhaustion", ext + 0.4, 4.4);
 		}
 	}
 
 	private void renderExperience(OverlayManager.ScreenRenderer renderer) {
+		if (!renderer.gui.shouldDrawSurvivalElements()) return;
 		LocalPlayer player = renderer.localPlayer;
 		if (player == null) return;
 		renderer.draw("exp_empty");
@@ -167,17 +179,27 @@ public class LLOverlay implements IIngameOverlay {
 	}
 
 	private void renderMiddle(OverlayManager.ScreenRenderer renderer) {
-		renderer.draw("mid_list");
+		if (!renderer.gui.shouldDrawSurvivalElements()) return;
+		if (renderer.localPlayer == null) return;
+
 		renderer.draw("armor_column");
 		renderer.draw("armor_tag");
+		OverlayManager.Rect armor = renderer.get("armor_tag");
+		double val = renderer.localPlayer.getAttribute(Attributes.ARMOR).getValue();
+		SkillOverlay.renderText(renderer.gui, renderer.stack, Integer.toString((int) Math.floor(val)), armor.sx + armor.w / 2, armor.sy + armor.h / 2);
+		renderer.start();
 
-		if (renderer.localPlayer == null || !LLPlayerData.isProper(renderer.localPlayer)) return;
+		if (!LLPlayerData.isProper(renderer.localPlayer)) return;
 		LLPlayerData data = CapProxy.getHandler();
 		int exp = data.abilityPoints.exp;
 		int max = AbilityPoints.expRequirement(data.abilityPoints.level);
 		renderer.draw("lv_empty");
 		renderer.drawBottomUp("lv_strip", exp, max);
 		renderer.draw("lv");
+		renderer.draw("mid_list");
+		OverlayManager.Rect lv = renderer.get("lv");
+		SkillOverlay.renderText(renderer.gui, renderer.stack, Integer.toString(data.abilityPoints.level), lv.sx + lv.w / 2, lv.sy + lv.h / 2);
+		renderer.start();
 	}
 
 }

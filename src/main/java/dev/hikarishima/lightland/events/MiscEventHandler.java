@@ -19,6 +19,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.api.distmarker.Dist;
@@ -65,10 +66,10 @@ public class MiscEventHandler {
 
 	@SubscribeEvent
 	public static void onTargetSet(LivingSetAttackTargetEvent event) {
-		if (event.getEntityLiving().hasEffect(LightlandVanillaMagic.T_CLEAR.get()))
-			event.setCanceled(true);
-		if (event.getTarget() != null && event.getTarget().hasEffect(LightlandVanillaMagic.T_HIDE.get()))
-			event.setCanceled(true);
+		if (event.getTarget() != null && (event.getEntityLiving().hasEffect(LightlandVanillaMagic.T_CLEAR.get()) ||
+				event.getTarget().hasEffect(LightlandVanillaMagic.T_HIDE.get()))) {
+			((Mob) event.getEntityLiving()).setTarget(null);
+		}
 	}
 
 	@SubscribeEvent

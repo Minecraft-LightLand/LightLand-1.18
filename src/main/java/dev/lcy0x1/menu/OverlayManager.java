@@ -118,6 +118,10 @@ public class OverlayManager {
 			gui.setupOverlayRenderState(true, false, texture);
 		}
 
+		public Rect get(String str){
+			return getComp(str);
+		}
+
 		/**
 		 * Draw a side sprite on the location specified by the component
 		 */

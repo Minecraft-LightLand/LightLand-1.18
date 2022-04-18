@@ -8,18 +8,15 @@ import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
 import dev.hikarishima.lightland.content.skill.internal.SkillData;
-import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.SkillRegistry;
 import dev.lcy0x1.base.Proxy;
 import dev.lcy0x1.menu.OverlayManager;
 import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.client.gui.ForgeIngameGui;
-import net.minecraftforge.client.gui.IIngameOverlay;
 
 public class SkillOverlay {
 
@@ -29,9 +26,10 @@ public class SkillOverlay {
 		if (player != renderer.cameraEntity) return;
 		if (!LLPlayerData.isProper(player)) return;
 		LLPlayerData data = CapProxy.getHandler();
-		int x = renderer.gui.screenWidth / 2 + 91 + 8;
-		int y = renderer.gui.screenHeight - 16 - 6;
 		renderer.draw("skill_list");
+		OverlayManager.Rect rect = renderer.get("skill_list");
+		int x = renderer.gui.screenWidth / 2 + rect.sx + 6;
+		int y = renderer.gui.screenHeight + rect.sy + 3;
 		for (int i = 0; i < SkillRegistry.MAX; i++) {
 			if (data.skillCap.list.size() > i) {
 				renderSkill(renderer.gui, renderer.stack, data.skillCap.list.get(i), x + i * 20 + 3, y + 3, i);
@@ -81,7 +79,7 @@ public class SkillOverlay {
 		BufferUploader.end(builder);
 	}
 
-	private static void renderText(ForgeIngameGui gui, PoseStack mStack, String s, int cx, int cy) {
+	public static void renderText(ForgeIngameGui gui, PoseStack mStack, String s, int cx, int cy) {
 		int i1 = cx - gui.getFont().width(s) / 2;
 		int j1 = cy - 3;
 		gui.getFont().draw(mStack, s, (float) (i1 + 1), (float) j1, 0);
