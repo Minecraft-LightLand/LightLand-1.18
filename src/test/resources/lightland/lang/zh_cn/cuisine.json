@@ -1,0 +1,124 @@
+{
+  "block.lightland": {
+	"basin": "盆",
+	"jar": "罐子",
+	"mill": "磨",
+	"mortar": "臼",
+	"pan": "炖锅",
+
+	"chili": "辣椒",
+	"chinese_cabbage": "大白菜",
+	"corn": "玉米",
+	"cucumber": "黄瓜",
+	"eggplant": "茄子",
+	"garlic": "大蒜",
+	"ginger": "姜",
+	"green_pepper": "青椒",
+	"leek": "韭菜",
+	"lettuce": "生菜",
+	"onion": "洋葱",
+	"peanut": "花生",
+	"red_pepper": "红椒",
+	"rice": "水稻",
+	"scallion": "葱",
+	"sesame": "芝麻",
+	"sichuan_pepper": "花椒",
+	"soybean": "大豆",
+	"spinach": "菠菜",
+	"tomato": "西红柿",
+	"turnip": "白萝卜"
+  },
+  "item.lightland": {
+	"chili_powder": "辣椒粉",
+	"crude_salt": "粗盐",
+	"dough": "面团",
+	"flour": "面粉",
+	"liquid_bottle": "瓶子",
+	"rice_powder": "米粉",
+	"salt": "精盐",
+	"sichuan_pepper_powder": "花椒粉",
+	"tofu": "豆腐",
+	"unrefined_sugar": "粗制糖",
+	"white_rice": "稻米",
+
+	"empowered_boat": "充能木船",
+	"fruittree_boat": "柑橘木船",
+	"mystic_boat": "世界木船",
+
+	"citron": "香橼",
+	"grapefruit": "西柚",
+	"lemon": "柠檬",
+	"lime": "酸橙",
+	"mandarin": "橘子",
+	"orange": "甜橙",
+	"pomelo": "柚子"
+  },
+  "entity.lightland": {
+	"empowered_boat": "充能木船",
+	"fruittree_boat": "柑橘木船",
+	"mystic_boat": "世界木船"
+  },
+  "fluid.lightland": {
+	"cuisine_juice": "果汁",
+	"edible_oil": "食用油",
+	"fruit_vinegar": "果醋",
+	"rice_vinegar": "米醋",
+	"sesame_oil": "香油",
+	"soy_milk": "酱油",
+	"soy_sauce": "豆浆",
+	"sugarcane_juice": "甘蔗汁"
+  },
+  "itemGroup.lightland": {
+	"cuisine": "料理工艺"
+  },
+  "lightland": {
+	"tooltip": {
+	  "fluid.amount": "容量: %s/%s mB",
+	  "fluid.title": "流体:",
+	  "fluid.uses": "用量: %s/%s 次"
+	}
+  },
+  "-cartesian": {
+	"-wood_blocks": {
+	  "path": "block.lightland",
+	  "list": [
+		{
+		  "empowered": "充能木",
+		  "fruittree": "柑橘木",
+		  "mystic": "世界木"
+		},
+		{
+		  "button": "按钮",
+		  "door": "门",
+		  "fence": "栅栏",
+		  "fence_gate": "栅栏门",
+		  "log": " 原木",
+		  "planks": "木板",
+		  "pressure_plate": "压力板",
+		  "slab": "半砖",
+		  "stairs": "台阶",
+		  "trapdoor": "活板门"
+		}
+	  ]
+	},
+	"-tree_blocks": {
+	  "path": "block.lightland",
+	  "reverse": true,
+	  "list": [
+		{
+		  "leaves": "树叶",
+		  "sapling": "树苗"
+		},
+		{
+		  "citron": "香橼",
+		  "grapefruit": "西柚",
+		  "lemon": "柠檬",
+		  "lime": "酸橙",
+		  "mandarin": "橘子",
+		  "orange": "甜橙",
+		  "pomelo": "柚子"
+		}
+	  ]
+	}
+  }
+}

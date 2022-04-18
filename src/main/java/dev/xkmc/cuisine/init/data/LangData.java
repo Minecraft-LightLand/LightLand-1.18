@@ -39,6 +39,7 @@ public enum LangData {
 		for (LangData lang : LangData.values()) {
 			pvd.add(lang.key, lang.def);
 		}
+		pvd.add("itemGroup.lightland.cuisine", "Cuisine");
 	}
 
 }

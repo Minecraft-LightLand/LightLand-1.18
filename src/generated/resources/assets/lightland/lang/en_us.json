@@ -409,6 +409,7 @@
   "item.minecraft.splash_potion.effect.long_dispell": "Item.minecraft.splash Potion.effect.long Dispell",
   "item.minecraft.splash_potion.effect.long_holy_water": "Item.minecraft.splash Potion.effect.long Holy Water",
   "item.minecraft.splash_potion.effect.strong_dispell": "Item.minecraft.splash Potion.effect.strong Dispell",
+  "itemGroup.lightland.cuisine": "Cuisine",
   "itemGroup.lightland.generated": "Common Equipments",
   "itemGroup.lightland.material": "Tools and Materials",
   "itemGroup.lightland.profession": "Professional Equipments",
