@@ -1,21 +1,19 @@
 package dev.hikarishima.lightland.compat.jei.recipes;
 
-import com.google.common.collect.Lists;
 import dev.hikarishima.lightland.compat.jei.LightLandJeiPlugin;
 import dev.hikarishima.lightland.compat.jei.ingredients.ElementIngredient;
+import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandMenu;
-import mezz.jei.api.MethodsReturnNonnullByDefault;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IGuiIngredientGroup;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredientType;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -27,39 +25,22 @@ import net.minecraft.world.item.enchantment.EnchantmentInstance;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class DisEnchanterRecipeCategory implements IRecipeCategory<IMagicRecipe<?>> {
-
-	private static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
-
-	private final ResourceLocation id;
-	private IDrawable background, icon;
+public class DisEnchanterRecipeCategory extends BaseRecipeCategory<IMagicRecipe<?>, DisEnchanterRecipeCategory> {
 
 	public DisEnchanterRecipeCategory() {
-		this.id = new ResourceLocation(LightLand.MODID, "disenchant");
+		super(new ResourceLocation(LightLand.MODID, "disenchant"), cast(IMagicRecipe.class));
 	}
 
 	public DisEnchanterRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 18, 176, 18);
-		icon = guiHelper.createDrawableIngredient(LightlandItems.DISENC_BOOK.get().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, LightlandItems.DISENC_BOOK.get().getDefaultInstance());
 		return this;
-	}
-
-	@Override
-	public ResourceLocation getUid() {
-		return id;
-	}
-
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	@Override
-	public Class getRecipeClass() {
-		return IMagicRecipe.class;
 	}
 
 	@Override
@@ -68,54 +49,34 @@ public class DisEnchanterRecipeCategory implements IRecipeCategory<IMagicRecipe<
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
-	}
-
-	@Override
-	public IDrawable getIcon() {
-		return icon;
-	}
-
-	@Override
-	public void setIngredients(IMagicRecipe<?> r, IIngredients list) {
-		Enchantment ench = (Enchantment) r.getProduct().item;
+	public void setRecipe(IRecipeLayoutBuilder builder, IMagicRecipe<?> recipe, IFocusGroup focuses) {
+		Enchantment ench = (Enchantment) recipe.getProduct().item;
 		List<ItemStack> l0 = new ArrayList<>();
 		List<ItemStack> l1 = new ArrayList<>();
 		List<ItemStack> l2 = new ArrayList<>();
-		List<ElementIngredient> elem = ElementIngredient.collect(Arrays.stream(r.getElements()).map(ElementIngredient::new));
 		for (int i = 1; i <= ench.getMaxLevel(); i++) {
 			l0.add(EnchantedBookItem.createForEnchantment(new EnchantmentInstance(ench, i)));
 			l1.add(new ItemStack(Items.GOLD_NUGGET, i));
 			l2.add(new ItemStack(LightlandItems.ENC_GOLD_NUGGET.get(), i));
 		}
-		List<List<ElementIngredient>> l3 = elem.stream().map(e -> {
+		builder.addSlot(RecipeIngredientRole.INPUT, 1, 1).addIngredients(VanillaTypes.ITEM_STACK, l0);
+		builder.addSlot(RecipeIngredientRole.INPUT, 19, 1).addIngredients(VanillaTypes.ITEM_STACK, l1);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 69, 1).addIngredients(VanillaTypes.ITEM_STACK, l2);
+		IIngredientType<ElementIngredient> type = LightLandJeiPlugin.INSTANCE.ELEM_TYPE;
+
+		int ind = 1;
+		Map<MagicElement, Integer> map = new HashMap<>();
+		for (MagicElement me : recipe.getElements()) {
+			map.put(me, map.getOrDefault(me, 0) + 1);
+		}
+		for (Map.Entry<MagicElement, Integer> entry : map.entrySet()) {
 			List<ElementIngredient> ans = new ArrayList<>();
 			for (int i = 1; i <= ench.getMaxLevel(); i++)
-				ans.add(new ElementIngredient(e.elem, e.count * i));
-			return ans;
-		}).collect(Collectors.toList());
-		list.setInputLists(VanillaTypes.ITEM, Lists.newArrayList(l0, l1));
-		list.setOutputLists(VanillaTypes.ITEM, Collections.singletonList(l2));
-		list.setOutputLists(LightLandJeiPlugin.INSTANCE.ELEM_TYPE, l3);
-	}
-
-	@Override
-	public void setRecipe(IRecipeLayout layout, IMagicRecipe<?> r, IIngredients list) {
-		set(layout.getItemStacks(), list.getInputs(VanillaTypes.ITEM).get(0), 0, true, 0, 0);
-		set(layout.getItemStacks(), list.getInputs(VanillaTypes.ITEM).get(1), 1, true, 18, 0);
-		set(layout.getItemStacks(), list.getOutputs(VanillaTypes.ITEM).get(0), 2, false, 68, 0);
-		int ind = 3;
-		IIngredientType<ElementIngredient> type = LightLandJeiPlugin.INSTANCE.ELEM_TYPE;
-		for (List<ElementIngredient> e : list.getOutputs(type)) {
-			set(layout.getIngredientsGroup(type), e, ind, false, 69 + ((ind - 2) * 18), 1);
+				ans.add(new ElementIngredient(entry.getKey(), entry.getValue() * i));
+			builder.addSlot(RecipeIngredientRole.OUTPUT, 69 + 18 * ind, 1)
+					.addIngredients(type, ans);
 			ind++;
 		}
-	}
-
-	private static <T> void set(IGuiIngredientGroup<T> group, List<T> t, int ind, boolean bool, int x, int y) {
-		group.init(ind, bool, x, y);
-		group.set(ind, t);
 	}
 
 }

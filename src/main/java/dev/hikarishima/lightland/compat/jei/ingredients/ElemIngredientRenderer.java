@@ -4,9 +4,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
 import dev.hikarishima.lightland.content.magic.gui.AbstractHexGui;
 import dev.hikarishima.lightland.init.data.LangData;
-import mezz.jei.api.MethodsReturnNonnullByDefault;
 import mezz.jei.api.ingredients.IIngredientRenderer;
 import net.minecraft.ChatFormatting;
+import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.TooltipFlag;
@@ -21,9 +21,9 @@ import java.util.List;
 public class ElemIngredientRenderer implements IIngredientRenderer<ElementIngredient> {
 
 	@Override
-	public void render(PoseStack matrixStack, int x, int y, @Nullable ElementIngredient elem) {
+	public void render(PoseStack matrixStack, @Nullable ElementIngredient elem) {
 		if (elem != null)
-			AbstractHexGui.drawElement(matrixStack, x + 8, y + 8, elem.elem, elem.count > 1 ? "" + elem.count : "");
+			AbstractHexGui.drawElement(matrixStack, 8, 8, elem.elem, elem.count > 1 ? "" + elem.count : "");
 	}
 
 	@Override

@@ -69,10 +69,10 @@ public class CuisineJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_PAN), PAN.getUid());
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_JAR), JAR.getUid());
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_BASIN), BASIN.getUid());
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_MILL), MILL.getUid());
+		registration.addRecipes(PAN.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_PAN));
+		registration.addRecipes(JAR.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_JAR));
+		registration.addRecipes(BASIN.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_BASIN));
+		registration.addRecipes(MILL.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_MILL));
 	}
 
 	@Override
@@ -81,10 +81,10 @@ public class CuisineJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(CuisineBlocks.PAN.get().asItem().getDefaultInstance(), PAN.getUid());
-		registration.addRecipeCatalyst(CuisineBlocks.JAR.get().asItem().getDefaultInstance(), JAR.getUid());
-		registration.addRecipeCatalyst(CuisineBlocks.BASIN.get().asItem().getDefaultInstance(), BASIN.getUid());
-		registration.addRecipeCatalyst(CuisineBlocks.MILL.get().asItem().getDefaultInstance(), MILL.getUid());
+		registration.addRecipeCatalyst(CuisineBlocks.PAN.get().asItem().getDefaultInstance(), PAN.getRecipeType());
+		registration.addRecipeCatalyst(CuisineBlocks.JAR.get().asItem().getDefaultInstance(), JAR.getRecipeType());
+		registration.addRecipeCatalyst(CuisineBlocks.BASIN.get().asItem().getDefaultInstance(), BASIN.getRecipeType());
+		registration.addRecipeCatalyst(CuisineBlocks.MILL.get().asItem().getDefaultInstance(), MILL.getRecipeType());
 	}
 
 	@Override

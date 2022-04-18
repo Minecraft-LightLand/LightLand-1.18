@@ -11,12 +11,10 @@ import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
-import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.IGuiIngredientGroup;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.category.IRecipeCategory;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -26,43 +24,25 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualRecipe<?>> {
-
-	private static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
-
-	private final ResourceLocation id;
-	private IDrawable background, icon;
+public class MagicCraftRecipeCategory extends BaseRecipeCategory<AbstractRitualRecipe<?>, MagicCraftRecipeCategory> {
 
 	public MagicCraftRecipeCategory() {
-		this.id = new ResourceLocation(LightLand.MODID, "ritual");
+		super(new ResourceLocation(LightLand.MODID, "ritual"), cast(AbstractRitualRecipe.class));
 	}
 
 	public MagicCraftRecipeCategory init(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BG, 0, 36, 145, 54);
-		icon = guiHelper.createDrawableIngredient(LightlandBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance());
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, LightlandBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance());
 		return this;
-	}
-
-	@Override
-	public ResourceLocation getUid() {
-		return id;
-	}
-
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	@Override
-	public Class getRecipeClass() {
-		return AbstractRitualRecipe.class;
 	}
 
 	@Override
@@ -71,72 +51,37 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualR
 	}
 
 	@Override
-	public IDrawable getBackground() {
-		return background;
-	}
-
-	@Override
-	public IDrawable getIcon() {
-		return icon;
-	}
-
-	@Override
-	public void setIngredients(AbstractRitualRecipe<?> sl, IIngredients list) {
-		List<Ingredient> input = new ArrayList<>();
-		input.add(Ingredient.of(sl.core.input));
-		for (AbstractRitualRecipe.Entry ent : sl.side) {
-			if (!ent.input.isEmpty()) {
-				input.add(Ingredient.of(ent.input));
-			}
-		}
-		input.add(Ingredient.of(LightlandItems.MAGIC_WAND.get().getDefaultInstance()));
-		list.setInputIngredients(input);
-		List<ItemStack> output = new ArrayList<>();
-		output.add(sl.core.output);
-		for (AbstractRitualRecipe.Entry ent : sl.side) {
-			if (!ent.output.isEmpty()) {
-				output.add(ent.output);
-			}
-		}
-		list.setOutputs(VanillaTypes.ITEM, output);
-	}
-
-	@Override
-	public void setRecipe(IRecipeLayout layout, AbstractRitualRecipe<?> sl, IIngredients list) {
-		List<AbstractRitualRecipe.Entry> entry = new ArrayList<>(sl.side);
+	public void setRecipe(IRecipeLayoutBuilder builder, AbstractRitualRecipe<?> recipe, IFocusGroup focuses) {
+		List<AbstractRitualRecipe.Entry> entry = new ArrayList<>(recipe.side);
 		while (entry.size() < 8) {
 			entry.add(new AbstractRitualRecipe.Entry());
 		}
-		entry.add(4, sl.core);
-
-		int in = 0;
+		entry.add(4, recipe.core);
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				ItemStack item = specialProcess(sl, entry.get(i * 3 + j).input, i * 3 + j == 4);
-				if (!item.isEmpty())
-					set(layout.getItemStacks(),
-							Collections.singletonList(item),
-							in++, true, j * 18, i * 18);
+				ItemStack item = specialProcess(recipe, entry.get(i * 3 + j).input, i * 3 + j == 4);
+				if (!item.isEmpty()) {
+					builder.addSlot(RecipeIngredientRole.INPUT, j * 18 + 1, i * 18 + 1)
+							.addIngredient(VanillaTypes.ITEM_STACK, item);
+				}
 			}
 		}
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				ItemStack item = specialProcess(sl, entry.get(i * 3 + j).output, i * 3 + j == 4);
-				if (!item.isEmpty())
-					set(layout.getItemStacks(),
-							Collections.singletonList(item),
-							in++, false, 90 + j * 18, i * 18);
+				ItemStack item = specialProcess(recipe, entry.get(i * 3 + j).output, i * 3 + j == 4);
+				if (!item.isEmpty()) {
+					builder.addSlot(RecipeIngredientRole.OUTPUT, 90 + j * 18 + 1, i * 18 + 1)
+							.addIngredient(VanillaTypes.ITEM_STACK, item);
+				}
 			}
 		}
 		MagicWand wand = LightlandItems.MAGIC_WAND.get();
 		ItemStack wand_stack = wand.getDefaultInstance();
-
-        IMagicRecipe<?> magic = sl.getMagic() == null ? null : CapProxy.getHandler().magicHolder.getRecipe(sl.getMagic());
-        if (magic != null) {
-            wand.setMagic(magic, wand_stack);
-        }
-
-		set(layout.getItemStacks(), Collections.singletonList(wand_stack), in, true, 63, 0);
+		IMagicRecipe<?> magic = recipe.getMagic() == null ? null : CapProxy.getHandler().magicHolder.getRecipe(recipe.getMagic());
+		if (magic != null) {
+			wand.setMagic(magic, wand_stack);
+		}
+		builder.addSlot(RecipeIngredientRole.CATALYST, 64, 1).addIngredient(VanillaTypes.ITEM_STACK, wand_stack);
 	}
 
 	private static ItemStack specialProcess(AbstractRitualRecipe<?> sl, ItemStack stack, boolean isCore) {
@@ -164,11 +109,6 @@ public class MagicCraftRecipeCategory implements IRecipeCategory<AbstractRitualR
 			}
 		}
 		return stack;
-	}
-
-	private static <T> void set(IGuiIngredientGroup<T> group, List<T> t, int ind, boolean bool, int x, int y) {
-		group.init(ind, bool, x, y);
-		group.set(ind, t);
 	}
 
 }

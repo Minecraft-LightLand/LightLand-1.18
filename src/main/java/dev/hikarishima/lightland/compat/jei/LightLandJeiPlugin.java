@@ -27,6 +27,7 @@ import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @JeiPlugin
@@ -84,8 +85,8 @@ public class LightLandJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(IMagicRecipe.getMap(Proxy.getWorld(), MagicRegistry.MPT_ENCH.get()).values(), DISENCHANT.getUid());
-		registration.addRecipes(Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_RITUAL), MAGIC_CRAFT.getUid());
+		registration.addRecipes(DISENCHANT.getRecipeType(), List.copyOf(IMagicRecipe.getMap(Proxy.getWorld(), MagicRegistry.MPT_ENCH.get()).values()));
+		registration.addRecipes(MAGIC_CRAFT.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_RITUAL));
 	}
 
 	@Override
@@ -94,8 +95,8 @@ public class LightLandJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(LightlandItems.DISENC_BOOK.get().getDefaultInstance(), DISENCHANT.getUid());
-		registration.addRecipeCatalyst(LightlandBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance(), MAGIC_CRAFT.getUid());
+		registration.addRecipeCatalyst(LightlandItems.DISENC_BOOK.get().getDefaultInstance(), DISENCHANT.getRecipeType());
+		registration.addRecipeCatalyst(LightlandBlocks.B_RITUAL_CORE.get().asItem().getDefaultInstance(), MAGIC_CRAFT.getRecipeType());
 	}
 
 	@Override
