@@ -100,19 +100,26 @@ public class LLOverlay implements IIngameOverlay {
 			boolean frozen = entity.isFullyFrozen();
 			if (wither) {
 				renderer.drawLeftRight("hp_wither_strip", health, healthMax);
-				renderer.draw("hp_wither");
 			} else if (poison) {
 				renderer.drawLeftRight("hp_poison_strip", health, healthMax);
-				renderer.draw("hp_poison");
 			} else if (frozen) {
 				renderer.drawLeftRight("hp_freezing_strip", health, healthMax);
-				renderer.draw("hp_freezing");
-			} else if (absorb > 0.1) {
-				renderer.drawLeftRight("hp_strip", health, healthMax);
-				renderer.drawLeftRight("hp_gold_strip", absorb, healthMax);
-				renderer.draw("hp_gold");
 			} else {
 				renderer.drawLeftRight("hp_strip", health, healthMax);
+			}
+			if (absorb > 0.1) {
+				renderer.drawLeftRight("hp_gold_strip", absorb, healthMax);
+			}
+
+			if (wither) {
+				renderer.draw("hp_wither");
+			} else if (poison) {
+				renderer.draw("hp_poison");
+			} else if (frozen) {
+				renderer.draw("hp_freezing");
+			} else if (absorb > 0.1) {
+				renderer.draw("hp_gold");
+			} else {
 				renderer.draw("hp");
 			}
 		}
@@ -136,18 +143,19 @@ public class LLOverlay implements IIngameOverlay {
 			FoodData stats = player.getFoodData();
 			int level = stats.getFoodLevel();
 			float sat = stats.getSaturationLevel();
-			renderer.drawRightLeft("food_strip", level, 20);
-			renderer.drawRightLeft("saturation_strip", sat, 20);
+			float ext = stats.getExhaustionLevel();
+
+			if (player.hasEffect(MobEffects.HUNGER)) {
+				renderer.drawRightLeft("hunger_strip", level, 20);
+				renderer.draw("hunger");
+			} else {
+				renderer.drawRightLeft("food_strip", level, 20);
+				renderer.drawRightLeft("saturation_strip", sat, 20);
+				renderer.draw("food");
+				renderer.drawRightLeft("exhaustion", ext + 0.4, 4.4);
+			}
 		}
 
-		if (player.hasEffect(MobEffects.HUNGER))
-			renderer.draw("hunger");
-		else {
-			FoodData stats = player.getFoodData();
-			renderer.draw("food");
-			float ext = stats.getExhaustionLevel();
-			renderer.drawRightLeft("exhaustion", ext + 0.4, 4.4);
-		}
 	}
 
 	private void renderExperience(OverlayManager.ScreenRenderer renderer) {
@@ -186,7 +194,7 @@ public class LLOverlay implements IIngameOverlay {
 		renderer.draw("armor_tag");
 		OverlayManager.Rect armor = renderer.get("armor_tag");
 		double val = renderer.localPlayer.getAttribute(Attributes.ARMOR).getValue();
-		SkillOverlay.renderText(renderer.gui, renderer.stack, Integer.toString((int) Math.floor(val)), armor.sx + armor.w / 2, armor.sy + armor.h / 2);
+		renderText(renderer, armor, Integer.toString((int) Math.floor(val)));
 		renderer.start();
 
 		if (!LLPlayerData.isProper(renderer.localPlayer)) return;
@@ -198,8 +206,13 @@ public class LLOverlay implements IIngameOverlay {
 		renderer.draw("lv");
 		renderer.draw("mid_list");
 		OverlayManager.Rect lv = renderer.get("lv");
-		SkillOverlay.renderText(renderer.gui, renderer.stack, Integer.toString(data.abilityPoints.level), lv.sx + lv.w / 2, lv.sy + lv.h / 2);
+		renderText(renderer, lv, Integer.toString(data.abilityPoints.level));
 		renderer.start();
+	}
+
+	private static void renderText(OverlayManager.ScreenRenderer renderer, OverlayManager.Rect rect, String str) {
+		SkillOverlay.renderText(renderer.gui, renderer.stack, str, rect.sx + (int) Math.ceil((renderer.gui.screenWidth + rect.w) / 2f), renderer.gui.screenHeight + rect.sy + rect.h / 2);
+
 	}
 
 }
