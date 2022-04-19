@@ -41,5 +41,5 @@ description='''
 [[dependencies.lightland]]
     modId="jei"
     mandatory=true
-    versionRange="[10.0,)"
+    versionRange="[9.7,)"
     side="CLIENT"

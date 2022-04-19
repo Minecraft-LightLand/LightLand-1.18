@@ -16,12 +16,11 @@ import java.util.function.Consumer;
 
 public class PanRecipeBuilder extends BaseRecipeBuilder<PanRecipeBuilder, PanRecipe, PanRecipe, PanBlockEntity.RecipeContainer> {
 
-	public PanRecipeBuilder(ItemLike result, int count, int time, Item interrupt) {
+	public PanRecipeBuilder(ItemLike result, int count, int time) {
 		super(CuisineRecipe.RS_PAN.get());
 		recipe.item_ingredients = new ArrayList<>();
 		recipe.fluid_ingredients = new ArrayList<>();
 		recipe.result = new ItemStack(result.asItem(), count);
-		recipe.interrupt = new ItemStack(interrupt);
 		recipe.time = time;
 	}
 

@@ -1,12 +1,12 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.hikarishima.lightland.init.data.AllTags;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
 import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.one.LightBlockMethod;
+import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.core.BlockPos;
@@ -17,6 +17,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -89,7 +90,7 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 		if (pl.isShiftKeyDown()) {
 			return InteractionResult.PASS;
 		}
-		if (!open || stack.isEmpty() && te.outputInventory.isEmpty()) {
+		if (!open || stack.isEmpty() && te.result.isEmpty()) {
 			if (!w.isClientSide()) {
 				BlockState toggle_cap = bs.setValue(BlockStateProperties.OPEN, !open);
 				if (!open && cooking) {
@@ -105,12 +106,21 @@ public class PanBlock implements CreateBlockStateBlockMethod, DefaultStateBlockM
 			}
 			return InteractionResult.SUCCESS;
 		}
-		if (!te.outputInventory.isEmpty()) {
-			if (!w.isClientSide()) {
-				int count = te.outputInventory.getItem(0).getCount();
-				pl.getInventory().placeItemBackInInventory(te.outputInventory.removeItem(0, count));
+		if (!te.result.isEmpty()) {
+			Ingredient container = CuisineUtil.getContainer(te.result);
+			if (container.isEmpty() || container.test(stack)) {
+				if (!w.isClientSide()) {
+					if (!container.isEmpty())
+						stack.shrink(1);
+					pl.getInventory().placeItemBackInInventory(te.result.split(1));
+					if (te.result.isEmpty()) {
+						te.result = ItemStack.EMPTY;
+					}
+					te.notifyTile(null);
+				}
+				return InteractionResult.SUCCESS;
 			}
-			return InteractionResult.SUCCESS;
+			return InteractionResult.CONSUME;
 		}
 		if (!stack.isEmpty()) {
 			LazyOptional<IFluidHandlerItem> opt = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);

@@ -2,16 +2,10 @@
   "fluid_ingredients": [
     {
       "fluid": "minecraft:water",
-      "amount": 2
+      "amount": 100
     }
   ],
-  "interrupt": {
-    "item": "minecraft:bowl"
-  },
   "item_ingredients": [
-    {
-      "item": "minecraft:bowl"
-    },
     {
       "item": "minecraft:rabbit"
     },

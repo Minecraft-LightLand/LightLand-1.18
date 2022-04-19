@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.hikarishima.lightland.init.data.AllTags;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
@@ -22,7 +21,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -31,6 +29,7 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +60,6 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			.setPredicate(e -> canAccess() && CuisineTags.AllItemTags.CAN_COOK.matches(e)).add(this);
 
 	@SerialClass.SerialField(toClient = true)
-	protected final BaseContainer outputInventory = new BaseContainer(1).setPredicate(e -> false).add(this);
-	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID).setClickMax(50)
 			.setPredicate(e -> canAccess() && CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid()))
 			.setExtract(() -> false).add(this);
@@ -75,11 +72,11 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	@SerialClass.SerialField(toClient = true)
 	public int cooking_max = 0, cooking = 0;
 	@SerialClass.SerialField(toClient = true)
-	public ItemStack result = ItemStack.EMPTY, interrupt = ItemStack.EMPTY;
+	public ItemStack result = ItemStack.EMPTY;
 
 	public PanBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
-		itemCapability = LazyOptional.of(() -> new CombinedInvWrapper(new InvWrapper(inputInventory), new InvWrapper(outputInventory)));
+		itemCapability = LazyOptional.of(() -> new InvWrapper(inputInventory));
 		fluidCapability = LazyOptional.of(() -> fluids);
 	}
 
@@ -123,8 +120,8 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 		return manager;
 	}
 
-	@Nullable
 	@Override
+	@Nonnull
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
 		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return itemCapability.cast();
@@ -135,7 +132,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	@Override
 	public List<Container> getContainers() {
-		return List.of(inputInventory, outputInventory);
+		return List.of(inputInventory);
 	}
 
 	@Override
@@ -150,24 +147,19 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	public void stopCooking() {
 		if (cooking_max > 0) {
-			if (cooking == 0) {
-				outputInventory.setItem(0, result);
-			} else {
-				outputInventory.setItem(0, interrupt);
+			if (cooking > 0) {
+				result = ItemStack.EMPTY;
 			}
 			cooking = 0;
 			cooking_max = 0;
-			result = ItemStack.EMPTY;
-			interrupt = ItemStack.EMPTY;
 		}
 		notifyTile(null);
 	}
 
 	public void dumpInventory() {
 		if (level == null) return;
-		if (!inputInventory.isEmpty() || !outputInventory.isEmpty()) {
+		if (!inputInventory.isEmpty()) {
 			Containers.dropContents(level, this.getBlockPos().above(), inputInventory);
-			Containers.dropContents(level, this.getBlockPos().above(), outputInventory);
 		} else
 			fluids.clear();
 		notifyTile(null);
@@ -175,7 +167,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	public boolean startCooking() {
 		if (level == null) return false;
-		boolean ans = outputInventory.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
+		boolean ans = result.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
 		if (!ans) return false;
 		Optional<PanRecipe> r = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_PAN, inputInventory, level);
 		inputInventory.clear();
@@ -184,13 +176,11 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			cooking_max = 100;
 			cooking = cooking_max;
 			result = ItemStack.EMPTY;
-			interrupt = ItemStack.EMPTY;
 		} else {
 			PanRecipe recipe = r.get();
 			cooking_max = recipe.time;
 			cooking = cooking_max;
 			result = recipe.result.copy();
-			interrupt = recipe.interrupt.copy();
 		}
 		notifyTile(null);
 		return true;

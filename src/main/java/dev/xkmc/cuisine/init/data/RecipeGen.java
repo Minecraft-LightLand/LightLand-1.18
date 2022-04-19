@@ -41,13 +41,22 @@ public class RecipeGen {
 			}
 		}
 		{
-			unlock(pvd, new PanRecipeBuilder(Items.RABBIT_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.RABBIT_STEW)
-					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL).requires(Items.RABBIT)
+			unlock(pvd, new PanRecipeBuilder(Items.RABBIT_STEW, 1, 100)::unlockedBy, Items.RABBIT_STEW)
+					.requires(new FluidStack(Fluids.WATER, 100)).requires(Items.RABBIT)
 					.requires(Items.POTATO).requires(Items.CARROT).requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
 					.save(pvd);
-			unlock(pvd, new PanRecipeBuilder(Items.MUSHROOM_STEW, 1, 100, Items.BOWL)::unlockedBy, Items.MUSHROOM_STEW)
-					.requires(new FluidStack(Fluids.WATER, 2)).requires(Items.BOWL)
+			unlock(pvd, new PanRecipeBuilder(Items.MUSHROOM_STEW, 1, 100)::unlockedBy, Items.MUSHROOM_STEW)
+					.requires(new FluidStack(Fluids.WATER, 100))
 					.requires(Items.RED_MUSHROOM).requires(Items.BROWN_MUSHROOM)
+					.save(pvd);
+
+			unlock(pvd, new PanRecipeBuilder(Items.HONEY_BOTTLE, 3, 100)::unlockedBy, Items.HONEYCOMB)
+					.requires(new FluidStack(CuisineFluids.WATER.fluid.get(), 50))
+					.requires(Items.BEEF)
+					.save(pvd);
+			unlock(pvd, new PanRecipeBuilder(Items.COOKED_PORKCHOP, 3, 100)::unlockedBy, Items.PORKCHOP)
+					.requires(new FluidStack(CuisineFluids.EDIBLE_OIL.fluid.get(), 50))
+					.requires(Items.PORKCHOP)
 					.save(pvd);
 		}
 		{
@@ -89,7 +98,6 @@ public class RecipeGen {
 	private static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, InventoryChangeTrigger.TriggerInstance, T> func, Item item) {
 		return func.apply("has_" + pvd.safeName(item), DataIngredient.items(item).getCritereon(pvd));
 	}
-
 
 	public static <T extends ItemLike & IForgeRegistryEntry<?>> void boat(RegistrateRecipeProvider pvd, DataIngredient source, Supplier<? extends T> result) {
 		ShapedRecipeBuilder.shaped(result.get())

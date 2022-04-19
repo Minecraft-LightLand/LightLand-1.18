@@ -21,7 +21,7 @@ public class PanRenderer extends GeoBlockRenderer<PanBlockEntity> {
 	public void render(BlockEntity tile, float ptick, PoseStack pose, MultiBufferSource buffer, int light, int overlay) {
 		super.render(tile, ptick, pose, buffer, light, overlay);
 		PanBlockEntity te = (PanBlockEntity) tile;
-		ItemStack result = te.outputInventory.getItem(0);
+		ItemStack result = te.result;
 		if (tile.getLevel() != null && !result.isEmpty() && te.getBlockState().getValue(BlockStateProperties.OPEN)) {
 			RitualRenderer.renderItemAbove(result, 0.7, tile.getLevel(), ptick, pose, buffer, light, overlay);
 		}

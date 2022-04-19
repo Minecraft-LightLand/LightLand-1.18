@@ -1208,11 +1208,15 @@ a504c09b54af3e845b10694bbb34356d013ac6fb data/lightland/tags/items/staple.json
 6ab9294a7bc75d2cf479414b5e70ac30e7e3a5d3 data/lightland/tags/items/sweet.json
 e4ef681fb14384b2816a39ef2892ca257419ef7b data/lightland/tags/items/veges.json
 08ca75f5aa9a4bcdcd93f7f70ae77a67deb12007 data/minecraft/advancements/recipes/jar/jar/air.json
+73ec52fd92b64d6de7b52c32c0d56f8240673038 data/minecraft/advancements/recipes/pan/pan/cooked_porkchop.json
+e2d6f00a9eb6c7be4ae026f624cf6b929681f150 data/minecraft/advancements/recipes/pan/pan/honey_bottle.json
 4e3c6edd160b537d79c8492f67e54380b3014269 data/minecraft/advancements/recipes/pan/pan/mushroom_stew.json
 b17a5ca638fdab8e6f5e718d13ce05e9ad2896cd data/minecraft/advancements/recipes/pan/pan/rabbit_stew.json
 11a196b30f9defc5a5c41bca7afcdb3ab5a6c3ae data/minecraft/recipes/jar/air.json
-d68e0c36f3ba5bbcbc0fed140e61c95349a9a859 data/minecraft/recipes/pan/mushroom_stew.json
-c3320d8950082fe698c0204e06c5c52d83b461c6 data/minecraft/recipes/pan/rabbit_stew.json
+a7c5c7d0a87f4a753e2db21d6b8007a0b4594b81 data/minecraft/recipes/pan/cooked_porkchop.json
+b8d15923546723d8cdf1504bf43f97065917bd79 data/minecraft/recipes/pan/honey_bottle.json
+d42cf7ba34718959f8252120145ab4fcf1e3a0d0 data/minecraft/recipes/pan/mushroom_stew.json
+389a742062ea89449e021e3201ddbb9c415b01a1 data/minecraft/recipes/pan/rabbit_stew.json
 d241020a2a2ada6bbc9577541ff3a3c03886547b data/minecraft/tags/blocks/buttons.json
 7630a37228ff19c521fe3998c010a94926d70c44 data/minecraft/tags/blocks/climbable.json
 05c47d8eecdd4ddeb58edf8a2e90dd27c7ab9f7e data/minecraft/tags/blocks/doors.json

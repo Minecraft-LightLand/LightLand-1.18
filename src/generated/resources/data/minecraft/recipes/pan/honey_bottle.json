@@ -2,19 +2,17 @@
   "fluid_ingredients": [
     {
       "fluid": "minecraft:water",
-      "amount": 100
+      "amount": 50
     }
   ],
   "item_ingredients": [
     {
-      "item": "minecraft:red_mushroom"
-    },
-    {
-      "item": "minecraft:brown_mushroom"
+      "item": "minecraft:beef"
     }
   ],
   "result": {
-    "item": "minecraft:mushroom_stew"
+    "item": "minecraft:honey_bottle",
+    "count": 3
   },
   "time": 100,
   "type": "lightland:pan"

@@ -23,8 +23,6 @@ public class PanRecipe extends BaseRecipe<PanRecipe, PanRecipe, PanBlockEntity.R
 	@SerialClass.SerialField
 	public ItemStack result;
 	@SerialClass.SerialField
-	public ItemStack interrupt;
-	@SerialClass.SerialField
 	public int time;
 
 	public PanRecipe(ResourceLocation id) {
