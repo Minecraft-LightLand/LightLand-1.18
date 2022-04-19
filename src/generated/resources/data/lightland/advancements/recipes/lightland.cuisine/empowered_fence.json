@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:empowered_fence"
+    ]
+  },
+  "criteria": {
+    "has_empowered_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:empowered_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:empowered_fence"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_empowered_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "lightland:fruittree_planks"
+    }
+  },
+  "result": {
+    "item": "lightland:fruittree_pressure_plate"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "item": "lightland:empowered_log"
+    }
+  ],
+  "result": {
+    "item": "lightland:empowered_planks",
+    "count": 4
+  }
+}

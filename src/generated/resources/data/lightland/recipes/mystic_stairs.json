@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "X  ",
+    "XX ",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "lightland:mystic_planks"
+    }
+  },
+  "result": {
+    "item": "lightland:mystic_stairs",
+    "count": 4
+  }
+}

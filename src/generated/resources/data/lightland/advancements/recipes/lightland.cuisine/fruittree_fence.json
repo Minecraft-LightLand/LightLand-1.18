@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:fruittree_fence"
+    ]
+  },
+  "criteria": {
+    "has_fruittree_planks": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lightland:fruittree_planks"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:fruittree_fence"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_fruittree_planks",
+      "has_the_recipe"
+    ]
+  ]
+}

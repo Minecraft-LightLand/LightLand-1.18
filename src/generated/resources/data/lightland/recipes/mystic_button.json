@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "lightland:mystic_planks"
+    }
+  ],
+  "result": {
+    "item": "lightland:mystic_button"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "item": "lightland:fruittree_log"
+    }
+  ],
+  "result": {
+    "item": "lightland:fruittree_planks",
+    "count": 4
+  }
+}
