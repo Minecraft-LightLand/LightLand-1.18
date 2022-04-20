@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.Random;
 
-public class TimeProcessing<T extends CuisineTile<T> & TimeTile> implements AnimateTickBlockMethod {
+public class TimeProcessing implements AnimateTickBlockMethod {
 
 	@OnlyIn(Dist.CLIENT)
 	@Override

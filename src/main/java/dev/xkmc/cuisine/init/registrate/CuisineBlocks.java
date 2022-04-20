@@ -9,6 +9,9 @@ import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlock;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;
 import dev.xkmc.cuisine.content.tools.basin.BasinRenderer;
+import dev.xkmc.cuisine.content.tools.firepit.FirePitBlock;
+import dev.xkmc.cuisine.content.tools.firepit.FirePitStickBlockEntity;
+import dev.xkmc.cuisine.content.tools.firepit.FirePitWokBlockEntity;
 import dev.xkmc.cuisine.content.tools.jar.JarBlock;
 import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.mill.MillBlock;
@@ -50,6 +53,8 @@ public class CuisineBlocks {
 	public static final BlockEntityEntry<BasinBlockEntity> TE_BASIN;
 	public static final BlockEntityEntry<MillBlockEntity> TE_MILL;
 	public static final BlockEntityEntry<MortarBlockEntity> TE_MORTAR;
+	public static final BlockEntityEntry<FirePitStickBlockEntity> TE_STICK;
+	public static final BlockEntityEntry<FirePitWokBlockEntity> TE_WOK;
 
 	static {
 		CuisineCropType.register();
@@ -113,30 +118,32 @@ public class CuisineBlocks {
 		// fire pit
 		{
 			FIRE_PIT = REGISTRATE.block("fire_pit", p -> DelegateBlock.newBaseBlock(prop,
-							CuisineUtil.FIRE)).blockstate((ctx, pvd) ->
+							CuisineUtil.FIRE, FirePitBlock.PUT, FirePitBlock.BURN)).blockstate((ctx, pvd) ->
 							pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 									new ResourceLocation(Cuisine.MODID, "block/fire_pit"))))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
 			FIRE_PIT_STICK = REGISTRATE.block("fire_pit_with_sticks", p -> DelegateBlock.newBaseBlock(prop,
-							CuisineUtil.FIRE))
+							CuisineUtil.FIRE, FirePitBlock.BURN, FirePitBlock.STICK, CuisineUtil.DUMP, CuisineUtil.ADD))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_sticks"))))
 					.loot((table, block) -> table.add(block, LootTableTemplate.selfOrOther(block, FIRE_PIT.get(), Items.STICK, 3)))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
-			WOK = REGISTRATE.block("wok", p -> DelegateBlock.newBaseBlock(prop,
-							CuisineUtil.FIRE))
+			WOK = REGISTRATE.block("wok", p -> DelegateBlock.newBaseBlock(prop))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/wok"))))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
 			FIRE_PIT_WOK = REGISTRATE.block("fire_pit_with_wok", p -> DelegateBlock.newBaseBlock(prop,
-							CuisineUtil.FIRE))
+							CuisineUtil.FIRE, FirePitBlock.BURN, FirePitBlock.WOK, CuisineUtil.DUMP, CuisineUtil.ADD))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_wok"))))
 					.loot((table, block) -> table.add(block, LootTableTemplate.selfOrOther(block, FIRE_PIT.get(), WOK.get().asItem(), 1)))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
+
+			TE_STICK = REGISTRATE.blockEntity("fire_pit_with_stick", FirePitStickBlockEntity::new).validBlock(FIRE_PIT_STICK).register();
+			TE_WOK = REGISTRATE.blockEntity("fire_pit_with_wok", FirePitWokBlockEntity::new).validBlock(FIRE_PIT_WOK).register();
 
 		}
 	}

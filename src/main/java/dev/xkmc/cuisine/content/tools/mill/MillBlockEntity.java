@@ -41,15 +41,14 @@ public class MillBlockEntity extends CuisineTile<MillBlockEntity> implements Tic
 
 	private final AnimationFactory manager = new AnimationFactory(this);
 
+	protected int rotate_time;
+
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID).add(this);
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank water = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> e.getFluid() == Fluids.WATER).add(this);
 
-	protected int rotate_time;
-
-	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
 
 	@SerialClass.SerialField(toClient = true)
@@ -57,7 +56,6 @@ public class MillBlockEntity extends CuisineTile<MillBlockEntity> implements Tic
 
 	public MillBlockEntity(BlockEntityType<MillBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 1).add(t));
-		itemCapability = LazyOptional.of(() -> new InvWrapper(inventory));
 		fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper()
 				.add(CombinedTankWrapper.Type.INSERT, water)
 				.add(CombinedTankWrapper.Type.EXTRACT, fluids)
@@ -80,11 +78,6 @@ public class MillBlockEntity extends CuisineTile<MillBlockEntity> implements Tic
 		stepHandler.resetProgress();
 		this.setChanged();
 		this.sync();
-	}
-
-	@Override
-	public List<Container> getContainers() {
-		return List.of(inventory);
 	}
 
 	@Override
@@ -115,11 +108,7 @@ public class MillBlockEntity extends CuisineTile<MillBlockEntity> implements Tic
 
 	@Override
 	public List<TileInfoOverlay.IDrawable> getContents() {
-		List<TileInfoOverlay.IDrawable> list = new ArrayList<>();
-		for (ItemStack stack : inventory.getAsList()) {
-			if (!stack.isEmpty())
-				list.add(new TileInfoOverlay.ItemDrawable(stack));
-		}
+		List<TileInfoOverlay.IDrawable> list = super.getContents();
 		for (FluidStack stack : water.getAsList()) {
 			if (!stack.isEmpty())
 				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID, 50));
@@ -134,8 +123,6 @@ public class MillBlockEntity extends CuisineTile<MillBlockEntity> implements Tic
 	@Nonnull
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return itemCapability.cast();
 		if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
 			return fluidCapability.cast();
 		return super.getCapability(cap, side);

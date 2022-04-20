@@ -1,5 +1,6 @@
 package dev.xkmc.cuisine.compat.jei.recipes;
 
+import dev.xkmc.cuisine.content.tools.firepit.FirePitStickRecipe;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanRecipe;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
@@ -18,36 +19,23 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public class PanRecipeCategory extends BaseCuisineRecipeCategory<PanRecipe, PanRecipeCategory> {
+public class FirePitStickRecipeCategory extends BaseCuisineRecipeCategory<FirePitStickRecipe, FirePitStickRecipeCategory> {
 
-	public PanRecipeCategory() {
-		super("pan", CuisineBlocks.PAN, PanRecipe.class, PanBlockEntity.MAX_FLUID, CuisineRecipes.RT_PAN);
+	public FirePitStickRecipeCategory() {
+		super("stick", CuisineBlocks.FIRE_PIT_STICK, FirePitStickRecipe.class, 0, CuisineRecipes.RT_STICK);
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, PanRecipe recipe, IFocusGroup focuses) {
+	public void setRecipe(IRecipeLayoutBuilder builder, FirePitStickRecipe recipe, IFocusGroup focuses) {
 		int index = 0;
-		for (Ingredient ingredient : recipe.item_ingredients) {
+		for (Ingredient ingredient : recipe.ingredients) {
 			builder.addSlot(RecipeIngredientRole.INPUT, index % 6 * 18 + 1, index / 6 * 18 + 1)
 					.addIngredients(ingredient);
-			index++;
-		}
-		for (FluidStack ingredient : recipe.fluid_ingredients) {
-			builder.addSlot(RecipeIngredientRole.INPUT, index % 6 * 18 + 1, index / 6 * 18 + 1)
-					.setFluidRenderer(PanBlockEntity.MAX_FLUID, true, 16, 16)
-					.addIngredient(ForgeTypes.FLUID_STACK, ingredient);
 			index++;
 		}
 		if (!recipe.result.isEmpty())
 			builder.addSlot(RecipeIngredientRole.OUTPUT, 145, 10)
 					.addIngredient(VanillaTypes.ITEM_STACK, recipe.result);
 	}
-
-	public PanRecipeCategory init(IGuiHelper guiHelper) {
-		background = guiHelper.createDrawable(BG, 0, 90, 162, 36);
-		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, icon_item.asStack(1));
-		return this;
-	}
-
 
 }

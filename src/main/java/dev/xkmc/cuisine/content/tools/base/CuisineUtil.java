@@ -22,7 +22,7 @@ public class CuisineUtil {
 	public static final LidClick LID = new LidClick();
 	public static final TakeResultClick<?> TAKE = new TakeResultClick<>();
 	public static final StepClick<?> STEP = new StepClick<>();
-	public static final TimeProcessing<?> TIME = new TimeProcessing<>();
+	public static final TimeProcessing TIME = new TimeProcessing();
 
 	@Nonnull
 	public static Ingredient getContainer(ItemStack result) {

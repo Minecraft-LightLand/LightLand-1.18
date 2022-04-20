@@ -3,6 +3,7 @@ package dev.xkmc.cuisine.compat.jei.recipes;
 import dev.xkmc.cuisine.content.tools.mill.MillBlockEntity;
 import dev.xkmc.cuisine.content.tools.mill.MillRecipe;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.IFocusGroup;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -14,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class MillRecipeCategory extends BaseCuisineRecipeCategory<MillRecipe, MillRecipeCategory> {
 
 	public MillRecipeCategory() {
-		super("mill", CuisineBlocks.MILL, MillRecipe.class, MillBlockEntity.MAX_FLUID);
+		super("mill", CuisineBlocks.MILL, MillRecipe.class, MillBlockEntity.MAX_FLUID, CuisineRecipes.RT_MILL);
 	}
 
 	@Override

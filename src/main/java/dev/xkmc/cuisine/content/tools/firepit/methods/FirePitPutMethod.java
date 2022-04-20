@@ -1,0 +1,32 @@
+package dev.xkmc.cuisine.content.tools.firepit.methods;
+
+import dev.lcy0x1.block.mult.OnClickBlockMethod;
+import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.BlockHitResult;
+
+public class FirePitPutMethod implements OnClickBlockMethod {
+
+	@Override
+	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
+		ItemStack stack = pl.getItemInHand(hand);
+		if (stack.getItem() == CuisineBlocks.WOK.get().asItem()) {
+			if (!level.isClientSide()) {
+				stack.shrink(1);
+				boolean lit = state.getValue(BlockStateProperties.LIT);
+				BlockState next = CuisineBlocks.FIRE_PIT_WOK.getDefaultState().setValue(BlockStateProperties.LIT, lit);
+				level.setBlockAndUpdate(pos, next);
+			}
+			return InteractionResult.SUCCESS;
+		}
+		return InteractionResult.PASS;
+	}
+
+}

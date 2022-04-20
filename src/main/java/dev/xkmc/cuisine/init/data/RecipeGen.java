@@ -114,6 +114,9 @@ public class RecipeGen {
 							SimpleItem.RICE_POWDER.item.asStack(), 5)::unlockedBy,
 					SimpleItem.WHITE_RICE.item.get()).save(pvd);
 		}
+		// stick
+		{
+		}
 	}
 
 	private static <T> T unlock(RegistrateRecipeProvider pvd, BiFunction<String, InventoryChangeTrigger.TriggerInstance, T> func, Item item) {

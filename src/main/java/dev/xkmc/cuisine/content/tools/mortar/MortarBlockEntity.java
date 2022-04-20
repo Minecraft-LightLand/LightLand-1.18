@@ -45,36 +45,7 @@ public class MortarBlockEntity extends CuisineTile<MortarBlockEntity> implements
 		this.sync();
 	}
 
-	@Override
-	public List<Container> getContainers() {
-		return List.of(inventory);
-	}
-
 	public void tick() {
-	}
-
-	public void dumpInventory() {
-		if (level == null) return;
-		Containers.dropContents(level, this.getBlockPos().above(), inventory);
-		notifyTile();
-	}
-
-	@Override
-	public List<TileInfoOverlay.IDrawable> getContents() {
-		List<TileInfoOverlay.IDrawable> list = new ArrayList<>();
-		for (ItemStack stack : inventory.getAsList()) {
-			if (!stack.isEmpty())
-				list.add(new TileInfoOverlay.ItemDrawable(stack));
-		}
-		return list;
-	}
-
-	@Nonnull
-	@Override
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return itemCapability.cast();
-		return super.getCapability(cap, side);
 	}
 
 	@Override

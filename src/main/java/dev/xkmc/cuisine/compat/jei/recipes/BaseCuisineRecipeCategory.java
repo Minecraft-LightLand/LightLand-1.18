@@ -2,35 +2,41 @@ package dev.xkmc.cuisine.compat.jei.recipes;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.compat.jei.recipes.BaseRecipeCategory;
+import dev.lcy0x1.base.Proxy;
+import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
 import dev.xkmc.cuisine.init.Cuisine;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-public abstract class BaseCuisineRecipeCategory<T, C extends BaseCuisineRecipeCategory<T, C>> extends BaseRecipeCategory<T, C> {
+public abstract class BaseCuisineRecipeCategory<T extends CuisineRecipe<T, ?>, C extends BaseCuisineRecipeCategory<T, C>> extends BaseRecipeCategory<T, C> {
 
 	protected final BlockEntry<?> icon_item;
 	private final int max_fluid;
+	private final RecipeType<T> type;
 
-	public BaseCuisineRecipeCategory(String name, BlockEntry<?> icon_item, Class<T> cls, int max_fluid) {
+	public BaseCuisineRecipeCategory(String name, BlockEntry<?> icon_item, Class<T> cls, int max_fluid, RecipeType<T> type) {
 		super(new ResourceLocation(Cuisine.MODID, name), cls);
 		this.icon_item = icon_item;
 		this.max_fluid = max_fluid;
+		this.type = type;
 	}
 
 	public C init(IGuiHelper guiHelper) {
@@ -66,6 +72,14 @@ public abstract class BaseCuisineRecipeCategory<T, C extends BaseCuisineRecipeCa
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 126 + index * 18 + 1, 1)
 				.setFluidRenderer(max_fluid, true, 16, 16)
 				.addIngredient(ForgeTypes.FLUID_STACK, ingredient);
+	}
+
+	public void registerRecipes(IRecipeRegistration registration) {
+		registration.addRecipes(getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(type));
+	}
+
+	public void registerBlocks(IRecipeCatalystRegistration registration) {
+		registration.addRecipeCatalyst(icon_item.get().asItem().getDefaultInstance(), getRecipeType());
 	}
 
 }

@@ -72,5 +72,4 @@ public class TimeHandler<T extends CuisineTile<T> & TimeTile, R extends CuisineR
 		}
 	}
 
-
 }

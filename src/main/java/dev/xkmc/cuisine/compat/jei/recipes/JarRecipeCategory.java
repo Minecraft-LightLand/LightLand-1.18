@@ -3,6 +3,7 @@ package dev.xkmc.cuisine.compat.jei.recipes;
 import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipe;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.recipe.IFocusGroup;
 import net.minecraft.MethodsReturnNonnullByDefault;
@@ -15,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class JarRecipeCategory extends BaseCuisineRecipeCategory<JarRecipe, JarRecipeCategory> {
 
 	public JarRecipeCategory() {
-		super("jar", CuisineBlocks.JAR, JarRecipe.class, JarBlockEntity.MAX_FLUID);
+		super("jar", CuisineBlocks.JAR, JarRecipe.class, JarBlockEntity.MAX_FLUID, CuisineRecipes.RT_JAR);
 	}
 
 	@Override

@@ -1,32 +1,18 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.lcy0x1.base.BaseTank;
 import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.*;
-import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
-import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
-import dev.xkmc.cuisine.content.tools.base.tile.LitTile;
-import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.CookHandler;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.content.tools.base.tile.*;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.Container;
-import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -34,40 +20,25 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 @SerialClass
-public class PanBlockEntity extends CuisineTile<PanBlockEntity> implements TickableBlockEntity, IAnimatable,
-		BottleResultTile, LitTile {
+public class PanBlockEntity extends CuisineTankTile<PanBlockEntity> implements TickableBlockEntity, IAnimatable,
+		BottleResultTile, LitTile, CookTile, LidTile {
 
 	public static final int MAX_FLUID = 8 * 50;
 
 	private final AnimationFactory manager = new AnimationFactory(this);
-
-	@SerialClass.SerialField(toClient = true)
-	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID).setClickMax(50)
-			.setPredicate(e -> canAccess() && CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid()))
-			.setExtract(() -> false).add(this);
-
-	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
-	protected final LazyOptional<IFluidHandler> fluidCapability;
-
 	private BlockState prevState = null;
 
 	@SerialClass.SerialField(toClient = true)
-	public int cooking_max = 0, cooking = 0;
-	@SerialClass.SerialField(toClient = true)
-	public ItemStack result = ItemStack.EMPTY;
+	private final CookHandler<PanBlockEntity, PanRecipe> cookHandler = new CookHandler<>(this, CuisineRecipes.RT_PAN);
 
 	public PanBlockEntity(BlockEntityType<PanBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 8).setMax(1)
-				.setPredicate(e -> t.canAccess() && CuisineTags.AllItemTags.CAN_COOK.matches(e)).add(t));
-		itemCapability = LazyOptional.of(() -> new InvWrapper(getMainInventory()));
-		fluidCapability = LazyOptional.of(() -> fluids);
+						.setPredicate(e -> t.canAccess() && CuisineTags.AllItemTags.CAN_COOK.matches(e)).add(t),
+				new FluidInfo(4, MAX_FLUID, 50));
+		fluids.setClickMax(50)
+				.setPredicate(e -> canAccess() && CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid()))
+				.setExtract(() -> false);
 	}
 
 	@Override
@@ -111,21 +82,6 @@ public class PanBlockEntity extends CuisineTile<PanBlockEntity> implements Ticka
 	}
 
 	@Override
-	@Nonnull
-	public <T> LazyOptional<T> getCapability(Capability<T> cap, @Nullable Direction side) {
-		if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-			return itemCapability.cast();
-		if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-			return fluidCapability.cast();
-		return super.getCapability(cap, side);
-	}
-
-	@Override
-	public List<Container> getContainers() {
-		return List.of(getMainInventory());
-	}
-
-	@Override
 	public void notifyTile() {
 		this.setChanged();
 		this.sync();
@@ -135,78 +91,28 @@ public class PanBlockEntity extends CuisineTile<PanBlockEntity> implements Ticka
 		return !getBlockState().getValue(BlockStateProperties.SIGNAL_FIRE);
 	}
 
-	public void stopCooking() {
-		if (cooking_max > 0) {
-			if (cooking > 0) {
-				result = ItemStack.EMPTY;
-			}
-			cooking = 0;
-			cooking_max = 0;
-		}
-		notifyTile();
-	}
-
 	public void dumpInventory() {
-		if (level == null) return;
 		if (!getBlockState().getValue(BlockStateProperties.OPEN)) return;
-		if (!result.isEmpty()) {
-			result = ItemStack.EMPTY;
-		} else if (!getMainInventory().isEmpty()) {
-			Containers.dropContents(level, this.getBlockPos().above(), getMainInventory());
-		} else
-			fluids.clear();
-		notifyTile();
-	}
-
-	public boolean startCooking() {
-		if (level == null) return false;
-		boolean ans = result.isEmpty() && !getMainInventory().isEmpty() || !fluids.isEmpty();
-		if (!ans) return false;
-		Optional<PanRecipe> r = level.getRecipeManager().getRecipeFor(CuisineRecipes.RT_PAN, getMainInventory(), level);
-		getMainInventory().clear();
-		fluids.clear();
-		if (r.isEmpty()) {
-			cooking_max = 100;
-			cooking = cooking_max;
-			result = ItemStack.EMPTY;
+		if (!getResult().isEmpty()) {
+			clearResult();
+			notifyTile();
 		} else {
-			PanRecipe recipe = r.get();
-			cooking_max = recipe.time;
-			cooking = cooking_max;
-			result = recipe.result.copy();
+			super.dumpInventory();
 		}
-		notifyTile();
-		return true;
 	}
 
 	@Override
 	public void tick() {
-		if (cooking > 0) {
-			cooking--;
-			if (level != null && cooking == 0 && !level.isClientSide()) {
-				level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.SIGNAL_FIRE, false));
-				stopCooking();
-			}
-		}
-	}
-
-	@Override
-	public List<TileInfoOverlay.IDrawable> getContents() {
-		List<TileInfoOverlay.IDrawable> list = new ArrayList<>();
-		for (ItemStack stack : getMainInventory().getAsList()) {
-			if (!stack.isEmpty())
-				list.add(new TileInfoOverlay.ItemDrawable(stack));
-		}
-		for (FluidStack stack : fluids.getAsList()) {
-			if (!stack.isEmpty())
-				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID, 50));
-		}
-		return list;
+		cookHandler.tick();
 	}
 
 	@Override
 	public ItemStack getResult() {
-		return result;
+		return cookHandler.result;
+	}
+
+	public void clearResult() {
+		cookHandler.result = ItemStack.EMPTY;
 	}
 
 	@Override
@@ -219,7 +125,7 @@ public class PanBlockEntity extends CuisineTile<PanBlockEntity> implements Ticka
 		boolean open = next.getValue(BlockStateProperties.OPEN);
 		if (!level.isClientSide()) {
 			if (!open) {
-				if (startCooking()) {
+				if (cookHandler.startCooking()) {
 					next = next.setValue(BlockStateProperties.SIGNAL_FIRE, true)
 							.setValue(BlockStateProperties.OPEN, false);
 				}
@@ -232,8 +138,37 @@ public class PanBlockEntity extends CuisineTile<PanBlockEntity> implements Ticka
 	public void onUnlit(Level level, BlockPos pos, BlockState state) {
 		state = state.setValue(BlockStateProperties.SIGNAL_FIRE, false);
 		if (!level.isClientSide()) {
-			stopCooking();
+			cookHandler.stopCooking();
 			level.setBlockAndUpdate(pos, state);
 		}
 	}
+
+	@Override
+	public void onStopCooking() {
+		if (level == null) return;
+		level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(BlockStateProperties.SIGNAL_FIRE, false));
+	}
+
+	@Override
+	public boolean canChangeLid() {
+		return getResult().isEmpty();
+	}
+
+	@Override
+	public BlockState onLidChange(BlockState state, boolean open) {
+		state = state.setValue(BlockStateProperties.OPEN, !open);
+		boolean lit = state.getValue(BlockStateProperties.LIT);
+		boolean cooking = state.getValue(BlockStateProperties.SIGNAL_FIRE);
+		if (!open && cooking) {
+			state = state.setValue(BlockStateProperties.SIGNAL_FIRE, false);
+			cookHandler.stopCooking();
+		}
+		if (open && lit) {
+			if (cookHandler.startCooking())
+				state = state.setValue(BlockStateProperties.SIGNAL_FIRE, true)
+						.setValue(BlockStateProperties.OPEN, false);
+		}
+		return state;
+	}
+
 }

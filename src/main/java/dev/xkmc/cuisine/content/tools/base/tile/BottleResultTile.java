@@ -6,6 +6,8 @@ public interface BottleResultTile {
 
 	ItemStack getResult();
 
+	void clearResult();
+
 	boolean canTake();
 
 }
