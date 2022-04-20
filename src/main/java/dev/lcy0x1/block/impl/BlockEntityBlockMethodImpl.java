@@ -50,9 +50,9 @@ public record BlockEntityBlockMethodImpl<T extends BlockEntity>(
 	}
 
 	@Override
-	public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
-		BlockEntity te = w.getBlockEntity(pos);
-		if (w.isClientSide())
+	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
+		BlockEntity te = level.getBlockEntity(pos);
+		if (level.isClientSide())
 			return te instanceof MenuProvider ? InteractionResult.SUCCESS : InteractionResult.PASS;
 		if (te instanceof MenuProvider) {
 			pl.openMenu((MenuProvider) te);

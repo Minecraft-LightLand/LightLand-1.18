@@ -2,7 +2,10 @@ package dev.xkmc.cuisine.content.tools.jar;
 
 import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.content.tools.base.TimeHandler;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,7 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @SerialClass
-public class JarRecipe extends BaseRecipe<JarRecipe, JarRecipe, JarBlockEntity.RecipeContainer> {
+public class JarRecipe extends CuisineRecipe<JarRecipe, JarBlockEntity> implements TimeHandler.TimeRecipe {
 
 	@SerialClass.SerialField
 	public ArrayList<Ingredient> item_ingredients;
@@ -26,11 +29,11 @@ public class JarRecipe extends BaseRecipe<JarRecipe, JarRecipe, JarBlockEntity.R
 	public int time;
 
 	public JarRecipe(ResourceLocation id) {
-		super(id, CuisineRecipe.RS_JAR.get());
+		super(id, CuisineRecipes.RS_JAR.get());
 	}
 
 	@Override
-	public boolean matches(JarBlockEntity.RecipeContainer inv, Level world) {
+	public boolean matches(RecipeContainer<JarBlockEntity> inv, Level world) {
 		List<Ingredient> items = new ArrayList<>(item_ingredients);
 		for (ItemStack stack : inv.getTile().inventory.getAsList()) {
 			if (stack.isEmpty())
@@ -54,13 +57,8 @@ public class JarRecipe extends BaseRecipe<JarRecipe, JarRecipe, JarBlockEntity.R
 	}
 
 	@Override
-	public ItemStack assemble(JarBlockEntity.RecipeContainer inv) {
+	public ItemStack assemble(RecipeContainer<JarBlockEntity> inv) {
 		return result.copy();
-	}
-
-	@Override
-	public boolean canCraftInDimensions(int r, int c) {
-		return false;
 	}
 
 	@Override
@@ -68,4 +66,8 @@ public class JarRecipe extends BaseRecipe<JarRecipe, JarRecipe, JarBlockEntity.R
 		return result;
 	}
 
+	@Override
+	public int getTime() {
+		return time;
+	}
 }

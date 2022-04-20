@@ -1,15 +1,17 @@
 package dev.xkmc.cuisine.content.tools.mortar;
 
-import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.content.tools.base.StepHandler;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 
 @SerialClass
-public class MortarRecipe extends BaseRecipe<MortarRecipe, MortarRecipe, MortarBlockEntity.RecipeContainer> {
+public class MortarRecipe extends CuisineRecipe<MortarRecipe, MortarBlockEntity> implements StepHandler.StepRecipe {
 
 	@SerialClass.SerialField
 	public Ingredient ingredient;
@@ -19,11 +21,11 @@ public class MortarRecipe extends BaseRecipe<MortarRecipe, MortarRecipe, MortarB
 	public int step;
 
 	public MortarRecipe(ResourceLocation id) {
-		super(id, CuisineRecipe.RS_MORTAR.get());
+		super(id, CuisineRecipes.RS_MORTAR.get());
 	}
 
 	@Override
-	public boolean matches(MortarBlockEntity.RecipeContainer inv, Level world) {
+	public boolean matches(RecipeContainer<MortarBlockEntity> inv, Level world) {
 		if (!inv.canAddItem(result.copy()))
 			return false;
 		for (ItemStack stack : inv.getAsList()) {
@@ -35,7 +37,7 @@ public class MortarRecipe extends BaseRecipe<MortarRecipe, MortarRecipe, MortarB
 	}
 
 	@Override
-	public ItemStack assemble(MortarBlockEntity.RecipeContainer inv) {
+	public ItemStack assemble(RecipeContainer<MortarBlockEntity> inv) {
 		for (ItemStack stack : inv.getAsList()) {
 			if (ingredient.test(stack)) {
 				stack.shrink(1);
@@ -47,13 +49,12 @@ public class MortarRecipe extends BaseRecipe<MortarRecipe, MortarRecipe, MortarB
 	}
 
 	@Override
-	public boolean canCraftInDimensions(int r, int c) {
-		return false;
-	}
-
-	@Override
 	public ItemStack getResultItem() {
 		return result;
 	}
 
+	@Override
+	public int getStep() {
+		return step;
+	}
 }

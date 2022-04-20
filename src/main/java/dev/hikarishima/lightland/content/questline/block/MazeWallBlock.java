@@ -195,8 +195,8 @@ public class MazeWallBlock {
 		}
 
 		@Override
-		public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-			ItemStack stack = player.getItemInHand(hand);
+		public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
+			ItemStack stack = pl.getItemInHand(hand);
 			if (stack.is(LightlandItems.DISPELL_DUST.get())) {
 				if (!level.isClientSide()) {
 					for (Direction dire : Direction.values()) {
@@ -209,7 +209,7 @@ public class MazeWallBlock {
 						}
 					}
 					level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-					if (!player.getAbilities().instabuild)
+					if (!pl.getAbilities().instabuild)
 						stack.shrink(1);
 				}
 				return InteractionResult.SUCCESS;

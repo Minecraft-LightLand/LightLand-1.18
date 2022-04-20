@@ -1,8 +1,10 @@
 package dev.xkmc.cuisine.content.tools.basin;
 
-import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.content.tools.base.StepHandler;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -11,25 +13,23 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 @SerialClass
-public class BasinRecipe extends BaseRecipe<BasinRecipe, BasinRecipe, BasinBlockEntity.RecipeContainer> {
+public class BasinRecipe extends CuisineRecipe<BasinRecipe, BasinBlockEntity> implements StepHandler.StepRecipe {
 
 	@SerialClass.SerialField
 	public Ingredient item_ingredients;
 	@SerialClass.SerialField
-	public ItemStack result;
+	public FluidStack remain;
 	@SerialClass.SerialField
-	public FluidStack fluid_ingredient, remain;
-	@SerialClass.SerialField
-	public int step, time;
+	public int step;
 
 	public BasinRecipe(ResourceLocation id) {
-		super(id, CuisineRecipe.RS_BASIN.get());
+		super(id, CuisineRecipes.RS_BASIN.get());
 	}
 
 	@Override
-	public boolean matches(BasinBlockEntity.RecipeContainer inv, Level world) {
+	public boolean matches(RecipeContainer<BasinBlockEntity> inv, Level world) {
 		boolean hasFire = inv.getTile().checkBlockBelow();
-		if (!hasFire && step > 0) { // item -> fluid
+		if (!hasFire) {
 			boolean match = false;
 			for (ItemStack stack : inv.getTile().inventory.getAsList()) {
 				if (item_ingredients.test(stack)) {
@@ -41,41 +41,28 @@ public class BasinRecipe extends BaseRecipe<BasinRecipe, BasinRecipe, BasinBlock
 				return false;
 			return inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.SIMULATE) == remain.getAmount();
 		}
-		if (hasFire && time > 0) { // fluid -> item
-			FluidStack stack = inv.getTile().fluids.getFluidInTank(0);
-			boolean match = !stack.isEmpty() && stack.isFluidEqual(fluid_ingredient) && stack.getAmount() >= fluid_ingredient.getAmount();
-			if (!match)
-				return false;
-			return inv.getTile().inventory.canAddItem(result);
-		}
 		return false;
 	}
 
 	@Override
-	public ItemStack assemble(BasinBlockEntity.RecipeContainer inv) {
-		if (step > 0) { // item -> fluid
-			for (ItemStack stack : inv.getTile().inventory.getAsList()) {
-				if (item_ingredients.test(stack)) {
-					stack.shrink(1);
-					break;
-				}
+	public ItemStack assemble(RecipeContainer<BasinBlockEntity> inv) {
+		for (ItemStack stack : inv.getTile().inventory.getAsList()) {
+			if (item_ingredients.test(stack)) {
+				stack.shrink(1);
+				break;
 			}
-			inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.EXECUTE);
-		} else { // fluid -> item
-			inv.getTile().fluids.drain(fluid_ingredient.copy(), IFluidHandler.FluidAction.EXECUTE);
-			inv.getTile().inventory.addItem(result.copy());
 		}
+		inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.EXECUTE);
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public boolean canCraftInDimensions(int r, int c) {
-		return false;
+	public ItemStack getResultItem() {
+		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public ItemStack getResultItem() {
-		return result;
+	public int getStep() {
+		return step;
 	}
-
 }

@@ -58,12 +58,12 @@ public class RitualCore {
 		}
 
 		@Override
-		public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
-			if (w.isClientSide()) {
+		public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
+			if (level.isClientSide()) {
 				return pl.getMainHandItem().getItem() instanceof MagicWand ? InteractionResult.SUCCESS : InteractionResult.PASS;
 			}
 			if (pl.getMainHandItem().getItem() instanceof MagicWand) {
-				BlockEntity te = w.getBlockEntity(pos);
+				BlockEntity te = level.getBlockEntity(pos);
 				if (te instanceof TE) {
 					MagicProduct<?, ?> magic = LightlandItems.MAGIC_WAND.get().getData(pl, pl.getMainHandItem());
 					((TE) te).activate(pl, magic);

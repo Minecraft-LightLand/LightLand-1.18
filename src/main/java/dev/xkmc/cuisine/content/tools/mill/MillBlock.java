@@ -26,42 +26,9 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import java.util.Objects;
 import java.util.Random;
 
-public class MillBlock implements OnClickBlockMethod, RenderShapeBlockMethod {
+public class MillBlock implements RenderShapeBlockMethod {
 
 	public static final BlockEntityBlockMethod<MillBlockEntity> TE = new BlockEntityBlockMethodImpl<>(CuisineBlocks.TE_MILL, MillBlockEntity.class);
-
-	@Override
-	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand h, BlockHitResult hitResult) {
-		ItemStack stack = pl.getItemInHand(h);
-		MillBlockEntity te = Objects.requireNonNull((MillBlockEntity) level.getBlockEntity(pos));
-		if (pl.isShiftKeyDown()) {
-			if (!level.isClientSide())
-				te.dumpInventory();
-			return InteractionResult.SUCCESS;
-		}
-
-		if (!stack.isEmpty()) {
-			LazyOptional<IFluidHandlerItem> opt = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
-			if (opt.resolve().isPresent()) {
-				IFluidHandlerItem item = opt.resolve().get();
-				FluidStack fluidStack = item.getFluidInTank(0);
-				if (fluidStack.isEmpty() || CuisineTags.AllFluidTags.JAR_ACCEPT.matches(fluidStack.getFluid())) {
-					return FluidUtil.interactWithFluidHandler(pl, h, level, pos, hitResult.getDirection()) ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
-				}
-			}
-			ItemStack copy = stack.copy();
-			copy.setCount(1);
-			ItemStack remain = te.inventory.addItem(copy);
-			if (remain.isEmpty()) stack.shrink(1);
-			return InteractionResult.SUCCESS;
-		}
-		if (te.step()) {
-			if (level.isClientSide()) {
-				CuisineUtil.spawnParticle(level, pos, level.getRandom());
-			}
-		}
-		return InteractionResult.PASS;
-	}
 
 	@Override
 	public RenderShape getRenderShape(BlockState state) {

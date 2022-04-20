@@ -1,16 +1,21 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.lcy0x1.base.*;
-import dev.lcy0x1.block.BlockContainer;
+import dev.lcy0x1.base.BaseTank;
+import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.*;
+import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
+import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
+import dev.xkmc.cuisine.content.tools.base.tile.LitTile;
+import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
 import dev.xkmc.cuisine.init.data.CuisineTags;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,28 +41,12 @@ import java.util.List;
 import java.util.Optional;
 
 @SerialClass
-public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEntity, IAnimatable, BlockContainer,
-		BaseContainerListener<BaseContainer>, TileInfoOverlay.TileInfoProvider {
-
-	public class RecipeContainer extends BaseContainer {
-
-		public RecipeContainer(int size) {
-			super(size);
-		}
-
-		public PanBlockEntity getTile() {
-			return PanBlockEntity.this;
-		}
-
-	}
+public class PanBlockEntity extends CuisineTile<PanBlockEntity> implements TickableBlockEntity, IAnimatable,
+		BottleResultTile, LitTile {
 
 	public static final int MAX_FLUID = 8 * 50;
 
 	private final AnimationFactory manager = new AnimationFactory(this);
-
-	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inputInventory = (RecipeContainer) new RecipeContainer(8).setMax(1)
-			.setPredicate(e -> canAccess() && CuisineTags.AllItemTags.CAN_COOK.matches(e)).add(this);
 
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(4, MAX_FLUID).setClickMax(50)
@@ -74,9 +63,10 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	@SerialClass.SerialField(toClient = true)
 	public ItemStack result = ItemStack.EMPTY;
 
-	public PanBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
-		itemCapability = LazyOptional.of(() -> new InvWrapper(inputInventory));
+	public PanBlockEntity(BlockEntityType<PanBlockEntity> type, BlockPos pos, BlockState state) {
+		super(type, pos, state, t -> new RecipeContainer<>(t, 8).setMax(1)
+				.setPredicate(e -> t.canAccess() && CuisineTags.AllItemTags.CAN_COOK.matches(e)).add(t));
+		itemCapability = LazyOptional.of(() -> new InvWrapper(getMainInventory()));
 		fluidCapability = LazyOptional.of(() -> fluids);
 	}
 
@@ -132,11 +122,11 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	@Override
 	public List<Container> getContainers() {
-		return List.of(inputInventory);
+		return List.of(getMainInventory());
 	}
 
 	@Override
-	public void notifyTile(@Nullable BaseContainer cont) {
+	public void notifyTile() {
 		this.setChanged();
 		this.sync();
 	}
@@ -153,24 +143,27 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			cooking = 0;
 			cooking_max = 0;
 		}
-		notifyTile(null);
+		notifyTile();
 	}
 
 	public void dumpInventory() {
 		if (level == null) return;
-		if (!inputInventory.isEmpty()) {
-			Containers.dropContents(level, this.getBlockPos().above(), inputInventory);
+		if (!getBlockState().getValue(BlockStateProperties.OPEN)) return;
+		if (!result.isEmpty()) {
+			result = ItemStack.EMPTY;
+		} else if (!getMainInventory().isEmpty()) {
+			Containers.dropContents(level, this.getBlockPos().above(), getMainInventory());
 		} else
 			fluids.clear();
-		notifyTile(null);
+		notifyTile();
 	}
 
 	public boolean startCooking() {
 		if (level == null) return false;
-		boolean ans = result.isEmpty() && !inputInventory.isEmpty() || !fluids.isEmpty();
+		boolean ans = result.isEmpty() && !getMainInventory().isEmpty() || !fluids.isEmpty();
 		if (!ans) return false;
-		Optional<PanRecipe> r = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_PAN, inputInventory, level);
-		inputInventory.clear();
+		Optional<PanRecipe> r = level.getRecipeManager().getRecipeFor(CuisineRecipes.RT_PAN, getMainInventory(), level);
+		getMainInventory().clear();
 		fluids.clear();
 		if (r.isEmpty()) {
 			cooking_max = 100;
@@ -182,7 +175,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			cooking = cooking_max;
 			result = recipe.result.copy();
 		}
-		notifyTile(null);
+		notifyTile();
 		return true;
 	}
 
@@ -200,7 +193,7 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	@Override
 	public List<TileInfoOverlay.IDrawable> getContents() {
 		List<TileInfoOverlay.IDrawable> list = new ArrayList<>();
-		for (ItemStack stack : inputInventory.getAsList()) {
+		for (ItemStack stack : getMainInventory().getAsList()) {
 			if (!stack.isEmpty())
 				list.add(new TileInfoOverlay.ItemDrawable(stack));
 		}
@@ -209,5 +202,38 @@ public class PanBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 				list.add(new TileInfoOverlay.FluidDrawable(stack, MAX_FLUID, 50));
 		}
 		return list;
+	}
+
+	@Override
+	public ItemStack getResult() {
+		return result;
+	}
+
+	@Override
+	public boolean canTake() {
+		return getBlockState().getValue(BlockStateProperties.OPEN);
+	}
+
+	@Override
+	public void onLit(Level level, BlockPos pos, BlockState next) {
+		boolean open = next.getValue(BlockStateProperties.OPEN);
+		if (!level.isClientSide()) {
+			if (!open) {
+				if (startCooking()) {
+					next = next.setValue(BlockStateProperties.SIGNAL_FIRE, true)
+							.setValue(BlockStateProperties.OPEN, false);
+				}
+			}
+			level.setBlockAndUpdate(pos, next);
+		}
+	}
+
+	@Override
+	public void onUnlit(Level level, BlockPos pos, BlockState state) {
+		state = state.setValue(BlockStateProperties.SIGNAL_FIRE, false);
+		if (!level.isClientSide()) {
+			stopCooking();
+			level.setBlockAndUpdate(pos, state);
+		}
 	}
 }

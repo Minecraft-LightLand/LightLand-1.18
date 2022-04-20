@@ -1,7 +1,8 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
 import dev.lcy0x1.recipe.BaseRecipeBuilder;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -14,10 +15,10 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class PanRecipeBuilder extends BaseRecipeBuilder<PanRecipeBuilder, PanRecipe, PanRecipe, PanBlockEntity.RecipeContainer> {
+public class PanRecipeBuilder extends BaseRecipeBuilder<PanRecipeBuilder, PanRecipe, PanRecipe, RecipeContainer<PanBlockEntity>> {
 
 	public PanRecipeBuilder(ItemLike result, int count, int time) {
-		super(CuisineRecipe.RS_PAN.get());
+		super(CuisineRecipes.RS_PAN.get());
 		recipe.item_ingredients = new ArrayList<>();
 		recipe.fluid_ingredients = new ArrayList<>();
 		recipe.result = new ItemStack(result.asItem(), count);

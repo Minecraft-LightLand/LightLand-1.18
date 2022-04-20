@@ -1,4 +1,4 @@
-package dev.xkmc.cuisine.content.tools.base;
+package dev.xkmc.cuisine.content.tools.base.tile;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;

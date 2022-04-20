@@ -19,16 +19,10 @@ public class BasinRecipeCategory extends BaseCuisineRecipeCategory<BasinRecipe, 
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, BasinRecipe recipe, IFocusGroup focuses) {
-		int index = 0;
 		if (!recipe.item_ingredients.isEmpty())
-			addInputItem(builder, index++, recipe.item_ingredients);
-		if (!recipe.fluid_ingredient.isEmpty())
-			addInputFluid(builder, index, recipe.fluid_ingredient);
-		index = 0;
-		if (!recipe.result.isEmpty())
-			addOutputItem(builder, index++, recipe.result);
+			addInputItem(builder, 0, recipe.item_ingredients);
 		if (!recipe.remain.isEmpty())
-			addOutputFluid(builder, index, recipe.remain);
+			addOutputFluid(builder, 0, recipe.remain);
 	}
 
 }

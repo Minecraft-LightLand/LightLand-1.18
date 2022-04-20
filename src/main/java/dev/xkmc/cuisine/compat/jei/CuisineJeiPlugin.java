@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.base.Proxy;
 import dev.xkmc.cuisine.compat.jei.recipes.*;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -28,6 +28,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 	public final PanRecipeCategory PAN = new PanRecipeCategory();
 	public final JarRecipeCategory JAR = new JarRecipeCategory();
 	public final BasinRecipeCategory BASIN = new BasinRecipeCategory();
+	public final BasinDryRecipeCategory BASIN_DRY = new BasinDryRecipeCategory();
 	public final MillRecipeCategory MILL = new MillRecipeCategory();
 	public final MortarRecipeCategory MORTAR = new MortarRecipeCategory();
 
@@ -57,6 +58,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 		registration.addRecipeCategories(PAN.init(helper));
 		registration.addRecipeCategories(JAR.init(helper));
 		registration.addRecipeCategories(BASIN.init(helper));
+		registration.addRecipeCategories(BASIN_DRY.init(helper));
 		registration.addRecipeCategories(MILL.init(helper));
 		registration.addRecipeCategories(MORTAR.init(helper));
 		GUI_HELPER = helper;
@@ -68,11 +70,12 @@ public class CuisineJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		registration.addRecipes(PAN.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_PAN));
-		registration.addRecipes(JAR.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_JAR));
-		registration.addRecipes(BASIN.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_BASIN));
-		registration.addRecipes(MILL.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_MILL));
-		registration.addRecipes(MORTAR.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_MORTAR));
+		registration.addRecipes(PAN.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipes.RT_PAN));
+		registration.addRecipes(JAR.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipes.RT_JAR));
+		registration.addRecipes(BASIN.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipes.RT_BASIN));
+		registration.addRecipes(BASIN_DRY.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipes.RT_BASIN_DRY));
+		registration.addRecipes(MILL.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipes.RT_MILL));
+		registration.addRecipes(MORTAR.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipes.RT_MORTAR));
 	}
 
 	@Override
@@ -84,6 +87,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 		registration.addRecipeCatalyst(CuisineBlocks.PAN.get().asItem().getDefaultInstance(), PAN.getRecipeType());
 		registration.addRecipeCatalyst(CuisineBlocks.JAR.get().asItem().getDefaultInstance(), JAR.getRecipeType());
 		registration.addRecipeCatalyst(CuisineBlocks.BASIN.get().asItem().getDefaultInstance(), BASIN.getRecipeType());
+		registration.addRecipeCatalyst(CuisineBlocks.BASIN.get().asItem().getDefaultInstance(), BASIN_DRY.getRecipeType());
 		registration.addRecipeCatalyst(CuisineBlocks.MILL.get().asItem().getDefaultInstance(), MILL.getRecipeType());
 		registration.addRecipeCatalyst(CuisineBlocks.MORTAR.get().asItem().getDefaultInstance(), MORTAR.getRecipeType());
 	}

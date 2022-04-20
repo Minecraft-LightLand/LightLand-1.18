@@ -3,7 +3,7 @@ package dev.xkmc.cuisine.content.tools.pan;
 import com.mojang.blaze3d.vertex.PoseStack;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
 import dev.xkmc.cuisine.content.tools.base.ContentRenderer;
-import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.ItemStack;

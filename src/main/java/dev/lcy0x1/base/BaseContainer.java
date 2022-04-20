@@ -1,6 +1,8 @@
 package dev.lcy0x1.base;
 
 import dev.lcy0x1.serial.codec.AliasCollection;
+import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
+import dev.xkmc.cuisine.content.tools.mill.MillBlockEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -8,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class BaseContainer extends SimpleContainer implements AliasCollection<ItemStack> {
+public class BaseContainer<T extends BaseContainer<T>> extends SimpleContainer implements AliasCollection<ItemStack> {
 
 	private int max = 64;
 	private Predicate<ItemStack> predicate = e -> true;
@@ -17,19 +19,19 @@ public class BaseContainer extends SimpleContainer implements AliasCollection<It
 		super(size);
 	}
 
-	public BaseContainer setMax(int max) {
+	public T setMax(int max) {
 		this.max = Mth.clamp(max, 1, 64);
-		return this;
+		return getThis();
 	}
 
-	public BaseContainer setPredicate(Predicate<ItemStack> predicate) {
+	public T setPredicate(Predicate<ItemStack> predicate) {
 		this.predicate = predicate;
-		return this;
+		return getThis();
 	}
 
-	public BaseContainer add(BaseContainerListener<BaseContainer> t) {
+	public T add(BaseContainerListener t) {
 		addListener(t);
-		return this;
+		return getThis();
 	}
 
 	public int countSpace() {
@@ -69,5 +71,10 @@ public class BaseContainer extends SimpleContainer implements AliasCollection<It
 	@Override
 	public Class<ItemStack> getElemClass() {
 		return ItemStack.class;
+	}
+
+	@SuppressWarnings("unchecked")
+	public T getThis() {
+		return (T) this;
 	}
 }

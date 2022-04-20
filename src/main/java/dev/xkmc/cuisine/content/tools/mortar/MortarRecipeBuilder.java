@@ -1,7 +1,8 @@
 package dev.xkmc.cuisine.content.tools.mortar;
 
 import dev.lcy0x1.recipe.BaseRecipeBuilder;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -10,10 +11,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Consumer;
 
-public class MortarRecipeBuilder extends BaseRecipeBuilder<MortarRecipeBuilder, MortarRecipe, MortarRecipe, MortarBlockEntity.RecipeContainer> {
+public class MortarRecipeBuilder extends BaseRecipeBuilder<MortarRecipeBuilder, MortarRecipe, MortarRecipe, RecipeContainer<MortarBlockEntity>> {
 
 	public MortarRecipeBuilder(Ingredient in, ItemStack out, int step) {
-		super(CuisineRecipe.RS_MORTAR.get());
+		super(CuisineRecipes.RS_MORTAR.get());
 		recipe.ingredient = in;
 		recipe.result = out;
 		recipe.step = step;

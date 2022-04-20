@@ -52,8 +52,8 @@ public class WorldChestBlock implements CreateBlockStateBlockMethod, DefaultStat
 	}
 
 	@Override
-	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-		ItemStack stack = player.getItemInHand(hand);
+	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
+		ItemStack stack = pl.getItemInHand(hand);
 		BlockEntity be = level.getBlockEntity(pos);
 		if (stack.getItem() instanceof DyeItem dye && be instanceof WorldChestBlockEntity chest) {
 			if (!level.isClientSide()) {

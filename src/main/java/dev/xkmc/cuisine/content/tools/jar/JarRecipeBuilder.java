@@ -1,7 +1,8 @@
 package dev.xkmc.cuisine.content.tools.jar;
 
 import dev.lcy0x1.recipe.BaseRecipeBuilder;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -14,10 +15,10 @@ import net.minecraftforge.fluids.FluidStack;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class JarRecipeBuilder extends BaseRecipeBuilder<JarRecipeBuilder, JarRecipe, JarRecipe, JarBlockEntity.RecipeContainer> {
+public class JarRecipeBuilder extends BaseRecipeBuilder<JarRecipeBuilder, JarRecipe, JarRecipe, RecipeContainer<JarBlockEntity>> {
 
 	public JarRecipeBuilder(ItemLike result, int count, int time, FluidStack in, FluidStack out) {
-		super(CuisineRecipe.RS_JAR.get());
+		super(CuisineRecipes.RS_JAR.get());
 		recipe.item_ingredients = new ArrayList<>();
 		recipe.result = new ItemStack(result.asItem(), count);
 		recipe.fluid_ingredient = in;

@@ -1,8 +1,10 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.content.tools.base.TimeHandler;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -14,7 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @SerialClass
-public class PanRecipe extends BaseRecipe<PanRecipe, PanRecipe, PanBlockEntity.RecipeContainer> {
+public class PanRecipe extends CuisineRecipe<PanRecipe, PanBlockEntity> implements TimeHandler.TimeRecipe {
 
 	@SerialClass.SerialField
 	public ArrayList<Ingredient> item_ingredients;
@@ -26,13 +28,13 @@ public class PanRecipe extends BaseRecipe<PanRecipe, PanRecipe, PanBlockEntity.R
 	public int time;
 
 	public PanRecipe(ResourceLocation id) {
-		super(id, CuisineRecipe.RS_PAN.get());
+		super(id, CuisineRecipes.RS_PAN.get());
 	}
 
 	@Override
-	public boolean matches(PanBlockEntity.RecipeContainer inv, Level world) {
+	public boolean matches(RecipeContainer<PanBlockEntity> inv, Level world) {
 		List<Ingredient> items = new ArrayList<>(item_ingredients);
-		for (ItemStack stack : inv.getTile().inputInventory.getAsList()) {
+		for (ItemStack stack : inv.getTile().getMainInventory().getAsList()) {
 			if (stack.isEmpty())
 				continue;
 			if (items.isEmpty())
@@ -72,7 +74,7 @@ public class PanRecipe extends BaseRecipe<PanRecipe, PanRecipe, PanBlockEntity.R
 	}
 
 	@Override
-	public ItemStack assemble(PanBlockEntity.RecipeContainer inv) {
+	public ItemStack assemble(RecipeContainer<PanBlockEntity> inv) {
 		return result.copy();
 	}
 
@@ -86,4 +88,8 @@ public class PanRecipe extends BaseRecipe<PanRecipe, PanRecipe, PanBlockEntity.R
 		return result;
 	}
 
+	@Override
+	public int getTime() {
+		return time;
+	}
 }

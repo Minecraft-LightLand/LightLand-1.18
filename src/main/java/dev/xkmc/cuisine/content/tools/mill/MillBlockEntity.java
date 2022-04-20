@@ -1,13 +1,16 @@
 package dev.xkmc.cuisine.content.tools.mill;
 
-import dev.lcy0x1.base.*;
-import dev.lcy0x1.block.BlockContainer;
+import dev.lcy0x1.base.BaseTank;
+import dev.lcy0x1.base.CombinedTankWrapper;
+import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.*;
+import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
+import dev.xkmc.cuisine.content.tools.base.tile.StepTile;
+import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
@@ -30,49 +33,30 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SerialClass
-public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEntity,
-		BaseContainerListener<BaseContainer>, BlockContainer, IAnimatable,
-		TileInfoOverlay.TileInfoProvider {
-
-	public class RecipeContainer extends BaseContainer {
-
-		public RecipeContainer(int size) {
-			super(size);
-		}
-
-		public MillBlockEntity getTile() {
-			return MillBlockEntity.this;
-		}
-
-	}
+public class MillBlockEntity extends CuisineTile<MillBlockEntity> implements TickableBlockEntity, IAnimatable, StepTile {
 
 	public static final int MAX_FLUID = 1000, ROTATE_TIME = 20, ROTATE_ALLOW = 10;
 
 	private final AnimationFactory manager = new AnimationFactory(this);
 
 	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(1).add(this);
-	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID).add(this);
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank water = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> e.getFluid() == Fluids.WATER).add(this);
-
-	@SerialClass.SerialField(toClient = true)
-	protected int max_step, step;
-	@SerialClass.SerialField
-	protected ResourceLocation recipe;
 
 	protected int rotate_time;
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
 
-	public MillBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
+	@SerialClass.SerialField(toClient = true)
+	private final StepHandler<MillBlockEntity, MillRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_MILL);
+
+	public MillBlockEntity(BlockEntityType<MillBlockEntity> type, BlockPos pos, BlockState state) {
+		super(type, pos, state, t -> new RecipeContainer<>(t, 1).add(t));
 		itemCapability = LazyOptional.of(() -> new InvWrapper(inventory));
 		fluidCapability = LazyOptional.of(() -> new CombinedTankWrapper()
 				.add(CombinedTankWrapper.Type.INSERT, water)
@@ -92,8 +76,8 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 	}
 
 	@Override
-	public void notifyTile(@Nullable BaseContainer cont) {
-		this.resetProgress();
+	public void notifyTile() {
+		stepHandler.resetProgress();
 		this.setChanged();
 		this.sync();
 	}
@@ -111,36 +95,11 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 	}
 
 	public boolean step() {
-		if (step > 0 && level != null && rotate_time <= ROTATE_ALLOW) {
-			step--;
+		if (rotate_time <= ROTATE_ALLOW && stepHandler.step()) {
 			rotate_time += ROTATE_TIME;
-			if (!level.isClientSide && step == 0) {
-				Optional<MillRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MILL, inventory, level);
-				max_step = 0;
-				if (optional.isPresent()) {
-					MillRecipe r = optional.get();
-					r.assemble(inventory);
-				}
-				notifyTile(null);
-			}
 			return true;
 		}
 		return false;
-	}
-
-	public void resetProgress() {
-		max_step = 0;
-		step = 0;
-		recipe = null;
-		if (level != null) {
-			Optional<MillRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MILL, inventory, level);
-			if (optional.isPresent()) {
-				MillRecipe r = optional.get();
-				max_step = r.step;
-				step = max_step;
-				recipe = r.id;
-			}
-		}
 	}
 
 	public void dumpInventory() {
@@ -151,9 +110,8 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 			water.clear();
 			fluids.clear();
 		}
-		notifyTile(null);
+		notifyTile();
 	}
-
 
 	@Override
 	public List<TileInfoOverlay.IDrawable> getContents() {
@@ -182,6 +140,5 @@ public class MillBlockEntity extends BaseBlockEntity implements TickableBlockEnt
 			return fluidCapability.cast();
 		return super.getCapability(cap, side);
 	}
-
 
 }

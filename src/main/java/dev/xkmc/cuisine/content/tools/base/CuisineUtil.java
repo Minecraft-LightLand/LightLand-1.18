@@ -1,5 +1,6 @@
 package dev.xkmc.cuisine.content.tools.base;
 
+import dev.xkmc.cuisine.content.tools.base.methods.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BowlFoodItem;
@@ -13,11 +14,18 @@ import java.util.Random;
 
 public class CuisineUtil {
 
+	public static final DumpInventory DUMP = new DumpInventory();
+	public static final AddOneItem ADD = new AddOneItem();
+	public static final FireClick<?> FIRE = new FireClick<>();
+	public static final LidClick LID = new LidClick();
+	public static final TakeResultClick<?> TAKE = new TakeResultClick<>();
+	public static final StepClick<?> STEP = new StepClick<>();
+	public static final TimeProcessing<?> TIME = new TimeProcessing<>();
+
 	@Nonnull
 	public static Ingredient getContainer(ItemStack result) {
 		ItemStack container = result.getItem().getContainerItem(result);
-		if (!container.isEmpty())
-			return Ingredient.of(container);
+		if (!container.isEmpty()) return Ingredient.of(container);
 		if (result.getItem() instanceof BowlFoodItem) {
 			return Ingredient.of(Items.BOWL);
 		}

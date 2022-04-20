@@ -1,16 +1,14 @@
 package dev.xkmc.cuisine.content.tools.mortar;
 
-import dev.lcy0x1.base.BaseBlockEntity;
-import dev.lcy0x1.base.BaseContainer;
-import dev.lcy0x1.base.BaseContainerListener;
 import dev.lcy0x1.base.TickableBlockEntity;
-import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.content.tools.base.*;
+import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
+import dev.xkmc.cuisine.content.tools.base.tile.StepTile;
+import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
@@ -26,43 +24,23 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SerialClass
-public class MortarBlockEntity extends BaseBlockEntity implements TickableBlockEntity,
-		BaseContainerListener<BaseContainer>, BlockContainer,
-		TileInfoOverlay.TileInfoProvider {
-
-	public class RecipeContainer extends BaseContainer {
-
-		public RecipeContainer(int size) {
-			super(size);
-		}
-
-		public MortarBlockEntity getTile() {
-			return MortarBlockEntity.this;
-		}
-
-	}
+public class MortarBlockEntity extends CuisineTile<MortarBlockEntity> implements TickableBlockEntity, StepTile {
 
 	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(4)
-			.setPredicate(stack -> this.inventory.countSpace() > 2).add(this);
-
-	@SerialClass.SerialField(toClient = true)
-	protected int max_step, step;
-	protected ResourceLocation recipe;
+	private final StepHandler<MortarBlockEntity, MortarRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_MORTAR);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 
-	public MortarBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
+	public MortarBlockEntity(BlockEntityType<MortarBlockEntity> type, BlockPos pos, BlockState state) {
+		super(type, pos, state, t -> new RecipeContainer<>(t, 4).setPredicate(stack -> t.inventory.countSpace() > 2).add(t));
 		itemCapability = LazyOptional.of(() -> new InvWrapper(inventory));
 	}
 
 	@Override
-	public void notifyTile(@Nullable BaseContainer cont) {
-		this.resetProgress();
+	public void notifyTile() {
+		stepHandler.resetProgress();
 		this.setChanged();
 		this.sync();
 	}
@@ -72,52 +50,13 @@ public class MortarBlockEntity extends BaseBlockEntity implements TickableBlockE
 		return List.of(inventory);
 	}
 
-	public boolean step() {
-		if (step > 0 && level != null) {
-			step--;
-			if (!level.isClientSide && step == 0) {
-				completeRecipe();
-			}
-			return true;
-		}
-		return false;
-	}
-
 	public void tick() {
-	}
-
-	private void completeRecipe() {
-		if (level == null || level.isClientSide) return;
-
-		Optional<MortarRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MORTAR, inventory, level);
-		max_step = 0;
-		step = 0;
-		if (optional.isPresent()) {
-			MortarRecipe r = optional.get();
-			r.assemble(inventory);
-		}
-		notifyTile(null);
-	}
-
-	public void resetProgress() {
-		max_step = 0;
-		step = 0;
-		recipe = null;
-		if (level != null) {
-			Optional<MortarRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_MORTAR, inventory, level);
-			if (optional.isPresent()) {
-				MortarRecipe r = optional.get();
-				max_step = r.step;
-				step = max_step;
-				recipe = r.id;
-			}
-		}
 	}
 
 	public void dumpInventory() {
 		if (level == null) return;
 		Containers.dropContents(level, this.getBlockPos().above(), inventory);
-		notifyTile(null);
+		notifyTile();
 	}
 
 	@Override
@@ -138,4 +77,8 @@ public class MortarBlockEntity extends BaseBlockEntity implements TickableBlockE
 		return super.getCapability(cap, side);
 	}
 
+	@Override
+	public boolean step() {
+		return stepHandler.step();
+	}
 }

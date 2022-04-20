@@ -67,11 +67,11 @@ public class RitualTE extends SyncedSingleItemTE {
 	public static class RitualPlace implements OnClickBlockMethod, CreateBlockStateBlockMethod, DefaultStateBlockMethod {
 
 		@Override
-		public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
-			if (w.isClientSide()) {
+		public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
+			if (level.isClientSide()) {
 				return InteractionResult.SUCCESS;
 			}
-			BlockEntity te = w.getBlockEntity(pos);
+			BlockEntity te = level.getBlockEntity(pos);
 			if (te instanceof RitualTE rte) {
 				if (!rte.isLocked()) {
 					if (rte.isEmpty()) {

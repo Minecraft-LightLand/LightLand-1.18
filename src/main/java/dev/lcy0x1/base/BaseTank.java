@@ -16,7 +16,7 @@ import java.util.function.Predicate;
 public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 
 	private final int size, capacity;
-	private final List<BaseContainerListener<BaseContainer>> listeners = new ArrayList<>();
+	private final List<BaseContainerListener> listeners = new ArrayList<>();
 
 	private Predicate<FluidStack> predicate = e -> true;
 	private BooleanSupplier allowExtract = () -> true;
@@ -32,7 +32,7 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 		list = NonNullList.withSize(size, FluidStack.EMPTY);
 	}
 
-	public BaseTank add(BaseContainerListener<BaseContainer> listener) {
+	public BaseTank add(BaseContainerListener listener) {
 		listeners.add(listener);
 		return this;
 	}
@@ -180,7 +180,7 @@ public class BaseTank implements IFluidHandler, AliasCollection<FluidStack> {
 	}
 
 	public void setChanged() {
-		listeners.forEach(e -> e.notifyTile(null));
+		listeners.forEach(BaseContainerListener::notifyTile);
 	}
 
 	@Override

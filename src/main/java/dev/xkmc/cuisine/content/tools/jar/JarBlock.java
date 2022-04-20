@@ -27,46 +27,8 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import java.util.Objects;
 import java.util.Random;
 
-public class JarBlock implements OnClickBlockMethod, AnimateTickBlockMethod {
+public class JarBlock {
 
 	public static final BlockEntityBlockMethod<JarBlockEntity> TE = new BlockEntityBlockMethodImpl<>(CuisineBlocks.TE_JAR, JarBlockEntity.class);
 
-	@Override
-	public InteractionResult onClick(BlockState bs, Level w, BlockPos pos, Player pl, InteractionHand h, BlockHitResult r) {
-		ItemStack stack = pl.getItemInHand(h);
-		JarBlockEntity te = Objects.requireNonNull((JarBlockEntity) w.getBlockEntity(pos));
-		if (pl.isShiftKeyDown()) {
-			if (!w.isClientSide())
-				te.dumpInventory();
-			return InteractionResult.SUCCESS;
-		}
-
-		if (!stack.isEmpty()) {
-			LazyOptional<IFluidHandlerItem> opt = stack.getCapability(CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY);
-			if (opt.resolve().isPresent()) {
-				IFluidHandlerItem item = opt.resolve().get();
-				FluidStack fluidStack = item.getFluidInTank(0);
-				if (fluidStack.isEmpty() || CuisineTags.AllFluidTags.JAR_ACCEPT.matches(fluidStack.getFluid())) {
-					return FluidUtil.interactWithFluidHandler(pl, h, w, pos, r.getDirection()) ? InteractionResult.SUCCESS : InteractionResult.CONSUME;
-				}
-			}
-			ItemStack copy = stack.copy();
-			copy.setCount(1);
-			ItemStack remain = te.inventory.addItem(copy);
-			if (remain.isEmpty()) stack.shrink(1);
-			return InteractionResult.SUCCESS;
-		}
-		return InteractionResult.PASS;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	@Override
-	public void animateTick(BlockState state, Level world, BlockPos pos, Random r) {
-		BlockEntity te = world.getBlockEntity(pos);
-		if (te instanceof JarBlockEntity jar) {
-			if (jar.max_time > 0) {
-				CuisineUtil.spawnParticle(world, pos, r);
-			}
-		}
-	}
 }

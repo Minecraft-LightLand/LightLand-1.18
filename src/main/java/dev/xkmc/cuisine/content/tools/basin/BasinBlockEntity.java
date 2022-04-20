@@ -1,14 +1,17 @@
 package dev.xkmc.cuisine.content.tools.basin;
 
-import dev.lcy0x1.base.*;
-import dev.lcy0x1.block.BlockContainer;
+import dev.lcy0x1.base.BaseTank;
+import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.*;
+import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
+import dev.xkmc.cuisine.content.tools.base.tile.StepTile;
+import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.tile.TimeTile;
 import dev.xkmc.cuisine.init.data.CuisineTags;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
@@ -29,51 +32,34 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SerialClass
-public class BasinBlockEntity extends BaseBlockEntity implements TickableBlockEntity,
-		BaseContainerListener<BaseContainer>, BlockContainer,
-		TileInfoOverlay.TileInfoProvider {
-
-	public class RecipeContainer extends BaseContainer {
-
-		public RecipeContainer(int size) {
-			super(size);
-		}
-
-		public BasinBlockEntity getTile() {
-			return BasinBlockEntity.this;
-		}
-
-	}
+public class BasinBlockEntity extends CuisineTile<BasinBlockEntity> implements TickableBlockEntity, StepTile, TimeTile {
 
 	public static final int MAX_FLUID = 500;
-
-	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(8)
-			.setPredicate(stack -> this.inventory.countSpace() > 4).add(this);
 
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid())).add(this);
 
 	@SerialClass.SerialField(toClient = true)
-	protected int max_step, step, max_time, time;
-	protected ResourceLocation recipe;
+	private final StepHandler<BasinBlockEntity, BasinRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_BASIN);
+	@SerialClass.SerialField(toClient = true)
+	private final TimeHandler<BasinBlockEntity, BasinDryRecipe> timeHandler = new TimeHandler<>(this, CuisineRecipes.RT_BASIN_DRY);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
 
-	public BasinBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
+	public BasinBlockEntity(BlockEntityType<BasinBlockEntity> type, BlockPos pos, BlockState state) {
+		super(type, pos, state, t -> new RecipeContainer<>(t, 8).setPredicate(stack -> t.inventory.countSpace() > 4).add(t));
 		itemCapability = LazyOptional.of(() -> new InvWrapper(inventory));
 		fluidCapability = LazyOptional.of(() -> fluids);
 	}
 
 	@Override
-	public void notifyTile(@Nullable BaseContainer cont) {
-		this.resetProgress();
+	public void notifyTile() {
+		stepHandler.resetProgress();
+		timeHandler.resetProgress();
 		this.setChanged();
 		this.sync();
 	}
@@ -83,21 +69,13 @@ public class BasinBlockEntity extends BaseBlockEntity implements TickableBlockEn
 		return List.of(inventory);
 	}
 
-	public void step() {
-		if (step > 0 && level != null) {
-			step--;
-			if (!level.isClientSide && step == 0) {
-				completeRecipe();
-			}
-		}
+	public boolean step() {
+		return stepHandler.step();
 	}
 
 	public void tick() {
-		if (time > 0 && level != null && checkBlockBelow()) {
-			time--;
-			if (!level.isClientSide && time == 0) {
-				completeRecipe();
-			}
+		if (checkBlockBelow()) {
+			timeHandler.tick();
 		}
 	}
 
@@ -110,47 +88,13 @@ public class BasinBlockEntity extends BaseBlockEntity implements TickableBlockEn
 						state.getValue(BlockStateProperties.LIT);
 	}
 
-	private void completeRecipe() {
-		if (level == null || level.isClientSide) return;
-
-		Optional<BasinRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_BASIN, inventory, level);
-		max_step = 0;
-		max_time = 0;
-		step = 0;
-		time = 0;
-		if (optional.isPresent()) {
-			BasinRecipe r = optional.get();
-			r.assemble(inventory);
-		}
-		notifyTile(null);
-	}
-
-	public void resetProgress() {
-		max_step = 0;
-		max_time = 0;
-		step = 0;
-		time = 0;
-		recipe = null;
-		if (level != null) {
-			Optional<BasinRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_BASIN, inventory, level);
-			if (optional.isPresent()) {
-				BasinRecipe r = optional.get();
-				max_step = r.step;
-				max_time = r.time;
-				step = max_step;
-				time = max_time;
-				recipe = r.id;
-			}
-		}
-	}
-
 	public void dumpInventory() {
 		if (level == null) return;
 		if (!inventory.isEmpty())
 			Containers.dropContents(level, this.getBlockPos().above(), inventory);
 		else
 			fluids.clear();
-		notifyTile(null);
+		notifyTile();
 	}
 
 	@Override
@@ -177,4 +121,8 @@ public class BasinBlockEntity extends BaseBlockEntity implements TickableBlockEn
 		return super.getCapability(cap, side);
 	}
 
+	@Override
+	public boolean processing() {
+		return timeHandler.processing();
+	}
 }

@@ -1,14 +1,16 @@
 package dev.xkmc.cuisine.content.tools.jar;
 
-import dev.lcy0x1.base.*;
-import dev.lcy0x1.block.BlockContainer;
+import dev.lcy0x1.base.BaseTank;
+import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.*;
+import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
+import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.tile.TimeTile;
 import dev.xkmc.cuisine.init.data.CuisineTags;
-import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
+import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
@@ -27,50 +29,31 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @SerialClass
-public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEntity,
-		BaseContainerListener<BaseContainer>, BlockContainer,
-		TileInfoOverlay.TileInfoProvider {
-
-	public class RecipeContainer extends BaseContainer {
-
-		public RecipeContainer(int size) {
-			super(size);
-		}
-
-		public JarBlockEntity getTile() {
-			return JarBlockEntity.this;
-		}
-
-	}
+public class JarBlockEntity extends CuisineTile<JarBlockEntity> implements TickableBlockEntity, TimeTile {
 
 	public static final int MAX_FLUID = 1000;
 
-	@SerialClass.SerialField(toClient = true)
-	protected final RecipeContainer inventory = (RecipeContainer) new RecipeContainer(3).setMax(1).add(this);
 	@SerialClass.SerialField(toClient = true)
 	protected final BaseTank fluids = new BaseTank(1, MAX_FLUID)
 			.setPredicate(e -> CuisineTags.AllFluidTags.JAR_ACCEPT.matches(e.getFluid())).add(this);
 
 	@SerialClass.SerialField(toClient = true)
-	protected int max_time, time;
-	@SerialClass.SerialField
-	protected ResourceLocation recipe;
+	private final TimeHandler<JarBlockEntity, JarRecipe> timeHandler = new TimeHandler<>(this, CuisineRecipes.RT_JAR);
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 	protected final LazyOptional<IFluidHandler> fluidCapability;
 
-	public JarBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-		super(type, pos, state);
+	public JarBlockEntity(BlockEntityType<JarBlockEntity> type, BlockPos pos, BlockState state) {
+		super(type, pos, state, (t) -> new RecipeContainer<>(t, 3).setMax(1).add(t));
 		itemCapability = LazyOptional.of(() -> new InvWrapper(inventory));
 		fluidCapability = LazyOptional.of(() -> fluids);
 	}
 
 	@Override
-	public void notifyTile(@Nullable BaseContainer cont) {
-		this.resetProgress();
+	public void notifyTile() {
+		timeHandler.resetProgress();
 		this.setChanged();
 		this.sync();
 	}
@@ -82,38 +65,7 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 
 	@Override
 	public void tick() {
-		if (time > 0 && level != null) {
-			time--;
-			if (!level.isClientSide && time == 0) {
-				Optional<JarRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_JAR, inventory, level);
-				inventory.clear();
-				fluids.clear();
-				max_time = 0;
-				if (optional.isPresent()) {
-					JarRecipe r = optional.get();
-					if (!r.result.isEmpty())
-						inventory.addItem(r.result.copy());
-					if (!r.remain.isEmpty())
-						fluids.fill(r.remain.copy(), IFluidHandler.FluidAction.EXECUTE);
-				}
-				notifyTile(null);
-			}
-		}
-	}
-
-	public void resetProgress() {
-		max_time = 0;
-		time = 0;
-		recipe = null;
-		if (level != null) {
-			Optional<JarRecipe> optional = level.getRecipeManager().getRecipeFor(CuisineRecipe.RT_JAR, inventory, level);
-			if (optional.isPresent()) {
-				JarRecipe r = optional.get();
-				max_time = r.time;
-				time = max_time;
-				recipe = r.id;
-			}
-		}
+		timeHandler.tick();
 	}
 
 	public void dumpInventory() {
@@ -122,7 +74,7 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 			Containers.dropContents(level, this.getBlockPos().above(), inventory);
 		else
 			fluids.clear();
-		notifyTile(null);
+		notifyTile();
 	}
 
 
@@ -151,4 +103,8 @@ public class JarBlockEntity extends BaseBlockEntity implements TickableBlockEnti
 	}
 
 
+	@Override
+	public boolean processing() {
+		return timeHandler.processing();
+	}
 }
