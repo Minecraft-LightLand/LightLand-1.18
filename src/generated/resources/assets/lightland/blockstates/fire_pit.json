@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "lightland:fire_pit"
+      "model": "lightland:block/fire_pit"
     }
   }
 }

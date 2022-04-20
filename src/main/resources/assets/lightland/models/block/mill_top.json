@@ -1,6 +1,6 @@
 {
     "textures": {
-        "particle": "minecraft:blocks/stone",
+        "particle": "minecraft:block/stone",
         "top": "lightland:block/mill_top",
         "wood": "minecraft:block/oak_planks",
         "side": "minecraft:block/stone"
