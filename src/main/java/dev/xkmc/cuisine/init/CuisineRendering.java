@@ -2,6 +2,7 @@ package dev.xkmc.cuisine.init;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
+import dev.xkmc.cuisine.init.data.CuisineTreeType;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
@@ -25,8 +26,8 @@ public final class CuisineRendering {
 			}
 			return -1;
 		};
-		for (BlockEntry<?> entry : CuisineBlocks.LEAVE) {
-			blockColors.register(color, entry.get());
+		for (CuisineTreeType type : CuisineTreeType.values()) {
+			blockColors.register(color, type.leave.get());
 		}
 	}
 
@@ -39,8 +40,8 @@ public final class CuisineRendering {
 				return leave.getType().color;
 			return -1;
 		};
-		for (BlockEntry<?> entry : CuisineBlocks.LEAVE) {
-			itemColors.register(color, entry.get());
+		for (CuisineTreeType type : CuisineTreeType.values()) {
+			itemColors.register(color, type.leave.get());
 		}
 	}
 

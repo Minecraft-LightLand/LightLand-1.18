@@ -2,9 +2,9 @@ package dev.xkmc.cuisine.init.registrate;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.hikarishima.lightland.util.LootTableTemplate;
 import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
-import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlock;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;
@@ -27,9 +27,8 @@ import dev.xkmc.cuisine.init.data.WoodType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -43,10 +42,8 @@ public class CuisineBlocks {
 		REGISTRATE.creativeModeTab(() -> CuisineItems.TAB_MAIN);
 	}
 
-	public static final BlockEntry<CuisineLeaveBlock>[] LEAVE;
-	public static final BlockEntry<SaplingBlock>[] SAPLING;
-
-	public static final BlockEntry<DelegateBlock> PAN, JAR, BASIN, MILL, MORTAR;
+	public static final BlockEntry<DelegateBlock> PAN, JAR, BASIN, MILL, MORTAR,
+			FIRE_PIT, FIRE_PIT_STICK, FIRE_PIT_WOK, WOK;
 
 	public static final BlockEntityEntry<PanBlockEntity> TE_PAN;
 	public static final BlockEntityEntry<JarBlockEntity> TE_JAR;
@@ -57,30 +54,8 @@ public class CuisineBlocks {
 	static {
 		CuisineCropType.register();
 		CuisineTreeType.register();
-		// tree
-		{
-			int n = CuisineTreeType.values().length;
-			LEAVE = new BlockEntry[n];
-			SAPLING = new BlockEntry[n];
-			for (int i = 0; i < n; i++) {
-				CuisineTreeType type = CuisineTreeType.values()[i];
-				LEAVE[i] = REGISTRATE.block("leaves_" + type.getName(), p -> new CuisineLeaveBlock(type,
-								BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).randomTicks().noCollission()))
-						.blockstate(type::generate).loot(type::loot).addLayer(() -> RenderType::cutoutMipped)
-						.tag(BlockTags.MINEABLE_WITH_HOE, BlockTags.LEAVES).simpleItem().register();
-			}
-			for (int i = 0; i < n; i++) {
-				CuisineTreeType type = CuisineTreeType.values()[i];
-				SAPLING[i] = REGISTRATE.block("sapling_" + type.getName(), p -> new SaplingBlock(type.getGrower(),
-								BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
-						.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(),
-								pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
-						.addLayer(() -> RenderType::cutoutMipped).tag(BlockTags.SAPLINGS)
-						.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry,
-								pvd.modLoc("block/" + ctx.getName()))).build().register();
-			}
-			WoodType.register();
-		}
+		WoodType.register();
+
 		// basic tools
 		DelegateBlockProperties prop = DelegateBlockProperties.copy(Blocks.STONE).make(BlockBehaviour.Properties::noOcclusion);
 		{
@@ -137,25 +112,31 @@ public class CuisineBlocks {
 		}
 		// fire pit
 		{
-			REGISTRATE.block("fire_pit", p -> DelegateBlock.newBaseBlock(prop)).blockstate((ctx, pvd) ->
+			FIRE_PIT = REGISTRATE.block("fire_pit", p -> DelegateBlock.newBaseBlock(prop,
+							CuisineUtil.FIRE)).blockstate((ctx, pvd) ->
 							pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 									new ResourceLocation(Cuisine.MODID, "block/fire_pit"))))
-					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang().register();
+					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
-			REGISTRATE.block("fire_pit_with_sticks", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()))
+			FIRE_PIT_STICK = REGISTRATE.block("fire_pit_with_sticks", p -> DelegateBlock.newBaseBlock(prop,
+							CuisineUtil.FIRE))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_sticks"))))
-					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang().register();
+					.loot((table, block) -> table.add(block, LootTableTemplate.selfOrOther(block, FIRE_PIT.get(), Items.STICK, 3)))
+					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
-			REGISTRATE.block("fire_pit_with_wok", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()))
-					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
-							new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_wok"))))
-					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang().register();
-
-			REGISTRATE.block("wok", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()))
+			WOK = REGISTRATE.block("wok", p -> DelegateBlock.newBaseBlock(prop,
+							CuisineUtil.FIRE))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/wok"))))
-					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLoot().defaultLang().register();
+					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
+
+			FIRE_PIT_WOK = REGISTRATE.block("fire_pit_with_wok", p -> DelegateBlock.newBaseBlock(prop,
+							CuisineUtil.FIRE))
+					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
+							new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_wok"))))
+					.loot((table, block) -> table.add(block, LootTableTemplate.selfOrOther(block, FIRE_PIT.get(), WOK.get().asItem(), 1)))
+					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
 		}
 	}

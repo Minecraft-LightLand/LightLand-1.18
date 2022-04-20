@@ -10,6 +10,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -93,6 +94,24 @@ public class LootTableTemplate {
 				MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(hasEnchantment(Enchantments.SILK_TOUCH, 1)))
 		);
 		return inverted ? InvertedLootItemCondition.invert(ans) : ans;
+	}
+
+	public static LootItemCondition.Builder silk(boolean inverted) {
+		LootItemCondition.Builder ans = MatchTool.toolMatches(ItemPredicate.Builder.item().hasEnchantment(hasEnchantment(Enchantments.SILK_TOUCH, 1)));
+		return inverted ? InvertedLootItemCondition.invert(ans) : ans;
+	}
+
+	public static LootTable.Builder selfOrOther(Block block, Block base, Item other, int count) {
+		return LootTable.lootTable().withPool(
+						LootTableTemplate.getPool(1, 0)
+								.add(LootTableTemplate.getItem(base.asItem(), 1))
+								.add(LootTableTemplate.getItem(other, count))
+								.when(ExplosionCondition.survivesExplosion())
+								.when(LootTableTemplate.silk(true)))
+				.withPool(LootTableTemplate.getPool(1, 0)
+						.add(LootTableTemplate.getItem(block.asItem(), 1))
+						.when(LootTableTemplate.silk(false))
+				);
 	}
 
 }

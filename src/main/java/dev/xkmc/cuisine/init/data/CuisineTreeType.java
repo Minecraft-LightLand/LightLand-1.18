@@ -9,15 +9,20 @@ import dev.hikarishima.lightland.util.LootTableTemplate;
 import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -51,12 +56,26 @@ public enum CuisineTreeType {
 	private final ResourceLocation fruit_type;
 	public final int color;
 
+	public final BlockEntry<CuisineLeaveBlock> leave;
+	public final BlockEntry<SaplingBlock> sapling;
+
 	public final ItemEntry<Item> fruit;
 
 	CuisineTreeType(String fruit_type, int color, CuisineTags.AllItemTags... tags) {
 		this.fruit_type = new ResourceLocation(Cuisine.MODID, "block/fruit_" + fruit_type);
 		this.color = color;
 		this.fruit = REGISTRATE.item(getName(), Item::new).tag(CuisineTags.map(tags)).register();
+		this.leave = REGISTRATE.block("leaves_" + getName(), p -> new CuisineLeaveBlock(this,
+						BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).randomTicks().noCollission()))
+				.blockstate(this::blockstate).loot(this::loot).addLayer(() -> RenderType::cutoutMipped)
+				.tag(BlockTags.MINEABLE_WITH_HOE, BlockTags.LEAVES).simpleItem().register();
+		this.sapling = REGISTRATE.block("sapling_" + getName(), p -> new SaplingBlock(getGrower(),
+						BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))
+				.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(),
+						pvd.models().cross(ctx.getName(), pvd.blockTexture(ctx.getEntry()))))
+				.addLayer(() -> RenderType::cutoutMipped).tag(BlockTags.SAPLINGS)
+				.item().model((ctx, pvd) -> pvd.generated(ctx::getEntry,
+						pvd.modLoc("block/" + ctx.getName()))).build().register();
 	}
 
 	public String getName() {
@@ -68,11 +87,11 @@ public enum CuisineTreeType {
 	}
 
 	public BlockEntry<?> getLeave() {
-		return CuisineBlocks.LEAVE[ordinal()];
+		return leave;
 	}
 
 	public BlockEntry<?> getSapling() {
-		return CuisineBlocks.SAPLING[ordinal()];
+		return sapling;
 	}
 
 	public ItemEntry<?> getFruit() {
@@ -83,7 +102,7 @@ public enum CuisineTreeType {
 
 	private static final ResourceLocation FLOWER = new ResourceLocation(Cuisine.MODID, "block/flowers");
 
-	public void generate(DataGenContext<Block, CuisineLeaveBlock> ctx, RegistrateBlockstateProvider pvd) {
+	public void blockstate(DataGenContext<Block, CuisineLeaveBlock> ctx, RegistrateBlockstateProvider pvd) {
 		ModelFile leave = pvd.models().withExistingParent(ctx.getName(), "block/leaves")
 				.texture("all", new ResourceLocation(Cuisine.MODID, "block/leaves_" + getName()));
 		ModelFile flower = pvd.models().getBuilder("flowers_" + getName()).parent(new ModelFile.UncheckedModelFile(FLOWER))
@@ -112,6 +131,7 @@ public enum CuisineTreeType {
 										1 / 50f, 1 / 45f, 1 / 40f, 1 / 30f, 1 / 10f)))
 						.when(LootTableTemplate.shearOrSilk(true))));
 	}
+
 
 	private static final BeehiveDecorator BEEHIVE_005 = new BeehiveDecorator(0.05F);
 	public Holder<ConfiguredFeature<TreeConfiguration, ?>> feature;
