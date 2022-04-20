@@ -65,4 +65,9 @@ public class TypeInfo {
 	public boolean isArray() {
 		return cls.isArray();
 	}
+
+	@Override
+	public String toString() {
+		return "{cls = " + cls + ", type = " + type + "}";
+	}
 }

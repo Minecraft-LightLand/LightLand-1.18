@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "lightland:block/wok"
+    },
+    "facing=south": {
+      "model": "lightland:block/wok",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lightland:block/wok",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "lightland:block/wok",
+      "y": 90
     }
   }
 }

@@ -10,6 +10,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 
 import java.util.Optional;
 
+@SerialClass
 public class CookHandler<T extends CuisineTile<T> & BottleResultTile & CookTile, R extends CuisineRecipe<R, T> & TimeHandler.TimeRecipe> {
 
 	private final T tile;

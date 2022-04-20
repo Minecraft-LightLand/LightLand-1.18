@@ -3,6 +3,7 @@ package dev.xkmc.cuisine.init.registrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.util.LootTableTemplate;
+import dev.lcy0x1.block.BlockProxy;
 import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
@@ -64,8 +65,8 @@ public class CuisineBlocks {
 		// basic tools
 		DelegateBlockProperties prop = DelegateBlockProperties.copy(Blocks.STONE).make(BlockBehaviour.Properties::noOcclusion);
 		{
-			PAN = REGISTRATE.block("pan", p -> DelegateBlock.newBaseBlock(prop, PanBlock.TE, new PanBlock(),
-							CuisineUtil.FIRE, CuisineUtil.TAKE, CuisineUtil.LID, CuisineUtil.DUMP, CuisineUtil.ADD))
+			PAN = REGISTRATE.block("pan", p -> DelegateBlock.newBaseBlock(prop,
+							PanBlock.TE, new PanBlock(), CuisineUtil.FIRE, CuisineUtil.TAKE, CuisineUtil.LID, CuisineUtil.DUMP, CuisineUtil.ADD))
 					.item().defaultModel().build().blockstate((ctx, pvd) -> pvd.getMultipartBuilder(ctx.getEntry()).part()
 							.modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/pan_lit")))
 							.addModel().condition(BlockStateProperties.LIT, true).end())
@@ -73,22 +74,23 @@ public class CuisineBlocks {
 			TE_PAN = REGISTRATE.blockEntity("pan", PanBlockEntity::new).validBlock(PAN)
 					.renderer(() -> PanRenderer::new).register();
 
-			JAR = REGISTRATE.block("jar", p -> DelegateBlock.newBaseBlock(prop, JarBlock.TE,
-							CuisineUtil.TIME, CuisineUtil.DUMP, CuisineUtil.ADD))
+			JAR = REGISTRATE.block("jar", p -> DelegateBlock.newBaseBlock(prop,
+							JarBlock.TE, CuisineUtil.TIME, CuisineUtil.DUMP, CuisineUtil.ADD))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/jar"))))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE).simpleItem().register();
 			TE_JAR = REGISTRATE.blockEntity("jar", JarBlockEntity::new).validBlock(JAR).register();
 
-			BASIN = REGISTRATE.block("basin", p -> DelegateBlock.newBaseBlock(prop, BasinBlock.TE, new BasinBlock(),
-							CuisineUtil.TIME, CuisineUtil.DUMP, CuisineUtil.ADD))
+			BASIN = REGISTRATE.block("basin", p -> DelegateBlock.newBaseBlock(prop,
+							BasinBlock.TE, new BasinBlock(), CuisineUtil.TIME, CuisineUtil.DUMP, CuisineUtil.ADD))
 					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/basin"))))
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE).simpleItem().register();
 			TE_BASIN = REGISTRATE.blockEntity("basin", BasinBlockEntity::new).validBlock(BASIN)
 					.renderer(() -> BasinRenderer::new).register();
 
-			MILL = REGISTRATE.block("mill", p -> DelegateBlock.newBaseBlock(prop, MillBlock.TE, new MillBlock(),
+			MILL = REGISTRATE.block("mill", p -> DelegateBlock.newBaseBlock(prop,
+							MillBlock.TE, new MillBlock(),
 							CuisineUtil.DUMP, CuisineUtil.ADD, CuisineUtil.STEP))
 					.blockstate((ctx, pvd) -> {
 						ModelFile base = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/mill"));
@@ -103,7 +105,8 @@ public class CuisineBlocks {
 					}).build().register();
 			TE_MILL = REGISTRATE.blockEntity("mill", MillBlockEntity::new).validBlock(MILL).renderer(() -> MillRenderer::new).register();
 
-			MORTAR = REGISTRATE.block("mortar", p -> DelegateBlock.newBaseBlock(prop, MortarBlock.TE, new MortarBlock(),
+			MORTAR = REGISTRATE.block("mortar", p -> DelegateBlock.newBaseBlock(prop,
+							MortarBlock.TE, BlockProxy.HORIZONTAL, new MortarBlock(),
 							CuisineUtil.DUMP, CuisineUtil.ADD, CuisineUtil.STEP))
 					.blockstate((ctx, pvd) -> {
 						ModelFile mortar = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/mortar"));
@@ -118,26 +121,26 @@ public class CuisineBlocks {
 		// fire pit
 		{
 			FIRE_PIT = REGISTRATE.block("fire_pit", p -> DelegateBlock.newBaseBlock(prop,
-							CuisineUtil.FIRE, FirePitBlock.PUT, FirePitBlock.BURN)).blockstate((ctx, pvd) ->
-							pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
-									new ResourceLocation(Cuisine.MODID, "block/fire_pit"))))
+							BlockProxy.HORIZONTAL, CuisineUtil.FIRE, FirePitBlock.PUT, FirePitBlock.BURN))
+					.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
+							new ResourceLocation(Cuisine.MODID, "block/fire_pit"))))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
 			FIRE_PIT_STICK = REGISTRATE.block("fire_pit_with_sticks", p -> DelegateBlock.newBaseBlock(prop,
-							CuisineUtil.FIRE, FirePitBlock.BURN, FirePitBlock.STICK, CuisineUtil.DUMP, CuisineUtil.ADD))
-					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
+							BlockProxy.HORIZONTAL, CuisineUtil.FIRE, FirePitBlock.BURN, FirePitBlock.STICK, CuisineUtil.DUMP, CuisineUtil.ADD))
+					.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_sticks"))))
 					.loot((table, block) -> table.add(block, LootTableTemplate.selfOrOther(block, FIRE_PIT.get(), Items.STICK, 3)))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
-			WOK = REGISTRATE.block("wok", p -> DelegateBlock.newBaseBlock(prop))
-					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
+			WOK = REGISTRATE.block("wok", p -> DelegateBlock.newBaseBlock(prop, BlockProxy.HORIZONTAL))
+					.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/wok"))))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
 			FIRE_PIT_WOK = REGISTRATE.block("fire_pit_with_wok", p -> DelegateBlock.newBaseBlock(prop,
-							CuisineUtil.FIRE, FirePitBlock.BURN, FirePitBlock.WOK, CuisineUtil.DUMP, CuisineUtil.ADD))
-					.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
+							BlockProxy.HORIZONTAL, CuisineUtil.FIRE, FirePitBlock.BURN, FirePitBlock.WOK, CuisineUtil.DUMP, CuisineUtil.ADD))
+					.blockstate((ctx, pvd) -> pvd.horizontalBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
 							new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_wok"))))
 					.loot((table, block) -> table.add(block, LootTableTemplate.selfOrOther(block, FIRE_PIT.get(), WOK.get().asItem(), 1)))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
