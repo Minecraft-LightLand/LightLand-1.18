@@ -4,10 +4,10 @@ import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.AnimateTickBlockMethod;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
+import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -65,12 +65,7 @@ public class JarBlock implements OnClickBlockMethod, AnimateTickBlockMethod {
 		BlockEntity te = world.getBlockEntity(pos);
 		if (te instanceof JarBlockEntity jar) {
 			if (jar.max_time > 0) {
-				double d0 = pos.getX() + 1 - r.nextFloat() * 0.5F;
-				double d1 = pos.getY() + 1 - r.nextFloat() * 0.5F;
-				double d2 = pos.getZ() + 1 - r.nextFloat() * 0.5F;
-				if (r.nextInt(5) == 0) {
-					world.addParticle(ParticleTypes.END_ROD, d0, d1, d2, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D);
-				}
+				CuisineUtil.spawnParticle(world, pos, r);
 			}
 		}
 	}

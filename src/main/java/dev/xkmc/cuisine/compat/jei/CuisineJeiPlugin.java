@@ -3,10 +3,7 @@ package dev.xkmc.cuisine.compat.jei;
 import dev.hikarishima.lightland.compat.jei.screen.ExtraInfoScreen;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.base.Proxy;
-import dev.xkmc.cuisine.compat.jei.recipes.BasinRecipeCategory;
-import dev.xkmc.cuisine.compat.jei.recipes.JarRecipeCategory;
-import dev.xkmc.cuisine.compat.jei.recipes.MillRecipeCategory;
-import dev.xkmc.cuisine.compat.jei.recipes.PanRecipeCategory;
+import dev.xkmc.cuisine.compat.jei.recipes.*;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import mezz.jei.api.IModPlugin;
@@ -32,6 +29,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 	public final JarRecipeCategory JAR = new JarRecipeCategory();
 	public final BasinRecipeCategory BASIN = new BasinRecipeCategory();
 	public final MillRecipeCategory MILL = new MillRecipeCategory();
+	public final MortarRecipeCategory MORTAR = new MortarRecipeCategory();
 
 	public IGuiHelper GUI_HELPER;
 
@@ -60,6 +58,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 		registration.addRecipeCategories(JAR.init(helper));
 		registration.addRecipeCategories(BASIN.init(helper));
 		registration.addRecipeCategories(MILL.init(helper));
+		registration.addRecipeCategories(MORTAR.init(helper));
 		GUI_HELPER = helper;
 	}
 
@@ -73,6 +72,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 		registration.addRecipes(JAR.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_JAR));
 		registration.addRecipes(BASIN.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_BASIN));
 		registration.addRecipes(MILL.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_MILL));
+		registration.addRecipes(MORTAR.getRecipeType(), Proxy.getWorld().getRecipeManager().getAllRecipesFor(CuisineRecipe.RT_MORTAR));
 	}
 
 	@Override
@@ -85,6 +85,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 		registration.addRecipeCatalyst(CuisineBlocks.JAR.get().asItem().getDefaultInstance(), JAR.getRecipeType());
 		registration.addRecipeCatalyst(CuisineBlocks.BASIN.get().asItem().getDefaultInstance(), BASIN.getRecipeType());
 		registration.addRecipeCatalyst(CuisineBlocks.MILL.get().asItem().getDefaultInstance(), MILL.getRecipeType());
+		registration.addRecipeCatalyst(CuisineBlocks.MORTAR.get().asItem().getDefaultInstance(), MORTAR.getRecipeType());
 	}
 
 	@Override

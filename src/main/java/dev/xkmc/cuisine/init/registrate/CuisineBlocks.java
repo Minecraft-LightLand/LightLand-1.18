@@ -13,6 +13,9 @@ import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.mill.MillBlock;
 import dev.xkmc.cuisine.content.tools.mill.MillBlockEntity;
 import dev.xkmc.cuisine.content.tools.mill.MillRenderer;
+import dev.xkmc.cuisine.content.tools.mortar.MortarBlock;
+import dev.xkmc.cuisine.content.tools.mortar.MortarBlockEntity;
+import dev.xkmc.cuisine.content.tools.mortar.MortarRenderer;
 import dev.xkmc.cuisine.content.tools.pan.PanBlock;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanRenderer;
@@ -23,7 +26,6 @@ import dev.xkmc.cuisine.init.data.WoodType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -42,14 +44,13 @@ public class CuisineBlocks {
 	public static final BlockEntry<CuisineLeaveBlock>[] LEAVE;
 	public static final BlockEntry<SaplingBlock>[] SAPLING;
 
-	public static final BlockEntry<DelegateBlock> PAN, JAR, BASIN, MILL;
-
-	public static final BlockEntry<Block> MORTAR;
+	public static final BlockEntry<DelegateBlock> PAN, JAR, BASIN, MILL, MORTAR;
 
 	public static final BlockEntityEntry<PanBlockEntity> TE_PAN;
 	public static final BlockEntityEntry<JarBlockEntity> TE_JAR;
 	public static final BlockEntityEntry<BasinBlockEntity> TE_BASIN;
 	public static final BlockEntityEntry<MillBlockEntity> TE_MILL;
+	public static final BlockEntityEntry<MortarBlockEntity> TE_MORTAR;
 
 	static {
 		CuisineCropType.register();
@@ -79,17 +80,6 @@ public class CuisineBlocks {
 			WoodType.register();
 		}
 		// tools
-		{
-			MORTAR = REGISTRATE.block("mortar", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()))
-					.blockstate((ctx, pvd) -> {
-						ModelFile mortar = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/mortar"));
-						ModelFile pestle = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/pestle"));
-						pvd.getMultipartBuilder(ctx.getEntry())
-								.part().modelFile(mortar).addModel().end()
-								.part().modelFile(pestle).addModel().end();
-					}).item().defaultModel().build()
-					.tag(BlockTags.MINEABLE_WITH_PICKAXE).register();
-		}
 		{
 			DelegateBlockProperties prop = DelegateBlockProperties.copy(Blocks.STONE).make(BlockBehaviour.Properties::noOcclusion);
 			PAN = REGISTRATE.block("pan", p -> DelegateBlock.newBaseBlock(prop, PanBlock.TE, new PanBlock()))
@@ -126,6 +116,18 @@ public class CuisineBlocks {
 						pvd.getBuilder(ctx.getName()).parent(inv);
 					}).build().register();
 			TE_MILL = REGISTRATE.blockEntity("mill", MillBlockEntity::new).validBlock(MILL).renderer(() -> MillRenderer::new).register();
+
+
+			MORTAR = REGISTRATE.block("mortar", p -> DelegateBlock.newBaseBlock(prop, MortarBlock.TE, new MortarBlock()))
+					.blockstate((ctx, pvd) -> {
+						ModelFile mortar = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/mortar"));
+						ModelFile pestle = new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/pestle"));
+						pvd.getMultipartBuilder(ctx.getEntry())
+								.part().modelFile(mortar).addModel().end()
+								.part().modelFile(pestle).addModel().end();
+					}).item().defaultModel().build()
+					.tag(BlockTags.MINEABLE_WITH_PICKAXE).item().defaultModel().build().register();
+			TE_MORTAR = REGISTRATE.blockEntity("mortar", MortarBlockEntity::new).validBlock(MORTAR).renderer(() -> MortarRenderer::new).register();
 		}
 	}
 

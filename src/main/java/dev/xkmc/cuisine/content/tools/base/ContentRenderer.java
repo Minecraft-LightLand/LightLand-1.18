@@ -1,4 +1,4 @@
-package dev.xkmc.cuisine.content.tools;
+package dev.xkmc.cuisine.content.tools.base;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
@@ -76,6 +76,8 @@ public class ContentRenderer {
 	}
 
 	private static float renderFluids(Context ctx) {
+		if (ctx.max_fluid == 0)
+			return 0;
 		List<FluidStack> list = ctx.tile.getContents().stream()
 				.filter(e -> e instanceof TileInfoOverlay.FluidDrawable draw && !draw.stack().isEmpty())
 				.map(e -> ((TileInfoOverlay.FluidDrawable) e).stack()).toList();

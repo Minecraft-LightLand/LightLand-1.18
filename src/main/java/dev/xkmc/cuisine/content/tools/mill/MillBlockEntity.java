@@ -3,7 +3,7 @@ package dev.xkmc.cuisine.content.tools.mill;
 import dev.lcy0x1.base.*;
 import dev.lcy0x1.block.BlockContainer;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

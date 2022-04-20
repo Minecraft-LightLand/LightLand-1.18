@@ -1,0 +1,10 @@
+{
+  "ingredient": {
+    "item": "lightland:white_rice"
+  },
+  "result": {
+    "item": "lightland:rice_powder"
+  },
+  "step": 5,
+  "type": "lightland:mortar"
+}

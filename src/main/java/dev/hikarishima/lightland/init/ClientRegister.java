@@ -8,7 +8,7 @@ import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
 import dev.hikarishima.lightland.content.common.render.*;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
-import dev.xkmc.cuisine.content.tools.TileInfoOverlay;
+import dev.xkmc.cuisine.content.tools.base.TileInfoOverlay;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;

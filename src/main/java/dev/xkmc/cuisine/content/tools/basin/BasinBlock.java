@@ -8,10 +8,10 @@ import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.one.EntityInsideBlockMethod;
 import dev.lcy0x1.block.one.ShapeBlockMethod;
+import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -81,11 +81,7 @@ public class BasinBlock implements OnClickBlockMethod, FallOnBlockMethod, Animat
 	public boolean fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float height) {
 		if (level.getBlockEntity(pos) instanceof BasinBlockEntity te && te.step > 0) {
 			if (level.isClientSide()) {
-				Random r = level.getRandom();
-				double d0 = pos.getX() + 1 - r.nextFloat() * 0.5F;
-				double d1 = pos.getY() + 1 - r.nextFloat() * 0.5F;
-				double d2 = pos.getZ() + 1 - r.nextFloat() * 0.5F;
-				level.addParticle(ParticleTypes.END_ROD, d0, d1, d2, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D);
+				CuisineUtil.spawnParticle(level, pos, level.getRandom());
 			}
 			te.step();
 		}
@@ -98,13 +94,8 @@ public class BasinBlock implements OnClickBlockMethod, FallOnBlockMethod, Animat
 	public void animateTick(BlockState state, Level world, BlockPos pos, Random r) {
 		BlockEntity te = world.getBlockEntity(pos);
 		if (te instanceof BasinBlockEntity jar) {
-			if (jar.max_time > 0) {
-				double d0 = pos.getX() + 1 - r.nextFloat() * 0.5F;
-				double d1 = pos.getY() + 1 - r.nextFloat() * 0.5F;
-				double d2 = pos.getZ() + 1 - r.nextFloat() * 0.5F;
-				if (r.nextInt(5) == 0) {
-					world.addParticle(ParticleTypes.END_ROD, d0, d1, d2, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D, r.nextGaussian() * 0.005D);
-				}
+			if (jar.max_time > 0 && r.nextFloat() > 0.8) {
+				CuisineUtil.spawnParticle(world, pos, r);
 			}
 		}
 	}

@@ -4,6 +4,7 @@ import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.one.RenderShapeBlockMethod;
+import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.core.BlockPos;
@@ -56,15 +57,7 @@ public class MillBlock implements OnClickBlockMethod, RenderShapeBlockMethod {
 		}
 		if (te.step()) {
 			if (level.isClientSide()) {
-				Random random = level.getRandom();
-				double d0 = pos.getX() + 1 - random.nextFloat() * 0.5F;
-				double d1 = pos.getY() + 1 - random.nextFloat() * 0.5F;
-				double d2 = pos.getZ() + 1 - random.nextFloat() * 0.5F;
-				level.addParticle(ParticleTypes.END_ROD, d0, d1, d2,
-						random.nextGaussian() * 0.005D,
-						random.nextGaussian() * 0.005D,
-						random.nextGaussian() * 0.005D);
-
+				CuisineUtil.spawnParticle(level, pos, level.getRandom());
 			}
 		}
 		return InteractionResult.PASS;

@@ -8,6 +8,8 @@ import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipe;
 import dev.xkmc.cuisine.content.tools.mill.MillBlockEntity;
 import dev.xkmc.cuisine.content.tools.mill.MillRecipe;
+import dev.xkmc.cuisine.content.tools.mortar.MortarBlockEntity;
+import dev.xkmc.cuisine.content.tools.mortar.MortarRecipe;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanRecipe;
 import dev.xkmc.cuisine.init.Cuisine;
@@ -22,6 +24,7 @@ public class CuisineRecipe {
 	public static RecipeType<JarRecipe> RT_JAR;
 	public static RecipeType<BasinRecipe> RT_BASIN;
 	public static RecipeType<MillRecipe> RT_MILL;
+	public static RecipeType<MortarRecipe> RT_MORTAR;
 
 	public static final RegistryEntry<BaseRecipe.RecType<PanRecipe, PanRecipe, PanBlockEntity.RecipeContainer>> RS_PAN =
 			REGISTRATE.simple("pan", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PanRecipe.class, RT_PAN));
@@ -31,12 +34,15 @@ public class CuisineRecipe {
 			REGISTRATE.simple("basin", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(BasinRecipe.class, RT_BASIN));
 	public static final RegistryEntry<BaseRecipe.RecType<MillRecipe, MillRecipe, MillBlockEntity.RecipeContainer>> RS_MILL =
 			REGISTRATE.simple("mill", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(MillRecipe.class, RT_MILL));
+	public static final RegistryEntry<MortarRecipe.RecType<MortarRecipe, MortarRecipe, MortarBlockEntity.RecipeContainer>> RS_MORTAR =
+			REGISTRATE.simple("mortar", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(MortarRecipe.class, RT_MORTAR));
 
 	public static void registerRecipeType() {
 		RT_PAN = RecipeType.register(Cuisine.MODID + ":pan");
 		RT_JAR = RecipeType.register(Cuisine.MODID + ":jar");
 		RT_BASIN = RecipeType.register(Cuisine.MODID + ":basin");
 		RT_MILL = RecipeType.register(Cuisine.MODID + ":mill");
+		RT_MORTAR= RecipeType.register(Cuisine.MODID + ":mortar");
 	}
 
 	public static void register() {
