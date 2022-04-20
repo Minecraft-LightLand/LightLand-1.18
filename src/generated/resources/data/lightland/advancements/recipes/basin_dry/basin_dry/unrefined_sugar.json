@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lightland:jar/unrefined_sugar"
+      "lightland:basin_dry/unrefined_sugar"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lightland:jar/unrefined_sugar"
+        "recipe": "lightland:basin_dry/unrefined_sugar"
       }
     }
   },

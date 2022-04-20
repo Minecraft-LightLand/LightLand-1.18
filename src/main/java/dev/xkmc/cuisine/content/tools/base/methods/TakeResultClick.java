@@ -1,7 +1,6 @@
 package dev.xkmc.cuisine.content.tools.base.methods;
 
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
-import dev.xkmc.cuisine.content.tools.base.methods.TileClick;
 import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import net.minecraft.core.BlockPos;
@@ -24,7 +23,7 @@ public class TakeResultClick<T extends CuisineTile<T> & BottleResultTile> implem
 				if (!level.isClientSide()) {
 					if (!container.isEmpty())
 						stack.shrink(1);
-					pl.getInventory().placeItemBackInInventory(tile.getResult().split(1));
+					CuisineUtil.placeBack(pl, tile.getResult().split(1));
 					tile.notifyTile();
 				}
 				return InteractionResult.SUCCESS;

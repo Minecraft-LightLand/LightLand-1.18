@@ -2,6 +2,7 @@ package dev.xkmc.cuisine.init.data;
 
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.DataIngredient;
+import dev.xkmc.cuisine.content.tools.basin.BasinDryRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.basin.BasinRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.mill.MillRecipeBuilder;
@@ -86,10 +87,10 @@ public class RecipeGen {
 			unlock(pvd, new BasinRecipeBuilder(Ingredient.of(Items.SUGAR_CANE),
 					new FluidStack(CuisineFluids.SUGARCANE_JUICE.fluid.get(), 250),
 					5)::unlockedBy, Items.SUGAR_CANE)
-					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/sugarcane_juice"));
-			unlock(pvd, new BasinRecipeBuilder(new FluidStack(CuisineFluids.SUGARCANE_JUICE.fluid.get(), 250),
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "basin/sugarcane_juice"));
+			unlock(pvd, new BasinDryRecipeBuilder(new FluidStack(CuisineFluids.SUGARCANE_JUICE.fluid.get(), 250),
 					SimpleItem.UNREFINED_SUGAR.item.asStack(1), 100)::unlockedBy, Items.SUGAR_CANE)
-					.save(pvd, new ResourceLocation(Cuisine.MODID, "jar/unrefined_sugar"));
+					.save(pvd, new ResourceLocation(Cuisine.MODID, "basin_dry/unrefined_sugar"));
 		}
 		// mill
 		{

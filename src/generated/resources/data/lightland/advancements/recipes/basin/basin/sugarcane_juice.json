@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "lightland:jar/sugarcane_juice"
+      "lightland:basin/sugarcane_juice"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "lightland:jar/sugarcane_juice"
+        "recipe": "lightland:basin/sugarcane_juice"
       }
     }
   },

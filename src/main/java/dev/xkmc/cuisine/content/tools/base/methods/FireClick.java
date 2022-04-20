@@ -3,6 +3,7 @@ package dev.xkmc.cuisine.content.tools.base.methods;
 import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
 import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
 import dev.lcy0x1.block.one.LightBlockMethod;
+import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import dev.xkmc.cuisine.content.tools.base.tile.LitTile;
 import net.minecraft.core.BlockPos;
@@ -45,7 +46,7 @@ public class FireClick<T extends CuisineTile<T> & LitTile> implements TileClick<
 			if (!lit) {
 				level.playSound(pl, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
 				BlockState next = state.setValue(BlockStateProperties.LIT, true);
-				stack.hurtAndBreak(1, pl, (player) -> player.broadcastBreakEvent(hand));
+				CuisineUtil.hurtAndBreak(pl, stack, hand);
 				tile.onLit(level, pos, next);
 				return InteractionResult.SUCCESS;
 			} else {

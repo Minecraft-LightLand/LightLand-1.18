@@ -3,6 +3,8 @@ package dev.xkmc.cuisine.content.tools.base;
 import dev.xkmc.cuisine.content.tools.base.methods.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -41,4 +43,12 @@ public class CuisineUtil {
 		}
 	}
 
+	public static void placeBack(Player player, ItemStack stack) {
+		player.getInventory().placeItemBackInInventory(stack);
+	}
+
+
+	public static void hurtAndBreak(Player pl, ItemStack stack, InteractionHand hand) {
+		stack.hurtAndBreak(1, pl, (player) -> player.broadcastBreakEvent(hand));
+	}
 }
