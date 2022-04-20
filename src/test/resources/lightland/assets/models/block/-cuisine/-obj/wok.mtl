@@ -1,5 +1,5 @@
 newmtl mat1
-map_Kd cuisine:block/iron
+map_Kd #iron
 
 newmtl mat2
-map_Kd minecraft:blocks/oak_planks
+map_Kd #planks

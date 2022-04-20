@@ -1,0 +1,14 @@
+{
+  "__comment": "Add the following line on the same level as a 'model' declaration.",
+  "loader": "forge:obj",
+  "flip-v": true,
+  "model": "lightland:models/block/fire_pit.obj",
+  "textures": {
+	"_comment": "Can refer to in .mtl using #texture0",
+	"stone": "minecraft:block/cobblestone",
+	"planks": "minecraft:block/oak_planks",
+	"log": "minecraft:block/oak_log",
+	"iron": "lightland:block/iron",
+	"particle": "lightland:block/iron"
+  }
+}

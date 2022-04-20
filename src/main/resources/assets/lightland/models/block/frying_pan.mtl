@@ -30,7 +30,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd lightland:block/iron
+map_Kd #iron
 
 newmtl mat2
 Ns 96.078431
@@ -41,7 +41,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd minecraft:blocks/oak_planks
+map_Kd #planks
 
 newmtl mat2.001
 Ns 96.078431
@@ -52,4 +52,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd minecraft:blocks/oak_planks
+map_Kd #planks

@@ -133,7 +133,7 @@ public class CuisineBlocks {
 		// fire pit
 		{
 			REGISTRATE.block("fire_pit", Block::new).blockstate((ctx, pvd) -> {
-				pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "fire_pit.obj")));
+				pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "fire_pit")));
 			}).simpleItem().register();
 		}
 	}
