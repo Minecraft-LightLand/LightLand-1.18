@@ -135,6 +135,18 @@ public class CuisineBlocks {
 			REGISTRATE.block("fire_pit", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion())).blockstate((ctx, pvd) -> {
 				pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/fire_pit")));
 			}).simpleItem().register();
+
+			REGISTRATE.block("fire_pit_with_sticks", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion())).blockstate((ctx, pvd) -> {
+				pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_sticks")));
+			}).simpleItem().register();
+
+			REGISTRATE.block("fire_pit_with_wok", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion())).blockstate((ctx, pvd) -> {
+				pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/fire_pit_with_wok")));
+			}).simpleItem().register();
+
+			REGISTRATE.block("wok", p -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion())).blockstate((ctx, pvd) -> {
+				pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "block/wok")));
+			}).simpleItem().register();
 		}
 	}
 
