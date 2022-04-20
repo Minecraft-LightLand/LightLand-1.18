@@ -72,13 +72,15 @@ public class MortarBlockEntity extends BaseBlockEntity implements TickableBlockE
 		return List.of(inventory);
 	}
 
-	public void step() {
+	public boolean step() {
 		if (step > 0 && level != null) {
 			step--;
 			if (!level.isClientSide && step == 0) {
 				completeRecipe();
 			}
+			return true;
 		}
+		return false;
 	}
 
 	public void tick() {
