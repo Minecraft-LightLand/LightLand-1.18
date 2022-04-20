@@ -1,8 +1,6 @@
 package dev.lcy0x1.base;
 
 import dev.lcy0x1.serial.codec.AliasCollection;
-import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
-import dev.xkmc.cuisine.content.tools.mill.MillBlockEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;

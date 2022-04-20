@@ -2,7 +2,6 @@ package dev.xkmc.cuisine.content.tools.base.methods;
 
 import dev.lcy0x1.block.mult.AnimateTickBlockMethod;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
-import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import dev.xkmc.cuisine.content.tools.base.tile.TimeTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

@@ -28,6 +28,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public abstract class BaseCuisineRecipeCategory<T extends CuisineRecipe<T, ?>, C extends BaseCuisineRecipeCategory<T, C>> extends BaseRecipeCategory<T, C> {
 
+	protected static final ResourceLocation BG = new ResourceLocation(Cuisine.MODID, "textures/jei/background.png");
+
 	protected final BlockEntry<?> icon_item;
 	private final int max_fluid;
 	private final RecipeType<T> type;

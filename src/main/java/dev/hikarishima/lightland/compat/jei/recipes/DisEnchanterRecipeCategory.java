@@ -33,6 +33,8 @@ import java.util.Map;
 @ParametersAreNonnullByDefault
 public class DisEnchanterRecipeCategory extends BaseRecipeCategory<IMagicRecipe<?>, DisEnchanterRecipeCategory> {
 
+	protected static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
+
 	public DisEnchanterRecipeCategory() {
 		super(new ResourceLocation(LightLand.MODID, "disenchant"), cast(IMagicRecipe.class));
 	}

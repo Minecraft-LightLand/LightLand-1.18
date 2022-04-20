@@ -14,10 +14,10 @@ import java.util.List;
 public class CombinedTankWrapper implements IFluidHandler {
 
 	public enum Type {
-		INSERT, EXTRACT, ALL;
+		INSERT, EXTRACT, ALL
 	}
 
-	private List<Pair<IFluidHandler, Type>> list = new ArrayList<>();
+	private final List<Pair<IFluidHandler, Type>> list = new ArrayList<>();
 
 	protected int[] baseIndex;
 	protected int tankCount;

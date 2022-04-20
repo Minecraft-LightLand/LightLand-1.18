@@ -18,7 +18,7 @@ public class LLRegistryEvents {
 	}
 
 	@SubscribeEvent
-	public static void onFirstRegistry(RegistryEvent<Block> event){
+	public static void onFirstRegistry(RegistryEvent<Block> event) {
 		LightlandRecipe.registerRecipeType();
 		CuisineRecipes.registerRecipeType();
 	}

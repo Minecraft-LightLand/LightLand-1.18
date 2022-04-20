@@ -118,7 +118,7 @@ public class OverlayManager {
 			gui.setupOverlayRenderState(true, false, texture);
 		}
 
-		public Rect get(String str){
+		public Rect get(String str) {
 			return getComp(str);
 		}
 

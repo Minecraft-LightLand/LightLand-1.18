@@ -6,8 +6,8 @@ import dev.hikarishima.lightland.content.magic.products.MagicProduct;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.hikarishima.lightland.network.config.SpellDataConfig;
-import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.SerialClass;
+import dev.lcy0x1.serial.codec.TagCodec;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -26,15 +26,15 @@ public class SpellConfig {
 	public static <C extends SpellConfig> C get(Spell<C, ?> spell, Level world, Player player) {
 		C ans = SpellDataConfig.getConfig(spell.getRegistryName());
 
-        IMagicRecipe<?> r = IMagicRecipe.getMap(world, MagicRegistry.MPT_SPELL.get()).get(spell);
-        if (r == null)
-            return ans;
-        MagicProduct<?, ?> p = LLPlayerData.get(player).magicHolder.getProduct(r);
-        if (p == null || !p.usable())
-            return ans;
-        ans = makeCopy(ans);
-        ans.mana_cost += p.getCost() * ans.factor;
-        ans.spell_load += p.getCost() * ans.factor;
+		IMagicRecipe<?> r = IMagicRecipe.getMap(world, MagicRegistry.MPT_SPELL.get()).get(spell);
+		if (r == null)
+			return ans;
+		MagicProduct<?, ?> p = LLPlayerData.get(player).magicHolder.getProduct(r);
+		if (p == null || !p.usable())
+			return ans;
+		ans = makeCopy(ans);
+		ans.mana_cost += p.getCost() * ans.factor;
+		ans.spell_load += p.getCost() * ans.factor;
 
 		return ans;
 	}

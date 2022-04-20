@@ -1,9 +1,9 @@
 package dev.hikarishima.lightland.content.common.capability.player;
 
 import dev.lcy0x1.base.Proxy;
-import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
+import dev.lcy0x1.serial.codec.TagCodec;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.player.Player;

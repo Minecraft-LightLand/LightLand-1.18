@@ -35,6 +35,8 @@ import java.util.stream.Collectors;
 @MethodsReturnNonnullByDefault
 public class MagicCraftRecipeCategory extends BaseRecipeCategory<AbstractRitualRecipe<?>, MagicCraftRecipeCategory> {
 
+	protected static final ResourceLocation BG = new ResourceLocation(LightLand.MODID, "textures/jei/background.png");
+
 	public MagicCraftRecipeCategory() {
 		super(new ResourceLocation(LightLand.MODID, "ritual"), cast(AbstractRitualRecipe.class));
 	}

@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 
 public class ExceptionHandler {
 
-	public static <T> T parse(Supplier<T> sup){
+	public static <T> T parse(Supplier<T> sup) {
 		return sup.get();
 	}
 

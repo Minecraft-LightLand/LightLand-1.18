@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.util;
+package dev.lcy0x1.base;
 
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;

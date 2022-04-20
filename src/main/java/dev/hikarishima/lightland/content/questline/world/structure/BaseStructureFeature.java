@@ -2,7 +2,6 @@ package dev.hikarishima.lightland.content.questline.world.structure;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.PostPlacementProcessor;

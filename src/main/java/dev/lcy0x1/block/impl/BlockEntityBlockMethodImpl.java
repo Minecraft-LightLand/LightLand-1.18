@@ -27,7 +27,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * To make it menu show name, implements NameSetable <br>
  * To make it drop content when break, implements Container or BlockContainer <br>
  * To make it output redstone signal, implements Container <br>
- * */
+ */
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public record BlockEntityBlockMethodImpl<T extends BlockEntity>(

@@ -1,23 +1,12 @@
 package dev.hikarishima.lightland.compat.jei.recipes;
 
-import com.tterrag.registrate.util.entry.BlockEntry;
-import dev.xkmc.cuisine.init.Cuisine;
-import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -25,10 +14,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public abstract class BaseRecipeCategory<T, C extends BaseRecipeCategory<T, C>> implements IRecipeCategory<T> {
 
-	protected static final ResourceLocation BG = new ResourceLocation(Cuisine.MODID, "textures/jei/background.png");
-
 	@SuppressWarnings("unchecked")
-	public static <T extends R, R> Class<T> cast(Class<R> cls){
+	public static <T extends R, R> Class<T> cast(Class<R> cls) {
 		return (Class<T>) cls;
 	}
 

@@ -1,9 +1,7 @@
 package dev.xkmc.cuisine.init;
 
-import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
 import dev.xkmc.cuisine.init.data.CuisineTreeType;
-import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColor;

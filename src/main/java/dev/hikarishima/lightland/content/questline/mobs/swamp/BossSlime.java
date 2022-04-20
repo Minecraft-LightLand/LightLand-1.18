@@ -2,10 +2,10 @@ package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.common.item.generic.GenericTieredItem;
-import dev.hikarishima.lightland.util.LootTableTemplate;
 import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
+import dev.lcy0x1.base.LootTableTemplate;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;

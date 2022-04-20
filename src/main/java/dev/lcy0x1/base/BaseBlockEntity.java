@@ -1,9 +1,9 @@
 package dev.lcy0x1.base;
 
 import dev.hikarishima.lightland.util.annotation.ServerOnly;
-import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.ExceptionHandler;
 import dev.lcy0x1.serial.SerialClass;
+import dev.lcy0x1.serial.codec.TagCodec;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

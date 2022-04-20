@@ -14,7 +14,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Objects;
 
 @OnlyIn(Dist.CLIENT)
 @MethodsReturnNonnullByDefault
@@ -27,7 +26,7 @@ public class RitualRenderer implements BlockEntityRenderer<RitualTE> {
 
 	@Override
 	public void render(RitualTE te, float partial, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {
-		renderItemAbove(te.getItem(0),1.5, te.getLevel(), partial, matrix, buffer, light, overlay);
+		renderItemAbove(te.getItem(0), 1.5, te.getLevel(), partial, matrix, buffer, light, overlay);
 	}
 
 	public static void renderItemAbove(ItemStack stack, double height, Level level, float partial, PoseStack matrix, MultiBufferSource buffer, int light, int overlay) {

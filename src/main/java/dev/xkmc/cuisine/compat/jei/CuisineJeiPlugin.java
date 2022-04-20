@@ -1,8 +1,8 @@
 package dev.xkmc.cuisine.compat.jei;
 
 import dev.hikarishima.lightland.compat.jei.screen.ExtraInfoScreen;
-import dev.hikarishima.lightland.init.LightLand;
 import dev.xkmc.cuisine.compat.jei.recipes.*;
+import dev.xkmc.cuisine.init.Cuisine;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -21,7 +21,7 @@ public class CuisineJeiPlugin implements IModPlugin {
 
 	public static CuisineJeiPlugin INSTANCE;
 
-	public final ResourceLocation UID = new ResourceLocation(LightLand.MODID, "cuisine");
+	public final ResourceLocation UID = new ResourceLocation(Cuisine.MODID, "cuisine");
 
 	public final List<BaseCuisineRecipeCategory<?, ?>> LIST = List.of(
 			new PanRecipeCategory(),

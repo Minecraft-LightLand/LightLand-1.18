@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.network;
 
-import dev.lcy0x1.serial.codec.TagCodec;
 import dev.lcy0x1.serial.SerialClass;
+import dev.lcy0x1.serial.codec.TagCodec;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;

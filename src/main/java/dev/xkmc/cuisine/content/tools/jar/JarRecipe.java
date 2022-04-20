@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.content.tools.jar;
 
-import dev.lcy0x1.recipe.BaseRecipe;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
