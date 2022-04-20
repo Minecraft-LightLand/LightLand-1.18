@@ -1,0 +1,17 @@
+# Blender MTL File: 'None'
+# Material Count: 5
+
+newmtl cobblestone
+map_Kd minecraft:blocks/cobblestone
+
+newmtl cobblestone_planks_oak
+map_Kd minecraft:blocks/oak_planks
+
+newmtl iron
+map_Kd lightland:block/iron
+
+newmtl planks
+map_Kd lightland:block/iron
+
+newmtl planks_planks_oak
+map_Kd minecraft:blocks/oak_planks

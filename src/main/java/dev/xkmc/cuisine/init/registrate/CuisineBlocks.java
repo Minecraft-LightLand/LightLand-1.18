@@ -26,6 +26,7 @@ import dev.xkmc.cuisine.init.data.WoodType;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -79,7 +80,7 @@ public class CuisineBlocks {
 			}
 			WoodType.register();
 		}
-		// tools
+		// basic tools
 		{
 			DelegateBlockProperties prop = DelegateBlockProperties.copy(Blocks.STONE).make(BlockBehaviour.Properties::noOcclusion);
 			PAN = REGISTRATE.block("pan", p -> DelegateBlock.newBaseBlock(prop, PanBlock.TE, new PanBlock()))
@@ -128,6 +129,12 @@ public class CuisineBlocks {
 					}).item().defaultModel().build()
 					.tag(BlockTags.MINEABLE_WITH_PICKAXE).item().defaultModel().build().register();
 			TE_MORTAR = REGISTRATE.blockEntity("mortar", MortarBlockEntity::new).validBlock(MORTAR).renderer(() -> MortarRenderer::new).register();
+		}
+		// fire pit
+		{
+			REGISTRATE.block("fire_pit", Block::new).blockstate((ctx, pvd) -> {
+				pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(new ResourceLocation(Cuisine.MODID, "fire_pit.obj")));
+			}).simpleItem().register();
 		}
 	}
 
