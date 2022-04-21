@@ -5,6 +5,10 @@
 	"mill": "磨",
 	"mortar": "臼",
 	"pan": "炖锅",
+	"fire_pit": "火塘",
+	"fire_pit_with_sticks": "火塘与烧烤架",
+	"fire_pit_with_wok": "火塘与炒锅",
+	"wok": "炒锅",
 
 	"chili": "辣椒",
 	"chinese_cabbage": "大白菜",
@@ -117,6 +121,29 @@
 		  "mandarin": "橘子",
 		  "orange": "甜橙",
 		  "pomelo": "柚子"
+		}
+	  ]
+	},
+	"-meat": {
+	  "path": "item.lightland",
+	  "reverse": true,
+	  "list": [
+		{
+		  "cubed": "块",
+		  "sliced": "片",
+		  "shredded": "丝",
+		  "diced": "丁",
+		  "minced": "馅",
+		  "paste": "酱"
+		},
+		{
+		  "chicken": "鸡肉",
+		  "pork": "猪肉",
+		  "beef": "牛肉",
+		  "mutton": "羊肉",
+		  "rabbit": "兔肉",
+		  "salmon": "三文鱼",
+		  "cod": "鳕鱼"
 		}
 	  ]
 	}

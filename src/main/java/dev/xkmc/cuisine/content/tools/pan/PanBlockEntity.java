@@ -2,7 +2,7 @@ package dev.xkmc.cuisine.content.tools.pan;
 
 import dev.lcy0x1.block.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.handlers.BottledResultHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.ContainerResultHandler;
 import dev.xkmc.cuisine.content.tools.base.handlers.CookHandler;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
 import dev.xkmc.cuisine.content.tools.base.tile.CookTile;
@@ -34,7 +34,7 @@ public class PanBlockEntity extends CuisineTankTile<PanBlockEntity> implements T
 	private BlockState prevState = null;
 
 	@SerialClass.SerialField(toClient = true)
-	private final BottledResultHandler<PanBlockEntity> resultHandler = new BottledResultHandler<>(this);
+	private final ContainerResultHandler<PanBlockEntity> resultHandler = new ContainerResultHandler<>(this);
 	@SerialClass.SerialField(toClient = true)
 	private final CookHandler<PanBlockEntity, PanRecipe> cookHandler = new CookHandler<>(this, CuisineRecipes.RT_PAN.get(), resultHandler);
 

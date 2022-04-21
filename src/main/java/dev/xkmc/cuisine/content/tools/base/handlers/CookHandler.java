@@ -18,7 +18,7 @@ public class CookHandler<T extends CuisineTile<T> & CookTile, R extends CuisineR
 	private final ResultHandler<T> handler;
 
 	@SerialClass.SerialField
-	private ItemStack result;
+	private ItemStack result = ItemStack.EMPTY;
 
 	@SerialClass.SerialField(toClient = true)
 	public int cooking_max = 0, cooking = 0;

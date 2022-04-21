@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:paste_chicken",
+    "lightland:minced_chicken",
+    "lightland:shredded_chicken",
+    "lightland:sliced_chicken",
+    "lightland:diced_chicken",
+    "lightland:cubed_chicken",
+    "lightland:paste_pork",
+    "lightland:minced_pork",
+    "lightland:shredded_pork",
+    "lightland:sliced_pork",
+    "lightland:diced_pork",
+    "lightland:cubed_pork",
+    "lightland:paste_rabbit",
+    "lightland:minced_rabbit",
+    "lightland:shredded_rabbit",
+    "lightland:sliced_rabbit",
+    "lightland:diced_rabbit",
+    "lightland:cubed_rabbit"
+  ]
+}

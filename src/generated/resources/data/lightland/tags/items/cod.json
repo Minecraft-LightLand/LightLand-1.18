@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:paste_cod",
+    "lightland:minced_cod",
+    "lightland:shredded_cod",
+    "lightland:sliced_cod",
+    "lightland:diced_cod",
+    "lightland:cubed_cod"
+  ]
+}

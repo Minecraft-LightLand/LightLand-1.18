@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:cubed_chicken",
+    "lightland:cubed_pork",
+    "lightland:cubed_beef",
+    "lightland:cubed_mutton",
+    "lightland:cubed_rabbit",
+    "lightland:cubed_salmon",
+    "lightland:cubed_cod"
+  ]
+}

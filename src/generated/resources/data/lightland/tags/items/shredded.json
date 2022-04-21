@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:shredded_chicken",
+    "lightland:shredded_pork",
+    "lightland:shredded_beef",
+    "lightland:shredded_mutton",
+    "lightland:shredded_rabbit",
+    "lightland:shredded_salmon",
+    "lightland:shredded_cod"
+  ]
+}

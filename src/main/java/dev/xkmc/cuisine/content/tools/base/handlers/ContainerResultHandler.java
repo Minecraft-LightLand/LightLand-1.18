@@ -6,18 +6,18 @@ import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import net.minecraft.world.item.ItemStack;
 
 @SerialClass
-public class BottledResultHandler<T extends CuisineTile<T> & BottleResultTile> extends ResultHandler<T> {
+public class ContainerResultHandler<T extends CuisineTile<T> & BottleResultTile> extends ResultHandler<T> {
 
 	@SerialClass.SerialField(toClient = true)
 	public ItemStack result = ItemStack.EMPTY;
 
-	public BottledResultHandler(T tile) {
+	public ContainerResultHandler(T tile) {
 		super(tile);
 	}
 
 	@Override
 	public void addResult(ItemStack stack) {
-
+		result = stack;
 	}
 
 	@Override

@@ -2,9 +2,10 @@ package dev.xkmc.cuisine.content.tools.firepit.wok;
 
 import dev.lcy0x1.block.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.handlers.BottledResultHandler;
-import dev.xkmc.cuisine.content.tools.base.handlers.CookHandler;
+import dev.lcy0x1.util.Lock;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.content.tools.base.handlers.ContainerResultHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.CookHandler;
 import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CookTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTankTile;
@@ -22,7 +23,7 @@ public class FirePitWokBlockEntity extends CuisineTankTile<FirePitWokBlockEntity
 	public static final int MAX_FLUID = 8 * 50;
 
 	@SerialClass.SerialField(toClient = true)
-	private final BottledResultHandler<FirePitWokBlockEntity> resultHandler = new BottledResultHandler<>(this);
+	private final ContainerResultHandler<FirePitWokBlockEntity> resultHandler = new ContainerResultHandler<>(this);
 	@SerialClass.SerialField(toClient = true)
 	private final CookHandler<FirePitWokBlockEntity, FirePitWokRecipe> cookHandler =
 			new CookHandler<>(this, CuisineRecipes.RT_WOK.get(), resultHandler);
@@ -36,12 +37,16 @@ public class FirePitWokBlockEntity extends CuisineTankTile<FirePitWokBlockEntity
 				.setExtract(() -> false);
 	}
 
+	private final Lock lock = new Lock();
+
 	@Override
 	public void notifyTile() {
-		cookHandler.stopCooking();
-		cookHandler.startCooking();
-		setChanged();
-		sync();
+		lock.execute(()->{
+			cookHandler.stopCooking();
+			cookHandler.startCooking();
+			setChanged();
+			sync();
+		});
 	}
 
 	@Override

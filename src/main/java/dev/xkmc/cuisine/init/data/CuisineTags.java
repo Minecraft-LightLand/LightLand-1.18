@@ -1,5 +1,6 @@
 package dev.xkmc.cuisine.init.data;
 
+import com.google.common.collect.Lists;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
@@ -160,6 +161,9 @@ public class CuisineTags {
 	}
 
 	public enum AllItemTags {
+		CUBED, DICED, SLICED, SHREDDED, MINCED, PASTE,
+		CHICKEN, BEEF, PORK, MUTTON, RABBIT, COD, SALMON,
+		RED_MEAT, WHITE_MEAT, FISH,
 		STAPLE, MEAT, VEGES, SIDE, FRUIT, CONDIMENT,
 		SEAFOOD, ABSORB_SALT,
 		GREASY, SALTY, SWEET, SPICY, NUMB, SOUR, KELP, SESAME,
@@ -331,8 +335,14 @@ public class CuisineTags {
 	}
 
 	@SuppressWarnings({"unsafe", "unchecked"})
-	public static TagKey<Item>[] map(AllItemTags[] tags) {
+	public static TagKey<Item>[] map(AllItemTags... tags) {
 		return (TagKey<Item>[]) Arrays.stream(tags).map(e -> e.tag).toArray(TagKey[]::new);
+	}
+
+
+	@SuppressWarnings({"unsafe", "unchecked"})
+	public static TagKey<Item>[] map(AllItemTags tag, AllItemTags... tags) {
+		return (TagKey<Item>[]) Lists.asList(tag, tags).stream().map(e -> e.tag).toArray(TagKey[]::new);
 	}
 
 }

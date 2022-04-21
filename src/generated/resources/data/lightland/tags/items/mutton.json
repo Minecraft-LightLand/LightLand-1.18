@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:paste_mutton",
+    "lightland:minced_mutton",
+    "lightland:shredded_mutton",
+    "lightland:sliced_mutton",
+    "lightland:diced_mutton",
+    "lightland:cubed_mutton"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:paste_salmon",
+    "lightland:minced_salmon",
+    "lightland:shredded_salmon",
+    "lightland:sliced_salmon",
+    "lightland:diced_salmon",
+    "lightland:cubed_salmon"
+  ]
+}

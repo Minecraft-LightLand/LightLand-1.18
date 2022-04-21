@@ -39,14 +39,16 @@ public class PanRecipe extends BaseCookingRecipe<PanRecipe, PanBlockEntity> impl
 			return false;
 		List<ItemStack> remain_item = new ArrayList<>();
 		for (ItemStack stack : inv.getAsList()) {
-			remain_item.add(stack.copy());
+			if (!stack.isEmpty())
+				remain_item.add(stack.copy());
 		}
 		List<Ingredient> items = new ArrayList<>(item_ingredients);
 		if (listFilterItem(items, remain_item))
 			return false;
 		List<FluidStack> remain_fluid = new ArrayList<>();
 		for (FluidStack stack : inv.getTile().fluids.getAsList()) {
-			remain_fluid.add(stack.copy());
+			if (!stack.isEmpty())
+				remain_fluid.add(stack.copy());
 		}
 		List<FluidStack> fluids = new ArrayList<>(fluid_ingredients);
 		if (listFilterFluid(fluids, remain_fluid))

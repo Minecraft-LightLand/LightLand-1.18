@@ -2,8 +2,9 @@ package dev.xkmc.cuisine.content.tools.firepit.stick;
 
 import dev.lcy0x1.block.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
+import dev.lcy0x1.util.Lock;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
-import dev.xkmc.cuisine.content.tools.base.handlers.BottledResultHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.ContainerResultHandler;
 import dev.xkmc.cuisine.content.tools.base.handlers.CookHandler;
 import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CookTile;
@@ -19,7 +20,7 @@ public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity
 		LitTile, BottleResultTile, CookTile {
 
 	@SerialClass.SerialField(toClient = true)
-	private final BottledResultHandler<FirePitStickBlockEntity> resultHandler = new BottledResultHandler<>(this);
+	private final ContainerResultHandler<FirePitStickBlockEntity> resultHandler = new ContainerResultHandler<>(this);
 	@SerialClass.SerialField(toClient = true)
 	private final CookHandler<FirePitStickBlockEntity, FirePitStickRecipe> cookHandler =
 			new CookHandler<>(this, CuisineRecipes.RT_STICK.get(), resultHandler);
@@ -28,12 +29,16 @@ public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity
 		super(type, pos, state, t -> new RecipeContainer<>(t, 4).setMax(1).add(t));
 	}
 
+	private final Lock lock = new Lock();
+
 	@Override
 	public void notifyTile() {
-		cookHandler.stopCooking();
-		cookHandler.startCooking();
-		setChanged();
-		sync();
+		lock.execute(() -> {
+			cookHandler.stopCooking();
+			cookHandler.startCooking();
+			setChanged();
+			sync();
+		});
 	}
 
 	@Override

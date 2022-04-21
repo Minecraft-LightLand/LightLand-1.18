@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:paste_chicken",
+    "lightland:paste_pork",
+    "lightland:paste_beef",
+    "lightland:paste_mutton",
+    "lightland:paste_rabbit",
+    "lightland:paste_salmon",
+    "lightland:paste_cod"
+  ]
+}

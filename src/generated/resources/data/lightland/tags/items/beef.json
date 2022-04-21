@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "lightland:paste_beef",
+    "lightland:minced_beef",
+    "lightland:shredded_beef",
+    "lightland:sliced_beef",
+    "lightland:diced_beef",
+    "lightland:cubed_beef"
+  ]
+}
