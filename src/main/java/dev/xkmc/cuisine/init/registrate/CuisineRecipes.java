@@ -20,7 +20,7 @@ import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 
-import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
+import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
 
 public class CuisineRecipes {
 

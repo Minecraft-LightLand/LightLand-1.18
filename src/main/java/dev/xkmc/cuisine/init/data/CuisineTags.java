@@ -4,7 +4,6 @@ import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
-import dev.hikarishima.lightland.init.data.LangData;
 import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -27,7 +26,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
+import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
 
 public class CuisineTags {
 

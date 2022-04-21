@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.content.tools.basin;
 
-import dev.hikarishima.lightland.util.damage.DamageUtil;
 import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
 import dev.lcy0x1.block.mult.FallOnBlockMethod;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
@@ -8,6 +7,7 @@ import dev.lcy0x1.block.one.EntityInsideBlockMethod;
 import dev.lcy0x1.block.one.ShapeBlockMethod;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
+import dev.xkmc.cuisine.util.DamageUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;

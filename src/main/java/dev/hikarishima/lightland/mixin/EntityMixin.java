@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.mixin;
 
 import dev.hikarishima.lightland.content.archery.feature.bow.GlowTargetAimFeature;
-import dev.hikarishima.lightland.util.math.RayTraceUtil;
+import dev.hikarishima.lightland.util.RayTraceUtil;
 import dev.lcy0x1.block.DelegateBlockImpl;
 import dev.lcy0x1.block.mult.FallOnBlockMethod;
 import net.minecraft.core.BlockPos;

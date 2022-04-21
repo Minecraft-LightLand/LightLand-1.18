@@ -2,9 +2,9 @@ package dev.hikarishima.lightland.content.common.item.backpack;
 
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.LightlandMenu;
-import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import dev.lcy0x1.menu.BaseContainerMenu;
 import dev.lcy0x1.menu.SpriteManager;
+import dev.lcy0x1.util.ServerOnly;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.FriendlyByteBuf;

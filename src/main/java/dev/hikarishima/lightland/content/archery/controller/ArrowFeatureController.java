@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.archery.feature.types.OnShootFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericArrowItem;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.common.entity.GenericArrowEntity;
-import dev.hikarishima.lightland.util.GenericItemStack;
+import dev.lcy0x1.util.GenericItemStack;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;

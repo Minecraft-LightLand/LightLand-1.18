@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.compat.jei.recipes;
+package dev.lcy0x1.base;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

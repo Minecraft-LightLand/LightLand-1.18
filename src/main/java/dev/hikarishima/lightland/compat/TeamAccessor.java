@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.compat;
 
 import dev.ftb.mods.ftbteams.FTBTeamsAPI;
-import dev.hikarishima.lightland.util.annotation.ServerOnly;
+import dev.lcy0x1.util.ServerOnly;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.compat.jei.recipes;
 
 import com.tterrag.registrate.util.entry.BlockEntry;
-import dev.hikarishima.lightland.compat.jei.recipes.BaseRecipeCategory;
+import dev.lcy0x1.base.BaseRecipeCategory;
 import dev.lcy0x1.base.Proxy;
 import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
 import dev.xkmc.cuisine.init.Cuisine;

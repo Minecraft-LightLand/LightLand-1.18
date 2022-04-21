@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.util;
+package dev.lcy0x1.util;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

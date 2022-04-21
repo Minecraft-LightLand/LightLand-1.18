@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.archery.feature.bow;
 
 import dev.hikarishima.lightland.content.archery.feature.types.OnPullFeature;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
-import dev.hikarishima.lightland.util.GenericItemStack;
+import dev.lcy0x1.util.GenericItemStack;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

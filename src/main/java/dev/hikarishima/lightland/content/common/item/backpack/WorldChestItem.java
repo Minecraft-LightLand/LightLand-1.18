@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.common.capability.worldstorage.StorageC
 import dev.hikarishima.lightland.content.common.capability.worldstorage.WorldStorage;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
-import dev.hikarishima.lightland.util.annotation.ServerOnly;
+import dev.lcy0x1.util.ServerOnly;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

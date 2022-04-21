@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.magic.render.SpellComponent;
 import dev.hikarishima.lightland.content.magic.spell.internal.ActivationConfig;
 import dev.hikarishima.lightland.content.magic.spell.internal.SpellConfig;
 import dev.hikarishima.lightland.init.registrate.LightlandEntities;
-import dev.hikarishima.lightland.util.math.RayTraceUtil;
+import dev.hikarishima.lightland.util.RayTraceUtil;
 import dev.lcy0x1.base.BaseEntity;
 import dev.lcy0x1.serial.SerialClass;
 import net.minecraft.world.entity.EntityType;

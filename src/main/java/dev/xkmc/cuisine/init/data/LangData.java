@@ -7,6 +7,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 
 import javax.annotation.Nullable;
+import java.util.Locale;
 
 public enum LangData {
 	TOOLTIP_FLUID_TITLE("tooltip.fluid.title", "Fluid:", 0, ChatFormatting.GRAY),
@@ -25,6 +26,10 @@ public enum LangData {
 		this.format = format;
 	}
 
+	public static String asId(String name) {
+		return name.toLowerCase(Locale.ROOT);
+	}
+
 	public MutableComponent get(Object... args) {
 		if (args.length != arg)
 			throw new IllegalArgumentException("for " + name() + ": expect " + arg + " parameters, got " + args.length);
@@ -39,7 +44,7 @@ public enum LangData {
 		for (LangData lang : LangData.values()) {
 			pvd.add(lang.key, lang.def);
 		}
-		pvd.add("itemGroup.lightland.cuisine", "Cuisine");
+		pvd.add("itemGroup." + Cuisine.MODID + ".cuisine", "Cuisine");
 	}
 
 }

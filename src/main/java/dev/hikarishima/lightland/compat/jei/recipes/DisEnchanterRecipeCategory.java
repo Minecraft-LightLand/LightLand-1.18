@@ -7,6 +7,7 @@ import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandMenu;
+import dev.lcy0x1.base.BaseRecipeCategory;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;

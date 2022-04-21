@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.util.annotation;
+package dev.lcy0x1.util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

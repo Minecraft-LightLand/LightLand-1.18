@@ -2,8 +2,8 @@ package dev.hikarishima.lightland.content.common.item.backpack;
 
 import dev.hikarishima.lightland.content.common.capability.worldstorage.StorageContainer;
 import dev.hikarishima.lightland.init.registrate.LightlandMenu;
-import dev.hikarishima.lightland.util.annotation.ServerOnly;
 import dev.lcy0x1.menu.BaseContainerMenu;
+import dev.lcy0x1.util.ServerOnly;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

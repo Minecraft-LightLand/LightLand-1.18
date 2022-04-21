@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.util.damage;
+package dev.hikarishima.lightland.util;
 
 import dev.hikarishima.lightland.content.common.item.generic.GenericArmorItem;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;

@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
+import dev.lcy0x1.base.RenderUtils;
 import dev.xkmc.cuisine.content.tools.base.ContentRenderer;
 import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -23,7 +23,7 @@ public class PanRenderer extends GeoBlockRenderer<PanBlockEntity> {
 		PanBlockEntity te = (PanBlockEntity) tile;
 		ItemStack result = te.getResult();
 		if (tile.getLevel() != null && !result.isEmpty() && te.getBlockState().getValue(BlockStateProperties.OPEN)) {
-			RitualRenderer.renderItemAbove(result, 0.7, tile.getLevel(), ptick, pose, buffer, light, overlay);
+			RenderUtils.renderItemAbove(result, 0.7, tile.getLevel(), ptick, pose, buffer, light, overlay);
 		}
 		ContentRenderer.renderContent(new ContentRenderer.Context(pose, buffer, light, overlay, ptick,
 				3.5f / 16f, 12.5f / 16f, 5 / 16f, 10 / 16f - 1e-3f, 3.5f / 16f, 12.5f / 16f,

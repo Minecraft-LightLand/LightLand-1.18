@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.mixin;
 
-import dev.hikarishima.lightland.util.damage.DamageUtil;
+import dev.hikarishima.lightland.util.DamageUtil;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;

@@ -1,7 +1,6 @@
 package dev.xkmc.cuisine.init.registrate;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-import dev.hikarishima.lightland.init.LightLand;
 import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.data.CuisineCropType;
@@ -23,7 +22,7 @@ public class CuisineItems {
 		private final Supplier<Supplier<Item>> icon;
 
 		public Tab(String id, Supplier<Supplier<Item>> icon) {
-			super(LightLand.MODID + "." + id);
+			super(Cuisine.MODID + "." + id);
 			this.icon = icon;
 		}
 

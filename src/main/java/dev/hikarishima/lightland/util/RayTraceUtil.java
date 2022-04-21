@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.util.math;
+package dev.hikarishima.lightland.util;
 
 import com.google.common.collect.Maps;
 import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;

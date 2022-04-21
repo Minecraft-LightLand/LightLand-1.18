@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.compat.jei;
 
-import dev.hikarishima.lightland.compat.jei.screen.ExtraInfoScreen;
 import dev.xkmc.cuisine.compat.jei.recipes.*;
 import dev.xkmc.cuisine.init.Cuisine;
 import mezz.jei.api.IModPlugin;
@@ -79,7 +78,6 @@ public class CuisineJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-		ExtraInfoScreen.init();
 	}
 
 	@Override

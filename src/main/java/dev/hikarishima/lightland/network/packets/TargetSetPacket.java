@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.network.packets;
 
 import dev.hikarishima.lightland.network.SimplePacketBase;
-import dev.hikarishima.lightland.util.math.RayTraceUtil;
+import dev.hikarishima.lightland.util.RayTraceUtil;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
 
