@@ -9,11 +9,14 @@ import dev.xkmc.cuisine.content.tools.mill.MillRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.mortar.MortarRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.pan.PanRecipeBuilder;
 import dev.xkmc.cuisine.init.Cuisine;
+import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import dev.xkmc.cuisine.init.registrate.CuisineFluids;
 import dev.xkmc.cuisine.init.registrate.SimpleItem;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -28,6 +31,8 @@ import java.util.function.Supplier;
 public class RecipeGen {
 
 	public static void genRecipe(RegistrateRecipeProvider pvd) {
+		// normal recipes
+
 		// woods
 		{
 			for (WoodType type : WoodType.values()) {
@@ -43,6 +48,37 @@ public class RecipeGen {
 				pressurePlate(pvd, DataIngredient.items(type.PLANK.get()), type.PRESSURE_PLATE);
 			}
 		}
+		// fire pit
+		{
+			unlock(pvd, ShapedRecipeBuilder.shaped(CuisineBlocks.FIRE_PIT.get())::unlockedBy, Items.CAMPFIRE)
+					.pattern("BAB")
+					.define('A', Items.CAMPFIRE).define('B', ItemTags.STONE_CRAFTING_MATERIALS)
+					.save(pvd);
+			unlock(pvd, ShapedRecipeBuilder.shaped(CuisineBlocks.FIRE_PIT_STICK.get())::unlockedBy, Items.CAMPFIRE)
+					.pattern(" C ").pattern("C C").pattern("BAB").group("fire_pit_with_stick")
+					.define('A', Items.CAMPFIRE).define('B', ItemTags.STONE_CRAFTING_MATERIALS)
+					.define('C', Items.STICK).save(pvd, "fire_pit_with_stick_by_campfire");
+			unlock(pvd, ShapedRecipeBuilder.shaped(CuisineBlocks.FIRE_PIT_STICK.get())::unlockedBy, CuisineBlocks.FIRE_PIT.get().asItem())
+					.pattern(" C ").pattern("CAC").group("fire_pit_with_stick")
+					.define('A', CuisineBlocks.FIRE_PIT.get())
+					.define('C', Items.STICK).save(pvd);
+			unlock(pvd, ShapedRecipeBuilder.shaped(CuisineBlocks.FIRE_PIT_WOK.get())::unlockedBy, Items.CAMPFIRE)
+					.pattern(" C ").pattern("BAB").group("fire_pit_with_wok")
+					.define('A', Items.CAMPFIRE).define('B', ItemTags.STONE_CRAFTING_MATERIALS)
+					.define('C', CuisineBlocks.WOK.get().asItem())
+					.save(pvd, "fire_pit_with_wok_by_campfire");
+			unlock(pvd, ShapedRecipeBuilder.shaped(CuisineBlocks.WOK.get())::unlockedBy, Items.IRON_INGOT)
+					.pattern("  S").pattern("I I").pattern(" I ")
+					.define('S', Items.STICK).define('I', Items.IRON_INGOT)
+					.save(pvd);
+			unlock(pvd, ShapelessRecipeBuilder.shapeless(CuisineBlocks.FIRE_PIT_WOK.get())::unlockedBy, CuisineBlocks.FIRE_PIT.get().asItem())
+					.requires(CuisineBlocks.WOK.get()).requires(CuisineBlocks.FIRE_PIT.get()).group("fire_pit_with_wok").save(pvd);
+
+
+		}
+
+		// special recipes
+
 		// pan
 		{
 			unlock(pvd, new PanRecipeBuilder(Items.RABBIT_STEW, 1, 100)::unlockedBy, Items.RABBIT_STEW)

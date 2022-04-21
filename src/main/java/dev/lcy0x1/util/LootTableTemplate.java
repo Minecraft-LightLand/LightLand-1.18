@@ -102,12 +102,15 @@ public class LootTableTemplate {
 	}
 
 	public static LootTable.Builder selfOrOther(Block block, Block base, Item other, int count) {
-		return LootTable.lootTable().withPool(
-						LootTableTemplate.getPool(1, 0)
-								.add(LootTableTemplate.getItem(base.asItem(), 1))
-								.add(LootTableTemplate.getItem(other, count))
-								.when(ExplosionCondition.survivesExplosion())
-								.when(LootTableTemplate.silk(true)))
+		return LootTable.lootTable()
+				.withPool(LootTableTemplate.getPool(1, 0)
+						.add(LootTableTemplate.getItem(base.asItem(), 1))
+						.when(ExplosionCondition.survivesExplosion())
+						.when(LootTableTemplate.silk(true)))
+				.withPool(LootTableTemplate.getPool(1, 0)
+						.add(LootTableTemplate.getItem(other, count))
+						.when(ExplosionCondition.survivesExplosion())
+						.when(LootTableTemplate.silk(true)))
 				.withPool(LootTableTemplate.getPool(1, 0)
 						.add(LootTableTemplate.getItem(block.asItem(), 1))
 						.when(LootTableTemplate.silk(false))

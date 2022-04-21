@@ -7,6 +7,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,6 +27,15 @@ public class FirePitPutMethod implements OnClickBlockMethod {
 				boolean lit = state.getValue(BlockStateProperties.LIT);
 				BlockState next = CuisineBlocks.FIRE_PIT_WOK.getDefaultState().setValue(BlockStateProperties.LIT, lit)
 						.setValue(BlockStateProperties.HORIZONTAL_FACING, wok_state.getValue(BlockStateProperties.HORIZONTAL_FACING));
+				level.setBlockAndUpdate(pos, next);
+			}
+			return InteractionResult.SUCCESS;
+		}
+		if (stack.getItem() == Items.STICK && stack.getCount() >= 3) {
+			if (!level.isClientSide()) {
+				stack.shrink(3);
+				boolean lit = state.getValue(BlockStateProperties.LIT);
+				BlockState next = CuisineBlocks.FIRE_PIT_STICK.getDefaultState().setValue(BlockStateProperties.LIT, lit);
 				level.setBlockAndUpdate(pos, next);
 			}
 			return InteractionResult.SUCCESS;

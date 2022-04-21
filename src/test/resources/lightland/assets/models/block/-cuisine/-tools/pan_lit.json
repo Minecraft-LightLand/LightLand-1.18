@@ -6,7 +6,7 @@
   ],
   "textures": {
 	"2": "lightland:block/pan_lit",
-	"particle": "lightland:block/pan_lit"
+	"particle": "lightland:block/iron"
   },
   "elements": [
 	{

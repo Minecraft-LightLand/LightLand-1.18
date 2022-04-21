@@ -1,34 +1,47 @@
 {
-  "variants": {
-    "facing=north,lit=false": {
-      "model": "lightland:block/fire_pit"
+  "multipart": [
+    {
+      "when": {
+        "lit": "true"
+      },
+      "apply": {
+        "model": "lightland:block/pan_lit"
+      }
     },
-    "facing=south,lit=false": {
-      "model": "lightland:block/fire_pit",
-      "y": 180
+    {
+      "when": {
+        "facing": "north"
+      },
+      "apply": {
+        "model": "lightland:block/fire_pit",
+        "y": 180
+      }
     },
-    "facing=west,lit=false": {
-      "model": "lightland:block/fire_pit",
-      "y": 270
+    {
+      "when": {
+        "facing": "east"
+      },
+      "apply": {
+        "model": "lightland:block/fire_pit",
+        "y": 270
+      }
     },
-    "facing=east,lit=false": {
-      "model": "lightland:block/fire_pit",
-      "y": 90
+    {
+      "when": {
+        "facing": "south"
+      },
+      "apply": {
+        "model": "lightland:block/fire_pit"
+      }
     },
-    "facing=north,lit=true": {
-      "model": "lightland:block/fire_pit"
-    },
-    "facing=south,lit=true": {
-      "model": "lightland:block/fire_pit",
-      "y": 180
-    },
-    "facing=west,lit=true": {
-      "model": "lightland:block/fire_pit",
-      "y": 270
-    },
-    "facing=east,lit=true": {
-      "model": "lightland:block/fire_pit",
-      "y": 90
+    {
+      "when": {
+        "facing": "west"
+      },
+      "apply": {
+        "model": "lightland:block/fire_pit",
+        "y": 90
+      }
     }
-  }
+  ]
 }

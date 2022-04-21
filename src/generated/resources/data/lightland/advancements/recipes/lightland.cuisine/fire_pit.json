@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "lightland:fire_pit"
+    ]
+  },
+  "criteria": {
+    "has_campfire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:campfire"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "lightland:fire_pit"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_campfire",
+      "has_the_recipe"
+    ]
+  ]
+}

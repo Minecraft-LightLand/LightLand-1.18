@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "minecraft:fire_pit_with_stick_by_campfire"
+    ]
+  },
+  "criteria": {
+    "has_campfire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:campfire"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "minecraft:fire_pit_with_stick_by_campfire"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_campfire",
+      "has_the_recipe"
+    ]
+  ]
+}
