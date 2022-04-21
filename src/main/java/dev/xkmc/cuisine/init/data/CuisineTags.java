@@ -1,22 +1,15 @@
 package dev.xkmc.cuisine.init.data;
 
 import com.google.common.collect.Lists;
-import com.tterrag.registrate.builders.BlockBuilder;
-import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.util.nullness.NonNullFunction;
 import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -39,42 +32,6 @@ public class CuisineTags {
 		return optionalTag(registry, new ResourceLocation("forge", path));
 	}
 
-	public static TagKey<Block> forgeBlockTag(String path) {
-		return forgeTag(ForgeRegistries.BLOCKS, path);
-	}
-
-	public static TagKey<Item> forgeItemTag(String path) {
-		return forgeTag(ForgeRegistries.ITEMS, path);
-	}
-
-	public static TagKey<Fluid> forgeFluidTag(String path) {
-		return forgeTag(ForgeRegistries.FLUIDS, path);
-	}
-
-	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, BlockBuilder<T, P>> axeOrPickaxe() {
-		return b -> b.tag(BlockTags.MINEABLE_WITH_AXE)
-				.tag(BlockTags.MINEABLE_WITH_PICKAXE);
-	}
-
-	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, BlockBuilder<T, P>> axeOnly() {
-		return b -> b.tag(BlockTags.MINEABLE_WITH_AXE);
-	}
-
-	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, BlockBuilder<T, P>> pickaxeOnly() {
-		return b -> b.tag(BlockTags.MINEABLE_WITH_PICKAXE);
-	}
-
-	public static <T extends Block, P> NonNullFunction<BlockBuilder<T, P>, ItemBuilder<BlockItem, BlockBuilder<T, P>>> tagBlockAndItem(String... path) {
-		return b -> {
-			for (String p : path)
-				b.tag(forgeBlockTag(p));
-			ItemBuilder<BlockItem, BlockBuilder<T, P>> item = b.item();
-			for (String p : path)
-				item.tag(forgeItemTag(p));
-			return item;
-		};
-	}
-
 	public enum NameSpace {
 
 		MOD(Cuisine.MODID, false, true),
@@ -93,69 +50,6 @@ public class CuisineTags {
 			this.id = id;
 			this.optionalDefault = optionalDefault;
 			this.alwaysDatagenDefault = alwaysDatagenDefault;
-		}
-
-	}
-
-	public enum AllBlockTags {
-		;
-
-		public final TagKey<Block> tag;
-
-		AllBlockTags() {
-			this(NameSpace.MOD);
-		}
-
-		AllBlockTags(NameSpace namespace) {
-			this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-		}
-
-		AllBlockTags(NameSpace namespace, String path) {
-			this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-		}
-
-		AllBlockTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-			this(namespace, null, optional, alwaysDatagen);
-		}
-
-		AllBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-			ResourceLocation id = new ResourceLocation(namespace.id, path == null ? LangData.asId(name()) : path);
-			if (optional) {
-				tag = optionalTag(ForgeRegistries.BLOCKS, id);
-			} else {
-				tag = BlockTags.create(id);
-			}
-			if (alwaysDatagen) {
-				REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag));
-			}
-		}
-
-		@SuppressWarnings("deprecation")
-		public boolean matches(Block block) {
-			return block.builtInRegistryHolder().is(tag);
-		}
-
-		public boolean matches(BlockState state) {
-			return state.is(tag);
-		}
-
-		public void add(Block... values) {
-			REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
-					.add(values));
-		}
-
-		public void includeIn(TagKey<Block> parent) {
-			REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(parent)
-					.addTag(tag));
-		}
-
-		public void includeIn(com.simibubi.create.AllTags.AllBlockTags parent) {
-			includeIn(parent.tag);
-		}
-
-		public void includeAll(TagKey<Block> child) {
-			REGISTRATE.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.tag(tag)
-					.addTag(child));
 		}
 
 	}
@@ -239,6 +133,7 @@ public class CuisineTags {
 		CHOCOLATE(NameSpace.FORGE),
 		HONEY(NameSpace.FORGE),
 		TEA(NameSpace.FORGE),
+		GREASY, SALTY, SWEET, SPICY, SOUR, KELP, SESAME, VEGES,
 		JAR_ACCEPT;
 
 		public final TagKey<Fluid> tag;

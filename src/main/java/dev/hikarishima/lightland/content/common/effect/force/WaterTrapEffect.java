@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.effect.force;
 
 import dev.hikarishima.lightland.content.common.effect.ForceEffect;
-import dev.hikarishima.lightland.util.BodyAttribute;
+import dev.lcy0x1.util.MathHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class WaterTrapEffect extends MobEffect implements ForceEffect {
 
-	public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:water_trap");
+	public static final UUID ID = MathHelper.getUUIDfromString("lightland:water_trap");
 
 	public WaterTrapEffect(MobEffectCategory type, int color) {
 		super(type, color);

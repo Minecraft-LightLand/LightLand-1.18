@@ -4,25 +4,53 @@ import com.tterrag.registrate.builders.NoConfigBuilder;
 import com.tterrag.registrate.util.entry.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.cuisine.content.misc.TasteEffect;
+import dev.xkmc.cuisine.content.misc.TasteEffect.Attribs;
+import dev.xkmc.cuisine.content.misc.TasteEffect.Config;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.Locale;
+import java.util.function.Supplier;
 
 import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
 
 public enum CuisineEffects {
-	TOO_SPICY, SPICY, SWEET, TOO_SWEET,
-	BLAND, TASTEFUL, TOO_SALTY,
-	SOUR, TOO_SOUR, NO_OIL, OIL, GREASY,
-	SESAME, KELP, NUMB;
+	TOO_SPICY(new Config(MobEffectCategory.HARMFUL, 0xffffff, 20, 1,
+			new Attribs(Attributes.ATTACK_DAMAGE, Operation.MULTIPLY_TOTAL, 0.1f))),
+	SPICY(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0,
+			new Attribs(Attributes.ATTACK_DAMAGE, Operation.MULTIPLY_TOTAL, 0.1f))),
+	SWEET(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0,
+			new Attribs(Attributes.MOVEMENT_SPEED, Operation.MULTIPLY_TOTAL, 0.2f))),
+	TOO_SWEET(() -> new MobEffectInstance(MobEffects.CONFUSION, 600)),
+	BLAND(() -> new MobEffectInstance(MobEffects.HUNGER, 300)),
+	TASTEFUL(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 20, -1)),
 
-	public final RegistryEntry<TasteEffect> effect;
+	TOO_SALTY(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	SOUR(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	TOO_SOUR(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	NO_OIL(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	OIL(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	GREASY(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	SESAME(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	KELP(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	NUMB(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	STOCHASTIC(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	FINE(new Config(MobEffectCategory.BENEFICIAL, 0xffffff, 0, 0)),
+	;
 
+	private final Supplier<MobEffectInstance> effect;
 
-	CuisineEffects() {
-		effect = genEffect(getName(), () -> new TasteEffect(MobEffectCategory.NEUTRAL, 0x4800FF));
+	CuisineEffects(Config config) {
+		RegistryEntry<TasteEffect> entry = genEffect(getName(), () -> new TasteEffect(config, getName()));
+		effect = () -> new MobEffectInstance(entry.get(), 1200);
+	}
+
+	CuisineEffects(Supplier<MobEffectInstance> effect) {
+		this.effect = effect;
 	}
 
 	public String getName() {
@@ -35,6 +63,6 @@ public enum CuisineEffects {
 	}
 
 	public MobEffectInstance getEffect() {
-		return new MobEffectInstance(effect.get(), 1200);
+		return effect.get();
 	}
 }

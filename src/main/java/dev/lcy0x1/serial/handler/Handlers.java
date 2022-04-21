@@ -7,6 +7,7 @@ import net.minecraft.nbt.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
@@ -112,6 +113,8 @@ public class Handlers {
 					tag.putDouble("z", obj.z());
 					return tag;
 				});
+		new ClassHandler<>(MobEffectInstance.class, null, null, null, null,
+				MobEffectInstance::load, e -> e.save(new CompoundTag()));
 	}
 
 	public static void register() {

@@ -1,13 +1,13 @@
 package dev.hikarishima.lightland.util;
 
 import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
+import dev.lcy0x1.util.MathHelper;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Random;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -19,14 +19,6 @@ public class BodyAttribute {
 
 	private static double exp(double e, double v) {
 		return Math.pow(e, v) - 1;
-	}
-
-	public static UUID getUUIDfromString(String str) {
-		int hash = str.hashCode();
-		Random r = new Random(hash);
-		long l0 = r.nextLong();
-		long l1 = r.nextLong();
-		return new UUID(l0, l1);
 	}
 
 	public static void resetModifiers(AbilityPoints ability, Player player) {
@@ -63,7 +55,7 @@ public class BodyAttribute {
 
 		Attr(String name, Attribute attr, AttributeModifier.Operation op, Function<AbilityPoints, Double> getter) {
 			this.name = name;
-			this.id = getUUIDfromString(name);
+			this.id = MathHelper.getUUIDfromString(name);
 			this.attr = attr;
 			this.op = op;
 			this.getter = getter;

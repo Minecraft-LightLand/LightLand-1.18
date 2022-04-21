@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.effect;
 
-import dev.hikarishima.lightland.util.BodyAttribute;
+import dev.lcy0x1.util.MathHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class ArmorReduceEffect extends MobEffect {
 
-	public static final UUID ID = BodyAttribute.getUUIDfromString("lightland:armor_reduce");
+	public static final UUID ID = MathHelper.getUUIDfromString("lightland:armor_reduce");
 
 	public ArmorReduceEffect(MobEffectCategory category, int color) {
 		super(category, color);
