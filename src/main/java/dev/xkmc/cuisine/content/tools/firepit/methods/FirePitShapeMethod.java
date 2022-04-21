@@ -11,11 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class FirePitShapeMethod implements ShapeBlockMethod {
 
-	private final int height;
 	private final VoxelShape shape;
 
 	public FirePitShapeMethod(int height) {
-		this.height = height;
 		shape = Block.box(0D, 0D, 0D, 16.0D, height, 16.0D);
 	}
 

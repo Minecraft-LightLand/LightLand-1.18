@@ -8,6 +8,8 @@ import dev.xkmc.cuisine.content.tools.basin.BasinDryRecipe;
 import dev.xkmc.cuisine.content.tools.basin.BasinRecipe;
 import dev.xkmc.cuisine.content.tools.firepit.FirePitStickBlockEntity;
 import dev.xkmc.cuisine.content.tools.firepit.FirePitStickRecipe;
+import dev.xkmc.cuisine.content.tools.firepit.FirePitWokBlockEntity;
+import dev.xkmc.cuisine.content.tools.firepit.FirePitWokRecipe;
 import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipe;
 import dev.xkmc.cuisine.content.tools.mill.MillBlockEntity;
@@ -37,6 +39,7 @@ public class CuisineRecipes {
 	public static RegistryObject<RecipeType<MillRecipe>> RT_MILL = REGISTRATE.recipe(RECIPE_TYPES, "mill");
 	public static RegistryObject<RecipeType<MortarRecipe>> RT_MORTAR = REGISTRATE.recipe(RECIPE_TYPES, "mortar");
 	public static RegistryObject<RecipeType<FirePitStickRecipe>> RT_STICK = REGISTRATE.recipe(RECIPE_TYPES, "stick");
+	public static RegistryObject<RecipeType<FirePitWokRecipe>> RT_WOK = REGISTRATE.recipe(RECIPE_TYPES, "wok");
 
 	public static final RegistryEntry<BaseRecipe.RecType<PanRecipe, PanRecipe, RecipeContainer<PanBlockEntity>>> RS_PAN =
 			REGISTRATE.simple("pan", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PanRecipe.class, RT_PAN));
@@ -52,6 +55,8 @@ public class CuisineRecipes {
 			REGISTRATE.simple("mortar", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(MortarRecipe.class, RT_MORTAR));
 	public static final RegistryEntry<BaseRecipe.RecType<FirePitStickRecipe, FirePitStickRecipe, RecipeContainer<FirePitStickBlockEntity>>> RS_STICK =
 			REGISTRATE.simple("stick", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(FirePitStickRecipe.class, RT_STICK));
+	public static final RegistryEntry<BaseRecipe.RecType<FirePitWokRecipe, FirePitWokRecipe, RecipeContainer<FirePitWokBlockEntity>>> RS_WOK =
+			REGISTRATE.simple("wok", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(FirePitWokRecipe.class, RT_WOK));
 
 	public static void register(IEventBus bus) {
 		RECIPE_TYPES.register(bus);

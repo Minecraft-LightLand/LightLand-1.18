@@ -1,7 +1,6 @@
 package dev.xkmc.cuisine.content.tools.base;
 
 import dev.lcy0x1.serial.SerialClass;
-import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CookTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTankTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
@@ -11,7 +10,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import java.util.Optional;
 
 @SerialClass
-public class CookHandler<T extends CuisineTile<T> & BottleResultTile & CookTile, R extends CuisineRecipe<R, T> & TimeHandler.TimeRecipe> {
+public class CookHandler<T extends CuisineTile<T> & CookTile, R extends CuisineRecipe<R, T> & TimeHandler.TimeRecipe> {
 
 	private final T tile;
 	private final RecipeType<R> type;

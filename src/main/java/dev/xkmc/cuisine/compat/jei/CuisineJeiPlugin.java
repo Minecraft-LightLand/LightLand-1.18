@@ -29,7 +29,8 @@ public class CuisineJeiPlugin implements IModPlugin {
 			new BasinDryRecipeCategory(),
 			new MillRecipeCategory(),
 			new MortarRecipeCategory(),
-			new FirePitStickRecipeCategory());
+			new FirePitStickRecipeCategory(),
+			new FirePitWokRecipeCategory());
 
 	public IGuiHelper GUI_HELPER;
 

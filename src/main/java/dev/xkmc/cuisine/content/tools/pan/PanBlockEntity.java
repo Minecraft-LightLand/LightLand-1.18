@@ -4,7 +4,10 @@ import dev.lcy0x1.block.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.CookHandler;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
-import dev.xkmc.cuisine.content.tools.base.tile.*;
+import dev.xkmc.cuisine.content.tools.base.tile.CookTile;
+import dev.xkmc.cuisine.content.tools.base.tile.CuisineTankTile;
+import dev.xkmc.cuisine.content.tools.base.tile.LidTile;
+import dev.xkmc.cuisine.content.tools.base.tile.LitTile;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.core.BlockPos;
@@ -22,7 +25,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 @SerialClass
 public class PanBlockEntity extends CuisineTankTile<PanBlockEntity> implements TickableBlockEntity, IAnimatable,
-		BottleResultTile, LitTile, CookTile, LidTile {
+		LitTile, CookTile, LidTile {
 
 	public static final int MAX_FLUID = 8 * 50;
 
