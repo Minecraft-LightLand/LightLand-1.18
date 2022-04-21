@@ -17,10 +17,10 @@ public class FirePitWokRenderer implements BlockEntityRenderer<FirePitWokBlockEn
 	public void render(FirePitWokBlockEntity tile, float pTick, PoseStack poseStack, MultiBufferSource source, int light, int overlay) {
 		ItemStack result = tile.getResult();
 		if (tile.getLevel() != null && !result.isEmpty()) {
-			RenderUtils.renderItemAbove(result, 0.5, tile.getLevel(), pTick, poseStack, source, light, overlay);
+			RenderUtils.renderItemAbove(result, 6 / 16f, tile.getLevel(), pTick, poseStack, source, light, overlay);
 		}
 		ContentRenderer.renderContent(new ContentRenderer.Context(poseStack, source, light, overlay, pTick,
-				3.5f / 16f, 12.5f / 16f, 6 / 16f, 6 / 16f + 1e-3f, 3.5f / 16f, 12.5f / 16f,
+				1.5f / 16f, 14.5f / 16f, 6 / 16f, 7 / 16f, 1.5f / 16f, 14.5f / 16f,
 				0.125f, 0.5f, tile, tile.getBlockPos(), tile.getLevel(), FirePitWokBlockEntity.MAX_FLUID * 4));
 	}
 

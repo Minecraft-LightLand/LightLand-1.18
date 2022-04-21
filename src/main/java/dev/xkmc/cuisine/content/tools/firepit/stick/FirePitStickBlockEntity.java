@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity> implements TickableBlockEntity,
 		LitTile, BottleResultTile, CookTile {
@@ -23,7 +24,7 @@ public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity
 	private final ContainerResultHandler<FirePitStickBlockEntity> resultHandler = new ContainerResultHandler<>(this);
 	@SerialClass.SerialField(toClient = true)
 	private final CookHandler<FirePitStickBlockEntity, FirePitStickRecipe> cookHandler =
-			new CookHandler<>(this, CuisineRecipes.RT_STICK.get(), resultHandler);
+			new CookHandler<>(this, CuisineRecipes.RT_STICK.get(), resultHandler, false);
 
 	public FirePitStickBlockEntity(BlockEntityType<FirePitStickBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 4).setMax(1).add(t));
@@ -34,8 +35,10 @@ public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity
 	@Override
 	public void notifyTile() {
 		lock.execute(() -> {
-			cookHandler.stopCooking();
-			cookHandler.startCooking();
+			if (getBlockState().getValue(BlockStateProperties.LIT)) {
+				cookHandler.stopCooking();
+				cookHandler.startCooking();
+			}
 			setChanged();
 			sync();
 		});

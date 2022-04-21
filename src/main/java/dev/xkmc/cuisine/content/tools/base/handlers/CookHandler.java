@@ -16,6 +16,7 @@ public class CookHandler<T extends CuisineTile<T> & CookTile, R extends CuisineR
 	private final T tile;
 	private final RecipeType<R> type;
 	private final ResultHandler<T> handler;
+	private final boolean canFail;
 
 	@SerialClass.SerialField
 	private ItemStack result = ItemStack.EMPTY;
@@ -23,10 +24,11 @@ public class CookHandler<T extends CuisineTile<T> & CookTile, R extends CuisineR
 	@SerialClass.SerialField(toClient = true)
 	public int cooking_max = 0, cooking = 0;
 
-	public CookHandler(T tile, RecipeType<R> type, ResultHandler<T> handler) {
+	public CookHandler(T tile, RecipeType<R> type, ResultHandler<T> handler, boolean canFail) {
 		this.tile = tile;
 		this.type = type;
 		this.handler = handler;
+		this.canFail = canFail;
 	}
 
 	public boolean tick() {
@@ -61,7 +63,7 @@ public class CookHandler<T extends CuisineTile<T> & CookTile, R extends CuisineR
 		if (!canCook) return false;
 		Optional<R> r = tile.getLevel().getRecipeManager().getRecipeFor(type, tile.getMainInventory(), tile.getLevel());
 		if (r.isEmpty()) {
-			cooking_max = 100;
+			cooking_max = canFail ? 100 : 0;
 			cooking = cooking_max;
 			result = ItemStack.EMPTY;
 		} else {
