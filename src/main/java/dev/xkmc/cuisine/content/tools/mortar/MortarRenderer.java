@@ -17,7 +17,7 @@ public class MortarRenderer implements BlockEntityRenderer<MortarBlockEntity> {
 					   int light, int overlay) {
 		ContentRenderer.renderBasinContent(new ContentRenderer.Context(ms, buffer, light, overlay, partialTicks,
 				1 / 16f, 15 / 16f, 1 / 16f, 7 / 16f, 1 / 16f, 15 / 16f,
-				0.125f, 0.5f,
+				0.125f, 0.5f,true,
 				basin, basin.getBlockPos(), basin.getLevel(), 0));
 	}
 

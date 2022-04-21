@@ -28,7 +28,7 @@ public class ContentRenderer {
 
 	public record Context(PoseStack ms, MultiBufferSource buffer, int light, int overlay, float partialTicks,
 						  float xMin, float xMax, float yMin, float yMax, float zMin, float zMax, float radius,
-						  float scale,
+						  float scale, boolean tilt,
 						  TileInfoOverlay.TileInfoProvider tile, BlockPos pos, Level level, int max_fluid
 	) {
 
@@ -66,7 +66,7 @@ public class ContentRenderer {
 			Vec3 itemPosition = VecHelper.rotate(baseVector, anglePartition * itemCount, Direction.Axis.Y);
 			ctx.ms.translate(itemPosition.x, itemPosition.y, itemPosition.z);
 			ctx.ms.mulPose(Vector3f.YP.rotationDegrees(anglePartition * itemCount + 35));
-			ctx.ms.mulPose(Vector3f.XP.rotationDegrees(65));
+			if (ctx.tilt) ctx.ms.mulPose(Vector3f.XP.rotationDegrees(65));
 			for (int i = 0; i <= stack.getCount() / 8; i++) {
 				ctx.ms.pushPose();
 				Vec3 vec = VecHelper.offsetRandomly(Vec3.ZERO, r, 1 / 16f);

@@ -4,6 +4,8 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.client.model.generators.ModelFile;
 
 import java.util.Locale;
@@ -17,9 +19,9 @@ public enum PlateItem {
 
 
 	PlateItem() {
-		entry = REGISTRATE.block(getName(), Block::new)
-				.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().getBuilder(getName()).parent(new ModelFile.UncheckedModelFile(
-						new ResourceLocation(Cuisine.MODID, "block/" + getName()))))).simpleItem().defaultLang().register();
+		entry = REGISTRATE.block(getName(), p -> new Block(BlockBehaviour.Properties.copy(Blocks.FLOWER_POT)))
+				.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), new ModelFile.UncheckedModelFile(
+						new ResourceLocation(Cuisine.MODID, "block/" + getName())))).simpleItem().defaultLang().register();
 	}
 
 	public String getName() {

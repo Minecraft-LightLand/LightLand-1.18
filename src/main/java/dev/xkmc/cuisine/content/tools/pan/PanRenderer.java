@@ -27,7 +27,7 @@ public class PanRenderer extends GeoBlockRenderer<PanBlockEntity> {
 		}
 		ContentRenderer.renderBasinContent(new ContentRenderer.Context(pose, buffer, light, overlay, ptick,
 				3.5f / 16f, 12.5f / 16f, 5 / 16f, 10 / 16f - 1e-3f, 3.5f / 16f, 12.5f / 16f,
-				0.125f, 0.5f,
+				0.125f, 0.5f,true,
 				(TileInfoOverlay.TileInfoProvider) tile, tile.getBlockPos(), tile.getLevel(), PanBlockEntity.MAX_FLUID * 4));
 	}
 

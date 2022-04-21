@@ -17,7 +17,7 @@ public class BasinRenderer implements BlockEntityRenderer<BasinBlockEntity> {
 					   int light, int overlay) {
 		ContentRenderer.renderBasinContent(new ContentRenderer.Context(ms, buffer, light, overlay, partialTicks,
 				1 / 16f, 15 / 16f, 1 / 16f, 7 / 16f, 1 / 16f, 15 / 16f,
-				0.125f, 0.8f,
+				0.125f, 0.8f, true,
 				basin, basin.getBlockPos(), basin.getLevel(), BasinBlockEntity.MAX_FLUID));
 	}
 
