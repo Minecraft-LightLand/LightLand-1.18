@@ -21,7 +21,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class PanRecipeCategory extends BaseCuisineRecipeCategory<PanRecipe, PanRecipeCategory> {
 
 	public PanRecipeCategory() {
-		super("pan", CuisineBlocks.PAN, PanRecipe.class, PanBlockEntity.MAX_FLUID, CuisineRecipes.RT_PAN);
+		super("pan", CuisineBlocks.PAN, PanRecipe.class, PanBlockEntity.MAX_FLUID, CuisineRecipes.RT_PAN.get());
 	}
 
 	@Override

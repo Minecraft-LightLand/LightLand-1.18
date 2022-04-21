@@ -30,7 +30,7 @@ public class PanBlockEntity extends CuisineTankTile<PanBlockEntity> implements T
 	private BlockState prevState = null;
 
 	@SerialClass.SerialField(toClient = true)
-	private final CookHandler<PanBlockEntity, PanRecipe> cookHandler = new CookHandler<>(this, CuisineRecipes.RT_PAN);
+	private final CookHandler<PanBlockEntity, PanRecipe> cookHandler = new CookHandler<>(this, CuisineRecipes.RT_PAN.get());
 
 	public PanBlockEntity(BlockEntityType<PanBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 8).setMax(1)

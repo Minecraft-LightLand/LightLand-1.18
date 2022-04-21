@@ -46,13 +46,13 @@ public class LightLand {
 	public static final Logger LOGGER = LogManager.getLogger();
 	public static final LLRegistrate REGISTRATE = new LLRegistrate(MODID);
 
-	private static void registerRegistrates() {
+	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
 		LightlandBlocks.register();
 		LightlandEntities.register();
 		LightlandItems.register();
 		LightlandMenu.register();
-		LightlandRecipe.register();
+		LightlandRecipe.register(bus);
 		LightlandVanillaMagic.register();
 		LightlandParticle.register();
 		WorldGenRegistrate.register();
@@ -98,7 +98,7 @@ public class LightLand {
 		registerModBusEvents(bus);
 		GeckoLib.initialize();
 		DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> LightLandClient.onCtorClient(bus, MinecraftForge.EVENT_BUS));
-		registerRegistrates();
+		registerRegistrates(bus);
 		registerForgeEvents();
 		registerCommands();
 		new Cuisine();

@@ -9,7 +9,11 @@ import com.tterrag.registrate.util.nullness.NonnullType;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.base.NamedEntry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 
 public class LLRegistrate extends AbstractRegistrate<LLRegistrate> {
@@ -33,6 +37,10 @@ public class LLRegistrate extends AbstractRegistrate<LLRegistrate> {
 						new ResourceLocation(LightLand.MODID, "fluid/" + name + "_flow"), null, VirtualFluid::new));
 	}
 
+	public <T extends Recipe<?>> RegistryObject<RecipeType<T>> recipe(DeferredRegister<RecipeType<?>> type, String id) {
+		return type.register(id, () -> new RecipeType<>() {
+		});
+	}
 
 	public static class GenericBuilder<T extends NamedEntry<T>, P extends T> extends AbstractBuilder<T, P, LLRegistrate, GenericBuilder<T, P>> {
 

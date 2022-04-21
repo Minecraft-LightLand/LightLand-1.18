@@ -109,7 +109,7 @@ public class MagicWandOverlay implements IIngameOverlay {
 				if (pl != null) {
 					x = (width / 2 + 60);
 					int cost = p.getCost();
-					Optional<AbstractRitualRecipe<?>> opr = Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_RITUAL).stream()
+					Optional<AbstractRitualRecipe<?>> opr = Proxy.getWorld().getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_RITUAL.get()).stream()
 							.filter(e -> e instanceof AbstractLevelRitualRecipe<?>).filter(e -> p.recipe.id.equals(e.getMagic()))
 							.findFirst();
 					if (opr.isPresent()) {

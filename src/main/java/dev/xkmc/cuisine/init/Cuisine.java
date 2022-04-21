@@ -9,10 +9,7 @@ import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.data.LangData;
 import dev.xkmc.cuisine.init.data.RecipeGen;
 import dev.xkmc.cuisine.init.data.WoodType;
-import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
-import dev.xkmc.cuisine.init.registrate.CuisineFluids;
-import dev.xkmc.cuisine.init.registrate.CuisineItems;
-import dev.xkmc.cuisine.init.registrate.CuisineWorldGen;
+import dev.xkmc.cuisine.init.registrate.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -30,6 +27,7 @@ public class Cuisine {
 		CuisineItems.register();
 		CuisineFluids.register();
 		CuisineTags.register();
+		CuisineRecipes.register(FMLJavaModLoadingContext.get().getModEventBus());
 		REGISTRATE.addDataGenerator(ProviderType.LANG, LangData::genLang);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 

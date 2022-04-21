@@ -18,7 +18,7 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 public class MortarBlockEntity extends CuisineTile<MortarBlockEntity> implements TickableBlockEntity, StepTile {
 
 	@SerialClass.SerialField(toClient = true)
-	private final StepHandler<MortarBlockEntity, MortarRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_MORTAR);
+	private final StepHandler<MortarBlockEntity, MortarRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_MORTAR.get());
 
 	protected final LazyOptional<IItemHandlerModifiable> itemCapability;
 

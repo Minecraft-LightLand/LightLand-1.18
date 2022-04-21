@@ -17,7 +17,7 @@ public class JarBlockEntity extends CuisineTankTile<JarBlockEntity> implements T
 	public static final int MAX_FLUID = 1000;
 
 	@SerialClass.SerialField(toClient = true)
-	private final TimeHandler<JarBlockEntity, JarRecipe> timeHandler = new TimeHandler<>(this, CuisineRecipes.RT_JAR);
+	private final TimeHandler<JarBlockEntity, JarRecipe> timeHandler = new TimeHandler<>(this, CuisineRecipes.RT_JAR.get());
 
 	public JarBlockEntity(BlockEntityType<JarBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, (t) -> new RecipeContainer<>(t, 3).setMax(1).add(t),

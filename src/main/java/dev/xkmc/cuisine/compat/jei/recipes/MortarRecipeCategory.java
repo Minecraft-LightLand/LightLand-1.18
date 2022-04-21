@@ -14,7 +14,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class MortarRecipeCategory extends BaseCuisineRecipeCategory<MortarRecipe, MortarRecipeCategory> {
 
 	public MortarRecipeCategory() {
-		super("mortar", CuisineBlocks.MORTAR, MortarRecipe.class, 0, CuisineRecipes.RT_MORTAR);
+		super("mortar", CuisineBlocks.MORTAR, MortarRecipe.class, 0, CuisineRecipes.RT_MORTAR.get());
 	}
 
 	@Override

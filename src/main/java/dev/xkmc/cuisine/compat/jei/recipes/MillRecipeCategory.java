@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class MillRecipeCategory extends BaseCuisineRecipeCategory<MillRecipe, MillRecipeCategory> {
 
 	public MillRecipeCategory() {
-		super("mill", CuisineBlocks.MILL, MillRecipe.class, MillBlockEntity.MAX_FLUID, CuisineRecipes.RT_MILL);
+		super("mill", CuisineBlocks.MILL, MillRecipe.class, MillBlockEntity.MAX_FLUID, CuisineRecipes.RT_MILL.get());
 	}
 
 	@Override

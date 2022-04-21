@@ -124,7 +124,7 @@ public class RitualCore {
 			}
 			//TODO sideness
 			Inv inv = new Inv(this, list);
-			Optional<AbstractRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(LightlandRecipe.RT_RITUAL, inv, level);
+			Optional<AbstractRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(LightlandRecipe.RT_RITUAL.get(), inv, level);
 			r.ifPresent(e -> {
 				Map<MagicElement, Integer> map = new LinkedHashMap<>();
 				if (e.getMagic() != null) {
@@ -198,7 +198,7 @@ public class RitualCore {
 			List<RitualSide.TE> list = getSide();
 			if (list.size() == 8 && recipe == null) {
 				Inv inv = new Inv(this, list);
-				Optional<AbstractRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(LightlandRecipe.RT_RITUAL, inv, level);
+				Optional<AbstractRitualRecipe<?>> r = level.getRecipeManager().getRecipeFor(LightlandRecipe.RT_RITUAL.get(), inv, level);
 				if (r.isPresent()) {
 					recipe = r.get();
 				} else {

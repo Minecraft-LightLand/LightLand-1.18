@@ -17,20 +17,26 @@ import dev.xkmc.cuisine.content.tools.mortar.MortarRecipe;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanRecipe;
 import dev.xkmc.cuisine.init.Cuisine;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
 
 public class CuisineRecipes {
 
-	public static RecipeType<PanRecipe> RT_PAN;
-	public static RecipeType<JarRecipe> RT_JAR;
-	public static RecipeType<BasinRecipe> RT_BASIN;
-	public static RecipeType<BasinDryRecipe> RT_BASIN_DRY;
-	public static RecipeType<MillRecipe> RT_MILL;
-	public static RecipeType<MortarRecipe> RT_MORTAR;
-	public static RecipeType<FirePitStickRecipe> RT_STICK;
+	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, Cuisine.MODID);
+
+	public static RegistryObject<RecipeType<PanRecipe>> RT_PAN = REGISTRATE.recipe(RECIPE_TYPES, "pan");
+	public static RegistryObject<RecipeType<JarRecipe>> RT_JAR = REGISTRATE.recipe(RECIPE_TYPES, "pan");
+	public static RegistryObject<RecipeType<BasinRecipe>> RT_BASIN = REGISTRATE.recipe(RECIPE_TYPES, "pan");
+	public static RegistryObject<RecipeType<BasinDryRecipe>> RT_BASIN_DRY = REGISTRATE.recipe(RECIPE_TYPES, "pan");
+	public static RegistryObject<RecipeType<MillRecipe>> RT_MILL = REGISTRATE.recipe(RECIPE_TYPES, "pan");
+	public static RegistryObject<RecipeType<MortarRecipe>> RT_MORTAR = REGISTRATE.recipe(RECIPE_TYPES, "pan");
+	public static RegistryObject<RecipeType<FirePitStickRecipe>> RT_STICK = REGISTRATE.recipe(RECIPE_TYPES, "pan");
 
 	public static final RegistryEntry<BaseRecipe.RecType<PanRecipe, PanRecipe, RecipeContainer<PanBlockEntity>>> RS_PAN =
 			REGISTRATE.simple("pan", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PanRecipe.class, RT_PAN));
@@ -47,16 +53,8 @@ public class CuisineRecipes {
 	public static final RegistryEntry<BaseRecipe.RecType<FirePitStickRecipe, FirePitStickRecipe, RecipeContainer<FirePitStickBlockEntity>>> RS_STICK =
 			REGISTRATE.simple("stick", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(FirePitStickRecipe.class, RT_STICK));
 
-	public static void registerRecipeType() {
-		RT_PAN = RecipeType.register(Cuisine.MODID + ":pan");
-		RT_JAR = RecipeType.register(Cuisine.MODID + ":jar");
-		RT_BASIN = RecipeType.register(Cuisine.MODID + ":basin");
-		RT_BASIN_DRY = RecipeType.register(Cuisine.MODID + ":basin_dry");
-		RT_MILL = RecipeType.register(Cuisine.MODID + ":mill");
-		RT_MORTAR = RecipeType.register(Cuisine.MODID + ":mortar");
-	}
-
-	public static void register() {
+	public static void register(IEventBus bus) {
+		RECIPE_TYPES.register(bus);
 	}
 
 }

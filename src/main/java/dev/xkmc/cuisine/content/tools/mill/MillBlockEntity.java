@@ -47,7 +47,7 @@ public class MillBlockEntity extends CuisineTile<MillBlockEntity> implements Tic
 	protected final LazyOptional<IFluidHandler> fluidCapability;
 
 	@SerialClass.SerialField(toClient = true)
-	private final StepHandler<MillBlockEntity, MillRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_MILL);
+	private final StepHandler<MillBlockEntity, MillRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_MILL.get());
 
 	public MillBlockEntity(BlockEntityType<MillBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 1).add(t));

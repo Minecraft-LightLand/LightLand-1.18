@@ -17,7 +17,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class FirePitStickRecipeCategory extends BaseCuisineRecipeCategory<FirePitStickRecipe, FirePitStickRecipeCategory> {
 
 	public FirePitStickRecipeCategory() {
-		super("stick", CuisineBlocks.FIRE_PIT_STICK, FirePitStickRecipe.class, 0, CuisineRecipes.RT_STICK);
+		super("stick", CuisineBlocks.FIRE_PIT_STICK, FirePitStickRecipe.class, 0, CuisineRecipes.RT_STICK.get());
 	}
 
 	@Override

@@ -22,9 +22,9 @@ public class BasinBlockEntity extends CuisineTankTile<BasinBlockEntity> implemen
 
 
 	@SerialClass.SerialField(toClient = true)
-	private final StepHandler<BasinBlockEntity, BasinRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_BASIN);
+	private final StepHandler<BasinBlockEntity, BasinRecipe> stepHandler = new StepHandler<>(this, CuisineRecipes.RT_BASIN.get());
 	@SerialClass.SerialField(toClient = true)
-	private final TimeHandler<BasinBlockEntity, BasinDryRecipe> timeHandler = new TimeHandler<>(this, CuisineRecipes.RT_BASIN_DRY);
+	private final TimeHandler<BasinBlockEntity, BasinDryRecipe> timeHandler = new TimeHandler<>(this, CuisineRecipes.RT_BASIN_DRY.get());
 
 	@SerialClass.SerialField
 	private boolean has_fire = false;

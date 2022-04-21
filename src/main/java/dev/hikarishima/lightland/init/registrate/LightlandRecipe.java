@@ -8,19 +8,25 @@ import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.products.recipe.DefMagicRecipe;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.content.magic.ritual.*;
+import dev.hikarishima.lightland.init.LightLand;
 import dev.lcy0x1.recipe.AbstractShapedRecipe;
 import dev.lcy0x1.recipe.AbstractShapelessRecipe;
 import dev.lcy0x1.recipe.AbstractSmithingRecipe;
 import dev.lcy0x1.recipe.BaseRecipe;
+import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 
 public class LightlandRecipe {
 
-	public static RecipeType<AbstractRitualRecipe<?>> RT_RITUAL;
-	public static RecipeType<IMagicRecipe<?>> RT_MAGIC;
+	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, LightLand.MODID);
+	public static RegistryObject<RecipeType<AbstractRitualRecipe<?>>> RT_RITUAL = REGISTRATE.recipe(RECIPE_TYPES, "ritual");
+	public static RegistryObject<RecipeType<IMagicRecipe<?>>> RT_MAGIC = REGISTRATE.recipe(RECIPE_TYPES, "magic");
 
 	public static final RegistryEntry<BaseRecipe.RecType<BasicRitualRecipe, AbstractRitualRecipe<?>, RitualCore.Inv>> RS_DEF =
 			REGISTRATE.simple("ritual_default", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(BasicRitualRecipe.class, RT_RITUAL));
@@ -47,14 +53,8 @@ public class LightlandRecipe {
 	public static final RegistryEntry<BaseRecipe.RecType<DefMagicRecipe, IMagicRecipe<?>, IMagicRecipe.Inv>> RSM_DEF =
 			REGISTRATE.simple("magic_default", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(DefMagicRecipe.class, RT_MAGIC));
 
-
-	public static void registerRecipeType() {
-		RT_RITUAL = RecipeType.register("lightland:ritual");
-		RT_MAGIC = RecipeType.register("lightland:magic");
-	}
-
-	public static void register() {
-
+	public static void register(IEventBus bus) {
+		RECIPE_TYPES.register(bus);
 	}
 
 }

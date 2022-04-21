@@ -15,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class BasinDryRecipeCategory extends BaseCuisineRecipeCategory<BasinDryRecipe, BasinDryRecipeCategory> {
 
 	public BasinDryRecipeCategory() {
-		super("basin_dry", CuisineBlocks.BASIN, BasinDryRecipe.class, BasinBlockEntity.MAX_FLUID, CuisineRecipes.RT_BASIN_DRY);
+		super("basin_dry", CuisineBlocks.BASIN, BasinDryRecipe.class, BasinBlockEntity.MAX_FLUID, CuisineRecipes.RT_BASIN_DRY.get());
 	}
 
 	@Override

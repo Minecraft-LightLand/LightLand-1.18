@@ -8,6 +8,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.RegistryObject;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -51,7 +52,7 @@ public abstract class BaseRecipe<
 
 	@Override
 	public final RecipeType<?> getType() {
-		return factory.type;
+		return factory.type.get();
 	}
 
 	public interface RecInv<R extends BaseRecipe<?, R, ?>> extends Container {
@@ -61,9 +62,9 @@ public abstract class BaseRecipe<
 	public static class RecType<Rec extends SRec, SRec extends BaseRecipe<?, SRec, Inv>, Inv extends Container>
 			extends RecSerializer<Rec, Inv> {
 
-		public final RecipeType<SRec> type;
+		public final RegistryObject<RecipeType<SRec>> type;
 
-		public RecType(Class<Rec> rec, RecipeType<SRec> type) {
+		public RecType(Class<Rec> rec, RegistryObject<RecipeType<SRec>> type) {
 			super(rec);
 			this.type = type;
 		}

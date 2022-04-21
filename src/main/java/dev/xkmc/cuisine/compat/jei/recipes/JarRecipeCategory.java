@@ -16,7 +16,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 public class JarRecipeCategory extends BaseCuisineRecipeCategory<JarRecipe, JarRecipeCategory> {
 
 	public JarRecipeCategory() {
-		super("jar", CuisineBlocks.JAR, JarRecipe.class, JarBlockEntity.MAX_FLUID, CuisineRecipes.RT_JAR);
+		super("jar", CuisineBlocks.JAR, JarRecipe.class, JarBlockEntity.MAX_FLUID, CuisineRecipes.RT_JAR.get());
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class IMagicRecipe<R extends IMagicRecipe<R>> extends BaseRecipe<R, IMagi
 	}
 
 	public static List<IMagicRecipe<?>> getAll(Level w) {
-		return w.getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_MAGIC);
+		return w.getRecipeManager().getAllRecipesFor(LightlandRecipe.RT_MAGIC.get());
 	}
 
 	public static <T extends IForgeRegistryEntry<T>> Map<T, IMagicRecipe<?>> getMap(Level w, MagicProductType<T, ?> type) {
