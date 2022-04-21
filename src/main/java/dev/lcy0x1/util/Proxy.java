@@ -1,4 +1,4 @@
-package dev.lcy0x1.base;
+package dev.lcy0x1.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;

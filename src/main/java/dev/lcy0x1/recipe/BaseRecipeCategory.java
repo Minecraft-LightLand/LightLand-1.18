@@ -1,4 +1,4 @@
-package dev.lcy0x1.base;
+package dev.lcy0x1.recipe;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

@@ -13,7 +13,7 @@ import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.LightlandParticle;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.util.RayTraceUtil;
-import dev.lcy0x1.base.Proxy;
+import dev.lcy0x1.util.Proxy;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.AbstractClientPlayer;

@@ -2,10 +2,10 @@ package dev.xkmc.cuisine.init.registrate;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import dev.lcy0x1.base.LootTableTemplate;
 import dev.lcy0x1.block.BlockProxy;
 import dev.lcy0x1.block.DelegateBlock;
 import dev.lcy0x1.block.DelegateBlockProperties;
+import dev.lcy0x1.util.LootTableTemplate;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlock;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;

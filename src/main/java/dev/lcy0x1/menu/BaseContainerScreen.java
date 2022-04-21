@@ -1,7 +1,7 @@
 package dev.lcy0x1.menu;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.lcy0x1.base.Proxy;
+import dev.lcy0x1.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;

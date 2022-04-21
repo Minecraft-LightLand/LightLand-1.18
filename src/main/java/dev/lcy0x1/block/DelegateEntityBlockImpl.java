@@ -1,6 +1,5 @@
 package dev.lcy0x1.block;
 
-import dev.lcy0x1.base.TickableBlockEntity;
 import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.lcy0x1.block.type.BlockMethod;
 import net.minecraft.MethodsReturnNonnullByDefault;

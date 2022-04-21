@@ -1,4 +1,4 @@
-package dev.lcy0x1.base;
+package dev.lcy0x1.block;
 
 public interface TickableBlockEntity {
 

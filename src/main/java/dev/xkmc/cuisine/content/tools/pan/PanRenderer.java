@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.lcy0x1.base.RenderUtils;
+import dev.lcy0x1.util.RenderUtils;
 import dev.xkmc.cuisine.content.tools.base.ContentRenderer;
 import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
 import net.minecraft.client.renderer.MultiBufferSource;

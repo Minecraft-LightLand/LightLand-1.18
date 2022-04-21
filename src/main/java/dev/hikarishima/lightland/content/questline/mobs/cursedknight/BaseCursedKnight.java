@@ -4,7 +4,7 @@ import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.AlertClassGoal;
 import dev.hikarishima.lightland.content.questline.common.mobs.BipedMonster;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
-import dev.lcy0x1.base.LootTableTemplate;
+import dev.lcy0x1.util.LootTableTemplate;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;

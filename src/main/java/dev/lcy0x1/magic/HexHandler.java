@@ -1,8 +1,8 @@
 package dev.lcy0x1.magic;
 
-import dev.lcy0x1.math.Frac;
 import dev.lcy0x1.serial.NBTList;
 import dev.lcy0x1.serial.NBTObj;
+import dev.lcy0x1.util.Frac;
 
 public class HexHandler {
 

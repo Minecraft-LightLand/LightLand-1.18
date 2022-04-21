@@ -1,4 +1,4 @@
-package dev.lcy0x1.math;
+package dev.lcy0x1.util;
 
 /**
  * represents a positive fraction

@@ -8,7 +8,7 @@ import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.util.EffectAddUtil;
-import dev.lcy0x1.base.Proxy;
+import dev.lcy0x1.util.Proxy;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

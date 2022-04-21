@@ -16,7 +16,7 @@ import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
-import dev.lcy0x1.base.Proxy;
+import dev.lcy0x1.util.Proxy;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;

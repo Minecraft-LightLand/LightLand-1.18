@@ -1,4 +1,4 @@
-package dev.lcy0x1.base;
+package dev.lcy0x1.util;
 
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;

@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.lcy0x1.base.TickableBlockEntity;
+import dev.lcy0x1.block.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.CookHandler;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;

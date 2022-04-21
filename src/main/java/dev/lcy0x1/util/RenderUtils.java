@@ -1,4 +1,4 @@
-package dev.lcy0x1.base;
+package dev.lcy0x1.util;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
