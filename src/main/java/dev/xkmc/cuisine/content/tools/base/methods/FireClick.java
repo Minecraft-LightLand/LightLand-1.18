@@ -2,9 +2,9 @@ package dev.xkmc.cuisine.content.tools.base.methods;
 
 import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
 import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
+import dev.lcy0x1.block.mult.OnClickBlockMethod;
 import dev.lcy0x1.block.one.LightBlockMethod;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
-import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import dev.xkmc.cuisine.content.tools.base.tile.LitTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.BlockHitResult;
 
-public class FireClick<T extends CuisineTile<T> & LitTile> implements TileClick<T>, CreateBlockStateBlockMethod, DefaultStateBlockMethod, LightBlockMethod {
+public class FireClick implements OnClickBlockMethod, CreateBlockStateBlockMethod, DefaultStateBlockMethod, LightBlockMethod {
 
 	@Override
 	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -40,14 +40,19 @@ public class FireClick<T extends CuisineTile<T> & LitTile> implements TileClick<
 	}
 
 	@Override
-	public InteractionResult click(Level level, BlockState state, BlockPos pos, T tile, ItemStack stack, Player pl, InteractionHand hand, BlockHitResult result) {
+	public InteractionResult onClick(BlockState state, Level level, BlockPos pos, Player pl, InteractionHand hand, BlockHitResult result) {
+		ItemStack stack = pl.getItemInHand(hand);
+		LitTile litTile = LitTile.DEFAULT;
+		if (level.getBlockEntity(pos) instanceof LitTile t) {
+			litTile = t;
+		}
 		boolean lit = state.getValue(BlockStateProperties.LIT);
 		if (stack.getItem() instanceof FlintAndSteelItem) {
 			if (!lit) {
 				level.playSound(pl, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F);
 				BlockState next = state.setValue(BlockStateProperties.LIT, true);
 				CuisineUtil.hurtAndBreak(pl, stack, hand);
-				tile.onLit(level, pos, next);
+				litTile.onLit(level, pos, next);
 				return InteractionResult.SUCCESS;
 			} else {
 				return InteractionResult.CONSUME;
@@ -55,7 +60,7 @@ public class FireClick<T extends CuisineTile<T> & LitTile> implements TileClick<
 		}
 		if (lit && pl.isShiftKeyDown()) {
 			BlockState unlit = state.setValue(BlockStateProperties.LIT, false);
-			tile.onUnlit(level, pos, unlit);
+			litTile.onUnlit(level, pos, unlit);
 			return InteractionResult.SUCCESS;
 		}
 		return InteractionResult.PASS;

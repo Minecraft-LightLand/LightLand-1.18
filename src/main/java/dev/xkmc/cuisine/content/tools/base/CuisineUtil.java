@@ -18,8 +18,8 @@ public class CuisineUtil {
 
 	public static final DumpInventory DUMP = new DumpInventory();
 	public static final AddOneItem ADD = new AddOneItem();
-	public static final FireClick<?> FIRE = new FireClick<>();
-	public static final LidClick LID = new LidClick();
+	public static final FireClick FIRE = new FireClick();
+	public static final LidClick<?> LID = new LidClick<>();
 	public static final TakeResultClick<?> TAKE = new TakeResultClick<>();
 	public static final StepClick<?> STEP = new StepClick<>();
 	public static final TimeProcessing TIME = new TimeProcessing();

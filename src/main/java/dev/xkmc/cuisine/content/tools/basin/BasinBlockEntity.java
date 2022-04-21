@@ -26,6 +26,9 @@ public class BasinBlockEntity extends CuisineTankTile<BasinBlockEntity> implemen
 	@SerialClass.SerialField(toClient = true)
 	private final TimeHandler<BasinBlockEntity, BasinDryRecipe> timeHandler = new TimeHandler<>(this, CuisineRecipes.RT_BASIN_DRY);
 
+	@SerialClass.SerialField
+	private boolean has_fire = false;
+
 	public BasinBlockEntity(BlockEntityType<BasinBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 8).setPredicate(stack -> t.inventory.countSpace() > 4).add(t),
 				new FluidInfo(1, MAX_FLUID, 50));
@@ -44,7 +47,12 @@ public class BasinBlockEntity extends CuisineTankTile<BasinBlockEntity> implemen
 	}
 
 	public void tick() {
-		if (checkBlockBelow()) {
+		boolean new_fire = checkBlockBelow();
+		if (has_fire != new_fire) {
+			notifyTile();
+			has_fire = new_fire;
+		}
+		if (new_fire) {
 			timeHandler.tick();
 		}
 	}

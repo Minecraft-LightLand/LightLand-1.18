@@ -5,9 +5,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
 import java.util.function.Predicate;
 
+@ParametersAreNonnullByDefault
 public class BaseContainer<T extends BaseContainer<T>> extends SimpleContainer implements AliasCollection<ItemStack> {
 
 	private int max = 64;
@@ -44,6 +46,11 @@ public class BaseContainer<T extends BaseContainer<T>> extends SimpleContainer i
 	@Override
 	public boolean canPlaceItem(int slot, ItemStack stack) {
 		return predicate.test(stack);
+	}
+
+	@Override
+	public boolean canAddItem(ItemStack stack) {
+		return predicate.test(stack) && super.canAddItem(stack);
 	}
 
 	@Override

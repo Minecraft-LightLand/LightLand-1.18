@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -57,6 +58,10 @@ public class JarRecipe extends CuisineRecipe<JarRecipe, JarBlockEntity> implemen
 
 	@Override
 	public ItemStack assemble(RecipeContainer<JarBlockEntity> inv) {
+		inv.clear();
+		inv.getTile().fluids.clear();
+		inv.addItem(result.copy());
+		inv.getTile().fluids.fill(remain.copy(), IFluidHandler.FluidAction.EXECUTE);
 		return result.copy();
 	}
 
