@@ -33,7 +33,7 @@ public enum LangData {
 	public MutableComponent get(Object... args) {
 		if (args.length != arg)
 			throw new IllegalArgumentException("for " + name() + ": expect " + arg + " parameters, got " + args.length);
-		TranslatableComponent ans = new TranslatableComponent(key);
+		TranslatableComponent ans = new TranslatableComponent(key, args);
 		if (format != null) {
 			return ans.withStyle(format);
 		}

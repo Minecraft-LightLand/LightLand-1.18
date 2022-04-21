@@ -1,7 +1,9 @@
 package dev.xkmc.cuisine.content.tools.base;
 
+import com.jozufozu.flywheel.util.transform.TransformStack;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
+import com.simibubi.create.content.contraptions.relays.belt.BeltHelper;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.VecHelper;
@@ -9,9 +11,11 @@ import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
+import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -30,7 +34,14 @@ public class ContentRenderer {
 
 	}
 
-	public static void renderContent(Context ctx) {
+	public static void renderDepotContent(Context ctx) {
+		float fluidLevel = renderFluids(ctx);
+		List<ItemStack> list = ctx.tile.getContents().stream().filter(e -> e instanceof TileInfoOverlay.ItemDrawable)
+				.map(e -> ((TileInfoOverlay.ItemDrawable) e).stack()).filter(e -> !e.isEmpty()).toList();
+		renderDepotInv(ctx.pos, ctx.partialTicks, ctx.ms, ctx.buffer, ctx.light, ctx.overlay, list);
+	}
+
+	public static void renderBasinContent(Context ctx) {
 		float fluidLevel = renderFluids(ctx);
 		float height = Mth.clamp(fluidLevel - .3f * ctx.scale, ctx.yMin, ctx.yMax);
 		ctx.ms.pushPose();
@@ -61,7 +72,7 @@ public class ContentRenderer {
 				Vec3 vec = VecHelper.offsetRandomly(Vec3.ZERO, r, 1 / 16f);
 				ctx.ms.translate(vec.x, vec.y, vec.z);
 				ctx.ms.scale(ctx.scale, ctx.scale, ctx.scale);
-				renderItem(ctx, stack);
+				renderBasinItem(ctx, stack);
 				ctx.ms.popPose();
 			}
 			ctx.ms.popPose();
@@ -70,7 +81,7 @@ public class ContentRenderer {
 		ctx.ms.popPose();
 	}
 
-	private static void renderItem(Context ctx, ItemStack stack) {
+	private static void renderBasinItem(Context ctx, ItemStack stack) {
 		Minecraft.getInstance()
 				.getItemRenderer()
 				.renderStatic(stack, ItemTransforms.TransformType.GROUND, ctx.light, ctx.overlay, ctx.ms, ctx.buffer, 0);
@@ -97,4 +108,82 @@ public class ContentRenderer {
 		}
 		return y;
 	}
+
+	private static void renderDepotInv(BlockPos pos, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+									  int light, int overlay, List<ItemStack> list) {
+
+		TransformStack msr = TransformStack.cast(ms);
+		Vec3 itemPosition = VecHelper.getCenterOf(pos);
+
+		ms.pushPose();
+		ms.translate(.5f, 15 / 16f, .5f);
+
+		// Render output items
+		for (int i = 0; i < list.size(); i++) {
+			ItemStack stack = list.get(i);
+			if (stack.isEmpty())
+				continue;
+			ms.pushPose();
+			msr.nudge(i);
+
+			boolean renderUpright = BeltHelper.isItemUpright(stack);
+			msr.rotateY(360 / 8f * i);
+			ms.translate(.35f, 0, 0);
+			if (renderUpright)
+				msr.rotateY(-(360 / 8f * i));
+			Random r = new Random(i + 1);
+			int angle = (int) (360 * r.nextFloat());
+			renderDepotItem(ms, buffer, light, overlay, stack, renderUpright ? angle + 90 : angle, r, itemPosition);
+			ms.popPose();
+		}
+
+		ms.popPose();
+	}
+
+	private static void renderDepotItem(PoseStack ms, MultiBufferSource buffer, int light, int overlay, ItemStack itemStack,
+									   int angle, Random r, Vec3 itemPosition) {
+		ItemRenderer itemRenderer = Minecraft.getInstance()
+				.getItemRenderer();
+		TransformStack msr = TransformStack.cast(ms);
+		int count = Mth.log2(itemStack.getCount()) / 2;
+		boolean renderUpright = BeltHelper.isItemUpright(itemStack);
+		boolean blockItem = itemRenderer.getModel(itemStack, null, null, 0).isGui3d();
+
+		ms.pushPose();
+		msr.rotateY(angle);
+
+		if (renderUpright) {
+			Entity renderViewEntity = Minecraft.getInstance().cameraEntity;
+			if (renderViewEntity != null) {
+				Vec3 positionVec = renderViewEntity.position();
+				Vec3 diff = itemPosition.subtract(positionVec);
+				float yRot = (float) (Mth.atan2(diff.x, diff.z) + Math.PI);
+				ms.mulPose(Vector3f.YP.rotation(yRot));
+			}
+			ms.translate(0, 3 / 32d, -1 / 16f);
+		}
+
+		for (int i = 0; i <= count; i++) {
+			ms.pushPose();
+			if (blockItem)
+				ms.translate(r.nextFloat() * .0625f * i, 0, r.nextFloat() * .0625f * i);
+			ms.scale(.5f, .5f, .5f);
+			if (!blockItem && !renderUpright) {
+				ms.translate(0, -3 / 16f, 0);
+				msr.rotateX(90);
+			}
+			itemRenderer.renderStatic(itemStack, ItemTransforms.TransformType.FIXED, light, overlay, ms, buffer, 0);
+			ms.popPose();
+
+			if (!renderUpright) {
+				if (!blockItem)
+					msr.rotateY(10);
+				ms.translate(0, blockItem ? 1 / 64d : 1 / 16d, 0);
+			} else
+				ms.translate(0, 0, -1 / 16f);
+		}
+
+		ms.popPose();
+	}
+
 }

@@ -15,7 +15,7 @@ public class MortarRenderer implements BlockEntityRenderer<MortarBlockEntity> {
 	@Override
 	public void render(MortarBlockEntity basin, float partialTicks, PoseStack ms, MultiBufferSource buffer,
 					   int light, int overlay) {
-		ContentRenderer.renderContent(new ContentRenderer.Context(ms, buffer, light, overlay, partialTicks,
+		ContentRenderer.renderBasinContent(new ContentRenderer.Context(ms, buffer, light, overlay, partialTicks,
 				1 / 16f, 15 / 16f, 1 / 16f, 7 / 16f, 1 / 16f, 15 / 16f,
 				0.125f, 0.5f,
 				basin, basin.getBlockPos(), basin.getLevel(), 0));

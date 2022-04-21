@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+@SerialClass
 public class FirePitWokBlockEntity extends CuisineTankTile<FirePitWokBlockEntity> implements TickableBlockEntity,
 		LitTile, BottleResultTile, CookTile {
 
