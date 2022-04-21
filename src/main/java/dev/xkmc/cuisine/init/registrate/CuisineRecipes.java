@@ -31,12 +31,12 @@ public class CuisineRecipes {
 	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, Cuisine.MODID);
 
 	public static RegistryObject<RecipeType<PanRecipe>> RT_PAN = REGISTRATE.recipe(RECIPE_TYPES, "pan");
-	public static RegistryObject<RecipeType<JarRecipe>> RT_JAR = REGISTRATE.recipe(RECIPE_TYPES, "pan");
-	public static RegistryObject<RecipeType<BasinRecipe>> RT_BASIN = REGISTRATE.recipe(RECIPE_TYPES, "pan");
-	public static RegistryObject<RecipeType<BasinDryRecipe>> RT_BASIN_DRY = REGISTRATE.recipe(RECIPE_TYPES, "pan");
-	public static RegistryObject<RecipeType<MillRecipe>> RT_MILL = REGISTRATE.recipe(RECIPE_TYPES, "pan");
-	public static RegistryObject<RecipeType<MortarRecipe>> RT_MORTAR = REGISTRATE.recipe(RECIPE_TYPES, "pan");
-	public static RegistryObject<RecipeType<FirePitStickRecipe>> RT_STICK = REGISTRATE.recipe(RECIPE_TYPES, "pan");
+	public static RegistryObject<RecipeType<JarRecipe>> RT_JAR = REGISTRATE.recipe(RECIPE_TYPES, "jar");
+	public static RegistryObject<RecipeType<BasinRecipe>> RT_BASIN = REGISTRATE.recipe(RECIPE_TYPES, "basin");
+	public static RegistryObject<RecipeType<BasinDryRecipe>> RT_BASIN_DRY = REGISTRATE.recipe(RECIPE_TYPES, "basin_dry");
+	public static RegistryObject<RecipeType<MillRecipe>> RT_MILL = REGISTRATE.recipe(RECIPE_TYPES, "mill");
+	public static RegistryObject<RecipeType<MortarRecipe>> RT_MORTAR = REGISTRATE.recipe(RECIPE_TYPES, "mortar");
+	public static RegistryObject<RecipeType<FirePitStickRecipe>> RT_STICK = REGISTRATE.recipe(RECIPE_TYPES, "stick");
 
 	public static final RegistryEntry<BaseRecipe.RecType<PanRecipe, PanRecipe, RecipeContainer<PanBlockEntity>>> RS_PAN =
 			REGISTRATE.simple("pan", RecipeSerializer.class, () -> new BaseRecipe.RecType<>(PanRecipe.class, RT_PAN));

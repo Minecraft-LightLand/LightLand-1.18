@@ -6,7 +6,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.common.item.api.Mat;
 import dev.hikarishima.lightland.content.common.item.generic.*;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
-import dev.hikarishima.lightland.init.special.LLRegistrate;
+import dev.lcy0x1.base.LcyRegistrate;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
@@ -170,7 +170,7 @@ public class GenItem {
 
 	public interface EntryProcessor {
 
-		ItemBuilder<Item, LLRegistrate> apply(ItemBuilder<Item, LLRegistrate> builder);
+		ItemBuilder<Item, LcyRegistrate> apply(ItemBuilder<Item, LcyRegistrate> builder);
 
 	}
 

@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.init.special;
+package dev.lcy0x1.base;
 
 import com.tterrag.registrate.AbstractRegistrate;
 import com.tterrag.registrate.builders.BuilderCallback;

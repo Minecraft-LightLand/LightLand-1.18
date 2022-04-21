@@ -36,8 +36,8 @@ import dev.hikarishima.lightland.content.questline.item.SlimeTentacleItem;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.GenItem;
-import dev.hikarishima.lightland.init.special.LLRegistrate;
-import dev.hikarishima.lightland.init.special.VirtualFluid;
+import dev.lcy0x1.base.LcyRegistrate;
+import dev.lcy0x1.base.VirtualFluid;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
@@ -383,7 +383,7 @@ public class LightlandItems {
 	}
 
 	@SuppressWarnings({"rawtypes", "unsafe", "unchecked"})
-	public static <T extends ArmorItem> ItemEntry<T>[] genArmor(String id, BiFunction<EquipmentSlot, Item.Properties, T> sup, Function<ItemBuilder<T, LLRegistrate>, ItemBuilder<T, LLRegistrate>> func) {
+	public static <T extends ArmorItem> ItemEntry<T>[] genArmor(String id, BiFunction<EquipmentSlot, Item.Properties, T> sup, Function<ItemBuilder<T, LcyRegistrate>, ItemBuilder<T, LcyRegistrate>> func) {
 		ItemEntry[] ans = new ItemEntry[4];
 		ans[0] = func.apply(REGISTRATE.item(id + "_helmet", p -> sup.apply(EquipmentSlot.HEAD, p))).defaultLang().register();
 		ans[1] = func.apply(REGISTRATE.item(id + "_chestplate", p -> sup.apply(EquipmentSlot.CHEST, p))).defaultLang().register();

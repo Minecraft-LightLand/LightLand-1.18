@@ -1,4 +1,4 @@
-package dev.hikarishima.lightland.init.special;
+package dev.lcy0x1.base;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;

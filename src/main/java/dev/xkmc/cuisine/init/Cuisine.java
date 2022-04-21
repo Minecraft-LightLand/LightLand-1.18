@@ -2,14 +2,17 @@ package dev.xkmc.cuisine.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.special.LLRegistrate;
+import dev.lcy0x1.base.LcyRegistrate;
 import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
+import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
 import dev.xkmc.cuisine.content.veges.CornBlock;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.data.LangData;
 import dev.xkmc.cuisine.init.data.RecipeGen;
 import dev.xkmc.cuisine.init.data.WoodType;
 import dev.xkmc.cuisine.init.registrate.*;
+import net.minecraftforge.client.gui.ForgeIngameGui;
+import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -20,7 +23,7 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 public class Cuisine {
 
 	public static final String MODID = LightLand.MODID;
-	public static final LLRegistrate REGISTRATE = LightLand.REGISTRATE;
+	public static final LcyRegistrate REGISTRATE = LightLand.REGISTRATE;
 
 	public Cuisine() {
 		CuisineBlocks.register();
@@ -54,6 +57,7 @@ public class Cuisine {
 		event.enqueueWork(() -> {
 			WoodType.onClientInit();
 			CuisineBottleItem.onClientInit();
+			OverlayRegistry.registerOverlayAbove(ForgeIngameGui.CROSSHAIR_ELEMENT, "Block Info", new TileInfoOverlay());
 		});
 	}
 

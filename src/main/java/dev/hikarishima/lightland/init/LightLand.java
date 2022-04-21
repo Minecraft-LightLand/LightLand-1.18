@@ -16,10 +16,10 @@ import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.data.RecipeGen;
 import dev.hikarishima.lightland.init.registrate.*;
-import dev.hikarishima.lightland.init.special.LLRegistrate;
 import dev.hikarishima.lightland.init.worldgenreg.StructureRegistrate;
 import dev.hikarishima.lightland.init.worldgenreg.WorldGenRegistrate;
 import dev.hikarishima.lightland.network.PacketHandler;
+import dev.lcy0x1.base.LcyRegistrate;
 import dev.lcy0x1.serial.handler.Handlers;
 import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraftforge.api.distmarker.Dist;
@@ -44,7 +44,7 @@ public class LightLand {
 
 	public static final String MODID = "lightland";
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final LLRegistrate REGISTRATE = new LLRegistrate(MODID);
+	public static final LcyRegistrate REGISTRATE = new LcyRegistrate(MODID);
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
