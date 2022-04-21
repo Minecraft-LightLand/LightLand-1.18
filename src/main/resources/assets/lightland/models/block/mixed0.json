@@ -1,0 +1,4 @@
+{
+  "parent": "lightland:block/plate",
+  "model": "lightland:models/block/mixed0.obj"
+}

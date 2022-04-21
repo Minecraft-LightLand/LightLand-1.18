@@ -1,0 +1,12 @@
+newmtl 01___Default
+map_Kd #plate
+
+newmtl 07___Default
+map_Kd #vege
+
+newmtl 13___Default
+map_Kd #lime_vege
+
+newmtl 14___Default
+d 0.5
+map_Kd #veges_soup

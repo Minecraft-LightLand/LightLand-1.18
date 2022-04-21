@@ -90,8 +90,8 @@ d5d06b9237d936ff04e4bbb633bb7504d6a8401e assets/lightland/blockstates/steel_bloc
 9c38d81c2ab30b20f34ae55d9a992513d3121f04 assets/lightland/blockstates/tomato.json
 107ffed7845d4e06e2f058d103222be5aea5dc8d assets/lightland/blockstates/turnip.json
 c7c7aa6f16158cedce4eb0ea90a56b53d8bba608 assets/lightland/blockstates/wok.json
-2f9cadf374c776652d8001d6cd29da2fbe794575 assets/lightland/lang/en_ud.json
-106b5df7e1b21280de7752d57ad1175be629d787 assets/lightland/lang/en_us.json
+78669206babcb7c75a8e02e708f764d5d2543737 assets/lightland/lang/en_ud.json
+d06defbbfe1530fddba4d9be8ff044f954ce8a7f assets/lightland/lang/en_us.json
 e2ea17ff5098184db8d64db202680419be7fe023 assets/lightland/models/block/chili_stage_0.json
 d814ee307c735f50ea3c1f557536a16e09043624 assets/lightland/models/block/chili_stage_1.json
 4397ffc9d401d0c8695c0c2a8dacf22c97ffdae3 assets/lightland/models/block/chili_stage_2.json
@@ -443,6 +443,7 @@ c6ee41b1416675e2a46fb1f20f24b5829f1f8e4f assets/lightland/models/item/ethernium_
 535d20d8d3e8680bd8b0779e2643706fb83ab085 assets/lightland/models/item/fire_pit.json
 db55295989337b4412d6729b74169c00a07f85a5 assets/lightland/models/item/fire_pit_with_sticks.json
 98db4230d6d7225f317154b4ef4ad6b58e2c2db4 assets/lightland/models/item/fire_pit_with_wok.json
+1d50d4a5064fb762d47356bd3d61f587c3d30467 assets/lightland/models/item/fish0.json
 1b447ad2f3aa0dfa9b1773232acd4b34b87604ad assets/lightland/models/item/flour.json
 25233390a5209ab966a75f638221649835dacc9f assets/lightland/models/item/frozen_arrow.json
 4545597d5aab9fcbdb2eb79421d39c35fe70b976 assets/lightland/models/item/fruittree_boat.json
@@ -570,6 +571,8 @@ c88036358fc9056523f2ebadde8065297a24818f assets/lightland/models/item/liquid_bot
 60a11c5b5121ed336078afef7dcfd90cd0f1d19d assets/lightland/models/item/magnify_bow_pulling_2.json
 f76d7eeacce1a9bd8428db9e0ccfbbb71a660765 assets/lightland/models/item/mandarin.json
 286c348537e9cc9cf5f7f98e611753f84d9d7d7c assets/lightland/models/item/maze_wall.json
+1319b12a3a3a094230d36178e31b4bfbf2d04bbd assets/lightland/models/item/meat0.json
+f60365ca85f8ab42733d0babc9d86f30477e0b88 assets/lightland/models/item/meat1.json
 ea1b647516b97e69bf8fab8162a2e5f0c941d879 assets/lightland/models/item/medicine_leather.json
 a601220ad07ec2f3caeb5bf9bd4aa0a6fdca441a assets/lightland/models/item/medicine_leather_boots.json
 0f13646c802df42c7f6048e624f8ab74c62594e1 assets/lightland/models/item/medicine_leather_chestplate.json
@@ -583,6 +586,8 @@ aac2f8c4b95db9de6042532126c67ad05536d6fa assets/lightland/models/item/minced_mut
 aac2f8c4b95db9de6042532126c67ad05536d6fa assets/lightland/models/item/minced_pork.json
 aac2f8c4b95db9de6042532126c67ad05536d6fa assets/lightland/models/item/minced_rabbit.json
 aac2f8c4b95db9de6042532126c67ad05536d6fa assets/lightland/models/item/minced_salmon.json
+2d2de58cb90e91dcbfc0f5083a31ea307d8946e2 assets/lightland/models/item/mixed0.json
+052da277ce48283326d927de1956225a2730f06c assets/lightland/models/item/mixed1.json
 43e7bf056f9926c1b209f1af5ce30bb08e79b789 assets/lightland/models/item/mortar.json
 c6d2c31ffd4a0a6e9623fcb3bf2b506e3952c2d8 assets/lightland/models/item/mystic_boat.json
 9fd0a97bdee96d0fa67aefe466eaea928e3a1e09 assets/lightland/models/item/mystic_button.json
@@ -621,6 +626,7 @@ a38c5ace817237f47b8a0df1f0000a0e1d13050c assets/lightland/models/item/orange.jso
 71fb4078ab110b567d8210b7d46c838d2dc4b33f assets/lightland/models/item/paste_rabbit.json
 71fb4078ab110b567d8210b7d46c838d2dc4b33f assets/lightland/models/item/paste_salmon.json
 6fbaa26e4a0e7f46db647a02e9cfda2b9d1dac1e assets/lightland/models/item/peanut.json
+53cdc18e2ac40e267e65fcf252b0dde88c3deabf assets/lightland/models/item/plate.json
 e15a54d74428de4cd07e8355289bd68467e93cc6 assets/lightland/models/item/pomelo.json
 7d7b1ed60bff2e02d4845495bd9038db9c530c3c assets/lightland/models/item/potion_core.json
 98167609bf3898587f7565736a6fc24a7966cacd assets/lightland/models/item/potion_slime_spawn_egg.json
@@ -629,6 +635,7 @@ f3814b7c40c61cd362f13d696e95e1938ae91507 assets/lightland/models/item/processing
 ad84eafc30a7567a412fe08f77bcef0329c69bdc assets/lightland/models/item/record_pearl.json
 23fffa184469d3835487d05831e4bad9405b8473 assets/lightland/models/item/red_pepper.json
 01ec3456fc8fc8b345ebf5c82f6dbb548a10849f assets/lightland/models/item/rice.json
+3f25c6e714cb6948204fafa5b3cde9a8e69097fb assets/lightland/models/item/rice0.json
 a0b5cf71363c9ec88025ce05dd7b7ff468efbbec assets/lightland/models/item/rice_powder.json
 2c1b9e28968495713bd589c4ba4eee737584302c assets/lightland/models/item/ritual_core.json
 059bc813cba9a58f68bf6343bbf350c958dcab0a assets/lightland/models/item/ritual_side.json
@@ -694,6 +701,8 @@ c59c341ccf84aac2612513f8954cc165659a8979 assets/lightland/models/item/tomato.jso
 e0c10160037321d7e3c3a29ebd27ebd6c8e385aa assets/lightland/models/item/turnip.json
 ccf2e9189200bb4fe5e2d9df084f897c3ef45699 assets/lightland/models/item/unrefined_sugar.json
 12c820f5a79e25f1d663cda89b48f0becfa60ba5 assets/lightland/models/item/unstable_slime.json
+821fa08b3609e9cb6783de2426745ede9e46da98 assets/lightland/models/item/veges0.json
+343b99ffe220d97a4662f7b85fcb057fcaa50c06 assets/lightland/models/item/veges1.json
 98167609bf3898587f7565736a6fc24a7966cacd assets/lightland/models/item/vine_slime_spawn_egg.json
 7bebfbc11230d37b4057ae272ca6301001aa9e22 assets/lightland/models/item/white_rice.json
 bb160963941e097a9dd5bcc805642bc4009ae62e assets/lightland/models/item/wind_bow.json

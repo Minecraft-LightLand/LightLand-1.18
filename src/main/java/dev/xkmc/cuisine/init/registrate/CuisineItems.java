@@ -58,6 +58,7 @@ public class CuisineItems {
 							.override().predicate(new ResourceLocation(Cuisine.MODID, "amount"), 0.9f).model(overrides[4]).end();
 				}).color(() -> () -> (stack, index) -> index == 0 ? CuisineBottleItem.getFluidColor(stack) : 0xFFFFFF)
 				.defaultLang().register();
+		PlateItem.register();
 		ProcessedMeat.Meat.register();
 	}
 

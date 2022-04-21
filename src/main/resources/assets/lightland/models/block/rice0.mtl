@@ -1,0 +1,14 @@
+newmtl 01___Default
+map_Kd #plate
+
+newmtl 02___Default
+map_Kd #rice
+
+newmtl 03___Default
+map_Kd #red_deco
+
+newmtl 08___Default
+map_Kd #yellow_deco
+
+newmtl 07___Default
+map_Kd #vege

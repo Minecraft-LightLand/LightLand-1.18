@@ -1,0 +1,8 @@
+newmtl 01___Default
+map_Kd #plate
+
+newmtl Material__8
+map_Kd #beef
+
+newmtl 07___Default
+map_Kd #vege
