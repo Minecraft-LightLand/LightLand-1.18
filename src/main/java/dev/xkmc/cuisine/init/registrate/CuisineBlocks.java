@@ -13,8 +13,10 @@ import dev.xkmc.cuisine.content.tools.basin.BasinBlock;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;
 import dev.xkmc.cuisine.content.tools.basin.BasinRenderer;
 import dev.xkmc.cuisine.content.tools.firepit.FirePitBlock;
-import dev.xkmc.cuisine.content.tools.firepit.FirePitStickBlockEntity;
-import dev.xkmc.cuisine.content.tools.firepit.FirePitWokBlockEntity;
+import dev.xkmc.cuisine.content.tools.firepit.stick.FirePitStickBlockEntity;
+import dev.xkmc.cuisine.content.tools.firepit.stick.FirePitStickRenderer;
+import dev.xkmc.cuisine.content.tools.firepit.wok.FirePitWokBlockEntity;
+import dev.xkmc.cuisine.content.tools.firepit.wok.FirePitWokRenderer;
 import dev.xkmc.cuisine.content.tools.jar.JarBlock;
 import dev.xkmc.cuisine.content.tools.jar.JarBlockEntity;
 import dev.xkmc.cuisine.content.tools.mill.MillBlock;
@@ -44,7 +46,7 @@ import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 
 import static dev.xkmc.cuisine.init.Cuisine.REGISTRATE;
 
-@SuppressWarnings({"rawtype", "unchecked", "unsafe"})
+@SuppressWarnings({"rawtype", "unsafe"})
 public class CuisineBlocks {
 
 	static {
@@ -149,8 +151,10 @@ public class CuisineBlocks {
 					.loot((table, block) -> table.add(block, LootTableTemplate.selfOrOther(block, FIRE_PIT.get(), WOK.get().asItem(), 1)))
 					.simpleItem().tag(BlockTags.MINEABLE_WITH_PICKAXE).defaultLang().register();
 
-			TE_STICK = REGISTRATE.blockEntity("fire_pit_with_stick", FirePitStickBlockEntity::new).validBlock(FIRE_PIT_STICK).register();
-			TE_WOK = REGISTRATE.blockEntity("fire_pit_with_wok", FirePitWokBlockEntity::new).validBlock(FIRE_PIT_WOK).register();
+			TE_STICK = REGISTRATE.blockEntity("fire_pit_with_stick", FirePitStickBlockEntity::new)
+					.validBlock(FIRE_PIT_STICK).renderer(() -> FirePitStickRenderer::new).register();
+			TE_WOK = REGISTRATE.blockEntity("fire_pit_with_wok", FirePitWokBlockEntity::new)
+					.validBlock(FIRE_PIT_WOK).renderer(() -> FirePitWokRenderer::new).register();
 
 		}
 	}

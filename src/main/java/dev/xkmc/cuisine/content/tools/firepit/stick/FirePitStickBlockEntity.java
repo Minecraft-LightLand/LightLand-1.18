@@ -1,8 +1,10 @@
-package dev.xkmc.cuisine.content.tools.firepit;
+package dev.xkmc.cuisine.content.tools.firepit.stick;
 
 import dev.lcy0x1.block.TickableBlockEntity;
-import dev.xkmc.cuisine.content.tools.base.CookHandler;
+import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
+import dev.xkmc.cuisine.content.tools.base.handlers.BottledResultHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.CookHandler;
 import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CookTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
@@ -16,7 +18,11 @@ import net.minecraft.world.level.block.state.BlockState;
 public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity> implements TickableBlockEntity,
 		LitTile, BottleResultTile, CookTile {
 
-	private final CookHandler<FirePitStickBlockEntity, FirePitStickRecipe> cookHandler = new CookHandler<>(this, CuisineRecipes.RT_STICK.get());
+	@SerialClass.SerialField(toClient = true)
+	private final BottledResultHandler<FirePitStickBlockEntity> resultHandler = new BottledResultHandler<>(this);
+	@SerialClass.SerialField(toClient = true)
+	private final CookHandler<FirePitStickBlockEntity, FirePitStickRecipe> cookHandler =
+			new CookHandler<>(this, CuisineRecipes.RT_STICK.get(), resultHandler);
 
 	public FirePitStickBlockEntity(BlockEntityType<FirePitStickBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 4).setMax(1).add(t));
@@ -24,6 +30,8 @@ public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity
 
 	@Override
 	public void notifyTile() {
+		cookHandler.stopCooking();
+		cookHandler.startCooking();
 		setChanged();
 		sync();
 	}
@@ -35,12 +43,12 @@ public class FirePitStickBlockEntity extends CuisineTile<FirePitStickBlockEntity
 
 	@Override
 	public ItemStack getResult() {
-		return cookHandler.result;
+		return resultHandler.result;
 	}
 
 	@Override
 	public void clearResult() {
-		cookHandler.result = ItemStack.EMPTY;
+		resultHandler.result = ItemStack.EMPTY;
 	}
 
 	@Override

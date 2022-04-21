@@ -3,7 +3,7 @@ package dev.xkmc.cuisine.content.tools.basin;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
-import dev.xkmc.cuisine.content.tools.base.StepHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.StepHandler;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

@@ -1,9 +1,9 @@
-package dev.xkmc.cuisine.content.tools.firepit;
+package dev.xkmc.cuisine.content.tools.firepit.stick;
 
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
-import dev.xkmc.cuisine.content.tools.base.TimeHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.TimeHandler;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

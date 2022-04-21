@@ -1,7 +1,9 @@
-package dev.xkmc.cuisine.content.tools.firepit;
+package dev.xkmc.cuisine.content.tools.firepit.wok;
 
 import dev.lcy0x1.block.TickableBlockEntity;
-import dev.xkmc.cuisine.content.tools.base.CookHandler;
+import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.cuisine.content.tools.base.handlers.BottledResultHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.CookHandler;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
 import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CookTile;
@@ -19,7 +21,11 @@ public class FirePitWokBlockEntity extends CuisineTankTile<FirePitWokBlockEntity
 
 	public static final int MAX_FLUID = 8 * 50;
 
-	private final CookHandler<FirePitWokBlockEntity, FirePitWokRecipe> cookHandler = new CookHandler<>(this, CuisineRecipes.RT_WOK.get());
+	@SerialClass.SerialField(toClient = true)
+	private final BottledResultHandler<FirePitWokBlockEntity> resultHandler = new BottledResultHandler<>(this);
+	@SerialClass.SerialField(toClient = true)
+	private final CookHandler<FirePitWokBlockEntity, FirePitWokRecipe> cookHandler =
+			new CookHandler<>(this, CuisineRecipes.RT_WOK.get(), resultHandler);
 
 	public FirePitWokBlockEntity(BlockEntityType<FirePitWokBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state, t -> new RecipeContainer<>(t, 4).setMax(1)
@@ -32,6 +38,8 @@ public class FirePitWokBlockEntity extends CuisineTankTile<FirePitWokBlockEntity
 
 	@Override
 	public void notifyTile() {
+		cookHandler.stopCooking();
+		cookHandler.startCooking();
 		setChanged();
 		sync();
 	}
@@ -43,12 +51,12 @@ public class FirePitWokBlockEntity extends CuisineTankTile<FirePitWokBlockEntity
 
 	@Override
 	public ItemStack getResult() {
-		return cookHandler.result;
+		return resultHandler.result;
 	}
 
 	@Override
 	public void clearResult() {
-		cookHandler.result = ItemStack.EMPTY;
+		resultHandler.result = ItemStack.EMPTY;
 	}
 
 	@Override

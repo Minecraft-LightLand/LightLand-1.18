@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.compat.jei.recipes;
 
-import dev.xkmc.cuisine.content.tools.firepit.FirePitWokRecipe;
+import dev.xkmc.cuisine.content.tools.firepit.wok.FirePitWokRecipe;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import mezz.jei.api.constants.VanillaTypes;

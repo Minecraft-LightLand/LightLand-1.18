@@ -3,7 +3,7 @@ package dev.xkmc.cuisine.content.tools.pan;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.BaseCookingRecipe;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
-import dev.xkmc.cuisine.content.tools.base.TimeHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.TimeHandler;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.resources.ResourceLocation;

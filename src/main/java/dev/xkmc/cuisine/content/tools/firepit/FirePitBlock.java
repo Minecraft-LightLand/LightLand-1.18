@@ -5,6 +5,8 @@ import dev.lcy0x1.block.one.BlockEntityBlockMethod;
 import dev.xkmc.cuisine.content.tools.firepit.methods.FirePitBurnMethod;
 import dev.xkmc.cuisine.content.tools.firepit.methods.FirePitPutMethod;
 import dev.xkmc.cuisine.content.tools.firepit.methods.FirePitShapeMethod;
+import dev.xkmc.cuisine.content.tools.firepit.stick.FirePitStickBlockEntity;
+import dev.xkmc.cuisine.content.tools.firepit.wok.FirePitWokBlockEntity;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 
 public class FirePitBlock {

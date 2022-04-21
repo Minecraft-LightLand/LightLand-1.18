@@ -5,7 +5,7 @@ import dev.lcy0x1.base.CombinedTankWrapper;
 import dev.lcy0x1.block.TickableBlockEntity;
 import dev.lcy0x1.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
-import dev.xkmc.cuisine.content.tools.base.StepHandler;
+import dev.xkmc.cuisine.content.tools.base.handlers.StepHandler;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import dev.xkmc.cuisine.content.tools.base.tile.StepTile;
 import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;

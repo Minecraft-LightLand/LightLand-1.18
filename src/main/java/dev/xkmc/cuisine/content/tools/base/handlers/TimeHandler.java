@@ -1,6 +1,7 @@
-package dev.xkmc.cuisine.content.tools.base;
+package dev.xkmc.cuisine.content.tools.base.handlers;
 
 import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import dev.xkmc.cuisine.content.tools.base.tile.TimeTile;
 import net.minecraft.resources.ResourceLocation;
