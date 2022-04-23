@@ -3,7 +3,7 @@
     "product_type": "lightland:spell",
     "product_id": "lightland:water_trap_1",
     "predecessor": [
-        "lightland:spell_water_trap_0"
+        "lightland:magic_recipe/spell_water_trap_0"
     ],
     "elemental_mastery": [
         {

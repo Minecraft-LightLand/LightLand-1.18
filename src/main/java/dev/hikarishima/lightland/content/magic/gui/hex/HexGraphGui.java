@@ -80,10 +80,21 @@ public class HexGraphGui extends AbstractHexGui {
 		matrix.translate(x0 + scrollX, y0 + scrollY, 0);
 		LocateResult hover = graph.getElementOnHex((mx - x0 - scrollX) / magn, (my - y0 - scrollY) / magn);
 		renderBG(matrix, hover);
-		double width = RADIUS / 4 * magn;
-		double length = HexHandler.WIDTH * 3 / 4 * magn;
 
-		renderPath(matrix, width, length);
+		double ratio, width, length;
+
+		ratio = 1 / 4d;
+
+		width = RADIUS * ratio * magn;
+		length = HexHandler.WIDTH * (1 - ratio) * magn;
+
+		renderPath(matrix, width, length, true);
+
+		ratio *= 0.5;
+
+		width = RADIUS * ratio * magn;
+		length = HexHandler.WIDTH * (1 - ratio) * magn;
+		renderPath(matrix, width, length, false);
 		renderFlow(matrix, width, length, partial);
 		renderError(matrix, width, length);
 		renderIcons(matrix);
@@ -222,20 +233,20 @@ public class HexGraphGui extends AbstractHexGui {
 		HexRenderUtil.common_end();
 	}
 
-	private void renderPath(PoseStack matrix, double width, double length) {
+	private void renderPath(PoseStack matrix, double width, double length, boolean render_off) {
 		HexCell cell = new HexCell(graph, 0, 0);
 		HexRenderUtil.path_start(matrix, width, length, HexHandler.WIDTH * magn, 0);
 		for (cell.row = 0; cell.row < graph.getRowCount(); cell.row++) {
 			for (cell.cell = 0; cell.cell < graph.getCellCount(cell.row); cell.cell++) {
 				double x = cell.getX() * magn;
 				double y = cell.getY() * magn;
-				double r = RADIUS * magn;
 				int col;
 				for (int i = 0; i < 3; i++) {
 					HexDirection dire = HexDirection.values()[i];
 					if (cell.canWalk(dire)) {
 						col = cell.isConnected(dire) ? COL_ENABLED : COL_DISABLED;
-						HexRenderUtil.path(x, y, i, col);
+						if (render_off || cell.isConnected(dire))
+							HexRenderUtil.path(x, y, i, col);
 					}
 				}
 			}
@@ -246,9 +257,9 @@ public class HexGraphGui extends AbstractHexGui {
 			for (cell.cell = 0; cell.cell < graph.getCellCount(cell.row); cell.cell++) {
 				double x = cell.getX() * magn;
 				double y = cell.getY() * magn;
-				double r = RADIUS * magn;
 				int col = cell.exists() ? COL_ENABLED : COL_DISABLED;
-				HexRenderUtil.hex(x, y, r / 4, col);
+				if (render_off || cell.exists())
+					HexRenderUtil.hex(x, y, width, col);
 			}
 		}
 		HexRenderUtil.common_end();
@@ -276,7 +287,7 @@ public class HexGraphGui extends AbstractHexGui {
 		renderFlowBase(masks, col_masks, vals, node_masks);
 		HexRenderUtil.common_end();
 		renderFlowSelected(matrix, width, length, partial, selected);
-		renderFlowNode(matrix, vals, node_masks, col_masks);
+		renderFlowNode(matrix, vals, node_masks, col_masks, width);
 	}
 
 	private void renderFlowBase(int[] masks, int[] col_masks, double[][] vals, int[][] node_masks) {
@@ -371,14 +382,13 @@ public class HexGraphGui extends AbstractHexGui {
 		HexRenderUtil.common_end();
 	}
 
-	private void renderFlowNode(PoseStack matrix, double[][] vals, int[][] masks, int[] col_masks) {
+	private void renderFlowNode(PoseStack matrix, double[][] vals, int[][] masks, int[] col_masks, double width) {
 		HexCell cell = new HexCell(graph, 0, 0);
 		HexRenderUtil.hex_start(matrix);
 		for (cell.row = 0; cell.row < graph.getRowCount(); cell.row++)
 			for (cell.cell = 0; cell.cell < graph.getCellCount(cell.row); cell.cell++) {
 				double x = cell.getX() * magn;
 				double y = cell.getY() * magn;
-				double r = RADIUS * magn;
 				double val = vals[cell.row][cell.cell];
 				int col;
 				if (!cell.exists()) {
@@ -395,22 +405,20 @@ public class HexGraphGui extends AbstractHexGui {
 						col = getFlowColor(val);
 					}
 				}
-				HexRenderUtil.hex(x, y, r / 4, col);
+				HexRenderUtil.hex(x, y, width, col);
 			}
 		if (selected != null) {
 			cell.toCorner(selected);
 			double x = cell.getX() * magn;
 			double y = cell.getY() * magn;
-			double r = RADIUS * magn;
-			HexRenderUtil.hex(x, y, r / 4, COL_HOVER);
+			HexRenderUtil.hex(x, y, width, COL_HOVER);
 		}
 		for (int i = 0; i < 6; i++) {
 			if (wrong_flow[i]) {
 				cell.toCorner(HexDirection.values()[i]);
 				double x = cell.getX() * magn;
 				double y = cell.getY() * magn;
-				double r = RADIUS * magn;
-				HexRenderUtil.hex(x, y, r / 4, COL_ERROR);
+				HexRenderUtil.hex(x, y, width, COL_ERROR);
 			}
 		}
 		HexRenderUtil.common_end();
@@ -436,13 +444,12 @@ public class HexGraphGui extends AbstractHexGui {
 				cell.cell = side.cell;
 				double x = cell.getX() * magn;
 				double y = cell.getY() * magn;
-				double r = RADIUS * magn;
 				int col = COL_ERROR;
-				HexRenderUtil.hex(x, y, r / 4, col);
+				HexRenderUtil.hex(x, y, width, col);
 				cell.walk(side.dir);
 				x = cell.getX() * magn;
 				y = cell.getY() * magn;
-				HexRenderUtil.hex(x, y, r / 4, col);
+				HexRenderUtil.hex(x, y, width, col);
 			}
 			HexRenderUtil.common_end();
 		}

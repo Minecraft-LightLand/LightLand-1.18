@@ -3,7 +3,7 @@
     "product_type": "lightland:craft",
     "product_id": "minecraft:granite",
     "predecessor": [
-        "lightland:craft_tutorial_4"
+        "lightland:magic_recipe/craft_tutorial_4"
     ],
     "elemental_mastery": [],
     "screen": {

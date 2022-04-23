@@ -49,7 +49,8 @@ public class MagicHolder {
 	public void checkUnlocks() {
 		List<IMagicRecipe<?>> list = IMagicRecipe.getAll(parent.world);
 		for (IMagicRecipe<?> r : list) {
-			recipe_cache.put(r.id, r);
+			ResourceLocation id = r.id;
+			recipe_cache.put(id, r);
 		}
 		for (IMagicRecipe<?> r : list) {
 			if (isUnlocked(r))

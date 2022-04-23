@@ -3,7 +3,7 @@
     "product_type": "lightland:spell",
     "product_id": "lightland:blade_side",
     "predecessor": [
-        "lightland:spell_blade_front"
+        "lightland:magic_recipe/spell_blade_front"
     ],
     "elemental_mastery": [
         {

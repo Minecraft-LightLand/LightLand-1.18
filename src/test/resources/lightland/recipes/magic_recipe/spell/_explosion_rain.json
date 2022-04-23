@@ -3,7 +3,7 @@
     "product_type": "lightland:spell",
     "product_id": "lightland:explosion_rain",
     "predecessor": [
-        "lightland:spell_fire_rain"
+        "lightland:magic_recipe/spell_fire_rain"
     ],
     "elemental_mastery": [
         {
