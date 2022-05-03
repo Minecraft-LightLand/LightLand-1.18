@@ -3,7 +3,7 @@ package dev.hikarishima.lightland.util;
 import com.google.common.collect.Maps;
 import dev.hikarishima.lightland.events.generic.ClientEntityEffectRenderEvents;
 import dev.hikarishima.lightland.network.packets.TargetSetPacket;
-import dev.lcy0x1.util.Proxy;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

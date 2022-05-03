@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.content.tools.firepit.wok;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.lcy0x1.util.RenderUtils;
+import dev.xkmc.l2library.util.RenderUtils;
 import dev.xkmc.cuisine.content.tools.base.ContentRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init.worldgenreg;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.questline.world.structure.BaseStructureFeature;
 import dev.hikarishima.lightland.content.questline.world.structure.curseknight.CKMazeFeature;
 import dev.hikarishima.lightland.content.questline.world.structure.curseknight.CKMazePiece;

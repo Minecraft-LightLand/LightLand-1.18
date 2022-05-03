@@ -10,10 +10,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'com.github.johnrengelman.shadow' version "${shadow_version}"
-}
-
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
@@ -120,20 +116,17 @@ repositories {
         }
     }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
-
-}
-
-configurations {
-    shade
+    flatDir{
+        dirs 'libs'
+    }
 }
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    def registrate = "com.tterrag.registrate:Registrate:${registrate_version}"
-    implementation fg.deobf(registrate)
-    shade registrate
+    implementation fg.deobf('dev.xkmc.l2library:l2library:0.0.2')
+    implementation fg.deobf('dev.xkmc.l2backpack:l2backpack:0.0.1')
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
 
@@ -170,19 +163,6 @@ jar {
         ])
     }
 }
-
-shadowJar {
-    classifier = ''
-    configurations = [project.configurations.shade]
-    relocate 'com.tterrag.registrate', 'dev.hikarishima.lightland.repack.registrate'
-}
-
-reobf {
-    shadowJar {}
-}
-
-build.dependsOn shadowJar
-build.dependsOn reobfShadowJar
 
 // Example configuration to allow publishing using the maven-publish plugin
 // This is the preferred method to reobfuscate your jar file

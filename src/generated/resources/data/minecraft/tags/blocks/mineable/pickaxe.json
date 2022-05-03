@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "lightland:dimensional_storage",
     "lightland:ritual_core",
     "lightland:ritual_side",
     "lightland:enchant_gold_block",

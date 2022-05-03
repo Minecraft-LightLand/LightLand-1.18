@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.network.config;
 
 import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nullable;

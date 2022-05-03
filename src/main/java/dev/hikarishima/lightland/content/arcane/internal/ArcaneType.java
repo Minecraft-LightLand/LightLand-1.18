@@ -1,11 +1,11 @@
 package dev.hikarishima.lightland.content.arcane.internal;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
-import dev.lcy0x1.base.NamedEntry;
+import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

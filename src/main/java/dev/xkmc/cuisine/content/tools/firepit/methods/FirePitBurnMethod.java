@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.firepit.methods;
 
-import dev.lcy0x1.block.one.EntityInsideBlockMethod;
+import dev.xkmc.l2library.block.one.EntityInsideBlockMethod;
 import dev.xkmc.cuisine.util.DamageUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.damagesource.DamageSource;

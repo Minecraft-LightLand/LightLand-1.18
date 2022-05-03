@@ -1,10 +1,10 @@
 package dev.hikarishima.lightland.content.questline.world.structure.curseknight;
 
-import dev.lcy0x1.maze.generator.MazeConfig;
-import dev.lcy0x1.maze.generator.MazeGen;
-import dev.lcy0x1.maze.objective.LeafMarker;
-import dev.lcy0x1.maze.objective.MazeIterator;
-import dev.lcy0x1.maze.objective.MazeRegistry;
+import dev.xkmc.l2library.maze.generator.MazeConfig;
+import dev.xkmc.l2library.maze.generator.MazeGen;
+import dev.xkmc.l2library.maze.objective.LeafMarker;
+import dev.xkmc.l2library.maze.objective.MazeIterator;
+import dev.xkmc.l2library.maze.objective.MazeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;

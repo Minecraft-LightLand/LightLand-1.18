@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init.special;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.arcane.internal.Arcane;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.magic.products.MagicElement;
@@ -11,7 +11,7 @@ import dev.hikarishima.lightland.content.profession.Profession;
 import dev.hikarishima.lightland.content.profession.prof.*;
 import dev.hikarishima.lightland.content.skill.internal.Skill;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.lcy0x1.serial.handler.RLClassHandler;
+import dev.xkmc.l2library.serial.handler.RLClassHandler;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;

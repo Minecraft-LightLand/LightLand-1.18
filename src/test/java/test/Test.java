@@ -1,7 +1,7 @@
 package test;
 
 import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
-import dev.lcy0x1.serial.codec.TypeInfo;
+import dev.xkmc.l2library.serial.codec.TypeInfo;
 import org.apache.logging.log4j.LogManager;
 
 import java.lang.reflect.Field;

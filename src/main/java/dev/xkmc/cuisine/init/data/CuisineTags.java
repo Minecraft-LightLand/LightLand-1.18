@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.init.data;
 
 import com.google.common.collect.Lists;
-import com.tterrag.registrate.providers.ProviderType;
+import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;

@@ -4,7 +4,7 @@ import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
-import dev.lcy0x1.base.NamedEntry;
+import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.resources.ResourceLocation;
 
 public abstract class Profession extends NamedEntry<Profession> {

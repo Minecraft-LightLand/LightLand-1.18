@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import dev.hikarishima.lightland.content.questline.world.structure.BaseStructureFeature;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.lcy0x1.maze.generator.MazeConfig;
+import dev.xkmc.l2library.maze.generator.MazeConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.QuartPos;

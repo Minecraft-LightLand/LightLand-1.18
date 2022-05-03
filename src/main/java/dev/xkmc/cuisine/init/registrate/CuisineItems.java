@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.init.registrate;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.init.data.CuisineCropType;

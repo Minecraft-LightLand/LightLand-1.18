@@ -1,9 +1,9 @@
 package dev.hikarishima.lightland.content.magic.block;
 
 import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
-import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
-import dev.lcy0x1.block.one.BlockEntityBlockMethod;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
+import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;

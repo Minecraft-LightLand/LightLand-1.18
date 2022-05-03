@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.item.misc;
 
-import com.tterrag.registrate.util.entry.MenuEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
 import dev.hikarishima.lightland.init.registrate.LightlandMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

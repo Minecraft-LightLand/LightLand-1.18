@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.content.tools.base.tile;
 
-import dev.lcy0x1.base.BaseTank;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.base.BaseTank;
+import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
 import dev.xkmc.cuisine.init.data.CuisineTags;
 import net.minecraft.core.BlockPos;

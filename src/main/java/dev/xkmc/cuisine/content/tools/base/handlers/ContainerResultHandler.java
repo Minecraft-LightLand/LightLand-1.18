@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.base.handlers;
 
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.tile.BottleResultTile;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import net.minecraft.world.item.ItemStack;

@@ -1,13 +1,13 @@
 package dev.hikarishima.lightland.content.arcane.internal;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.compat.TeamAccessor;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
-import dev.lcy0x1.base.NamedEntry;
-import dev.lcy0x1.util.DoubleSidedCall;
-import dev.lcy0x1.util.ServerOnly;
+import dev.xkmc.l2library.base.NamedEntry;
+import dev.xkmc.l2library.util.DoubleSidedCall;
+import dev.xkmc.l2library.util.ServerOnly;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

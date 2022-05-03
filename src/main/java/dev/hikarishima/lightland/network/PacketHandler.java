@@ -27,8 +27,7 @@ public enum PacketHandler {
 	CAP_TO_SERVER(CapToServer.class, PLAY_TO_SERVER),
 	EMPTY_RIGHT_CLICK(EmptyRightClickToServer.class, PLAY_TO_SERVER),
 	CONFIG_SYNC(ConfigSyncManager.SyncPacket.class, PLAY_TO_CLIENT),
-	SKILL_TO_SERVER(SkillToServer.class, PLAY_TO_SERVER),
-	SLOT_CLICK_TO_SERVER(SlotClickToServer.class, PLAY_TO_SERVER);
+	SKILL_TO_SERVER(SkillToServer.class, PLAY_TO_SERVER);
 
 	public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(LightLand.MODID, "main");
 	public static final int NETWORK_VERSION = 1;

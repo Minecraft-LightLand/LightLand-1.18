@@ -1,12 +1,12 @@
 package dev.hikarishima.lightland.init.data;
 
-import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.common.item.api.Mat;
 import dev.hikarishima.lightland.content.common.item.generic.*;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
-import dev.lcy0x1.base.LcyRegistrate;
+import dev.xkmc.l2library.base.LcyRegistrate;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;

@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.lcy0x1.recipe.BaseRecipeBuilder;
+import dev.xkmc.l2library.recipe.BaseRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
 import dev.xkmc.cuisine.init.registrate.CuisineRecipes;
 import net.minecraft.data.recipes.FinishedRecipe;

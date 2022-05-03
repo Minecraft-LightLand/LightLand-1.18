@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.init.data;
 
-import com.tterrag.registrate.providers.RegistrateLangProvider;
 import dev.xkmc.cuisine.init.Cuisine;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;

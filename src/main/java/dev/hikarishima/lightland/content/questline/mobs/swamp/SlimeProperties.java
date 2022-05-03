@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
 import dev.hikarishima.lightland.network.config.ConfigSyncManager;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.effect.MobEffect;

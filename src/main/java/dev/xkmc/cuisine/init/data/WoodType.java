@@ -1,9 +1,9 @@
 package dev.xkmc.cuisine.init.data;
 
 import com.mojang.datafixers.util.Pair;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.entry.EntityEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraft.client.model.BoatModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;

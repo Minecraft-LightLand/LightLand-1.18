@@ -7,7 +7,7 @@ import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.magic.products.MagicProductType;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
-import dev.lcy0x1.util.Proxy;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.GameRenderer;

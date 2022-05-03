@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.archery.feature.types;
 
 import dev.hikarishima.lightland.content.archery.feature.BowArrowFeature;
 import dev.hikarishima.lightland.content.common.entity.GenericArrowEntity;
-import dev.lcy0x1.util.ServerOnly;
+import dev.xkmc.l2library.util.ServerOnly;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.function.Consumer;

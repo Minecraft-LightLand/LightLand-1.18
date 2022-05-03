@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.init.data;
 
-import com.tterrag.registrate.providers.RegistrateRecipeProvider;
-import com.tterrag.registrate.util.DataIngredient;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
+import dev.xkmc.l2library.repack.registrate.util.DataIngredient;
 import dev.xkmc.cuisine.content.tools.basin.BasinDryRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.basin.BasinRecipeBuilder;
 import dev.xkmc.cuisine.content.tools.jar.JarRecipeBuilder;

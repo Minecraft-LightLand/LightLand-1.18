@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init.data;
 
-import com.tterrag.registrate.providers.RegistrateLangProvider;
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.gui.ability.AbilityScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.ArcaneInjectContainer;
@@ -10,7 +10,7 @@ import dev.hikarishima.lightland.content.magic.gui.hex.HexStatus;
 import dev.hikarishima.lightland.content.magic.products.info.ProductState;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
-import dev.lcy0x1.magic.HexDirection;
+import dev.xkmc.l2library.magic.HexDirection;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;
@@ -42,7 +42,6 @@ public class LangData {
 		TARGET_ALL("tooltip.target.all", 0),
 		POTION_RADIUS("tooltip.potion.radius", 1),
 		CONT_RITUAL("container.ritual", 0),
-		BACKPACK_SLOT("tooltip.backpack_slot", 2),
 		MANA_COST("tooltip.mana_cost", 1),
 		ENCH_LV("tooltip.enchantment_result.level", 1),
 		ENCH_NEXT("tooltip.enchantment_result.next", 1),
@@ -52,7 +51,6 @@ public class LangData {
 		RITUAL_ELEM("chat.ritual.fail.element", 0),
 		ARMOR_WEIGHT("tooltip.weight", 1),
 		ARMOR_ENCHANT("tooltip.enchant", 1),
-		STORAGE_OWNER("tooltip.owner", 1),
 
 		LVUP_NO_POINT("screen.ability.ability.error.no_point", 0),
 		LVUP_NO_PROF("screen.ability.ability.error.no_prof", 0),

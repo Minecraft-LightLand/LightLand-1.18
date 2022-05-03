@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.skill.internal.SkillConfig;
 import dev.hikarishima.lightland.content.skill.internal.SkillData;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.util.EffectAddUtil;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;

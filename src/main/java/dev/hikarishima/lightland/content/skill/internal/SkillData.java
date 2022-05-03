@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.skill.internal;
 
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 
 @SerialClass
 public class SkillData {

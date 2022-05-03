@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.misc;
 
-import dev.lcy0x1.util.MathHelper;
+import dev.xkmc.l2library.util.MathHelper;
 import dev.xkmc.cuisine.init.Cuisine;
 import dev.xkmc.cuisine.util.DamageUtil;
 import net.minecraft.world.damagesource.DamageSource;

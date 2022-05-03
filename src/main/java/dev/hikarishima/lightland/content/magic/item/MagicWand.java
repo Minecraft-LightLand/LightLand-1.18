@@ -7,7 +7,7 @@ import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.content.magic.spell.internal.Spell;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
-import dev.lcy0x1.util.Proxy;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

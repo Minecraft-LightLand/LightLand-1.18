@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.compat.create;
 
 import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyItem;
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.world.item.Item;
 

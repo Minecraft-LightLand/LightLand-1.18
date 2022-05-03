@@ -1,9 +1,9 @@
 package dev.hikarishima.lightland.init.data;
 
-import com.tterrag.registrate.builders.BlockBuilder;
-import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.util.nullness.NonNullFunction;
+import dev.xkmc.l2library.repack.registrate.builders.BlockBuilder;
+import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
+import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullFunction;
 import dev.hikarishima.lightland.init.LightLand;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
@@ -157,8 +157,7 @@ public class AllTags {
 	}
 
 	public enum AllItemTags {
-		BACKPACKS,
-		DIMENSIONAL_STORAGES;
+		;
 
 		public final TagKey<Item> tag;
 

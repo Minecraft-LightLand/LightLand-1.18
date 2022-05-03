@@ -1,10 +1,10 @@
 package dev.hikarishima.lightland.content.questline.mobs.cursedknight;
 
-import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.AlertClassGoal;
 import dev.hikarishima.lightland.content.questline.common.mobs.BipedMonster;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
-import dev.lcy0x1.util.LootTableTemplate;
+import dev.xkmc.l2library.util.LootTableTemplate;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;

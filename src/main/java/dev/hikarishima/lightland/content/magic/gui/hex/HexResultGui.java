@@ -8,7 +8,7 @@ import dev.hikarishima.lightland.content.magic.products.MagicElement;
 import dev.hikarishima.lightland.content.magic.products.MagicProduct;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.data.LangData;
-import dev.lcy0x1.menu.WindowBox;
+import dev.xkmc.l2library.menu.WindowBox;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraftforge.api.distmarker.Dist;

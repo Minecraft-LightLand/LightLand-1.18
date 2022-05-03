@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.questline.mobs.swamp;
 
-import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.util.EffectAddUtil;
-import dev.lcy0x1.util.LootTableTemplate;
+import dev.xkmc.l2library.util.LootTableTemplate;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;

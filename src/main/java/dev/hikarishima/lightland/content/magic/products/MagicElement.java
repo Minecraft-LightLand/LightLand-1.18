@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.products;
 
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
-import dev.lcy0x1.base.NamedEntry;
+import dev.xkmc.l2library.base.NamedEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

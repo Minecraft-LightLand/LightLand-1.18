@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.archery.controller;
 
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
-import dev.lcy0x1.util.GenericItemStack;
+import dev.xkmc.l2library.util.GenericItemStack;
 import net.minecraft.world.entity.player.Player;
 
 public class BowFeatureController {

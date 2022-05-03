@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.init.registrate;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.Item;
 
 import java.util.Locale;
