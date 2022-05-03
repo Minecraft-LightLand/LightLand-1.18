@@ -1,5 +1,5 @@
 {
-  "_class": "dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant",
+  "_class": "dev.xkmc.lightland.content.common.capability.restriction.ArmorEnchant",
   "map": {
 	"minecraft:protection": 4,
 	"minecraft:fire_protection": 3,

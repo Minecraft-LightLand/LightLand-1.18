@@ -3,7 +3,7 @@
   "file": "config_skill",
   "path": "map",
   "common": {
-	"_class": "dev.hikarishima.lightland.content.skill.ImpactSkill$Config"
+	"_class": "dev.xkmc.lightland.content.skill.ImpactSkill$Config"
   },
   "map": {
 	"lightland:impact_attract": {

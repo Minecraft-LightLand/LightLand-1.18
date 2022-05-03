@@ -1,5 +1,5 @@
 {
-  "_class": "dev.hikarishima.lightland.content.common.capability.restriction.ArmorWeight",
+  "_class": "dev.xkmc.lightland.content.common.capability.restriction.ArmorWeight",
   "entries": {},
   "materials": {},
   "suffixes": [

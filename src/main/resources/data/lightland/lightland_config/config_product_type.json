@@ -1,28 +1,28 @@
 {
-    "_class": "dev.hikarishima.lightland.network.config.ProductTypeConfig",
+    "_class": "dev.xkmc.lightland.network.config.ProductTypeConfig",
     "map": {
         "lightland:enchantment": {
-            "_class": "dev.hikarishima.lightland.content.magic.products.info.TypeConfig",
+            "_class": "dev.xkmc.lightland.content.magic.products.info.TypeConfig",
             "icon": "minecraft:enchanted_book",
             "background": "lightland:textures/block/ritual_iron.png"
         },
         "lightland:effect": {
-            "_class": "dev.hikarishima.lightland.content.magic.products.info.TypeConfig",
+            "_class": "dev.xkmc.lightland.content.magic.products.info.TypeConfig",
             "icon": "minecraft:glass_bottle",
             "background": "lightland:textures/block/ritual_iron.png"
         },
         "lightland:arcane": {
-            "_class": "dev.hikarishima.lightland.content.magic.products.info.TypeConfig",
+            "_class": "dev.xkmc.lightland.content.magic.products.info.TypeConfig",
             "icon": "lightland:gilded_arcane_axe",
             "background": "lightland:textures/block/ritual_iron.png"
         },
         "lightland:spell": {
-            "_class": "dev.hikarishima.lightland.content.magic.products.info.TypeConfig",
+            "_class": "dev.xkmc.lightland.content.magic.products.info.TypeConfig",
             "icon": "lightland:spell_card",
             "background": "lightland:textures/block/ritual_iron.png"
         },
         "lightland:craft": {
-            "_class": "dev.hikarishima.lightland.content.magic.products.info.TypeConfig",
+            "_class": "dev.xkmc.lightland.content.magic.products.info.TypeConfig",
             "icon": "minecraft:crafting_table",
             "background": "lightland:textures/block/ritual_iron.png"
         }

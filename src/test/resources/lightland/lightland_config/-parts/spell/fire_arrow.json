@@ -3,7 +3,7 @@
   "file": "config_spell",
   "path": "map",
   "common": {
-    "_class": "dev.hikarishima.lightland.content.magic.spell.FireArrowSpell$Config"
+    "_class": "dev.xkmc.lightland.content.magic.spell.FireArrowSpell$Config"
   },
   "map": {
     "lightland:fire_rain": {

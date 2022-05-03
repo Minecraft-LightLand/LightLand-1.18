@@ -3,7 +3,7 @@
   "file": "config_spell",
   "path": "map",
   "common": {
-    "_class": "dev.hikarishima.lightland.content.magic.spell.WindBladeSpell$Config"
+    "_class": "dev.xkmc.lightland.content.magic.spell.WindBladeSpell$Config"
   },
   "map": {
     "lightland:blade_side": {

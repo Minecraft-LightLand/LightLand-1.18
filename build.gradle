@@ -16,7 +16,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
 version = '6.4.7'
-group = 'dev.hikarishima.lightland' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'dev.xkmc.lightland' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'lightland'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -153,11 +153,11 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : "lightland",
-                "Specification-Vendor"    : "hikarishima",
+                "Specification-Vendor"    : "xkmc",
                 "Specification-Version"   : "1", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "hikarishima",
+                "Implementation-Vendor"   : "xkmc",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'MixinConfigs'            : 'lightland.mixins.json'
         ])

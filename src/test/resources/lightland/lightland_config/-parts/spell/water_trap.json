@@ -3,7 +3,7 @@
   "file": "config_spell",
   "path": "map",
   "common": {
-    "_class": "dev.hikarishima.lightland.content.magic.spell.WaterTrapSpell$Config"
+    "_class": "dev.xkmc.lightland.content.magic.spell.WaterTrapSpell$Config"
   },
   "map": {
     "lightland:water_trap_0": {

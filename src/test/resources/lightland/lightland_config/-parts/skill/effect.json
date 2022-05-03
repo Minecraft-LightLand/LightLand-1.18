@@ -3,7 +3,7 @@
   "file": "config_skill",
   "path": "map",
   "common": {
-	"_class": "dev.hikarishima.lightland.content.skill.EffectSkill$Config"
+	"_class": "dev.xkmc.lightland.content.skill.EffectSkill$Config"
   },
   "map": {
 	"lightland:no_knockback": {

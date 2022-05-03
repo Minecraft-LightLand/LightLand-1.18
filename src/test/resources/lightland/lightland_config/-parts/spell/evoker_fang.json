@@ -3,7 +3,7 @@
   "file": "config_spell",
   "path": "map",
   "common": {
-    "_class": "dev.hikarishima.lightland.content.magic.spell.EvokerFangSpell$Config"
+    "_class": "dev.xkmc.lightland.content.magic.spell.EvokerFangSpell$Config"
   },
   "map": {
     "lightland:fang_round": {

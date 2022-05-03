@@ -1,7 +1,7 @@
 {
   "required": true,
   "priority": 1000,
-  "package": "dev.hikarishima.lightland.mixin",
+  "package": "dev.xkmc.lightland.mixin",
   "compatibilityLevel": "JAVA_16",
   "refmap": "lightland.refmap.json",
   "mixins": [
