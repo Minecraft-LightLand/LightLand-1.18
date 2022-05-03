@@ -1,5 +1,5 @@
 {
-    "_class": "dev.hikarishima.lightland.network.config.SpellEntityConfig",
+    "_class": "dev.xkmc.lightland.network.config.SpellEntityConfig",
     "map": {
     }
 }

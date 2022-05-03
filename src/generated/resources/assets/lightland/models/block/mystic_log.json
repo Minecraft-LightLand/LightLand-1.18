@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "side": "lightland:block/mystic_log",
-    "end": "lightland:block/mystic_log_top"
-  }
-}

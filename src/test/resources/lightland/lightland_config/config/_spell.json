@@ -1,4 +1,4 @@
 {
-    "_class": "dev.hikarishima.lightland.network.config.SpellDataConfig",
+    "_class": "dev.xkmc.lightland.network.config.SpellDataConfig",
     "map": {}
 }

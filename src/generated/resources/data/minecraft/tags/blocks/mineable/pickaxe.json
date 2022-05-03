@@ -7,15 +7,6 @@
     "lightland:lead_block",
     "lightland:magicium_block",
     "lightland:layline_charger",
-    "lightland:maze_wall",
-    "lightland:pan",
-    "lightland:jar",
-    "lightland:basin",
-    "lightland:mill",
-    "lightland:mortar",
-    "lightland:fire_pit",
-    "lightland:fire_pit_with_sticks",
-    "lightland:wok",
-    "lightland:fire_pit_with_wok"
+    "lightland:maze_wall"
   ]
 }

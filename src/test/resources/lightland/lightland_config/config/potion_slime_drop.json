@@ -1,5 +1,5 @@
 {
-  "_class": "dev.hikarishima.lightland.content.questline.mobs.swamp.SlimeProperties",
+  "_class": "dev.xkmc.lightland.content.questline.mobs.swamp.SlimeProperties",
   "map": {
 	"poison": {
 	  "effect": "minecraft:poison",

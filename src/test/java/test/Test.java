@@ -1,6 +1,6 @@
 package test;
 
-import dev.hikarishima.lightland.content.common.capability.player.SkillCap;
+import dev.xkmc.lightland.content.common.capability.player.SkillCap;
 import dev.xkmc.l2library.serial.codec.TypeInfo;
 import org.apache.logging.log4j.LogManager;
 
