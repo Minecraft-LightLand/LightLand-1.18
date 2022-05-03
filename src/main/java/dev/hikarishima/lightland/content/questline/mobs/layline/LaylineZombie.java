@@ -2,7 +2,7 @@ package dev.hikarishima.lightland.content.questline.mobs.layline;
 
 import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
-import dev.lcy0x1.util.LootTableTemplate;
+import dev.xkmc.l2library.util.LootTableTemplate;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;

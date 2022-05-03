@@ -7,7 +7,7 @@ import dev.hikarishima.lightland.content.magic.spell.internal.SimpleSpell;
 import dev.hikarishima.lightland.content.magic.spell.internal.SpellConfig;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.util.EffectAddUtil;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;

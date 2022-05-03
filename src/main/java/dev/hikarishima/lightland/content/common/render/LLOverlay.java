@@ -6,7 +6,7 @@ import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
 import dev.hikarishima.lightland.content.common.capability.player.CapProxy;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.lcy0x1.menu.OverlayManager;
+import dev.xkmc.l2library.menu.OverlayManager;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.world.effect.MobEffects;

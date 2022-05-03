@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.content.tools.jar;
 
-import dev.lcy0x1.block.TickableBlockEntity;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.block.TickableBlockEntity;
+import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
 import dev.xkmc.cuisine.content.tools.base.handlers.TimeHandler;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTankTile;

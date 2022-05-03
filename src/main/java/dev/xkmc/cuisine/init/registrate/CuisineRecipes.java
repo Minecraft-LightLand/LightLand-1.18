@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.init.registrate;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import dev.lcy0x1.recipe.BaseRecipe;
+import dev.xkmc.l2library.recipe.BaseRecipe;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;
 import dev.xkmc.cuisine.content.tools.basin.BasinDryRecipe;

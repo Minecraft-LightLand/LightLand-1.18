@@ -2,7 +2,7 @@ package organize.json;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.SerialClass;
 
 @SerialClass
 public class JsonPartMap extends JsonPart {

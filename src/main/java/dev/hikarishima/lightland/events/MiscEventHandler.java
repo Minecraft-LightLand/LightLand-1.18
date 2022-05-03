@@ -12,7 +12,7 @@ import dev.hikarishima.lightland.init.data.Lore;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
 import dev.hikarishima.lightland.network.packets.SlotClickToServer;
 import dev.hikarishima.lightland.util.EffectAddUtil;
-import dev.lcy0x1.util.Proxy;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

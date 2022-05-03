@@ -1,9 +1,9 @@
 package dev.xkmc.cuisine.content.tools.base.methods;
 
-import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
-import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
-import dev.lcy0x1.block.mult.OnClickBlockMethod;
-import dev.lcy0x1.block.one.LightBlockMethod;
+import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
+import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
+import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
+import dev.xkmc.l2library.block.one.LightBlockMethod;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.content.tools.base.tile.LitTile;
 import net.minecraft.core.BlockPos;

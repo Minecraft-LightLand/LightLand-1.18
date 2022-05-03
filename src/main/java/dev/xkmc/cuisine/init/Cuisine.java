@@ -2,7 +2,7 @@ package dev.xkmc.cuisine.init;
 
 import com.tterrag.registrate.providers.ProviderType;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.lcy0x1.base.LcyRegistrate;
+import dev.xkmc.l2library.base.LcyRegistrate;
 import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
 import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
 import dev.xkmc.cuisine.content.veges.CornBlock;

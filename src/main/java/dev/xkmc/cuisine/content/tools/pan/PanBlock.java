@@ -1,9 +1,9 @@
 package dev.xkmc.cuisine.content.tools.pan;
 
-import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
-import dev.lcy0x1.block.mult.CreateBlockStateBlockMethod;
-import dev.lcy0x1.block.mult.DefaultStateBlockMethod;
-import dev.lcy0x1.block.one.BlockEntityBlockMethod;
+import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
+import dev.xkmc.l2library.block.mult.CreateBlockStateBlockMethod;
+import dev.xkmc.l2library.block.mult.DefaultStateBlockMethod;
+import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;

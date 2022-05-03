@@ -2,10 +2,10 @@ package dev.hikarishima.lightland.network.packets;
 
 import dev.hikarishima.lightland.content.common.capability.player.*;
 import dev.hikarishima.lightland.network.SerialPacketBase;
-import dev.lcy0x1.serial.ExceptionHandler;
-import dev.lcy0x1.serial.SerialClass;
-import dev.lcy0x1.serial.codec.TagCodec;
-import dev.lcy0x1.util.Proxy;
+import dev.xkmc.l2library.serial.ExceptionHandler;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.codec.TagCodec;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;

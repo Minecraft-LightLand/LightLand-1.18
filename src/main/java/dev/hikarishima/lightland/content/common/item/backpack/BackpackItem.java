@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.item.backpack;
 
 import dev.hikarishima.lightland.init.data.LangData;
-import dev.lcy0x1.util.Proxy;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;

@@ -16,7 +16,7 @@ import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
 import dev.hikarishima.lightland.init.special.MagicRegistry;
 import dev.hikarishima.lightland.network.packets.CapToServer;
-import dev.lcy0x1.util.Proxy;
+import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;

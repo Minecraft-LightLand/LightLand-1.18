@@ -5,7 +5,7 @@ import dev.hikarishima.lightland.content.common.item.generic.GenericTieredItem;
 import dev.hikarishima.lightland.init.registrate.LightlandEntities;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
-import dev.lcy0x1.util.LootTableTemplate;
+import dev.xkmc.l2library.util.LootTableTemplate;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;

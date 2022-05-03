@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.block;
 
-import dev.lcy0x1.base.BaseBlockEntity;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.base.BaseBlockEntity;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

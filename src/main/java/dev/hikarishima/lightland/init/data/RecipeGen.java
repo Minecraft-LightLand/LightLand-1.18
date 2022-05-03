@@ -7,7 +7,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
-import dev.lcy0x1.recipe.CustomShapelessBuilder;
+import dev.xkmc.l2library.recipe.CustomShapelessBuilder;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.UpgradeRecipeBuilder;

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.common.recipe;
 
 import dev.hikarishima.lightland.init.registrate.LightlandRecipe;
-import dev.lcy0x1.recipe.AbstractSmithingRecipe;
+import dev.xkmc.l2library.recipe.AbstractSmithingRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;

@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.common.effect;
 
-import dev.lcy0x1.util.MathHelper;
+import dev.xkmc.l2library.util.MathHelper;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

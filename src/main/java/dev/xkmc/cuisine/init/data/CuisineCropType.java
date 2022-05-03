@@ -4,7 +4,7 @@ import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import dev.lcy0x1.util.LootTableTemplate;
+import dev.xkmc.l2library.util.LootTableTemplate;
 import dev.xkmc.cuisine.content.veges.CornBlock;
 import dev.xkmc.cuisine.content.veges.CuisineCropBlock;
 import dev.xkmc.cuisine.content.veges.DoubleCropBlock;

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.util;
 
 import dev.hikarishima.lightland.content.common.capability.player.AbilityPoints;
-import dev.lcy0x1.util.MathHelper;
+import dev.xkmc.l2library.util.MathHelper;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;

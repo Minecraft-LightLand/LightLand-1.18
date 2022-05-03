@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.base;
 
-import dev.lcy0x1.recipe.BaseRecipe;
+import dev.xkmc.l2library.recipe.BaseRecipe;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import net.minecraft.resources.ResourceLocation;
 

@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.content.common.item.misc;
 
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
-import dev.lcy0x1.serial.ExceptionHandler;
-import dev.lcy0x1.serial.codec.TagCodec;
+import dev.xkmc.l2library.serial.ExceptionHandler;
+import dev.xkmc.l2library.serial.codec.TagCodec;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;

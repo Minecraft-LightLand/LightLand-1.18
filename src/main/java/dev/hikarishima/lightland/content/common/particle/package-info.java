@@ -1,7 +1,7 @@
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 
-package dev.lcy0x1.menu;
+package dev.hikarishima.lightland.content.common.particle;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

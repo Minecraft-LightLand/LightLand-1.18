@@ -1,10 +1,10 @@
 package dev.xkmc.cuisine.content.tools.basin;
 
-import dev.lcy0x1.block.impl.BlockEntityBlockMethodImpl;
-import dev.lcy0x1.block.mult.FallOnBlockMethod;
-import dev.lcy0x1.block.one.BlockEntityBlockMethod;
-import dev.lcy0x1.block.one.EntityInsideBlockMethod;
-import dev.lcy0x1.block.one.ShapeBlockMethod;
+import dev.xkmc.l2library.block.impl.BlockEntityBlockMethodImpl;
+import dev.xkmc.l2library.block.mult.FallOnBlockMethod;
+import dev.xkmc.l2library.block.one.BlockEntityBlockMethod;
+import dev.xkmc.l2library.block.one.EntityInsideBlockMethod;
+import dev.xkmc.l2library.block.one.ShapeBlockMethod;
 import dev.xkmc.cuisine.content.tools.base.CuisineUtil;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import dev.xkmc.cuisine.util.DamageUtil;

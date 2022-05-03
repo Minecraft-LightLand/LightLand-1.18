@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.base.methods;
 
-import dev.lcy0x1.block.mult.OnClickBlockMethod;
+import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
 import dev.xkmc.cuisine.content.tools.base.tile.CuisineTile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

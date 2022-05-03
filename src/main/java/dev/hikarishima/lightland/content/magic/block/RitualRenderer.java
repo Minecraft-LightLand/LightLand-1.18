@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.content.magic.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.lcy0x1.util.RenderUtils;
+import dev.xkmc.l2library.util.RenderUtils;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

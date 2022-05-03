@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.firepit.methods;
 
-import dev.lcy0x1.block.mult.OnClickBlockMethod;
+import dev.xkmc.l2library.block.mult.OnClickBlockMethod;
 import dev.xkmc.cuisine.init.registrate.CuisineBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;

@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.compat;
 
 import dev.hikarishima.lightland.compat.create.CreateCompatHandler;
-import dev.lcy0x1.serial.ExceptionHandler;
+import dev.xkmc.l2library.serial.ExceptionHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.OverlayRegistry;

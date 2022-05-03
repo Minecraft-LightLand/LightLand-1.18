@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.content.tools.firepit.methods;
 
-import dev.lcy0x1.block.one.ShapeBlockMethod;
+import dev.xkmc.l2library.block.one.ShapeBlockMethod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;

@@ -10,7 +10,7 @@ import dev.hikarishima.lightland.content.magic.gui.hex.HexStatus;
 import dev.hikarishima.lightland.content.magic.products.info.ProductState;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
-import dev.lcy0x1.magic.HexDirection;
+import dev.xkmc.l2library.magic.HexDirection;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.Item;

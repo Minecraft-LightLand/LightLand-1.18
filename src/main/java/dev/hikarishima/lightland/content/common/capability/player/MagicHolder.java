@@ -5,8 +5,8 @@ import dev.hikarishima.lightland.content.magic.products.MagicProduct;
 import dev.hikarishima.lightland.content.magic.products.MagicProductType;
 import dev.hikarishima.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.hikarishima.lightland.init.special.LightLandRegistry;
-import dev.lcy0x1.serial.NBTObj;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.serial.NBTObj;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 

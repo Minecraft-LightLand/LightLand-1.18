@@ -4,9 +4,9 @@ import dev.hikarishima.lightland.content.common.capability.worldstorage.StorageC
 import dev.hikarishima.lightland.content.common.capability.worldstorage.WorldStorage;
 import dev.hikarishima.lightland.content.common.item.backpack.WorldChestContainer;
 import dev.hikarishima.lightland.init.data.LangData;
-import dev.lcy0x1.base.BaseBlockEntity;
-import dev.lcy0x1.block.NameSetable;
-import dev.lcy0x1.serial.SerialClass;
+import dev.xkmc.l2library.base.BaseBlockEntity;
+import dev.xkmc.l2library.block.NameSetable;
+import dev.xkmc.l2library.serial.SerialClass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;

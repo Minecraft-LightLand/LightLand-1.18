@@ -1,16 +1,11 @@
 package dev.xkmc.cuisine.content.tools.firepit.stick;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import dev.lcy0x1.util.RenderUtils;
-import dev.xkmc.cuisine.content.tools.base.ContentRenderer;
-import dev.xkmc.cuisine.content.tools.base.tile.TileInfoOverlay;
-import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
-import dev.xkmc.cuisine.content.tools.pan.PanGeoModel;
+import dev.xkmc.l2library.util.RenderUtils;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class FirePitStickRenderer implements BlockEntityRenderer<FirePitStickBlockEntity> {
 

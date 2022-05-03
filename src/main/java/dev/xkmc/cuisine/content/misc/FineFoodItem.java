@@ -1,7 +1,7 @@
 package dev.xkmc.cuisine.content.misc;
 
-import dev.lcy0x1.serial.SerialClass;
-import dev.lcy0x1.serial.codec.TagCodec;
+import dev.xkmc.l2library.serial.SerialClass;
+import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.cuisine.init.data.CuisineTags.AllFluidTags;
 import dev.xkmc.cuisine.init.data.CuisineTags.AllItemTags;
 import dev.xkmc.cuisine.init.registrate.CuisineEffects;
