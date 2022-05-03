@@ -5,13 +5,13 @@
   "compatibilityLevel": "JAVA_16",
   "refmap": "lightland.refmap.json",
   "mixins": [
-	"dev.xkmc.lightland.mixin.EntityMixin",
-	"dev.xkmc.lightland.mixin.LivingEntityMixin",
-	"dev.xkmc.lightland.mixin.ShapedRecipeMixin"
+	"EntityMixin",
+	"LivingEntityMixin",
+	"ShapedRecipeMixin"
   ],
   "client": [
-	"dev.xkmc.lightland.mixin.ClientLocalPlayerMixin",
-	"dev.xkmc.lightland.mixin.ItemInHandRendererMixin"
+	"ClientLocalPlayerMixin",
+	"ItemInHandRendererMixin"
   ],
   "injectors": {
 	"defaultRequire": 1
