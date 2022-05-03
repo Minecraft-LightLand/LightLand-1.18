@@ -21,7 +21,6 @@ import dev.hikarishima.lightland.init.worldgenreg.WorldGenRegistrate;
 import dev.hikarishima.lightland.network.PacketHandler;
 import dev.xkmc.l2library.base.LcyRegistrate;
 import dev.xkmc.l2library.serial.handler.Handlers;
-import dev.xkmc.cuisine.init.Cuisine;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.ForgeMod;
@@ -101,7 +100,6 @@ public class LightLand {
 		registerRegistrates(bus);
 		registerForgeEvents();
 		registerCommands();
-		new Cuisine();
 	}
 
 	private static void setup(final FMLCommonSetupEvent event) {
