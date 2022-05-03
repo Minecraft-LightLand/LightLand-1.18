@@ -32,42 +32,6 @@ public class RecipeGen {
 			storage(pvd, LightlandItems.LEAD_NUGGET, LightlandItems.LEAD_INGOT, LightlandBlocks.LEAD_BLOCK);
 			storage(pvd, LightlandItems.MAGICIUM_NUGGET, LightlandItems.MAGICIUM_INGOT, LightlandBlocks.MAGICIUM_BLOCK);
 		}
-		{
-			for (int i = 0; i < 16; i++) {
-				DyeColor color = DyeColor.values()[i];
-				Item wool = ForgeRegistries.ITEMS.getValue(new ResourceLocation(color.getName() + "_wool"));
-				Item dye = ForgeRegistries.ITEMS.getValue(new ResourceLocation(color.getName() + "_dye"));
-				Item backpack = LightlandItems.BACKPACKS[i].get();
-
-				unlock(pvd, new ShapedRecipeBuilder(backpack, 1)::unlockedBy, backpack)
-						.group("backpack_craft").pattern("ADA").pattern("BCB").pattern("ADA")
-						.define('A', Tags.Items.LEATHER).define('B', wool)
-						.define('C', Items.CHEST).define('D', Items.IRON_INGOT)
-						.save(pvd, "lightland:shaped/craft_backpack_" + color.getName());
-
-				unlock(pvd, new CustomShapelessBuilder<>(LightlandRecipe.RSC_BAG_DYE, backpack, 1)::unlockedBy, backpack)
-						.group("backpack_dye").requires(Ingredient.of(AllTags.AllItemTags.BACKPACKS.tag))
-						.requires(Ingredient.of(dye)).save(pvd, "lightland:shapeless/dye_backpack_" + color.getName());
-
-				unlock(pvd, new UpgradeRecipeBuilder(LightlandRecipe.RSC_BAG_UPGRADE.get(), Ingredient.of(backpack),
-						Ingredient.of(LightlandItems.ENDER_POCKET.get()), backpack)::unlocks, backpack)
-						.save(pvd, "lightland:smithing/upgrade_backpack_" + color.getName());
-
-				Item storage = LightlandItems.DIMENSIONAL_STORAGE[i].get();
-
-				unlock(pvd, new ShapedRecipeBuilder(storage, 1)::unlockedBy, storage)
-						.group("dimensional_storage_craft").pattern("DAD").pattern("ACA").pattern("BAB")
-						.define('A', LightlandItems.ENDER_POCKET.get()).define('B', wool)
-						.define('C', Items.ENDER_CHEST).define('D', Items.POPPED_CHORUS_FRUIT)
-						.save(pvd, "lightland:shaped/craft_storage_" + color.getName());
-			}
-			Item ender = LightlandItems.ENDER_BACKPACK.get();
-			unlock(pvd, new ShapedRecipeBuilder(ender, 1)::unlockedBy, ender)
-					.pattern("ADA").pattern("BCB").pattern("ADA")
-					.define('A', Tags.Items.LEATHER).define('B', Items.ENDER_PEARL)
-					.define('C', Items.ENDER_CHEST).define('D', Items.IRON_INGOT)
-					.save(pvd);
-		}
 	}
 
 	private static void storage(RegistrateRecipeProvider pvd, ItemEntry<?> nugget, ItemEntry<?> ingot, BlockEntry<?> block) {

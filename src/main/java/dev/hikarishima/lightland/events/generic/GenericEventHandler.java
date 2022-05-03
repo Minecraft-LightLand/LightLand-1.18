@@ -39,23 +39,11 @@ public class GenericEventHandler {
 
 	@SubscribeEvent
 	public static void addReloadListeners(AddReloadListenerEvent event) {
-		event.addListener(new BaseJsonReloadListener("gui/coords", map -> {
-			SpriteManager.CACHE.clear();
-			SpriteManager.CACHE.putAll(map);
-		}));
 		event.addListener(ConfigSyncManager.CONFIG);
 	}
 
 	@OnlyIn(Dist.CLIENT)
 	public static void clientReloadListeners(RegisterClientReloadListenersEvent event) {
-		event.registerReloadListener(new BaseJsonReloadListener("textures/gui/overlays", map -> {
-			map.forEach((k, v) -> {
-				String modid = k.getNamespace();
-				String[] paths = k.getPath().split("/");
-				String path = paths[paths.length - 1];
-				OverlayManager.get(modid, path).reset(v);
-			});
-		}));
 	}
 
 	@SubscribeEvent

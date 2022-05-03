@@ -42,7 +42,6 @@ public class LangData {
 		TARGET_ALL("tooltip.target.all", 0),
 		POTION_RADIUS("tooltip.potion.radius", 1),
 		CONT_RITUAL("container.ritual", 0),
-		BACKPACK_SLOT("tooltip.backpack_slot", 2),
 		MANA_COST("tooltip.mana_cost", 1),
 		ENCH_LV("tooltip.enchantment_result.level", 1),
 		ENCH_NEXT("tooltip.enchantment_result.next", 1),
@@ -52,7 +51,6 @@ public class LangData {
 		RITUAL_ELEM("chat.ritual.fail.element", 0),
 		ARMOR_WEIGHT("tooltip.weight", 1),
 		ARMOR_ENCHANT("tooltip.enchant", 1),
-		STORAGE_OWNER("tooltip.owner", 1),
 
 		LVUP_NO_POINT("screen.ability.ability.error.no_point", 0),
 		LVUP_NO_PROF("screen.ability.ability.error.no_prof", 0),

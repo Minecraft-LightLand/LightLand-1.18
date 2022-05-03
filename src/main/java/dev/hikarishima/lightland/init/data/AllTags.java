@@ -157,8 +157,7 @@ public class AllTags {
 	}
 
 	public enum AllItemTags {
-		BACKPACKS,
-		DIMENSIONAL_STORAGES;
+		;
 
 		public final TagKey<Item> tag;
 

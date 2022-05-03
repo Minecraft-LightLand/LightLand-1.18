@@ -98,7 +98,6 @@
 	  }
 	},
 	"tooltip": {
-	  "backpack_slot": "背包升级: %s / %s",
 	  "enchant": "附魔负载: %s",
 	  "enchantment_result.elements": "元素消耗:",
 	  "enchantment_result.level": "附魔等级: %s",
@@ -108,8 +107,7 @@
 	  "target.all": "全部",
 	  "target.ally": "队友",
 	  "target.enemy": "敌人",
-	  "weight": "重量: %s",
-	  "owner": "所有者: %s"
+	  "weight": "重量: %s"
 	}
   }
 }

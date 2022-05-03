@@ -1,11 +1,5 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
-import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
-import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvider;
-import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
-import dev.xkmc.l2library.repack.registrate.util.entry.FluidEntry;
-import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;
@@ -20,9 +14,6 @@ import dev.hikarishima.lightland.content.berserker.item.MedicineArmor;
 import dev.hikarishima.lightland.content.berserker.item.MedicineLeather;
 import dev.hikarishima.lightland.content.common.gui.ability.ProfessionScreen;
 import dev.hikarishima.lightland.content.common.item.api.Mat;
-import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
-import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
-import dev.hikarishima.lightland.content.common.item.backpack.WorldChestItem;
 import dev.hikarishima.lightland.content.common.item.misc.ContainerBook;
 import dev.hikarishima.lightland.content.common.item.misc.RecordPearl;
 import dev.hikarishima.lightland.content.common.item.misc.ScreenBook;
@@ -34,10 +25,15 @@ import dev.hikarishima.lightland.content.magic.item.PotionCore;
 import dev.hikarishima.lightland.content.questline.item.DispellWaterBottle;
 import dev.hikarishima.lightland.content.questline.item.SlimeTentacleItem;
 import dev.hikarishima.lightland.init.LightLand;
-import dev.hikarishima.lightland.init.data.AllTags;
 import dev.hikarishima.lightland.init.data.GenItem;
 import dev.xkmc.l2library.base.LcyRegistrate;
 import dev.xkmc.l2library.base.VirtualFluid;
+import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
+import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvider;
+import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.FluidEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
@@ -87,10 +83,7 @@ public class LightlandItems {
 	}
 
 	// -------- common --------
-	public static final ItemEntry<BackpackItem>[] BACKPACKS;
-	public static final ItemEntry<WorldChestItem>[] DIMENSIONAL_STORAGE;
-	public static final ItemEntry<EnderBackpackItem> ENDER_BACKPACK;
-	public static final ItemEntry<Item> STRONG_LEATHER, ENDER_POCKET;
+	public static final ItemEntry<Item> STRONG_LEATHER;
 	public static final ItemEntry<RecordPearl> RECORD_PEARL;
 	public static final ItemEntry<ScreenBook> MAGIC_BOOK, ABILITY_BOOK;
 	public static final ItemEntry<ContainerBook> ARCANE_INJECT_BOOK, DISENC_BOOK, SPCRAFT_BOOK;
@@ -107,23 +100,6 @@ public class LightlandItems {
 	static {
 		// Backpacks
 		{
-			BACKPACKS = new ItemEntry[16];
-			for (int i = 0; i < 16; i++) {
-				DyeColor color = DyeColor.values()[i];
-				BACKPACKS[i] = REGISTRATE.item("backpack_" + color.getName(), p -> new BackpackItem(color, p.stacksTo(1)))
-						.tag(AllTags.AllItemTags.BACKPACKS.tag).model(LightlandItems::createBackpackModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((BackpackItem) stack.getItem()).color.getMaterialColor().col)
-						.defaultLang().register();
-			}
-			DIMENSIONAL_STORAGE = new ItemEntry[16];
-			for (int i = 0; i < 16; i++) {
-				DyeColor color = DyeColor.values()[i];
-				DIMENSIONAL_STORAGE[i] = REGISTRATE.item("dimensional_storage_" + color.getName(), p -> new WorldChestItem(color, p.stacksTo(1)))
-						.tag(AllTags.AllItemTags.DIMENSIONAL_STORAGES.tag).model(LightlandItems::createWorldChestModel)
-						.color(() -> () -> (stack, val) -> val == 0 ? -1 : ((WorldChestItem) stack.getItem()).color.getMaterialColor().col)
-						.defaultLang().register();
-			}
-			ENDER_BACKPACK = REGISTRATE.item("ender_backpack", EnderBackpackItem::new).model(LightlandItems::createEnderBackpackModel).defaultLang().register();
 			RECORD_PEARL = REGISTRATE.item("record_pearl", p -> new RecordPearl(p.stacksTo(1))).defaultModel().defaultLang().register();
 		}
 		// Books
@@ -142,7 +118,6 @@ public class LightlandItems {
 			LEAD_INGOT = simpleItem("lead_ingot");
 			LEAD_NUGGET = simpleItem("lead_nugget");
 			STRONG_LEATHER = simpleItem("strong_leather");
-			ENDER_POCKET = simpleItem("ender_pocket");
 			LAYLINE_ORB = simpleItem("layline_orb");
 			CURSED_DROPLET = simpleItem("cursed_droplet");
 			KNIGHT_SCRAP = simpleItem("knight_scrap");
@@ -169,25 +144,6 @@ public class LightlandItems {
 			SLIME_TENTACLE = REGISTRATE.item("slime_tentacle", SlimeTentacleItem::new)
 					.defaultModel().defaultLang().register();
 		}
-	}
-
-	private static void createBackpackModel(DataGenContext<Item, BackpackItem> ctx, RegistrateItemModelProvider pvd) {
-		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:backpack");
-		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/backpack_open"));
-	}
-
-	private static void createWorldChestModel(DataGenContext<Item, WorldChestItem> ctx, RegistrateItemModelProvider pvd) {
-		ItemModelBuilder builder = pvd.withExistingParent(ctx.getName(), "lightland:dimensional_storage");
-	}
-
-	private static void createEnderBackpackModel(DataGenContext<Item, EnderBackpackItem> ctx, RegistrateItemModelProvider pvd) {
-		pvd.withExistingParent("ender_backpack_open", "generated")
-				.texture("layer0", "item/ender_backpack_open");
-		ItemModelBuilder builder = pvd.withExistingParent("ender_backpack", "generated");
-		builder.texture("layer0", "item/ender_backpack");
-		builder.override().predicate(new ResourceLocation("open"), 1).model(
-				new ModelFile.UncheckedModelFile(LightLand.MODID + ":item/ender_backpack_open"));
 	}
 
 	// -------- magic --------

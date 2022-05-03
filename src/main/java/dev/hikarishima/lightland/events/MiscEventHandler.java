@@ -3,29 +3,21 @@ package dev.hikarishima.lightland.events;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorEnchant;
 import dev.hikarishima.lightland.content.common.capability.restriction.ArmorWeight;
 import dev.hikarishima.lightland.content.common.effect.ForceEffect;
-import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;
-import dev.hikarishima.lightland.content.common.item.backpack.EnderBackpackItem;
-import dev.hikarishima.lightland.content.common.item.backpack.WorldChestItem;
 import dev.hikarishima.lightland.content.common.render.MagicWandOverlay;
 import dev.hikarishima.lightland.init.data.LangData;
 import dev.hikarishima.lightland.init.data.Lore;
 import dev.hikarishima.lightland.init.registrate.LightlandVanillaMagic;
-import dev.hikarishima.lightland.network.packets.SlotClickToServer;
 import dev.hikarishima.lightland.util.EffectAddUtil;
 import dev.xkmc.l2library.util.Proxy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
@@ -38,31 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MiscEventHandler {
-
-	@OnlyIn(Dist.CLIENT)
-	@SubscribeEvent
-	public static void onScreenClick(ScreenEvent.MouseClickedEvent event) {
-		Screen screen = event.getScreen();
-		if (event.getButton() == 1 &&
-				screen instanceof AbstractContainerScreen cont) {
-			Slot slot = cont.findSlot(event.getMouseX(), event.getMouseY());
-			boolean b0 = slot != null;
-			boolean b1 = b0 && slot.container == Proxy.getClientPlayer().getInventory();
-			boolean b2 = b0 && cont.getMenu().containerId > 0;
-			if (b1 || b2) {
-				int inv = b1 ? slot.getSlotIndex() : -1;
-				int ind = inv == -1 ? slot.index : -1;
-				int wid = cont.getMenu().containerId;
-				if ((inv >= 0 || ind >= 0) && (slot.getItem().getItem() instanceof EnderBackpackItem ||
-						slot.getItem().getItem() instanceof WorldChestItem ||
-						inv >= 0 && slot.getItem().getItem() instanceof BackpackItem)) {
-					new SlotClickToServer(ind, inv, wid).toServer();
-					event.setCanceled(true);
-				}
-			}
-		}
-
-	}
 
 	@SubscribeEvent
 	public static void onTargetSet(LivingSetAttackTargetEvent event) {

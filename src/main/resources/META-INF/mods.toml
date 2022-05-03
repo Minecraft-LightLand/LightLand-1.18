@@ -23,6 +23,12 @@ description='''
     ordering="NONE"
     side="BOTH"
 [[dependencies.lightland]]
+    modId="l2library"
+    mandatory=true
+    versionRange="[0.0.2,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.lightland]]
     modId="geckolib3"
     mandatory=true
     versionRange="[3.0.0,)"

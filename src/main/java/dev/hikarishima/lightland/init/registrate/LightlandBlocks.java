@@ -1,23 +1,18 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateBlockLootTables;
-import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
-import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
-import dev.hikarishima.lightland.content.common.block.WorldChestBlock;
-import dev.hikarishima.lightland.content.common.block.WorldChestBlockEntity;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;
 import dev.hikarishima.lightland.content.magic.block.RitualRenderer;
 import dev.hikarishima.lightland.content.magic.block.RitualSide;
 import dev.hikarishima.lightland.content.questline.block.*;
-import dev.hikarishima.lightland.init.LightLand;
 import dev.hikarishima.lightland.init.data.GenItem;
 import dev.xkmc.l2library.block.BlockProxy;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;
+import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateBlockLootTables;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WebBlock;
@@ -25,8 +20,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
 
 import static dev.hikarishima.lightland.init.LightLand.REGISTRATE;
 import static dev.hikarishima.lightland.init.registrate.LightlandItems.TAB_MAIN;
@@ -40,7 +33,7 @@ public class LightlandBlocks {
 		REGISTRATE.creativeModeTab(() -> TAB_MAIN);
 	}
 
-	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE, WORLD_CHEST;
+	public static final BlockEntry<DelegateBlock> B_RITUAL_CORE, B_RITUAL_SIDE;
 	public static final BlockEntry<Block> ENCHANT_GOLD_BLOCK, LEAD_BLOCK, MAGICIUM_BLOCK;
 	public static final BlockEntry<LayrootBody> LAYROOT_BODY;
 	public static final BlockEntry<LayrootHead> LAYROOT_HEAD;
@@ -53,31 +46,11 @@ public class LightlandBlocks {
 
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
-	public static final BlockEntityEntry<WorldChestBlockEntity> TE_WORLD_CHEST;
 
 
 	public static final BlockEntry<Block>[] GEN_BLOCK = GenItem.genBlockMats();
 
 	static {
-		{
-			DelegateBlockProperties CHEST = DelegateBlockProperties.copy(Blocks.ENDER_CHEST);
-			WORLD_CHEST = REGISTRATE.block("dimensional_storage", p -> DelegateBlock.newBaseBlock(
-							CHEST, WorldChestBlock.INSTANCE, WorldChestBlock.TILE_ENTITY_SUPPLIER_BUILDER
-					)).blockstate((ctx, pvd) -> {
-						for (DyeColor color : DyeColor.values()) {
-							pvd.models().cubeAll("dimensional_storage_" + color.getName(), new ResourceLocation(LightLand.MODID,
-									"block/dimensional_storage_" + color.getName()));
-						}
-						pvd.getVariantBuilder(ctx.getEntry()).forAllStates(state ->
-								ConfiguredModel.builder().modelFile(new ModelFile.UncheckedModelFile(new ResourceLocation(LightLand.MODID,
-												"block/dimensional_storage_" + state.getValue(WorldChestBlock.COLOR).getName())))
-										.build());
-					}).loot((table, block) -> table.dropOther(block, Blocks.ENDER_CHEST))
-					.tag(BlockTags.MINEABLE_WITH_PICKAXE, BlockTags.NEEDS_DIAMOND_TOOL)
-					.defaultLang().register();
-			TE_WORLD_CHEST = REGISTRATE.blockEntity("dimensional_storage", WorldChestBlockEntity::new)
-					.validBlock(WORLD_CHEST).register();
-		}
 		{
 			DelegateBlockProperties PEDESTAL = DelegateBlockProperties.copy(Blocks.STONE).make(e -> e
 					.noOcclusion().lightLevel(bs -> bs.getValue(BlockStateProperties.LIT) ? 15 : 7)
