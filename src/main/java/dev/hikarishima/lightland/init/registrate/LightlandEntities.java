@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import com.tterrag.registrate.util.entry.EntityEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
 import dev.hikarishima.lightland.content.common.entity.*;
 import dev.hikarishima.lightland.content.questline.mobs.cursedknight.*;
 import dev.hikarishima.lightland.content.questline.mobs.layline.LaylineSkeleton;

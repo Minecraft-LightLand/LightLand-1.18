@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.init;
 
-import com.tterrag.registrate.providers.ProviderType;
+import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.common.capability.player.LLPlayerData;
 import dev.hikarishima.lightland.content.common.command.*;

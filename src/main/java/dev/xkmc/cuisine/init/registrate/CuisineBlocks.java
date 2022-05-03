@@ -1,9 +1,9 @@
 package dev.xkmc.cuisine.init.registrate;
 
-import com.tterrag.registrate.providers.DataGenContext;
-import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
-import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2library.block.BlockProxy;
 import dev.xkmc.l2library.block.DelegateBlock;
 import dev.xkmc.l2library.block.DelegateBlockProperties;

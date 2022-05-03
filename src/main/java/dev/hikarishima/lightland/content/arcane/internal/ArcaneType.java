@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.arcane.internal;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;

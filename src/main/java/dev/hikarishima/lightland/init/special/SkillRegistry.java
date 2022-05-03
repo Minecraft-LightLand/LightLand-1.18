@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init.special;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.hikarishima.lightland.content.skill.EffectSkill;
 import dev.hikarishima.lightland.content.skill.ImpactSkill;
 import dev.hikarishima.lightland.content.skill.MovementSkill;

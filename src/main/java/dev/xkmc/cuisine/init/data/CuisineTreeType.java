@@ -1,10 +1,10 @@
 package dev.xkmc.cuisine.init.data;
 
-import com.tterrag.registrate.providers.DataGenContext;
-import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateBlockstateProvider;
+import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateBlockLootTables;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.xkmc.l2library.util.LootTableTemplate;
 import dev.xkmc.cuisine.content.fruits.CuisineLeaveBlock;
 import dev.xkmc.cuisine.init.Cuisine;

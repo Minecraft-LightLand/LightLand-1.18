@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.content.questline.mobs.cursedknight;
 
-import com.tterrag.registrate.providers.loot.RegistrateEntityLootTables;
+import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.hikarishima.lightland.content.questline.common.mobs.AlertClassGoal;
 import dev.hikarishima.lightland.content.questline.common.mobs.BipedMonster;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;

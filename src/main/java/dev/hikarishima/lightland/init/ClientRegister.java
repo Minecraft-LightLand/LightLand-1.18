@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.init;
 
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.compat.GeneralCompatHandler;
 import dev.hikarishima.lightland.content.archery.item.GenericBowItem;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackItem;

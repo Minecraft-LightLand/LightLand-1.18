@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import com.tterrag.registrate.util.entry.MenuEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.MenuEntry;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackContainer;
 import dev.hikarishima.lightland.content.common.item.backpack.BackpackScreen;
 import dev.hikarishima.lightland.content.common.item.backpack.WorldChestContainer;

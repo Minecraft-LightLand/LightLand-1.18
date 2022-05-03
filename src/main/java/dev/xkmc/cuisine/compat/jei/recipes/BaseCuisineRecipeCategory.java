@@ -1,6 +1,6 @@
 package dev.xkmc.cuisine.compat.jei.recipes;
 
-import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2library.recipe.BaseRecipeCategory;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.cuisine.content.tools.base.CuisineRecipe;

@@ -1,8 +1,8 @@
 package dev.xkmc.cuisine.init.registrate;
 
-import com.tterrag.registrate.builders.NoConfigBuilder;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import dev.xkmc.l2library.repack.registrate.builders.NoConfigBuilder;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.cuisine.content.misc.TasteEffect;
 import dev.xkmc.cuisine.content.misc.TasteEffect.Attribs;
 import dev.xkmc.cuisine.content.misc.TasteEffect.Config;

@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.init;
 
-import com.tterrag.registrate.providers.ProviderType;
 import dev.hikarishima.lightland.init.LightLand;
 import dev.xkmc.l2library.base.LcyRegistrate;
 import dev.xkmc.cuisine.content.misc.CuisineBottleItem;
@@ -11,6 +10,7 @@ import dev.xkmc.cuisine.init.data.LangData;
 import dev.xkmc.cuisine.init.data.RecipeGen;
 import dev.xkmc.cuisine.init.data.WoodType;
 import dev.xkmc.cuisine.init.registrate.*;
+import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import net.minecraftforge.client.gui.ForgeIngameGui;
 import net.minecraftforge.client.gui.OverlayRegistry;
 import net.minecraftforge.common.MinecraftForge;

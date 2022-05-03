@@ -1,7 +1,7 @@
 package dev.hikarishima.lightland.init.data;
 
-import com.tterrag.registrate.providers.RegistrateLangProvider;
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateLangProvider;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.arcane.internal.ArcaneType;
 import dev.hikarishima.lightland.content.common.gui.ability.AbilityScreen;
 import dev.hikarishima.lightland.content.magic.gui.craft.ArcaneInjectContainer;

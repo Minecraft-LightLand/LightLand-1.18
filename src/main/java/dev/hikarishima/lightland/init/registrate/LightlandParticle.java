@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.common.particle.EmeraldParticle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleType;

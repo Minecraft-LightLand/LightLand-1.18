@@ -1,11 +1,11 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.providers.DataGenContext;
-import com.tterrag.registrate.providers.RegistrateItemModelProvider;
-import com.tterrag.registrate.util.entry.EntityEntry;
-import com.tterrag.registrate.util.entry.FluidEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
+import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateItemModelProvider;
+import dev.xkmc.l2library.repack.registrate.util.entry.EntityEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.FluidEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneAxe;
 import dev.hikarishima.lightland.content.arcane.item.ArcaneSword;
 import dev.hikarishima.lightland.content.archery.feature.FeatureList;

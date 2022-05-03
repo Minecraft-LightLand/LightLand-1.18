@@ -1,8 +1,8 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import com.tterrag.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateBlockLootTables;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntityEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.hikarishima.lightland.content.common.block.WorldChestBlock;
 import dev.hikarishima.lightland.content.common.block.WorldChestBlockEntity;
 import dev.hikarishima.lightland.content.magic.block.RitualCore;

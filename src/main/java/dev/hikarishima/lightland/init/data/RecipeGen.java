@@ -1,9 +1,9 @@
 package dev.hikarishima.lightland.init.data;
 
-import com.tterrag.registrate.providers.RegistrateRecipeProvider;
-import com.tterrag.registrate.util.DataIngredient;
-import com.tterrag.registrate.util.entry.BlockEntry;
-import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.l2library.repack.registrate.providers.RegistrateRecipeProvider;
+import dev.xkmc.l2library.repack.registrate.util.DataIngredient;
+import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
 import dev.hikarishima.lightland.init.registrate.LightlandBlocks;
 import dev.hikarishima.lightland.init.registrate.LightlandItems;
 import dev.hikarishima.lightland.init.registrate.LightlandRecipe;

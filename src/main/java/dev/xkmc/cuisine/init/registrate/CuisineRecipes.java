@@ -1,6 +1,5 @@
 package dev.xkmc.cuisine.init.registrate;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.recipe.BaseRecipe;
 import dev.xkmc.cuisine.content.tools.base.RecipeContainer;
 import dev.xkmc.cuisine.content.tools.basin.BasinBlockEntity;
@@ -19,6 +18,7 @@ import dev.xkmc.cuisine.content.tools.mortar.MortarRecipe;
 import dev.xkmc.cuisine.content.tools.pan.PanBlockEntity;
 import dev.xkmc.cuisine.content.tools.pan.PanRecipe;
 import dev.xkmc.cuisine.init.Cuisine;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;

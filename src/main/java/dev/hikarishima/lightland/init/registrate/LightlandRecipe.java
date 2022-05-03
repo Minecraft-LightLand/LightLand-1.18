@@ -1,6 +1,6 @@
 package dev.hikarishima.lightland.init.registrate;
 
-import com.tterrag.registrate.util.entry.RegistryEntry;
+import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.hikarishima.lightland.content.berserker.recipe.MedArmorRecipe;
 import dev.hikarishima.lightland.content.common.recipe.BackpackDyeRecipe;
 import dev.hikarishima.lightland.content.common.recipe.BackpackUpgradeRecipe;
