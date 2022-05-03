@@ -1,7 +1,0 @@
-{
-  "parent": "lightland:block/double_crop",
-  "textures": {
-    "lower": "lightland:block/cucumber_lower_2",
-    "upper": "lightland:block/cucumber_upper_2"
-  }
-}

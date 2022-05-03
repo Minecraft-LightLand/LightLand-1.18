@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_rh",
-  "textures": {
-    "bottom": "lightland:block/fruittree_door_lower",
-    "top": "lightland:block/fruittree_door_upper"
-  }
-}

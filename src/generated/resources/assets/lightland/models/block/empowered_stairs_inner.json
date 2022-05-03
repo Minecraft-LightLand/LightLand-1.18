@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "side": "lightland:block/empowered_planks",
-    "bottom": "lightland:block/empowered_planks",
-    "top": "lightland:block/empowered_planks"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "side": "lightland:block/fruittree_planks",
-    "bottom": "lightland:block/fruittree_planks",
-    "top": "lightland:block/fruittree_planks"
-  }
-}

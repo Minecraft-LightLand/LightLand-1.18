@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/stairs",
-  "textures": {
-    "side": "lightland:block/mystic_planks",
-    "bottom": "lightland:block/mystic_planks",
-    "top": "lightland:block/mystic_planks"
-  }
-}

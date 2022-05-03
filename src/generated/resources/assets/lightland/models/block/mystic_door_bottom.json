@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom",
-  "textures": {
-    "bottom": "lightland:block/mystic_door_lower",
-    "top": "lightland:block/mystic_door_upper"
-  }
-}

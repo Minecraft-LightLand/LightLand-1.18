@@ -1,6 +1,0 @@
-{
-  "parent": "lightland:block/cross_crop",
-  "textures": {
-    "crop": "lightland:block/eggplant_stage_2"
-  }
-}
