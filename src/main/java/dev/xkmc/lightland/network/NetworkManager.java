@@ -16,7 +16,7 @@ public class NetworkManager {
 
 	static final PacketHandlerWithConfig HANDLER = new PacketHandlerWithConfig(
 			new ResourceLocation(LightLand.MODID, "main"), 1, "lightland_config",
-			e -> e.create(TargetSetPacket.class, TargetSetPacket::new, PLAY_TO_SERVER),
+			e -> e.create(TargetSetPacket.class, PLAY_TO_SERVER),
 			e -> e.create(CapToClient.class, PLAY_TO_CLIENT),
 			e -> e.create(CapToServer.class, PLAY_TO_SERVER),
 			e -> e.create(EmptyRightClickToServer.class, PLAY_TO_SERVER),

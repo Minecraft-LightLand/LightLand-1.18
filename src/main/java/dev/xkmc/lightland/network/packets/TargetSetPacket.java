@@ -20,13 +20,8 @@ public class TargetSetPacket extends LLSerialPacket {
 		this.target = target;
 	}
 
-	public TargetSetPacket(FriendlyByteBuf buf) {
-		player = buf.readUUID();
-		boolean exist = buf.readBoolean();
-		if (exist) {
-			target = buf.readUUID();
-		}
-	}
+	@Deprecated
+	public TargetSetPacket(){}
 
 	@Override
 	public void handle(NetworkEvent.Context context) {

@@ -4,7 +4,6 @@ import dev.xkmc.l2library.serial.ExceptionHandler;
 import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerCapability;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerData;
-import dev.xkmc.lightland.content.common.capability.worldstorage.WorldStorageCapability;
 import dev.xkmc.lightland.init.LightLand;
 import dev.xkmc.lightland.network.packets.CapToClient;
 import net.minecraft.nbt.CompoundTag;
@@ -29,17 +28,6 @@ public class CapabilityEvents {
 		if (event.getObject() instanceof Player player) {
 			event.addCapability(new ResourceLocation(LightLand.MODID, "player_data"),
 					new LLPlayerCapability(player, player.level));
-		}
-	}
-
-
-	@SubscribeEvent
-	public static void onAttachLevelCapabilities(AttachCapabilitiesEvent<Level> event) {
-		if (event.getObject() instanceof ServerLevel level) {
-			if (level.dimension() == Level.OVERWORLD) {
-				event.addCapability(new ResourceLocation(LightLand.MODID, "world_storage"),
-						new WorldStorageCapability(level));
-			}
 		}
 	}
 
