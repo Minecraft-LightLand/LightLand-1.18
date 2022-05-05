@@ -1,6 +1,6 @@
 package dev.xkmc.lightland.content.common.effect.force;
 
-import dev.xkmc.lightland.content.common.effect.ForceEffect;
+import dev.xkmc.l2library.effects.ForceEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 

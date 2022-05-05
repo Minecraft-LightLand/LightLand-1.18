@@ -1,6 +1,6 @@
 package dev.xkmc.lightland.content.berserker.item;
 
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -32,7 +32,7 @@ public class MedicineArmor extends ArmorItem implements MedicineItem {
 		for (MobEffectInstance ins : list) {
 			MobEffectInstance a = new MobEffectInstance(ins.getEffect(), ins.getDuration() * amount, ins.getAmplifier(),
 					ins.isAmbient(), ins.isVisible(), ins.showIcon());
-			EffectAddUtil.addEffect(entity, a, EffectAddUtil.AddReason.SELF, entity);
+			EffectUtil.addEffect(entity, a, EffectUtil.AddReason.SELF, entity);
 		}
 		return super.damageItem(stack, amount, entity, onBroken);
 	}

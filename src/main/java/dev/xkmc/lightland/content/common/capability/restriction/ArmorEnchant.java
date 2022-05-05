@@ -1,9 +1,10 @@
 package dev.xkmc.lightland.content.common.capability.restriction;
 
+import dev.xkmc.l2library.network.BaseConfig;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerData;
 import dev.xkmc.lightland.content.common.capability.player.MagicAbility;
-import dev.xkmc.lightland.network.config.ConfigSyncManager;
+import dev.xkmc.lightland.network.NetworkManager;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -16,10 +17,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SerialClass
-public class ArmorEnchant extends ConfigSyncManager.BaseConfig {
+public class ArmorEnchant extends BaseConfig {
 
 	private static ArmorEnchant getInstance() {
-		return (ArmorEnchant) ConfigSyncManager.CONFIGS.get("lightland:config_enchant");
+		return (ArmorEnchant) NetworkManager.getConfig("lightland:config_enchant");
 	}
 
 	public static int getArmorEnchantLevel(Player player) {

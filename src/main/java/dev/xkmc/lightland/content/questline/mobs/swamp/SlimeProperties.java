@@ -1,7 +1,8 @@
 package dev.xkmc.lightland.content.questline.mobs.swamp;
 
+import dev.xkmc.l2library.network.BaseConfig;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.lightland.network.config.ConfigSyncManager;
+import dev.xkmc.lightland.network.NetworkManager;
 import net.minecraft.util.random.WeightedEntry;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.effect.MobEffect;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 @SerialClass
-public class SlimeProperties extends ConfigSyncManager.BaseConfig {
+public class SlimeProperties extends BaseConfig {
 
 	@SerialClass
 	public static class SlimeConfig {
@@ -42,7 +43,7 @@ public class SlimeProperties extends ConfigSyncManager.BaseConfig {
 
 	@Nullable
 	public static SlimeProperties getInstance() {
-		return (SlimeProperties) ConfigSyncManager.CONFIGS.get("lightland:potion_slime_drop");
+		return (SlimeProperties) NetworkManager.getConfig("lightland:potion_slime_drop");
 	}
 
 	@SerialClass.SerialField

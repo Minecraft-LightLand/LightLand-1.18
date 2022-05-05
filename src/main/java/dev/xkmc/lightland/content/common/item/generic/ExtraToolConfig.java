@@ -1,7 +1,7 @@
 package dev.xkmc.lightland.content.common.item.generic;
 
 import com.google.common.collect.Multimap;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -36,7 +36,7 @@ public class ExtraToolConfig {
 
 	public void onHit(ItemStack stack, LivingEntity target, LivingEntity user) {
 		for (MobEffectInstance ins : effects) {
-			EffectAddUtil.addEffect(target, ins, EffectAddUtil.AddReason.NONE, user);
+			EffectUtil.addEffect(target, ins, EffectUtil.AddReason.NONE, user);
 		}
 	}
 

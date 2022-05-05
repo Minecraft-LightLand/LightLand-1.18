@@ -8,7 +8,7 @@ import dev.xkmc.lightland.content.magic.spell.internal.Spell;
 import dev.xkmc.lightland.init.data.LangData;
 import dev.xkmc.lightland.init.registrate.LightlandItems;
 import dev.xkmc.lightland.init.special.LightLandRegistry;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -161,7 +161,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
 						continue;
 					}
 					for (MobEffectInstance ins : list) {
-						EffectAddUtil.addEffect((LivingEntity) e, ins, EffectAddUtil.AddReason.PROF, player);
+						EffectUtil.addEffect((LivingEntity) e, ins, EffectUtil.AddReason.PROF, player);
 					}
 				}
 			}

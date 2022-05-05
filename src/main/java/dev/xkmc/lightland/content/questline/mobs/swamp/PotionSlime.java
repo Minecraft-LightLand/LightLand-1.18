@@ -2,7 +2,7 @@ package dev.xkmc.lightland.content.questline.mobs.swamp;
 
 import dev.xkmc.l2library.repack.registrate.providers.loot.RegistrateEntityLootTables;
 import dev.xkmc.l2library.util.LootTableTemplate;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -58,7 +58,7 @@ public class PotionSlime extends BaseSlime<PotionSlime> {
 		super.aiStep();
 		MobEffectInstance ins = getConfig().ins;
 		if (ins.getEffect().isBeneficial() && !hasEffect(ins.getEffect())) {
-			EffectAddUtil.addEffect(this, ins, EffectAddUtil.AddReason.SELF, this);
+			EffectUtil.addEffect(this, ins, EffectUtil.AddReason.SELF, this);
 		}
 	}
 
@@ -67,7 +67,7 @@ public class PotionSlime extends BaseSlime<PotionSlime> {
 		super.doEnchantDamageEffects(self, target);
 		MobEffectInstance ins = getConfig().ins;
 		if (!ins.getEffect().isBeneficial() && target instanceof LivingEntity le) {
-			EffectAddUtil.addEffect(le, ins, EffectAddUtil.AddReason.NONE, self);
+			EffectUtil.addEffect(le, ins, EffectUtil.AddReason.NONE, self);
 		}
 	}
 

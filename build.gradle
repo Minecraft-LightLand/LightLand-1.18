@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-version = '6.4.7'
+version = "${ll_version}"
 group = 'dev.xkmc.lightland' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'lightland'
 
@@ -125,8 +125,8 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    implementation fg.deobf('dev.xkmc.l2library:l2library:0.0.2')
-    implementation fg.deobf('dev.xkmc.l2backpack:l2backpack:0.0.1')
+    implementation fg.deobf('dev.xkmc.l2library:l2library:0.0.5')
+    implementation fg.deobf('dev.xkmc.l2backpack:l2backpack:0.0.2')
 
     implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
 

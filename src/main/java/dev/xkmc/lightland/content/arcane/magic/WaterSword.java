@@ -4,7 +4,7 @@ import dev.xkmc.lightland.content.arcane.internal.Arcane;
 import dev.xkmc.lightland.content.arcane.internal.ArcaneType;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerData;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -30,16 +30,16 @@ public class WaterSword extends Arcane {
 		strike(w, player, target);
 		if (!w.isClientSide()) {
 			search(w, player, radius, target.getPosition(1), target, false, this::strike);
-			EffectAddUtil.addEffect(target, new MobEffectInstance(LightlandVanillaMagic.WATER_TRAP.get(), time, 1),
-					EffectAddUtil.AddReason.SKILL, player);
+			EffectUtil.addEffect(target, new MobEffectInstance(LightlandVanillaMagic.WATER_TRAP.get(), time, 1),
+					EffectUtil.AddReason.SKILL, player);
 		}
 		return true;
 	}
 
 	private void strike(Level w, Player player, LivingEntity target) {
 		if (!w.isClientSide()) {
-			EffectAddUtil.addEffect(target, new MobEffectInstance(LightlandVanillaMagic.WATER_TRAP.get(), time, 0),
-					EffectAddUtil.AddReason.SKILL, player);
+			EffectUtil.addEffect(target, new MobEffectInstance(LightlandVanillaMagic.WATER_TRAP.get(), time, 0),
+					EffectUtil.AddReason.SKILL, player);
 		}
 	}
 

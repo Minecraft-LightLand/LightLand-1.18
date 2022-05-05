@@ -3,9 +3,9 @@ loaderVersion="[40,)"
 license="All rights reserved"
 [[mods]]
 modId="lightland"
-version="6.4.7" #mandatory
+version="${file.jarVersion}" #mandatory
 displayName="LightLand RPG" #mandatory
-logoFile="examplemod.png" #optional
+logoFile="lightland.png" #optional
 credits="Thanks for this example mod goes to Java" #optional
 authors="Love, Cheese and small house plants" #optional
 description='''

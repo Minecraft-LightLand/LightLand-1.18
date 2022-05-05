@@ -12,7 +12,7 @@ import dev.xkmc.lightland.content.magic.products.MagicProduct;
 import dev.xkmc.lightland.content.magic.products.recipe.IMagicRecipe;
 import dev.xkmc.lightland.content.profession.Profession;
 import dev.xkmc.lightland.init.special.LightLandRegistry;
-import dev.xkmc.lightland.network.SerialPacketBase;
+import dev.xkmc.lightland.network.LLSerialPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,7 +29,7 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 
 @SerialClass
-public class CapToServer extends SerialPacketBase {
+public class CapToServer extends LLSerialPacket {
 
 	public enum Action {
 		HEX((handler, tag) -> {

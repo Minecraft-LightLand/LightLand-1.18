@@ -6,7 +6,7 @@ import dev.xkmc.lightland.content.profession.Profession;
 import dev.xkmc.lightland.init.data.LangData;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
 import dev.xkmc.lightland.util.BodyAttribute;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Consumer;
@@ -123,7 +123,7 @@ public class AbilityPoints {
 		int slow = weight <= base ? 0 : weight <= base * 1.2 ? 1 : 2;
 		if (slow > 0) {
 			MobEffectInstance ins = new MobEffectInstance(LightlandVanillaMagic.HEAVY.get(), 40, slow - 1);
-			EffectAddUtil.addEffect(parent.player, ins, EffectAddUtil.AddReason.SELF, parent.player);
+			EffectUtil.addEffect(parent.player, ins, EffectUtil.AddReason.SELF, parent.player);
 		}
 
 		if (parent.player.experienceLevel >= 40) {

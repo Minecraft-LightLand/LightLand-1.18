@@ -3,12 +3,12 @@ package dev.xkmc.lightland.events;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lightland.content.common.capability.restriction.ArmorEnchant;
 import dev.xkmc.lightland.content.common.capability.restriction.ArmorWeight;
-import dev.xkmc.lightland.content.common.effect.ForceEffect;
+import dev.xkmc.l2library.effects.ForceEffect;
 import dev.xkmc.lightland.content.common.render.MagicWandOverlay;
 import dev.xkmc.lightland.init.data.LangData;
 import dev.xkmc.lightland.init.data.Lore;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -92,11 +92,11 @@ public class MiscEventHandler {
 		if (flag) {
 			if (event.getPotionEffect().getEffect() instanceof ForceEffect)
 				return;
-			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.FORCE)
+			if (EffectUtil.getReason() == EffectUtil.AddReason.FORCE)
 				return;
-			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.SELF)
+			if (EffectUtil.getReason() == EffectUtil.AddReason.SELF)
 				return;
-			if (EffectAddUtil.getReason() == EffectAddUtil.AddReason.SKILL)
+			if (EffectUtil.getReason() == EffectUtil.AddReason.SKILL)
 				return;
 			if (event.getPotionEffect().getEffect() == LightlandVanillaMagic.CLEANSE.get())
 				return;

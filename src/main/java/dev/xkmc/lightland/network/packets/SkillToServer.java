@@ -5,7 +5,7 @@ import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lightland.content.common.capability.player.CapProxy;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerData;
 import dev.xkmc.lightland.content.common.capability.player.SkillCap;
-import dev.xkmc.lightland.network.SerialPacketBase;
+import dev.xkmc.lightland.network.LLSerialPacket;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,7 +13,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.network.NetworkEvent;
 
 @SerialClass
-public class SkillToServer extends SerialPacketBase {
+public class SkillToServer extends LLSerialPacket {
 
 	@SerialClass.SerialField
 	public int slot;

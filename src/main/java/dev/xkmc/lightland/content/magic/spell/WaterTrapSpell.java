@@ -7,7 +7,7 @@ import dev.xkmc.lightland.content.magic.spell.internal.ActivationConfig;
 import dev.xkmc.lightland.content.magic.spell.internal.SimpleSpell;
 import dev.xkmc.lightland.content.magic.spell.internal.SpellConfig;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,9 +39,9 @@ public class WaterTrapSpell extends SimpleSpell<WaterTrapSpell.Config> {
 					ent -> ent instanceof LivingEntity le &&
 							!TeamAccessor.arePlayerAndEntityInSameTeam(player, le) &&
 							le.position().distanceTo(spell.position()) < config.radius
-			).forEach(le -> EffectAddUtil.addEffect((LivingEntity) le,
+			).forEach(le -> EffectUtil.addEffect((LivingEntity) le,
 					new MobEffectInstance(LightlandVanillaMagic.WATER_TRAP.get(), config.effect_time, config.effect_level),
-					EffectAddUtil.AddReason.SKILL, player));
+					EffectUtil.AddReason.SKILL, player));
 		});
 		world.addFreshEntity(e);
 	}

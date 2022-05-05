@@ -12,7 +12,7 @@ import dev.xkmc.lightland.events.MiscEventHandler;
 import dev.xkmc.lightland.events.WorldGenEventHandler;
 import dev.xkmc.lightland.events.generic.CapabilityEvents;
 import dev.xkmc.lightland.events.generic.ClientEntityEffectRenderEvents;
-import dev.xkmc.lightland.events.generic.EffectSyncEvents;
+import dev.xkmc.l2library.effects.EffectSyncEvents;
 import dev.xkmc.lightland.events.generic.GenericEventHandler;
 import dev.xkmc.lightland.init.data.AllTags;
 import dev.xkmc.lightland.init.data.LangData;
@@ -20,7 +20,8 @@ import dev.xkmc.lightland.init.data.RecipeGen;
 import dev.xkmc.lightland.init.registrate.*;
 import dev.xkmc.lightland.init.worldgenreg.StructureRegistrate;
 import dev.xkmc.lightland.init.worldgenreg.WorldGenRegistrate;
-import dev.xkmc.lightland.network.PacketHandler;
+import dev.xkmc.lightland.network.NetworkManager;
+import dev.xkmc.lightland.util.EffectAddUtil;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.common.ForgeMod;
@@ -58,6 +59,7 @@ public class LightLand {
 		StructureRegistrate.register();
 		AllTags.register();
 		Handlers.register();
+		NetworkManager.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
 	}
@@ -104,8 +106,7 @@ public class LightLand {
 
 	private static void setup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			PacketHandler.registerPackets();
-			EffectSyncEvents.init();
+			EffectAddUtil.init();
 			LightlandVanillaMagic.registerBrewingRecipe();
 		});
 		StructureRegistrate.commonSetup(event);

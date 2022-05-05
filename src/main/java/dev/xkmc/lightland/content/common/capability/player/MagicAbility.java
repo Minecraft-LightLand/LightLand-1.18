@@ -8,7 +8,7 @@ import dev.xkmc.lightland.content.magic.item.MagicScroll;
 import dev.xkmc.lightland.content.magic.spell.internal.Spell;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
 import dev.xkmc.lightland.network.packets.CapToClient;
-import dev.xkmc.lightland.util.EffectAddUtil;
+import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -102,7 +102,7 @@ public class MagicAbility {
 
 	private void add(MobEffect eff, int lv) {
 		MobEffectInstance ins = new MobEffectInstance(eff, 40, lv);
-		EffectAddUtil.addEffect(parent.player, ins, EffectAddUtil.AddReason.SELF, parent.player);
+		EffectUtil.addEffect(parent.player, ins, EffectUtil.AddReason.SELF, parent.player);
 	}
 
 	private void tickSpell(ItemStack stack, CompoundTag tag) {

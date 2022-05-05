@@ -5,7 +5,7 @@ import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.l2library.serial.codec.TagCodec;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lightland.content.common.capability.player.*;
-import dev.xkmc.lightland.network.SerialPacketBase;
+import dev.xkmc.lightland.network.LLSerialPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 @SerialClass
-public class CapToClient extends SerialPacketBase {
+public class CapToClient extends LLSerialPacket {
 
 	@SerialClass.SerialField
 	public Action action;

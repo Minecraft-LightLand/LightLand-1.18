@@ -2,14 +2,14 @@ package dev.xkmc.lightland.network.packets;
 
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lightland.events.ItemUseEventHandler;
-import dev.xkmc.lightland.network.SerialPacketBase;
+import dev.xkmc.lightland.network.LLSerialPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.network.NetworkEvent;
 
 @SerialClass
-public class EmptyRightClickToServer extends SerialPacketBase {
+public class EmptyRightClickToServer extends LLSerialPacket {
 
 	@SerialClass.SerialField
 	public boolean hand, right;
