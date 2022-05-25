@@ -1,15 +1,15 @@
 package dev.xkmc.lightland.content.common.capability.player;
 
-import dev.xkmc.l2library.serial.ExceptionHandler;
+import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
+import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
+import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.l2library.serial.codec.TagCodec;
-import dev.xkmc.l2library.util.Proxy;
-import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.nbt.CompoundTag;
+import dev.xkmc.lightland.init.LightLand;
+import dev.xkmc.lightland.network.packets.CapToClient;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -17,45 +17,36 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 import java.util.function.Consumer;
 
 @SerialClass
-public class LLPlayerData {
+public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
 
-	public static Capability<LLPlayerData> CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+	public static final Capability<LLPlayerData> CAPABILITY = CapabilityManager.get(new CapabilityToken<LLPlayerData>() {
 	});
 
-	public static LLPlayerData get(Player e) {
-		LLPlayerData data;
-		if (!e.getCapability(CAPABILITY).isPresent()) {
-			e.reviveCaps();
-			data = e.getCapability(CAPABILITY).resolve().get().check();
-			e.invalidateCaps();
-		} else data = e.getCapability(CAPABILITY).resolve().get().check();
-		return data;
+	public static final PlayerCapabilityHolder<LLPlayerData> HOLDER = new PlayerCapabilityHolder<>(
+			new ResourceLocation(LightLand.MODID, "player_data"), CAPABILITY,
+			LLPlayerData.class, LLPlayerData::new, holder -> new PlayerCapabilityNetworkHandler<>(holder) {
+
+		@Override
+		public void toClientSyncAll(ServerPlayer e) {
+			new CapToClient(CapToClient.Action.ALL, HOLDER.get(e)).toClientPlayer(e);
+		}
+
+		@Override
+		public void toClientSyncClone(ServerPlayer e) {
+			new CapToClient(CapToClient.Action.CLONE, HOLDER.get(e)).toClientPlayer(e);
+		}
+	});
+
+	public static LLPlayerData get(Player player) {
+		return HOLDER.get(player);
 	}
 
 	public static boolean isProper(Player player) {
-		return player.getCapability(CAPABILITY).isPresent();
+		return HOLDER.isProper(player);
 	}
 
-	private static CompoundTag revive_cache;
+	public static void register(){
 
-	@OnlyIn(Dist.CLIENT)
-	public static void cacheSet(CompoundTag tag, boolean force) {
-		AbstractClientPlayer pl = Proxy.getClientPlayer();
-		if (!force && pl != null && pl.getCapability(CAPABILITY).cast().resolve().isPresent()) {
-			LLPlayerData m = LLPlayerData.get(pl);
-			m.reset(Reset.FOR_INJECT);
-			ExceptionHandler.run(() -> TagCodec.fromTag(tag, LLPlayerData.class, m, f -> true));
-			m.init();
-		} else revive_cache = tag;
-	}
-
-	@OnlyIn(Dist.CLIENT)
-	public static CompoundTag getCache(Player pl) {
-		CompoundTag tag = revive_cache;
-		revive_cache = null;
-		if (tag == null)
-			tag = TagCodec.toTag(new CompoundTag(), get(pl));
-		return tag;
 	}
 
 	@SerialClass.SerialField
@@ -68,8 +59,6 @@ public class LLPlayerData {
 	public SkillCap skillCap = new SkillCap(this);
 	@SerialClass.SerialField
 	public MagicHolder magicHolder = new MagicHolder(this);
-	public Player player;
-	public Level world;
 
 	public void tick() {
 		magicAbility.tick();
@@ -80,7 +69,7 @@ public class LLPlayerData {
 		reset.cons.accept(this);
 	}
 
-	protected void init() {
+	public void init() {
 		if (state == null) {
 			reset(Reset.FOR_INJECT);
 		}
@@ -96,17 +85,26 @@ public class LLPlayerData {
 		check();
 	}
 
-	private LLPlayerData check() {
+	public LLPlayerData check() {
 		if (state != State.ACTIVE)
 			init();
 		return this;
 	}
 
+	@Deprecated
+	@Override
+	public void preInject() {
+		reset(Reset.FOR_INJECT);
+	}
+
+	@Deprecated
+	@SuppressWarnings("unused")
 	@SerialClass.OnInject
 	public void onInject() {
 		if (state == State.PREINJECT || state == State.ACTIVE)
 			state = State.PREINIT;
 	}
+
 
 	public enum State {
 		PREINJECT, PREINIT, ACTIVE

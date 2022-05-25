@@ -53,11 +53,11 @@ public class CapToClient extends LLSerialPacket {
 		ALL((m) -> {
 			m.magicAbility.time_after_sync = 0;
 			return TagCodec.toTag(new CompoundTag(), m);
-		}, tag -> LLPlayerData.cacheSet(tag, false)),
+		}, tag -> LLPlayerData.HOLDER.cacheSet(tag, false)),
 		CLONE((m) -> {
 			m.magicAbility.time_after_sync = 0;
 			return TagCodec.toTag(new CompoundTag(), m);
-		}, tag -> LLPlayerData.cacheSet(tag, true)),
+		}, tag -> LLPlayerData.HOLDER.cacheSet(tag, true)),
 		ARCANE_TYPE((m) -> m.magicAbility.arcane_type, (tag) -> {
 			MagicAbility abi = CapProxy.getHandler().magicAbility;
 			abi.arcane_type = tag;

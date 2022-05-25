@@ -2,7 +2,6 @@ package dev.xkmc.lightland.init;
 
 import dev.xkmc.l2library.base.LcyRegistrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
-import dev.xkmc.l2library.serial.handler.Handlers;
 import dev.xkmc.lightland.compat.GeneralCompatHandler;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerData;
 import dev.xkmc.lightland.content.common.command.*;
@@ -10,9 +9,7 @@ import dev.xkmc.lightland.events.DamageEventHandler;
 import dev.xkmc.lightland.events.ItemUseEventHandler;
 import dev.xkmc.lightland.events.MiscEventHandler;
 import dev.xkmc.lightland.events.WorldGenEventHandler;
-import dev.xkmc.lightland.events.generic.CapabilityEvents;
 import dev.xkmc.lightland.events.generic.ClientEntityEffectRenderEvents;
-import dev.xkmc.l2library.effects.EffectSyncEvents;
 import dev.xkmc.lightland.events.generic.GenericEventHandler;
 import dev.xkmc.lightland.init.data.AllTags;
 import dev.xkmc.lightland.init.data.LangData;
@@ -58,17 +55,16 @@ public class LightLand {
 		WorldGenRegistrate.register();
 		StructureRegistrate.register();
 		AllTags.register();
-		Handlers.register();
 		NetworkManager.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);
 		REGISTRATE.addDataGenerator(ProviderType.RECIPE, RecipeGen::genRecipe);
+
+		LLPlayerData.register();
 	}
 
 	private static void registerForgeEvents() {
 		MinecraftForge.EVENT_BUS.register(ClientEntityEffectRenderEvents.class);
-		MinecraftForge.EVENT_BUS.register(EffectSyncEvents.class);
 		MinecraftForge.EVENT_BUS.register(ItemUseEventHandler.class);
-		MinecraftForge.EVENT_BUS.register(CapabilityEvents.class);
 		MinecraftForge.EVENT_BUS.register(GenericEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(DamageEventHandler.class);
 		MinecraftForge.EVENT_BUS.register(MiscEventHandler.class);
@@ -121,7 +117,6 @@ public class LightLand {
 	}
 
 	public static void registerCaps(RegisterCapabilitiesEvent event) {
-		event.register(LLPlayerData.class);
 	}
 
 }
