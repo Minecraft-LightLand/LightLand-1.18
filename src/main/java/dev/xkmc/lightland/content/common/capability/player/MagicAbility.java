@@ -1,5 +1,6 @@
 package dev.xkmc.lightland.content.common.capability.player;
 
+import dev.xkmc.l2library.effects.EffectUtil;
 import dev.xkmc.l2library.serial.NBTObj;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lightland.content.arcane.internal.ArcaneType;
@@ -8,7 +9,6 @@ import dev.xkmc.lightland.content.magic.item.MagicScroll;
 import dev.xkmc.lightland.content.magic.spell.internal.Spell;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
 import dev.xkmc.lightland.network.packets.CapToClient;
-import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -66,7 +66,7 @@ public class MagicAbility {
 			spell_load = Math.max(spell_load - spell_restore, 0);
 			tick = 0;
 			parent.abilityPoints.tickSeconds();
-			int load = spell_load / Math.max(100, getMaxSpellEndurance());
+			int load = spell_load / getMaxSpellEndurance();
 			if (load == 1) {
 				add(MobEffects.MOVEMENT_SLOWDOWN, 2);
 				add(MobEffects.CONFUSION, 0);
@@ -137,7 +137,7 @@ public class MagicAbility {
 	}
 
 	public int getMaxSpellEndurance() {
-		return spell_level * 100;
+		return Math.max(100, spell_level * 100);
 	}
 
 	public int getSpellLoad() {

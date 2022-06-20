@@ -1,7 +1,7 @@
 package dev.xkmc.lightland.content.common.capability.player;
 
-import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityHolder;
+import dev.xkmc.l2library.capability.player.PlayerCapabilityNetworkHandler;
 import dev.xkmc.l2library.capability.player.PlayerCapabilityTemplate;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lightland.init.LightLand;
@@ -9,7 +9,6 @@ import dev.xkmc.lightland.network.packets.CapToClient;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
@@ -45,7 +44,7 @@ public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
 		return HOLDER.isProper(player);
 	}
 
-	public static void register(){
+	public static void register() {
 
 	}
 
@@ -89,6 +88,14 @@ public class LLPlayerData extends PlayerCapabilityTemplate<LLPlayerData> {
 		if (state != State.ACTIVE)
 			init();
 		return this;
+	}
+
+	@Override
+	public void onClone(boolean isWasDeath) {
+		if (isWasDeath) {
+			magicAbility.magic_mana = magicAbility.getMaxMana();
+			magicAbility.spell_load = 0;
+		}
 	}
 
 	@Deprecated
