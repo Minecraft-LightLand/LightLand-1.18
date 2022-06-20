@@ -116,6 +116,9 @@ repositories {
         }
     }
     maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven {
+        url = "https://maven.theillusivec4.top/"
+    }
     flatDir{
         dirs 'libs'
     }
@@ -125,11 +128,10 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
-    implementation fg.deobf('dev.xkmc.l2library:l2library:0.0.6')
-    implementation fg.deobf('dev.xkmc.l2backpack:l2backpack:0.0.2')
+    implementation fg.deobf('dev.xkmc.l2library:l2library:0.1.2')
+    implementation fg.deobf('dev.xkmc.l2backpack:l2backpack:0.0.5')
+    implementation fg.deobf('dev.xkmc.l2backpack:l2artifacts:0.0.2')
     implementation fg.deobf('dev.xkmc.cuisine:cuisine:0.0.2')
-
-    implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
 
     implementation fg.deobf('software.bernie.geckolib:geckolib-1.18-forge:3.0.12')
     implementation fg.deobf("curse.maven:appleskin-248787:3686482")
@@ -141,6 +143,19 @@ dependencies {
     implementation fg.deobf("dev.ftb.mods:ftb-teams-forge:1802.2.6-build.49")
     implementation fg.deobf("dev.ftb.mods:ftb-chunks-forge:1802.3.5-build.128")
     runtimeOnly fg.deobf("dev.latvian.mods:item-filters-forge:1801.2.6-build.16")
+
+    runtimeOnly fg.deobf('curse.maven:wthit-forge-455982:3791304')
+    runtimeOnly fg.deobf('curse.maven:badpackets-615134:3773642')
+    implementation fg.deobf("mezz.jei:jei-${jei_minecraft_version}:${jei_version}")
+
+    runtimeOnly fg.deobf('curse.maven:attributefix-280510:3801087')
+    runtimeOnly fg.deobf('curse.maven:max-health-fix-492246:3764471')
+    runtimeOnly fg.deobf('curse.maven:tool-stats-377109:3697308')
+
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus-forge:${caelus_version}")
+    runtimeOnly fg.deobf('curse.maven:curious-elytra-317716:3601975')
+
 
     //runtimeOnly fg.deobf("dev.ftb.mods:ftb-quests-forge:1801.3.7-build.94")
     //runtimeOnly fg.deobf("dev.latvian.mods:rhino-forge:1801.1.8-build.102")
