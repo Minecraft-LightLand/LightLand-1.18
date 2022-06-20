@@ -49,7 +49,7 @@ public class ArcaneItemUseHelper implements ItemUseEventHandler.ItemClickHandler
 			return false;
 		String str = tag.getString(type.getID());
 		ResourceLocation rl = new ResourceLocation(str);
-		Arcane arcane = LightLandRegistry.ARCANE.getValue(rl);
+		Arcane arcane = LightLandRegistry.ARCANE.get().getValue(rl);
 		if (arcane == null || arcane.cost > tag.getInt("mana"))
 			return false;
 		if (arcane.activate(player, magic, stack, target)) {

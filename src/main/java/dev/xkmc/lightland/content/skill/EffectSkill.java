@@ -1,12 +1,12 @@
 package dev.xkmc.lightland.content.skill;
 
+import dev.xkmc.l2library.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lightland.compat.TeamAccessor;
 import dev.xkmc.lightland.content.skill.internal.Skill;
 import dev.xkmc.lightland.content.skill.internal.SkillConfig;
 import dev.xkmc.lightland.content.skill.internal.SkillData;
 import dev.xkmc.lightland.init.LightLand;
-import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;

@@ -1,6 +1,5 @@
 package dev.xkmc.lightland.init;
 
-import dev.xkmc.lightland.events.generic.GenericEventHandler;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;

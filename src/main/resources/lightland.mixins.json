@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "refmap": "lightland.refmap.json",
   "mixins": [
+	"AnvilBlockMixin",
 	"EntityMixin",
 	"LivingEntityMixin",
 	"ShapedRecipeMixin"

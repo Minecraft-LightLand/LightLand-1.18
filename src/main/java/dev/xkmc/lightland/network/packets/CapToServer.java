@@ -55,20 +55,20 @@ public class CapToServer extends LLSerialPacket {
 			AbilityPoints.LevelType.values()[tag.getInt("type")].doLevelUp(handler);
 		}),
 		PROFESSION((handler, tag) -> {
-			Profession prof = LightLandRegistry.PROFESSION.getValue(new ResourceLocation(tag.getString("id")));
+			Profession prof = LightLandRegistry.PROFESSION.get().getValue(new ResourceLocation(tag.getString("id")));
 			if (prof == null)
 				return;
 			handler.abilityPoints.setProfession(prof);
 		}),
 		ELEMENTAL((handler, tag) -> {
-			MagicElement elem = LightLandRegistry.ELEMENT.getValue(new ResourceLocation(tag.getString("id")));
+			MagicElement elem = LightLandRegistry.ELEMENT.get().getValue(new ResourceLocation(tag.getString("id")));
 			if (elem == null)
 				return;
 			if (handler.abilityPoints.canLevelElement() && handler.magicHolder.addElementalMastery(elem))
 				handler.abilityPoints.levelElement();
 		}),
 		ARCANE((handler, tag) -> {
-			ArcaneType type = LightLandRegistry.ARCANE_TYPE.getValue(new ResourceLocation(tag.getString("id")));
+			ArcaneType type = LightLandRegistry.ARCANE_TYPE.get().getValue(new ResourceLocation(tag.getString("id")));
 			if (type == null)
 				return;
 			if (handler.abilityPoints.canLevelArcane() && !handler.magicAbility.isArcaneTypeUnlocked(type)) {

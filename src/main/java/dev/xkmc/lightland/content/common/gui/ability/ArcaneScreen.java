@@ -31,7 +31,7 @@ public class ArcaneScreen extends AbstractAbilityScreen {
 	public static boolean canAccess() {
 		LLPlayerData handler = CapProxy.getHandler();
 		return handler.abilityPoints.canLevelArcane() ||
-				LightLandRegistry.ARCANE_TYPE.getValues().stream()
+				LightLandRegistry.ARCANE_TYPE.get().getValues().stream()
 						.anyMatch(handler.magicAbility::isArcaneTypeUnlocked);
 	}
 

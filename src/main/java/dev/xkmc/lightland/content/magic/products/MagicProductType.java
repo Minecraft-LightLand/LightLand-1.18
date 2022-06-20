@@ -25,7 +25,7 @@ public class MagicProductType<I extends IForgeRegistryEntry<I>, P extends MagicP
 
 	public MagicProductType(Class<P> cls, MagicFactory<I, P> fac, Supplier<IForgeRegistry<I>> registry,
 							Function<I, String> namer, MagicElement elem) {
-		super(() -> LightLandRegistry.PRODUCT_TYPE);
+		super(LightLandRegistry.PRODUCT_TYPE);
 		this.cls = cls;
 		this.fac = fac;
 		this.getter = (s) -> registry.get().getValue(s);

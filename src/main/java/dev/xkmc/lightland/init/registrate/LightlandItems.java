@@ -1,6 +1,6 @@
 package dev.xkmc.lightland.init.registrate;
 
-import dev.xkmc.l2library.base.LcyRegistrate;
+import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.base.VirtualFluid;
 import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
 import dev.xkmc.l2library.repack.registrate.providers.DataGenContext;
@@ -339,7 +339,7 @@ public class LightlandItems {
 	}
 
 	@SuppressWarnings({"rawtypes", "unsafe", "unchecked"})
-	public static <T extends ArmorItem> ItemEntry<T>[] genArmor(String id, BiFunction<EquipmentSlot, Item.Properties, T> sup, Function<ItemBuilder<T, LcyRegistrate>, ItemBuilder<T, LcyRegistrate>> func) {
+	public static <T extends ArmorItem> ItemEntry<T>[] genArmor(String id, BiFunction<EquipmentSlot, Item.Properties, T> sup, Function<ItemBuilder<T, L2Registrate>, ItemBuilder<T, L2Registrate>> func) {
 		ItemEntry[] ans = new ItemEntry[4];
 		ans[0] = func.apply(REGISTRATE.item(id + "_helmet", p -> sup.apply(EquipmentSlot.HEAD, p))).defaultLang().register();
 		ans[1] = func.apply(REGISTRATE.item(id + "_chestplate", p -> sup.apply(EquipmentSlot.CHEST, p))).defaultLang().register();

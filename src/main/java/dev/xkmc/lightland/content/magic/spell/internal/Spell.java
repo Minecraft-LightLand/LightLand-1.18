@@ -8,12 +8,11 @@ import dev.xkmc.lightland.network.packets.CapToClient;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> extends NamedEntry<Spell<?, ?>> implements IForgeRegistryEntry<Spell<?, ?>> {
+public abstract class Spell<C extends SpellConfig, A extends ActivationConfig> extends NamedEntry<Spell<?, ?>> {
 
 	public Spell() {
-		super(() -> LightLandRegistry.SPELL);
+		super(LightLandRegistry.SPELL);
 	}
 
 	protected abstract A canActivate(Type type, Level world, ServerPlayer player);

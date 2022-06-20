@@ -14,6 +14,7 @@ import dev.xkmc.lightland.init.LightLand;
 import dev.xkmc.lightland.init.data.GenItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.AnvilBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WebBlock;
@@ -42,9 +43,13 @@ public class LightlandBlocks {
 
 	public static final BlockEntry<DelegateBlock> MAZE_WALL;
 
+	public static final BlockEntry<AnvilBlock> ETERNAL_ANVIL = LightLand.REGISTRATE
+			.block("eternal_anvil", p -> new AnvilBlock(BlockBehaviour.Properties.copy(Blocks.ANVIL)))
+			.blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.getEntry(), pvd.models().withExistingParent(ctx.getName(), "anvil")))
+			.register();
+
 	public static final BlockEntityEntry<RitualCore.TE> TE_RITUAL_CORE;
 	public static final BlockEntityEntry<RitualSide.TE> TE_RITUAL_SIDE;
-
 
 	public static final BlockEntry<Block>[] GEN_BLOCK = GenItem.genBlockMats();
 

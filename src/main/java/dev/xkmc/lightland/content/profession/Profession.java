@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 public abstract class Profession extends NamedEntry<Profession> {
 
 	public Profession() {
-		super(() -> LightLandRegistry.PROFESSION);
+		super(LightLandRegistry.PROFESSION);
 	}
 
 	public abstract void init(LLPlayerData handler);

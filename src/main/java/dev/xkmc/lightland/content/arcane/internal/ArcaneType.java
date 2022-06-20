@@ -31,7 +31,7 @@ public class ArcaneType extends NamedEntry<ArcaneType> {
 	private final ItemStack stack;
 
 	public ArcaneType(Weapon weapon, Hit hit, Mana mana) {
-		super(() -> LightLandRegistry.ARCANE_TYPE);
+		super(LightLandRegistry.ARCANE_TYPE);
 		this.weapon = weapon;
 		this.hit = hit;
 		this.mana = mana;
@@ -42,7 +42,7 @@ public class ArcaneType extends NamedEntry<ArcaneType> {
 	}
 
 	private static RegistryEntry<ArcaneType> reg(String str, Weapon w, Hit h, Mana m) {
-		return LightLand.REGISTRATE.generic(ArcaneType.class, str, () -> new ArcaneType(w, h, m)).defaultLang().register();
+		return LightLand.REGISTRATE.generic(LightLandRegistry.ARCANE_TYPE, str, () -> new ArcaneType(w, h, m)).defaultLang().register();
 	}
 
 	@OnlyIn(Dist.CLIENT)

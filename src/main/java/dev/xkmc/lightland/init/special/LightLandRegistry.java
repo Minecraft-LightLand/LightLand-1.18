@@ -1,5 +1,6 @@
 package dev.xkmc.lightland.init.special;
 
+import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.util.entry.RegistryEntry;
 import dev.xkmc.l2library.repack.registrate.util.nullness.NonNullSupplier;
 import dev.xkmc.l2library.serial.handler.RLClassHandler;
@@ -11,59 +12,20 @@ import dev.xkmc.lightland.content.magic.spell.internal.Spell;
 import dev.xkmc.lightland.content.profession.Profession;
 import dev.xkmc.lightland.content.profession.prof.*;
 import dev.xkmc.lightland.content.skill.internal.Skill;
-import dev.xkmc.lightland.init.LightLand;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.minecraftforge.registries.NewRegistryEvent;
-import net.minecraftforge.registries.RegistryBuilder;
+
+import static dev.xkmc.lightland.init.LightLand.REGISTRATE;
 
 public class LightLandRegistry {
 
-	public static IForgeRegistry<MagicElement> ELEMENT;
-	public static IForgeRegistry<MagicProductType<?, ?>> PRODUCT_TYPE;
-	public static IForgeRegistry<ArcaneType> ARCANE_TYPE;
-	public static IForgeRegistry<Arcane> ARCANE;
-	public static IForgeRegistry<Spell<?, ?>> SPELL;
-	public static IForgeRegistry<Profession> PROFESSION;
-	public static IForgeRegistry<Skill<?, ?>> SKILL;
-
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void createRegistries(NewRegistryEvent event) {
-		event.create(new RegistryBuilder<MagicElement>()
-				.setName(new ResourceLocation(LightLand.MODID, "magic_element"))
-				.setType(MagicElement.class), e -> ELEMENT = regSerializer(e));
-
-		event.create(new RegistryBuilder()
-				.setName(new ResourceLocation(LightLand.MODID, "magic_product_type"))
-				.setType(MagicProductType.class), e -> PRODUCT_TYPE = regSerializer(e));
-
-		event.create(new RegistryBuilder<ArcaneType>()
-				.setName(new ResourceLocation(LightLand.MODID, "arcane_type"))
-				.setType(ArcaneType.class), e -> ARCANE_TYPE = regSerializer(e));
-
-		event.create(new RegistryBuilder<Arcane>()
-				.setName(new ResourceLocation(LightLand.MODID, "arcane"))
-				.setType(Arcane.class), e -> ARCANE = regSerializer(e));
-
-		event.create(new RegistryBuilder()
-				.setName(new ResourceLocation(LightLand.MODID, "spell"))
-				.setType(Spell.class), e -> SPELL = regSerializer(e));
-
-		event.create(new RegistryBuilder<Profession>()
-				.setName(new ResourceLocation(LightLand.MODID, "profession"))
-				.setType(Profession.class), e -> PROFESSION = regSerializer(e));
-
-		event.create(new RegistryBuilder()
-				.setName(new ResourceLocation(LightLand.MODID, "skill"))
-				.setType(Skill.class), e -> SKILL = regSerializer(e));
-
-		MagicRegistry.register();
-		ArcaneType.register();
-		ArcaneRegistry.register();
-		SpellRegistry.register();
-		SkillRegistry.register();
-	}
+	public static final L2Registrate.RegistryInstance<MagicElement> ELEMENT = REGISTRATE.newRegistry("magic_element", MagicElement.class);
+	public static final L2Registrate.RegistryInstance<MagicProductType<?, ?>> PRODUCT_TYPE = REGISTRATE.newRegistry("magic_product_type", MagicProductType.class);
+	public static final L2Registrate.RegistryInstance<ArcaneType> ARCANE_TYPE = REGISTRATE.newRegistry("arcane_type", ArcaneType.class);
+	public static final L2Registrate.RegistryInstance<Arcane> ARCANE = REGISTRATE.newRegistry("arcane", Arcane.class);
+	public static final L2Registrate.RegistryInstance<Spell<?, ?>> SPELL = REGISTRATE.newRegistry("spell", Spell.class);
+	public static final L2Registrate.RegistryInstance<Profession> PROFESSION = REGISTRATE.newRegistry("profession", Profession.class);
+	public static final L2Registrate.RegistryInstance<Skill<?, ?>> SKILL = REGISTRATE.newRegistry("skill", Skill.class);
 
 	public static final RegistryEntry<ArcaneProfession> PROF_ARCANE = genProf("arcane", ArcaneProfession::new);
 	public static final RegistryEntry<MagicianProfession> PROF_MAGIC = genProf("magician", MagicianProfession::new);
@@ -79,7 +41,7 @@ public class LightLandRegistry {
 	public static final RegistryEntry<AssassinProfession> PROF_ASSASSIN = genProf("assassin", AssassinProfession::new);
 
 	private static <V extends Profession> RegistryEntry<V> genProf(String name, NonNullSupplier<V> v) {
-		return LightLand.REGISTRATE.generic(Profession.class, name, v).defaultLang().register();
+		return REGISTRATE.generic(PROFESSION, name, v).defaultLang().register();
 	}
 
 	@SuppressWarnings({"rawtypes"})

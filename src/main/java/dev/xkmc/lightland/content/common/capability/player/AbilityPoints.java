@@ -1,12 +1,12 @@
 package dev.xkmc.lightland.content.common.capability.player;
 
+import dev.xkmc.l2library.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lightland.content.common.capability.restriction.ArmorWeight;
 import dev.xkmc.lightland.content.profession.Profession;
 import dev.xkmc.lightland.init.data.LangData;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
 import dev.xkmc.lightland.util.BodyAttribute;
-import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Consumer;

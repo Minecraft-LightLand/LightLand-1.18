@@ -1,5 +1,6 @@
 package dev.xkmc.lightland.content.magic.item;
 
+import dev.xkmc.l2library.effects.EffectUtil;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerData;
 import dev.xkmc.lightland.content.common.capability.player.MagicAbility;
@@ -8,7 +9,6 @@ import dev.xkmc.lightland.content.magic.spell.internal.Spell;
 import dev.xkmc.lightland.init.data.LangData;
 import dev.xkmc.lightland.init.registrate.LightlandItems;
 import dev.xkmc.lightland.init.special.LightLandRegistry;
-import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -86,7 +86,7 @@ public class MagicScroll extends Item implements IGlowingTarget {
 		String id = stack.getOrCreateTagElement("spell").getString("spell");
 		if (id.length() == 0) return null;
 		ResourceLocation rl = new ResourceLocation(id);
-		return LightLandRegistry.SPELL.getValue(rl);
+		return LightLandRegistry.SPELL.get().getValue(rl);
 	}
 
 	public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {

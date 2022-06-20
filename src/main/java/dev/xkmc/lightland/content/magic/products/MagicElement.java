@@ -11,7 +11,7 @@ public class MagicElement extends NamedEntry<MagicElement> {
 	public final int color;
 
 	public MagicElement(int color) {
-		super(() -> LightLandRegistry.ELEMENT);
+		super(LightLandRegistry.ELEMENT);
 		this.color = color;
 	}
 

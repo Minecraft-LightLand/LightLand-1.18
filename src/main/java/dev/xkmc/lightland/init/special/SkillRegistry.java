@@ -22,9 +22,8 @@ public class SkillRegistry {
 	public static final RegistryEntry<ImpactSkill> IMPACT_ATTRACT = reg("impact_attract", ImpactSkill::new);
 	public static final RegistryEntry<ImpactSkill> IMPACT_REPEL = reg("impact_repel", ImpactSkill::new);
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static <T extends Skill<?, ?>> RegistryEntry<T> reg(String id, NonNullSupplier<T> sup) {
-		return LightLand.REGISTRATE.generic((Class<Skill<?, ?>>) (Class) Skill.class, id, sup).defaultLang().register();
+		return LightLand.REGISTRATE.generic(LightLandRegistry.SKILL, id, sup).defaultLang().register();
 	}
 
 	public static void register() {

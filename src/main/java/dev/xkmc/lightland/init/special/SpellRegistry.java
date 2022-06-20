@@ -22,7 +22,7 @@ public class SpellRegistry {
 
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public static <T extends Spell<?, ?>> RegistryEntry<T> reg(String id, NonNullSupplier<T> sup) {
-		return LightLand.REGISTRATE.generic((Class<Spell<?, ?>>) (Class) Spell.class, id, sup).defaultLang().register();
+		return LightLand.REGISTRATE.generic(LightLandRegistry.SPELL, id, sup).defaultLang().register();
 	}
 
 	public static void register() {

@@ -108,7 +108,7 @@ public class MagicHolder {
 			return null;
 		}
 		MagicElement type = elem.get(0);
-		MagicProductType<?, ?> res = LightLandRegistry.PRODUCT_TYPE.getValues().stream()
+		MagicProductType<?, ?> res = LightLandRegistry.PRODUCT_TYPE.get().getValues().stream()
 				.filter(e -> e.elem == type)
 				.findFirst().orElseThrow(() -> new NoSuchElementException("no matching type"));
 		if (!product_cache.containsKey(res))

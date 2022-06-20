@@ -2,7 +2,6 @@ package dev.xkmc.lightland.network;
 
 import dev.xkmc.l2library.network.SerialPacketBase;
 import dev.xkmc.l2library.serial.SerialClass;
-import dev.xkmc.lightland.init.LightLand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 

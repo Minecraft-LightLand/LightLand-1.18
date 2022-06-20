@@ -68,7 +68,7 @@ public class HexGraphGui extends AbstractHexGui {
 		if (graph == null) {
 			graph = new HexHandler(3);
 		}
-		LightLandRegistry.ELEMENT.forEach((a) -> ELEM_2_ID.put(a, ELEM_2_ID.size()));
+		LightLandRegistry.ELEMENT.get().forEach((a) -> ELEM_2_ID.put(a, ELEM_2_ID.size()));
 	}
 
 	public void render(PoseStack matrix, double mx, double my, float partial) {

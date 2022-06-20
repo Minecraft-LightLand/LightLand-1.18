@@ -1,6 +1,6 @@
 package dev.xkmc.lightland.init.data;
 
-import dev.xkmc.l2library.base.LcyRegistrate;
+import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.builders.ItemBuilder;
 import dev.xkmc.l2library.repack.registrate.util.entry.BlockEntry;
 import dev.xkmc.l2library.repack.registrate.util.entry.ItemEntry;
@@ -169,7 +169,7 @@ public class GenItem {
 
 	public interface EntryProcessor {
 
-		ItemBuilder<Item, LcyRegistrate> apply(ItemBuilder<Item, LcyRegistrate> builder);
+		ItemBuilder<Item, L2Registrate> apply(ItemBuilder<Item, L2Registrate> builder);
 
 	}
 

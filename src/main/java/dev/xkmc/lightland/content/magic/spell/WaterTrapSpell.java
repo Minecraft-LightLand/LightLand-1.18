@@ -1,5 +1,6 @@
 package dev.xkmc.lightland.content.magic.spell;
 
+import dev.xkmc.l2library.effects.EffectUtil;
 import dev.xkmc.l2library.serial.SerialClass;
 import dev.xkmc.lightland.compat.TeamAccessor;
 import dev.xkmc.lightland.content.common.entity.SpellEntity;
@@ -7,7 +8,6 @@ import dev.xkmc.lightland.content.magic.spell.internal.ActivationConfig;
 import dev.xkmc.lightland.content.magic.spell.internal.SimpleSpell;
 import dev.xkmc.lightland.content.magic.spell.internal.SpellConfig;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
-import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;

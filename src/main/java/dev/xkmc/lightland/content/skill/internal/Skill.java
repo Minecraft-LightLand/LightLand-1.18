@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 public abstract class Skill<C extends SkillConfig<D>, D extends SkillData> extends NamedEntry<Skill<?, ?>> {
 
 	public Skill() {
-		super(() -> LightLandRegistry.SKILL);
+		super(LightLandRegistry.SKILL);
 	}
 
 	/**

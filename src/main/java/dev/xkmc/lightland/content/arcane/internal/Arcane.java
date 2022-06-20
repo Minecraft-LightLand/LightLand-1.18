@@ -23,7 +23,7 @@ public abstract class Arcane extends NamedEntry<Arcane> {
 	public final int cost;
 
 	public Arcane(RegistryEntry<ArcaneType> type, int cost) {
-		super(() -> LightLandRegistry.ARCANE);
+		super(LightLandRegistry.ARCANE);
 		this.type = type;
 		this.cost = cost;
 	}

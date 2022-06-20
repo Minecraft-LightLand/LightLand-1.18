@@ -49,7 +49,7 @@ public class DisEnchanterContainer extends BaseContainerMenu<DisEnchanterContain
 				int seed = enc.getRegistryName().toString().hashCode();
 				Random r = new Random(seed);
 				MagicElement[] elems = new MagicElement[3];
-				List<MagicElement> list = new ArrayList<>(LightLandRegistry.ELEMENT.getValues());
+				List<MagicElement> list = new ArrayList<>(LightLandRegistry.ELEMENT.get().getValues());
 				for (int i = 0; i < 3; i++) {
 					elems[i] = list.get(r.nextInt(list.size()));
 				}

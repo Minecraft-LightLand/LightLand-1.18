@@ -17,7 +17,7 @@ public class ArcaneItemCraftHelper {
 			return null;
 		String str = tag.getString(s);
 		ResourceLocation rl = new ResourceLocation(str);
-		return LightLandRegistry.ARCANE.getValue(rl);
+		return LightLandRegistry.ARCANE.get().getValue(rl);
 	}
 
 	public static List<Arcane> getAllArcanesOnItem(ItemStack stack) {
@@ -26,7 +26,7 @@ public class ArcaneItemCraftHelper {
 		for (String str : tag.getAllKeys()) {
 			if (str.equals("charged") || str.equals("mana"))
 				continue;
-			list.add(LightLandRegistry.ARCANE.getValue(new ResourceLocation(tag.getString(str))));
+			list.add(LightLandRegistry.ARCANE.get().getValue(new ResourceLocation(tag.getString(str))));
 		}
 		return list;
 	}

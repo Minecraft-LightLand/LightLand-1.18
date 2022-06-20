@@ -38,7 +38,7 @@ public class ArcaneCommand extends BaseCommand {
 				.executes(withPlayer((context, e) -> {
 					LLPlayerData magic = LLPlayerData.get(e);
 					TextComponent comps = new TextComponent("[");
-					for (ArcaneType type : LightLandRegistry.ARCANE_TYPE.getValues()) {
+					for (ArcaneType type : LightLandRegistry.ARCANE_TYPE.get().getValues()) {
 						boolean bool = magic.magicAbility.isArcaneTypeUnlocked(type);
 						BaseComponent lock = (bool ? LangData.IDS.UNLOCKED : LangData.IDS.LOCKED).get();
 						comps.append(type.getDesc().append(": ").append(lock).append(",\n"));

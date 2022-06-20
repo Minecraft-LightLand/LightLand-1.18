@@ -1,8 +1,9 @@
 package dev.xkmc.lightland.init;
 
-import dev.xkmc.l2library.base.LcyRegistrate;
+import dev.xkmc.l2library.base.L2Registrate;
 import dev.xkmc.l2library.repack.registrate.providers.ProviderType;
 import dev.xkmc.lightland.compat.GeneralCompatHandler;
+import dev.xkmc.lightland.content.arcane.internal.ArcaneType;
 import dev.xkmc.lightland.content.common.capability.player.LLPlayerData;
 import dev.xkmc.lightland.content.common.command.*;
 import dev.xkmc.lightland.events.DamageEventHandler;
@@ -15,6 +16,10 @@ import dev.xkmc.lightland.init.data.AllTags;
 import dev.xkmc.lightland.init.data.LangData;
 import dev.xkmc.lightland.init.data.RecipeGen;
 import dev.xkmc.lightland.init.registrate.*;
+import dev.xkmc.lightland.init.special.ArcaneRegistry;
+import dev.xkmc.lightland.init.special.MagicRegistry;
+import dev.xkmc.lightland.init.special.SkillRegistry;
+import dev.xkmc.lightland.init.special.SpellRegistry;
 import dev.xkmc.lightland.init.worldgenreg.StructureRegistrate;
 import dev.xkmc.lightland.init.worldgenreg.WorldGenRegistrate;
 import dev.xkmc.lightland.network.NetworkManager;
@@ -41,7 +46,7 @@ public class LightLand {
 
 	public static final String MODID = "lightland";
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final LcyRegistrate REGISTRATE = new LcyRegistrate(MODID);
+	public static final L2Registrate REGISTRATE = new L2Registrate(MODID);
 
 	private static void registerRegistrates(IEventBus bus) {
 		ForgeMod.enableMilkFluid();
@@ -54,6 +59,11 @@ public class LightLand {
 		LightlandParticle.register();
 		WorldGenRegistrate.register();
 		StructureRegistrate.register();
+		MagicRegistry.register();
+		ArcaneType.register();
+		ArcaneRegistry.register();
+		SpellRegistry.register();
+		SkillRegistry.register();
 		AllTags.register();
 		NetworkManager.register();
 		GeneralCompatHandler.handle(GeneralCompatHandler.Stage.INIT);

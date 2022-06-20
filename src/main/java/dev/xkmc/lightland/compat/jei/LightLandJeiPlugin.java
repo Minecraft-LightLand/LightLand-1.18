@@ -66,7 +66,7 @@ public class LightLandJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerIngredients(IModIngredientRegistration registration) {
-		registration.register(ELEM_TYPE, LightLandRegistry.ELEMENT.getValues().stream()
+		registration.register(ELEM_TYPE, LightLandRegistry.ELEMENT.get().getValues().stream()
 						.map(ElementIngredient::new).collect(Collectors.toList()),
 				ELEM_HELPER, ELEM_RENDERER);
 	}

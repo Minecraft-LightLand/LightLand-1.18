@@ -35,15 +35,15 @@ import java.util.function.Supplier;
 @SuppressWarnings({"unchecked", "rawtypes"})
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-public class RegistryParser<T extends IForgeRegistryEntry<T>> implements ArgumentType<T> {
+public record RegistryParser<T extends IForgeRegistryEntry<T>>(Class<T> cls, Supplier<IForgeRegistry<T>> registry) implements ArgumentType<T> {
 
 	public static final Set<RegistryParser<?>> SET = new HashSet<>();
-	public static final RegistryParser<MagicElement> ELEMENT = new RegistryParser<>(MagicElement.class, () -> LightLandRegistry.ELEMENT);
-	public static final RegistryParser<ArcaneType> ARCANE_TYPE = new RegistryParser<>(ArcaneType.class, () -> LightLandRegistry.ARCANE_TYPE);
-	public static final RegistryParser<Arcane> ARCANE = new RegistryParser<>(Arcane.class, () -> LightLandRegistry.ARCANE);
-	public static final RegistryParser<Profession> PROFESSION = new RegistryParser<>(Profession.class, () -> LightLandRegistry.PROFESSION);
-	public static final RegistryParser<Spell<?, ?>> SPELL = new RegistryParser(Spell.class, () -> LightLandRegistry.SPELL);
-	public static final RegistryParser<Skill<?, ?>> SKILL = new RegistryParser(Skill.class, () -> LightLandRegistry.SKILL);
+	public static final RegistryParser<MagicElement> ELEMENT = new RegistryParser<>(MagicElement.class, LightLandRegistry.ELEMENT);
+	public static final RegistryParser<ArcaneType> ARCANE_TYPE = new RegistryParser<>(ArcaneType.class, LightLandRegistry.ARCANE_TYPE);
+	public static final RegistryParser<Arcane> ARCANE = new RegistryParser<>(Arcane.class, LightLandRegistry.ARCANE);
+	public static final RegistryParser<Profession> PROFESSION = new RegistryParser<>(Profession.class, LightLandRegistry.PROFESSION);
+	public static final RegistryParser<Spell<?, ?>> SPELL = new RegistryParser(Spell.class, LightLandRegistry.SPELL);
+	public static final RegistryParser<Skill<?, ?>> SKILL = new RegistryParser(Skill.class, LightLandRegistry.SKILL);
 
 	public static void register() {
 		ArgumentTypes.register("lightland:registry", (Class<RegistryParser<?>>) (Class) RegistryParser.class, new ArgumentSerializer<>() {
@@ -66,9 +66,6 @@ public class RegistryParser<T extends IForgeRegistryEntry<T>> implements Argumen
 			}
 		});
 	}
-
-	public final Class<T> cls;
-	public final Supplier<IForgeRegistry<T>> registry;
 
 	public RegistryParser(Class<T> cls, Supplier<IForgeRegistry<T>> registry) {
 		this.cls = cls;

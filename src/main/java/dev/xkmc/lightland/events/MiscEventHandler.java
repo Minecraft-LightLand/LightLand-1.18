@@ -1,14 +1,14 @@
 package dev.xkmc.lightland.events;
 
+import dev.xkmc.l2library.effects.EffectUtil;
+import dev.xkmc.l2library.effects.ForceEffect;
 import dev.xkmc.l2library.util.Proxy;
 import dev.xkmc.lightland.content.common.capability.restriction.ArmorEnchant;
 import dev.xkmc.lightland.content.common.capability.restriction.ArmorWeight;
-import dev.xkmc.l2library.effects.ForceEffect;
 import dev.xkmc.lightland.content.common.render.MagicWandOverlay;
 import dev.xkmc.lightland.init.data.LangData;
 import dev.xkmc.lightland.init.data.Lore;
 import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
-import dev.xkmc.l2library.effects.EffectUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.TranslatableComponent;
