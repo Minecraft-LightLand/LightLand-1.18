@@ -143,7 +143,7 @@ public class AllTags {
 					.addTag(tag));
 		}
 
-		public void includeIn(com.simibubi.create.AllTags.AllBlockTags parent) {
+		public void includeIn(AllTags.AllBlockTags parent) {
 			includeIn(parent.tag);
 		}
 
@@ -269,7 +269,7 @@ public class AllTags {
 					.addTag(tag));
 		}
 
-		public void includeIn(com.simibubi.create.AllTags.AllFluidTags parent) {
+		public void includeIn(AllTags.AllFluidTags parent) {
 			includeIn(parent.tag);
 		}
 

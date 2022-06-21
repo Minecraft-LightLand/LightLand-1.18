@@ -40,11 +40,6 @@ description='''
     ordering="AFTER"
     side="BOTH"
 [[dependencies.lightland]]
-    modId="create"
-    mandatory=true
-    versionRange="[0.4.1,)"
-    ordering="AFTER"
-[[dependencies.lightland]]
     modId="jei"
     mandatory=true
     versionRange="[9.7,)"
