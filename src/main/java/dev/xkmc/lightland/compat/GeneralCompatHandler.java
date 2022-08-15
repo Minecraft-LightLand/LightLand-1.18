@@ -1,7 +1,6 @@
 package dev.xkmc.lightland.compat;
 
 import dev.xkmc.l2library.serial.ExceptionHandler;
-import dev.xkmc.lightland.compat.create.CreateCompatHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.gui.OverlayRegistry;
@@ -16,7 +15,6 @@ public class GeneralCompatHandler {
 
 	public static void handle(Stage stage) {
 		if (ModList.get().isLoaded("create")) {
-			ExceptionHandler.ignore(() -> CreateCompatHandler.handleCompat(stage));
 		}
 		if (ModList.get().isLoaded("appleskin")) {
 			ExceptionHandler.ignore(() -> AppleSkinCompatHandler.handleCompat(stage));

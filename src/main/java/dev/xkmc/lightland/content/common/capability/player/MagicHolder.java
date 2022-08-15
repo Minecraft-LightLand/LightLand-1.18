@@ -103,6 +103,7 @@ public class MagicHolder {
 		return elements.getInt(elem.getID());
 	}
 
+	@Nullable
 	public IMagicRecipe<?> getTree(List<MagicElement> elem) {
 		if (elem.size() == 0) {
 			return null;

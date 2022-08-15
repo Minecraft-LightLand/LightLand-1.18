@@ -29,11 +29,6 @@ description='''
     ordering="AFTER"
     side="BOTH"
 [[dependencies.lightland]]
-    modId="geckolib3"
-    mandatory=true
-    versionRange="[3.0.0,)"
-    ordering="AFTER"
-[[dependencies.lightland]]
     modId="appleskin"
     mandatory=false
     versionRange="[2.3.0,)"

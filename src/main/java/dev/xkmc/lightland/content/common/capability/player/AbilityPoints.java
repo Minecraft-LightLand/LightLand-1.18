@@ -9,6 +9,7 @@ import dev.xkmc.lightland.init.registrate.LightlandVanillaMagic;
 import dev.xkmc.lightland.util.BodyAttribute;
 import net.minecraft.world.effect.MobEffectInstance;
 
+import javax.annotation.Nullable;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -22,7 +23,7 @@ public class AbilityPoints {
 		return (int) Math.round(100 * Math.pow(1.5, lv));
 	}
 
-	private final LLPlayerData parent;
+	public final LLPlayerData parent;
 	@SerialClass.SerialField
 	public int general, body, magic, element, arcane;
 	@SerialClass.SerialField
@@ -77,6 +78,7 @@ public class AbilityPoints {
 		if (element > 0) element--;
 	}
 
+	@Nullable
 	public Profession getProfession() {
 		return profession;
 	}
